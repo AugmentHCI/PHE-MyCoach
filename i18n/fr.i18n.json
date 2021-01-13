@@ -1,0 +1,59 @@
+{
+  "_locale": "fr-BE",
+  "_namespace": "Common",
+  "myProgress": {
+    "navBar": {
+      "overview": "Vue d'ensemble",
+      "insights": "Vue de détails"
+    },
+    "timeFrames": {
+      "daily": "Quotidiennement",
+      "weekly": "Hebdomadairement",
+      "monthly": "Mensuellement"
+    },
+    "parameters": {
+      "painIntensity": "Intensité de la douleur",
+      "satisfaction": "Satisfaction",
+      "physicalTiredness": "Fatigue physique",
+      "mentalTiredness": "Fatigue mentale"
+    },
+    "activities": {
+      "activities": "Activités",
+      "work": "travailler",
+      "domesticChores": "tâches ménagères", 
+      "relaxationExercises": "exercises de relaxation", 
+      "physicalExercises": "exercise physique (sport/étirements)", 
+      "familyOrFriends": "passer du temps avec la famille et les amis",  
+      "somethingIEnjoy": "une activité qui me plaît", 
+      "TV": "télevision/ordinateur/lecture", 
+      "resting": "repos", 
+      "other": "autre"
+    },
+    "axes": {
+      "day": "Jour",
+      "amountOfDays": "Nombre de jours",
+      "monday": "lu",
+      "tuesday": "ma",
+      "wednesday": "me",
+      "thursday": "je",
+      "friday": "ve",
+      "saturday": "sa",
+      "sunday": "di"
+    },
+    "weekOf": "Semaine du",
+    "insights": {
+      "title": "Qu'est-ce que tu veux voir",
+      "insights": "Vue de détails",
+      "showMe": "Montre moi",
+      "period": "Pour la période de",
+      "compare": "Compare avec",
+      "delete": "Supprime"
+    },
+    "notifications": {
+      "errorFitbitTitle": "Connectez FitBit",
+      "errorFitbitMessage": "Il semble que vous n'ayez pas encore connecté votre FitBit, connectez-la à l'application pour enregistrer votre activité.",
+      "errorNoDataTitle": "Aucune donnée chargée",
+      "errorNoDataMessage": "Il semble qu'une erreur s'est produite lors de la récupération de vos données. Contactez le support pour plus d'aide."
+    }
+  }
+}

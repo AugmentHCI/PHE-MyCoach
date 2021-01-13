@@ -1,0 +1,59 @@
+/* Date Picker colors */
+
+.MuiInputBase-input {
+    font-family: var(--main-font) !important;
+    font-family: 'Montserrat', sans-serif !important; 
+    font-size: 14px !important;
+    color: var(--dark-grey) !important;
+    background-color: #F9FEFF !important;
+    border: 1px solid var(--light-grey) !important;
+    border-radius: 4px !important;
+    padding: 8px !important;
+    width: 5000px !important;
+    margin-top: 2px !important;
+    text-transform: capitalize;
+    margin-right: 4px;
+    -webkit-appearance: none;
+  }
+  
+  .MuiInput-underline:before{
+    border-bottom: none !important;
+  }
+  .MuiPickersToolbar-toolbar {
+    background-color: var(--idewe-dark-blue) !important;
+  }
+  
+  .MuiPickersToolbar-toolbar  {
+    color: var(--idewe-dark-blue) !important;
+  }
+  
+  .MuiPickersDay-current  {
+    color: var(--idewe-dark-blue) !important;
+  }
+  
+  .MuiPickersDay-daySelected {
+    color: white !important;
+    background-color: var(--idewe-header) !important;
+  }
+  
+  .MuiPickersDay-daySelected:hover {
+    color: white !important;
+    background-color: var(--idewe-header) !important;
+  }
+  
+  .MuiButton-textPrimary {
+    color: var(--idewe-dark-blue) !important;
+  }
+  
+  .MuiInput-underline:after {
+    border-bottom: none !important;
+  }
+  
+  .MuiPickersMonth-monthSelected {
+    color: var(--idewe-dark-blue) !important;
+  }
+  
+  .MuiPickersMonth-monthSelected:hover {
+    color: var(--idewe-dark-blue) !important;
+  }
+  

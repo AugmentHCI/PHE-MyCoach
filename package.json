@@ -1,0 +1,39 @@
+{
+    "name": "phe-views",
+    "private": true,
+    "scripts": {
+        "start": "meteor run",
+        "test": "meteor test --once --driver-package meteortesting:mocha",
+        "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+        "visualize": "meteor --production --extra-packages bundle-visualizer"
+    },
+    "dependencies": {
+        "@babel/runtime": "^7.12.5",
+        "@date-io/date-fns": "^2.2.0",
+        "@date-io/moment": "^1.3.13",
+        "@material-ui/core": "^4.9.1",
+        "@material-ui/pickers": "^3.2.10",
+        "@nivo/bar": "^0.61.1",
+        "@nivo/line": "^0.61.1",
+        "bootstrap": "^4.5.3",
+        "browserslist": "^4.8.6",
+        "caniuse-lite": "^1.0.30001025",
+        "date-fns": "^2.9.0",
+        "meteor-node-stubs": "^1.0.0",
+        "moment": "^2.29.1",
+        "nivo": "^0.31.0",
+        "react": "^16.14.0",
+        "react-bootstrap": "^1.3.0",
+        "react-dom": "^16.14.0",
+        "react-mounter": "^1.2.0",
+        "tslib": "^1.10.0",
+        "yarn": "^1.21.1"
+    },
+    "meteor": {
+        "mainModule": {
+            "client": "client/main.jsx",
+            "server": "server/main.js"
+        },
+        "testModule": "tests/main.js"
+    }
+}

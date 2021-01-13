@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,800;1,200;1,300;1,400;1,500;1,600;1,800&display=swap');
+/* color palette */
+:root {
+  --idewe-blue:#5AB9EA;  /* echte IDEWE blauw: #0086BF */
+  --idewe-blue-tint5:#5AB9EA;
+  --idewe-blue-tint4: #91D0F1;
+  --idewe-blue-tint3: #ACDCF5;
+  --idewe-blue-tint2: #C8E8F8;
+  --idewe-blue-tint1: #E3F3FC;
+  --idewe-red:#B52555;
+  --idewe-red-tint5: #B52555;
+  --idewe-red-tint4: #DE5D88;
+  --idewe-red-tint3: #E686A6;
+  --idewe-red-tint2: #EEAEC4;
+  --idewe-red-tint1: #F7D7E1;
+  --idewe-yellow:#F0B323;
+  --idewe-yellow-tint5:#F0B323;
+  --idewe-yellow-tint4: #F5CC6C;
+  --idewe-yellow-tint3: #F8D991;
+  --idewe-yellow-tint2: #FAE6B6;
+  --idewe-yellow-tint1: #FCF2DA;
+  --idewe-purple: #68478D;
+  --idewe-purple-tint5: #68478D;
+  --idewe-purple-tint4: #9A7BBC;
+  --idewe-purple-tint3: #B39CCD;
+  --idewe-purple-tint2: #CCBDDE;
+  --idewe-purple-tint1: #E6DEEE;
+  --dark-grey: rgb(77, 80, 83);
+  --light-grey: #D3D3D3;
+  --very-light-grey: rgb(216, 216, 216);
+  
+  --idewe-header: #DDE6EF;
+  --idewe-body: #E9EFF5;
+  --idewe-title: #323536;
+  --idewe-subtitle: #7C8182;
+  --idewe-dark-blue: #00436B;
+  --main-font:'Montserrat', sans-serif; 
+} 
+
+body {
+  font-family: var(--main-font);
+  font-size: 14px;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+
+  padding:
+    env(safe-area-inset-top, 20px)
+    env(safe-area-inset-right, 20px)
+    env(safe-area-inset-bottom, 20px)
+    env(safe-area-inset-left, 20px);
+}
+
+.container {
+  max-width: 100%;
+  min-height: 100%;
+  padding-top: 20px;
+  background: #f4f8fc; 
+  display: flex;
+  flex-direction: column;
+}
+
+.screen-title {
+  color: var(--idewe-title);
+  font-family: var(--main-font);
+  font-weight: 700;
+  font-size: 24px;
+  margin-top: 20px;;
+}
+
+.dev-icon {
+  font-size: 12px;
+  border: 1px solid var(--idewe-dark-blue);
+  color: var(--idewe-dark-blue);
+  width: 31px;
+  padding: 1px 5px 0px 5px;
+  border-radius: 4px;
+  margin-left: 5px;
+}
+
+.subtitle {
+  color: var(--idewe-subtitle);
+  font-family: var(--main-font);
+  font-weight: 600;
+  font-size: 10px;
+  margin: 5px 0 0 0;
+  text-transform: uppercase;
+}
+
+.large-text {
+  color: var(--dark-grey);
+  font-family: var(--main-font);
+  font-size: 16px;
+}
+
+.small-text {
+  color: var(--dark-grey);
+  font-family: var(--main-font);
+  font-size: 14px;
+}
+
+/* Button dropdown */
+.btn-dropdown {
+  font-family: var(--main-font) !important;
+  background: #F9FEFF !important;
+  color: var(--dark-grey) !important;
+  border-color: var(--light-grey) !important;
+  margin: 2px !important;
+  font-size: 14px !important;
+  justify-content: left !important;
+  width:100% !important;
+}
+
+.btn-dropdown:hover {
+  color: var(--dark-grey) !important;
+  font-size: 14px !important;
+}
+
+.dropdown-item {
+  font-family: var(--main-font);
+  font-size: 14px;
+}
+
+.close-button {
+  background-color: #F9FEFF;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  margin-left: 10%;
+  font-size: 14px;
+  color: var(--dark-grey);
+  padding: 2px 12px;
+  height: 35.2px;
+  width: 90%;
+  margin-top: 2px;
+}
