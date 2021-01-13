@@ -3,17 +3,20 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 import moment from "moment"
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-//import internationalization files
+// Import internationalization files
 import i18n from 'meteor/universe:i18n';
 import "../../../i18n/nl.i18n.json"
 import "../../../i18n/fr.i18n.json"
 import "../../../i18n/en.i18n.json"
 
-//import data processing functions
+// Import data processing functions
 import { setDataParserLocale } from '../../api/dataparser';
 import { getWeeklyDummyData, getMonthlyDummyData } from '../../api/dummydata';
 
 // Import components
+import './MyProgress.css';
+import '../components/Input/Dropdown.css';
+
 import DayPicker from '../components/Input/DayPicker';
 import WeekPicker from '../components/Input/WeekPicker';
 import MonthPicker from '../components/Input/MonthPicker';
