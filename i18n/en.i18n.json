@@ -1,0 +1,59 @@
+{
+  "_locale": "en",
+  "_namespace": "Common",
+  "myProgress": {
+    "navBar": {
+      "overview": "Overview",
+      "insights": "Insights"
+    },
+    "timeFrames": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "parameters": {
+      "painIntensity": "Pain intensity",
+      "satisfaction": "Satisfaction",
+      "physicalTiredness": "Physical tiredness",
+      "mentalTiredness": "Mental tiredness"
+    },
+    "activities": {
+      "activities": "Activities",
+      "work": "work",
+      "domesticChores": "domestic chores", 
+      "relaxationExercises": "relaxation exercises", 
+      "physicalExercises": "physical exercises (sport/stretching)", 
+      "familyOrFriends": "time spent with family or friends",  
+      "somethingIEnjoy": "doing something I enjoy", 
+      "TV": "TV/computer/reading", 
+      "resting": "resting", 
+      "other": "other"
+    },
+    "axes": {
+      "day": "Day",
+      "amountOfDays": "Amount of days",
+      "monday": "mo",
+      "tuesday": "tu",
+      "wednesday": "we",
+      "thursday": "th",
+      "friday": "fr",
+      "saturday": "sa",
+      "sunday": "su"
+    },
+    "weekOf": "Week of",
+    "insights": {
+      "title": "What do you want to see",
+      "insights": "Insights",
+      "showMe": "Show me",
+      "period": "For the period of",
+      "compare": "Compare with",
+      "delete": "Delete"
+    },
+    "notifications": {
+      "errorFitbitTitle": "Connect FitBit",
+      "errorFitbitMessage": "It seems you don't have any FitBit data yet, connect it to the app to log your activity.",
+      "errorNoDataTitle": "Couldn't load data",
+      "errorNoDataMessage": "It seems an error has occured while retrieving your data. Contact Support for more help."
+    }
+  }
+}

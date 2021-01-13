@@ -1,0 +1,59 @@
+{
+  "_locale": "nl-BE",
+  "_namespace": "Common",
+  "myProgress": {
+    "navBar": {
+      "overview": "Overzicht",
+      "insights": "Inzichten"
+    },
+    "timeFrames": {
+      "daily": "Dagelijks",
+      "weekly": "Wekelijks",
+      "monthly": "Maandelijks"
+    },
+    "parameters": {
+      "painIntensity": "Pijn intensiteit",
+      "satisfaction": "Tevredenheid",
+      "physicalTiredness": "Lichamelijke vermoeidheid",
+      "mentalTiredness": "Mentale vermoeidheid"
+    },
+    "activities": {
+      "activities": "Activiteiten",
+      "work": "werken",
+      "domesticChores": "huishouden", 
+      "relaxationExercises": "relaxatie oefeningen", 
+      "physicalExercises": "lichamelijke oefeningen", 
+      "familyOrFriends": "familie of vrienden",  
+      "somethingIEnjoy": "iets wat ik leuk vind", 
+      "TV": "tv/computer/lezen", 
+      "resting": "rusten", 
+      "other": "overig"
+    },
+    "axes": {
+      "day": "Dag",
+      "amountOfDays": "Aantal dagen",
+      "monday": "ma",
+      "tuesday": "di",
+      "wednesday": "wo",
+      "thursday": "do",
+      "friday": "vr",
+      "saturday": "za",
+      "sunday": "zo"
+    },
+    "weekOf": "Week van",
+    "insights": {
+      "title": "Wat wil je zien",
+      "insights": "Inzichten",
+      "showMe": "Toon mij",
+      "period": "Voor de periode van",
+      "compare": "Vergelijk met",
+      "delete": "Wis"
+    },
+    "notifications": {
+      "errorFitbitTitle": "Verbind FitBit",
+      "errorFitbitMessage": "Het lijkt er op dat je nog geen FitBit-data hebt. Verbind je FitBit met de app om je gegevens te loggen.",      
+      "errorNoDataTitle": "Kon gegevens niet laden",
+      "errorNoDataMessage": "Er is een error opgetreden bij het ophalen van je gegevens."
+    }
+  }
+}
