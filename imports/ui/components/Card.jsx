@@ -1,5 +1,5 @@
 import React from 'react';
-import './Card.css';
+import './Card.scss';
 
 function Card(props) {
     
@@ -7,7 +7,7 @@ function Card(props) {
 
     return (
         <div className="card">
-            <p className="card-header-title"><T>{props.title}</T></p>
+            <p className="card-header-title">{props.demo ? props.title : <T>{props.title}</T>}</p>
             <div className="card-body" style={props.bodyStyle}>
                 {props.children}
             </div>

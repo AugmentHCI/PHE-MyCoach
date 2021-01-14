@@ -29,22 +29,22 @@ export default function MyCoach(props) {
         <React.Fragment>
             <NavigationBar></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
-                <Card title="MIJN SHORTCUTS">
+                <Card title="MIJN SHORTCUTS" demo={true}>
                     <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
                     <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
                 </Card>
 
-                <Card title="MIJN TRAJECT">
+                <Card title="MIJN TRAJECT" demo={true}>
                     <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
                     <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
                 </Card>
 
-                <Card title="MIJN TRAJECT">
+                <Card title="MIJN TRAJECT" demo={true}>
                     <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
                     <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
                 </Card>
 
-                <Card title="MIJN TRAJECT">
+                <Card title="MIJN TRAJECT" demo={true}>
                     <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
                     <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
                 </Card>
