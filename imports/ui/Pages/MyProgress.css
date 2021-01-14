@@ -35,27 +35,27 @@
 }
   
 .large-text {
-  color: var(--dark-grey);
+  color: var(--idewe-gray-dark);
   font-family: var(--main-font);
   font-size: 16px;
 }
   
 .small-text {
-  color: var(--dark-grey);
+  color: var(--idewe-gray-dark);
   font-family: var(--main-font);
   font-size: 14px;
 }
   
 .close-button {
-  background-color: var(--idewe-white);
-  border: 1px solid var(--idewe-gray-light);
-  border-radius: 4px;
-  margin-left: 10%;
+  background-color: var(--idewe-blue-dark);
+  border: 1px solid var(--idewe-background-solid);
+  border-radius: 8px;
+  margin-left: 5%;
   margin-top: 2px;
   font: var(--main-font) !important;
   font-size: 16px;
-  color: var(--idewe-blue-dark);
+  color: var(--idewe-white);
   padding: 2px 12px;
-  height: 37px;
+  height: 38px;
   width: 90%;
 }
