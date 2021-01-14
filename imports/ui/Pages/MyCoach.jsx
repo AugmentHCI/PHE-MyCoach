@@ -2,60 +2,37 @@ import React, { Component } from 'react';
 import moment from "moment";
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-//import internationalization files
+// Import internationalization files
 import i18n from 'meteor/universe:i18n';
 import "../../../i18n/nl.i18n.json"
 import "../../../i18n/fr.i18n.json"
 import "../../../i18n/en.i18n.json"
 
-//import data processing functions
-import { setDataParserLocale } from '../../api/dataparser';
+// Import components
+import ActionButton from '../components/ActionButton.jsx';
 
-//instance of React translate component, "Common" refers to the namespace of the i18n files
+// Instance of React translate component, "Common" refers to the namespace of the i18n files
 const T = i18n.createComponent("Common");
 
-export default class MyCoach extends Component {
-
-    constructor(props) {
-        super(props);
-
-        //state contains some default settings when first loading MyProgress page
-        this.state = {
-            timeFrame: "weekly",
-            tab: "overview",
-            data: null,
-            userToken: "",
-            fitbitConnected: false,
-            parameter: "painIntensity",
-            compareParameter: "",
-            callError: "",
-            devEnvironment: false
-        };
-    }
-
-    // Is called when initializing MyProgress component
-    componentDidMount(){
-        // Get user token from URL routing (see also routes.jsx file)
-        /*
-        let token = FlowRouter.getParam('token');
-        this.setState({userToken: token});
-        this.setLocale();
-        this.fetchData(this.state.selectedPeriod, token, this.state.timeFrame);*/
-    }
+export default function MyCoach(props) {
 
     // Get locale from URL routing (see also routes.jsx file)
-    setLocale() {
+    function setLocale() {
         /*
         let language = FlowRouter.getParam('language');
         i18n.setLocale(language);
         setDataParserLocale(language);*/
     }
 
-    render() {
-        return (
+    return (
         <div className="container">
-            <h1>MyCoach</h1>
-            {this.state.userToken}
-        </div>)
-    }
+            <h1>My Coach</h1>
+            <h2>MIJN TODO'S</h2>
+            <ActionButton>Voeg toe aan je pijnlogboek</ActionButton>
+            <ActionButton>Bekijk je coaching van de dag</ActionButton>
+
+            <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
+            <ActionButton action={() => FlowRouter.go('/mycoach/paineducation/')}>Pijn-educatie</ActionButton>
+        </div>
+    )
 };

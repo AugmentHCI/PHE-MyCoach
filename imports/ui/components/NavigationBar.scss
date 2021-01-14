@@ -1,0 +1,16 @@
+.NavigationBar {
+    position: fixed;
+    z-index: 10;
+    width:100vw;
+    height: 50px;
+    top: 0;
+    padding-left: 30px;
+    padding-top: 10px;
+    color: var(--idewe-blue-dark);
+    background-color: var(--idewe-white);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    /* Font */
+    font-family: var(--main-font);
+    font-size: 24px;
+    font-weight: 600;
+}

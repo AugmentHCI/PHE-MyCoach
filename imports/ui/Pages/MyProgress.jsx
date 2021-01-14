@@ -342,7 +342,7 @@ export default class MyProgress extends Component {
       <div className="container">
         {!this.state.fitbitConnected && this.renderConnectFitbitMessage()}
         <div>
-          <p className="screen-title">My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</p>
+          <h1>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1>
         </div>
         {this.renderInsightsCard()}
         {this.state.timeFrame == "weekly" && this.renderOverviewWeekly()}
