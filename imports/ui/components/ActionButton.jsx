@@ -15,7 +15,10 @@ function ActionButton(props) {
     }
 
     return (
-        <button className={pressClass} onTouchStart={() => press(true)} onTouchEnd={() => action()}>
+        <button className={pressClass} 
+                onTouchStart={() => press(true)} 
+                onClick={() => action()} 
+                onTouchEnd={() => press(false)}>
             <div className="button-icon"/>
             <div className={props.size === "small" ? "button-text-small" : "button-text"}>
                 {props.children}
