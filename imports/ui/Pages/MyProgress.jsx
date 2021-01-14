@@ -294,7 +294,7 @@ export default class MyProgress extends Component {
               locale = {i18n.getLocale()}
             />
           </Card>
-          <Card title="myProgress.activities.activities" bodyStyle={{padding:"10px 0 10px 5px"}}>
+          <Card title="myProgress.activities.activities">
             <ActivityGraph 
               data = {this.state.data}
               locale = {i18n.getLocale()}
