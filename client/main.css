@@ -3,7 +3,6 @@
 
 /* Color palette */
 :root {
-  --idewe-blue:#5AB9EA;  /* echte IDEWE blauw: #0086BF */
   --idewe-blue-tint5:#5AB9EA;
   --idewe-blue-tint4: #91D0F1;
   --idewe-blue-tint3: #ACDCF5;
@@ -31,10 +30,11 @@
   --idewe-blue: #0086BF;
   --idewe-blue-dark: #01426A;
   --idewe-background: linear-gradient(180deg, #E7F0F7 0%, #DFEFF9 100%);
+  --idewe-background-solid: #DFE6F0;
   --idewe-gray-light: #9DABBB;
   --idewe-gray-dark: #5F6B78;
   --idewe-black: #2D353E;
-  --idewe-white: white;
+  --idewe-white: #f5f5fa;
   --main-font: 'Maven Pro', 'Montserrat', sans-serif; 
 } 
 
