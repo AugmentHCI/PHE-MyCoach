@@ -8,7 +8,7 @@ import "../../../../i18n/en.i18n.json"
 
 const T = i18n.createComponent("Common");
 
-const grey = getComputedStyle(document.documentElement).getPropertyValue('--very-light-grey');
+const grey = getComputedStyle(document.documentElement).getPropertyValue('--idewe-background');
 
 //component for one calender cell of the visualisation
 class Cell extends Component {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { getParameterData } from '../../../api/dataparser';
 import i18n from 'meteor/universe:i18n';
 import "../../../../i18n/nl.i18n.json"

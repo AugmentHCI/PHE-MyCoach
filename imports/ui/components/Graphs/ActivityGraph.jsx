@@ -7,8 +7,8 @@ import "../../../../i18n/en.i18n.json";
 
 const T = i18n.createComponent("Common");
 
-const blue = getComputedStyle(document.documentElement).getPropertyValue('--idewe-dark-blue');
-const grey = getComputedStyle(document.documentElement).getPropertyValue('--light-grey');
+const blue = getComputedStyle(document.documentElement).getPropertyValue('--idewe-blue-dark');
+const grey = getComputedStyle(document.documentElement).getPropertyValue('--idewe-gray-light');
 
 //circle component for when an activity was completed that day
 class FullCircle extends Component {
