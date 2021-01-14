@@ -27,8 +27,7 @@ export default function MyCoach(props) {
 
     return (
         <React.Fragment>
-            <NavigationBar></NavigationBar>
-            <div className="container">
+            <div className="container" style={{paddingTop: "85px"}}>
                 <Card title="MIJN SHORTCUTS">
                     <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
                     <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>

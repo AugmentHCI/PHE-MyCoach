@@ -43,8 +43,11 @@ body {
   font-size: 16px;
   background-color: #E7F0F7 !important;
 
-  position: absolute;
-  top: 0;
+  overscroll-behavior-y: none;
+  overflow-x: hidden; 
+  overscroll-behavior-x: none;
+
+  position: relative;
   bottom: 0;
   left: 0;
   right: 0;
