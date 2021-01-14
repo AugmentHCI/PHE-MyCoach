@@ -89,7 +89,7 @@ class WeekPicker extends Component {
   
 }
 
-const blue = getComputedStyle(document.documentElement).getPropertyValue('--idewe-dark-blue');
+const blue = getComputedStyle(document.documentElement).getPropertyValue('--idewe-blue-dark');
 
 const styles = createStyles(theme => ({
   dayWrapper: {

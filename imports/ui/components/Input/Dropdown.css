@@ -1,21 +1,21 @@
 /* Button dropdown */
 .btn-dropdown {
     font-family: var(--main-font) !important;
-    background: #F9FEFF !important;
-    color: var(--dark-grey) !important;
-    border-color: var(--light-grey) !important;
+    background: var(--idewe-white) !important;
+    color: var(--idewe-blue-dark) !important;
+    border-color: var(--idewe-gray-light) !important;
     margin: 2px !important;
-    font-size: 14px !important;
+    font-size: 16px !important;
     justify-content: left !important;
     width:100% !important;
 }
 
 .btn-dropdown:hover {
-    color: var(--dark-grey) !important;
-    font-size: 14px !important;
+    color: var(--idewe-gray-dark) !important;
+    font-size: 16px !important;
 }
 
 .dropdown-item {
     font-family: var(--main-font);
-    font-size: 14px;
+    font-size: 16px;
 }

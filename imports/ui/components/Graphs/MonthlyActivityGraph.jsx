@@ -8,7 +8,7 @@ import "../../../../i18n/en.i18n.json";
 
 const T = i18n.createComponent("Common");
 
-const blue = getComputedStyle(document.documentElement).getPropertyValue('--idewe-dark-blue');
+const blue = getComputedStyle(document.documentElement).getPropertyValue('--idewe-blue-dark');
 
 export default class MonthlyActivityGraph extends Component {
   constructor(props){

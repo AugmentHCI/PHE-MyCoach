@@ -3,14 +3,16 @@
 .alert-dark {
   margin-top: 10px !important;
   padding: 10px 10px 0px 10px !important;
-  background-color: var(--idewe-header) !important;
-  color: var(--dark-grey);
+  background-color: var(--idewe-white) !important;
+  color: var(--idewe-blue-dark);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
   
 .alert-heading {
   font-size: 20px !important;
   font-weight: 600 !important;
   font-family: var(--main-font) !important;
+  color: var(--idewe-blue-dark);
 }
 
 .alert-body {

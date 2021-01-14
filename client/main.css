@@ -27,15 +27,14 @@
   --idewe-purple-tint3: #B39CCD;
   --idewe-purple-tint2: #CCBDDE;
   --idewe-purple-tint1: #E6DEEE;
-  --dark-grey: rgb(77, 80, 83);
-  --light-grey: #D3D3D3;
-  --very-light-grey: rgb(216, 216, 216);
-  
-  --idewe-header: #DDE6EF;
-  --idewe-body: #E9EFF5;
-  --idewe-title: #323536;
-  --idewe-subtitle: #7C8182;
-  --idewe-dark-blue: #00436B;
+
+  --idewe-blue: #0086BF;
+  --idewe-blue-dark: #01426A;
+  --idewe-background: linear-gradient(180deg, #E7F0F7 0%, #DFEFF9 100%);
+  --idewe-gray-light: #9DABBB;
+  --idewe-gray-dark: #5F6B78;
+  --idewe-black: #2D353E;
+  --idewe-white: white;
   --main-font: 'Maven Pro', 'Montserrat', sans-serif; 
 } 
 
