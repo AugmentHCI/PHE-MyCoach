@@ -1,13 +1,25 @@
-.NavigationBar {
+.navigation-bar {
     position: fixed;
     z-index: 10;
     width:100vw;
     height: 55px;
-    padding-left: 30px;
+    padding-left: 0px;
     padding-top: 10px;
     color: var(--idewe-blue-dark);
     background-color: var(--idewe-white);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    /* Font */
+    font-family: var(--main-font);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.navigation-bar-button {
+    background: none;
+    color: var(--idewe-blue-dark);
+    border: none;
+    width: 20px;
+    padding-right: 30px;
     /* Font */
     font-family: var(--main-font);
     font-size: 24px;
