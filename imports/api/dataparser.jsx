@@ -46,7 +46,7 @@ const parameters = [
   {
     "id": "mentalTiredness",
     "measure": "", //"mentalTiredness",
-    "color": '--idewe-dark-blue',
+    "color": '--idewe-blue-dark',
     "min": 1,
     "max": 4,
     "code": "phe.dagelijks.mentale.vermoeidheid"
