@@ -3,8 +3,9 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { mount } from 'react-mounter';
 
 import App from '../imports/ui/App.jsx';
-import MyProgress from '../imports/ui/Pages/MyProgress';
-import MyCoach from '../imports/ui/Pages/MyCoach';
+import MyProgress from '../imports/ui/Pages/MyProgress.jsx';
+import MyCoach from '../imports/ui/Pages/MyCoach.jsx';
+import PainEducation from '../imports/ui/Pages/PainEducation.jsx';
 
 //route when no parameters are passed -> MyProgress will render with dummy data
 FlowRouter.route('/', {
@@ -16,6 +17,9 @@ FlowRouter.route('/', {
   }
 })
 
+/*
+  MY COACH ROUTES
+*/
 FlowRouter.route('/mycoach/', {
   name: 'MyCoach',
   action(){ 
@@ -25,6 +29,16 @@ FlowRouter.route('/mycoach/', {
   }
 })
 
+FlowRouter.route('/mycoach/paineducation', {
+  name: 'Paineducation',
+  action(){ 
+    mount( App, {
+      content: <PainEducation /> 
+    })
+  }
+})
+
+
 FlowRouter.route('/mycoach/:language/:token', {
   name: 'MyCoach',
   action(){ 
@@ -33,6 +47,11 @@ FlowRouter.route('/mycoach/:language/:token', {
     })
   }
 })
+
+
+/*
+  MY PROGRESS ROUTES
+*/
 
 // Route when token is passed
 FlowRouter.route('/:token', {
