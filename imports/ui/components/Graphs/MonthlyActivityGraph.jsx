@@ -73,7 +73,7 @@ export default class MonthlyActivityGraph extends Component {
             data={this.sortActivityData(this.state.data)} //unsorted: data={this.state.data}
             keys={["sum"]}
             indexBy="key"
-            margin={{ top: 10, right: 50, bottom: 50, left: 150 }}
+            margin={{ top: 10, right: 15, bottom: 50, left: 150 }}
             padding={0.3}
             layout="horizontal"
             colors={blue}
