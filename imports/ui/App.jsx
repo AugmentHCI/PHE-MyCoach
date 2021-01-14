@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import NavigationBar from '../ui/components/NavigationBar.jsx';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../client/main.css';
 
@@ -9,6 +11,7 @@ class App extends Component {
   render() {
     return(
       <div>
+        <NavigationBar></NavigationBar>
         {this.props.content}
       </div>
     )
