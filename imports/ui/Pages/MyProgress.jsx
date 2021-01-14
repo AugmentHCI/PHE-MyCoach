@@ -286,7 +286,7 @@ export default class MyProgress extends Component {
     renderOverviewWeekly() {
       return (
         <React.Fragment>
-          <Card title="myProgress.insights.insights" bodyStyle={{padding: '0'}}>
+          <Card title="myProgress.insights.insights" bodyStyle={{padding: '0', paddingBottom: '15px'}}>
             <LineGraph 
               parameter = {this.state.parameter}
               data = {this.state.data}
@@ -307,7 +307,7 @@ export default class MyProgress extends Component {
     renderOverviewMonthly() {
       return (
         <React.Fragment>
-          <Card title="myProgress.insights.insights" bodyStyle={{padding: '0'}}>
+          <Card title="myProgress.insights.insights" bodyStyle={{padding: '10px 5px'}}>
             <CalendarGraph 
               parameter = {this.state.parameter}
               data = {this.state.data}
