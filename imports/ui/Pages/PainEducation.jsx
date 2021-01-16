@@ -11,6 +11,9 @@ import "../../../i18n/en.i18n.json"
 import ActionButton from '../components/ActionButton.jsx';
 import Card from '../components/Card.jsx';
 import NavigationBar from '../components/NavigationBar.jsx';
+import PillButton from '../components/PillButton.jsx';
+
+
 
 // Instance of React translate component, "Common" refers to the namespace of the i18n files
 const T = i18n.createComponent("Common");
@@ -32,22 +35,15 @@ export default function MyCoach(props) {
                 <Card title="MIJN SHORTCUTS" demo={true}>
                     <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
                     <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
+                    <PillButton>15 minuten</PillButton>
                 </Card>
 
                 <Card title="MIJN TRAJECT" demo={true}>
                     <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
                     <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
+
                 </Card>
 
-                <Card title="MIJN TRAJECT" demo={true}>
-                    <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
-                    <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
-                </Card>
-
-                <Card title="MIJN TRAJECT" demo={true}>
-                    <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
-                    <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
-                </Card>
             </div>
         </React.Fragment>
     )
