@@ -1,0 +1,20 @@
+.icon {
+    margin-top: -3px;
+    margin-bottom: 5px;
+
+    &-blue {
+        @extend .icon;
+        filter: invert(43%) sepia(45%) saturate(7192%) hue-rotate(175deg) brightness(92%) contrast(102%);
+    }
+
+    &-white {
+        @extend .icon;
+        filter: invert(100%) sepia(6%) saturate(7500%) hue-rotate(224deg) brightness(108%) contrast(112%);
+    }
+
+    &-black {
+        @extend .icon;
+        filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(137deg) brightness(87%) contrast(105%);
+    }
+
+}
