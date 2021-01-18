@@ -12,6 +12,7 @@ import ActionButton from '../components/ActionButton.jsx';
 import Card from '../components/Card.jsx';
 import NavigationBar from '../components/NavigationBar.jsx';
 import PillButton from '../components/PillButton.jsx';
+import ModuleCard from '../components/ModuleCard.jsx';
 
 
 
@@ -35,13 +36,12 @@ export default function MyCoach(props) {
                 <Card title="MIJN SHORTCUTS" demo={true}>
                     <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
                     <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
-                    <PillButton>15 minuten</PillButton>
+                    <PillButton icon={"time"}>15 minuten</PillButton>
+                    <PillButton icon={"information"}>Informatief</PillButton>
                 </Card>
 
                 <Card title="MIJN TRAJECT" demo={true}>
-                    <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
-                    <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
-
+                    <ModuleCard title={<div>Rol van <br/> het brein</div>} number="Onderdeel 2"></ModuleCard>
                 </Card>
 
             </div>
