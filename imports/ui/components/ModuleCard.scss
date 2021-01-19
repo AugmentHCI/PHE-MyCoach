@@ -8,6 +8,11 @@
     border-radius: 15px 15px 0 0;
     position: relative;
     z-index: 0;
+
+    &-white {
+        @extend .module-card-top;
+        background-color: var(--idewe-white);
+    }
 }
 
 .module-card-title {
