@@ -29,6 +29,11 @@ export default function MyCoach(props) {
         setDataParserLocale(language);*/
     }
 
+    /* Links to modules */
+    function routeToModule(link) {
+        FlowRouter.go(`/mycoach/paineducation/${link}`);
+    }
+
     return (
         <React.Fragment>
             <NavigationBar></NavigationBar>
@@ -41,7 +46,10 @@ export default function MyCoach(props) {
                 </Card>
 
                 <Card title="MIJN TRAJECT" demo={true}>
-                    <ModuleCard title={<div>Rol van <br/> het brein</div>} number="Onderdeel 2"></ModuleCard>
+                    <ModuleCard title={<div>Rol van <br/> het brein</div>} 
+                                number="Onderdeel 2"
+                                onClick={() => routeToModule('part-2')}>
+                    </ModuleCard>
                 </Card>
 
             </div>

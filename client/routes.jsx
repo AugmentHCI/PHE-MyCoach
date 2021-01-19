@@ -6,6 +6,7 @@ import App from '../imports/ui/App.jsx';
 import MyProgress from '../imports/ui/Pages/MyProgress.jsx';
 import MyCoach from '../imports/ui/Pages/MyCoach.jsx';
 import PainEducation from '../imports/ui/Pages/PainEducation.jsx';
+import PainEducationParser from '../imports/ui/Pages/PainEducationParser.jsx';
 
 //route when no parameters are passed -> MyProgress will render with dummy data
 FlowRouter.route('/', {
@@ -34,6 +35,15 @@ FlowRouter.route('/mycoach/paineducation', {
   action(){ 
     mount( App, {
       content: <PainEducation /> 
+    })
+  }
+})
+
+FlowRouter.route('/mycoach/paineducation/part-:part', {
+  name: 'Paineducation',
+  action(){ 
+    mount( App, {
+      content: <PainEducationParser /> 
     })
   }
 })

@@ -1,0 +1,26 @@
+.content-question {
+    background-color: var(--idewe-background-solid);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.content-question-title {
+    font-family: var(--main-font);
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--idewe-gray-dark);
+}
+
+.content-question-text {
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--idewe-blue-dark);
+}
+
+.content-text {
+    font-family: var(--main-font);
+    font-weight: 400;
+    color: var(--idewe-blue-dark);
+}

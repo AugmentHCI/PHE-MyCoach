@@ -12,17 +12,19 @@ const T = i18n.createComponent("Common");
 
 function ModuleCard(props) {
 
+    const topColor = props.topColor === "white" ? "module-card-top-white" : "module-card-top"
+
     return (
         <div className="module-card-container">
-            <div className="module-card-top">
+            <div className={topColor}>
                 <div className="module-card-number">{props.number}</div>
                 <div className="module-card-title">{props.title}</div>
                 <Art image="new-ideas" width="160px" style={{position: "absolute", bottom: "-10px", right: "20px", zIndex: "1"}}></Art>
             </div>
             <div className="module-card-bottom">
-                <div className="module-card-information">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</div>
-                <PillButton color="white" icon="time">15 minutes</PillButton>
-                <PillButton color="white" icon="information">Informatief</PillButton>
+                <div className="module-card-information">{props.description}</div>
+                <PillButton color="white" icon="time">{props.duration}</PillButton>
+                <PillButton color="white" icon="information">{props.type}</PillButton>
             </div>
         </div>);
 }
