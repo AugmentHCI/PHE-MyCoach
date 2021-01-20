@@ -19,7 +19,7 @@ function ModuleCard(props) {
     function createTitleHTML() {
         let prototypeTitleHTML = [];
         props.title.forEach((title, index) => {
-            prototypeTitleHTML.push(<React.Fragment>{title}<br/></React.Fragment>)
+            prototypeTitleHTML.push(<div key={index}>{title}<br/></div>)
         });
         return prototypeTitleHTML;
     }
