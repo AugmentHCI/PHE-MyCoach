@@ -14,7 +14,7 @@ function CardsParser(props) {
     function createCards() {
         props.cards.forEach((card, index) => {   
             contentsHTML.push(
-                <Card key={index} title={card.header} noTranslate>
+                <Card key={index} title={card.header} noTranslate overview={card.overview}>
                     {createCardContent(index, card["card-contents"])}
                 </Card>
             );
