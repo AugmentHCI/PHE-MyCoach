@@ -12,14 +12,16 @@ const T = i18n.createComponent("Common");
 
 function ModuleCard(props) {
 
-    const topColor = props.topColor === "white" ? "module-card-top-white" : "module-card-top"
+    const topClass = props.topColor === "white" ? "module-card-top-white" : "module-card-top"
 
     return (
         <div className="module-card-container">
-            <div className={topColor}>
-                <div className="module-card-number">{props.number}</div>
-                <div className="module-card-title">{props.title}</div>
-                <Art image="new-ideas" width="160px" style={{position: "absolute", bottom: "-10px", right: "20px", zIndex: "1"}}></Art>
+            <div className={topClass}>
+                <div className="module-card-title-container">
+                    <div className="module-card-number">{props.number}</div>
+                    <div className="module-card-title">{props.title}</div>
+                </div>
+                <Art image="new-ideas" width="160px" style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}></Art>
             </div>
             <div className="module-card-bottom">
                 <div className="module-card-information">{props.description}</div>
