@@ -15,7 +15,7 @@ function ModuleCard(props) {
     const topClass = props.topColor === "white" ? "module-card-top-white" : "module-card-top"
 
     return (
-        <div className="module-card-container">
+        <div className="module-card-container" onClick={props.onClick}>
             <div className={topClass}>
                 <div className="module-card-title-container">
                     <div className="module-card-number">{props.number}</div>
@@ -25,8 +25,10 @@ function ModuleCard(props) {
             </div>
             <div className="module-card-bottom">
                 <div className="module-card-information">{props.description}</div>
-                <PillButton color="white" icon="time">{props.duration}</PillButton>
-                <PillButton color="white" icon="information">{props.type}</PillButton>
+                <div className="module-card-pills">
+                    <PillButton color="white" icon="time">{props.duration}</PillButton>
+                    <PillButton color="white" icon="information">{props.type}</PillButton>
+                </div>
             </div>
         </div>);
 }

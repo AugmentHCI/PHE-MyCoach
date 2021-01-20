@@ -9,21 +9,32 @@ import Icon from './Illustrations/Icon.jsx';
 
 const T = i18n.createComponent("Common");
 
+/**
+ * 
+ * @param {*} props 
+ */
 function PillButton(props) {
 
     const buttonClass = props.color === "white" ? "pill-button-white" : "pill-button-blue";
 
     const buttonIconClass = props.color === "white" ? "pill-button-icon-blue" : "pill-button-icon-white";
 
-    const noOutline = ["information"];
+    const noOutline = ["information", "time"];
+
+    const needsOutline = props.icon && noOutline.includes(props.icon);
+
+    function createIcon() {
+        if (!needsOutline) return (<div className={buttonIconClass}>       
+            <Icon width="14px" image={props.icon} color={props.color ? props.color : "blue"}></Icon>
+        </div>);
+        else return (<Icon width="20px" image={props.icon} color={props.color === "white" ? "blue" : "white"} style={{float:"left", marginTop:"2px", paddingTop: "-6px"}}></Icon>);
+    }
+
+    const updateStyle = needsOutline ? {marginTop: "0px !important"} : {};
 
     return (
-        <button className={buttonClass}>
-            {props.icon && !noOutline.includes(props.icon) && <div className={buttonIconClass}>       
-                <Icon width="14px" image={props.icon} color={props.color ? props.color : "blue"}></Icon>
-            </div>}
-            {props.icon && noOutline.includes(props.icon) &&
-                <Icon width="20px" image={props.icon} color={props.color === "white" ? "blue" : "white"} style={{float:"left", marginTop:"2px", paddingTop: "-6px"}}></Icon>}
+        <button className={buttonClass} style={updateStyle}>
+            {createIcon()}
             <div className='pill-button-text'>
                 {props.children}
             </div>
