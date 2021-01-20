@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Card from '../components/Card.jsx';
-import Content from '../components/Content.jsx';
+import Card from '../../components/Card.jsx';
+import Content from '../../components/Content.jsx';
 
 
 function CardsParser(props) {

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import moment from "moment";
+import React from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // Import internationalization files
