@@ -19,6 +19,56 @@
     color: var(--idewe-blue-dark);
 }
 
+.content-button {
+    border: 2px solid var(--idewe-blue);
+    border-radius: 10px;
+    color: var(--idewe-blue);
+    background-color: var(--idewe-background-solid);
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 3px 15px;
+
+    &-incorrect {
+        @extend .content-button;
+        border: 2px solid var(--idewe-red);
+        background-color: var(--idewe-red);
+        color: var(--idewe-white);
+    }
+
+    &-correct {
+        @extend .content-button;
+        border: 2px solid var(--idewe-green);
+        background-color: var(--idewe-green);
+        color: var(--idewe-white);
+    }
+}
+
+.content-answer {
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 10px;
+
+    &-correct {
+        @extend .content-answer;
+        color: var(--idewe-green);
+    }
+
+    &-incorrect {
+        @extend .content-answer;
+        color: var(--idewe-red);
+    }
+}
+
+.content-buttons {
+    width: 100%;
+    text-align: center;
+}
+
 .content-text {
     font-family: var(--main-font);
     font-weight: 400;

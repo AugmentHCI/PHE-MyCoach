@@ -12,19 +12,19 @@ function CardsParser(props) {
     const userProfile = {pain: "No pain", profile: 6, language: "nl-NL"};
 
     function createCards() {
-        props.cards.forEach(card => {   
-            let cardHTML = [];     
-            Object.entries(card).forEach(([key, value]) => {
-                cardHTML.push(createCardContent(key, value["card-content"]));
-            });
-            contentsHTML.push(<Card title={"Hello"}>{cardHTML}</Card>);
+        props.cards.forEach((card, index) => {   
+            contentsHTML.push(
+                <Card key={index} title={card.header} noTranslate>
+                    {createCardContent(index, card["card-contents"])}
+                </Card>
+            );
         });
     }
 
     function createCardContent(key, contents) {
         let contentArray = [];
-        contents.forEach(content => {
-            contentArray.push(<Content key={key} data={content} userProfile={userProfile}></Content>)
+        contents.forEach((content, index) => {
+            contentArray.push(<Content key={"content-" + key + "-" + index} data={content} userProfile={userProfile}></Content>)
         });
         return contentArray;
     }
