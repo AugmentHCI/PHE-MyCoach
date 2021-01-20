@@ -7,7 +7,7 @@ const PainEducation = {
         "duration": "15 minuten",
         "type": "Informatief",
         "cards": [
-            {"card-1": {
+            {"PE-MOD-card-1": {
                     "header": "Inleiding",
                     "card-content": [
                         {
@@ -21,12 +21,13 @@ const PainEducation = {
                     ]
                 }
             }, 
-            {"card-2": {
+            {"PE-MOD-card-2": {
                 "header": "Vragen",
                 "card-content": [
                     {
                         "type": "Text",
-                        "content": "Goed zo, je hebt het eerste filmpje over hoe pijn ontstaat met succes doorlopen. Heb je het goed onthouden en begrepen?"
+                        "content": "Goed zo, je hebt het eerste filmpje over hoe pijn ontstaat met succes doorlopen. Heb je het goed onthouden en begrepen?",
+                        "show-if": "Pain"
                     },
                     {
                         "type": "Question",

@@ -48,7 +48,10 @@ export default function MyCoach(props) {
                 <Card title="MIJN TRAJECT" demo={true}>
                     <ModuleCard title={<div>Rol van <br/> het brein</div>} 
                                 number="Onderdeel 2"
-                                onClick={() => routeToModule('part-2')}>
+                                duration={"10 minuten"}
+                                description={"In deze module bekijken we het effect van ons brein op de pijn die wij ervaren."}
+                                type={"Informatief"}
+                                onClick={() => routeToModule('part-1')}>
                     </ModuleCard>
                 </Card>
 
