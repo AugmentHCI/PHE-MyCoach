@@ -48,6 +48,7 @@ export default function PainEducation(props) {
                                 duration={"10 minuten"}
                                 description={"In deze module bekijken we het effect van ons brein op de pijn die wij ervaren."}
                                 type={"Informatief"}
+                                image="new-ideas"
                                 onClick={() => routeToModule('part-1')}>
                     </ModuleCard>
                 </Card>
