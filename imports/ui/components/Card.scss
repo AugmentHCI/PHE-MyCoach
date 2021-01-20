@@ -28,5 +28,9 @@
   font-weight: 500 !important;
   font-size: 18px !important;
   text-transform: uppercase;
-  text-decoration: underline;
+  
+  &-underline {
+    @extend .card-header-title;
+    text-decoration: underline;
+  }
 }
