@@ -79,6 +79,10 @@ html, body {
   padding-right: 20px !important;
   background: var(--idewe-background) !important; 
 
+  scroll-snap-type: mandatory;
+  scroll-snap-type: y mandatory;
+  scroll-padding: 70px;
+
   /* Disable text selection and highlighting */
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
