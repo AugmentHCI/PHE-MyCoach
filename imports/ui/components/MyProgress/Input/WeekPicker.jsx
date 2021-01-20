@@ -9,9 +9,9 @@ import { IconButton, withStyles } from "@material-ui/core";
 import './MuiInput.css';
 
 import i18n from 'meteor/universe:i18n';
-import "../../../../i18n/nl.i18n.json"
-import "../../../../i18n/fr.i18n.json"
-import "../../../../i18n/en.i18n.json"
+import "../../../../../i18n/nl.i18n.json";
+import "../../../../../i18n/fr.i18n.json";
+import "../../../../../i18n/en.i18n.json";
 
 //this code is based on https://material-ui-pickers.dev/demo/datepicker#customization
 

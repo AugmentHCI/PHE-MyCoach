@@ -15,17 +15,17 @@ import { getWeeklyDummyData, getMonthlyDummyData } from '../../api/dummydata';
 
 // Import components
 import './MyProgress.css';
-import '../components/Input/Dropdown.css';
+import '../components/MyProgress/Input/Dropdown.css';
 
-import DayPicker from '../components/Input/DayPicker';
-import WeekPicker from '../components/Input/WeekPicker';
-import MonthPicker from '../components/Input/MonthPicker';
-import ParameterPicker from '../components/Input/ParameterPicker.jsx';
+import DayPicker from '../components/MyProgress/Input/DayPicker';
+import WeekPicker from '../components/MyProgress/Input/WeekPicker';
+import MonthPicker from '../components/MyProgress/Input/MonthPicker';
+import ParameterPicker from '../components/MyProgress/Input/ParameterPicker.jsx';
 
-import LineGraph from '../components/Graphs/LineGraph.jsx';
-import ActivityGraph from '../components/Graphs/ActivityGraph.jsx';
-import MonthlyActivityGraph from '../components/Graphs/MonthlyActivityGraph.jsx';
-import CalendarGraph from '../components/Graphs/CalendarGraph.jsx';
+import LineGraph from '../components/MyProgress/Graphs/LineGraph.jsx';
+import ActivityGraph from '../components/MyProgress/Graphs/ActivityGraph.jsx';
+import MonthlyActivityGraph from '../components/MyProgress/Graphs/MonthlyActivityGraph.jsx';
+import CalendarGraph from '../components/MyProgress/Graphs/CalendarGraph.jsx';
 
 import NotificationAlert from '../components/Notification.jsx';
 import Card from '../components/Card.jsx';
