@@ -13,6 +13,7 @@ export default function ModuleParser(props) {
     const part =  "part-" + FlowRouter.getParam('part');
     
     let data = [];
+    
     switch (FlowRouter.getParam('module')) {
         case 'paineducation':
             data = PainEducation[part];
@@ -30,7 +31,8 @@ export default function ModuleParser(props) {
                             topColor={"white"}
                             description={data.description}
                             duration={data.duration}
-                            type={data.type}>
+                            type={data.type}
+                            image={data.image}>
                 </ModuleCard>
                 <hr style={{borderTop: "1px solid var(--idewe-blue)", width: "90%"}}/>
                 <CardsParser cards={data.cards}></CardsParser>

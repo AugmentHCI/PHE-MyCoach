@@ -12,7 +12,7 @@ const T = i18n.createComponent("Common");
 
 function ModuleCard(props) {
 
-    const topClass = props.topColor === "white" ? "module-card-top-white" : "module-card-top"
+    const topClass = props.topColor === "white" ? "module-card-top-white" : "module-card-top";
 
     const titleHTML = Array.isArray(props.title) ? createTitleHTML() : props.title;
 
@@ -31,7 +31,7 @@ function ModuleCard(props) {
                     <div className="module-card-number">{props.number}</div>
                     <div className="module-card-title">{titleHTML}</div>
                 </div>
-                <Art image="new-ideas" width="160px" style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}></Art>
+                <Art image={props.image} width="160px" style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}></Art>
             </div>
             <div className="module-card-bottom">
                 <div className="module-card-information">{props.description}</div>
