@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Card from '../../components/Card.jsx';
-import Content from '../../components/Content.jsx';
+import Content from './Content.jsx';
 
 
 function CardsParser(props) {
@@ -11,8 +11,13 @@ function CardsParser(props) {
     // DUMMY DATA
     const userProfile = {pain: "No pain", profile: 6, language: "nl-NL"};
 
-    function createCards() {
-        props.cards.forEach((card, index) => {   
+    /**
+     * Creates all the Cards HTML in a given array.
+     * @param {Array} cards 
+     */
+    function createCards(cards) {
+        cards.forEach((card, index) => {  
+            if (Object.keys(card).length === 0) return;
             contentsHTML.push(
                 <Card key={index} title={card.header} noTranslate overview={card.overview}>
                     {createCardContent(index, card["card-contents"])}
@@ -21,15 +26,23 @@ function CardsParser(props) {
         });
     }
 
+    /**
+     * Creates all the Contents HTML in a given array.
+     * @param {String} key 
+     * @param {Array} contents 
+     */
     function createCardContent(key, contents) {
         let contentArray = [];
         contents.forEach((content, index) => {
-            contentArray.push(<Content key={"content-" + key + "-" + index} data={content} userProfile={userProfile}></Content>)
+            contentArray.push(
+                <Content key={"content-" + key + "-" + index} 
+                         data={content} 
+                         userProfile={userProfile}></Content>);
         });
         return contentArray;
     }
 
-    createCards();
+    createCards(props.cards);
 
     return contentsHTML;
 

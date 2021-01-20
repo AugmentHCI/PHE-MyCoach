@@ -4,7 +4,7 @@ const PainEducation = {
     "part-1": {
         "title": "Ontstaan van pijn",
         "description": "In dit onderdeel zien we hoe pijn ontstaat en de weg die prikkels moeten afleggen naar onze hersenen.",
-        "duration": "15 minuten",
+        "duration": "10 minuten",
         "type": "Informatief",
         "cards": [{
                     "header": "Inleiding",
@@ -72,10 +72,24 @@ const PainEducation = {
                     "card-contents": [
                         {
                             "type": "Text",
-                            "content": "Goed zo, je hebt het eerste onderdeel van de module pijneducatie succesvol doorlopen. Je kan altijd terugkeren naar dit onderdeel als je het filmpje nog eens wilt bekijken. Hieronder heb je nog een overzicht van wat je hebt geleerd in deze module."
+                            "overview": true,
+                            "content": "Hier nog even een overzicht van het onderdeel 'ontstaan van pijn':"
+                        },
+                        {
+                            "type": "List",
+                            "overview": true,
+                            "numbered": true,
+                            "content": ["Receptoren op de zenuwen nemen prikkels uit de omgeving waar. Worden de receptoren sterk genoeg gestimuleerd, dan wordt er een boodschap gestuurd naar de hersenen.", "De boodschappen worden via het ruggenmerg naar de hersenen gestuurd. De hersenen bepalen welke boodschappen worden doorgestuurd in het ruggenmerg.", "De hersenen analyseren de binnenkomende boodschappen en kiezen een gepaste reactie."]
                         }
                 ]}
             ]
+    },
+    "part-2": {
+        "title": "Rol van het brein",
+        "description": "In dit onderdeel bespreken we welke rol ons brein heeft in het verwerken van onze prikkels, en onze pijnervaring.",
+        "duration": "15 minuten",
+        "type": "Informatief",
+        "cards": [{}]
     }
 }
 

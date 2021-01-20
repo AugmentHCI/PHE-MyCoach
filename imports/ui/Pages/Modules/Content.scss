@@ -1,3 +1,4 @@
+/*   Content - QUESTION   */
 .content-question {
     background-color: var(--idewe-background-solid);
     padding: 10px;
@@ -69,8 +70,32 @@
     text-align: center;
 }
 
+/*   Content - TEXT   */
 .content-text {
     font-family: var(--main-font);
     font-weight: 400;
     color: var(--idewe-blue-dark);
+
+    &-overview {
+        @extend .content-text;
+        color: var(--idewe-white);
+    }
 }
+
+/*   Content - LIST   */
+.content-list {
+    margin-top: 10px;
+    list-style-position: outside;
+}
+.content-list-item {
+    font-family: var(--main-font);
+    font-weight: 400;
+    color: var(--idewe-blue-dark);
+    margin-bottom: 4px;
+
+    &-overview {
+        @extend .content-list-item;
+        color: var(--idewe-white);
+    }
+}
+
