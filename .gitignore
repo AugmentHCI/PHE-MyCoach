@@ -1,2 +1,8 @@
 node_modules/
 .meteor/local
+.DS_Store
+imports/.DS_Store
+imports/ui/.DS_Store
+imports/ui/components/.DS_Store
+imports/ui/components/Illustrations/.DS_Store
+imports/ui/components/Illustrations/Art/.DS_Store
