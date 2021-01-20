@@ -11,7 +11,6 @@ import "../../../../../i18n/en.i18n.json"
 import ActionButton from '../../../components/ActionButton.jsx';
 import Card from '../../../components/Card.jsx';
 import NavigationBar from '../../../components/NavigationBar.jsx';
-import PillButton from '../../../components/PillButton.jsx';
 import ModuleCard from '../../../components/ModuleCard.jsx';
 
 

@@ -68,6 +68,7 @@ const PainEducation = {
                 {
                     "header": "Overzicht",
                     "code": "PE-MOD1-OVERVIEW",
+                    "overview": true,
                     "card-contents": [
                         {
                             "type": "Text",
