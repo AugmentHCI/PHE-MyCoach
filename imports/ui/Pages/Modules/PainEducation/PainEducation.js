@@ -3,6 +3,8 @@ const PainEducation = {
     "module-parts": 6,
     "part-1": {
         "title": "Ontstaan van pijn",
+        "title-markup": ["Ontstaan", "van pijn"],
+        "part": 1,
         "description": "In dit onderdeel zien we hoe pijn ontstaat en de weg die prikkels moeten afleggen naar onze hersenen.",
         "duration": "10 minuten",
         "type": "Informatief",
@@ -86,6 +88,8 @@ const PainEducation = {
     },
     "part-2": {
         "title": "Rol van het brein",
+        "title-markup": ["Rol van", "het brein"],
+        "part": 2,
         "description": "In dit onderdeel bespreken we welke rol ons brein heeft in het verwerken van onze prikkels, en onze pijnervaring.",
         "duration": "15 minuten",
         "type": "Informatief",
