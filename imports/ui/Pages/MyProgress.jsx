@@ -169,7 +169,7 @@ export default class MyProgress extends Component {
       }); 
 
       // Now try to fetch FitBit data as well
-      const urlFit = `https://connector-dev.idewe.be/healthempower/jobstudenten/api/fit-data?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}&taal=DUTCH`;
+      const urlFit = `https://connector.idewe.be/healthempower/jobstudenten/api/fit-data?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}&taal=DUTCH`;
 
       console.log('FITBIT - Retreiving FitBit data ...')
       Meteor.call("getData", {
@@ -246,7 +246,7 @@ export default class MyProgress extends Component {
   renderInsightsCard() {
     const compareWidth = this.state.compareParameter === "" ? "100%" : "70%";
     return (
-      <Card title="myProgress.insights.title">
+      <Card title="myProgress.insights.title" underline>
           <p className="subtitle"><T>myProgress.insights.showMe</T></p>
           <ParameterPicker 
             currentParameter={this.state.parameter} 
@@ -286,7 +286,7 @@ export default class MyProgress extends Component {
     renderOverviewWeekly() {
       return (
         <React.Fragment>
-          <Card title="myProgress.insights.insights" bodyStyle={{padding: '0', paddingBottom: '15px'}}>
+          <Card title="myProgress.insights.insights" bodyStyle={{padding: '0', paddingBottom: '15px'}} underline>
             <LineGraph 
               parameter = {this.state.parameter}
               data = {this.state.data}
@@ -294,7 +294,7 @@ export default class MyProgress extends Component {
               locale = {i18n.getLocale()}
             />
           </Card>
-          <Card title="myProgress.activities.activities">
+          <Card title="myProgress.activities.activities" underline>
             <ActivityGraph 
               data = {this.state.data}
               locale = {i18n.getLocale()}
@@ -307,7 +307,7 @@ export default class MyProgress extends Component {
     renderOverviewMonthly() {
       return (
         <React.Fragment>
-          <Card title="myProgress.insights.insights" bodyStyle={{padding: '10px 5px'}}>
+          <Card title="myProgress.insights.insights" bodyStyle={{padding: '10px 5px'}} underline>
             <CalendarGraph 
               parameter = {this.state.parameter}
               data = {this.state.data}
@@ -316,7 +316,7 @@ export default class MyProgress extends Component {
               locale = {i18n.getLocale()}
             />
           </Card>
-          <Card title="myProgress.activities.activities" bodyStyle={{paddingBottom: '0', paddingRight: '0'}}>
+          <Card title="myProgress.activities.activities" bodyStyle={{paddingBottom: '0', paddingRight: '0'}} underline>
             <MonthlyActivityGraph
               data = {this.state.data}
               locale = {i18n.getLocale()}
