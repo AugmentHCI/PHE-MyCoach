@@ -64,6 +64,15 @@ const PainEducation = {
                             "type": "Text",
                             "content": "Goed zo, je hebt het eerste onderdeel van de module pijneducatie succesvol doorlopen. Je kan altijd terugkeren naar dit onderdeel als je het filmpje nog eens wilt bekijken. Hieronder heb je nog een overzicht van wat je hebt geleerd in deze module."
                         }
+                ]},
+                {
+                    "header": "Overzicht",
+                    "code": "PE-MOD1-OVERVIEW",
+                    "card-contents": [
+                        {
+                            "type": "Text",
+                            "content": "Goed zo, je hebt het eerste onderdeel van de module pijneducatie succesvol doorlopen. Je kan altijd terugkeren naar dit onderdeel als je het filmpje nog eens wilt bekijken. Hieronder heb je nog een overzicht van wat je hebt geleerd in deze module."
+                        }
                 ]}
             ]
     }

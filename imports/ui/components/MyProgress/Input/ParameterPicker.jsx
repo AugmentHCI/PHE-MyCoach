@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import i18n from 'meteor/universe:i18n';
-import "../../../../i18n/nl.i18n.json";
-import "../../../../i18n/fr.i18n.json";
-import "../../../../i18n/en.i18n.json";
+import "../../../../../i18n/nl.i18n.json";
+import "../../../../../i18n/fr.i18n.json";
+import "../../../../../i18n/en.i18n.json";
 
 const T = i18n.createComponent("Common");
 
