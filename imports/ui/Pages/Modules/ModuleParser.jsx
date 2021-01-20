@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // Import components
-import ActionButton from '../../components/ActionButton.jsx';
-import Card from '../../components/Card.jsx';
 import NavigationBar from '../../components/NavigationBar.jsx';
-import PillButton from '../../components/PillButton.jsx';
 import ModuleCard from '../../components/ModuleCard.jsx';
 
 import PainEducation from './PainEducation/PainEducation.js';
@@ -14,7 +11,15 @@ import CardsParser from './CardsParser.jsx';
 export default function ModuleParser(props) {
 
     const part =  "part-" + FlowRouter.getParam('part');
-    const data = PainEducation[part];
+    
+    let data = [];
+    switch (FlowRouter.getParam('module')) {
+        case 'paineducation':
+            data = PainEducation[part];
+            break;
+        default:
+            return <div>Module {FlowRouter.getParam('module')} not developed</div>
+    }
 
     return (
         <React.Fragment>

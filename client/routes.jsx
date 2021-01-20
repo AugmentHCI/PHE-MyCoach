@@ -39,7 +39,7 @@ FlowRouter.route('/mycoach/paineducation', {
   }
 })
 
-FlowRouter.route('/mycoach/paineducation/part-:part', {
+FlowRouter.route('/mycoach/:module/part-:part', {
   name: 'Paineducation',
   action(){ 
     mount( App, {

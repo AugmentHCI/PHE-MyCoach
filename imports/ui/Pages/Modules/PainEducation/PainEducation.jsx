@@ -38,14 +38,12 @@ export default function PainEducation(props) {
         <React.Fragment>
             <NavigationBar></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
-                <Card title="MIJN SHORTCUTS" demo={true}>
+                <Card title="MIJN SHORTCUTS" noTranslate>
                     <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
                     <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
-                    <PillButton icon={"time"}>15 minuten</PillButton>
-                    <PillButton icon={"information"}>Informatief</PillButton>
                 </Card>
 
-                <Card title="MIJN TRAJECT" demo={true}>
+                <Card title="MIJN TRAJECT" noTranslate>
                     <ModuleCard title={<div>Rol van <br/> het brein</div>} 
                                 number="Onderdeel 2"
                                 duration={"10 minuten"}
