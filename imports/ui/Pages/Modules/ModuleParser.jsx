@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+import './ModuleParser.scss';
+
 // Import components
 import NavigationBar from '../../components/NavigationBar.jsx';
 import ModuleCard from '../../components/ModuleCard.jsx';
@@ -34,7 +36,7 @@ export default function ModuleParser(props) {
                             type={data.type}
                             image={data.image}>
                 </ModuleCard>
-                <hr style={{borderTop: "1px solid var(--idewe-blue)", width: "90%"}}/>
+                <hr className="module-hr-line"/>
                 <CardsParser cards={data.cards}></CardsParser>
             </div>
         </React.Fragment>
