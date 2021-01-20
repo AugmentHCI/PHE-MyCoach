@@ -6,10 +6,10 @@ const PainEducation = {
         "description": "In dit onderdeel zien we hoe pijn ontstaat en de weg die prikkels moeten afleggen naar onze hersenen.",
         "duration": "15 minuten",
         "type": "Informatief",
-        "cards": [
-            {"PE-MOD-card-1": {
+        "cards": [{
                     "header": "Inleiding",
-                    "card-content": [
+                    "code": "PE-MOD1-CARD1",
+                    "card-contents": [
                         {
                             "type": "Text",
                             "content": "Je lichaam neemt prikkels waar en stuurt deze info naar de hersenen. De hersenen analyseren de prikkels en kiezen een gepaste reactie, bijvoorbeeld pijn. In dit onderdeel wordt beschreven welke weg een prikkel moet afleggen voordat je effectief pijn ervaart. Het centrale zenuwstelsel speelt hierbij een cruciale rol. Onderstaand filmpje geeft meer uitleg en nadien is er een reflectieoefening."
@@ -19,27 +19,53 @@ const PainEducation = {
                             "link": {"nl-NL":"https://player.vimeo.com/video/485835694", "nl-FR": "https://player.vimeo.com/video/485835249", "en-EN":"https://player.vimeo.com/video/485834880"}
                         }
                     ]
-                }
-            }, 
-            {"PE-MOD-card-2": {
-                "header": "Vragen",
-                "card-content": [
-                    {
-                        "type": "Text",
-                        "content": "Goed zo, je hebt het eerste filmpje over hoe pijn ontstaat met succes doorlopen. Heb je het goed onthouden en begrepen?",
-                        "show-if": "Pain"
-                    },
-                    {
-                        "type": "Question",
-                        "code": "PE-MOD1-Q1",
-                        "question": "Wanneer je je voet omslaat wordt dit eerst waargenomen door de receptoren in de huid, gewrichten en spieren van je voet. Er zal een boodschap als waarschuwing van mogelijk gevaar worden gestuurd naar je ruggenmerg en hersenen.",
-                        "options": ["Juist", "Fout"],
-                        "correct": "Juist",
-                        "onCorrect": "Goed zo! Wanneer je je voet omslaat wordt dit geregistreerd door receptoren in de voet. Die receptoren werken als poorten en zorgen ervoor dat er ladingen de zenuwcel instromen. Bij voldoende ladingen wordt er een gevaarboodschap aangemaakt in de vorm van een elektrisch signaal.",
-                        "onIncorrect": "Jammer, maar deze stelling is juist. Wanneer je je voet omslaat wordt dit geregistreerd door receptoren in de voet. Die receptoren werken als poorten en zorgen ervoor dat er ladingen de zenuwcel instromen. Bij voldoende ladingen wordt er een gevaarboodschap aangemaakt in de vorm van een elektrisch signaal."
-                    }
+                }, 
+                {
+                    "header": "Vragen",
+                    "code": "PE-MOD1-CARD2",
+                    "card-contents": [
+                        {
+                            "type": "Text",
+                            "content": "Goed zo, je hebt het eerste filmpje over hoe pijn ontstaat met succes doorlopen. Heb je het goed onthouden en begrepen?"
+                        },
+                        {
+                            "type": "Question",
+                            "code": "PE-MOD1-Q1",
+                            "question": "Wanneer je je voet omslaat wordt dit eerst waargenomen door de receptoren in de huid, gewrichten en spieren van je voet. Er zal een boodschap als waarschuwing van mogelijk gevaar worden gestuurd naar je ruggenmerg en hersenen.",
+                            "options": ["Juist", "Fout"],
+                            "correct": "Juist",
+                            "onCorrect": "Goed zo! Wanneer je je voet omslaat wordt dit geregistreerd door receptoren in de voet. Die receptoren werken als poorten en zorgen ervoor dat er ladingen de zenuwcel instromen. Bij voldoende ladingen wordt er een gevaarboodschap aangemaakt in de vorm van een elektrisch signaal.",
+                            "onIncorrect": "Deze stelling is juist. Wanneer je je voet omslaat wordt dit geregistreerd door receptoren in de voet. Die receptoren werken als poorten en zorgen ervoor dat er ladingen de zenuwcel instromen. Bij voldoende ladingen wordt er een gevaarboodschap aangemaakt in de vorm van een elektrisch signaal."
+                        },
+                        {
+                            "type": "Question",
+                            "code": "PE-MOD1-Q2",
+                            "question": "Al de gevaarboodschappen (zoals bij het omslaan van je enkel) komen toe in de hersenen.",
+                            "options": ["Juist", "Fout"],
+                            "correct": "Fout",
+                            "onCorrect": "Deze stelling is inderdaad fout! De receptoren in je enkel zullen de  druk of rek op je enkel door de val waarnemen. Een gevaarboodschap zal gestuurd worden naar de hersenen langs het ruggenmerg. De hersenen beslissen of de boodschap zal worden doorgestuurd in het ruggenmerg. Je aandacht, gedachten, emoties en eerdere ervaringen spelen een belangrijke rol in deze beslissing.",
+                            "onIncorrect": "Jammer, maar deze stelling is fout. De receptoren in je enkel zullen de  druk of rek op je enkel door de val waarnemen. Een gevaarboodschap zal gestuurd worden naar de hersenen langs het ruggenmerg. De hersenen beslissen of de boodschap zal worden doorgestuurd in het ruggenmerg. Je aandacht, gedachten, emoties en eerdere ervaringen spelen een belangrijke rol in deze beslissing."
+                        },
+                        {
+                            "type": "Question",
+                            "code": "PE-MOD1-Q3",
+                            "question": "De hersenen beslissen of je pijn zal ervaren.",
+                            "options": ["Juist", "Fout"],
+                            "correct": "Juist",
+                            "onCorrect": "Inderdaad! Komt de gevaarboodschap in de hersenen toe, dan zullen de hersenen deze boodschap verwerken. Je emoties, gedachten, aandacht en eerdere pijnervaringen zullen hierin een belangrijke rol spelen en dat verwerkingsproces sturen. Pas dan zullen de hersenen beslissen of je pijn zal ervaren.",
+                            "onIncorrect": "Dit is fout... Komt de gevaarboodschap in de hersenen toe, dan zullen de hersenen deze boodschap verwerken. Je emoties, gedachten, aandacht en eerdere pijnervaringen zullen hierin een belangrijke rol spelen en dat verwerkingsproces sturen. Pas dan zullen de hersenen beslissen of je pijn zal ervaren."
+                        }
+                ]},
+                {
+                    "header": "Klaar!",
+                    "code": "PE-MOD1-CARD3",
+                    "card-contents": [
+                        {
+                            "type": "Text",
+                            "content": "Goed zo, je hebt het eerste onderdeel van de module pijneducatie succesvol doorlopen. Je kan altijd terugkeren naar dit onderdeel als je het filmpje nog eens wilt bekijken. Hieronder heb je nog een overzicht van wat je hebt geleerd in deze module."
+                        }
                 ]}
-            }]
+            ]
     }
 }
 
