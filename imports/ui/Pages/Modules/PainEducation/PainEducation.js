@@ -8,6 +8,7 @@ const PainEducation = {
         "description": "In dit onderdeel zien we hoe pijn ontstaat en de weg die prikkels moeten afleggen naar onze hersenen.",
         "duration": "10 minuten",
         "type": "Informatief",
+        "image": "new-ideas",
         "cards": [{
                     "header": "Inleiding",
                     "code": "PE-MOD1-CARD1",
@@ -93,6 +94,7 @@ const PainEducation = {
         "description": "In dit onderdeel bespreken we welke rol ons brein heeft in het verwerken van onze prikkels, en onze pijnervaring.",
         "duration": "15 minuten",
         "type": "Informatief",
+        "image": "new-ideas",
         "cards": [{}]
     }
 }
