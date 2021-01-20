@@ -9,9 +9,9 @@
 .card {
   display: flex;
   flex-direction: column;
-  background-color: var(--idewe-white) !important;
+  background-color: var(--idewe-white);
   color: var(--idewe-blue-dark);
-  border-radius: 10px !important;
+  border-radius: 10px;
   margin-bottom: 30px;
   border: none;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
@@ -19,20 +19,25 @@
 
   &-overview {
     @extend .card;
-    background-color: var(--idewe-blue) !important;
+    background-color: var(--idewe-blue);
     color: var(--idewe-white);
   }
 }
 
 .card-body {
   padding: 0 20px 20px 20px;
+
+  &-overview {
+    @extend .card-body;
+    color: var(--idewe-white)
+  }
 }
   
 .card-header-title {
   font-family: var(--main-font);
-  margin: 20px 10px 10px 20px !important;
-  font-weight: 500 !important;
-  font-size: 18px !important;
+  margin: 20px 10px 10px 20px;
+  font-weight: 500;
+  font-size: 18px;
   text-transform: uppercase;
   
   &-underline {
