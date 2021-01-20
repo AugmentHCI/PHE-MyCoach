@@ -25,7 +25,7 @@ export default function ModuleParser(props) {
         <React.Fragment>
             <NavigationBar></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
-                <ModuleCard title={data.title} 
+                <ModuleCard title={data["title-markup"]} 
                             number={"Onderdeel " + FlowRouter.getParam('part')}
                             topColor={"white"}
                             description={data.description}

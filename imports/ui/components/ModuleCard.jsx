@@ -14,12 +14,22 @@ function ModuleCard(props) {
 
     const topClass = props.topColor === "white" ? "module-card-top-white" : "module-card-top"
 
+    const titleHTML = Array.isArray(props.title) ? createTitleHTML() : props.title;
+
+    function createTitleHTML() {
+        let prototypeTitleHTML = [];
+        props.title.forEach((title, index) => {
+            prototypeTitleHTML.push(<React.Fragment>{title}<br/></React.Fragment>)
+        });
+        return prototypeTitleHTML;
+    }
+
     return (
         <div className="module-card-container" onClick={props.onClick}>
             <div className={topClass}>
                 <div className="module-card-title-container">
                     <div className="module-card-number">{props.number}</div>
-                    <div className="module-card-title">{props.title}</div>
+                    <div className="module-card-title">{titleHTML}</div>
                 </div>
                 <Art image="new-ideas" width="160px" style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}></Art>
             </div>
