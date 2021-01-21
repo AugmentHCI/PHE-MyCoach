@@ -326,6 +326,14 @@ export default class MyProgress extends Component {
       )};
 
   render() {
+    return (<div className="container">
+      <h1>Under Construction</h1>
+      <p style={{fontFamily:"var(--main-font", fontWeight: "500", fontSize:"20px", color:"var(--idewe-black"}}>We zijn de MyProgress screens even in een nieuw jasje aan het steken. Probeer binnen een paar uur opnieuw!</p>
+    </div>)
+  }
+
+  /*
+  render() {
     // OPTION 1: If no data is loaded and an error occured while retrieving data, display error screen
     if (!this.state.data && this.state.callError !== "") {
       return (<div className="container" style={{height:"100vh"}}>
@@ -350,4 +358,5 @@ export default class MyProgress extends Component {
       </div>
     )
   }
+  */
 };
