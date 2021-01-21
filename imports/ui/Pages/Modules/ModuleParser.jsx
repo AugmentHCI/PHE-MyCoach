@@ -7,18 +7,18 @@ import './ModuleParser.scss';
 import NavigationBar from '../../components/NavigationBar.jsx';
 import ModuleCard from '../../components/ModuleCard.jsx';
 
-import PainEducation from './PainEducation/PainEducation.js';
+import PainEducationScript from './PainEducation/PainEducationScript.js';
 import CardsParser from './CardsParser.jsx';
 
 export default function ModuleParser(props) {
 
-    const part =  "part-" + FlowRouter.getParam('part');
+    const part =  FlowRouter.getParam('part');
     
     let data = [];
     
     switch (FlowRouter.getParam('module')) {
         case 'paineducation':
-            data = PainEducation[part];
+            data = PainEducationScript[part];
             break;
         default:
             return <div>Module {FlowRouter.getParam('module')} not developed</div>
@@ -29,7 +29,7 @@ export default function ModuleParser(props) {
             <NavigationBar></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
                 <ModuleCard title={data["title-markup"]} 
-                            number={"Onderdeel " + FlowRouter.getParam('part')}
+                            number={"Onderdeel " + data.part}
                             topColor={"white"}
                             description={data.description}
                             duration={data.duration}

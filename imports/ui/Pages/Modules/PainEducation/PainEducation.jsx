@@ -7,6 +7,10 @@ import "../../../../../i18n/nl.i18n.json"
 import "../../../../../i18n/fr.i18n.json"
 import "../../../../../i18n/en.i18n.json"
 
+// [TEMP] Use dummy user data
+import UserData from '../../../../api/userdata_dummy.js';
+import PainEducationScript from './PainEducationScript.js';
+
 // Import components
 import ActionButton from '../../../components/ActionButton.jsx';
 import Card from '../../../components/Card.jsx';
@@ -27,6 +31,12 @@ export default function PainEducation(props) {
         i18n.setLocale(language);
         setDataParserLocale(language);*/
     }
+
+    function renderSubmodules() {
+        const ModuleCardsHTML = [];
+
+    }
+
 
     /* Links to modules */
     function routeToModule(link) {
@@ -49,8 +59,8 @@ export default function PainEducation(props) {
                                 description={"In deze module bekijken we het effect van ons brein op de pijn die wij ervaren."}
                                 type={"Informatief"}
                                 image="new-ideas"
-                                onClick={() => routeToModule('part-1')}
-                                closed>
+                                onClick={() => routeToModule('PE-MOD1')}
+                                closed={false}>
                     </ModuleCard>
                 </Card>
 
