@@ -33,8 +33,25 @@ export default function PainEducation(props) {
     }
 
     function renderSubmodules() {
-        const ModuleCardsHTML = [];
+        const moduleCardsHTML = [];
+        PainEducationScript.modules.forEach(module => {
+            const moduleTitle = Object.keys(module)[0];
+            const moduleData = module[moduleTitle];
+            const isClosed = UserData.progress.PAINEDUCATION[moduleTitle] === "COMPLETED" ? true : false;
+            const isLocked = UserData.progress.PAINEDUCATION[moduleTitle] === "NOT_STARTED" ? true : false;
 
+            moduleCardsHTML.push(<ModuleCard title={moduleData["title-markup"]}
+                number={moduleData.part}
+                duration={moduleData.duration}
+                description={moduleData.description}
+                type={moduleData.type}
+                image={moduleData.image}
+                onClick={() => routeToModule(moduleTitle)}
+                closed={isClosed}
+                locked={isLocked}>
+            </ModuleCard>)
+        });
+        return moduleCardsHTML;
     }
 
 
@@ -42,6 +59,7 @@ export default function PainEducation(props) {
     function routeToModule(link) {
         FlowRouter.go(`/mycoach/paineducation/${link}`);
     }
+
 
     return (
         <React.Fragment>
@@ -53,17 +71,8 @@ export default function PainEducation(props) {
                 </Card>
 
                 <Card title="MIJN TRAJECT" noTranslate>
-                    <ModuleCard title={["Rol van", "het brein"]}
-                                number="Onderdeel 2"
-                                duration={"10 minuten"}
-                                description={"In deze module bekijken we het effect van ons brein op de pijn die wij ervaren."}
-                                type={"Informatief"}
-                                image="new-ideas"
-                                onClick={() => routeToModule('PE-MOD1')}
-                                closed={false}>
-                    </ModuleCard>
+                    {renderSubmodules()}
                 </Card>
-
             </div>
         </React.Fragment>
     )
