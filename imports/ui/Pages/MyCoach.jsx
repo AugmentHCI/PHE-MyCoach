@@ -31,7 +31,7 @@ export default function MyCoach(props) {
             <ActionButton>Bekijk je coaching van de dag</ActionButton>
 
             <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
-            <ActionButton action={() => FlowRouter.go('/mycoach/paineducation/')}>Pijn-educatie</ActionButton>
+            <ActionButton action={() => FlowRouter.go(`/mycoach/paineducation/`)}>Pijn-educatie</ActionButton>
         </div>
     )
 };

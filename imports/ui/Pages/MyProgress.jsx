@@ -324,6 +324,7 @@ export default class MyProgress extends Component {
           </Card>
         </React.Fragment>
       )};
+      
 
   render() {
     return (<div className="container">
