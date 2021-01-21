@@ -80,8 +80,8 @@ html, body {
   background: var(--idewe-background) !important; 
 
   /* Scroll snapping */
-  scroll-snap-type: mandatory;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: proximity;
+  scroll-snap-type: y proximity;
   scroll-padding: 70px;
 
   /* Disable scroll bar */
