@@ -12,6 +12,9 @@ const T = i18n.createComponent("Common");
 
 function ModuleCard(props) {
 
+    if (props.closed) return (<div>{props.title.join(' ')}</div>);
+    
+
     const topClass = props.topColor === "white" ? "module-card-top-white" : "module-card-top";
 
     const titleHTML = Array.isArray(props.title) ? createTitleHTML() : props.title;

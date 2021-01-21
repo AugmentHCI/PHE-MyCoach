@@ -43,13 +43,14 @@ export default function PainEducation(props) {
                 </Card>
 
                 <Card title="MIJN TRAJECT" noTranslate>
-                    <ModuleCard title={<div>Rol van <br/> het brein</div>} 
+                    <ModuleCard title={["Rol van", "het brein"]}
                                 number="Onderdeel 2"
                                 duration={"10 minuten"}
                                 description={"In deze module bekijken we het effect van ons brein op de pijn die wij ervaren."}
                                 type={"Informatief"}
                                 image="new-ideas"
-                                onClick={() => routeToModule('part-1')}>
+                                onClick={() => routeToModule('part-1')}
+                                closed>
                     </ModuleCard>
                 </Card>
 
