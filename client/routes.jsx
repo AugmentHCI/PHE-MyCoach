@@ -48,17 +48,6 @@ FlowRouter.route('/mycoach/:module/:part', {
   }
 })
 
-
-FlowRouter.route('/mycoach/:language/:token', {
-  name: 'MyCoach',
-  action(){ 
-    mount( App, {
-      content: <MyCoach /> 
-    })
-  }
-})
-
-
 /*
   MY PROGRESS ROUTES
 */
