@@ -18,7 +18,9 @@ export default function ModuleParser(props) {
     
     switch (FlowRouter.getParam('module')) {
         case 'paineducation':
-            data = PainEducationScript[part];
+            PainEducationScript.modules.forEach(module => {
+                if (Object.keys(module)[0] === part)  {console.log(module);data = module[Object.keys(module)[0]]; return;}
+            });
             break;
         default:
             return <div>Module {FlowRouter.getParam('module')} not developed</div>
@@ -29,7 +31,7 @@ export default function ModuleParser(props) {
             <NavigationBar></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
                 <ModuleCard title={data["title-markup"]} 
-                            number={"Onderdeel " + data.part}
+                            number={data.part}
                             topColor={"white"}
                             description={data.description}
                             duration={data.duration}

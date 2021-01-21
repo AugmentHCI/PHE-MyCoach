@@ -12,8 +12,8 @@ const T = i18n.createComponent("Common");
 
 function ModuleCard(props) {
 
-    if (props.closed) return (<div className="module-card-closed">
-        <div className='module-card-closed-number'>{props.number}</div>
+    if (props.closed) return (<div className="module-card-closed" onClick={props.onClick}>
+        <div className='module-card-closed-number'>Onderdeel {props.number}</div>
         <div className='module-card-closed-title'>{props.title.join(' ')}</div>
     </div>);
     
@@ -34,7 +34,7 @@ function ModuleCard(props) {
         <div className="module-card-container" onClick={props.onClick}>
             <div className={topClass}>
                 <div className="module-card-title-container">
-                    <div className="module-card-number">{props.number}</div>
+                    <div className="module-card-number">Onderdeel {props.number}</div>
                     <div className="module-card-title">{titleHTML}</div>
                 </div>
                 <Art image={props.image} width="160px" style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}></Art>

@@ -1,7 +1,7 @@
 const PainEducationScript = {
     "module-title": "Pijneducatie",
     "module-parts": 6,
-    "PE-MOD1": {
+    "modules": [{"PE-MOD1": {
         "title": "Ontstaan van pijn",
         "title-markup": ["Ontstaan", "van pijn"],
         "part": 1,
@@ -86,8 +86,8 @@ const PainEducationScript = {
                         }
                 ]}
             ]
-    },
-    "PE-MOD2": {
+    }},
+    {"PE-MOD2": {
         "title": "Rol van het brein",
         "title-markup": ["Rol van", "het brein"],
         "part": 2,
@@ -96,7 +96,7 @@ const PainEducationScript = {
         "type": "Informatief",
         "image": "new-ideas",
         "cards": [{}]
-    }
+    }}]
 }
 
 export default PainEducationScript;
