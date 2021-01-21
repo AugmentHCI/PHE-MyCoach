@@ -1,3 +1,4 @@
+/* Open module card */
 .module-card-container {
     border-radius: 15px;
     box-shadow: 0px 4px 4px rgba(1, 66, 106, 0.1);
@@ -60,4 +61,26 @@
 
 .module-card-pills {
     margin-top: 10px;
+}
+
+/* Closed module card */
+.module-card-closed {
+    background-color: var(--idewe-blue);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(1, 66, 106, 0.1);
+}
+
+.module-card-closed-title {
+    color: var(--idewe-white);
+    font-family: var(--main-font);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.module-card-closed-number {
+    color: var(--idewe-blue-dark);
+    font-family: var(--main-font);
+    font-size: 14px;
+    font-weight: 400;
 }

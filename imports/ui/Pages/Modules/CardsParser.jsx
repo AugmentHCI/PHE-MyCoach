@@ -3,6 +3,9 @@ import React from 'react';
 import Card from '../../components/Card.jsx';
 import Content from './Content.jsx';
 
+/* [TEMP] Use dummy user data */
+import UserData from '../../../api/userdata_dummy.js';
+
 
 function CardsParser(props) {
 

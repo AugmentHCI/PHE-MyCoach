@@ -1,7 +1,7 @@
-const PainEducation = {
+const PainEducationScript = {
     "module-title": "Pijneducatie",
     "module-parts": 6,
-    "part-1": {
+    "PE-MOD1": {
         "title": "Ontstaan van pijn",
         "title-markup": ["Ontstaan", "van pijn"],
         "part": 1,
@@ -87,7 +87,7 @@ const PainEducation = {
                 ]}
             ]
     },
-    "part-2": {
+    "PE-MOD2": {
         "title": "Rol van het brein",
         "title-markup": ["Rol van", "het brein"],
         "part": 2,
@@ -99,4 +99,4 @@ const PainEducation = {
     }
 }
 
-export default PainEducation;
+export default PainEducationScript;

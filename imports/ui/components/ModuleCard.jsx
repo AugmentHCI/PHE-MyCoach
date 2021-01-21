@@ -12,7 +12,10 @@ const T = i18n.createComponent("Common");
 
 function ModuleCard(props) {
 
-    if (props.closed) return (<div>{props.title.join(' ')}</div>);
+    if (props.closed) return (<div className="module-card-closed">
+        <div className='module-card-closed-number'>{props.number}</div>
+        <div className='module-card-closed-title'>{props.title.join(' ')}</div>
+    </div>);
     
 
     const topClass = props.topColor === "white" ? "module-card-top-white" : "module-card-top";
