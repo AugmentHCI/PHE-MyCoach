@@ -18,8 +18,9 @@ export default function ModuleParser(props) {
     
     switch (FlowRouter.getParam('module')) {
         case 'paineducation':
-            PainEducationScript.modules.forEach(module => {
-                if (Object.keys(module)[0] === part)  {console.log(module);data = module[Object.keys(module)[0]]; return;}
+            PainEducationScript.submodules.forEach(submodule => {
+                console.log(submodule)
+                if (submodule.id === part)  {data = submodule; return;}
             });
             break;
         default:
