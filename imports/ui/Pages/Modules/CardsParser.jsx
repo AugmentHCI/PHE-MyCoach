@@ -40,7 +40,7 @@ function CardsParser(props) {
             contentArray.push(
                 <ContentParser key={"content-" + key + "-" + index} 
                          data={content} 
-                         userProfile={userProfile}></ContentParser>);
+                         userProfile={userProfile}/>);
         });
         return contentArray;
     }
@@ -48,7 +48,6 @@ function CardsParser(props) {
     createCards(props.cards);
 
     return contentsHTML;
-
 }
 
 export default CardsParser;
