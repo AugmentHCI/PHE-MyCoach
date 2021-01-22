@@ -53,7 +53,8 @@ export default class MyProgress extends Component {
       parameter: "painIntensity",
       compareParameter: "",
       callError: "",
-      devEnvironment: false
+      devEnvironment: false,
+      tap_count: 0
     };
   }
 
@@ -66,7 +67,7 @@ export default class MyProgress extends Component {
     this.fetchData(this.state.selectedPeriod, token, this.state.timeFrame);
   }
 
-  setLocale(){
+  setLocale() {
     // Get locale from URL routing (see also routes.jsx file)
     let language = FlowRouter.getParam('language');
     if (!language) return;
@@ -326,6 +327,10 @@ export default class MyProgress extends Component {
       )};
       
   render() {
+    if (this.state.tap_count === 5) {
+      this.setState({tap_count: 0});
+      FlowRouter.go('/mycoach');
+    }
     // OPTION 1: If no data is loaded and an error occured while retrieving data, display error screen
     if (!this.state.data && this.state.callError !== "") {
       return (<div className="container" style={{height:"100vh"}}>
@@ -342,7 +347,7 @@ export default class MyProgress extends Component {
       <div className="container">
         {!this.state.fitbitConnected && this.renderConnectFitbitMessage()}
         <div>
-          <h1>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1>
+          <h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1>
         </div>
         {this.renderInsightsCard()}
         {this.state.timeFrame == "weekly" && this.renderOverviewWeekly()}
