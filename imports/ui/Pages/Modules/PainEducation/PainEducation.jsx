@@ -34,19 +34,17 @@ export default function PainEducation(props) {
 
     function renderSubmodules() {
         const moduleCardsHTML = [];
-        PainEducationScript.modules.forEach(module => {
-            const moduleTitle = Object.keys(module)[0];
-            const moduleData = module[moduleTitle];
-            const isClosed = UserData.progress.PAINEDUCATION[moduleTitle] === "COMPLETED" ? true : false;
-            const isLocked = UserData.progress.PAINEDUCATION[moduleTitle] === "NOT_STARTED" ? true : false;
+        PainEducationScript.submodules.forEach(submodule => {
+            const isClosed = UserData.progress.PAINEDUCATION[submodule.id] === "COMPLETED" ? true : false;
+            const isLocked = UserData.progress.PAINEDUCATION[submodule.id] === "NOT_STARTED" ? true : false;
 
-            moduleCardsHTML.push(<ModuleCard title={moduleData["title-markup"]}
-                number={moduleData.part}
-                duration={moduleData.duration}
-                description={moduleData.description}
-                type={moduleData.type}
-                image={moduleData.image}
-                onClick={() => routeToModule(moduleTitle)}
+            moduleCardsHTML.push(<ModuleCard title={submodule["title-markup"]}
+                number={submodule.part}
+                duration={submodule.duration}
+                description={submodule.description}
+                type={submodule.type}
+                image={submodule.image}
+                onClick={() => routeToModule(submodule.id)}
                 closed={isClosed}
                 locked={isLocked}>
             </ModuleCard>)

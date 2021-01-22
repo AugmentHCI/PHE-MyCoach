@@ -19,11 +19,11 @@ function CardsParser(props) {
      * @param {Array} cards 
      */
     function createCards(cards) {
-        cards.forEach((card, index) => {  
-            if (Object.keys(card).length === 0) return;
+        cards.forEach(card => {
+            if (Object.keys(card).length === 0) return; /* Empty card */
             contentsHTML.push(
-                <Card key={index} title={card.header} noTranslate overview={card.overview}>
-                    {createCardContent(index, card["card-contents"])}
+                <Card key={card.id} title={card.title} noTranslate overview={card.overview}>
+                    {createCardContent(card.id, card["card-contents"])}
                 </Card>
             );
         });
