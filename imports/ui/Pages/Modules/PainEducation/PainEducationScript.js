@@ -1,5 +1,6 @@
 const PainEducationScript = {
-    "module-title": "Pijneducatie",
+    "id": "PE",
+    "title": "Pijneducatie",
     "submodule-parts": 6,
     "submodules": [{
         "id": "PE-MOD1",

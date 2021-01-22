@@ -61,7 +61,7 @@ export default function PainEducation(props) {
 
     return (
         <React.Fragment>
-            <NavigationBar></NavigationBar>
+            <NavigationBar title={PainEducationScript.title}></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
                 <Card title="MIJN SHORTCUTS" noTranslate>
                     <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>

@@ -9,10 +9,12 @@ function NavigationBar(props) {
 
     if (noNavigationBar.includes(FlowRouter.current().route.name)) return (<React.Fragment/>);
 
+    const title = props.title ? props.title : FlowRouter.current().route.name;
+
     return (
         <div className="navigation-bar">
             <button className="navigation-bar-button" onClick={() => history.back()}>{'<'}</button>
-            {FlowRouter.current().route.name}
+            {title}
         </div>
     )
 }

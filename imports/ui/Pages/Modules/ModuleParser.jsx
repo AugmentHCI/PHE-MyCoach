@@ -29,7 +29,7 @@ export default function ModuleParser(props) {
 
     return (
         <React.Fragment>
-            <NavigationBar></NavigationBar>
+            <NavigationBar title={data.title}></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
                 <ModuleCard title={data["title-markup"]} 
                             number={data.part}
