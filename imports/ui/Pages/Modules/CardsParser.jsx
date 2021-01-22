@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Card from '../../components/Card.jsx';
-import Content from './Content.jsx';
+import ContentParser from './ContentParser.jsx';
 
 /* [TEMP] Use dummy user data */
 import UserData from '../../../api/userdata_dummy.js';
@@ -38,9 +38,9 @@ function CardsParser(props) {
         let contentArray = [];
         contents.forEach((content, index) => {
             contentArray.push(
-                <Content key={"content-" + key + "-" + index} 
+                <ContentParser key={"content-" + key + "-" + index} 
                          data={content} 
-                         userProfile={userProfile}></Content>);
+                         userProfile={userProfile}></ContentParser>);
         });
         return contentArray;
     }

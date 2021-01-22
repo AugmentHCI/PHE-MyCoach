@@ -5,8 +5,8 @@ import { mount } from 'react-mounter';
 import App from '../imports/ui/App.jsx';
 import MyProgress from '../imports/ui/Pages/MyProgress.jsx';
 import MyCoach from '../imports/ui/Pages/MyCoach.jsx';
-import PainEducation from '../imports/ui/Pages/Modules/PainEducation/PainEducation.jsx';
 import ModuleParser from '../imports/ui/Pages/Modules/ModuleParser.jsx';
+import SubmoduleParser from '../imports/ui/Pages/Modules/SubmoduleParser.jsx';
 
 //route when no parameters are passed -> MyProgress will render with dummy data
 FlowRouter.route('/', {
@@ -30,20 +30,20 @@ FlowRouter.route('/mycoach/', {
   }
 })
 
-FlowRouter.route('/mycoach/paineducation', {
-  name: 'Paineducation',
-  action(){ 
-    mount( App, {
-      content: <PainEducation /> 
-    })
-  }
-})
-
-FlowRouter.route('/mycoach/:module/:part', {
+FlowRouter.route('/mycoach/:module', {
   name: 'Paineducation',
   action(){ 
     mount( App, {
       content: <ModuleParser /> 
+    })
+  }
+})
+
+FlowRouter.route('/mycoach/:module/:submodule', {
+  name: 'Paineducation',
+  action(){ 
+    mount( App, {
+      content: <SubmoduleParser /> 
     })
   }
 })
