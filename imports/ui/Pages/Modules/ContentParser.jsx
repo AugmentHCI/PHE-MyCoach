@@ -1,8 +1,8 @@
 import { data } from 'browserslist';
 import React, { useState } from 'react';
-import './Content.scss';
+import './ContentParser.scss';
 
-function Content(props) {
+function ContentParser(props) {
 
     /* Constructors for content */
 
@@ -97,4 +97,4 @@ function Content(props) {
     }
 }
 
-export default Content;
+export default ContentParser;
