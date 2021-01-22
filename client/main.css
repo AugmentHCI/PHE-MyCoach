@@ -79,11 +79,6 @@ html, body {
   padding-right: 20px !important;
   background: var(--idewe-background) !important; 
 
-  /* Scroll snapping */
-  scroll-snap-type: proximity;
-  scroll-snap-type: y proximity;
-  scroll-padding: 70px;
-
   /* Disable scroll bar */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none; 
