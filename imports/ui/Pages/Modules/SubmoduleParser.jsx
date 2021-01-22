@@ -27,34 +27,21 @@ export default function SubmoduleParser(props) {
     }
 
     useEffect(() => {
-        const accuracy = 100;
-        let options = {
-            root: document.querySelector('#content'),
-            rootMargin: '0px',
-            threshold: [...Array(accuracy).keys()].map(function(item) { return item/accuracy })
-        }
-
-        let callback = (entries, observer) => {
-            entries.forEach(entry => {
-                entry.target.style.opacity = entry.intersectionRatio * 2;
-              // Each entry describes an intersection change for one observed
-              // target element:
-              //   entry.boundingClientRect
-              //   entry.intersectionRatio
-              //   entry.intersectionRect
-              //   entry.isIntersecting
-              //   entry.rootBounds
-              //   entry.target
-              //   entry.time
+        function handleScroll() {
+            const windowHeight = document.getElementsByClassName('container')[0].clientHeight;
+            const cards = [...document.querySelectorAll('.card,.card-overview')];
+            cards.forEach(card => {
+                if (card.getBoundingClientRect().top  > windowHeight) card.style.opacity = 0;
+                else if (card.getBoundingClientRect().bottom < 200) {card.style.opacity = card.getBoundingClientRect().bottom / 200}
+                else {card.style.opacity = 1 - (card.getBoundingClientRect().top / windowHeight / 1.3)}
             });
-          };
-        let observer = new IntersectionObserver(callback, options);
-
-        const cards = document.querySelectorAll(".card,.card-overview");
-        for (let card of cards) {
-            observer.observe(card);
         }
-      }, []); 
+        document.querySelector('.container').addEventListener('scroll', handleScroll);
+
+        return () => {
+            document.querySelector('.container').removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
         <React.Fragment>
