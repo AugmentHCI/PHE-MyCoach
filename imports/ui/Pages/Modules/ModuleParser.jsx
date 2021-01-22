@@ -9,7 +9,7 @@ import "../../../../i18n/en.i18n.json"
 
 // [TEMP] Use dummy user data
 import UserData from '../../../api/userdata_dummy.js';
-import PainEducationScript from './PainEducation/PainEducationScript.js';
+import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 
 // Import components
 import ActionButton from '../../components/ActionButton.jsx';

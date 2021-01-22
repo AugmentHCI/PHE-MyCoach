@@ -7,7 +7,7 @@ import './SubmoduleParser.scss';
 import NavigationBar from '../../components/NavigationBar.jsx';
 import ModuleCard from '../../components/ModuleCard.jsx';
 
-import PainEducationScript from './PainEducation/PainEducationScript.js';
+import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import CardsParser from './CardsParser.jsx';
 
 export default function SubmoduleParser(props) {
