@@ -325,15 +325,6 @@ export default class MyProgress extends Component {
         </React.Fragment>
       )};
       
-
-  render() {
-    return (<div className="container">
-      <h1>Under Construction</h1>
-      <p style={{fontFamily:"var(--main-font", fontWeight: "500", fontSize:"20px", color:"var(--idewe-black"}}>We zijn de MyProgress screens even in een nieuw jasje aan het steken. Probeer binnen een paar uur opnieuw!</p>
-    </div>)
-  }
-
-  /*
   render() {
     // OPTION 1: If no data is loaded and an error occured while retrieving data, display error screen
     if (!this.state.data && this.state.callError !== "") {
@@ -359,5 +350,4 @@ export default class MyProgress extends Component {
       </div>
     )
   }
-  */
 };
