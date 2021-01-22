@@ -46,7 +46,9 @@ export default function ModuleParser(props) {
             const isClosed = UserData.progress.PAINEDUCATION[submodule.id] === "COMPLETED" ? true : false;
             const isLocked = UserData.progress.PAINEDUCATION[submodule.id] === "NOT_STARTED" ? true : false;
 
-            moduleCardsHTML.push(<ModuleCard title={submodule["title-markup"]}
+            moduleCardsHTML.push(<ModuleCard 
+                key={submodule.id}
+                title={submodule["title-markup"]}
                 number={submodule.part}
                 duration={submodule.duration}
                 description={submodule.description}
