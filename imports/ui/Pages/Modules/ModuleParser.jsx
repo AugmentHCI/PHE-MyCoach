@@ -16,6 +16,7 @@ import ActionButton from '../../components/ActionButton.jsx';
 import Card from '../../components/Card.jsx';
 import NavigationBar from '../../components/NavigationBar.jsx';
 import ModuleCard from '../../components/ModuleCard.jsx';
+import './ModuleParser.scss';
 
 
 
@@ -76,7 +77,7 @@ export default function ModuleParser(props) {
     useEffect(() => {fetchModuleData()}, []);
 
     if (moduleData === "invalid") {return <div className="container">Module "{FlowRouter.getParam('module')}" does not exist.</div>}
-    if (Object.keys(moduleData).length === 0) {return <div className="container">Loading</div>}
+    if (Object.keys(moduleData).length === 0) {return <div className="container"><div className="module-loading-message">Loading</div></div>}
 
     return (
         <React.Fragment>
