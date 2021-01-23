@@ -30,10 +30,12 @@ export default function SubmoduleParser(props) {
         function handleScroll() {
             const windowHeight = document.getElementsByClassName('container')[0].clientHeight;
             const cards = [...document.querySelectorAll('.card,.card-overview')];
-            cards.forEach(card => {
+            cards.forEach((card, index) => {
                 if (card.getBoundingClientRect().top  > windowHeight) card.style.opacity = 0;
-                else if (card.getBoundingClientRect().bottom < 200) {card.style.opacity = card.getBoundingClientRect().bottom / 200}
                 else {card.style.opacity = 1 - (card.getBoundingClientRect().top / windowHeight / 1.3)}
+
+                if (card.getBoundingClientRect().top  <= 70) card.classList.remove("card-scroll");
+                else card.classList.add("card-scroll");
             });
         }
         document.querySelector('.container').addEventListener('scroll', handleScroll);

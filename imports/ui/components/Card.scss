@@ -20,7 +20,12 @@
     @extend .card;
     background-color: var(--idewe-blue);
     color: var(--idewe-white);
+    margin-bottom: 50px;
   }
+}
+
+.card-scroll {
+  scroll-snap-align: start;
 }
 
 .card-body {
