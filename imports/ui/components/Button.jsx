@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import './ActionButton.scss';
+import './Button.scss';
 
-import Icon from './Illustrations/Icon.jsx';
-
-function ActionButton(props) {
-    
-    const T = i18n.createComponent("Common");
+function Button(props) {
 
     const [isPressed, press] = useState(false);
 
@@ -21,17 +17,14 @@ function ActionButton(props) {
                 onTouchStart={() => press(true)} 
                 onClick={() => action()} 
                 onTouchEnd={() => press(false)}>
-            {props.icon && <div className="button-icon">
-                <Icon width="22px" image={props.icon} color={"blue"} style={{marginTop: "7px", marginLeft: "2px"}}/>
-            </div>}
             <div className={props.size === "small" ? "button-text-small" : "button-text"}>
                 {props.children}
             </div>
             <div className="button-arrow">
-                <Icon image="next" width={"16px"} color="white"/>
+                {'>'}
             </div>
         </button>
     )
 }
 
-export default ActionButton;
+export default Button;

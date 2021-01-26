@@ -2,7 +2,7 @@
 .module-card-container {
     border-radius: 15px;
     box-shadow: 0px 4px 4px rgba(1, 66, 106, 0.1);
-    cursor: pointer;
+    margin-bottom: 15px;
 }
 
 .module-card-top {
@@ -47,20 +47,47 @@
 
 .module-card-bottom {
     background-color: var(--idewe-blue);
-    padding: 10px 20px;
+    padding: 10px 10px 10px 20px;
     border-radius: 0 0 15px 15px;
     z-index: 2;
+}
+
+.module-card-bottom-row {
+    display: flex;
+    width: 100%;
 }
 
 .module-card-information {
     font-family: var(--main-font);
     font-weight: 400;
     font-size: 14px;
+    padding-right: 20px;
     color: var(--idewe-white);
+    float: "left";
+    flex: 1;
 }
 
 .module-card-pills {
     margin-top: 10px;
+}
+
+.module-button-container {
+    float: "right";
+    width: fit-content;
+    margin: auto;
+    margin-right: 10px;
+}
+
+.module-button {
+    border: none;
+    background-color: var(--idewe-white);
+    color: var(--idewe-blue);
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: 0px 4px 4px rgba(1, 66, 106, 0.1);
 }
 
 /* Closed module card */
@@ -71,6 +98,29 @@
     box-shadow: 0px 4px 4px rgba(1, 66, 106, 0.1);
     margin-bottom: 15px;
     cursor: pointer;
+    display: flex;
+}
+
+.module-card-closed-text {
+    float: "left";
+    flex: 1;
+}
+
+.module-card-icon {
+    float: "right";
+    width: 30px;
+    margin: auto;
+    margin-right: 10px;
+}
+
+.module-card-icon-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: var(--idewe-white);
+    padding-top: 7px;
+    padding-left: 8px;
+    box-shadow: 0px 4px 4px rgba(1, 66, 106, 0.1);
 }
 
 .module-card-closed-title {
