@@ -17,11 +17,14 @@
         text-align: left;
         float: left;
         margin-top: 13px;
+        margin-left: 15px;
     }
 
     .button-text-small {
         @extend .button-text;
         font-size: 14px;
+        margin-left: 15px;
+        margin-top: 10px;
     }
 }
 
@@ -33,7 +36,7 @@
     background-color: var(--idewe-white);
     float: left;
     border-radius: 10px;
-    margin: 7px 15px 7px 7px;
+    margin: 7px 0px 7px 7px;
     height: 36px;
     width: 36px;
 }

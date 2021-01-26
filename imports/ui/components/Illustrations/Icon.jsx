@@ -7,7 +7,13 @@ function Icon(props) {
 
     [image, setImage] = useState(null);
 
-    const icons = {"time": '/icons/time.svg', "information": '/icons/information.svg'};
+    const icons = {
+        "time": '/icons/time.svg', 
+        "information": '/icons/information.svg',
+        "back": '/icons/back.svg',
+        "writing": '/icons/writing.svg',
+        "idea": '/icons/idea.svg',
+    };
 
     if (!icons.hasOwnProperty(props.image)) throw `Icon.jsx - No icon for '${props.image}' exists.`;
 

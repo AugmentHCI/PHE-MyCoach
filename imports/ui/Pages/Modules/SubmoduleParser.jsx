@@ -38,7 +38,7 @@ export default function SubmoduleParser(props) {
                     //card.style.transform = `scale(${0.5 + (card.style.opacity / 2)})`
                 }
 
-                if (card.getBoundingClientRect().top  <= 70 && card.getBoundingClientRect().top > -70) card.classList.remove("card-scroll");
+                if (card.getBoundingClientRect().top  <= 70 && card.getBoundingClientRect().top > 0) card.classList.remove("card-scroll");
                 else card.classList.add("card-scroll");
             });
         }

@@ -25,9 +25,9 @@ function PillButton(props) {
 
     function createIcon() {
         if (!needsOutline) return (<div className={buttonIconClass}>       
-            <Icon width="14px" image={props.icon} color={props.color ? props.color : "blue"}></Icon>
+            <Icon width="12px" image={props.icon} color={props.color ? props.color : "blue"}/>
         </div>);
-        else return (<Icon width="20px" image={props.icon} color={props.color === "white" ? "blue" : "white"} style={{float:"left", marginTop:"2px", paddingTop: "-6px"}}></Icon>);
+        else return (<Icon width="16px" image={props.icon} color={props.color === "white" ? "blue" : "white"} style={{float:"left", marginTop:"3px"}}></Icon>);
     }
 
     const updateStyle = needsOutline ? {marginTop: "0px !important"} : {};

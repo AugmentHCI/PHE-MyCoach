@@ -27,8 +27,8 @@ export default function MyCoach(props) {
         <div className="container">
             <h1>My Coach</h1>
             <h2>MIJN TODO'S</h2>
-            <ActionButton>Voeg toe aan je pijnlogboek</ActionButton>
-            <ActionButton>Bekijk je coaching van de dag</ActionButton>
+            <ActionButton icon={"writing"}>Voeg toe aan je pijnlogboek</ActionButton>
+            <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
 
             <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
             <ActionButton action={() => FlowRouter.go(`/mycoach/paineducation/`)}>Pijn-educatie</ActionButton>
