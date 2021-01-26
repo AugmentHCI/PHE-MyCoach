@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Fragment } from 'react';
-import Information from './SVG/information.svg';
-import Time from './SVG/time.svg';
 import './Icon.scss';
 
 
@@ -9,7 +7,7 @@ function Icon(props) {
 
     [image, setImage] = useState(null);
 
-    const icons = {"time": Time, "information": Information};
+    const icons = {"time": '/icons/time.svg', "information": '/icons/information.svg'};
 
     if (!icons.hasOwnProperty(props.image)) throw `Icon.jsx - No icon for '${props.image}' exists.`;
 

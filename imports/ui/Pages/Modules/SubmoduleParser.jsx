@@ -32,9 +32,13 @@ export default function SubmoduleParser(props) {
             const cards = [...document.querySelectorAll('.card,.card-overview')];
             cards.forEach((card, index) => {
                 if (card.getBoundingClientRect().top  > windowHeight) card.style.opacity = 0;
-                else {card.style.opacity = 1 - (card.getBoundingClientRect().top / windowHeight / 1.3)}
+                //else if (card.getBoundingClientRect().top  < 0) card.style.transform = `scale(${1 - (card.style.opacity / 2)})`;
+                else if (card.getBoundingClientRect().top  > 0) {
+                    card.style.opacity = 1 - (card.getBoundingClientRect().top / windowHeight / 1.3); 
+                    //card.style.transform = `scale(${0.5 + (card.style.opacity / 2)})`
+                }
 
-                if (card.getBoundingClientRect().top  <= 70) card.classList.remove("card-scroll");
+                if (card.getBoundingClientRect().top  <= 70 && card.getBoundingClientRect().top > -70) card.classList.remove("card-scroll");
                 else card.classList.add("card-scroll");
             });
         }

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Fragment } from 'react';
-import NewIdeas from './Art/new_ideas.svg';
 import './Art.scss';
 
 
@@ -8,7 +7,7 @@ function Art(props) {
 
     [image, setImage] = useState(null);
 
-    const images = {"new-ideas": NewIdeas};
+    const images = {"new-ideas": '/illustrations/new_ideas.svg'};
 
     if (!images.hasOwnProperty(props.image)) throw `Icon.jsx - No icon for '${props.image}' exists.`;
 
@@ -16,7 +15,7 @@ function Art(props) {
 
     return (
         <Fragment>
-            {image && <img className="art" src={image} width={props.width ? props.width : "100px"} style={props.style}/>}
+            {true && <img className="art" src={image} width={props.width ? props.width : "100px"} style={props.style}/>}
         </Fragment>
     );
 }
