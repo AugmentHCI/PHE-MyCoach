@@ -142,14 +142,35 @@ const PainEducationScript = {
                 },
                 {
                     "type": "Image",
-                    "url": "TODO"
+                    "url": "/images/paineducation/spider.jpg"
                 },
                 {
                     "type": "Selection",
                     "id": "PE-MOD2-Q1",
-                    "title": "Scenario",
+                    "title": "Wat doe je?",
                     "question": "Je doet de deur van je slaapkamer open en er zit een dikke, harige spin in het midden van de kamer. Wat doe je?",
                     "options": ["Gillen, weglopen, hulp roepen of verstijven van angst", "Een schoen nemen en de spin plat slaan", "Gefascineerd bestuderen of een potje nemen om de spin buiten te zetten"]
+                },
+                {
+                    "type": "Selection",
+                    "id": "PE-MOD2-Q2",
+                    "title": "En hoe voel jij je?",
+                    "question": "Je doet de deur van je slaapkamer open en er zit een dikke, harige spin in het midden van de kamer. Wat doe je?",
+                    "options": ["😄", "😒", "😔", "😟", "😩", "😡"]
+                }
+            ]
+        },
+        {
+            "id": "PE-MOD1-CARD4",
+            "title": "Even denken",
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "content": "Sommige mensen zullen waarschijnlijk een grote hekel hebben aan spinnen terwijl anderen deze dieren zelfs houden als huisdier. Toch gek dat hetzelfde dier bij verschillende mensen zo’n uiteenlopende reactie kan uitlokken? Dit heeft te maken met onze gedachten, emoties en ervaringen."
+                },
+                {
+                    "type": "Image",
+                    "url": ["/images/paineducation/model-with-spider.png", "/images/paineducation/scared-of-spider.png"]
                 }
             ]
         }]
