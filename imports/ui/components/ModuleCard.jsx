@@ -64,7 +64,7 @@ function ModuleCard(props) {
                         <PillButton color="white" icon="information">{props.type}</PillButton>
                     </div>
                     <div className="module-button-container">
-                        <button className="module-button">Begin</button>
+                        <button className="module-button" onClick={()=> {if (props.onClick) props.onClick()}}>Begin</button>
                     </div>
                 </div>
             </div>

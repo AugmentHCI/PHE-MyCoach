@@ -44,7 +44,7 @@ export default function ModuleParser(props) {
     function renderSubmodules() {
         const moduleCardsHTML = [];
         moduleData.submodules.forEach(submodule => {
-            const isClosed = UserData.progress.PAINEDUCATION[submodule.id] === "COMPLETED" ? true : false;
+            const isClosed = UserData.progress.PAINEDUCATION[submodule.id] === "COMPLETED" || UserData.progress.PAINEDUCATION[submodule.id] === "NOT_STARTED" ? true : false;
             const isLocked = UserData.progress.PAINEDUCATION[submodule.id] === "NOT_STARTED" ? true : false;
 
             moduleCardsHTML.push(<ModuleCard 
