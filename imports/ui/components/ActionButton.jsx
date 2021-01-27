@@ -9,7 +9,7 @@ function ActionButton(props) {
 
     const [isPressed, press] = useState(false);
 
-    const pressClass = isPressed ? "button-action pressed" : "button-action"
+    const pressClass = isPressed ? "actionbutton pressed" : "actionbutton"
 
     function action() {
         press(false); 
@@ -21,13 +21,13 @@ function ActionButton(props) {
                 onTouchStart={() => press(true)} 
                 onClick={() => action()} 
                 onTouchEnd={() => press(false)}>
-            {props.icon && <div className="button-icon">
+            {props.icon && <div className="actionbutton-icon">
                 <Icon width="22px" image={props.icon} color={"blue"} style={{marginTop: "7px", marginLeft: "2px"}}/>
             </div>}
-            <div className={props.size === "small" ? "button-text-small" : "button-text"}>
+            <div className={props.size === "small" ? "actionbutton-text-small" : "actionbutton-text"}>
                 {props.children}
             </div>
-            <div className="button-arrow">
+            <div className="actionbutton-arrow">
                 <Icon image="next" width={"16px"} color="white"/>
             </div>
         </button>

@@ -5,7 +5,9 @@ function Button(props) {
 
     const [isPressed, press] = useState(false);
 
-    const pressClass = isPressed ? "button-action pressed" : "button-action"
+    let pressClass = isPressed ? "button-action pressed" : "button-action";
+
+    if (props.isSelected) pressClass += " selected";
 
     function action() {
         press(false); 
@@ -19,9 +21,6 @@ function Button(props) {
                 onTouchEnd={() => press(false)}>
             <div className={props.size === "small" ? "button-text-small" : "button-text"}>
                 {props.children}
-            </div>
-            <div className="button-arrow">
-                {'>'}
             </div>
         </button>
     )

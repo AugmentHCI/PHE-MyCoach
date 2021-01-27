@@ -1,51 +1,33 @@
 .button-action {
     margin: 5px 0px;
-    padding: 0;
+    padding: 10px;
     border: none;
-    background-color: var(--idewe-blue);
-    color: var(--idewe-white);
+    background-color: var(--idewe-white);
+    color: var(--idewe-blue);
     border-radius: 15px;
-    height: 50px;
     width: 100%;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
     transition: .2s ease-in-out;
 
     .button-text {
-        font-weight: 600;
+        font-weight: 500;
         font-family: var(--main-font);
         font-size: 16px;
         text-align: left;
         float: left;
-        margin-top: 13px;
-        margin-left: 15px;
-    }
 
-    .button-text-small {
-        @extend .button-text;
-        font-size: 14px;
-        margin-left: 15px;
-        margin-top: 10px;
+        &-small {
+            @extend .button-text;
+            font-size: 14px;
+        }
     }
+}
+
+.button-action.selected {
+    background-color: var(--idewe-blue);
+    color: var(--idewe-white);
 }
 
 .button-action.pressed {
     transform: scale(0.97);
-}
-
-.button-icon {
-    background-color: var(--idewe-white);
-    float: left;
-    border-radius: 10px;
-    margin: 7px 0px 7px 7px;
-    height: 36px;
-    width: 36px;
-}
-
-.button-arrow {
-    font-weight: 600;
-    font-family: var(--main-font);
-    font-size: 22px;
-    float: right;
-    margin-top: 7px;
-    margin-right: 20px;
 }

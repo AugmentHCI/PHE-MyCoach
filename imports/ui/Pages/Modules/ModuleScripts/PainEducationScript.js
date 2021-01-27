@@ -12,17 +12,17 @@ const PainEducationScript = {
         "type": "Informatief",
         "image": "new-ideas",
         "cards": [{
-            "id": "PE-MOD1-CARD1",
-            "title": "Inleiding",
-            "card-contents": [
-                {
-                    "type": "Text",
-                    "content": "Je lichaam neemt prikkels waar en stuurt deze info naar de hersenen. De hersenen analyseren de prikkels en kiezen een gepaste reactie, bijvoorbeeld pijn. In dit onderdeel wordt beschreven welke weg een prikkel moet afleggen voordat je effectief pijn ervaart. Het centrale zenuwstelsel speelt hierbij een cruciale rol. Onderstaand filmpje geeft meer uitleg en nadien is er een reflectieoefening."
-                },
-                {
-                    "type": "Video",
-                    "link": {"nl-NL":"https://player.vimeo.com/video/485835694", "nl-FR": "https://player.vimeo.com/video/485835249", "en-EN":"https://player.vimeo.com/video/485834880"}
-                }]
+                "id": "PE-MOD1-CARD1",
+                "title": "Inleiding",
+                "card-contents": [
+                    {
+                        "type": "Text",
+                        "content": "Je lichaam neemt prikkels waar en stuurt deze info naar de hersenen. De hersenen analyseren de prikkels en kiezen een gepaste reactie, bijvoorbeeld pijn. In dit onderdeel wordt beschreven welke weg een prikkel moet afleggen voordat je effectief pijn ervaart. Het centrale zenuwstelsel speelt hierbij een cruciale rol. Onderstaand filmpje geeft meer uitleg en nadien is er een reflectieoefening."
+                    },
+                    {
+                        "type": "Video",
+                        "link": {"nl-NL":"https://player.vimeo.com/video/485835694", "nl-FR": "https://player.vimeo.com/video/485835249", "en-EN":"https://player.vimeo.com/video/485834880"}
+                    }]
             },
             {
                 "id": "PE-MOD1-CARD2",
@@ -99,7 +99,60 @@ const PainEducationScript = {
         "duration": "15 minuten",
         "type": "Informatief",
         "image": "new-ideas",
-        "cards": [{}]
+        "cards": [{
+            "id": "PE-MOD1-CARD1",
+            "title": "Recap",
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "content": "In het vorige onderdeel legden we je uit:"
+                },
+                {
+                    "type": "List",
+                    "numbered": true,
+                    "content": ["Hoe een prikkel van je lichaam (receptoren in je huid, spieren en gewrichten) tot in het ruggenmerg (tussenstation) terechtkomt.", "Dat het de taak van de hersenen is om te beslissen of de prikkel wordt doorgestuurd naar de hersenen of blijft liggen in het ruggenmerg.", "Dat niet altijd wanneer een prikkel tot in de hersenen geraakt, dat tot pijn zal leiden. Het is aan de hersenen om daarover te oordelen. In dit onderdeel gaan we dieper in op de rol van onze hersenen."]
+                }
+            ]
+        }, 
+        {
+            "id": "PE-MOD1-CARD2",
+            "title": "Video",
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "content": "Bekijk nu het filmpje over TODO"
+                },
+                {
+                    "type": "Video",
+                    "link": false
+                }
+            ]
+        },
+        {
+            "id": "PE-MOD1-CARD3",
+            "title": "Gedachte-oefening",
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "content": "In dit filmpje legden we je uit hoe de hersenen een prikkel, door de situatie of een eerdere ervaring, anders kunnen interpreteren en een andere reactie veroorzaken."
+                },
+                {
+                    "type": "Text",
+                    "content": "Je aandacht, emoties, gedachten en eerdere ervaringen zullen de verwerking van de binnenkomende prikkel beïnvloeden en de reactie bepalen. Hoe zou jij reageren in volgende situatie?"
+                },
+                {
+                    "type": "Image",
+                    "url": "TODO"
+                },
+                {
+                    "type": "Selection",
+                    "id": "PE-MOD2-Q1",
+                    "title": "Scenario",
+                    "question": "Je doet de deur van je slaapkamer open en er zit een dikke, harige spin in het midden van de kamer. Wat doe je?",
+                    "options": ["Gillen, weglopen, hulp roepen of verstijven van angst", "Een schoen nemen en de spin plat slaan", "Gefascineerd bestuderen of een potje nemen om de spin buiten te zetten"]
+                }
+            ]
+        }]
     }]
 }
 
