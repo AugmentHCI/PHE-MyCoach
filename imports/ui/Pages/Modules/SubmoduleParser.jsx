@@ -59,7 +59,8 @@ export default function SubmoduleParser(props) {
                             description={data.description}
                             duration={data.duration}
                             type={data.type}
-                            image={data.image}>
+                            image={data.image}
+                            hideButton>
                 </ModuleCard>
                 <hr className="module-hr-line"/>
                 <CardsParser cards={data.cards}></CardsParser>
