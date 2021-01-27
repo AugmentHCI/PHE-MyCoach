@@ -392,7 +392,7 @@ const PainEducationScript = {
                     "correct": "Fout",
                     "explanation": "Langdurig rusten zorgt ervoor dat je lichaam gaat verzwakken waardoor je het risico op overbelasting vergroot. Tijdens beweging treden ook de pijn dempende mechanismen in werking. Als je je focust op werk en andere betekenisvolle activiteiten gaan je hersenen minder aandacht besteden aan pijn gerelateerde prikkels en wordt je er vanzelf minder door gehinderd. Probeer daarom je normale activiteiten binnen de mate van het mogelijke verder te zetten en deze geleidelijk terug op te bouwen.",
                     "onCorrect": "Dit klopt inderdaad niet!",
-                    "onIncorrect": "Juist niet!"
+                    "onIncorrect": "Net niet!"
                 },
                 {
                     "id": "PE-MOD4-Q6",
