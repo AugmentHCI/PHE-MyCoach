@@ -157,6 +157,10 @@ const PainEducationScript = {
                     "title": "En hoe voel jij je?",
                     "question": "Welke emoticon illustreert het best hoe je je op dat moment voelt?",
                     "options": ["😄", "😒", "😔", "😟", "😩", "😡"]
+                },
+                {
+                    "type": "Text",
+                    "content": "[Noot - Emoji's wat leuker maken, zoals design]"
                 }
             ]
         },
@@ -284,6 +288,10 @@ const PainEducationScript = {
                     "onCorrect": "Inderdaad! Ondanks dat de hoeveelheid schade in beide situaties ongeveer gelijk is, is de kans groter dat de man die wordt overvallen meer pijn gaat ervaren. De rugbyspeler zal waarschijnlijk niet eens pijn voelen. Misschien merkt hij de dag nadien pas op dat hij een paar blauwe plekken en schrammen heeft.",
                     "onIncorrect": "Niet juist. Ondanks dat de hoeveelheid schade in beide situaties ongeveer gelijk is, is de kans groter dat de man die wordt overvallen meer pijn gaat ervaren. De rugbyspeler zal waarschijnlijk niet eens pijn voelen. Misschien merkt hij de dag nadien pas op dat hij een paar blauwe plekken en schrammen heeft."
                 },
+                {
+                    "type": "Text",
+                    "content": "[Noot - Bug oplossen bij fout antwoord + op 1 lijn zetten]"
+                },
             ]
         }, 
         {
@@ -338,6 +346,10 @@ const PainEducationScript = {
                 {
                     "type": "Text",
                     "content": "Ondertussen heb je al een goed zicht op hoe pijn ontstaat en hoe pijn chronisch wordt. Om te polsen of je alles goed hebt begrepen volgt hier een korte quiz van 10 vragen. Succes!"
+                },
+                {
+                    "type": "Text",
+                    "content": "[Noot - Quiz wat leuker maken]"
                 },
                 {
                     "id": "PE-MOD4-Q1",

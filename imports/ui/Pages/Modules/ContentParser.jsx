@@ -111,7 +111,7 @@ function ContentParser(props) {
         /* If an array of urls is given */
         let imageHTML = [];
         imageUrl.forEach((image, index) => {
-            imageHTML.push(<img className="content-image-inline" src={image} width={90 / imageUrl.length + "%"}/>)
+            imageHTML.push(<img key={key+"-"+index} className="content-image-inline" src={image} width={90 / imageUrl.length + "%"}/>)
         })
         return imageHTML;
     }
