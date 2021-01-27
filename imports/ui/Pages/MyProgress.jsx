@@ -345,7 +345,7 @@ export default class MyProgress extends Component {
     // OPTION 3: If call is succesful, display MyProgress screen
     else return (
       <div className="container">
-        {!this.state.fitbitConnected && this.renderConnectFitbitMessage()}
+        {/*!this.state.fitbitConnected && this.renderConnectFitbitMessage()*/}
         <div>
           <h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1>
         </div>
