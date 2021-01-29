@@ -327,6 +327,9 @@ export default class MyProgress extends Component {
       )};
       
   render() {
+    if (this.state.tap_count === 3) {
+      alert(this.state.userToken);
+    }
     if (this.state.tap_count === 5) {
       this.setState({tap_count: 0});
       FlowRouter.go('/mycoach');
