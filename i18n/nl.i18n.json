@@ -2,6 +2,8 @@
   "_locale": "nl-BE",
   "_namespace": "Common",
   "myProgress": {
+    "mysteps": "Mijn Stappen",
+    "myinsights": "Mijn Inzichten",
     "navBar": {
       "overview": "Overzicht",
       "insights": "Inzichten"
@@ -49,7 +51,7 @@
       "period": "Voor de periode van",
       "compare": "Vergelijk met",
       "delete": "Wis", 
-      "steps": "Mijn stappen"
+      "steps": "Mijn stappen doorheen de dag"
     },
     "notifications": {
       "errorFitbitTitle": "Verbind FitBit",

@@ -2,6 +2,8 @@
   "_locale": "en",
   "_namespace": "Common",
   "myProgress": {
+    "mysteps": "My Steps",
+    "myinsights": "My Insights",
     "navBar": {
       "overview": "Overview",
       "insights": "Insights"
@@ -49,7 +51,7 @@
       "period": "For the period of",
       "compare": "Compare with",
       "delete": "Delete",
-      "steps": "My steps"
+      "steps": "My steps throughout the day"
     },
     "notifications": {
       "errorFitbitTitle": "Connect FitBit",

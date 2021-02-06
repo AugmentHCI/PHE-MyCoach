@@ -40,7 +40,7 @@ class Cell extends Component {
     if(max == 4){
       step = 1;
     }else if (max == 100){
-      step = 20;
+      step = 25;
     }
     else {step = 1;}
 
@@ -72,7 +72,7 @@ class Cell extends Component {
     if(max == 4){
       step = 1;
     }else if (max == 100){
-      step = 20;
+      step = 25;
     }
     else {step = 1;}
 
@@ -119,13 +119,13 @@ class ColorLegend extends Component {
     if(this.props.max == 4){
       return [1,2,3,4];
     } else {
-      return [1,2,3,4,5];
+      return [1,2,3,4];
     }
   }
 
   getWidth = () => {
     if(this.props.max == 4){
-      return "140px";
+      return "180px";
     } else {
       return "180px";
     }
@@ -137,7 +137,7 @@ class ColorLegend extends Component {
         <div className='small-text'>{<T>{`myProgress.parameters.${this.props.parameter}`}</T>}</div>
         <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
           {this.getAmountOfCategories().map((d) => {
-            return <div key={d} style={{backgroundColor: getComputedStyle(document.documentElement).getPropertyValue(this.props.color + "-tint" + d.toString()), height: "8px", width: "40px"}}></div>;
+            return <div key={d} style={{backgroundColor: getComputedStyle(document.documentElement).getPropertyValue(this.props.color + "-tint" + (d+1).toString()), height: "8px", width: "40px"}}></div>;
           })}
         </div>
         <div style={{width: this.getWidth(), display: 'flex', justifyContent: 'space-between'}}>
@@ -193,7 +193,6 @@ export default class CalendarGraph extends Component {
   getData = (parameter) => {
     if (parameter === "distance") return getDistanceDataMonthly(this.props.fitData);
     let dataArray = getParameterData(this.props.data, parameter, "month");
-    console.log(dataArray)
     return dataArray;
   }
 

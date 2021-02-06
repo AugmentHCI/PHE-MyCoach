@@ -222,9 +222,10 @@ export default class LineGraph extends Component {
                 format: value => {
                     if(this.state.comparisonData.max==100){
                       return value;
-                    }else{
+                    }else if (this.state.data.max==4){
                       return Object.keys(ordinalData).find(key => ordinalData[key] === value);
                     }
+                    else {return value;}
                   },
               }}
               enableGridX={false}

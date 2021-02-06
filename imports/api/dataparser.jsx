@@ -37,7 +37,7 @@ const parameters = [
   },
   {
     "id": "physicalTiredness",
-    "measure": "", //"physicalTiredness",
+    "measure": "physicalTiredness", //"physicalTiredness",
     "color": '--idewe-purple',
     "min": 1,
     "max": 4,
@@ -45,8 +45,8 @@ const parameters = [
   },
   {
     "id": "mentalTiredness",
-    "measure": "", //"mentalTiredness",
-    "color": '--idewe-blue-dark',
+    "measure": "mentalTiredness", //"mentalTiredness",
+    "color": '--idewe-green-dark',
     "min": 1,
     "max": 4,
     "code": "phe.dagelijks.mentale.vermoeidheid"

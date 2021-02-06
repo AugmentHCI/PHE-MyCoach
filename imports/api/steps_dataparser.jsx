@@ -78,7 +78,6 @@ export function getDistanceDataMonthly(data) {
             distancesByDay[i] = 0;
         }
     };
-    console.log(distances)
     const max_distance = Math.max.apply(Math, distances) < 1 ? 1 : Math.max.apply(Math, distances);
     return {
         id: "distance",

@@ -2,6 +2,8 @@
   "_locale": "fr-BE",
   "_namespace": "Common",
   "myProgress": {
+    "mysteps": "Mes Étapes",
+    "myinsights": "Mes Aperçus",
     "navBar": {
       "overview": "Vue d'ensemble",
       "insights": "Vue de détails"
@@ -49,7 +51,7 @@
       "period": "Pour la période de",
       "compare": "Compare avec",
       "delete": "Supprime",
-      "steps": "Mes étapes"
+      "steps": "Mes étapes du jour"
     },
     "notifications": {
       "errorFitbitTitle": "Connectez FitBit",

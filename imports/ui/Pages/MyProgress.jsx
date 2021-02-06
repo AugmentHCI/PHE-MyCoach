@@ -388,7 +388,7 @@ export default class MyProgress extends Component {
 
   renderFitBitCard() {
     return <Card title="myProgress.insights.steps" bodyStyle={{padding: '10px 5px'}} underline>
-      <div style={{width: "100%", display: "flex", paddingLeft: "10px", paddingRight: "10px", marginBottom:"10px"}}>
+      <div style={{width: "100%", display: "flex", paddingLeft: "10px", paddingRight: "10px", marginBottom:"20px"}}>
         <button className="day-button-left" onClick={() => this.updateFitDay("backward")}>
           <Icon width="18px" image={"next"} color={"white"} style={{marginTop: "2px", transform:"rotate(-180deg)"}}/>
         </button>
@@ -406,9 +406,6 @@ export default class MyProgress extends Component {
   }
       
   render() {
-    if (this.state.tap_count === 3) {
-      alert(this.state.userToken);
-    }
     if (this.state.tap_count === 5) {
       this.setState({tap_count: 0});
       FlowRouter.go('/mycoach');
@@ -431,9 +428,9 @@ export default class MyProgress extends Component {
         <div>
           <h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1>
         </div>
-        <h2>Mijn Stappen</h2>
+        <h2><T>{`myProgress.mysteps`}</T></h2>
         {this.renderFitBitCard()}
-        <h2>Mijn Inzichten</h2>
+        <h2><T>{`myProgress.myinsights`}</T></h2>
         {this.renderInsightsCard()}
         {this.state.timeFrame == "weekly" && this.renderOverviewWeekly()}
         {this.state.timeFrame == "monthly" && this.renderOverviewMonthly()}
