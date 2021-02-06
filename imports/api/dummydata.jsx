@@ -2638,7 +2638,7 @@ export function getMonthlyDummyData() {
         "vraagVertaling": "Hoeveel pijn heb je op dit moment?",
         "antwoordId": 12808,
         "mogelijkAntwoordId": 3576,
-        "antwoord": "42",
+        "antwoord": "100",
         "datum": "2020-03-13T16:22:59.921"
     },
     {

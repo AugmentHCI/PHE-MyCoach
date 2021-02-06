@@ -24,11 +24,16 @@ class Cell extends Component {
       color = this.props.comparisonData.color;
     }
 
-    if(value == null){
+    if(value == null || value == 0){
       return grey;
     }
 
     let tint = color;
+
+    if (max !== 4 || max !== 100) {
+      tint = color + "-tint" + Math.round(value/max * 5);
+      return getComputedStyle(document.documentElement).getPropertyValue(tint);
+    }
 
     let interval = 1; 
     let step;
@@ -77,12 +82,10 @@ class Cell extends Component {
         height = (1+(interval*2.5)).toString()+"px";
       }
     }
-    console.log(`Value ${value}, height: ${height}`)
-    return height;
+    return (Math.round(14 * (value/max)) + 2) + "px";
   }
 
   getBarStyle = (value, comparison) => {
-    console.log(value)
     const barStyle = {
       backgroundColor: this.getColor(value, comparison),
       height: this.getHeight(value, comparison),
@@ -93,7 +96,6 @@ class Cell extends Component {
   }
 
   render() {
-    console.log(this.props.data.data);
     return(
       <div style={{display: 'flex', justifyContent: 'space-between', width: "13%", minHeight: "55px", flexDirection: "column", alignItems: 'center', padding: "4px", borderStyle: "solid", borderWidth: '1px', borderColor: grey}}>
         <div className='small-text'>{this.props.day}</div>
@@ -140,7 +142,7 @@ class ColorLegend extends Component {
         </div>
         <div style={{width: this.getWidth(), display: 'flex', justifyContent: 'space-between'}}>
           <div className='small-text'>{this.props.min}</div>
-          <div className='small-text'>{this.props.max}</div>
+          <div className='small-text'>{this.props.parameter === "distance" ? Math.ceil(this.props.max) + " km" : this.props.max}</div>
         </div>
       </div>
     )
