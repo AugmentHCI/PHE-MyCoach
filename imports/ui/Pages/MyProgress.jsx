@@ -150,7 +150,7 @@ export default class MyProgress extends Component {
 
   fetchData(selectedPeriod, token, timeFrame){
     // OPTION 1: Token given, try to fetch data
-    if (typeof token !== 'undefined' && token !== "demo"){
+    if (typeof token !== 'undefined' && token !== "demo") {
       // Data altijd in NL ophalen, vertalen indien nodig (keys zijn sowieso altijd NL)
       // const url = `https://jobstudenten-dev.idewe.be/api/antwoorden/export?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}&taal=DUTCH`;
       const url = `https://connector.idewe.be/healthempower/jobstudenten/api/antwoorden/export?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}&taal=DUTCH`;
@@ -224,23 +224,24 @@ export default class MyProgress extends Component {
   }
 
   fetchFitbitDayData(date, token) {
-    if (token === undefined) {this.setState({fitDataDayData: date.getDay()}); return;}
     // Now try to fetch FitBit data as well
-    const urlFit = `https://phe.idewe.be/api/fit-data?van=${date}&tot=${date}`;
-
-    console.log('FITBIT - Retreiving FitBit data ...')
-    Meteor.call("getData", {
-      url: urlFit,
-      userToken: token
-    }, (error, result) => {
-      if (error) {
-        console.log(`FITBIT-DAILY - Unable to retreive FitBit Data: ${error.message}.`)
-      } else {
-        if (!result.data) {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}). Data empty however.`);}
-        // Save fitbit data also to state
-        else {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}).`); this.setState({fitDataDayData: result.data}); }
-      }
-    }); 
+    if (typeof token !== 'undefined' && token !== "demo") {
+      const urlFit = `https://phe.idewe.be/api/fit-data?van=${date}&tot=${date}`;
+      console.log('FITBIT - Retreiving FitBit data ...')
+      Meteor.call("getData", {
+        url: urlFit,
+        userToken: token
+      }, (error, result) => {
+        if (error) {
+          console.log(`FITBIT-DAILY - Unable to retreive FitBit Data: ${error.message}.`)
+        } else {
+          if (!result.data) {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}). Data empty however.`);}
+          // Save fitbit data also to state
+          else {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}).`); this.setState({fitDataDayData: result.data}); }
+        }
+      }); 
+    }
+    else {this.setState({fitDataDayData: date.getDay()}); return;}
   }
 
   updateFitDay(direction) {
