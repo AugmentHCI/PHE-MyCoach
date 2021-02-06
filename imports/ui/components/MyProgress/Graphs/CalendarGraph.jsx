@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getParameterData } from '../../../../api/dataparser';
+import { getDistanceDataMonthly } from '../../../../api/steps_dataparser';
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";
@@ -33,9 +34,10 @@ class Cell extends Component {
     let step;
     if(max == 4){
       step = 1;
-    }else{
+    }else if (max == 100){
       step = 20;
     }
+    else {step = 1;}
 
     for (let i = 0; i < max; i+=step) {
       if(i<=value && value<=i+step){
@@ -64,9 +66,10 @@ class Cell extends Component {
     let step;
     if(max == 4){
       step = 1;
-    }else{
+    }else if (max == 100){
       step = 20;
     }
+    else {step = 1;}
 
     for (let i = 0; i < max; i=i+step) {
       interval++;
@@ -74,10 +77,12 @@ class Cell extends Component {
         height = (1+(interval*2.5)).toString()+"px";
       }
     }
+    console.log(`Value ${value}, height: ${height}`)
     return height;
   }
 
   getBarStyle = (value, comparison) => {
+    console.log(value)
     const barStyle = {
       backgroundColor: this.getColor(value, comparison),
       height: this.getHeight(value, comparison),
@@ -88,6 +93,7 @@ class Cell extends Component {
   }
 
   render() {
+    console.log(this.props.data.data);
     return(
       <div style={{display: 'flex', justifyContent: 'space-between', width: "13%", minHeight: "55px", flexDirection: "column", alignItems: 'center', padding: "4px", borderStyle: "solid", borderWidth: '1px', borderColor: grey}}>
         <div className='small-text'>{this.props.day}</div>
@@ -183,7 +189,9 @@ export default class CalendarGraph extends Component {
 
   //parameter meegeven ipv uit state te halen, want state werkt asynchroon -> is soms te laat geupdate
   getData = (parameter) => {
+    if (parameter === "distance") return getDistanceDataMonthly(this.props.fitData);
     let dataArray = getParameterData(this.props.data, parameter, "month");
+    console.log(dataArray)
     return dataArray;
   }
 

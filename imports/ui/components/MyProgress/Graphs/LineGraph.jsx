@@ -50,7 +50,7 @@ export default class LineGraph extends Component {
   } 
 
   getData = (parameter) => {
-    if (parameter === "distance") return getDistanceData(this.props.fitData, "week");
+    if (parameter === "distance") return getDistanceData(this.props.fitData);
     let dataArray = getParameterData(this.props.data, parameter, "week");
     return dataArray;
   }

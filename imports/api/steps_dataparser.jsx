@@ -22,7 +22,6 @@ export function getDistanceData(data) {
     let days = getWeekdaysTranslation();
     let distances = [];
     let distancesByDay = [];
-    console.log(data.fitData)
     const iterData = data.fitData === undefined ? data : data.fitData;
     days.forEach((dayInstance, index) => {
         let found = false;
@@ -42,12 +41,51 @@ export function getDistanceData(data) {
             distancesByDay.push({x: dayInstance, y: 0})
         }
     })
+    const max_distance = Math.max.apply(Math, distances) < 1 ? 1 : Math.max.apply(Math, distances);
     return {
         id: "distance",
         measure: "Distance",
         color: "--idewe-blue",
         min: 0,
-        max: Math.max.apply(Math, distances),
+        max: max_distance,
+        data: distancesByDay
+    }
+}
+
+export function getDistanceDataMonthly(data) {
+    let currentDate = data[0]!=undefined ? new Date(data[0].datum) : new Date();
+    let distances = [];
+    let distancesByDay = [];
+
+    const amountOfDays = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0).getDate();
+    let daysOfMonth = Array.from(Array(amountOfDays+1).keys());
+    daysOfMonth.shift();
+    const iterData = data.fitData === undefined ? data : data.fitData;
+    for (let i = 1; i <= amountOfDays; i++) {
+        let found = false;
+        iterData.forEach(day => {
+            if (!found) {
+                const date = new Date(day.datum);
+                if (date.getDate() === i) {
+                    distances.push(day.distance);
+                    distancesByDay[i] = day.distance;
+                    found = true;
+                }
+            }
+        })
+        if (!found) {
+            distances.push(0);
+            distancesByDay[i] = 0;
+        }
+    };
+    console.log(distances)
+    const max_distance = Math.max.apply(Math, distances) < 1 ? 1 : Math.max.apply(Math, distances);
+    return {
+        id: "distance",
+        measure: "Distance",
+        color: "--idewe-blue",
+        min: 0,
+        max: max_distance,
         data: distancesByDay
     }
 }

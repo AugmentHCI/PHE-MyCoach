@@ -8,14 +8,13 @@ export function StepsGraph(props) {
     const propsmonth = props.date.getMonth() + 1 < 10 ? "0" + (props.date.getMonth() + 1) : props.date.getMonth() + 1;
     const propsday = props.date.getDate() < 10 ? "0" + props.date.getDate() : props.date.getDate();
     let dateString = props.date.getFullYear() + "-" + propsmonth + "-" + propsday;
-    console.log("PROPS DATA");
-    console.log(props.data);
     const iterData = props.data.fitData === undefined ? props.data : props.data.fitData;
+    let dataFound = false;
     iterData.forEach(day => {
-        if (day.datum === dateString) { data = aggregateStepsByHour(day.stepsIntraday);}
+        if (day.datum === dateString) { data = aggregateStepsByHour(day.stepsIntraday); dataFound = true;}
     })
-    if (data === {}) return <div>No steps taken that day</div>
-    else return <div style={{height: "250px", width: "100%"}}><ResponsiveBar
+    if (!dataFound) {data = aggregateStepsByHour(null);}
+    return <div style={{height: "250px", width: "100%"}}><ResponsiveBar
         data={convertToChartData(data)}
         indexBy="hour"
         keys={["steps"]}
