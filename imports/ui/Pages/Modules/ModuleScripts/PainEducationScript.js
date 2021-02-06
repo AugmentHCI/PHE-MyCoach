@@ -277,7 +277,7 @@ const PainEducationScript = {
                 },
                 {
                     "type": "Sort-Exercise",
-                    "content": ""
+                    "columns": ["Rugby", "Beide", "Overval"]
                 },
                 {
                     "id": "PE-MOD3-Q1",

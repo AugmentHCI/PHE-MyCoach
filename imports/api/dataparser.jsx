@@ -128,7 +128,6 @@ export function getParameterData(data, parameter, timePeriod){
   let filtered = preFiltered.filter(function(el){
     return el.vraag==fullParamData.code;
   })
-
   if(timePeriod == "week"){
     paramData = getDataForWeek(filtered);
   }else{
@@ -136,7 +135,6 @@ export function getParameterData(data, parameter, timePeriod){
   }
   
   fullParamData.data = paramData;
-
   return fullParamData;
 }
 
@@ -175,7 +173,6 @@ function getDataForWeek(data){
   paramData.sort(function(a, b){  
     return weekdays.indexOf(a.x) - weekdays.indexOf(b.x);
   });
-
   return paramData;
 }
 
@@ -288,7 +285,6 @@ export function getMonthlyActivityData(data) {
     monthlyActivityData.push(barData);
   })
 
-  console.log(monthlyActivityData)
   return monthlyActivityData;
 
 }

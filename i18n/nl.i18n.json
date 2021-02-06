@@ -15,7 +15,8 @@
       "painIntensity": "Pijn intensiteit",
       "satisfaction": "Tevredenheid",
       "physicalTiredness": "Lichamelijke vermoeidheid",
-      "mentalTiredness": "Mentale vermoeidheid"
+      "mentalTiredness": "Mentale vermoeidheid",
+      "distance": "Gewandelde afstand"
     },
     "activities": {
       "activities": "Activiteiten",
@@ -47,7 +48,8 @@
       "showMe": "Toon mij",
       "period": "Voor de periode van",
       "compare": "Vergelijk met",
-      "delete": "Wis"
+      "delete": "Wis", 
+      "steps": "Mijn stappen"
     },
     "notifications": {
       "errorFitbitTitle": "Verbind FitBit",

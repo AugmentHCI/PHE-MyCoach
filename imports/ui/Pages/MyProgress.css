@@ -50,3 +50,23 @@
   height: 38px;
   width: 90%;
 }
+
+.day-button-left {
+  padding: 0;
+  margin: 0 5px 0 0;
+  background-color: var(--idewe-blue-dark);
+  border: none;
+  width: 10%;
+  border-radius: 8px;
+  height: 38px;
+}
+
+.day-button-right {
+  padding: 0;
+  margin: 0 0 0 5px;
+  background-color: var(--idewe-blue-dark);
+  border: none;
+  width: 10%;
+  border-radius: 8px;
+  height: 38px;
+}

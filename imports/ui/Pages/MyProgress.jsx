@@ -26,9 +26,14 @@ import LineGraph from '../components/MyProgress/Graphs/LineGraph.jsx';
 import ActivityGraph from '../components/MyProgress/Graphs/ActivityGraph.jsx';
 import MonthlyActivityGraph from '../components/MyProgress/Graphs/MonthlyActivityGraph.jsx';
 import CalendarGraph from '../components/MyProgress/Graphs/CalendarGraph.jsx';
+import { StepsGraph } from '../components/MyProgress/Graphs/StepsGraph.jsx';
+import Icon from '../components/Illustrations/Icon.jsx';
+
+//import Icon from '../components/Icon.jsx';
 
 import NotificationAlert from '../components/Notification.jsx';
 import Card from '../components/Card.jsx';
+import fitData from '../../api/responseFit.jsx';
 
 // Instance of React translate component, "Common" refers to the namespace of the i18n files
 const T = i18n.createComponent("Common");
@@ -39,6 +44,7 @@ export default class MyProgress extends Component {
 
     //bind date change coming from datepicker components to MyProgress page
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleFitbitDateChange = this.handleFitbitDateChange.bind(this);
     this.handleParameterChange = this.handleParameterChange.bind(this);
     this.handleCompareParameterChange = this.handleCompareParameterChange.bind(this);
 
@@ -48,6 +54,9 @@ export default class MyProgress extends Component {
       selectedDate: new Date(),
       selectedPeriod: this.getSelectedPeriod(moment(), "weekly"),
       data: null,
+      fitData: null,
+      fitDataDay: null,
+      fitDataDayData: null,
       userToken: "",
       fitbitConnected: false,
       parameter: "painIntensity",
@@ -60,11 +69,15 @@ export default class MyProgress extends Component {
 
   // Is called when initializing MyProgress component
   componentDidMount(){
+    const date = new Date();
+    date.setDate(date.getDate() - 2)
+    this.setState({fitDataDay: date})
     // Get user token from URL routing (see also routes.jsx file)
     let token = FlowRouter.getParam('token');
     this.setState({userToken: token});
     this.setLocale();
     this.fetchData(this.state.selectedPeriod, token, this.state.timeFrame);
+    this.fetchFitbitData(this.state.selectedPeriod, token);
   }
 
   setLocale() {
@@ -79,18 +92,24 @@ export default class MyProgress extends Component {
   updateTimeFrame = (newTimeFrame) => {
     this.setState({timeFrame: newTimeFrame})
     
-    const newPeriod = this.getSelectedPeriod(this.state.selectedDate, newTimeFrame)
-    this.setState({selectedPeriod: newPeriod})
-    this.fetchData(newPeriod, this.state.userToken, newTimeFrame)
+    const newPeriod = this.getSelectedPeriod(this.state.selectedDate, newTimeFrame);
+    this.setState({selectedPeriod: newPeriod});
+    this.fetchData(newPeriod, this.state.userToken, newTimeFrame);
+    this.fetchFitbitData(this.state.selectedPeriod, token);
   }
 
   // Called when date changes -> update data
   handleDateChange(newDate) {
-    const newPeriod = this.getSelectedPeriod(newDate, this.state.timeFrame)
+    const newPeriod = this.getSelectedPeriod(newDate, this.state.timeFrame);
 
-    this.setState({selectedDate: newDate})
-    this.setState({selectedPeriod: newPeriod})
-    this.fetchData(newPeriod, this.state.userToken, this.state.timeFrame)
+    this.setState({selectedDate: newDate, selectedPeriod: newPeriod});
+    this.fetchData(newPeriod, this.state.userToken, this.state.timeFrame);
+    this.fetchFitbitData(newPeriod, this.state.userToken);
+  }
+
+  handleFitbitDateChange(newDate) {
+    this.setState({fitDataDay: newDate});
+    this.fetchFitbitDayData(newDate, this.state.userToken);
   }
 
   // Passed to ParameterPicker to change the selected parameter
@@ -134,7 +153,8 @@ export default class MyProgress extends Component {
     if (typeof token !== 'undefined' && token !== "demo"){
       // Data altijd in NL ophalen, vertalen indien nodig (keys zijn sowieso altijd NL)
       // const url = `https://jobstudenten-dev.idewe.be/api/antwoorden/export?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}&taal=DUTCH`;
-	    const url = `https://connector.idewe.be/healthempower/jobstudenten/api/antwoorden/export?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}&taal=DUTCH`;
+      const url = `https://connector.idewe.be/healthempower/jobstudenten/api/antwoorden/export?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}&taal=DUTCH`;
+      //const url = `https://phe.idewe.be/api/antwoorden/export?van=2020-05-01&tot=2021-05-01&taal=DUTCH`;
 
       // Server side methode gebruiken (zoals gedefinieerd in main.js)
       console.log('QUESTIONNAIRE - Retreiving questionnaire data ...')
@@ -168,9 +188,25 @@ export default class MyProgress extends Component {
           this.setState({data: result.data}); 
         }
       }); 
+    } 
+    // OPTION 2: Demo data
+    else if (token === "demo") {
+      console.log("Displaying demo data.")
+      if (timeFrame == "weekly"){
+        this.setState({data: getWeeklyDummyData(), fitData: fitData}); 
+      } else if (timeFrame == "monthly"){
+        this.setState({data: getMonthlyDummyData()}); 
+      }
+    }
+    // OPTION 3: No valid token whatsoever, do nothing.
+    else {
+      console.log("No valid token has been provided.")
+    }
+  }
 
+  fetchFitbitData(selectedPeriod, token) {
       // Now try to fetch FitBit data as well
-      const urlFit = `https://connector.idewe.be/healthempower/jobstudenten/api/fit-data?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}&taal=DUTCH`;
+      const urlFit = `https://phe.idewe.be/api/fit-data?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}`;
 
       console.log('FITBIT - Retreiving FitBit data ...')
       Meteor.call("getData", {
@@ -182,23 +218,43 @@ export default class MyProgress extends Component {
         } else {
           if (!result.data) {console.log(`FITBIT - Successfully retreived FitBit data (Statuscode ${result.statusCode}). Data empty however.`); this.setState({fitbitConnected: false}); }
           // Save fitbit data also to state
-          else {console.log(`FITBIT - Successfully retreived FitBit data (Statuscode ${result.statusCode}).`); this.setState({fitbitConnected: true}); }
+          else {console.log(`FITBIT - Successfully retreived FitBit data (Statuscode ${result.statusCode}).`); this.setState({fitbitConnected: true, fitData: result.data}); }
         }
       }); 
-    } 
-    // OPTION 2: Demo data
-    else if (token === "demo") {
-      console.log("Displaying demo data.")
-      if (timeFrame == "weekly"){
-        this.setState({data: getWeeklyDummyData()}); 
-      } else if (timeFrame == "monthly"){
-        this.setState({data: getMonthlyDummyData()}); 
+  }
+
+  fetchFitbitDayData(date, token) {
+    if (token === undefined) {this.setState({fitDataDayData: date.getDay()}); return;}
+    // Now try to fetch FitBit data as well
+    const urlFit = `https://phe.idewe.be/api/fit-data?van=${date}&tot=${date}`;
+
+    console.log('FITBIT - Retreiving FitBit data ...')
+    Meteor.call("getData", {
+      url: urlFit,
+      userToken: token
+    }, (error, result) => {
+      if (error) {
+        console.log(`FITBIT-DAILY - Unable to retreive FitBit Data: ${error.message}.`)
+      } else {
+        if (!result.data) {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}). Data empty however.`);}
+        // Save fitbit data also to state
+        else {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}).`); this.setState({fitDataDayData: result.data}); }
       }
+    }); 
+  }
+
+  updateFitDay(direction) {
+    if (direction === "forward") {
+      const date = this.state.fitDataDay;
+      date.setDate(date.getDate() + 1)
+      this.setState({fitDataDay: date})
     }
-    // OPTION 3: No valid token whatsoever, do nothing.
     else {
-      console.log("No valid token has been provided.")
+      const date = this.state.fitDataDay;
+      date.setDate(date.getDate() - 1)
+      this.setState({fitDataDay: date})
     }
+    this.fetchFitbitDayData(this.state.fitDataDay, this.state.token);
   }
 
   /***
@@ -288,12 +344,13 @@ export default class MyProgress extends Component {
       return (
         <React.Fragment>
           <Card title="myProgress.insights.insights" bodyStyle={{padding: '0', paddingBottom: '15px'}} underline>
-            <LineGraph 
-              parameter = {this.state.parameter}
-              data = {this.state.data}
-              comparison = {this.state.compareParameter}
-              locale = {i18n.getLocale()}
-            />
+              <LineGraph 
+                parameter = {this.state.parameter}
+                data = {this.state.data}
+                fitData = {this.state.fitData}
+                comparison = {this.state.compareParameter}
+                locale = {i18n.getLocale()}
+              />
           </Card>
           <Card title="myProgress.activities.activities" underline>
             <ActivityGraph 
@@ -325,6 +382,25 @@ export default class MyProgress extends Component {
           </Card>
         </React.Fragment>
       )};
+
+  renderFitBitCard() {
+    return <Card title="myProgress.insights.steps" bodyStyle={{padding: '10px 5px'}} underline>
+      <div style={{width: "100%", display: "flex", paddingLeft: "10px", paddingRight: "10px", marginBottom:"10px"}}>
+        <button className="day-button-left" onClick={() => this.updateFitDay("backward")}>
+          <Icon width="18px" image={"next"} color={"white"} style={{marginTop: "2px", transform:"rotate(-180deg)"}}/>
+        </button>
+        <DayPicker 
+            selectedDate = {this.state.fitDataDay}
+            onDateChange = {this.handleFitbitDateChange}
+            locale = {i18n.getLocale()}
+          />
+          <button className="day-button-right" onClick={() => this.updateFitDay("forward")}>
+            <Icon width="18px" image={"next"} color={"white"} style={{marginTop: "2px"}}/>
+          </button>
+        </div>
+      <StepsGraph date={this.state.fitDataDay} data={fitData}></StepsGraph>
+    </Card>
+  }
       
   render() {
     if (this.state.tap_count === 3) {
@@ -352,6 +428,9 @@ export default class MyProgress extends Component {
         <div>
           <h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1>
         </div>
+        <h2>Mijn Stappen</h2>
+        {this.renderFitBitCard()}
+        <h2>Mijn Inzichten</h2>
         {this.renderInsightsCard()}
         {this.state.timeFrame == "weekly" && this.renderOverviewWeekly()}
         {this.state.timeFrame == "monthly" && this.renderOverviewMonthly()}

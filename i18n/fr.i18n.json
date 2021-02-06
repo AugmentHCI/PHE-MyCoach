@@ -15,7 +15,8 @@
       "painIntensity": "Intensité de la douleur",
       "satisfaction": "Satisfaction",
       "physicalTiredness": "Fatigue physique",
-      "mentalTiredness": "Fatigue mentale"
+      "mentalTiredness": "Fatigue mentale",
+      "distance": "Distance parcourue"
     },
     "activities": {
       "activities": "Activités",
@@ -47,7 +48,8 @@
       "showMe": "Montre moi",
       "period": "Pour la période de",
       "compare": "Compare avec",
-      "delete": "Supprime"
+      "delete": "Supprime",
+      "steps": "Mes étapes"
     },
     "notifications": {
       "errorFitbitTitle": "Connectez FitBit",

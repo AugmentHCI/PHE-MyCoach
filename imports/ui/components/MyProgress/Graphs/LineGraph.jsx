@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import { getParameterData } from '../../../../api/dataparser';
+import { getDistanceData } from '../../../../api/steps_dataparser';
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";
@@ -49,6 +50,7 @@ export default class LineGraph extends Component {
   } 
 
   getData = (parameter) => {
+    if (parameter === "distance") return getDistanceData(this.props.fitData, "week");
     let dataArray = getParameterData(this.props.data, parameter, "week");
     return dataArray;
   }
@@ -73,12 +75,9 @@ export default class LineGraph extends Component {
 
   //values = [1,2,3,4] for physical and mental tiredness, values = [0, ..., 100] for satisfaction and pain intensity
   getGridYValues = (data) => {
-    if(data.max==100){
-      return [0,10,20,30,40,50,60,70,80,90,100];
-    }else{
-      //ordinal data
-      return [1,2,3,4];
-    }
+    if(data.max===100) { return [0,10,20,30,40,50,60,70,80,90,100] } 
+    else if (data.max===4) { return [1,2,3,4] }
+    else { return [data.min, 2, data.max] }
   }
 
   getLineData = () => {
@@ -158,9 +157,10 @@ export default class LineGraph extends Component {
                 format: value => {
                     if(this.state.data.max==100){
                       return value;
-                    }else{
+                    }else if (this.state.data.max==4){
                       return Object.keys(ordinalData).find(key => ordinalData[key] === value);
                     }
+                    else {return value;}
                   },
               }}
               enableGridX={false}
