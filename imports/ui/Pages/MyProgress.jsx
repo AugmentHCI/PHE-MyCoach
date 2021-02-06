@@ -55,7 +55,7 @@ export default class MyProgress extends Component {
       selectedPeriod: this.getSelectedPeriod(moment(), "weekly"),
       data: null,
       fitData: null,
-      fitDataDay: null,
+      fitDataDay: new Date(),
       fitDataDayData: null,
       userToken: "",
       fitbitConnected: false,
@@ -69,15 +69,13 @@ export default class MyProgress extends Component {
 
   // Is called when initializing MyProgress component
   componentDidMount(){
-    const date = new Date();
-    date.setDate(date.getDate() - 2)
-    this.setState({fitDataDay: date})
     // Get user token from URL routing (see also routes.jsx file)
     let token = FlowRouter.getParam('token');
     this.setState({userToken: token});
     this.setLocale();
     this.fetchData(this.state.selectedPeriod, token, this.state.timeFrame);
     this.fetchFitbitData(this.state.selectedPeriod, token);
+    this.fetchFitbitDayData(this.state.fitDataDay, token);
   }
 
   setLocale() {
@@ -224,10 +222,13 @@ export default class MyProgress extends Component {
   }
 
   fetchFitbitDayData(date, token) {
+    const propsmonth = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+    const propsday = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    let dateString = date.getFullYear() + "-" + propsmonth + "-" + propsday;
     // Now try to fetch FitBit data as well
     if (typeof token !== 'undefined' && token !== "demo") {
-      const urlFit = `https://phe.idewe.be/api/fit-data?van=${date}&tot=${date}`;
-      console.log('FITBIT - Retreiving FitBit data ...')
+      const urlFit = `https://phe.idewe.be/api/fit-data?van=${dateString}&tot=${dateString}`;
+      console.log('FITBIT-DAILY - Retreiving FitBit data ...')
       Meteor.call("getData", {
         url: urlFit,
         userToken: token
@@ -241,7 +242,7 @@ export default class MyProgress extends Component {
         }
       }); 
     }
-    else {this.setState({fitDataDayData: date.getDay()}); return;}
+    else {this.setState({fitDataDayData: fitData}); return;}
   }
 
   updateFitDay(direction) {
@@ -399,7 +400,7 @@ export default class MyProgress extends Component {
             <Icon width="18px" image={"next"} color={"white"} style={{marginTop: "2px"}}/>
           </button>
         </div>
-      <StepsGraph date={this.state.fitDataDay} data={fitData}></StepsGraph>
+      <StepsGraph date={this.state.fitDataDay} data={this.state.fitDataDayData}></StepsGraph>
     </Card>
   }
       
