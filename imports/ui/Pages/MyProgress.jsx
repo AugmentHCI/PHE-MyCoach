@@ -242,7 +242,7 @@ export default class MyProgress extends Component {
         }
       }); 
     }
-    else {this.setState({fitDataDayData: fitData}); return;}
+    else {console.log("FITBIT-DAILY - Getting demo data"); this.setState({fitDataDayData: fitData}); return;}
   }
 
   updateFitDay(direction) {
