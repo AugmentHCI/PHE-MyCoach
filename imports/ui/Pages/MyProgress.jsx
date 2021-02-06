@@ -256,7 +256,7 @@ export default class MyProgress extends Component {
       date.setDate(date.getDate() - 1)
       this.setState({fitDataDay: date})
     }
-    this.fetchFitbitDayData(this.state.fitDataDay, this.state.token);
+    this.fetchFitbitDayData(this.state.fitDataDay, this.state.userToken);
   }
 
   /***
