@@ -428,7 +428,7 @@ export default class MyProgress extends Component {
         <div>
           <h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1>
         </div>
-        <h2>Mijn Stappen</h2>
+        <h2>Mijn Stappen - Testing</h2>
         {this.renderFitBitCard()}
         <h2>Mijn Inzichten</h2>
         {this.renderInsightsCard()}
