@@ -22,9 +22,7 @@ export function getDistanceData(data) {
     let days = getWeekdaysTranslation();
     let distances = [];
     let distancesByDay = [];
-    console.log("FIT DATA:")
-    console.log(data);
-    data.fitData.forEach(day => {
+    data.forEach(day => {
         const date = new Date(day.datum);
         const dateNumber = date.getDay()-1 < 0 ? 6 : date.getDay()-1;
         distances.push(day.distance);
