@@ -22,11 +22,25 @@ export function getDistanceData(data) {
     let days = getWeekdaysTranslation();
     let distances = [];
     let distancesByDay = [];
-    data.forEach(day => {
-        const date = new Date(day.datum);
-        const dateNumber = date.getDay()-1 < 0 ? 6 : date.getDay()-1;
-        distances.push(day.distance);
-        distancesByDay.push({x: days[dateNumber], y: day.distance})
+    console.log(data.fitData)
+    const iterData = data.fitData === undefined ? data : data.fitData;
+    days.forEach((dayInstance, index) => {
+        let found = false;
+        iterData.forEach(day => {
+            if (!found) {
+                const date = new Date(day.datum);
+                const dateNumber = date.getDay()-1 < 0 ? 6 : date.getDay()-1;
+                if (dateNumber === index) {
+                    distances.push(day.distance);
+                    distancesByDay.push({x: days[dateNumber], y: day.distance})
+                    found = true;
+                }
+            }
+        })
+        if (!found) {
+            distances.push(0);
+            distancesByDay.push({x: dayInstance, y: 0})
+        }
     })
     return {
         id: "distance",

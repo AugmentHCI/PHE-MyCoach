@@ -1,6 +1,5 @@
 export const fitData = 
-[{"rrnr":4557583,"datum":"2021-02-01","steps":0,"stepsIntraday":null,"distance":0.0},
-{"rrnr":4557583,"datum":"2021-02-02","steps":0,"stepsIntraday":null,"distance":0.0},
+[{"rrnr":4557583,"datum":"2021-02-02","steps":0,"stepsIntraday":null,"distance":0.0},
 {"rrnr":4557583,"datum":"2021-02-03","steps":232,"stepsIntraday":null,"distance":0.0},
 {"rrnr":4557583,"datum":"2021-02-04","steps":25,"stepsIntraday":{
     "dataset":
