@@ -55,7 +55,9 @@ export function getDistanceData(data) {
 }
 
 export function getDistanceDataMonthly(data) {
-    let currentDate = data[0]!=undefined ? new Date(data[0].datum) : new Date();
+    let currentDate = new Date();
+    try {currentDate = data[0]!=undefined ? new Date(data[0].datum) : new Date();}
+    catch {console.log("getDistanceDataMonthly - Empty user data")}
     let distances = [];
     let distancesByDay = [];
 
