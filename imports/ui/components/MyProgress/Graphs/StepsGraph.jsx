@@ -9,7 +9,7 @@ export function StepsGraph(props) {
     const propsday = props.date.getDate() < 10 ? "0" + props.date.getDate() : props.date.getDate();
     let dateString = props.date.getFullYear() + "-" + propsmonth + "-" + propsday;
     const iterData = [];
-    try {iterData = props.data.stepsIntraday}
+    try {iterData = props.data[0].stepsIntraday.dataset}
     catch {console.log("StepsGraph - Empty user data");}
     let dataFound = false;
     iterData.forEach(day => {
