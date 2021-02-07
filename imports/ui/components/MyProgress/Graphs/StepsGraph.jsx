@@ -7,7 +7,7 @@ export function StepsGraph(props) {
     let iterData = [];
     try { iterData = props.data[0].stepsIntraday }
     catch {console.log("StepsGraph - No FitBit step data for this day")}
-    let data = iterData.length === 0 ? aggregateStepsByHour(null) : aggregateStepsByHour(iterData);
+    let data = Array.isArray(iterData) && !iterData.length ? aggregateStepsByHour(null) : aggregateStepsByHour(iterData);
     return <div style={{height: "250px", width: "100%"}}><ResponsiveBar
         data={convertToChartData(data)}
         indexBy="hour"
