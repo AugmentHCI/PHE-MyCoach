@@ -9,7 +9,7 @@ export function StepsGraph(props) {
     const propsday = props.date.getDate() < 10 ? "0" + props.date.getDate() : props.date.getDate();
     let dateString = props.date.getFullYear() + "-" + propsmonth + "-" + propsday;
     let iterData = [];
-    try { iterData = props.data[0].stepsIntraday.dataset; }
+    try { iterData = props.data[0].stepsIntraday }
     catch {console.log("StepsGraph - No FitBit step data for this day")}
     let dataFound = false;
     iterData.forEach(day => {
