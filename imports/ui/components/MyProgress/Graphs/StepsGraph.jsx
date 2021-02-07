@@ -10,7 +10,7 @@ export function StepsGraph(props) {
     let dateString = props.date.getFullYear() + "-" + propsmonth + "-" + propsday;
     const iterData = [];
     console.log("STEPSGRAPH:")
-    console.log(props.data);
+    console.log(props.data[0]);
     try {iterData = props.data[0].stepsIntraday.dataset}
     catch {console.log("StepsGraph - Empty user data");}
     let dataFound = false;
