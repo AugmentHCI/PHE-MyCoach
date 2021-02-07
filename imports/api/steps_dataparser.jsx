@@ -22,7 +22,7 @@ export function getDistanceData(data) {
     let days = getWeekdaysTranslation();
     let distances = [];
     let distancesByDay = [];
-    const iterData = [];
+    let iterData = [];
     console.log("getDistanceDataWeekly - DATA:")
     console.log(data);
     try {iterData = data.fitData === undefined ? data : data.fitData;}
@@ -66,7 +66,7 @@ export function getDistanceDataMonthly(data) {
     const amountOfDays = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0).getDate();
     let daysOfMonth = Array.from(Array(amountOfDays+1).keys());
     daysOfMonth.shift();
-    const iterData = [];
+    let iterData = [];
     console.log("getDistanceDataMonthly - DATA:")
     console.log(data);
     try {iterData = data.fitData === undefined ? data : data.fitData;}

@@ -8,16 +8,9 @@ export function StepsGraph(props) {
     const propsmonth = props.date.getMonth() + 1 < 10 ? "0" + (props.date.getMonth() + 1) : props.date.getMonth() + 1;
     const propsday = props.date.getDate() < 10 ? "0" + props.date.getDate() : props.date.getDate();
     let dateString = props.date.getFullYear() + "-" + propsmonth + "-" + propsday;
-    const iterData = [];
-    try {
-    console.log("STEPSGRAPH:")
-    console.log(props.data);
-    const testData = props.data[0];
-    console.log(testData);
-    console.log(testData.stepsIntraday);}
-    catch {console.log("Skipping this day")}
-    try {iterData = props.data[0].stepsIntraday.dataset}
-    catch {console.log("StepsGraph - Empty user data");}
+    let iterData = [];
+    try { iterData = props.data[0].stepsIntraday.dataset; }
+    catch {console.log("StepsGraph - No FitBit step data for this day")}
     let dataFound = false;
     iterData.forEach(day => {
         if (day.datum === dateString) { data = aggregateStepsByHour(day.stepsIntraday); dataFound = true;}
