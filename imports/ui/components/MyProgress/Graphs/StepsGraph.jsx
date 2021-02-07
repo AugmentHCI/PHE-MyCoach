@@ -11,8 +11,9 @@ export function StepsGraph(props) {
     const iterData = [];
     console.log("STEPSGRAPH:")
     console.log(props.data);
-    console.log(props.data[0]);
-    console.log(props.data.stepsIntraday);
+    const testData = props.data[0];
+    console.log(testData);
+    console.log(testData.stepsIntraday);
     try {iterData = props.data[0].stepsIntraday.dataset}
     catch {console.log("StepsGraph - Empty user data");}
     let dataFound = false;
