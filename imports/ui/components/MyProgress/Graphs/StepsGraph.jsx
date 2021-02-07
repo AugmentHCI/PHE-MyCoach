@@ -4,18 +4,10 @@ import { aggregateStepsByHour, convertToChartData } from '../../../../api/steps_
 
 
 export function StepsGraph(props) {
-    let data = {};
-    const propsmonth = props.date.getMonth() + 1 < 10 ? "0" + (props.date.getMonth() + 1) : props.date.getMonth() + 1;
-    const propsday = props.date.getDate() < 10 ? "0" + props.date.getDate() : props.date.getDate();
-    let dateString = props.date.getFullYear() + "-" + propsmonth + "-" + propsday;
     let iterData = [];
     try { iterData = props.data[0].stepsIntraday }
     catch {console.log("StepsGraph - No FitBit step data for this day")}
-    let dataFound = false;
-    iterData.forEach(day => {
-        if (day.datum === dateString) { data = aggregateStepsByHour(day.stepsIntraday); dataFound = true;}
-    })
-    if (!dataFound) {data = aggregateStepsByHour(null);}
+    let data = iterData === [] ? aggregateStepsByHour(null) : aggregateStepsByHour(iterData);
     return <div style={{height: "250px", width: "100%"}}><ResponsiveBar
         data={convertToChartData(data)}
         indexBy="hour"
