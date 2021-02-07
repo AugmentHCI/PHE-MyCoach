@@ -238,7 +238,7 @@ export default class MyProgress extends Component {
         } else {
           if (!result.data) {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}). Data empty however.`);}
           // Save fitbit data also to state
-          else {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}).`); this.setState({fitDataDayData: result.data}); }
+          else {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}).`); console.log(result.data); this.setState({fitDataDayData: result.data}); }
         }
       }); 
     }
