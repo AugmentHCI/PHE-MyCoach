@@ -22,9 +22,9 @@ export function getDistanceData(data) {
     let days = getWeekdaysTranslation();
     let distances = [];
     let distancesByDay = [];
-    console.log("TRYING THIS 2")
-    const iterData = data.fitData === undefined ? data : data.fitData;
-    console.log("DID THIS 2")
+    const iterData = [];
+    try {iterData = data.fitData === undefined ? data : data.fitData;}
+    catch {console.log("getDistanceData - Empty user data");}
     days.forEach((dayInstance, index) => {
         let found = false;
         iterData.forEach(day => {
@@ -62,9 +62,9 @@ export function getDistanceDataMonthly(data) {
     const amountOfDays = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0).getDate();
     let daysOfMonth = Array.from(Array(amountOfDays+1).keys());
     daysOfMonth.shift();
-    console.log("TRYING THIS 1")
-    const iterData = data.fitData === undefined ? data : data.fitData;
-    console.log("DID THIS 1")
+    const iterData = [];
+    try {iterData = data.fitData === undefined ? data : data.fitData;}
+    catch {console.log("getDistanceDataMonthly - Empty user data");}
     for (let i = 1; i <= amountOfDays; i++) {
         let found = false;
         iterData.forEach(day => {
