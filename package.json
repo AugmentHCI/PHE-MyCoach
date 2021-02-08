@@ -19,6 +19,7 @@
         "browserslist": "^4.16.1",
         "caniuse-lite": "^1.0.30001177",
         "date-fns": "^2.16.1",
+        "jwt-decode": "^3.1.2",
         "meteor-node-stubs": "^1.0.1",
         "moment": "^2.29.1",
         "nivo": "^0.31.0",

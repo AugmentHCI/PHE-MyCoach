@@ -13,6 +13,8 @@ import "../../../i18n/en.i18n.json"
 import { setDataParserLocale } from '../../api/dataparser';
 import { getWeeklyDummyData, getMonthlyDummyData } from '../../api/dummydata';
 
+import jwt_decode from "jwt-decode";
+
 // Import components
 import './MyProgress.css';
 import '../components/MyProgress/Input/Dropdown.css';
@@ -28,6 +30,8 @@ import MonthlyActivityGraph from '../components/MyProgress/Graphs/MonthlyActivit
 import CalendarGraph from '../components/MyProgress/Graphs/CalendarGraph.jsx';
 import { StepsGraph } from '../components/MyProgress/Graphs/StepsGraph.jsx';
 import Icon from '../components/Illustrations/Icon.jsx';
+
+import '../../api/LogMethods.jsx';
 
 //import Icon from '../components/Icon.jsx';
 
@@ -58,6 +62,7 @@ export default class MyProgress extends Component {
       fitDataDay: new Date(),
       fitDataDayData: null,
       userToken: "",
+      userID: null,
       fitbitConnected: false,
       parameter: "painIntensity",
       compareParameter: "",
@@ -76,6 +81,10 @@ export default class MyProgress extends Component {
     this.fetchData(this.state.selectedPeriod, token, this.state.timeFrame);
     this.fetchFitbitData(this.state.selectedPeriod, token);
     this.fetchFitbitDayData(this.state.fitDataDay, token);
+    try {this.setState({userID: jwt_decode(this.state.userToken).rrnr})}
+    catch {console.log("ERROR [MyProgress] - Could not infer user-rrnr number from JWT token.")}
+    if (token === 'demo') {Meteor.call('logs.insert', 111111, "ACCESS");}
+    else { Meteor.call('logs.insert', this.state.userID, "ACCESS"); }
   }
 
   setLocale() {
@@ -150,9 +159,7 @@ export default class MyProgress extends Component {
     // OPTION 1: Token given, try to fetch data
     if (typeof token !== 'undefined' && token !== "demo") {
       // Data altijd in NL ophalen, vertalen indien nodig (keys zijn sowieso altijd NL)
-      // const url = `https://jobstudenten-dev.idewe.be/api/antwoorden/export?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}&taal=DUTCH`;
       const url = `https://connector.idewe.be/healthempower/jobstudenten/api/antwoorden/export?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}&taal=DUTCH`;
-      //const url = `https://phe.idewe.be/api/antwoorden/export?van=2020-05-01&tot=2021-05-01&taal=DUTCH`;
 
       // Server side methode gebruiken (zoals gedefinieerd in main.js)
       console.log('QUESTIONNAIRE - Retreiving questionnaire data ...')
@@ -429,7 +436,7 @@ export default class MyProgress extends Component {
           <h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1>
         </div>
         <h2><T>{`myProgress.mysteps`}</T></h2>
-        {this.state.tap_count > 3 && this.state.userToken}
+        {this.state.tap_count > 3 && jwt_decode(this.state.userToken)}
         {this.renderFitBitCard()}
         <h2><T>{`myProgress.myinsights`}</T></h2>
         {this.renderInsightsCard()}
