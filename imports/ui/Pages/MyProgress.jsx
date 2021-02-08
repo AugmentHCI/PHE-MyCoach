@@ -204,7 +204,7 @@ export default class MyProgress extends Component {
 
   fetchFitbitData(selectedPeriod, token) {
       // Now try to fetch FitBit data as well
-      const urlFit = `https://phe.idewe.be/api/fit-data?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}`;
+      const urlFit = `https://connector.idewe.be/healthempower/phe/api/fit-data?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}`;
 
       console.log('FITBIT - Retreiving FitBit data ...')
       Meteor.call("getData", {
@@ -227,7 +227,7 @@ export default class MyProgress extends Component {
     let dateString = date.getFullYear() + "-" + propsmonth + "-" + propsday;
     // Now try to fetch FitBit data as well
     if (typeof token !== 'undefined' && token !== "demo") {
-      const urlFit = `https://phe.idewe.be/api/fit-data?van=${dateString}&tot=${dateString}`;
+      const urlFit = `https://connector.idewe.be/healthempower/phe/api/fit-data?van=${dateString}&tot=${dateString}`;
       console.log('FITBIT-DAILY - Retreiving FitBit data ...')
       Meteor.call("getData", {
         url: urlFit,
