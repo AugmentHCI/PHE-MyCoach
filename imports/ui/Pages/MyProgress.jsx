@@ -32,9 +32,7 @@ import CalendarGraph from '../components/MyProgress/Graphs/CalendarGraph.jsx';
 import { StepsGraph } from '../components/MyProgress/Graphs/StepsGraph.jsx';
 import Icon from '../components/Illustrations/Icon.jsx';
 
-import '../../db/LogMethods.jsx';
-
-//import Icon from '../components/Icon.jsx';
+// import '../../db/LogMethods.jsx';
 
 import NotificationAlert from '../components/Notification.jsx';
 import Card from '../components/Card.jsx';
@@ -82,7 +80,7 @@ export default class MyProgress extends Component {
     this.fetchData(this.state.selectedPeriod, token, this.state.timeFrame);
     this.fetchFitbitData(this.state.selectedPeriod, token);
     this.fetchFitbitDayData(this.state.fitDataDay, token);
-    try {
+    /*try {
       console.log(jwt_decode(token).jti);
       this.setState({
         userID: jwt_decode(token).rrnr,
@@ -94,7 +92,7 @@ export default class MyProgress extends Component {
     }
     catch {console.log("ERROR [MyProgress] - Could not infer user-rrnr number from JWT token.")}
     if (token === 'demo') {Meteor.call('logs.insert', 111111, "MyProgress", "ACCESS");}
-    else { Meteor.call('logs.insert', this.state.userID, "MyProgress", "ACCESS"); }
+    else { Meteor.call('logs.insert', this.state.userID, "MyProgress", "ACCESS"); }*/
   }
 
   setLocale() {
@@ -220,9 +218,8 @@ export default class MyProgress extends Component {
   }
 
   fetchFitbitData(selectedPeriod, token) {
-      // Now try to fetch FitBit data as well
+    if (typeof token !== 'undefined' && token !== "demo") {
       const urlFit = `https://connector.idewe.be/healthempower/phe/api/fit-data?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}`;
-
       console.log('FITBIT - Retreiving FitBit data ...')
       Meteor.call("getData", {
         url: urlFit,
@@ -235,7 +232,11 @@ export default class MyProgress extends Component {
           // Save fitbit data also to state
           else {console.log(`FITBIT - Successfully retreived FitBit data (Statuscode ${result.statusCode}).`); this.setState({fitbitConnected: true, fitData: result.data}); }
         }
-      }); 
+      });
+    } 
+    else {
+      return;
+    }
   }
 
   fetchFitbitDayData(date, token) {
@@ -331,7 +332,8 @@ export default class MyProgress extends Component {
           <ParameterPicker 
             currentParameter={this.state.parameter} 
             dontDisplay={this.state.compareParameter} 
-            onChange={this.handleParameterChange}>
+            onChange={this.handleParameterChange}
+            demo={this.state.userToken === "demo" ? true : false}>
           </ParameterPicker>
           <p className="subtitle"><T>myProgress.insights.period</T></p>
           <div style={{display:"flex", width: "100%"}}>
@@ -346,8 +348,9 @@ export default class MyProgress extends Component {
               <ParameterPicker 
                 currentParameter={this.state.compareParameter} 
                 dontDisplay={this.state.parameter} 
-                onChange={this.handleCompareParameterChange}>
+                onChange={this.handleCompareParameterChange}
                 style={{width: compareWidth}}
+                demo={this.state.userToken === "demo" ? true : false}>
               </ParameterPicker>
             </div>
             {this.state.compareParameter !== "" && 
@@ -410,7 +413,26 @@ export default class MyProgress extends Component {
       )};
 
   renderFitBitCard() {
-    return <FadeIn delay="100"><Card title="myProgress.insights.steps" bodyStyle={{padding: '10px 5px'}} underline>
+    let steps = this.state.fitDataDayData ? this.state.fitDataDayData.steps : 0;
+    let distance = this.state.fitDataDayData ? this.state.fitDataDayData.distance : 0;
+    distance = distance < 1 ? Math.round(distance * 1000) + " m" : (Math.round(distance * 100)/100) + " km";
+    let infostyle = {
+      padding:"3px 20px 0 20px", 
+      height: "30px", 
+      backgroundColor:"var(--idewe-background-solid)", 
+      borderRadius:"10px", 
+      margin:"0 30px 5px 30px",
+      fontWeight:"500"};
+    let infostyleEmpty = {
+        padding:"3px 20px 0 20px", 
+        height: "30px", 
+        backgroundColor:"var(--idewe-background-solid)", 
+        borderRadius:"10px", 
+        margin:"0 30px 5px 30px",
+        fontWeight:"500",
+        textAlign: "center"};
+
+    return <FadeIn delay="50"><Card title="myProgress.insights.steps" bodyStyle={{padding: '10px 5px'}} underline>
       <div style={{width: "100%", display: "flex", paddingLeft: "10px", paddingRight: "10px", marginBottom:"20px"}}>
         <button className="day-button-left" onClick={() => this.updateFitDay("backward")}>
           <Icon width="18px" image={"next"} color={"white"} style={{marginTop: "2px", transform:"rotate(-180deg)"}}/>
@@ -424,6 +446,15 @@ export default class MyProgress extends Component {
             <Icon width="18px" image={"next"} color={"white"} style={{marginTop: "2px"}}/>
           </button>
         </div>
+        {steps > 0 && <div style={infostyle}>
+          <div style={{float:"left"}}>
+            <T>{`myProgress.mysteps.steps`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{steps}</div>
+          </div>
+          <div style={{float:"right"}}>
+          <T>{`myProgress.mysteps.distance`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{distance}</div>
+          </div>
+        </div>}
+        {steps === 0 && <div style={infostyleEmpty}><T>{`myProgress.mysteps.noSteps`}</T></div>}
       <StepsGraph data={this.state.fitDataDayData}></StepsGraph>
     </Card></FadeIn>
   }
@@ -451,9 +482,11 @@ export default class MyProgress extends Component {
         <div>
           <FadeIn><h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1></FadeIn>
         </div>
-        <h2><FadeIn><T>{`myProgress.mysteps`}</T></FadeIn></h2>
-        {this.state.tap_count > 3 && jwt_decode(this.state.userToken)}
-        {this.renderFitBitCard()}
+        {this.state.userToken === "demo" && <React.Fragment>
+          <h2><FadeIn><T>{`myProgress.mysteps.mySteps`}</T></FadeIn></h2>
+          {this.state.tap_count > 3 && jwt_decode(this.state.userToken)}
+          {this.renderFitBitCard()}
+        </React.Fragment>}
         <h2><FadeIn delay="150"><T>{`myProgress.myinsights`}</T></FadeIn></h2>
         {this.renderInsightsCard()}
         {this.state.timeFrame == "weekly" && this.renderOverviewWeekly()}

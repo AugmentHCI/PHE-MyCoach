@@ -2,7 +2,12 @@
   "_locale": "en",
   "_namespace": "Common",
   "myProgress": {
-    "mysteps": "My Steps",
+    "mysteps": {
+      "mySteps": "My Steps",
+      "noSteps": "No steps for this day",
+      "steps": "Steps",
+      "distance": "Distance"
+    },
     "myinsights": "My Insights",
     "navBar": {
       "overview": "Overview",
@@ -18,7 +23,8 @@
       "satisfaction": "Satisfaction",
       "physicalTiredness": "Physical tiredness",
       "mentalTiredness": "Mental tiredness",
-      "distance": "Walked distance"
+      "distance": "Walked distance",
+      "steps": "Number of steps"
     },
     "activities": {
       "activities": "Activities",

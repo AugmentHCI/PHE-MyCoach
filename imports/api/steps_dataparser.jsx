@@ -18,13 +18,12 @@ function getWeekdaysTranslation(){
     return translatedWeekdays;
   }
 
-export function getDistanceData(data) {
+// Type can either be "distance" or "steps"
+export function getFitBitData(data, type) {
     let days = getWeekdaysTranslation();
     let distances = [];
     let distancesByDay = [];
     let iterData = [];
-    console.log("getDistanceDataWeekly - DATA:")
-    console.log(data);
     try {iterData = data.fitData === undefined ? data : data.fitData;}
     catch {console.log("getDistanceData - Empty user data");}
     days.forEach((dayInstance, index) => {
@@ -34,8 +33,8 @@ export function getDistanceData(data) {
                 const date = new Date(day.datum);
                 const dateNumber = date.getDay()-1 < 0 ? 6 : date.getDay()-1;
                 if (dateNumber === index) {
-                    distances.push(day.distance);
-                    distancesByDay.push({x: days[dateNumber], y: day.distance})
+                    distances.push(day[type]);
+                    distancesByDay.push({x: days[dateNumber], y: day[type]})
                     found = true;
                 }
             }
@@ -47,8 +46,8 @@ export function getDistanceData(data) {
     })
     const max_distance = Math.max.apply(Math, distances) < 1 ? 1 : Math.max.apply(Math, distances);
     return {
-        id: "distance",
-        measure: "Distance",
+        id: type,
+        measure: type,
         color: "--idewe-blue",
         min: 0,
         max: max_distance,

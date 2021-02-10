@@ -2,7 +2,12 @@
   "_locale": "nl-BE",
   "_namespace": "Common",
   "myProgress": {
-    "mysteps": "Mijn Stappen",
+    "mysteps": {
+      "mySteps": "Mijn Stappen",
+      "noSteps": "Geen stappen voor deze dag",
+      "steps": "Stappen",
+      "distance": "Afstand"
+    },
     "myinsights": "Mijn Inzichten",
     "navBar": {
       "overview": "Overzicht",
@@ -18,7 +23,8 @@
       "satisfaction": "Tevredenheid",
       "physicalTiredness": "Lichamelijke vermoeidheid",
       "mentalTiredness": "Mentale vermoeidheid",
-      "distance": "Gewandelde afstand"
+      "distance": "Gewandelde afstand",
+      "steps": "Hoeveelheid stappen"
     },
     "activities": {
       "activities": "Activiteiten",
