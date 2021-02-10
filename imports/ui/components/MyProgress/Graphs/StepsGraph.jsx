@@ -5,8 +5,11 @@ import { aggregateStepsByHour, convertToChartData } from '../../../../api/steps_
 
 export function StepsGraph(props) {
     let iterData = [];
+    console.log(props.data)
     try { iterData = props.data[0].stepsIntraday }
-    catch {console.log("StepsGraph - No FitBit step data for this day")}
+    catch {
+        try { iterData = props.data.stepsIntraday }
+        catch { console.log("StepsGraph - No FitBit step data for this day") }}
     let data = Array.isArray(iterData) && !iterData.length ? aggregateStepsByHour(null) : aggregateStepsByHour(iterData);
     return <div style={{height: "250px", width: "100%"}}><ResponsiveBar
         data={convertToChartData(data)}

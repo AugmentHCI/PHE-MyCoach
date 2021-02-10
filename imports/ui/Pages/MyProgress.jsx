@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import moment from "moment"
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import FadeIn from 'react-fade-in';
 
 // Import internationalization files
 import i18n from 'meteor/universe:i18n';
@@ -31,7 +32,7 @@ import CalendarGraph from '../components/MyProgress/Graphs/CalendarGraph.jsx';
 import { StepsGraph } from '../components/MyProgress/Graphs/StepsGraph.jsx';
 import Icon from '../components/Illustrations/Icon.jsx';
 
-import '../../api/LogMethods.jsx';
+import '../../db/LogMethods.jsx';
 
 //import Icon from '../components/Icon.jsx';
 
@@ -81,10 +82,19 @@ export default class MyProgress extends Component {
     this.fetchData(this.state.selectedPeriod, token, this.state.timeFrame);
     this.fetchFitbitData(this.state.selectedPeriod, token);
     this.fetchFitbitDayData(this.state.fitDataDay, token);
-    try {this.setState({userID: jwt_decode(this.state.userToken).rrnr})}
+    try {
+      console.log(jwt_decode(token).jti);
+      this.setState({
+        userID: jwt_decode(token).rrnr,
+        deelnemerID: jwt_decode(token).deelnemerID
+      })
+      Meteor.loginWithPassword(this.state.userID, this.state.deelnemerID);
+      console.log("USER");
+      console.log(Meteor.user());
+    }
     catch {console.log("ERROR [MyProgress] - Could not infer user-rrnr number from JWT token.")}
-    if (token === 'demo') {Meteor.call('logs.insert', 111111, "ACCESS");}
-    else { Meteor.call('logs.insert', this.state.userID, "ACCESS"); }
+    if (token === 'demo') {Meteor.call('logs.insert', 111111, "MyProgress", "ACCESS");}
+    else { Meteor.call('logs.insert', this.state.userID, "MyProgress", "ACCESS"); }
   }
 
   setLocale() {
@@ -249,7 +259,11 @@ export default class MyProgress extends Component {
         }
       }); 
     }
-    else {console.log("FITBIT-DAILY - Getting demo data"); this.setState({fitDataDayData: fitData}); return;}
+    else {
+      console.log("FITBIT-DAILY - Getting demo data"); 
+      let demoDayIndex = fitData.fitData.length - 1 - ((new Date()).getDay() - this.state.fitDataDay.getDay());
+      this.setState({fitDataDayData: fitData.fitData[demoDayIndex < 0 ? 0 : demoDayIndex]}); 
+      return;}
   }
 
   updateFitDay(direction) {
@@ -312,7 +326,7 @@ export default class MyProgress extends Component {
   renderInsightsCard() {
     const compareWidth = this.state.compareParameter === "" ? "100%" : "70%";
     return (
-      <Card title="myProgress.insights.title" underline>
+      <FadeIn delay="200"><Card title="myProgress.insights.title" underline>
           <p className="subtitle"><T>myProgress.insights.showMe</T></p>
           <ParameterPicker 
             currentParameter={this.state.parameter} 
@@ -345,13 +359,14 @@ export default class MyProgress extends Component {
               </button>
             </div>}
           </div>
-      </Card>)
+      </Card></FadeIn>)
   }
 
     // Renders weekly overviews: LineGraph Card and ActivityDots Card
     renderOverviewWeekly() {
       return (
         <React.Fragment>
+          <FadeIn delay="300">
           <Card title="myProgress.insights.insights" bodyStyle={{padding: '0', paddingBottom: '15px'}} underline>
               <LineGraph 
                 parameter = {this.state.parameter}
@@ -367,6 +382,7 @@ export default class MyProgress extends Component {
               locale = {i18n.getLocale()}
             />
           </Card>
+          </FadeIn>
         </React.Fragment>)
     }
 
@@ -394,7 +410,7 @@ export default class MyProgress extends Component {
       )};
 
   renderFitBitCard() {
-    return <Card title="myProgress.insights.steps" bodyStyle={{padding: '10px 5px'}} underline>
+    return <FadeIn delay="100"><Card title="myProgress.insights.steps" bodyStyle={{padding: '10px 5px'}} underline>
       <div style={{width: "100%", display: "flex", paddingLeft: "10px", paddingRight: "10px", marginBottom:"20px"}}>
         <button className="day-button-left" onClick={() => this.updateFitDay("backward")}>
           <Icon width="18px" image={"next"} color={"white"} style={{marginTop: "2px", transform:"rotate(-180deg)"}}/>
@@ -408,8 +424,8 @@ export default class MyProgress extends Component {
             <Icon width="18px" image={"next"} color={"white"} style={{marginTop: "2px"}}/>
           </button>
         </div>
-      <StepsGraph date={this.state.fitDataDay} data={this.state.fitDataDayData}></StepsGraph>
-    </Card>
+      <StepsGraph data={this.state.fitDataDayData}></StepsGraph>
+    </Card></FadeIn>
   }
       
   render() {
@@ -433,12 +449,12 @@ export default class MyProgress extends Component {
       <div className="container">
         {/*!this.state.fitbitConnected && this.renderConnectFitbitMessage()*/}
         <div>
-          <h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1>
+          <FadeIn><h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1></FadeIn>
         </div>
-        <h2><T>{`myProgress.mysteps`}</T></h2>
+        <h2><FadeIn><T>{`myProgress.mysteps`}</T></FadeIn></h2>
         {this.state.tap_count > 3 && jwt_decode(this.state.userToken)}
         {this.renderFitBitCard()}
-        <h2><T>{`myProgress.myinsights`}</T></h2>
+        <h2><FadeIn delay="150"><T>{`myProgress.myinsights`}</T></FadeIn></h2>
         {this.renderInsightsCard()}
         {this.state.timeFrame == "weekly" && this.renderOverviewWeekly()}
         {this.state.timeFrame == "monthly" && this.renderOverviewMonthly()}

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import FadeIn from 'react-fade-in';
 
 import './SubmoduleParser.scss';
 
@@ -53,6 +54,7 @@ export default function SubmoduleParser(props) {
         <React.Fragment>
             <NavigationBar title={data.title}></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
+            <FadeIn>
                 <ModuleCard title={data["title-markup"]} 
                             number={data.part}
                             topColor={"white"}
@@ -64,6 +66,7 @@ export default function SubmoduleParser(props) {
                 </ModuleCard>
                 <hr className="module-hr-line"/>
                 <CardsParser cards={data.cards}></CardsParser>
+                </FadeIn>
             </div>
         </React.Fragment>
     )
