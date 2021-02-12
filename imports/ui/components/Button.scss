@@ -1,0 +1,33 @@
+.button-action {
+    margin: 5px 0px;
+    padding: 10px;
+    border: none;
+    background-color: var(--idewe-white);
+    color: var(--idewe-blue);
+    border-radius: 15px;
+    width: 100%;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    transition: .2s ease-in-out;
+
+    .button-text {
+        font-weight: 500;
+        font-family: var(--main-font);
+        font-size: 16px;
+        text-align: left;
+        float: left;
+
+        &-small {
+            @extend .button-text;
+            font-size: 14px;
+        }
+    }
+}
+
+.button-action.selected {
+    background-color: var(--idewe-blue);
+    color: var(--idewe-white);
+}
+
+.button-action.pressed {
+    transform: scale(0.97);
+}

@@ -3,6 +3,12 @@
 
 /* Color palette */
 :root {
+  --idewe-green-dark: #0b5a00;
+  --idewe-green-dark-tint5: #0b5a00;
+  --idewe-green-dark-tint4: #0f7e00;
+  --idewe-green-dark-tint3: #36922a;
+  --idewe-green-dark-tint2: #88c480;
+  --idewe-green-dark-tint1: #a2da9a;
   --idewe-blue-tint5:#5AB9EA;
   --idewe-blue-tint4: #91D0F1;
   --idewe-blue-tint3: #ACDCF5;
@@ -60,6 +66,8 @@ html, body {
   right: 0;
   margin: 0;
 
+  scroll-behavior: smooth;
+
   /*
   padding:
     env(safe-area-inset-top, 20px)
@@ -79,22 +87,20 @@ html, body {
   padding-right: 20px !important;
   background: var(--idewe-background) !important; 
 
-  /* Scroll snapping */
-  scroll-snap-type: proximity;
   scroll-snap-type: y proximity;
   scroll-padding: 70px;
 
   /* Disable scroll bar */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none; 
-
+  
   /* Disable text selection and highlighting */
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+  //-webkit-touch-callout: none; /* iOS Safari */
+  //  -webkit-user-select: none; /* Safari */
+  //   -khtml-user-select: none; /* Konqueror HTML */
+  //     -moz-user-select: none; /* Old versions of Firefox */
+  //      -ms-user-select: none; /* Internet Explorer/Edge */
+  //          user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 /* Disable scrollbar */
@@ -104,7 +110,7 @@ html, body {
 
 .container h1 {
   padding-bottom: 10px;
-  padding-top: 10px;
+  padding-top: 30px;
   font-family: var(--main-font);
   color: var(--idewe-blue-dark);
   font-size: 30px;

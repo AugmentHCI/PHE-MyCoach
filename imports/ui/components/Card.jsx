@@ -9,6 +9,7 @@ function Card(props) {
     const cardClass = props.overview ? "card-overview" : "card";
     const cardBodyClass = props.overview ? "card-body-overview" : "card-body";
 
+
     return (
         <div className={cardClass}>
             <p className={titleClass}>{props.noTranslate ? props.title : <T>{props.title}</T>}</p>

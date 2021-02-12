@@ -1,24 +1,13 @@
-import React from 'react';
 import i18n from 'meteor/universe:i18n';
-import "../../i18n/nl.i18n.json"
-import "../../i18n/fr.i18n.json"
-import "../../i18n/en.i18n.json"
+import "../../i18n/nl.i18n.json";
+import "../../i18n/fr.i18n.json";
+import "../../i18n/en.i18n.json";
 
 const T = i18n.createComponent("Common");
-
-//taal instellen
-export function setDataParserLocale(locale){
-  i18n.setLocale(locale);
-}
 
 //define color, min, max and measure (= title shown on the axis when plotted) for each parameter
 //code = key that is used for this parameter by the JSON that is returned by the API
 const parameters = [
-  /*{
-    "id": "Beweging",
-    "measure": "Aantal stappen",
-    "color": '--idewe-blue'
-  },*/
   {
     "id": "satisfaction",
     "measure": "satisfaction",
@@ -37,7 +26,7 @@ const parameters = [
   },
   {
     "id": "physicalTiredness",
-    "measure": "", //"physicalTiredness",
+    "measure": "physicalTiredness", //"physicalTiredness",
     "color": '--idewe-purple',
     "min": 1,
     "max": 4,
@@ -45,8 +34,8 @@ const parameters = [
   },
   {
     "id": "mentalTiredness",
-    "measure": "", //"mentalTiredness",
-    "color": '--idewe-blue-dark',
+    "measure": "mentalTiredness", //"mentalTiredness",
+    "color": '--idewe-green-dark',
     "min": 1,
     "max": 4,
     "code": "phe.dagelijks.mentale.vermoeidheid"
@@ -128,7 +117,6 @@ export function getParameterData(data, parameter, timePeriod){
   let filtered = preFiltered.filter(function(el){
     return el.vraag==fullParamData.code;
   })
-
   if(timePeriod == "week"){
     paramData = getDataForWeek(filtered);
   }else{
@@ -136,7 +124,6 @@ export function getParameterData(data, parameter, timePeriod){
   }
   
   fullParamData.data = paramData;
-
   return fullParamData;
 }
 
@@ -175,7 +162,6 @@ function getDataForWeek(data){
   paramData.sort(function(a, b){  
     return weekdays.indexOf(a.x) - weekdays.indexOf(b.x);
   });
-
   return paramData;
 }
 
@@ -288,7 +274,6 @@ export function getMonthlyActivityData(data) {
     monthlyActivityData.push(barData);
   })
 
-  console.log(monthlyActivityData)
   return monthlyActivityData;
 
 }

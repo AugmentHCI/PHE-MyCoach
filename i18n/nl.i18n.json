@@ -2,6 +2,13 @@
   "_locale": "nl-BE",
   "_namespace": "Common",
   "myProgress": {
+    "mysteps": {
+      "mySteps": "Mijn Stappen",
+      "noSteps": "Geen stappen voor deze dag",
+      "steps": "Stappen",
+      "distance": "Afstand"
+    },
+    "myinsights": "Mijn Inzichten",
     "navBar": {
       "overview": "Overzicht",
       "insights": "Inzichten"
@@ -15,7 +22,9 @@
       "painIntensity": "Pijn intensiteit",
       "satisfaction": "Tevredenheid",
       "physicalTiredness": "Lichamelijke vermoeidheid",
-      "mentalTiredness": "Mentale vermoeidheid"
+      "mentalTiredness": "Mentale vermoeidheid",
+      "distance": "Gewandelde afstand",
+      "steps": "Hoeveelheid stappen"
     },
     "activities": {
       "activities": "Activiteiten",
@@ -47,7 +56,8 @@
       "showMe": "Toon mij",
       "period": "Voor de periode van",
       "compare": "Vergelijk met",
-      "delete": "Wis"
+      "delete": "Wis", 
+      "steps": "Mijn stappen doorheen de dag"
     },
     "notifications": {
       "errorFitbitTitle": "Verbind FitBit",

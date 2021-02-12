@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './NavigationBar.scss';
+import Icon from './Illustrations/Icon.jsx';
 
 function NavigationBar(props) {
 
@@ -13,7 +14,9 @@ function NavigationBar(props) {
 
     return (
         <div className="navigation-bar">
-            <button className="navigation-bar-button" onClick={() => history.back()}>{'<'}</button>
+            <button className="navigation-bar-button" onClick={() => history.back()}>
+            <Icon width="18px" image={"back"} color={"blue-dark"} style={{marginTop: "2px"}}/>
+            </button>
             {title}
         </div>
     )

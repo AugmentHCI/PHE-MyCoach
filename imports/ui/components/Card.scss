@@ -15,13 +15,18 @@
   margin-bottom: 30px;
   border: none;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
-  scroll-snap-align: start;
+  transition: 200ms;
 
   &-overview {
     @extend .card;
     background-color: var(--idewe-blue);
     color: var(--idewe-white);
+    margin-bottom: 50px;
   }
+}
+
+.card-scroll {
+  scroll-snap-align: start;
 }
 
 .card-body {

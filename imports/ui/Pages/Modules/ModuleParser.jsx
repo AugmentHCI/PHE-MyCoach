@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import FadeIn from 'react-fade-in';
 
 // Import internationalization files
 import i18n from 'meteor/universe:i18n';
@@ -44,7 +45,7 @@ export default function ModuleParser(props) {
     function renderSubmodules() {
         const moduleCardsHTML = [];
         moduleData.submodules.forEach(submodule => {
-            const isClosed = UserData.progress.PAINEDUCATION[submodule.id] === "COMPLETED" ? true : false;
+            const isClosed = UserData.progress.PAINEDUCATION[submodule.id] === "COMPLETED" || UserData.progress.PAINEDUCATION[submodule.id] === "NOT_STARTED" ? true : false;
             const isLocked = UserData.progress.PAINEDUCATION[submodule.id] === "NOT_STARTED" ? true : false;
 
             moduleCardsHTML.push(<ModuleCard 
@@ -60,7 +61,7 @@ export default function ModuleParser(props) {
                 locked={isLocked}>
             </ModuleCard>)
         });
-        return moduleCardsHTML;
+        return <FadeIn delay="80">{moduleCardsHTML}</FadeIn>;
     }
 
     /**
@@ -83,14 +84,18 @@ export default function ModuleParser(props) {
         <React.Fragment>
             <NavigationBar title={moduleData.title}></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
+                <FadeIn>
                 <Card title="MIJN SHORTCUTS" noTranslate>
-                    <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
-                    <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
+                    <FadeIn delay="80">
+                        <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
+                        <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
+                    </FadeIn>
                 </Card>
 
                 <Card title="MIJN TRAJECT" noTranslate>
                     {renderSubmodules()}
                 </Card>
+                </FadeIn>
             </div>
         </React.Fragment>
     )

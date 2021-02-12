@@ -2,9 +2,9 @@
     position: fixed;
     z-index: 10;
     width:100vw;
-    height: 55px;
+    height: 65px;
     padding-left: 0px;
-    padding-top: 10px;
+    padding-top: 25px;
     color: var(--idewe-blue-dark);
     background-color: var(--idewe-white);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
@@ -27,9 +27,6 @@
     color: var(--idewe-blue-dark);
     border: none;
     width: 20px;
-    padding-right: 30px;
-    /* Font */
-    font-family: var(--main-font);
-    font-size: 24px;
-    font-weight: 600;
+    margin-right: 10px;
+    margin-left: 0px;
 }

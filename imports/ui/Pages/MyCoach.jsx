@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import FadeIn from 'react-fade-in';
 
 // Import internationalization files
 import i18n from 'meteor/universe:i18n';
@@ -25,13 +26,15 @@ export default function MyCoach(props) {
 
     return (
         <div className="container">
-            <h1>My Coach</h1>
-            <h2>MIJN TODO'S</h2>
-            <ActionButton>Voeg toe aan je pijnlogboek</ActionButton>
-            <ActionButton>Bekijk je coaching van de dag</ActionButton>
+            <FadeIn>
+                <h1>My Coach</h1>
+                <h2>MIJN TODO'S</h2>
+                <ActionButton icon={"writing"}>Voeg toe aan je pijnlogboek</ActionButton>
+                <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
 
-            <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
-            <ActionButton action={() => FlowRouter.go(`/mycoach/paineducation/`)}>Pijn-educatie</ActionButton>
+                <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
+                <ActionButton action={() => FlowRouter.go(`/mycoach/paineducation/`)}>Pijn-educatie</ActionButton>
+            </FadeIn>
         </div>
     )
 };

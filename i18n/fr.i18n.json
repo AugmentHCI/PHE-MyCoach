@@ -2,6 +2,13 @@
   "_locale": "fr-BE",
   "_namespace": "Common",
   "myProgress": {
+    "mysteps": {
+      "mySteps": "Mes Pas",
+      "noSteps": "Aucun activité pour ce jour",
+      "steps": "Pas",
+      "distance": "Distance"
+    },
+    "myinsights": "Mes Aperçus",
     "navBar": {
       "overview": "Vue d'ensemble",
       "insights": "Vue de détails"
@@ -15,7 +22,9 @@
       "painIntensity": "Intensité de la douleur",
       "satisfaction": "Satisfaction",
       "physicalTiredness": "Fatigue physique",
-      "mentalTiredness": "Fatigue mentale"
+      "mentalTiredness": "Fatigue mentale",
+      "distance": "Distance parcourue",
+      "steps": "Nombre de pas"
     },
     "activities": {
       "activities": "Activités",
@@ -47,7 +56,8 @@
       "showMe": "Montre moi",
       "period": "Pour la période de",
       "compare": "Compare avec",
-      "delete": "Supprime"
+      "delete": "Supprime",
+      "steps": "Mes étapes du jour"
     },
     "notifications": {
       "errorFitbitTitle": "Connectez FitBit",

@@ -9,6 +9,7 @@
     font-size: 16px !important;
     justify-content: left !important;
     width:100% !important;
+    float: right;
 }
 
 .btn-dropdown:hover {

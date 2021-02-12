@@ -33,12 +33,12 @@
   
   .MuiPickersDay-daySelected {
     color: white !important;
-    background-color: var(--idewe-blue) !important;
+    background-color: var(--idewe-blue-dark) !important;
   }
   
   .MuiPickersDay-daySelected:hover {
     color: white !important;
-    background-color: var(--idewe-blue) !important;
+    background-color: var(--idewe-blue-dark) !important;
   }
   
   .MuiButton-textPrimary {

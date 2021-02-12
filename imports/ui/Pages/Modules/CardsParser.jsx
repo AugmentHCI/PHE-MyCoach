@@ -1,4 +1,5 @@
 import React from 'react';
+import FadeIn from 'react-fade-in';
 
 import Card from '../../components/Card.jsx';
 import ContentParser from './ContentParser.jsx';
@@ -40,15 +41,14 @@ function CardsParser(props) {
             contentArray.push(
                 <ContentParser key={"content-" + key + "-" + index} 
                          data={content} 
-                         userProfile={userProfile}></ContentParser>);
+                         userProfile={userProfile}/>);
         });
         return contentArray;
     }
 
     createCards(props.cards);
 
-    return contentsHTML;
-
+    return <FadeIn>{contentsHTML}</FadeIn>;
 }
 
 export default CardsParser;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getParameterData } from '../../../../api/dataparser';
+import { getDistanceDataMonthly } from '../../../../api/steps_dataparser';
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";
@@ -23,19 +24,25 @@ class Cell extends Component {
       color = this.props.comparisonData.color;
     }
 
-    if(value == null){
+    if(value == null || value == 0){
       return grey;
     }
 
     let tint = color;
 
+    if (max !== 4 || max !== 100) {
+      tint = color + "-tint" + Math.round(value/max * 5);
+      return getComputedStyle(document.documentElement).getPropertyValue(tint);
+    }
+
     let interval = 1; 
     let step;
     if(max == 4){
       step = 1;
-    }else{
-      step = 20;
+    }else if (max == 100){
+      step = 25;
     }
+    else {step = 1;}
 
     for (let i = 0; i < max; i+=step) {
       if(i<=value && value<=i+step){
@@ -64,9 +71,10 @@ class Cell extends Component {
     let step;
     if(max == 4){
       step = 1;
-    }else{
-      step = 20;
+    }else if (max == 100){
+      step = 25;
     }
+    else {step = 1;}
 
     for (let i = 0; i < max; i=i+step) {
       interval++;
@@ -74,7 +82,7 @@ class Cell extends Component {
         height = (1+(interval*2.5)).toString()+"px";
       }
     }
-    return height;
+    return (Math.round(14 * (value/max)) + 2) + "px";
   }
 
   getBarStyle = (value, comparison) => {
@@ -111,13 +119,13 @@ class ColorLegend extends Component {
     if(this.props.max == 4){
       return [1,2,3,4];
     } else {
-      return [1,2,3,4,5];
+      return [1,2,3,4];
     }
   }
 
   getWidth = () => {
     if(this.props.max == 4){
-      return "140px";
+      return "180px";
     } else {
       return "180px";
     }
@@ -129,12 +137,12 @@ class ColorLegend extends Component {
         <div className='small-text'>{<T>{`myProgress.parameters.${this.props.parameter}`}</T>}</div>
         <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
           {this.getAmountOfCategories().map((d) => {
-            return <div key={d} style={{backgroundColor: getComputedStyle(document.documentElement).getPropertyValue(this.props.color + "-tint" + d.toString()), height: "8px", width: "40px"}}></div>;
+            return <div key={d} style={{backgroundColor: getComputedStyle(document.documentElement).getPropertyValue(this.props.color + "-tint" + (d+1).toString()), height: "8px", width: "40px"}}></div>;
           })}
         </div>
         <div style={{width: this.getWidth(), display: 'flex', justifyContent: 'space-between'}}>
           <div className='small-text'>{this.props.min}</div>
-          <div className='small-text'>{this.props.max}</div>
+          <div className='small-text'>{this.props.parameter === "distance" ? Math.ceil(this.props.max) + " km" : this.props.max}</div>
         </div>
       </div>
     )
@@ -183,6 +191,7 @@ export default class CalendarGraph extends Component {
 
   //parameter meegeven ipv uit state te halen, want state werkt asynchroon -> is soms te laat geupdate
   getData = (parameter) => {
+    if (parameter === "distance") return getDistanceDataMonthly(this.props.fitData);
     let dataArray = getParameterData(this.props.data, parameter, "month");
     return dataArray;
   }
