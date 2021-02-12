@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import { getParameterData } from '../../../../api/dataparser';
-import { getFitBitData } from '../../../../api/steps_dataparser';
+import { getFitBitDataWeekly } from '../../../../api/steps_dataparser';
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";
@@ -50,7 +50,7 @@ export default class LineGraph extends Component {
   } 
 
   getData = (parameter) => {
-    if (parameter === "distance" || parameter === "steps") return getFitBitData(this.props.fitData, parameter);
+    if (parameter === "distance" || parameter === "steps") return getFitBitDataWeekly(this.props.fitData, parameter);
     let dataArray = getParameterData(this.props.data, parameter, "week");
     return dataArray;
   }

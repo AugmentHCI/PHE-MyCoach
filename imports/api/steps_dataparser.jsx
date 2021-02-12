@@ -30,12 +30,15 @@ function getWeekdaysTranslation(){
     return translatedWeekdays;
   }
 
-// Type can either be "distance" or "steps"
-export function getFitBitData(data, type) {
-    let days = getWeekdaysTranslation();
-    let distances = [];
-    let distancesByDay = [];
-    let iterData = [];
+
+/**
+ * Returns the standard data representation used for the LineGraph of either steps or distances from FitBit-data.
+ * @param {JSON} data Array of FitBit-data containing steps and distances per day
+ * @param {String} type Either "distance" or "steps"
+ */
+export function getFitBitDataWeekly(data, type) {
+    let days = getWeekdaysTranslation(), result = [], resultByDay = [], iterData = [];
+
     try {iterData = data.fitData === undefined ? data : data.fitData;}
     catch {console.log("getDistanceData - Empty user data");}
     days.forEach((dayInstance, index) => {
@@ -45,41 +48,41 @@ export function getFitBitData(data, type) {
                 const date = new Date(day.datum);
                 const dateNumber = date.getDay()-1 < 0 ? 6 : date.getDay()-1;
                 if (dateNumber === index) {
-                    distances.push(day[type]);
-                    distancesByDay.push({x: days[dateNumber], y: day[type]})
+                    result.push(day[type]);
+                    resultByDay.push({x: days[dateNumber], y: day[type]})
                     found = true;
                 }
             }
         })
         if (!found) {
-            distances.push(0);
-            distancesByDay.push({x: dayInstance, y: 0})
+            result.push(0);
+            resultByDay.push({x: dayInstance, y: 0})
         }
     })
-    const max_distance = Math.max.apply(Math, distances) < 1 ? 1 : Math.max.apply(Math, distances);
+    const max_value = Math.max.apply(Math, result) < 1 ? 1 : Math.max.apply(Math, result);
     return {
         id: type,
         measure: i18n.getTranslation('Common', `myProgress.parameters.${type}`),
         color: "--idewe-blue",
         min: 0,
-        max: max_distance,
-        data: distancesByDay
+        max: max_value,
+        data: resultByDay
     }
 }
 
-export function getDistanceDataMonthly(data) {
+/**
+ * Returns the standard data representation used for the CalendarGraph of either steps or distances from FitBit-data.
+ * @param {JSON} data Array of FitBit-data containing steps and distances per day
+ * @param {String} type Either "distance" or "steps"
+ */
+export function getFitBitDataMonthly(data, type) {
     let currentDate = new Date();
     try {currentDate = data[0]!=undefined ? new Date(data[0].datum) : new Date();}
     catch {console.log("getDistanceDataMonthly - Empty user data")}
-    let distances = [];
-    let distancesByDay = [];
-
+    let results = [], resultsByDay = [], iterData = [];
     const amountOfDays = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0).getDate();
     let daysOfMonth = Array.from(Array(amountOfDays+1).keys());
     daysOfMonth.shift();
-    let iterData = [];
-    console.log("getDistanceDataMonthly - DATA:")
-    console.log(data);
     try {iterData = data.fitData === undefined ? data : data.fitData;}
     catch {console.log("getDistanceDataMonthly - Empty user data");}
     for (let i = 1; i <= amountOfDays; i++) {
@@ -88,25 +91,25 @@ export function getDistanceDataMonthly(data) {
             if (!found) {
                 const date = new Date(day.datum);
                 if (date.getDate() === i) {
-                    distances.push(day.distance);
-                    distancesByDay[i] = day.distance;
+                    results.push(day[type]);
+                    resultsByDay[i] = day[type];
                     found = true;
                 }
             }
         })
         if (!found) {
-            distances.push(0);
-            distancesByDay[i] = 0;
+            results.push(0);
+            resultsByDay[i] = 0;
         }
     };
-    const max_distance = Math.max.apply(Math, distances) < 1 ? 1 : Math.max.apply(Math, distances);
+    const max_value = Math.max.apply(Math, results) < 1 ? 1 : Math.max.apply(Math, results);
     return {
         id: "distance",
-        measure: "Distance",
+        measure: i18n.getTranslation('Common', `myProgress.parameters.${type}`),
         color: "--idewe-blue",
         min: 0,
-        max: max_distance,
-        data: distancesByDay
+        max: max_value,
+        data: resultsByDay
     }
 }
 

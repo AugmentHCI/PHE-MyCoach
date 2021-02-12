@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getParameterData } from '../../../../api/dataparser';
-import { getDistanceDataMonthly } from '../../../../api/steps_dataparser';
+import { getFitBitDataMonthly } from '../../../../api/steps_dataparser';
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";
@@ -191,7 +191,7 @@ export default class CalendarGraph extends Component {
 
   //parameter meegeven ipv uit state te halen, want state werkt asynchroon -> is soms te laat geupdate
   getData = (parameter) => {
-    if (parameter === "distance") return getDistanceDataMonthly(this.props.fitData);
+    if (parameter === "distance" || parameter === "steps") return getFitBitDataMonthly(this.props.fitData, parameter);
     let dataArray = getParameterData(this.props.data, parameter, "month");
     return dataArray;
   }
