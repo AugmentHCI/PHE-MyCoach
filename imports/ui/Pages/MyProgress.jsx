@@ -74,7 +74,7 @@ export default class MyProgress extends Component {
   // Is called when initializing MyProgress component
   componentDidMount(){
     // Get user token from URL routing (see also routes.jsx file)
-    let token = FlowRouter.getParam('token');
+    let token = FlowRouter.getParam('token') === undefined ? this.props.token : FlowRouter.getParam('token');
     this.setState({userToken: token});
     this.setLocale();
     this.fetchData(this.state.selectedPeriod, token, this.state.timeFrame);
