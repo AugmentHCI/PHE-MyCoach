@@ -464,7 +464,7 @@ const PainEducationScript = {
             ]
         },
         {
-            "id": "PE-MOD3-OVERVIEW",
+            "id": "PE-MOD4-OVERVIEW",
             "title": "Overzicht",
             "overview": true,
             "card-contents": [

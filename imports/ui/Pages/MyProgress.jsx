@@ -12,7 +12,8 @@ import "../../../i18n/en.i18n.json"
 
 // Import data processing functions
 import { setDataParserLocale } from '../../api/dataparser';
-import { getWeeklyDummyData, getMonthlyDummyData } from '../../api/dummydata';
+import { getWeeklyDummyData, getMonthlyDummyData } from '../../api/dummydata.jsx';
+import fitData from '../../api/dummydata.jsx';
 
 import jwt_decode from "jwt-decode";
 
@@ -36,7 +37,6 @@ import Icon from '../components/Illustrations/Icon.jsx';
 
 import NotificationAlert from '../components/Notification.jsx';
 import Card from '../components/Card.jsx';
-import fitData from '../../api/responseFit.jsx';
 
 // Instance of React translate component, "Common" refers to the namespace of the i18n files
 const T = i18n.createComponent("Common");

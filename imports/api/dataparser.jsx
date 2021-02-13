@@ -5,6 +5,11 @@ import "../../i18n/en.i18n.json";
 
 const T = i18n.createComponent("Common");
 
+//taal instellen
+export function setDataParserLocale(locale){
+  i18n.setLocale(locale);
+}
+
 //define color, min, max and measure (= title shown on the axis when plotted) for each parameter
 //code = key that is used for this parameter by the JSON that is returned by the API
 const parameters = [

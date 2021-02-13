@@ -166,9 +166,7 @@ export default class CalendarGraph extends Component {
   componentDidMount(){
     this.updateData(this.props.parameter, false);
     //if this.props.comparison = true -> graph for the insights tab, this one contains two parameters to compare
-    if(this.props.comparison !== ""){
-      this.updateData(this.state.comparisonParameter, true);
-    }
+    if (this.props.comparison !== "") { this.updateData(this.state.comparisonParameter, true); }
     i18n.setLocale(this.props.locale);
   }
 
@@ -180,13 +178,6 @@ export default class CalendarGraph extends Component {
     else if (prevProps.comparison != this.props.comparison && this.props.comparison !== "") {
       this.updateData(this.props.comparison, true);
     }
-    /*
-    if(this.props.data !== prevProps.data){
-      this.updateData(this.props.parameter, false);
-      if(this.props.comparison !== ""){
-        this.updateData(this.props.comparison, true);
-      }
-    }*/
   } 
 
   //parameter meegeven ipv uit state te halen, want state werkt asynchroon -> is soms te laat geupdate
@@ -208,26 +199,17 @@ export default class CalendarGraph extends Component {
 
   //called when a different parameter is selected in dropdown
   updateParameter = (newParameter, comparison) => {
-    if(!comparison){
-      this.setState({parameter: newParameter})
-    } else {
-      this.setState({comparisonParameter: newParameter})
-    }
+    if (!comparison) { this.setState({parameter: newParameter}) } 
+    else { this.setState({comparisonParameter: newParameter}) }
     this.updateData(newParameter, comparison);
   }
 
   // Calculate on which day of the week the given month starts (first = true) or ends (first = false)
   getDayOfWeek = (year, month, first) => {
     let day = 0;
-    if(first) {
-      day = new Date(year, month-1, 1).getDay()
-    } else {
-      day = new Date(year, month, 0).getDay()
-    }
-    day = (day===0) ? 7 : day;
-    //1 = maandag, 7 = zondag
-
-    return day;
+    if (first) { day = new Date(year, month-1, 1).getDay() } 
+    else { day = new Date(year, month, 0).getDay() }
+    return (day===0) ? 7 : day;
   }
 
   getAmountOfDays = (year, month) => {
