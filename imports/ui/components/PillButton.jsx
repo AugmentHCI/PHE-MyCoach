@@ -19,13 +19,9 @@ function PillButton(props) {
 
     const needsOutline = props.icon && noOutline.includes(props.icon);
 
-    const backgroundColor = props.fillColor ? 
-        getComputedStyle(document.documentElement).getPropertyValue(`--idewe-${props.fillColor}`) : 
-        getComputedStyle(document.documentElement).getPropertyValue(`--idewe-white`);
+    const backgroundColor = props.fillColor ? `var(--idewe-${props.fillColor})` : "var(--idewe-white)";
 
-    const color = props.contentColor ? 
-        getComputedStyle(document.documentElement).getPropertyValue(`--idewe-${props.contentColor}`) : 
-        getComputedStyle(document.documentElement).getPropertyValue(`--idewe-blue`);
+    const color = props.contentColor ? `var(--idewe-${props.contentColor})` : "var(--idewe-blue)";
 
     const style = {
         backgroundColor: backgroundColor,

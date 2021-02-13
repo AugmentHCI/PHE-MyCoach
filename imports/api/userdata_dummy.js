@@ -1,10 +1,14 @@
 const UserData = {
     "userID": "dummy",
     "profile": 3,
+    "interactions": {
+        "INTRODUCTION": false,
+        "INTRODUCTION_VIDEO": false,
+    },
     "answers": {
-        "PE-MOD1-Q1": "CORRECT",
-        "PE-MOD1-Q2": "INCORRECT",
-        "PE-MOD1-Q3": "CORRECT"
+        "PE-MOD1-Q1": true,
+        "PE-MOD1-Q2": false,
+        "PE-MOD1-Q3": null
     },
     "progress": {
         "PAINEDUCATION": {
