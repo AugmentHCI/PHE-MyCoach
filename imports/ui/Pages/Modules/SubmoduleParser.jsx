@@ -62,6 +62,7 @@ export default function SubmoduleParser(props) {
                             duration={data.duration}
                             type={data.type}
                             image={data.image}
+                            imageWidth={data.imageWidth}
                             hideButton>
                 </ModuleCard>
                 <hr className="module-hr-line"/>

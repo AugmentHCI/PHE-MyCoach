@@ -17,6 +17,26 @@
         filter: invert(100%) sepia(6%) saturate(7500%) hue-rotate(224deg) brightness(108%) contrast(112%);
     }
 
+    &-gray-light {
+        @extend .icon;
+        filter: invert(83%) sepia(27%) saturate(172%) hue-rotate(172deg) brightness(77%) contrast(90%);
+    }
+
+    &-gray-dark {
+        @extend .icon;
+        filter: invert(40%) sepia(15%) saturate(396%) hue-rotate(171deg) brightness(98%) contrast(94%);
+    }
+
+    &-green {
+        @extend .icon;
+        filter: invert(43%) sepia(14%) saturate(2217%) hue-rotate(73deg) brightness(104%) contrast(86%);
+    }
+
+    &-red {
+        @extend .icon;
+        filter: invert(17%) sepia(48%) saturate(5061%) hue-rotate(350deg) brightness(82%) contrast(82%);
+    }
+
     &-black {
         @extend .icon;
         filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(137deg) brightness(87%) contrast(105%);

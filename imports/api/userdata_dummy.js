@@ -9,8 +9,8 @@ const UserData = {
     "progress": {
         "PAINEDUCATION": {
             "OVERALL": "IN_PROGRESS",
-            "PE-MOD1": "PE-MOD1-CARD1",
-            "PE-MOD2": "NOT_STARTED",
+            "PE-MOD1": "COMPLETED",
+            "PE-MOD2": "IN_PROGRESS",
             "PE-MOD3": "NOT_STARTED",
             "PE-MOD4": "NOT_STARTED",
             "PE-MOD5": "NOT_STARTED"

@@ -14,16 +14,22 @@ const T = i18n.createComponent("Common");
 
 function ModuleCard(props) {
 
-    const [opened, toggleOpen] = useState(props.closed ? props.closed : false);
+    const lockedSuffix = props.locked ? "-locked" : "";
+    const iconColor = props.locked ? "gray-dark" : "blue";
+    const iconImage = {"IN_PROGRESS": {image: "loading", color: "blue"}, "COMPLETED": {image: "check", color: "blue"}, "NOT_STARTED": {image: "locked", color: "gray-dark"}}
 
-    if (opened) return (<div className="module-card-closed" onClick={() => toggleOpen(!opened)}>
+    /* UI - Open card */
+    if (props.closed) return (<div className={"module-card-closed" + lockedSuffix} onClick={() => toggleClosed()}>
+        <div className={"module-status-icon"}>
+            <Icon image={iconImage[props.status].image} color={iconImage[props.status].color} width={"18px"}></Icon>
+        </div>
         <div className="module-card-closed-text">
-            <div className='module-card-closed-number'>Onderdeel {props.number}</div>
-            <div className='module-card-closed-title'>{props.title.join(' ')}</div>
+            <div className={"module-card-closed-number" + lockedSuffix}>Onderdeel {props.number}</div>
+            <div className="module-card-closed-title">{props.title.join(' ')}</div>
         </div>
         <div className="module-card-icon">
             <div className="module-card-icon-circle">
-                <Icon image="next" style={{transform:"rotate(90deg)"}} width="14px" color="blue"/>
+                <Icon image="next" style={{transform:"rotate(90deg)"}} width="14px" color={iconColor}/>
             </div>
         </div>
     </div>);
@@ -31,6 +37,8 @@ function ModuleCard(props) {
     const topClass = props.topColor === "white" ? "module-card-top-white" : "module-card-top";
 
     const titleHTML = Array.isArray(props.title) ? createTitleHTML() : props.title;
+
+    const buttonText = props.status === "COMPLETED" ? "Herbekijk" : "Begin";
 
     function createTitleHTML() {
         let prototypeTitleHTML = [];
@@ -40,31 +48,37 @@ function ModuleCard(props) {
         return prototypeTitleHTML;
     }
 
+    function toggleClosed() {
+        if (props.onToggleClosed && props.closed) {props.onToggleClosed(props.id)}
+        else if (props.onToggleClosed && !props.closed) {props.onToggleClosed("closed")}
+    }
+
+    /* UI - Opened*/
     return (
         <div className="module-card-container">
             <div className={topClass}>
                 <div className="module-card-title-container">
-                    <div className="module-card-number">Onderdeel {props.number}</div>
-                    <div className="module-card-title">{titleHTML}</div>
+                    <div className={"module-card-number" + lockedSuffix}>Onderdeel {props.number}</div>
+                    <div className={"module-card-title" + lockedSuffix}>{titleHTML}</div>
                 </div>
-                <Art image={props.image} width="160px" style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}></Art>
+                <Art image={props.image + lockedSuffix} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}></Art>
             </div>
-            <div className="module-card-bottom">
+            <div className={"module-card-bottom" + lockedSuffix}>
                 <div className="module-card-bottom-row">
                     <div className="module-card-information">{props.description}</div>
                     <div className="module-card-icon">
-                        <div className="module-card-icon-circle" onClick={() => toggleOpen(!opened)}>
-                            <Icon image="next" style={{transform:"rotate(-90deg)"}} width="14px" color="blue"/>
+                        <div className="module-card-icon-circle" style={{marginBottom: "5px"}} onClick={() => toggleClosed()}>
+                            <Icon image="next" style={{transform:"rotate(-90deg)", marginTop:"-4px"}} width="14px" color={iconColor}/>
                         </div>
                     </div>
                 </div>
                 <div className="module-card-bottom-row">
                     <div className="module-card-pills">
-                        <PillButton color="white" icon="time">{props.duration}</PillButton>
-                        <PillButton color="white" icon="information">{props.type}</PillButton>
+                        <PillButton contentColor={props.locked ? "white" : "blue"} fillColor={props.locked ? "gray-light" : "white"} icon="time">{props.duration}</PillButton>
+                        <PillButton contentColor={props.locked ? "white" : "blue"} fillColor={props.locked ? "gray-light" : "white"} icon="information">{props.type}</PillButton>
                     </div>
                     {!props.hideButton && <div className="module-button-container">
-                        <button className="module-button" onClick={()=> {if (props.onClick) props.onClick()}}>Begin</button>
+                        <button className={"module-button" + (props.locked ? "-disabled" : "")} onClick={()=> {if (props.onClick && !props.locked) props.onClick()}}>{buttonText}</button>
                     </div>}
                 </div>
             </div>

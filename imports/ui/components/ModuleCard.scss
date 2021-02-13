@@ -32,6 +32,11 @@
     font-size: 30px;
     margin-left: 20px;
     line-height: 35px;
+
+    &-locked {
+        @extend .module-card-title;
+        color: var(--idewe-gray-dark);
+    }
 }
 
 .module-card-number {
@@ -43,6 +48,11 @@
     margin-left: 20px;
     margin-bottom: -5px;
     padding-top: 50px;
+
+    &-locked {
+        @extend .module-card-number;
+        color: var(--idewe-gray-dark);
+    }
 }
 
 .module-card-bottom {
@@ -50,6 +60,11 @@
     padding: 10px 10px 10px 20px;
     border-radius: 0 0 15px 15px;
     z-index: 2;
+
+    &-locked {
+        @extend .module-card-bottom;
+        background-color: var(--idewe-gray-dark);
+    }
 }
 
 .module-card-bottom-row {
@@ -88,6 +103,12 @@
     border-radius: 10px;
     padding: 10px 20px;
     box-shadow: 0px 4px 4px rgba(1, 66, 106, 0.1);
+
+    &-disabled {
+        @extend .module-button;
+        background-color: var(--idewe-gray-light);
+        color: var(--idewe-white);
+    }
 }
 
 /* Closed module card */
@@ -99,6 +120,24 @@
     margin-bottom: 15px;
     cursor: pointer;
     display: flex;
+
+    &-locked {
+        @extend .module-card-closed;
+        background-color: var(--idewe-gray-dark);
+    }
+}
+
+.module-status-icon {
+    float:left;
+    width: 35px;
+    height: 35px;
+    margin-top: 10px;
+    margin-right: 15px;
+    margin-left: 5px;
+    border-radius: 10px;
+    padding: 8px;
+    background-color: var(--idewe-white);
+    box-shadow: 0px 4px 4px rgba(1, 66, 106, 0.1);
 }
 
 .module-card-closed-text {
@@ -131,8 +170,13 @@
 }
 
 .module-card-closed-number {
-    color: var(--idewe-black);
+    color: var(--idewe-blue-dark);
     font-family: var(--main-font);
     font-size: 14px;
     font-weight: 500;
+
+    &-locked {
+        @extend .module-card-closed-number;
+        color: var(--idewe-black);
+    }
 }

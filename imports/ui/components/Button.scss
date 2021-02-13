@@ -1,4 +1,4 @@
-.button-action {
+.button {
     margin: 5px 0px;
     padding: 10px;
     border: none;
@@ -8,6 +8,11 @@
     width: 100%;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
     transition: .2s ease-in-out;
+
+    &-inactive {
+        @extend .button;
+        background-color: var(--idewe-gray-light);
+    }
 
     .button-text {
         font-weight: 500;
@@ -23,11 +28,11 @@
     }
 }
 
-.button-action.selected {
+.button.selected {
     background-color: var(--idewe-blue);
     color: var(--idewe-white);
 }
 
-.button-action.pressed {
+.button.pressed {
     transform: scale(0.97);
 }

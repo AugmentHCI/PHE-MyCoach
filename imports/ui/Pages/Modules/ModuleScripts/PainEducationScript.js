@@ -10,7 +10,8 @@ const PainEducationScript = {
         "description": "In dit onderdeel zien we hoe pijn ontstaat en de weg die prikkels moeten afleggen naar onze hersenen.",
         "duration": "10 minuten",
         "type": "Informatief",
-        "image": "new-ideas",
+        "image": "learning",
+        "imageWidth": "180px",
         "cards": [{
                 "id": "PE-MOD1-CARD1",
                 "title": "Inleiding",
@@ -98,7 +99,7 @@ const PainEducationScript = {
         "description": "In dit onderdeel bespreken we welke rol ons brein heeft in het verwerken van onze prikkels, en onze pijnervaring.",
         "duration": "15 minuten",
         "type": "Informatief",
-        "image": "new-ideas",
+        "image": "new_ideas",
         "cards": [{
             "id": "PE-MOD2-CARD1",
             "title": "Recap",
@@ -226,7 +227,8 @@ const PainEducationScript = {
         "description": "In dit onderdeel leer je hoe de gevoeligheid van het zenuwstelsel kan worden verhoogd of verlaagd en je dus meer of minder pijn gaat ervaren.",
         "duration": "15 minuten",
         "type": "Informatief",
-        "image": "new-ideas",
+        "image": "sensitivity",
+        "imageWidth": "170px",
         "cards": [{
             "id": "PE-MOD3-CARD1",
             "title": "Inleiding",
@@ -324,7 +326,8 @@ const PainEducationScript = {
         "description": "In dit onderdeel kom je te weten hoe pijn chronisch kan worden.",
         "duration": "15 minuten",
         "type": "Interactief",
-        "image": "new-ideas",
+        "image": "chronic",
+        "imageWidth": "200px",
         "cards": [{
             "id": "PE-MOD4-CARD1",
             "title": "Inleiding",

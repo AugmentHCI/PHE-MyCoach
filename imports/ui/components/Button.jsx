@@ -5,17 +5,20 @@ function Button(props) {
 
     const [isPressed, press] = useState(false);
 
-    let pressClass = isPressed ? "button-action pressed" : "button-action";
+    let buttonClass = props.disabled ? "button-inactive" : "button";
+    buttonClass += isPressed ? " pressed" : "";
+
+    console.log(props.disabled)
 
     if (props.isSelected) pressClass += " selected";
 
     function action() {
         press(false); 
-        if (props.action) {props.action()};
+        if (props.action && !props.inactive) {props.action()};
     }
 
     return (
-        <button className={pressClass} 
+        <button className={buttonClass} 
                 onTouchStart={() => press(true)} 
                 onClick={() => action()} 
                 onTouchEnd={() => press(false)}>

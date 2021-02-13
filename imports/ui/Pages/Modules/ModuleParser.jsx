@@ -26,6 +26,10 @@ const T = i18n.createComponent("Common");
 
 export default function ModuleParser(props) {
 
+    const [moduleData, updateModuleData] = useState({});
+
+    const [openSubmodule, updateOpenSubmodule] = useState("");
+
     /**
      * Fetches and sets the correct module data, depending on the 
      */
@@ -45,20 +49,25 @@ export default function ModuleParser(props) {
     function renderSubmodules() {
         const moduleCardsHTML = [];
         moduleData.submodules.forEach(submodule => {
-            const isClosed = UserData.progress.PAINEDUCATION[submodule.id] === "COMPLETED" || UserData.progress.PAINEDUCATION[submodule.id] === "NOT_STARTED" ? true : false;
-            const isLocked = UserData.progress.PAINEDUCATION[submodule.id] === "NOT_STARTED" ? true : false;
-
+            const moduleProgress = UserData.progress.PAINEDUCATION[submodule.id];
+            const isClosed = moduleProgress === "COMPLETED" || moduleProgress === "NOT_STARTED" ? true : false;
+            const isLocked = moduleProgress === "NOT_STARTED" ? true : false;
+            if (!isClosed && openSubmodule !== submodule.id && openSubmodule === "") { updateOpenSubmodule(submodule.id) }
             moduleCardsHTML.push(<ModuleCard 
                 key={submodule.id}
+                id={submodule.id}
                 title={submodule["title-markup"]}
                 number={submodule.part}
                 duration={submodule.duration}
                 description={submodule.description}
                 type={submodule.type}
                 image={submodule.image}
+                imageWidth={submodule.imageWidth}
                 onClick={() => routeToSubmodule(submodule.id)}
-                closed={isClosed}
-                locked={isLocked}>
+                onToggleClosed={updateOpenSubmodule}
+                closed={openSubmodule !== submodule.id}
+                locked={isLocked}
+                status={UserData.progress.PAINEDUCATION[submodule.id]}>
             </ModuleCard>)
         });
         return <FadeIn delay="80">{moduleCardsHTML}</FadeIn>;
@@ -71,8 +80,6 @@ export default function ModuleParser(props) {
     function routeToSubmodule(submodule) {
         FlowRouter.go(`/mycoach/paineducation/${submodule}`);
     }
-
-    const [moduleData, updateModuleData] = useState({});
 
     /* Fetch module data only once, avoids infinite re-rendering due to state-changes */
     useEffect(() => {fetchModuleData()}, []);

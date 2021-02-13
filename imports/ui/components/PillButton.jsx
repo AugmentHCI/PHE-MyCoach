@@ -15,25 +15,33 @@ const T = i18n.createComponent("Common");
  */
 function PillButton(props) {
 
-    const buttonClass = props.color === "white" ? "pill-button-white" : "pill-button-blue";
-
-    const buttonIconClass = props.color === "white" ? "pill-button-icon-blue" : "pill-button-icon-white";
-
     const noOutline = ["information", "time"];
 
     const needsOutline = props.icon && noOutline.includes(props.icon);
 
+    const backgroundColor = props.fillColor ? 
+        getComputedStyle(document.documentElement).getPropertyValue(`--idewe-${props.fillColor}`) : 
+        getComputedStyle(document.documentElement).getPropertyValue(`--idewe-white`);
+
+    const color = props.contentColor ? 
+        getComputedStyle(document.documentElement).getPropertyValue(`--idewe-${props.contentColor}`) : 
+        getComputedStyle(document.documentElement).getPropertyValue(`--idewe-blue`);
+
+    const style = {
+        backgroundColor: backgroundColor,
+        color: color,
+        marginTop: needsOutline ? "0px !important" : ""
+    }
+    
     function createIcon() {
-        if (!needsOutline) return (<div className={buttonIconClass}>       
-            <Icon width="12px" image={props.icon} color={props.color ? props.color : "blue"}/>
+        if (!needsOutline) return (<div className={"pill-button-icon"} style={{backgroundColor: color}}>       
+            <Icon width="12px" image={props.icon} color={backgroundColor}/>
         </div>);
-        else return (<Icon width="16px" image={props.icon} color={props.color === "white" ? "blue" : "white"} style={{float:"left", marginTop:"3px"}}></Icon>);
+        else return (<Icon width="16px" image={props.icon} color={props.contentColor ? props.contentColor : "blue"} style={{float:"left", marginTop:"3px"}}></Icon>);
     }
 
-    const updateStyle = needsOutline ? {marginTop: "0px !important"} : {};
-
     return (
-        <button className={buttonClass} style={updateStyle}>
+        <button className="pill-button" style={style}>
             {createIcon()}
             <div className='pill-button-text'>
                 {props.children}
