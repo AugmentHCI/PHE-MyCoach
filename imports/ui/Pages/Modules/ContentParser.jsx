@@ -133,7 +133,7 @@ function ContentParser(props) {
      */
     function createVideoContent(key, link, language) {
         if (link === false) {return <div className="content-video-todo">Video</div>}
-        return <iframe key={key} src={link[language]} width="100%" style={{marginTop:"20px", borderRadius: "10px"}} frameBorder="0" allow="autoplay; fullscreen"></iframe>
+        return <iframe key={key} src={link} width="100%" style={{marginTop:"20px", borderRadius: "10px"}} frameBorder="0" allow="autoplay; fullscreen"></iframe>
     }
 
 

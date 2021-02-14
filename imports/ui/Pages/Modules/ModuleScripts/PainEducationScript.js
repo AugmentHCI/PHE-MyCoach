@@ -22,7 +22,7 @@ const PainEducationScript = {
                     },
                     {
                         "type": "Video",
-                        "link": {"nl-NL":"https://player.vimeo.com/video/485835694", "nl-FR": "https://player.vimeo.com/video/485835249", "en-EN":"https://player.vimeo.com/video/485834880"}
+                        "link": "https://player.vimeo.com/video/506997813"
                     }]
             },
             {
@@ -121,11 +121,11 @@ const PainEducationScript = {
             "card-contents": [
                 {
                     "type": "Text",
-                    "content": "Bekijk nu het filmpje over TODO"
+                    "content": "Bekijk nu het filmpje over TODO-PE-MOD2-CARD2"
                 },
                 {
                     "type": "Video",
-                    "link": false
+                    "link": "https://player.vimeo.com/video/506998666"
                 }
             ]
         },
@@ -207,10 +207,6 @@ const PainEducationScript = {
                     "content": "Je hersenen bepalen welke prikkels in het ruggenmerg worden doorgestuurd en kiezen een gepaste reactie op de prikkels."
                 },
                 {
-                    "type": "Video",
-                    "link": false
-                },
-                {
                     "type": "List",
                     "numbered": true,
                     "overview": true,
@@ -239,7 +235,7 @@ const PainEducationScript = {
                 },
                 {
                     "type": "Video",
-                    "link": false,
+                    "link": "https://player.vimeo.com/video/507000187",
                 }
             ]
         },
@@ -289,11 +285,7 @@ const PainEducationScript = {
                     "correct": "Overval",
                     "onCorrect": "Inderdaad! Ondanks dat de hoeveelheid schade in beide situaties ongeveer gelijk is, is de kans groter dat de man die wordt overvallen meer pijn gaat ervaren. De rugbyspeler zal waarschijnlijk niet eens pijn voelen. Misschien merkt hij de dag nadien pas op dat hij een paar blauwe plekken en schrammen heeft.",
                     "onIncorrect": "Niet juist. Ondanks dat de hoeveelheid schade in beide situaties ongeveer gelijk is, is de kans groter dat de man die wordt overvallen meer pijn gaat ervaren. De rugbyspeler zal waarschijnlijk niet eens pijn voelen. Misschien merkt hij de dag nadien pas op dat hij een paar blauwe plekken en schrammen heeft."
-                },
-                {
-                    "type": "Text",
-                    "content": "[Noot - Bug oplossen bij fout antwoord + op 1 lijn zetten]"
-                },
+                }
             ]
         }, 
         {
@@ -304,10 +296,6 @@ const PainEducationScript = {
                 {
                     "type": "Text",
                     "content": "Je zenuwstelsel kan gevoeliger of minder gevoelig worden. De manier waarop je denkt en omgaat met je pijn speelt een belangrijke rol in je pijnbeleving."
-                },
-                {
-                    "type": "Video",
-                    "link": false
                 },
                 {
                     "type": "List",
@@ -338,7 +326,7 @@ const PainEducationScript = {
                 },
                 {
                     "type": "Video",
-                    "link": false,
+                    "link": "https://player.vimeo.com/video/507001144",
                 }
             ]
         },
@@ -476,14 +464,35 @@ const PainEducationScript = {
                     "content": "Bij chronische pijn is het oorspronkelijke letsel al hersteld maar de overgevoeligheid van het zenuwstelsel blijft."
                 },
                 {
-                    "type": "Video",
-                    "link": false
-                },
-                {
                     "type": "List",
                     "numbered": true,
                     "overview": true,
                     "content": ["Men spreekt van chronische pijn wanneer de pijn langdurig (meer dan 3 maanden) aanwezig is. De pijn kan sterk wisselen van dag tot dag en verspreiden in het lichaam. Ook lichtere prikkels, die normaal geen pijn doen, kunnen pijnlijk zijn.", "Bij chronische pijn speelt het oorspronkelijke letsel nog maar een kleine rol. Vooral de overgevoeligheid van het zenuwstelsel is de oorzaak van de klachten.", "Verscheidene factoren verhogen het risico op een overgevoelig zenuwstelsel en chronische pijn zoals; jezelf vaak overbelasten, langdurige stress, focussen op je pijn en negatieve gedachten en gevoelens ten aanzien van je pijn.", "Een gezonde levensstijl, voldoende beweging en je aandacht en energie richten op waardevolle activiteiten in plaats van op de pijn kunnen de overgevoeligheid van het zenuwstelsel terug verlagen en de impact van de chronische pijn beperken"]
+                }
+            ]
+        }]
+    },
+    {
+        "id": "PE-MOD5",
+        "title": "Pijn beïnvloeden",
+        "title-markup": ["Pijn", "beïnvloeden"],
+        "part": 5,
+        "description": "Ten slotte gaan we leren op welke manier jij je pijn kan beïnvloeden. We gaan je enkele tips en hulpmiddelen aanreiken die je gaan helpen bij het beter omgaan met je pijn.",
+        "duration": "15 minuten",
+        "type": "Informatief",
+        "image": "paininfluence",
+        "imageWidth": "215px",
+        "cards": [{
+            "id": "PE-MOD5-CARD1",
+            "title": "Inleiding",
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "content": "TODO: Dit onderdeel wordt nog verder uitgewerkt."
+                },
+                {
+                    "type": "Video",
+                    "link": "https://player.vimeo.com/video/507002347",
                 }
             ]
         }]
