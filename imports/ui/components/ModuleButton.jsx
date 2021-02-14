@@ -33,13 +33,15 @@ export default function ModuleButton(props) {
     }
 
     function generateTitle() {
+        if (props.code === "ACT") return <div style={{zIndex: "1"}}>{props.title.split(" ")[0]}<br/>{props.title.split(" ")[1] + " " + props.title.split(" ")[2]}</div>
+        if (props.code === "EM") return <div style={{zIndex: "1"}}>{props.title.split(" ")[0]}<br/>{props.title.split(" ")[1] + " " + props.title.split(" ")[2]}</div>
         if (props.code === "SOC") return <div style={{zIndex: "1"}}>{props.title.split(" ")[0]}<br/>{props.title.split(" ")[1]}</div>
         return <div style={{zIndex: "1"}}>{props.title}</div>
     }
 
     return <div className={"modulebutton-" + props.code + progressSuffix} onClick={() => handleOnClick()}>
         {generateTitle()}
-        <svg
+        {calculateProgress() < 100 && <svg
         className="progress-ring"
         width="150"
         height="150">
@@ -55,6 +57,6 @@ export default function ModuleButton(props) {
             r="68"
             cx="75"
             cy="74"/>
-        </svg>
+        </svg>}
     </div>
 }
