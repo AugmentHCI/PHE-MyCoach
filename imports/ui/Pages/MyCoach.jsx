@@ -77,79 +77,92 @@ export default function MyCoach(props) {
         }
     }
 
+    function renderTodos() {
+        return (<React.Fragment>
+            <h2>MIJN TODO'S</h2>
+            <Popover
+                content={<div className="tutorial-content">
+                    <h4>Shortcuts</h4>
+                    Hier zie jij je shortcuts waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog shortcuts toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
+                    <div className="tutorial-button-row">
+                        <Button color="blue" width="fit" size="small" style={{float:"right"}} action={()=> updateShowTutorial1(false)}>Volgende</Button>
+                    </div>
+                </div>}
+                placement="bottom"
+                trigger="click"
+                visible={showTutorial1}
+                onVisibleChange={() => updateShowTutorial1(false)}>
+            <ActionButton icon={"writing"} action={() => FlowRouter.go(`/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
+            <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
+            </Popover>
+        </React.Fragment>)
+    }
+
+    function renderModules() {
+        return (<React.Fragment>
+            <Popover
+                content={<div className="tutorial-content">
+                    <h4>Coaching</h4>
+                    Hier zie jij je persoonlijk coachingtraject.<br/>Je kan elke dag je coaching bekijken.<br/>
+                    <div className="tutorial-button-row">
+                        <Button color="gray-light" width="fit" size="small" action={()=> updateShowTutorial1(true)}>Vorige</Button>
+                        <Button color="blue" width="fit" size="small" style={{float:"right"}} action={()=> updateShowTutorial2(false)}>Volgende</Button>
+                    </div>
+                </div>}
+                placement="topLeft"
+                trigger="click"
+                visible={!showTutorial1 && showTutorial2}
+                onVisibleChange={() => updateShowTutorial2(false)}>
+            <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
+            </Popover>
+            <div className="module-container">
+                <div className="module-topandbottom-row" style={{marginTop:"20px"}}>
+                <Popover
+                content={<div className="tutorial-content">
+                    <h4>Modules</h4>
+                    Voltooi je coaching om na een tijdje andere<br/>modules vrij te spelen!<br/>
+                    <div className="tutorial-illustration"><Illustration image="voortgang" width={"100%"}></Illustration></div>
+                    <div className="tutorial-button-row">
+                        <Button color="gray-light" width="fit" size="small" action={()=> updateShowTutorial2(true)}>Vorige</Button>
+                        <Button color="blue" width="fit" size="small" style={{float:"right"}} action={()=> updateShowTutorial3(false)}>Begrepen!</Button>
+                    </div>
+                </div>}
+                placement="top"
+                trigger="click"
+                visible={!showTutorial2 && showTutorial3}
+                onVisibleChange={() => updateShowTutorial3(false)}>
+                    <ModuleButton code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/mycoach/paineducation/`)} data={userData.progress.PAINEDUCATION}/>
+                    </Popover>
+                    <div className="line-paineducation" style={{borderLeft:calculateLineColor("PAINEDUCATION")}}/>
+                </div>
+                <div className="module-middle-row">
+                    <ModuleButton code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/mycoach/thoughtsemotions/`)} data={userData.progress.THOUGHTSEMOTIONS}/>
+                    <div className="coaching-circle">Mijn <br/>coaching</div>
+                    <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/mycoach/activitywork/`)} data={userData.progress.ACTIVITYWORK}/>
+                </div>     
+                <div className="module-middle-row">
+                    <ModuleButton code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/mycoach/movement/`)} data={userData.progress.MOVEMENT}/>
+                    <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/mycoach/social/`)} data={userData.progress.SOCIAL}/>
+                    <div className="line-emotions" style={{borderLeft:calculateLineColor("THOUGHTSEMOTIONS")}}/>
+                    <div className="line-activity" style={{borderLeft:calculateLineColor("ACTIVITYWORK")}}/>
+                    <div className="line-movement" style={{borderLeft:calculateLineColor("MOVEMENT")}}/>
+                    <div className="line-social" style={{borderLeft:calculateLineColor("SOCIAL")}}/>
+                </div>
+                <div className="module-topandbottom-row">
+                    <ModuleButton code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/mycoach/stress/`)} data={userData.progress.STRESS}/>
+                    <div className="line-stress" style={{borderLeft:calculateLineColor("STRESS")}}/>
+                </div>    
+            </div> 
+        </React.Fragment>)
+    }
+
     return (
         <div className="container">
             {handleIntroduction()}
             <FadeIn>
                 <h1>My Coach</h1>
-                <h2>MIJN TODO'S</h2>
-                <Popover
-                    content={<div className="tutorial-content">
-                        <h4>Shortcuts</h4>
-                        Hier zie jij je shortcuts waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog shortcuts toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
-                        <div className="tutorial-button-row">
-                            <Button color="blue" width="fit" size="small" style={{float:"right"}} action={()=> updateShowTutorial1(false)}>Volgende</Button>
-                        </div>
-                    </div>}
-                    placement="bottom"
-                    trigger="click"
-                    visible={showTutorial1}
-                    onVisibleChange={() => updateShowTutorial1(false)}>
-                <ActionButton icon={"writing"} action={() => FlowRouter.go(`/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
-                <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
-                </Popover>
-                <Popover
-                    content={<div className="tutorial-content">
-                        <h4>Coaching</h4>
-                        Hier zie jij je persoonlijk coachingtraject.<br/>Je kan elke dag je coaching bekijken.<br/>
-                        <div className="tutorial-button-row">
-                            <Button color="gray-light" width="fit" size="small" action={()=> updateShowTutorial1(true)}>Vorige</Button>
-                            <Button color="blue" width="fit" size="small" style={{float:"right"}} action={()=> updateShowTutorial2(false)}>Volgende</Button>
-                        </div>
-                    </div>}
-                    placement="topLeft"
-                    trigger="click"
-                    visible={!showTutorial1 && showTutorial2}
-                    onVisibleChange={() => updateShowTutorial2(false)}>
-                <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
-                </Popover>
-                <div className="module-container">
-                    <div style={{position: "relative", width: "100%", minHeight: "150px", display: "flex", justifyContent: "center", marginTop:"20px"}}>
-                    <Popover
-                    content={<div className="tutorial-content">
-                        <h4>Modules</h4>
-                        Voltooi je coaching om na een tijdje andere<br/>modules vrij te spelen!<br/>
-                        <div className="tutorial-illustration"><Illustration image="voortgang" width={"100%"}></Illustration></div>
-                        <div className="tutorial-button-row">
-                            <Button color="gray-light" width="fit" size="small" action={()=> updateShowTutorial2(true)}>Vorige</Button>
-                            <Button color="blue" width="fit" size="small" style={{float:"right"}} action={()=> updateShowTutorial3(false)}>Begrepen!</Button>
-                        </div>
-                    </div>}
-                    placement="top"
-                    trigger="click"
-                    visible={!showTutorial2 && showTutorial3}
-                    onVisibleChange={() => updateShowTutorial3(false)}>
-                        <ModuleButton  code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/mycoach/paineducation/`)} data={userData.progress.PAINEDUCATION}></ModuleButton></Popover>
-                        <div style={{borderLeft:calculateLineColor("PAINEDUCATION"), height: "100px", position: "absolute", top: "50px"}}/>
-                    </div>
-                    <div style={{position: "relative", width: "100%", minHeight: "100px", display: "flex", textAlign:"center"}}>
-                        <ModuleButton  code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/mycoach/thoughtsemotions/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
-                        <div style={{margin:"0 auto", paddingTop:"25px", fontFamily:"var(--main-font", fontSize:"18px", fontWeight: "700", color:"var(--idewe-blue-dark)", backgroundColor:"var(--idewe-white", height:"110px", width: "110px", borderRadius: "60px", marginTop: "-10px", zIndex: "2"}}>Mijn <br/>coaching</div>
-                        <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/mycoach/activitywork/`)} data={userData.progress.ACTIVITYWORK}></ModuleButton>
-                    </div>     
-                    <div style={{position: "relative", width: "100%", minHeight: "100px", display: "flex", textAlign:"center"}}>
-                        <ModuleButton  code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/mycoach/movement/`)} data={userData.progress.MOVEMENT}></ModuleButton>
-                        <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/mycoach/social/`)} data={userData.progress.SOCIAL}></ModuleButton>
-                        <div style={{borderLeft:calculateLineColor("THOUGHTSEMOTIONS"), height: "100px", position: "absolute", left: "120px", top: "-130px", transform: "rotate(-55deg)", zIndex:"0"}}/>
-                        <div style={{borderLeft:calculateLineColor("ACTIVITYWORK"), height: "100px", position: "absolute", right: "120px", top: "-130px", transform: "rotate(55deg)", zIndex:"0"}}/>
-                        <div style={{borderLeft:calculateLineColor("MOVEMENT"), height: "100px", position: "absolute", right: "130px", top: "-90px", transform: "rotate(125deg)", zIndex:"0"}}/>
-                        <div style={{borderLeft:calculateLineColor("SOCIAL"), height: "100px", position: "absolute", left: "130px", top: "-90px", transform: "rotate(-125deg)", zIndex:"0"}}/>
-                    </div>
-                    <div style={{position: "relative", width: "100%", minHeight: "150px", display: "flex", justifyContent: "center"}}>
-                        <ModuleButton  code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/mycoach/stress/`)} data={userData.progress.STRESS}></ModuleButton>
-                        <div style={{borderLeft:calculateLineColor("STRESS"), height: "150px", position: "absolute", top: "-150px"}}/>
-                    </div>    
-                </div> 
+                {renderTodos()}
+                {renderModules()}
             </FadeIn>
         </div>
     )

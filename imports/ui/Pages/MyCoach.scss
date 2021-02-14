@@ -3,13 +3,12 @@
     margin: 0 auto;
 }
 
-.module-top-row {
+.module-topandbottom-row {
     position: relative;
     width: 100%;
     min-height: 150px;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
 }
 
 .module-middle-row {
@@ -20,6 +19,68 @@
     text-align: center;
 }
 
+.coaching-circle {
+    margin: 0 auto;
+    padding-top: 25px;
+    font-family: var(--main-font); 
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--idewe-blue-dark);
+    background-color: var(--idewe-white);
+    height: 110px;
+    width: 110px; 
+    border-radius: 60px;
+    margin-top: -10px;
+    z-index: 2;
+}
+
+/* Module Lines */
+.line {
+    height: 100px;
+    position: absolute;
+    z-index:0;
+
+    &-paineducation {
+        @extend .line;
+        top: 50px;
+    }
+    
+    &-emotions {
+        @extend .line;
+        left: 120px;
+        top: -130px;
+        transform: rotate(-55deg);
+    }
+
+    &-activity {
+        @extend .line;
+        right: 120px;
+        top: -130px;
+        transform: rotate(55deg);
+    }
+
+    &-movement {
+        @extend .line;
+        right: 130px;
+        top: -90px;
+        transform: rotate(125deg);
+    }
+
+    &-social {
+        @extend .line;
+        left: 130px;
+        top: -90px;
+        transform: rotate(-125deg);
+    }
+
+    &-stress {
+        @extend .line;
+        height: 150px;
+        top: -150px;
+    }
+}
+
+/* Tutorial Popovers */
 .tutorial-content {
     font-family: var(--main-font);
     font-size: 14px;
