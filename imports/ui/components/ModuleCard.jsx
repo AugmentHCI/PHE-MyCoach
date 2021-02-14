@@ -8,7 +8,7 @@ import "./ModuleCard.scss";
 
 import Icon from './Illustrations/Icon.jsx';
 import PillButton from './PillButton.jsx';
-import Art from './Illustrations/Art.jsx';
+import Illustration from './Illustrations/Illustration.jsx';
 
 const T = i18n.createComponent("Common");
 
@@ -61,7 +61,7 @@ function ModuleCard(props) {
                     <div className={"module-card-number" + lockedSuffix}>Onderdeel {props.number}</div>
                     <div className={"module-card-title" + lockedSuffix}>{titleHTML}</div>
                 </div>
-                <Art image={props.image + lockedSuffix} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}></Art>
+                <Illustration image={props.image + lockedSuffix} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}></Illustration>
             </div>
             <div className={"module-card-bottom" + lockedSuffix}>
                 <div className="module-card-bottom-row">

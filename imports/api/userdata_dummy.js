@@ -4,6 +4,7 @@ const UserData = {
     "interactions": {
         "INTRODUCTION": true,
         "INTRODUCTION_VIDEO": true,
+        "INTRODUCTION_POPOVERS": false,
     },
     "answers": {
         "PE-MOD1-Q1": true,

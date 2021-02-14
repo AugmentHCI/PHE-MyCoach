@@ -16,6 +16,7 @@
         "@molejs/highlight-words-core": "^0.1.1",
         "@nivo/bar": "^0.61.1",
         "@nivo/line": "^0.61.1",
+        "antd": "^4.12.3",
         "bcrypt": "^5.0.0",
         "bootstrap": "^4.6.0",
         "browserslist": "^4.16.3",

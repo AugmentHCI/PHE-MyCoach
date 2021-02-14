@@ -2,27 +2,35 @@ import React, { useState, useEffect } from "react";
 import { FlowRouter } from "meteor/kadira:flow-router";
 import FadeIn from "react-fade-in";
 
-import "./MyCoach.scss";
-import UserData from "../../api/userdata_dummy.js";
+/* Ant-Design Popover */
+import { Popover } from 'antd';
+import 'antd/dist/antd.css';
 
-// Import internationalization files
+import UserData from "../../api/userdata_dummy.js";
+import "./MyCoach.scss";
+
+/* Import internationalization files */
 import i18n from 'meteor/universe:i18n';
 import "../../../i18n/nl.i18n.json";
 import "../../../i18n/fr.i18n.json";
 import "../../../i18n/en.i18n.json";
 
-// Import components
+/* Import components */
 import ActionButton from "../components/ActionButton.jsx";
 import AppModal from "../components/AppModal.jsx";
 import ModuleButton from "../components/ModuleButton.jsx";
+import Button from "../components/Button.jsx";
 
-// Instance of React translate component, "Common" refers to the namespace of the i18n files
+/* Instance of React translate component, "Common" refers to the namespace of the i18n files */
 const T = i18n.createComponent("Common");
 
 export default function MyCoach(props) {
 
     const userData = UserData;
     const [updatePage, setUpdatePage] = useState(false);
+
+    const [showTutorial1, updateShowTutorial1] = useState(true);
+    const [showTutorial2, updateShowTutorial2] = useState(true);
 
     // Get locale from URL routing (see also routes.jsx file)
     function setLocale() {
@@ -73,10 +81,23 @@ export default function MyCoach(props) {
             <FadeIn>
                 <h1>My Coach</h1>
                 <h2>MIJN TODO'S</h2>
+                <Popover
+                    content={<div style={{fontFamily: "var(--main-font)", fontSize:"14px", color:"var(--idewe-black)"}}><h4 style={{color:"var(--idewe-blue)"}}>Shortcuts</h4>Hier zie jij je shortcuts waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog shortcuts toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/><Button color="blue" width="fit" size="small" action={()=> updateShowTutorial1(false)}>Volgende</Button></div>}
+                    placement="bottom"
+                    trigger="click"
+                    visible={showTutorial1}
+                    onVisibleChange={() => updateShowTutorial1(false)}>
                 <ActionButton icon={"writing"} action={() => FlowRouter.go(`/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
                 <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
+                </Popover>
 
                 <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
+                <Popover
+                    content={<div style={{fontFamily: "var(--main-font)", fontSize:"14px", color:"var(--idewe-black)"}}><h4 style={{color:"var(--idewe-blue)"}}>Coaching</h4>Hier zie jij je persoonlijk coachingtraject.<br/>Hoe vaker jij je dagelijse coaching<br/>bekijkt, hoe meer modules je vrijspeelt.<br/>Probeer dus elke dag je coaching te voltooien<br/><Button color="blue" width="fit" size="small" action={()=> updateShowTutorial2(false)}>Begrepen</Button></div>}
+                    placement="bottom"
+                    trigger="click"
+                    visible={!showTutorial1 && showTutorial2}
+                    onVisibleChange={() => updateShowTutorial2(false)}>
                 <div className="module-container">
                     <div style={{position: "relative", width: "100%", minHeight: "150px", display: "flex", justifyContent: "center", marginTop:"20px"}}>
                         <ModuleButton  code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/mycoach/paineducation/`)} data={userData.progress.PAINEDUCATION}></ModuleButton>
@@ -100,6 +121,7 @@ export default function MyCoach(props) {
                         <div style={{borderLeft:calculateLineColor("STRESS"), height: "150px", position: "absolute", top: "-150px"}}/>
                     </div>    
                 </div> 
+                </Popover>
             </FadeIn>
         </div>
     )
