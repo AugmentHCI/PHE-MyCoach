@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ModuleButton.scss";
 
 export default function ModuleButton(props) {
@@ -8,12 +8,16 @@ export default function ModuleButton(props) {
     const radius = diameter / 2 - ( stroke / 2 );
     const circumference = (diameter / 2 - ( stroke / 2 )) * 2 * Math.PI;
 
-    const progressSuffix = props.data.OVERALL === "COMPLETED" ? " completed" : (props.data.OVERALL === "NOT_STARTED" ? " locked" : "")
+    const [isPressed, press] = useState(false);
+
+    let progressSuffix = props.data.OVERALL === "COMPLETED" ? " completed" : (props.data.OVERALL === "NOT_STARTED" ? " locked" : "")
+    if (isPressed) progressSuffix += " pressed";
 
     /**
      * Handle the click action, and display visually
      */
     function handleOnClick() {
+        press(false);
         if (props.onClick && props.data.OVERALL !== "NOT_STARTED") props.onClick();
     }
 
@@ -44,24 +48,28 @@ export default function ModuleButton(props) {
         return <div style={{zIndex: "1"}}>{props.title}</div>
     }
 
-    return <div className={"modulebutton-" + props.code + progressSuffix} onClick={() => handleOnClick()}>
-        {generateTitle()}
-        {calculateProgress() < 100 && calculateProgress() > 0 && <svg
-        className="progress-ring"
-        width={diameter}
-        height={diameter}>
-        <circle
-            className="progress-ring-circle"
-            transform= "rotate(-90deg)"
-            stroke="var(--idewe-blue-dark)"
-            strokeDasharray={circumference + " " + circumference}
-            strokeLinecap="round"
-            strokeDashoffset = {setProgress(calculateProgress())}
-            strokeWidth={stroke}
-            fill="transparent"
-            r={radius}
-            cx={diameter / 2}
-            cy={diameter / 2 - 1}/>
-        </svg>}
+    return <div 
+        className={"modulebutton-" + props.code + progressSuffix} 
+        onClick={() => handleOnClick()}
+        onTouchStart={() => press(true)}
+        onTouchEnd={() => press(false)}>
+            {generateTitle()}
+            {calculateProgress() < 100 && calculateProgress() > 0 && <svg
+            className="progress-ring"
+            width={diameter}
+            height={diameter}>
+            <circle
+                className="progress-ring-circle"
+                transform= "rotate(-90deg)"
+                stroke="var(--idewe-blue-dark)"
+                strokeDasharray={circumference + " " + circumference}
+                strokeLinecap="round"
+                strokeDashoffset = {setProgress(calculateProgress())}
+                strokeWidth={stroke}
+                fill="transparent"
+                r={radius}
+                cx={diameter / 2}
+                cy={diameter / 2 - 1}/>
+            </svg>}
     </div>
 }
