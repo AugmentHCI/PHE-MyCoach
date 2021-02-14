@@ -20,6 +20,28 @@
     text-align: center;
 }
 
+.tutorial-content {
+    font-family: var(--main-font);
+    font-size: 14px;
+    color:var(--idewe-black)
+}
+
+.tutorial-content h4 {
+    color: var(--idewe-blue);
+}
+
+.tutorial-button-row {
+    overflow: auto;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+.tutorial-illustration {
+    display: flex;
+    justify-content: center;
+}
+
 .ant-popover-inner {
     border-radius: 10px;
 }
