@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import FadeIn from 'react-fade-in';
 
-import './SubmoduleParser.scss';
-
-// Import components
+/* Import components */
 import NavigationBar from '../../components/NavigationBar.jsx';
-import ModuleCard from '../../components/ModuleCard.jsx';
+import ModuleCard from '../../components/MyCoach/ModuleCard.jsx';
 
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import CardsParser from './CardsParser.jsx';
+
+import './SubmoduleParser.scss';
 
 export default function SubmoduleParser(props) {
 

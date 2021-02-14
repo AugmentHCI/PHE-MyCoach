@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FlowRouter } from "meteor/kadira:flow-router";
 import FadeIn from "react-fade-in";
 
@@ -18,7 +18,7 @@ import "../../../i18n/en.i18n.json";
 /* Import components */
 import ActionButton from "../components/ActionButton.jsx";
 import AppModal from "../components/AppModal.jsx";
-import ModuleButton from "../components/ModuleButton.jsx";
+import ModuleButton from "../components/MyCoach/ModuleButton.jsx";
 import Button from "../components/Button.jsx";
 import Illustration from "../components/Illustrations/Illustration.jsx";
 

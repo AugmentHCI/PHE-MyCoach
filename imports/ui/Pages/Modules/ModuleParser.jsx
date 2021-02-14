@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import FadeIn from 'react-fade-in';
 
-// Import internationalization files
+/* Import internationalization files */
 import i18n from 'meteor/universe:i18n';
 import "../../../../i18n/nl.i18n.json"
 import "../../../../i18n/fr.i18n.json"
 import "../../../../i18n/en.i18n.json"
 
-// [TEMP] Use dummy user data
+/* [TEMP] Use dummy user data */
 import UserData from '../../../api/userdata_dummy.js';
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 
-// Import components
+/* Import components */
 import ActionButton from '../../components/ActionButton.jsx';
 import Card from '../../components/Card.jsx';
 import NavigationBar from '../../components/NavigationBar.jsx';
-import ModuleCard from '../../components/ModuleCard.jsx';
+import ModuleCard from '../../components/MyCoach/ModuleCard.jsx';
 import './ModuleParser.scss';
 
 
