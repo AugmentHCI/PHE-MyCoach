@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.scss';
 
-function Card(props) {
+export default function Card(props) {
     
     const T = i18n.createComponent("Common");
 
@@ -19,5 +19,3 @@ function Card(props) {
         </div>
     )
 }
-
-export default Card;

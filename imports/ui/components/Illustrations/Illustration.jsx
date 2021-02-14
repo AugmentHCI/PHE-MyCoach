@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import './Illustration.scss';
 
 
-function Illustration(props) {
+export default function Illustration(props) {
 
     const image = '/illustrations/' + props.image + '.svg';
 
@@ -13,5 +13,3 @@ function Illustration(props) {
         </Fragment>
     );
 }
-
-export default Illustration;

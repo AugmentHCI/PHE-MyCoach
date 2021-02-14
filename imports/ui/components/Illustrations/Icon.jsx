@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import './Icon.scss';
 
 
-function Icon(props) {
+export default function Icon(props) {
 
     const iconClass = props.color ? "icon-" + props.color : "icon-black";
 
@@ -13,5 +13,3 @@ function Icon(props) {
         </Fragment>
     );
 }
-
-export default Icon;

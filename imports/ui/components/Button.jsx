@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Button.scss';
 
-function Button(props) {
+export default function Button(props) {
 
     const [isPressed, press] = useState(false);
 
@@ -33,5 +33,3 @@ function Button(props) {
         </button>
     )
 }
-
-export default Button;

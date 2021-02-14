@@ -12,7 +12,7 @@ import PillButton from '../PillButton.jsx';
 
 const T = i18n.createComponent("Common");
 
-function ModuleCard(props) {
+export default function ModuleCard(props) {
 
     const lockedSuffix = props.locked ? "-locked" : "";
     const iconColor = props.locked ? "gray-dark" : "blue";
@@ -84,5 +84,3 @@ function ModuleCard(props) {
             </div>
         </div>);
 }
-
-export default ModuleCard;

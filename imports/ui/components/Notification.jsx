@@ -9,7 +9,7 @@ import Alert from 'react-bootstrap/Alert';
 
 const T = i18n.createComponent("Common");
 
-function NotificationAlert(props) {
+export default function NotificationAlert(props) {
 
   const [open, toggleOpen] = useState(true);
 
@@ -25,5 +25,3 @@ function NotificationAlert(props) {
 
     else {return <React.Fragment></React.Fragment>}
 }
-
-export default NotificationAlert;

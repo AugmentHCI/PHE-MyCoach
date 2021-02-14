@@ -3,7 +3,7 @@ import './ActionButton.scss';
 
 import Icon from './Illustrations/Icon.jsx';
 
-function ActionButton(props) {
+export default function ActionButton(props) {
     
     const T = i18n.createComponent("Common");
 
@@ -33,5 +33,3 @@ function ActionButton(props) {
         </button>
     )
 }
-
-export default ActionButton;

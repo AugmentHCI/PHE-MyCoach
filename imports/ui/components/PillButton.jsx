@@ -13,7 +13,7 @@ const T = i18n.createComponent("Common");
  * 
  * @param {*} props 
  */
-function PillButton(props) {
+export default function PillButton(props) {
 
     const noOutline = ["information", "time"];
 
@@ -44,5 +44,3 @@ function PillButton(props) {
             </div>
         </button>);
 }
-
-export default PillButton;

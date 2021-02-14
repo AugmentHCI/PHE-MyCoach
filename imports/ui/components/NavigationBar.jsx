@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './NavigationBar.scss';
 import Icon from './Illustrations/Icon.jsx';
 
-function NavigationBar(props) {
+export default function NavigationBar(props) {
 
     const noNavigationBar = ["MyProgress", "MyCoach"]
     
@@ -21,5 +21,3 @@ function NavigationBar(props) {
         </div>
     )
 }
-
-export default NavigationBar;
