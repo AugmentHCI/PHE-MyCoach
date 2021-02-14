@@ -59,6 +59,14 @@ export default function MyCoach(props) {
         setUpdatePage(!updatePage);
     }
 
+    function calculateLineColor(activity) {
+        switch (userData.progress[activity].OVERALL) {
+            case "NOT_STARTED": return "3px solid var(--idewe-gray-dark)";
+            case "IN_PROGRESS": return "3px solid var(--idewe-blue)";
+            case "COMPLETED":   return "3px solid var(--idewe-blue-dark)";
+        }
+    }
+
     return (
         <div className="container">
             {handleIntroduction()}
@@ -72,24 +80,24 @@ export default function MyCoach(props) {
                 <div className="module-container">
                     <div style={{position: "relative", width: "100%", minHeight: "150px", display: "flex", justifyContent: "center", marginTop:"20px"}}>
                         <ModuleButton  code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/mycoach/paineducation/`)} data={userData.progress.PAINEDUCATION}></ModuleButton>
-                        <div style={{borderLeft:"3px solid var(--idewe-blue)", height: "100px", position: "absolute", top: "150px"}}/>
+                        <div style={{borderLeft:calculateLineColor("PAINEDUCATION"), height: "100px", position: "absolute", top: "50px"}}/>
                     </div>
                     <div style={{position: "relative", width: "100%", minHeight: "100px", display: "flex", textAlign:"center"}}>
                         <ModuleButton  code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/mycoach/thoughtsemotions/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
-                        <div style={{margin:"0 auto", paddingTop:"20px", fontFamily:"var(--main-font", fontSize:"24px", fontWeight: "600", color:"var(--idewe-blue-dark)", backgroundColor:"var(--idewe-white", height:"120px", width: "120px", borderRadius: "60px", marginTop: "35px", zIndex: "2"}}>Mijn <br/>coaching</div>
-                        <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/mycoach/activitywork/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
+                        <div style={{margin:"0 auto", paddingTop:"25px", fontFamily:"var(--main-font", fontSize:"18px", fontWeight: "700", color:"var(--idewe-blue-dark)", backgroundColor:"var(--idewe-white", height:"110px", width: "110px", borderRadius: "60px", marginTop: "-10px", zIndex: "2"}}>Mijn <br/>coaching</div>
+                        <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/mycoach/activitywork/`)} data={userData.progress.ACTIVITYWORK}></ModuleButton>
                     </div>     
                     <div style={{position: "relative", width: "100%", minHeight: "100px", display: "flex", textAlign:"center"}}>
-                        <ModuleButton  code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/mycoach/movement/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
-                        <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/mycoach/social/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
-                        <div style={{borderLeft:"3px solid var(--idewe-gray-dark)", height: "100px", position: "absolute", left: "150px", top: "-140px", transform: "rotate(-55deg)", zIndex:"0"}}/>
-                        <div style={{borderLeft:"3px solid var(--idewe-gray-dark)", height: "100px", position: "absolute", right: "150px", top: "-140px", transform: "rotate(55deg)", zIndex:"0"}}/>
-                        <div style={{borderLeft:"3px solid var(--idewe-gray-dark)", height: "100px", position: "absolute", right: "150px", top: "-60px", transform: "rotate(125deg)", zIndex:"0"}}/>
-                        <div style={{borderLeft:"3px solid var(--idewe-gray-dark)", height: "100px", position: "absolute", left: "150px", top: "-60px", transform: "rotate(-125deg)", zIndex:"0"}}/>
+                        <ModuleButton  code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/mycoach/movement/`)} data={userData.progress.MOVEMENT}></ModuleButton>
+                        <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/mycoach/social/`)} data={userData.progress.SOCIAL}></ModuleButton>
+                        <div style={{borderLeft:calculateLineColor("THOUGHTSEMOTIONS"), height: "100px", position: "absolute", left: "120px", top: "-130px", transform: "rotate(-55deg)", zIndex:"0"}}/>
+                        <div style={{borderLeft:calculateLineColor("ACTIVITYWORK"), height: "100px", position: "absolute", right: "120px", top: "-130px", transform: "rotate(55deg)", zIndex:"0"}}/>
+                        <div style={{borderLeft:calculateLineColor("MOVEMENT"), height: "100px", position: "absolute", right: "130px", top: "-90px", transform: "rotate(125deg)", zIndex:"0"}}/>
+                        <div style={{borderLeft:calculateLineColor("SOCIAL"), height: "100px", position: "absolute", left: "130px", top: "-90px", transform: "rotate(-125deg)", zIndex:"0"}}/>
                     </div>
                     <div style={{position: "relative", width: "100%", minHeight: "150px", display: "flex", justifyContent: "center"}}>
-                        <ModuleButton  code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/mycoach/stress/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
-                        <div style={{borderLeft:"3px solid var(--idewe-gray-dark)", height: "150px", position: "absolute", top: "-150px"}}/>
+                        <ModuleButton  code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/mycoach/stress/`)} data={userData.progress.STRESS}></ModuleButton>
+                        <div style={{borderLeft:calculateLineColor("STRESS"), height: "150px", position: "absolute", top: "-150px"}}/>
                     </div>    
                 </div> 
             </FadeIn>

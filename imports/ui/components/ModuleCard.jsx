@@ -67,9 +67,9 @@ function ModuleCard(props) {
                 <div className="module-card-bottom-row">
                     <div className="module-card-information">{props.description}</div>
                     <div className="module-card-icon">
-                        <div className="module-card-icon-circle" style={{marginBottom: "5px"}} onClick={() => toggleClosed()}>
+                    {!props.hideButton && <div className="module-card-icon-circle" style={{marginBottom: "5px"}} onClick={() => toggleClosed()}>
                             <Icon image="next" style={{transform:"rotate(-90deg)", marginTop:"-4px"}} width="14px" color={iconColor}/>
-                        </div>
+                        </div>}
                     </div>
                 </div>
                 <div className="module-card-bottom-row">

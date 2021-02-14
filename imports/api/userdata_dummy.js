@@ -26,6 +26,38 @@ const UserData = {
             "TE-MOD3": "NOT_STARTED",
             "TE-MOD4": "NOT_STARTED",
             "TE-MOD5": "NOT_STARTED"
+        },
+        "ACTIVITYWORK": {
+            "OVERALL": "NOT_STARTED",
+            "ACT-MOD1": "NOT_STARTED",
+            "ACT-MOD2": "NOT_STARTED",
+            "ACT-MOD3": "NOT_STARTED",
+            "ACT-MOD4": "NOT_STARTED",
+            "ACT-MOD5": "NOT_STARTED"
+        },
+        "MOVEMENT": {
+            "OVERALL": "NOT_STARTED",
+            "MOV-MOD1": "NOT_STARTED",
+            "MOV-MOD2": "NOT_STARTED",
+            "MOV-MOD3": "NOT_STARTED",
+            "MOV-MOD4": "NOT_STARTED",
+            "MOV-MOD5": "NOT_STARTED"
+        },
+        "SOCIAL": {
+            "OVERALL": "NOT_STARTED",
+            "SOC-MOD1": "NOT_STARTED",
+            "SOC-MOD2": "NOT_STARTED",
+            "SOC-MOD3": "NOT_STARTED",
+            "SOC-MOD4": "NOT_STARTED",
+            "SOC-MOD5": "NOT_STARTED"
+        },
+        "STRESS": {
+            "OVERALL": "NOT_STARTED",
+            "STR-MOD1": "NOT_STARTED",
+            "STR-MOD2": "NOT_STARTED",
+            "STR-MOD3": "NOT_STARTED",
+            "STR-MOD4": "NOT_STARTED",
+            "STR-MOD5": "NOT_STARTED"
         }
     }
 }

@@ -3,7 +3,12 @@ import "./ModuleButton.scss";
 
 export default function ModuleButton(props) {
 
-    const progressSuffix = props.data.OVERALL === "DONE" ? " finished" : (props.data.OVERALL === "NOT_STARTED" ? " locked" : "")
+    const diameter = 120;
+    const stroke = 14;
+    const radius = diameter / 2 - ( stroke / 2 );
+    const circumference = (diameter / 2 - ( stroke / 2 )) * 2 * Math.PI;
+
+    const progressSuffix = props.data.OVERALL === "COMPLETED" ? " completed" : (props.data.OVERALL === "NOT_STARTED" ? " locked" : "")
 
     /**
      * Handle the click action, and display visually
@@ -28,7 +33,7 @@ export default function ModuleButton(props) {
      * @param {Int} percent The percentage of completed submodules
      */
     function setProgress(percent) {
-        const circumference = 71 * 2 * Math.PI;
+        const circumference = radius * 2 * Math.PI;
         return circumference - percent / 100 * circumference;
     }
 
@@ -41,22 +46,22 @@ export default function ModuleButton(props) {
 
     return <div className={"modulebutton-" + props.code + progressSuffix} onClick={() => handleOnClick()}>
         {generateTitle()}
-        {calculateProgress() < 100 && <svg
+        {calculateProgress() < 100 && calculateProgress() > 0 && <svg
         className="progress-ring"
-        width="150"
-        height="150">
+        width={diameter}
+        height={diameter}>
         <circle
             className="progress-ring-circle"
             transform= "rotate(-90deg)"
             stroke="var(--idewe-blue-dark)"
-            strokeDasharray="446 446"
+            strokeDasharray={circumference + " " + circumference}
             strokeLinecap="round"
             strokeDashoffset = {setProgress(calculateProgress())}
-            strokeWidth="14"
+            strokeWidth={stroke}
             fill="transparent"
-            r="68"
-            cx="75"
-            cy="74"/>
+            r={radius}
+            cx={diameter / 2}
+            cy={diameter / 2 - 1}/>
         </svg>}
     </div>
 }
