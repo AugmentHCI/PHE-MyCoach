@@ -2,8 +2,8 @@ const UserData = {
     "userID": "dummy",
     "profile": 3,
     "interactions": {
-        "INTRODUCTION": false,
-        "INTRODUCTION_VIDEO": false,
+        "INTRODUCTION": true,
+        "INTRODUCTION_VIDEO": true,
     },
     "answers": {
         "PE-MOD1-Q1": true,

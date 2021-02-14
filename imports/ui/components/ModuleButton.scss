@@ -1,0 +1,81 @@
+.modulebutton {
+    position: absolute;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    color: var(--idewe-white);
+    background-color: var(--idewe-blue);
+    text-align: center;
+
+    font-size: 18px;
+    font-family: var(--main-font);
+    font-weight: 600;
+
+    &-PE {
+        @extend .modulebutton;
+        padding-top: 62px;
+    }
+
+    &-ACT {
+        @extend .modulebutton;
+        padding-top: 50px;       
+        position: absolute;
+        right: 0;
+        top: -40px;
+    }
+
+    &-EM {
+        @extend .modulebutton;
+        padding-top: 55px;
+        position: absolute;
+        left: 0;
+        top: -40px;
+
+    }
+
+    &-MOV {
+        @extend .modulebutton;
+        padding-top: 62px;       
+        position: absolute;
+        right: 0;
+        top: -10px;
+    }
+
+    &-SOC {
+        @extend .modulebutton;
+        padding-top: 50px;
+        position: absolute;
+        left: 0;
+        top: -10px;
+    }
+
+    &-STR {
+        @extend .modulebutton;
+        padding-top: 50px;
+        position: absolute;
+        top: -10px;
+    }
+}
+
+.locked {
+    background-color: var(--idewe-gray-dark);
+    transform: scale(0.8);
+}
+
+.finished {
+    background-color: var(--idewe-blue-dark);
+    transform: scale(0.8);
+}
+
+.modulebutton-text {
+    margin:auto;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+}

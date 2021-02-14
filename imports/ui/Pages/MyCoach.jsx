@@ -13,6 +13,7 @@ import "../../../i18n/en.i18n.json";
 // Import components
 import ActionButton from "../components/ActionButton.jsx";
 import AppModal from "../components/AppModal.jsx";
+import ModuleButton from "../components/ModuleButton.jsx";
 
 // Instance of React translate component, "Common" refers to the namespace of the i18n files
 const T = i18n.createComponent("Common");
@@ -31,7 +32,6 @@ export default function MyCoach(props) {
     }
 
     function handleIntroduction() {
-        console.log(!userData.interactions.INTRODUCTION);
         if (!userData.interactions.INTRODUCTION) 
         return (
             <AppModal show={true} title={"Welkom!"} defaultOption={"Naar het filmpje"} notifyParent={handleIntroductionSeen}>
@@ -64,11 +64,25 @@ export default function MyCoach(props) {
             <FadeIn>
                 <h1>My Coach</h1>
                 <h2>MIJN TODO'S</h2>
-                <ActionButton icon={"writing"}>Voeg toe aan je pijnlogboek</ActionButton>
+                <ActionButton icon={"writing"} action={() => FlowRouter.go(`/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
                 <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
 
                 <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
-                <ActionButton action={() => FlowRouter.go(`/mycoach/paineducation/`)}>Pijn-educatie</ActionButton>
+                <div style={{position: "relative", width: "100%", minHeight: "150px", display: "flex", justifyContent: "center", marginTop:"20px"}}>
+                    <ModuleButton  code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/mycoach/paineducation/`)} data={userData.progress.PAINEDUCATION}></ModuleButton>
+                </div>
+                <div style={{position: "relative", width: "100%", minHeight: "100px", display: "flex", textAlign:"center"}}>
+                    <ModuleButton  code={"EM"} title={"Gedachten en Emoties"} onClick={() => FlowRouter.go(`/mycoach/thoughtsemotions/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
+                    <div style={{margin:"0 auto", paddingTop:"40px", fontFamily:"var(--main-font", fontSize:"24px", fontWeight: "600", color:"var(--idewe-blue-dark)"}}>Mijn <br/>coaching</div>
+                    <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/mycoach/activitywork/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
+                </div>     
+                <div style={{position: "relative", width: "100%", minHeight: "100px", display: "flex", textAlign:"center"}}>
+                    <ModuleButton  code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/mycoach/movement/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
+                    <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/mycoach/social/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
+                </div>
+                <div style={{position: "relative", width: "100%", minHeight: "150px", display: "flex", justifyContent: "center"}}>
+                    <ModuleButton  code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/mycoach/stress/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
+                </div>     
             </FadeIn>
         </div>
     )
