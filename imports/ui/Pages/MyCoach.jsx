@@ -68,21 +68,23 @@ export default function MyCoach(props) {
                 <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
 
                 <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
-                <div style={{position: "relative", width: "100%", minHeight: "150px", display: "flex", justifyContent: "center", marginTop:"20px"}}>
-                    <ModuleButton  code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/mycoach/paineducation/`)} data={userData.progress.PAINEDUCATION}></ModuleButton>
-                </div>
-                <div style={{position: "relative", width: "100%", minHeight: "100px", display: "flex", textAlign:"center"}}>
-                    <ModuleButton  code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/mycoach/thoughtsemotions/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
-                    <div style={{margin:"0 auto", paddingTop:"40px", fontFamily:"var(--main-font", fontSize:"24px", fontWeight: "600", color:"var(--idewe-blue-dark)"}}>Mijn <br/>coaching</div>
-                    <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/mycoach/activitywork/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
-                </div>     
-                <div style={{position: "relative", width: "100%", minHeight: "100px", display: "flex", textAlign:"center"}}>
-                    <ModuleButton  code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/mycoach/movement/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
-                    <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/mycoach/social/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
-                </div>
-                <div style={{position: "relative", width: "100%", minHeight: "150px", display: "flex", justifyContent: "center"}}>
-                    <ModuleButton  code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/mycoach/stress/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
-                </div>     
+                <div style={{maxWidth:"480px", margin:"0 auto"}}>
+                    <div style={{position: "relative", width: "100%", minHeight: "150px", display: "flex", justifyContent: "center", marginTop:"20px"}}>
+                        <ModuleButton  code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/mycoach/paineducation/`)} data={userData.progress.PAINEDUCATION}></ModuleButton>
+                    </div>
+                    <div style={{position: "relative", width: "100%", minHeight: "100px", display: "flex", textAlign:"center"}}>
+                        <ModuleButton  code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/mycoach/thoughtsemotions/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
+                        <div style={{margin:"0 auto", paddingTop:"40px", fontFamily:"var(--main-font", fontSize:"24px", fontWeight: "600", color:"var(--idewe-blue-dark)"}}>Mijn <br/>coaching</div>
+                        <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/mycoach/activitywork/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
+                    </div>     
+                    <div style={{position: "relative", width: "100%", minHeight: "100px", display: "flex", textAlign:"center"}}>
+                        <ModuleButton  code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/mycoach/movement/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
+                        <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/mycoach/social/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
+                    </div>
+                    <div style={{position: "relative", width: "100%", minHeight: "150px", display: "flex", justifyContent: "center"}}>
+                        <ModuleButton  code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/mycoach/stress/`)} data={userData.progress.THOUGHTSEMOTIONS}></ModuleButton>
+                    </div>    
+                </div> 
             </FadeIn>
         </div>
     )
