@@ -27,14 +27,14 @@ const T = i18n.createComponent("Common");
 
 export default function MyCoach(props) {
 
-    const userData = props.data ? props.data : UserData;
+    const userData = props.data ? (Object.entries(props.data).length === 0 ? UserData : props.data) : UserData;
     const [updatePage, setUpdatePage] = useState(false);
     const [tapCount, updateTapCount] = useState(0);
     const [language, setLanguage] = useState(FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE");
 
-    const [showTutorial1, updateShowTutorial1] = useState(true);
-    const [showTutorial2, updateShowTutorial2] = useState(true);
-    const [showTutorial3, updateShowTutorial3] = useState(true);
+    const [showTutorial1, updateShowTutorial1] = useState(!userData.interactions.INTRODUCTION_POPUPS);
+    const [showTutorial2, updateShowTutorial2] = useState(!userData.interactions.INTRODUCTION_POPUPS);
+    const [showTutorial3, updateShowTutorial3] = useState(!userData.interactions.INTRODUCTION_POPUPS);
 
     // Get locale from URL routing (see also routes.jsx file)
     function setLocale() {
@@ -168,8 +168,8 @@ export default function MyCoach(props) {
 
     return (
         <div className="container">
-            {tapCount < 5 && renderSplashScreen()}
-            {tapCount >= 5 && <React.Fragment>
+            {(tapCount < 5 && !props.noSplash) && renderSplashScreen()}
+            {(tapCount >= 5 || props.noSplash) && <React.Fragment>
             {handleIntroduction()}
             <FadeIn>
                 <h1>My Coach</h1>

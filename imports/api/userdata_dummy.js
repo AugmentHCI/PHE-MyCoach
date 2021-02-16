@@ -1,9 +1,10 @@
 const UserData = {
     "userID": "dummy",
     "profile": 3,
+    "recent_pain": true,
     "interactions": {
-        "INTRODUCTION": false,
-        "INTRODUCTION_VIDEO": false,
+        "INTRODUCTION": true,
+        "INTRODUCTION_VIDEO": true,
         "INTRODUCTION_POPOVERS": false,
     },
     "answers": {
