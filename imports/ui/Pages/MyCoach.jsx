@@ -3,7 +3,7 @@ import { FlowRouter } from "meteor/kadira:flow-router";
 import FadeIn from "react-fade-in";
 
 /* Ant-Design Popover */
-import { Popover } from 'antd';
+import Popover from 'antd/lib/popover';
 import 'antd/dist/antd.css';
 
 import UserData from "../../api/userdata_dummy.js";
