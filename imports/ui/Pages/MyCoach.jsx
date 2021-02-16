@@ -27,7 +27,7 @@ const T = i18n.createComponent("Common");
 
 export default function MyCoach(props) {
 
-    const userData = UserData;
+    const userData = props.data ? props.data : UserData;
     const [updatePage, setUpdatePage] = useState(false);
 
     const [showTutorial1, updateShowTutorial1] = useState(true);

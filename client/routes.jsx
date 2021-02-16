@@ -8,13 +8,14 @@ import MyCoach from '../imports/ui/Pages/MyCoach.jsx';
 import ModuleParser from '../imports/ui/Pages/Modules/ModuleParser.jsx';
 import SubmoduleParser from '../imports/ui/Pages/Modules/SubmoduleParser.jsx';
 import PainLogbook from '../imports/ui/Pages/Modules/PainLogbook.jsx';
+import AdminScreen from '../imports/ui/AdminScreen.jsx';
 
 //route when no parameters are passed -> MyProgress will render with dummy data
 FlowRouter.route('/', {
-  name: 'MyProgress',
+  name: 'Admin',
   action(){
     mount( App, {
-      content: <MyProgress />
+      content: <AdminScreen/>
     })
   }
 })
