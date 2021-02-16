@@ -79,7 +79,7 @@ export default function ModuleParser(props) {
      * @param {String} submodule Corresponding submodule
      */
     function routeToSubmodule(submodule) {
-        FlowRouter.go(`/${language}/mycoach/paineducation/${submodule}`);
+        FlowRouter.go(`/${language}/mycoach/module/${FlowRouter.getParam('module')}/${submodule}`);
     }
 
     /* Fetch module data only once, avoids infinite re-rendering due to state-changes */
