@@ -1,25 +1,22 @@
 .control-panel {
     height: 100vh;
-    float: left;
+    width: 100vw;
     background-color: var(--idewe-background-solid);
-}
-
-.screen-panel {
-    position: relative;
-    height: 100vh;
-    float: right;
-    background-color: var(--idewe-background-solid);
+    padding: 50px 10px 0px 50px;
+    font-family: var(--main-font);
+    color: var(--idewe-blue-dark);
 }
 
 .phone-screen {
-    top:110px;
+    position: absolute;
+    top: 10vh;
     right: 30px;
     width: 376px;
     height: 660px;
     overflow: hidden;
-    float: left;
     z-index: 4;
-    outline: 2px solid black;
+    outline: 2px solid var(--idewe-white);
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
 }
 
 /*

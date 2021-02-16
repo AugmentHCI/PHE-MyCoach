@@ -29,6 +29,8 @@ export default function MyCoach(props) {
 
     const userData = props.data ? props.data : UserData;
     const [updatePage, setUpdatePage] = useState(false);
+    const [tapCount, updateTapCount] = useState(0);
+    const [language, setLanguage] = useState(FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE");
 
     const [showTutorial1, updateShowTutorial1] = useState(true);
     const [showTutorial2, updateShowTutorial2] = useState(true);
@@ -92,7 +94,7 @@ export default function MyCoach(props) {
                 trigger="click"
                 visible={showTutorial1}
                 onVisibleChange={() => updateShowTutorial1(false)}>
-            <ActionButton icon={"writing"} action={() => FlowRouter.go(`/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
+            <ActionButton icon={"writing"} action={() => FlowRouter.go(`/${language}/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
             <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
             </Popover>
         </React.Fragment>)
@@ -131,39 +133,49 @@ export default function MyCoach(props) {
                 trigger="click"
                 visible={!showTutorial2 && showTutorial3}
                 onVisibleChange={() => updateShowTutorial3(false)}>
-                    <ModuleButton code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/mycoach/paineducation/`)} data={userData.progress.PAINEDUCATION}/>
+                    <ModuleButton code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/paineducation/`)} data={userData.progress.PAINEDUCATION}/>
                     </Popover>
                     <div className="line-paineducation" style={{borderLeft:calculateLineColor("PAINEDUCATION")}}/>
                 </div>
                 <div className="module-middle-row">
-                    <ModuleButton code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/mycoach/thoughtsemotions/`)} data={userData.progress.THOUGHTSEMOTIONS}/>
+                    <ModuleButton code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/thoughtsemotions/`)} data={userData.progress.THOUGHTSEMOTIONS}/>
                     <div className="coaching-circle">Mijn <br/>coaching</div>
-                    <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/mycoach/activitywork/`)} data={userData.progress.ACTIVITYWORK}/>
+                    <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/activitywork/`)} data={userData.progress.ACTIVITYWORK}/>
                 </div>     
                 <div className="module-middle-row">
-                    <ModuleButton code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/mycoach/movement/`)} data={userData.progress.MOVEMENT}/>
-                    <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/mycoach/social/`)} data={userData.progress.SOCIAL}/>
+                    <ModuleButton code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/movement/`)} data={userData.progress.MOVEMENT}/>
+                    <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/social/`)} data={userData.progress.SOCIAL}/>
                     <div className="line-emotions" style={{borderLeft:calculateLineColor("THOUGHTSEMOTIONS")}}/>
                     <div className="line-activity" style={{borderLeft:calculateLineColor("ACTIVITYWORK")}}/>
                     <div className="line-movement" style={{borderLeft:calculateLineColor("MOVEMENT")}}/>
                     <div className="line-social" style={{borderLeft:calculateLineColor("SOCIAL")}}/>
                 </div>
                 <div className="module-topandbottom-row">
-                    <ModuleButton code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/mycoach/stress/`)} data={userData.progress.STRESS}/>
+                    <ModuleButton code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/stress/`)} data={userData.progress.STRESS}/>
                     <div className="line-stress" style={{borderLeft:calculateLineColor("STRESS")}}/>
                 </div>    
             </div> 
         </React.Fragment>)
     }
 
+    function renderSplashScreen() {
+        return (<div className="container" style={{justifyContent: "center", textAlign: "center", margin: "0 auto"}}>
+            <h2 style={{marginTop: "60px", color:"var(--idewe-blue", fontSize:"20px", fontWeight:"600"}} onClick={() => updateTapCount(tapCount+1)}>Nog even geduld</h2>
+            <p style={{fontFamily:"var(--main-font)", color:"var(--idewe-blue-dark)"}}>We zijn nog even bezig aan de MyCoach.</p>
+            <img src="/illustrations/working.svg" width={"70%"} style={{marginTop:"80px"}}></img>
+        </div>)
+    }
+
     return (
         <div className="container">
+            {tapCount < 5 && renderSplashScreen()}
+            {tapCount >= 5 && <React.Fragment>
             {handleIntroduction()}
             <FadeIn>
                 <h1>My Coach</h1>
                 {renderTodos()}
                 {renderModules()}
-            </FadeIn>
+            </FadeIn></React.Fragment>}
         </div>
     )
 };

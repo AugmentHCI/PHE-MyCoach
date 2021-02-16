@@ -27,6 +27,7 @@ const T = i18n.createComponent("Common");
 export default function ModuleParser(props) {
 
     const [moduleData, updateModuleData] = useState({});
+    const [language, setLanguage] = useState(FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE");
 
     const [openSubmodule, updateOpenSubmodule] = useState("");
 
@@ -78,7 +79,7 @@ export default function ModuleParser(props) {
      * @param {String} submodule Corresponding submodule
      */
     function routeToSubmodule(submodule) {
-        FlowRouter.go(`/mycoach/paineducation/${submodule}`);
+        FlowRouter.go(`/${language}/mycoach/paineducation/${submodule}`);
     }
 
     /* Fetch module data only once, avoids infinite re-rendering due to state-changes */

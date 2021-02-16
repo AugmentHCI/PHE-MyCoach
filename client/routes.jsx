@@ -10,7 +10,7 @@ import SubmoduleParser from '../imports/ui/Pages/Modules/SubmoduleParser.jsx';
 import PainLogbook from '../imports/ui/Pages/Modules/PainLogbook.jsx';
 import AdminScreen from '../imports/ui/AdminScreen.jsx';
 
-//route when no parameters are passed -> MyProgress will render with dummy data
+
 FlowRouter.route('/', {
   name: 'Admin',
   action(){
@@ -23,7 +23,7 @@ FlowRouter.route('/', {
 /*
   MY COACH ROUTES
 */
-FlowRouter.route('/mycoach/', {
+FlowRouter.route('/:language/mycoach/', {
   name: 'MyCoach',
   action(){ 
     mount( App, {
@@ -32,7 +32,7 @@ FlowRouter.route('/mycoach/', {
   }
 })
 
-FlowRouter.route('/mycoach/painlogbook', {
+FlowRouter.route('/:language/mycoach/painlogbook', {
   name: 'PainLogbook',
   action(){ 
     mount( App, {
@@ -41,7 +41,7 @@ FlowRouter.route('/mycoach/painlogbook', {
   }
 })
 
-FlowRouter.route('/mycoach/:module', {
+FlowRouter.route('/:language/mycoach/module/:module', {
   name: 'Paineducation',
   action(){ 
     mount( App, {
@@ -50,11 +50,20 @@ FlowRouter.route('/mycoach/:module', {
   }
 })
 
-FlowRouter.route('/mycoach/:module/:submodule', {
+FlowRouter.route('/:language/mycoach/module/:module/:submodule', {
   name: 'Paineducation',
   action(){ 
     mount( App, {
       content: <SubmoduleParser /> 
+    })
+  }
+})
+
+FlowRouter.route('/:language/mycoach/:token', {
+  name: 'MyCoach',
+  action(){ 
+    mount( App, {
+      content: <MyCoach /> 
     })
   }
 })
@@ -75,6 +84,16 @@ FlowRouter.route('/:token', {
 
 // Route when language and token are passed: these are the parameters that should always be passed, previous two routings should be obsolete
 FlowRouter.route('/:language/:token', {
+  name: 'MyProgress',
+  action(){ 
+    mount( App, {
+      content: <MyProgress /> 
+    })
+  }
+})
+
+// Route when language and token are passed: these are the parameters that should always be passed, previous two routings should be obsolete
+FlowRouter.route('/:language/myprogress/:token', {
   name: 'MyProgress',
   action(){ 
     mount( App, {
