@@ -92,7 +92,7 @@ export default function MyCoach(props) {
                 </div>}
                 placement="bottom"
                 trigger="click"
-                visible={showTutorial1}
+                visible={userData.interactions.INTRODUCTION && userData.interactions.INTRODUCTION_VIDEO && showTutorial1}
                 onVisibleChange={() => updateShowTutorial1(false)}>
             <ActionButton icon={"writing"} action={() => FlowRouter.go(`/${language}/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
             <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
