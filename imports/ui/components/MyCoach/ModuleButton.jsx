@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./ModuleButton.scss";
 
+import Icon from "../Illustrations/Icon.jsx";
+
 export default function ModuleButton(props) {
 
     const diameter = 120;
@@ -53,6 +55,7 @@ export default function ModuleButton(props) {
         onClick={() => handleOnClick()}
         onTouchStart={() => press(true)}
         onTouchEnd={() => press(false)}>
+            {props.data.OVERALL === "COMPLETED" && <div className="module-checkicon"><Icon color="blue-dark" image={"check"}></Icon></div>}
             {generateTitle()}
             {calculateProgress() < 100 && calculateProgress() > 0 && <svg
             className="progress-ring"

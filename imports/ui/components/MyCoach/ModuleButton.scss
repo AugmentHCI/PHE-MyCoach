@@ -59,6 +59,18 @@
     }
 }
 
+.module-checkicon {
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    width: 30px;
+    top: 0px;
+    right: 0px;
+    height: 30px;
+    border-radius: 15px;
+    padding: 5px;
+    background-color: var(--idewe-white);
+}
+
 .modulebutton.pressed {
     transform: scale(0.95);
 }
