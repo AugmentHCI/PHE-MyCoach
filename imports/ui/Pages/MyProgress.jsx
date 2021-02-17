@@ -363,7 +363,7 @@ export default class MyProgress extends Component {
             currentParameter={this.state.parameter} 
             dontDisplay={this.state.compareParameter} 
             onChange={this.handleParameterChange}
-            demo={this.state.userToken === "demo" ? true : false}>
+            demo={(this.state.userToken === "demo" || this.state.devEnvironment) ? true : false}>
           </ParameterPicker>
           <p className="subtitle"><T>myProgress.insights.period</T></p>
           <div style={{display:"flex", width: "100%"}}>
@@ -380,7 +380,7 @@ export default class MyProgress extends Component {
                 dontDisplay={this.state.parameter} 
                 onChange={this.handleCompareParameterChange}
                 style={{width: compareWidth}}
-                demo={this.state.userToken === "demo" ? true : false}>
+                demo={(this.state.userToken === "demo" || this.state.devEnvironment) ? true : false}>
               </ParameterPicker>
             </div>
             {this.state.compareParameter !== "" && 
