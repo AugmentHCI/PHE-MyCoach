@@ -32,6 +32,8 @@ export default function MyCoach(props) {
     const [tapCount, updateTapCount] = useState(0);
     const [language, setLanguage] = useState(FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE");
 
+    console.log(userData.interactions.INTRODUCTION_POPUPS)
+
     const [showTutorial1, updateShowTutorial1] = useState(!userData.interactions.INTRODUCTION_POPUPS);
     const [showTutorial2, updateShowTutorial2] = useState(!userData.interactions.INTRODUCTION_POPUPS);
     const [showTutorial3, updateShowTutorial3] = useState(!userData.interactions.INTRODUCTION_POPUPS);
@@ -45,10 +47,11 @@ export default function MyCoach(props) {
     }
 
     function handleIntroduction() {
-        if (!userData.interactions.INTRODUCTION) 
+        const introText = userData.RECENT_PAIN ? "Welkom bij de HealthEmpower coaching. Heb je momenteel pijn? Dan ben je niet alleen. Eén op vier werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe  je op een goede manier kan omgaan met je pijn. Dit heeft een positieve impact op je functioneren. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Bekijk hier alvast het introductiefilmpje." : "Welkom bij de Health Empower coaching. Heb jij momenteel geen pijn? Gelukkig! 1 op de 4 werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe je het risico op pijn in de toekomst kan beperken. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Bekijk hier alvast het introductiefilmpje."
+        if (!userData.interactions.INTRODUCTION_TEXT) 
         return (
             <AppModal show={true} title={"Welkom!"} defaultOption={"Naar het filmpje"} notifyParent={handleIntroductionSeen}>
-            Welkom bij de HealthEmpower coaching. Heb je momenteel pijn? Dan ben je niet alleen. Eén op vier werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe  je op een goede manier kan omgaan met je pijn. Dit heeft een positieve impact op je functioneren. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Bekijk hier alvast het introductiefilmpje.
+            {introText}
         </AppModal>
         )
         if (!userData.interactions.INTRODUCTION_VIDEO) 
@@ -62,7 +65,7 @@ export default function MyCoach(props) {
     }
 
     function handleIntroductionSeen() {
-        userData.interactions.INTRODUCTION = true;
+        userData.interactions.INTRODUCTION_TEXT = true;
         setUpdatePage(!updatePage);
     }
 
@@ -92,7 +95,7 @@ export default function MyCoach(props) {
                 </div>}
                 placement="bottom"
                 trigger="click"
-                visible={userData.interactions.INTRODUCTION && userData.interactions.INTRODUCTION_VIDEO && showTutorial1}
+                visible={userData.interactions.INTRODUCTION_TEXT && userData.interactions.INTRODUCTION_VIDEO && showTutorial1}
                 onVisibleChange={() => updateShowTutorial1(false)}>
             <ActionButton icon={"writing"} action={() => FlowRouter.go(`/${language}/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
             <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>

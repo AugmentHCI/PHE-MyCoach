@@ -3,7 +3,7 @@ const PainEducationScript = {
     "title": "Pijneducatie",
     "submodule-parts": 6,
     "submodules": [{
-        "id": "PE-MOD1",
+        "id": "PE_MOD1",
         "title": "Ontstaan van pijn",
         "title-markup": ["Ontstaan", "van pijn"],
         "part": 1,
@@ -92,7 +92,7 @@ const PainEducationScript = {
         ]
     },
     {
-        "id": "PE-MOD2",
+        "id": "PE_MOD2",
         "title": "Rol van het brein",
         "title-markup": ["Rol van", "het brein"],
         "part": 2,
@@ -216,7 +216,7 @@ const PainEducationScript = {
         }]
     },
     {
-        "id": "PE-MOD3",
+        "id": "PE_MOD3",
         "title": "Gevoeligheid zenuwstelsel",
         "title-markup": ["Gevoeligheid", "zenuwstelsel"],
         "part": 3,
@@ -307,7 +307,7 @@ const PainEducationScript = {
         }]
     },
     {
-        "id": "PE-MOD4",
+        "id": "PE_MOD4",
         "title": "Chronische pijn",
         "title-markup": ["Chronische", "pijn"],
         "part": 4,
@@ -473,7 +473,7 @@ const PainEducationScript = {
         }]
     },
     {
-        "id": "PE-MOD5",
+        "id": "PE_MOD5",
         "title": "Pijn beïnvloeden",
         "title-markup": ["Pijn", "beïnvloeden"],
         "part": 5,

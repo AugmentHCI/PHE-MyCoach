@@ -7,12 +7,15 @@ import Button from "./components/Button.jsx";
 /* AntDesign Components */
 import Switch from 'antd/lib/switch';
 import Select from 'antd/lib/select';
+import Collapse from 'antd/lib/collapse';
+import Radio from 'antd/lib/radio';
 
 
 import UserData from "../api/userdata_dummy.js";
 import './AdminScreen.scss';
 
 const { Option } = Select;
+const { Panel } = Collapse;
 
 export default function AdminScreen(props) {
 
@@ -44,21 +47,31 @@ function ControlPanel(props) {
     handleChange("interactions", value, interaction);
   }
 
+  function handleProgressChange(module, progress) {
+    let newUserData = JSON.parse(JSON.stringify(userData));
+    let moduleLength = Object.keys(newUserData.progress[module]).length;
+    for (const [submodule, status] of Object.entries(newUserData.progress[module])) {
+      if (submodule === "OVERALL" && progress === 0) {newUserData.progress[module][submodule] = "NOT_STARTED"} 
+      else if (submodule === "OVERALL" && progress < moduleLength) {newUserData.progress[module][submodule] = "IN_PROGRESS"} 
+      else if (submodule === "OVERALL" && progress === moduleLength) {newUserData.progress[module][submodule] = "COMPLETED"} 
+      else if (submodule.slice(-1) < progress) {newUserData.progress[module][submodule] = "COMPLETED"} 
+      else if (submodule.slice(-1) === progress) {newUserData.progress[module][submodule] = "IN_PROGRESS"} 
+      else if (submodule.slice(-1) > progress) {newUserData.progress[module][submodule] = "NOT_STARTED"} 
+    }
+    setUserData(newUserData);
+  }
+
   function handleChange(id, value, subId) {
-    console.log(userData.interactions);
-    console.log(subId + " will be " + value)
     let newUserData = JSON.parse(JSON.stringify(userData));
     subId ? newUserData[id][subId] = value : newUserData[id] = value;
-    console.log(newUserData.interactions)
     setUserData(newUserData);
-    console.log("UPDATED STATE")
   }
 
   function renderUserData() {
     controlPanelHtml = [];
     for (const [field, value] of Object.entries(userData)) {
       switch (field) {
-        case "profile":
+        case "PROFILE":
           controlPanelHtml.push(<div>Coaching-profiel: <Select defaultValue={value} style={{ width: 120 }} onChange={handleProfileChange}>
           <Option value={1}>Profiel 1</Option>
           <Option value={2}>Profiel 2</Option>
@@ -67,13 +80,29 @@ function ControlPanel(props) {
           <Option value={5}>Profiel 5</Option>
           <Option value={6}>Profiel 6</Option></Select></div>)
           break;
+        case "RECENT_PAIN":
+          controlPanelHtml.push(<div>Recentelijk pijn gehad: <Switch checked={userData.RECENT_PAIN} onChange={() => handleChange("RECENT_PAIN", !userData.RECENT_PAIN)}></Switch></div>)
+          break;
         case "interactions":
           controlPanelHtml.push(<h4>Interactions</h4>)
           for (const [interaction, didInteract] of Object.entries(userData.interactions)) 
             { controlPanelHtml.push(<div>{interaction}: <Switch checked={didInteract} onChange={() => handleInteractionChange(interaction)}></Switch></div>) }
           break;
         case "progress":
-
+          controlPanelHtml.push(<h4>Progress</h4>)
+          let collapseHtml = [];
+          for (const [module, submodules] of Object.entries(userData.progress)) {
+            let panelHtml = [];
+            let current = userData.progress[module].OVERALL === "COMPLETED" ? 6 : 0;
+            for (const [submodule, status] of Object.entries(userData.progress[module])) {
+              if (status === "IN_PROGRESS") current = submodule.slice(-1);
+              panelHtml.push( <div><Radio value={submodule.slice(-1) === "L" ? 0 : submodule.slice(-1)}>{submodule === "OVERALL" ? "Geen": submodule}</Radio></div>);
+            }
+            panelHtml.push( <div><Radio value={Object.keys(userData.progress[module]).length}>Alle</Radio></div>);
+            collapseHtml.push(<Panel header={module}><Radio.Group onChange={(e) => handleProgressChange(module, e.target.value)} value={current}>{panelHtml}</Radio.Group></Panel>) 
+          }
+          controlPanelHtml.push(<div style={{width:"300px"}}><Collapse accordion>{collapseHtml}</Collapse></div>);
+          break;
       }
     }
     return controlPanelHtml;
@@ -82,6 +111,6 @@ function ControlPanel(props) {
   return (<div className="control-panel" width={"100%"}>
       <h1>MyCoach - Settings</h1>
       {renderUserData()}
-      <Button width={"fit"} action={() => props.updateData(JSON.parse(JSON.stringify(userData)))}>Update MyCoach</Button>
+      <Button width={"fit"} action={() => props.updateData(JSON.parse(JSON.stringify(userData)))}>Pas toe</Button>
     </div>)
 }
