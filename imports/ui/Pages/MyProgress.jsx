@@ -512,7 +512,7 @@ export default class MyProgress extends Component {
         <div>
           <FadeIn><h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1></FadeIn>
         </div>
-        {this.state.devEnvironment && <React.Fragment>
+        {(this.state.devEnvironment || this.state.userToken === "demo") && <React.Fragment>
           <h2><FadeIn><T>{`myProgress.mysteps.mySteps`}</T></FadeIn></h2>
           {this.state.tap_count > 3 && jwt_decode(this.state.userToken)}
           {this.renderFitBitCard()}
