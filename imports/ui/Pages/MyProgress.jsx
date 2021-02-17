@@ -226,7 +226,22 @@ export default class MyProgress extends Component {
         userToken: token
       }, (error, result) => {
         if (error) {
-          console.log(`FITBIT - Unable to retreive FitBit Data: ${error.message}.`)
+          const devUrl = `https://connector-dev.idewe.be/healthempower/phe/api/fit-data?van=${selectedPeriod[0]}&tot=${selectedPeriod[1]}`;
+          Meteor.call("getData", {
+            url: devUrl,
+            userToken: token
+          }, (error, result) => {
+            // OPTION 1.1.1: DEVELOPMENT environment failed as well -> No data was fetched (Possibly an incorrect token)
+            if (error) {
+              this.setState({callError: error.message})
+              console.log(`QUESTIONNAIRE - Development environment failed as well: ${error.message}.`)
+            } 
+            // OPTION 1.1.2: DEVELOPMENT environment successful -> Data is fetched (means that token was a DEV token)
+            else {
+              console.log("QUESTIONNAIRE - Successful fallback to development environment.")
+              this.setState({fitbitConnected: true, fitData: result.data});
+            }
+          }); 
         } else {
           if (!result.data) {console.log(`FITBIT - Successfully retreived FitBit data (Statuscode ${result.statusCode}). Data empty however.`); this.setState({fitbitConnected: false}); }
           // Save fitbit data also to state
@@ -252,7 +267,22 @@ export default class MyProgress extends Component {
         userToken: token
       }, (error, result) => {
         if (error) {
-          console.log(`FITBIT-DAILY - Unable to retreive FitBit Data: ${error.message}.`)
+          const devUrl = `https://connector-dev.idewe.be/healthempower/phe/api/fit-data?van=${dateString}&tot=${dateString}`;
+          Meteor.call("getData", {
+            url: devUrl,
+            userToken: token
+          }, (error, result) => {
+            // OPTION 1.1.1: DEVELOPMENT environment failed as well -> No data was fetched (Possibly an incorrect token)
+            if (error) {
+              this.setState({callError: error.message})
+              console.log(`QUESTIONNAIRE - Development environment failed as well: ${error.message}.`)
+            } 
+            // OPTION 1.1.2: DEVELOPMENT environment successful -> Data is fetched (means that token was a DEV token)
+            else {
+              console.log("QUESTIONNAIRE - Successful fallback to development environment.")
+              this.setState({fitbitConnected: true, fitData: result.data});
+            }
+          }); 
         } else {
           if (!result.data) {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}). Data empty however.`);}
           // Save fitbit data also to state
@@ -482,7 +512,7 @@ export default class MyProgress extends Component {
         <div>
           <FadeIn><h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1></FadeIn>
         </div>
-        {this.state.userToken === "demo" && <React.Fragment>
+        {this.state.devEnvironment && <React.Fragment>
           <h2><FadeIn><T>{`myProgress.mysteps.mySteps`}</T></FadeIn></h2>
           {this.state.tap_count > 3 && jwt_decode(this.state.userToken)}
           {this.renderFitBitCard()}
