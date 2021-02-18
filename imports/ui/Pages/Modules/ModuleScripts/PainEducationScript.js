@@ -593,7 +593,11 @@ const PainEducationScript = {
             "card-contents": [
                 {
                     "type": "Text",
-                    "content": "Je hebt nu een grote hoeveelheid informatie meegekregen dat je zal helpen bij het omgaan met je pijn. Elk van deze kaarten worden verder besproken en uitgediept in andere modules. Neem snel een kijkje op het startscherm van de MyCoach om je vrijgespeelde modules te bekijken!"
+                    "content": "We zijn aan het einde gekomen van deze eerste coaching module, goed gedaan! Je hebt ondertussen een beter idee van hoe pijn ontstaat, welke factoren pijn kunnen beïnvloeden en wat je kan doen om pijn te beperken of beter met pijn om te gaan. Nu is het aan jou!"
+                },
+                {
+                    "type": "Text",
+                    "content": "Neem snel een kijkje op het startscherm van de MyCoach om je vrijgespeelde modules te bekijken!"
                 }]
         },
     ]
