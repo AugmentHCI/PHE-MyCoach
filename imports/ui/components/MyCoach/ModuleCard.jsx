@@ -18,7 +18,7 @@ export default function ModuleCard(props) {
     const iconColor = props.locked ? "gray-dark" : "blue";
     const iconImage = {"IN_PROGRESS": {image: "loading", color: "blue"}, "COMPLETED": {image: "check", color: "blue"}, "NOT_STARTED": {image: "locked", color: "gray-dark"}}
 
-    /* UI - Open card */
+    /* UI - Closed card */
     if (props.closed) return (<div className={"module-card-closed" + lockedSuffix} onClick={() => toggleClosed()}>
         <div className={"module-status-icon"}>
             <Icon image={iconImage[props.status].image} color={iconImage[props.status].color} width={"18px"}></Icon>
@@ -66,11 +66,11 @@ export default function ModuleCard(props) {
             <div className={"module-card-bottom" + lockedSuffix}>
                 <div className="module-card-bottom-row">
                     <div className="module-card-information">{props.description}</div>
-                    <div className="module-card-icon">
-                    {!props.hideButton && <div className="module-card-icon-circle" style={{marginBottom: "5px"}} onClick={() => toggleClosed()}>
+                    {!props.hideButton && <div className="module-card-icon">
+                    <div className="module-card-icon-circle" style={{marginBottom: "5px"}} onClick={() => toggleClosed()}>
                             <Icon image="next" style={{transform:"rotate(-90deg)", marginTop:"-4px"}} width="14px" color={iconColor}/>
-                        </div>}
-                    </div>
+                        </div>
+                    </div>}
                 </div>
                 <div className="module-card-bottom-row">
                     <div className="module-card-pills">

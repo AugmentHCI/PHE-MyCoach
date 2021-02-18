@@ -474,11 +474,11 @@ const PainEducationScript = {
     },
     {
         "id": "PE_MOD5",
-        "title": "Pijn beïnvloeden",
-        "title-markup": ["Pijn", "beïnvloeden"],
+        "title": "Omgaan met pijn",
+        "title-markup": ["Omgaan", "met pijn"],
         "part": 5,
-        "description": "Ten slotte gaan we leren op welke manier jij je pijn kan beïnvloeden. We gaan je enkele tips en hulpmiddelen aanreiken die je gaan helpen bij het beter omgaan met je pijn.",
-        "duration": "15 minuten",
+        "description": "In dit onderdeel leer je op welke factoren je een invloed kan uitoefenen. Zo kan je pijn in de toekomst beperken of kan je beter met pijn leren omgaan.",
+        "duration": "20 minuten",
         "type": "Informatief",
         "image": "paininfluence",
         "imageWidth": "215px",
@@ -488,14 +488,115 @@ const PainEducationScript = {
             "card-contents": [
                 {
                     "type": "Text",
-                    "content": "TODO: Dit onderdeel wordt nog verder uitgewerkt."
+                    "content": "Ondertussen weet je hoe pijn ontstaat en hoe pijn chronisch kan worden. Hier heb je nog eens een overzicht van al de factoren die pijn kunnen beïnvloeden:"
                 },
                 {
-                    "type": "Video",
-                    "link": "https://player.vimeo.com/video/507002347",
-                }
+                    "type": "List",
+                    "numbered": true,
+                    "content": ["Leeftijd", "Oorspronkelijke hoeveelheid schade", "Overbelasten", "Langdurige stress", "Ongezonde levensstijl", "Ongezonde beweeggewoontes", "Aandacht, gedachten en emoties", "Sociale omgeving"]
+                },
+                {
+                    "type": "Text",
+                    "content": "Aan de eerste 2 factoren kan je jammer genoeg niets doen. Maar op de overige factoren kan je wel impact uitoefenen!"
+                },
             ]
-        }]
+        },
+        {
+            "id": "PE-MOD5-CARD2",
+            "title": "Wat kan je doen",
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "content": "Binnen de Health Empower app hebben we een aantal modules ontwikkeld waar al deze factoren aan bod komen! Je vindt er tal van tips en oefeningen. Hieronder heb je alvast een overzich van hoe we met elk van deze factoren aan de slag gaan."
+                }]
+        },
+        {
+            "id": "PE-MOD5-CARD3",
+            "title": "Overbelasten",
+            "icon": "🏋🏽‍♀️",
+            "overview": true,
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "overview": true,
+                    "content": "Jezelf vaak overbelasten leidt tot toegenomen spierspanning en een verminderde doorbloeding van je weefsels. Dit verhoogt het aantal pijn gerelateerde prikkels die naar de hersenen worden gestuurd, wat het zenuwstel overgevoelig kan maken. Overbelasten kan je beperken door je taken slim aan te pakken en ergonomisch te werken. Let op, ook onderbelasten leiden tot meer pijnklachten. Door onderbelasten wordt je lichaam minder fit waaroor je jezelf sneller kan overbelasten. Dit zien we vaak bij mensen met chronische pijn. Daarom is het belangrijk om je belastbaarheid geleidelijk te verhogen."
+                }]
+        },
+        {
+            "id": "PE-MOD5-CARD4",
+            "title": "Langdurige stress",
+            "icon": "😩",
+            "overview": true,
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "overview": true,
+                    "content": "In tegenstelling tot acute stress (wat zorgt voor pijndemping, verhoogde alertheid, ..) heeft langdurige stress een hoop negatieve gevolgen voor onze gezondheid. Naast het verhoogde risico op hart- en vaatziekten zorgt langdurige stress voor een toegenomen spierspanning en verminderde werking van de pijn dempende mechanismen. Probeer stress te beperken met een goede planning, door je grenzen af te bakenen en tijd vrij te maken voor zaken die je energie geven."
+                }]
+        },
+        {
+            "id": "PE-MOD5-CARD5",
+            "title": "Ongezonde levensstijl",
+            "icon": "🍔",
+            "overview": true,
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "overview": true,
+                    "content": "Een evenwichtige voeding en voldoende slaap zijn belangrijk om je lichaam fit en gezond te houden. Slaap is het beste moment voor je lichaam om te herstellen. Een gezonde voeding zorgt ervoor dat je lichaam de nodige voedingsstoffen krijgt om te herstellen. Bovendien is er steeds meer bewijs voor een relatie tussen ongezonde voeding en lichamelijke pijn, mede door een toegenome inflammatoire reactie van ons lichaam."
+                }]
+        },
+        {
+            "id": "PE-MOD5-CARD6",
+            "title": "Ongezonde beweeggewoontes",
+            "icon": "🏃🏾‍♂️",
+            "overview": true,
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "overview": true,
+                    "content": "Ons lichaam is gemaakt om te bewegen. Bewegen bevordert de doorbloeding en dit versterkt onze spieren en botten, houdt onze gewrichten soepel, verbetert de werking van het hart en verhoogt de concentratie. Hierdoor loop je minder risico op overbelasting."
+                },
+                {
+                    "type": "Text",
+                    "overview": true,
+                    "content": "Tijdens bewegen worden ook pijn dempende stoffen vrijgezet waardoor je minder kans hebt op een overgevoelig zenuwstelsel. Tot slot zet bewegen ook het gelukshormoon vrij wat een aangenaam gevoel geeft. Enkel maar voordelen dus! Bij mensen met chronische pijn werken de pijndempende mechanismen tijdens bewegen minder goed, wat zorgt voor meer pijn. Dit wilt niet zeggen dat zij hun lichaam schaden, ook voor hen is het belangrijk om voldoende te bewegen. Maar een goede opbouw is cruciaal."
+                }]
+        },
+        {
+            "id": "PE-MOD5-CARD7",
+            "title": "Gedachten en emoties",
+            "icon": "🤔",
+            "overview": true,
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "overview": true,
+                    "content": "Negatieve gedachten en emoties beïnvloeden ons gedrag, zorgen voor stress en verhogen de kans op een overgevoelig zenuwstelsel. Door veel aandacht te schenken aan je pijn, gaan je hersenen meer op deze prikkels letten en ze uitvergroten. Als je ook nog eens veel activiteiten gaat vermijden uit angst voor pijn of schade, dan zal je lichaam na verloop van tijd minder sterk worden. Dit verhoogt dan weer het risico op overbelasting en dus meer pijn. Beperk daarom foutieve of niet helpende gedachten en focus op waardevolle activiteiten. Ben je iets aan het doen wat je heel leuk vindt of je concentreert je op je activiteit? Dan filteren je hersen vanzelf al een deel van de pijn weg!"
+                }]
+        },
+        {
+            "id": "PE-MOD5-CARD8",
+            "title": "Sociale omgeving",
+            "icon": "👋🏽",
+            "overview": true,
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "overview": true,
+                    "content": "Onbegrip en bezorgdheid van de omgeving gaan gepaard met onaangename gevoelens, gedachten en stress. Dit kan een overgevoelig zenuwstelsel mee in de hand werken en leiden tot over- en onder belasting. Betrek je omgeving op een helpende manier door sociale steun te verhogen, je behoeften te formuleren en assertief te reageren."
+                }]
+        },
+        {
+            "id": "PE-MOD5-CARD9",
+            "title": "Module afgerond! 🎉",
+            "card-contents": [
+                {
+                    "type": "Text",
+                    "content": "Je hebt nu een grote hoeveelheid informatie meegekregen dat je zal helpen bij het omgaan met je pijn. Elk van deze kaarten worden verder besproken en uitgediept in andere modules. Neem snel een kijkje op het startscherm van de MyCoach om je vrijgespeelde modules te bekijken!"
+                }]
+        },
+    ]
     }]
 }
 

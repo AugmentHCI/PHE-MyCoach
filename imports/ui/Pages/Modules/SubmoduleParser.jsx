@@ -5,6 +5,7 @@ import FadeIn from 'react-fade-in';
 /* Import components */
 import NavigationBar from '../../components/NavigationBar.jsx';
 import ModuleCard from '../../components/MyCoach/ModuleCard.jsx';
+import Button from '../../components/Button.jsx';
 
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import CardsParser from './CardsParser.jsx';
@@ -35,7 +36,7 @@ export default function SubmoduleParser(props) {
                 if (card.getBoundingClientRect().top  > windowHeight) card.style.opacity = 0;
                 //else if (card.getBoundingClientRect().top  < 0) card.style.transform = `scale(${1 - (card.style.opacity / 2)})`;
                 else if (card.getBoundingClientRect().top  > 0) {
-                    card.style.opacity = 1 - (card.getBoundingClientRect().top / windowHeight / 1.3); 
+                    card.style.opacity = 1 - (card.getBoundingClientRect().top / windowHeight / 1.3) + 0.1; 
                     //card.style.transform = `scale(${0.5 + (card.style.opacity / 2)})`
                 }
 
@@ -67,6 +68,7 @@ export default function SubmoduleParser(props) {
                 </ModuleCard>
                 <hr className="module-hr-line"/>
                 <CardsParser cards={data.cards}></CardsParser>
+                <Button style={{marginBottom: "100px", textAlign: "center", justifyContent: "center"}} color="blue">Voltooi deze module</Button>
                 </FadeIn>
             </div>
         </React.Fragment>

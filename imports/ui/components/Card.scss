@@ -21,8 +21,11 @@
     @extend .card;
     background-color: var(--idewe-blue);
     color: var(--idewe-white);
-    margin-bottom: 50px;
   }
+}
+
+.card-header-div {
+  display: flex;
 }
 
 .card-scroll {
@@ -37,16 +40,48 @@
     color: var(--idewe-white)
   }
 }
+
+.card-icon-circle {
+  width: 30px;
+  height: 30px;
+  margin-left: 20px;
+  margin-top: 18px;
+  padding-top: 4px;
+  padding-left: 5px;
+  background-color: var(--idewe-white);
+  display: inline-block;
+  border-radius: 25px;
+}
   
 .card-header-title {
   font-family: var(--main-font);
   margin: 20px 10px 10px 20px;
   font-weight: 500;
   font-size: 18px;
+  display: inline-block;
   text-transform: uppercase;
   
   &-underline {
     @extend .card-header-title;
     text-decoration: underline;
   }
+}
+
+.card-overview-line {
+  width: 95%;
+  border: 0.3px solid var(--idewe-white);
+  opacity: 40%;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  border-radius: 2px;
+}
+
+.card-line {
+  width: 90%;
+  margin-left: 5%;
+  border: 0.5px solid var(--idewe-blue-dark);
+  opacity: 60%;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  border-radius: 2px;
 }

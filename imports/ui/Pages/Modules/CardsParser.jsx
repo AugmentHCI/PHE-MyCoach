@@ -23,7 +23,7 @@ function CardsParser(props) {
         cards.forEach(card => {
             if (Object.keys(card).length === 0) return; /* Empty card */
             contentsHTML.push(
-                <Card key={card.id} title={card.title} noTranslate overview={card.overview}>
+                <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
                     {createCardContent(card.id, card["card-contents"])}
                 </Card>
             );
