@@ -64,6 +64,9 @@
       "errorFitbitMessage": "Il semble que vous n'ayez pas encore connecté votre FitBit, connectez-la à l'application pour enregistrer votre activité.",
       "errorNoDataTitle": "Aucune donnée chargée",
       "errorNoDataMessage": "Il semble qu'une erreur s'est produite lors de la récupération de vos données. Contactez le support pour plus d'aide."
-    }
+    },
+    "fitbitpopupTitle": "Voir vos données de FitBit!",
+    "fitbitpopupText": "Vous pouvez maintenant voir vos pas quotidiens que vous avez mesurés avec votre FitBit. Vous pouvez également comparer les distances parcourues et le nombre total de pas avec d'autres paramètres dans votre Vue de détails.",
+    "fitbitpopupConfirmation": "Entendue"
   }
 }

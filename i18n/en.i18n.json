@@ -57,13 +57,16 @@
       "period": "For the period of",
       "compare": "Compare with",
       "delete": "Delete",
-      "steps": "My steps throughout the day"
+      "steps": "My daily steps"
     },
     "notifications": {
       "errorFitbitTitle": "Connect FitBit",
       "errorFitbitMessage": "It seems you don't have any FitBit data yet, connect it to the app to log your activity.",
       "errorNoDataTitle": "Couldn't load data",
       "errorNoDataMessage": "It seems an error has occured while retrieving your data. Contact Support for more help."
-    }
+    },
+    "fitbitpopupTitle": "Look into your FitBit data!",
+    "fitbitpopupText": "You can now see your daily steps you have measured with your FitBit. You can also compare walked distances and total steps with other parameters in your Insights.",
+    "fitbitpopupConfirmation": "Understood"
   }
 }

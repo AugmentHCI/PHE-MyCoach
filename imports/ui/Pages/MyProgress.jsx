@@ -31,12 +31,14 @@ import ActivityGraph from '../components/MyProgress/Graphs/ActivityGraph.jsx';
 import MonthlyActivityGraph from '../components/MyProgress/Graphs/MonthlyActivityGraph.jsx';
 import CalendarGraph from '../components/MyProgress/Graphs/CalendarGraph.jsx';
 import { StepsGraph } from '../components/MyProgress/Graphs/StepsGraph.jsx';
-import Icon from '../components/Illustrations/Icon.jsx';
 
-// import '../../db/LogMethods.jsx';
+import '../../db/LogMethods.jsx';
 
+import AppModal from '../components/AppModal.jsx';
 import NotificationAlert from '../components/Notification.jsx';
 import Card from '../components/Card.jsx';
+import Icon from '../components/Illustrations/Icon.jsx';
+import Illustration from '../components/Illustrations/Illustration.jsx';
 
 // Instance of React translate component, "Common" refers to the namespace of the i18n files
 const T = i18n.createComponent("Common");
@@ -50,6 +52,7 @@ export default class MyProgress extends Component {
     this.handleFitbitDateChange = this.handleFitbitDateChange.bind(this);
     this.handleParameterChange = this.handleParameterChange.bind(this);
     this.handleCompareParameterChange = this.handleCompareParameterChange.bind(this);
+    this.handleDidSeeFitBitPopup = this.handleDidSeeFitBitPopup.bind(this);
 
     // State contains some default settings when first loading MyProgress page
     this.state = {
@@ -62,12 +65,14 @@ export default class MyProgress extends Component {
       fitDataDayData: null,
       userToken: "",
       userID: null,
+      deelnemerID: null,
       fitbitConnected: false,
       parameter: "painIntensity",
       compareParameter: "",
       callError: "",
       devEnvironment: false,
-      tap_count: 0
+      tap_count: 0,
+      didSeeFitBitPopup: null
     };
   }
 
@@ -80,19 +85,24 @@ export default class MyProgress extends Component {
     this.fetchData(this.state.selectedPeriod, token, this.state.timeFrame);
     this.fetchFitbitData(this.state.selectedPeriod, token);
     this.fetchFitbitDayData(this.state.fitDataDay, token);
-    /*try {
-      console.log(jwt_decode(token).jti);
+
+    try {
       this.setState({
         userID: jwt_decode(token).rrnr,
-        deelnemerID: jwt_decode(token).deelnemerID
+        deelnemerID: jwt_decode(token).deelnemerId
       })
-      Meteor.loginWithPassword(this.state.userID, this.state.deelnemerID);
-      console.log("USER");
-      console.log(Meteor.user());
+      if (token === 'demo') {Meteor.call('logs.insert', 1111111, "MyProgress", "ACCESS"); }
+      else { 
+        Meteor.call('logs.insert', {userID: jwt_decode(token).deelnemerId, context: "MyProgress", action: "ACCESS"}, (error, result) => {
+          if (error) console.log("[MyProgress] - Could not log ACCESS");
+        });
+       }
+       Meteor.call('logs.didSeeFitBit', {userID: jwt_decode(token).deelnemerId, context: "MyProgress"}, (error, result) => {
+        if (error) console.log("[MyProgress] - Could not get 'didSeeFitBit' log");
+        else {console.log(`Has seen: ${result}`); this.setState({didSeeFitBitPopup: result})}
+      });
     }
-    catch {console.log("ERROR [MyProgress] - Could not infer user-rrnr number from JWT token.")}
-    if (token === 'demo') {Meteor.call('logs.insert', 111111, "MyProgress", "ACCESS");}
-    else { Meteor.call('logs.insert', this.state.userID, "MyProgress", "ACCESS"); }*/
+    catch { console.log("ERROR [MyProgress] - Could not infer user-rrnr or participantID number from JWT token.") }
   }
 
   setLocale() {
@@ -286,7 +296,7 @@ export default class MyProgress extends Component {
         } else {
           if (!result.data) {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}). Data empty however.`);}
           // Save fitbit data also to state
-          else {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}).`); console.log(result.data); this.setState({fitDataDayData: result.data}); }
+          else {console.log(`FITBIT-DAILY - Successfully retreived FitBit data (Statuscode ${result.statusCode}).`); this.setState({fitDataDayData: result.data}); }
         }
       }); 
     }
@@ -311,9 +321,29 @@ export default class MyProgress extends Component {
     this.fetchFitbitDayData(this.state.fitDataDay, this.state.userToken);
   }
 
-  /***
-   * UI Elements
-   */
+  handleDidSeeFitBitPopup() {
+    Meteor.call('logs.insert', {userID: this.state.deelnemerID, context: "MyProgress", action: "FITBIT_POPUP"}, (error, result) => {
+      if (error) console.log("[MyProgress] - Could not log FITBIT_POPUP");
+    });
+    this.setState({didSeeFitBitPopup: true});
+  }
+
+/***
+* UI Elements
+*/
+  renderFitBitModal() {
+    if (!this.state.didSeeFitBitPopup) {
+      return (<FadeIn>
+        <AppModal show={true} translate title={'myProgress.fitbitpopupTitle'} defaultOption={"myProgress.fitbitpopupConfirmation"} notifyParent={() => this.handleDidSeeFitBitPopup()}>
+        <div style={{justifyContent:"center", alignContent: "center", width: "100%"}}>
+          <Illustration image="fitbit" width="60%" style={{margin: "0 auto", display: "block", marginBottom: "20px"}}></Illustration>
+        </div>
+        <T>{`myProgress.fitbitpopupText`}</T>
+      </AppModal>
+      </FadeIn>)
+    }
+    return <React.Fragment/>
+  }
 
   renderTimePicker() {
     return (<React.Fragment>
@@ -362,8 +392,7 @@ export default class MyProgress extends Component {
           <ParameterPicker 
             currentParameter={this.state.parameter} 
             dontDisplay={this.state.compareParameter} 
-            onChange={this.handleParameterChange}
-            demo={(this.state.userToken === "demo" || this.state.devEnvironment) ? true : false}>
+            onChange={this.handleParameterChange}>
           </ParameterPicker>
           <p className="subtitle"><T>myProgress.insights.period</T></p>
           <div style={{display:"flex", width: "100%"}}>
@@ -379,8 +408,7 @@ export default class MyProgress extends Component {
                 currentParameter={this.state.compareParameter} 
                 dontDisplay={this.state.parameter} 
                 onChange={this.handleCompareParameterChange}
-                style={{width: compareWidth}}
-                demo={(this.state.userToken === "demo" || this.state.devEnvironment) ? true : false}>
+                style={{width: compareWidth}}>
               </ParameterPicker>
             </div>
             {this.state.compareParameter !== "" && 
@@ -395,52 +423,52 @@ export default class MyProgress extends Component {
       </Card></FadeIn>)
   }
 
-    // Renders weekly overviews: LineGraph Card and ActivityDots Card
-    renderOverviewWeekly() {
-      return (
-        <React.Fragment>
-          <FadeIn delay="300">
-          <Card title="myProgress.insights.insights" bodyStyle={{padding: '0', paddingBottom: '15px'}} underline>
-              <LineGraph 
-                parameter = {this.state.parameter}
-                data = {this.state.data}
-                fitData = {this.state.fitData}
-                comparison = {this.state.compareParameter}
-                locale = {i18n.getLocale()}
-              />
-          </Card>
-          <Card title="myProgress.activities.activities" underline>
-            <ActivityGraph 
-              data = {this.state.data}
-              locale = {i18n.getLocale()}
-            />
-          </Card>
-          </FadeIn>
-        </React.Fragment>)
-    }
-
-    // Renders monthly overview: CalendarGraph card and ActivityBar Card
-    renderOverviewMonthly() {
-      return (
-        <React.Fragment>
-          <Card title="myProgress.insights.insights" bodyStyle={{padding: '10px 5px'}} underline>
-            <CalendarGraph 
+  // Renders weekly overviews: LineGraph Card and ActivityDots Card
+  renderOverviewWeekly() {
+    return (
+      <React.Fragment>
+        <FadeIn delay="300">
+        <Card title="myProgress.insights.insights" bodyStyle={{padding: '0', paddingBottom: '15px'}} underline>
+            <LineGraph 
               parameter = {this.state.parameter}
               data = {this.state.data}
-              date = {this.state.selectedDate}
               fitData = {this.state.fitData}
               comparison = {this.state.compareParameter}
               locale = {i18n.getLocale()}
             />
-          </Card>
-          <Card title="myProgress.activities.activities" bodyStyle={{paddingBottom: '0', paddingRight: '0'}} underline>
-            <MonthlyActivityGraph
-              data = {this.state.data}
-              locale = {i18n.getLocale()}
-            />
-          </Card>
-        </React.Fragment>
-      )};
+        </Card>
+        <Card title="myProgress.activities.activities" underline>
+          <ActivityGraph 
+            data = {this.state.data}
+            locale = {i18n.getLocale()}
+          />
+        </Card>
+        </FadeIn>
+      </React.Fragment>)
+  }
+
+  /* Renders monthly overview: CalendarGraph card and ActivityBar Card */
+  renderOverviewMonthly() {
+    return (
+      <React.Fragment>
+        <Card title="myProgress.insights.insights" bodyStyle={{padding: '10px 5px'}} underline>
+          <CalendarGraph 
+            parameter = {this.state.parameter}
+            data = {this.state.data}
+            date = {this.state.selectedDate}
+            fitData = {this.state.fitData}
+            comparison = {this.state.compareParameter}
+            locale = {i18n.getLocale()}
+          />
+        </Card>
+        <Card title="myProgress.activities.activities" bodyStyle={{paddingBottom: '0', paddingRight: '0'}} underline>
+          <MonthlyActivityGraph
+            data = {this.state.data}
+            locale = {i18n.getLocale()}
+          />
+        </Card>
+      </React.Fragment>
+  )};
 
   renderFitBitCard() {
     let steps = this.state.fitDataDayData ? this.state.fitDataDayData.steps : 0;
@@ -484,7 +512,7 @@ export default class MyProgress extends Component {
           <T>{`myProgress.mysteps.distance`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{distance}</div>
           </div>
         </div>}
-        {steps === 0 && <div style={infostyleEmpty}><T>{`myProgress.mysteps.noSteps`}</T></div>}
+        {(!steps || steps === 0) && <div style={infostyleEmpty}><T>{`myProgress.mysteps.noSteps`}</T></div>}
       <StepsGraph data={this.state.fitDataDayData}></StepsGraph>
     </Card></FadeIn>
   }
@@ -508,15 +536,15 @@ export default class MyProgress extends Component {
     // OPTION 3: If call is succesful, display MyProgress screen
     else return (
       <div className="container">
-        {/*!this.state.fitbitConnected && this.renderConnectFitbitMessage()*/}
+        {this.renderFitBitModal()}
         <div>
           <FadeIn><h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1></FadeIn>
         </div>
-        {(this.state.devEnvironment || this.state.userToken === "demo") && <React.Fragment>
+        <React.Fragment>
           <h2><FadeIn><T>{`myProgress.mysteps.mySteps`}</T></FadeIn></h2>
           {this.state.tap_count > 3 && jwt_decode(this.state.userToken)}
           {this.renderFitBitCard()}
-        </React.Fragment>}
+        </React.Fragment>
         <h2><FadeIn delay="150"><T>{`myProgress.myinsights`}</T></FadeIn></h2>
         {this.renderInsightsCard()}
         {this.state.timeFrame == "weekly" && this.renderOverviewWeekly()}

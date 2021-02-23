@@ -24,8 +24,8 @@ export default class ParameterPicker extends Component {
               {(this.props.currentParameter !== "satisfaction" && this.props.dontDisplay !== "satisfaction") && <Dropdown.Item key={"satisfaction"} onClick={() => this.handleChange("satisfaction")}><T>myProgress.parameters.satisfaction</T></Dropdown.Item>}
               {(this.props.currentParameter !== "physicalTiredness" && this.props.dontDisplay !== "physicalTiredness") && <Dropdown.Item key={"physicalTiredness"} onClick={() => this.handleChange("physicalTiredness")}><T>myProgress.parameters.physicalTiredness</T></Dropdown.Item>}
               {(this.props.currentParameter !== "mentalTiredness" && this.props.dontDisplay !== "mentalTiredness") && <Dropdown.Item key={"mentalTiredness"} onClick={() => this.handleChange("mentalTiredness")}><T>myProgress.parameters.mentalTiredness</T></Dropdown.Item>}
-              {(this.props.currentParameter !== "distance" && this.props.dontDisplay !== "distance" && this.props.demo) && <Dropdown.Item key={"distance"} onClick={() => this.handleChange("distance")}><T>myProgress.parameters.distance</T></Dropdown.Item>}
-              {(this.props.currentParameter !== "steps" && this.props.dontDisplay !== "steps" && this.props.demo) && <Dropdown.Item key={"steps"} onClick={() => this.handleChange("steps")}><T>myProgress.parameters.steps</T></Dropdown.Item>}
+              {(this.props.currentParameter !== "distance" && this.props.dontDisplay !== "distance") && <Dropdown.Item key={"distance"} onClick={() => this.handleChange("distance")}><T>myProgress.parameters.distance</T></Dropdown.Item>}
+              {(this.props.currentParameter !== "steps" && this.props.dontDisplay !== "steps") && <Dropdown.Item key={"steps"} onClick={() => this.handleChange("steps")}><T>myProgress.parameters.steps</T></Dropdown.Item>}
           </DropdownButton>
         )
     }

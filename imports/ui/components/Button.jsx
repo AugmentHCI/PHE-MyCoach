@@ -14,7 +14,6 @@ export default function Button(props) {
     let buttonClass = props.disabled ? "button-inactive" : "button";
     buttonClass += isPressed ? " pressed" : "";
     if (props.isSelected) buttonClass += " selected";
-    console.log(props.isSelected);
 
     /* Generate Button Style */
     let style = props.style ? props.style : {};

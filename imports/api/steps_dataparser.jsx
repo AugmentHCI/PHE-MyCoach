@@ -14,7 +14,7 @@ export function setDataParserLocale(locale){
 export function aggregateStepsByHour(data) {
     let hourly = {}
     for (let i = 0; i < 24; i++) { hourly[i] = 0; }
-    if (data === null) return hourly;
+    if (data === null || data === undefined) return hourly;
     data.dataset.forEach(minute => {
         let hour = minute.time.split(":")[0];
         if (hour[0] === "0") hour = hour[1];

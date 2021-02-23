@@ -57,13 +57,16 @@
       "period": "Voor de periode van",
       "compare": "Vergelijk met",
       "delete": "Wis", 
-      "steps": "Mijn stappen doorheen de dag"
+      "steps": "Mijn dagelijkse stappen"
     },
     "notifications": {
       "errorFitbitTitle": "Verbind FitBit",
       "errorFitbitMessage": "Het lijkt er op dat je nog geen FitBit-data hebt. Verbind je FitBit met de app om je gegevens te loggen.",      
       "errorNoDataTitle": "Kon gegevens niet laden",
       "errorNoDataMessage": "Er is een error opgetreden bij het ophalen van je gegevens."
-    }
+    },
+    "fitbitpopupTitle": "Bekijk je FitBit gegevens!",
+    "fitbitpopupText": "Je kan nu je dagelijkse stappen zien die je met je FitBit hebt gemeten. Je kan ook je gewandelde afstand en totaal aantal stappen vergelijken met andere parameters in je Inzichten.",
+    "fitbitpopupConfirmation": "Begrepen"
   }
 }
