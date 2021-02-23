@@ -120,7 +120,7 @@ export default class MyProgress extends Component {
     const newPeriod = this.getSelectedPeriod(this.state.selectedDate, newTimeFrame);
     this.setState({selectedPeriod: newPeriod});
     this.fetchData(newPeriod, this.state.userToken, newTimeFrame);
-    this.fetchFitbitData(this.state.selectedPeriod, token);
+    this.fetchFitbitData(this.state.selectedPeriod, this.state.userToken);
   }
 
   // Called when date changes -> update data
@@ -471,8 +471,8 @@ export default class MyProgress extends Component {
   )};
 
   renderFitBitCard() {
-    let steps = this.state.fitDataDayData ? this.state.fitDataDayData.steps : 0;
-    let distance = this.state.fitDataDayData ? this.state.fitDataDayData.distance : 0;
+    let steps = this.state.fitDataDayData ? this.state.fitDataDayData[0].steps : 0;
+    let distance = this.state.fitDataDayData ? this.state.fitDataDayData[0].distance : 0;
     distance = distance < 1 ? Math.round(distance * 1000) + " m" : (Math.round(distance * 100)/100) + " km";
     let infostyle = {
       padding:"3px 20px 0 20px", 
@@ -512,7 +512,7 @@ export default class MyProgress extends Component {
           <T>{`myProgress.mysteps.distance`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{distance}</div>
           </div>
         </div>}
-        {(!steps || steps === 0) && <div style={infostyleEmpty}><T>{`myProgress.mysteps.noSteps`}</T></div>}
+        {(steps === 0) && <div style={infostyleEmpty}><T>{`myProgress.mysteps.noSteps`}</T></div>}
       <StepsGraph data={this.state.fitDataDayData}></StepsGraph>
     </Card></FadeIn>
   }
