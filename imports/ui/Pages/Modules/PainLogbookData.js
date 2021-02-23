@@ -5,110 +5,110 @@ export const options = {
     "Deze pijn betekent dat er wel iets beschadigd moet zijn": 
         {type: "negative", tag: "Oorzaak", synonyms: ["kapot", "versleten"]},
     "Ik moet een scan laten nemen om de oorzaak van deze pijn te achterhalen": 
-        {type: "negative",tag: "Oorzaak", synonyms: ["vorig", "vorige", "voorgaande", "bijdragen"]},
+        {type: "negative", tag: "Oorzaak", synonyms: ["vorig", "vorige", "voorgaande", "bijdragen", "dokter", "ziekenhuis"]},
     "Ik heb slijtage van mijn gewrichten, daardoor heb ik nu pijn": 
-        {type: "negative",tag: "", synonyms: []},
+        {type: "negative", tag: "", synonyms: ["versleten", "slijt"]},
     /* Oorzaak - Positief */
     "De pijn, die ik nu ervaar, wilt niet noodzakelijk zeggen dat er iets beschadigd is": 
-        {type: "positive",tag: "", synonyms: []},
+        {type: "positive", tag: "", synonyms: []},
     "Normale ouderdomsverschijnselen, zoals slijtage van de gewrichten, spelen maar deels mee in de pijn die ik nu ervaar": 
-        {type: "negative",tag: "", synonyms: []},
+        {type: "negative", tag: "", synonyms: []},
     "Ik denk dat ongezonde gewoontes leiden tot de pijn die ik nu ervaar": 
         {type: "positive", tag: "Oorzaak", synonyms: ["slechte", "gezonde", "niet-gezonde"]},
     "De pijn, die ik nu ervaar, kan veroorzaakt zijn door spanning en foutief bewegen (gespannen, verkrampt, ...).": 
-        {type: "positive",tag: "", synonyms: []},
+        {type: "positive", tag: "", synonyms: []},
 
     /* Activiteiten en werk - Negatief */
     "Deze pijn is veroorzaakt door 'slechte' houdingen": 
-        {type: "negative",tag: "Activiteit en werk", synonyms: []},
+        {type: "negative", tag: "Activiteit en werk", synonyms: []},
     "Mijn spieren zijn gespannen door deze bewegingen of activiteiten": 
-        {type: "negative",tag: "Activiteit en werk", synonyms: []},
+        {type: "negative", tag: "Activiteit en werk", synonyms: []},
     "Ik krijg slijtage van mijn lichaam door de herhaaldelijke belasting tijdens deze bewegingen of activiteiten": 
-        {type: "negative",tag: "Activiteit en werk", synonyms: []},
+        {type: "negative", tag: "Activiteit en werk", synonyms: []},
     "Ik moet mijn lichaam opspannen tijdens deze bewegingen of activiteiten": 
-        {type: "negative",tag: "Activiteit en werk", synonyms: []},
+        {type: "negative", tag: "Activiteit en werk", synonyms: []},
     "Ik heb teveel gedaan (mezelf overbelast), daardoor is de schade aan mijn lichaam toegenomen": 
-        {type: "negative",tag: "Activiteit en werk", synonyms: []},
+        {type: "negative", tag: "Activiteit en werk", synonyms: []},
     "Nu kan ik maar beter al de bewegingen en activiteiten vermijden die mijn pijn nog kunnen verergeren": 
-        {type: "negative",tag: "Activiteit en werk", synonyms: []},
+        {type: "negative", tag: "Activiteit en werk", synonyms: []},
     "Deze bewegingen of activiteiten zijn gevaarlijk voor mijn lichaam": 
-        {type: "negative",tag: "Activiteit en werk", synonyms: []},
+        {type: "negative", tag: "Activiteit en werk", synonyms: []},
     "Deze pijn is een teken dat ik best stop waarmee ik bezig ben of de activiteit aanpas": 
-        {type: "negative",tag: "Activiteit en werk", synonyms: []},
+        {type: "negative", tag: "Activiteit en werk", synonyms: []},
     /* Activiteiten en werk - Positief */
     "Als ik geleidelijk wat meer zou bewegen of deze activiteit zou opbouwen, dan zou mijn lichaam sterker en gezonder worden": 
-        {type: "positive",tag: "Activiteit en werk", synonyms: []},
+        {type: "positive", tag: "Activiteit en werk", synonyms: []},
     "Als ik een gezondere levensstijl zou hebben, dan zou ik nu misschien niet zoveel pijn hebben": 
-        {type: "positive",tag: "Activiteit en werk", synonyms: []},
+        {type: "positive", tag: "Activiteit en werk", synonyms: []},
     "Het is oké, deze bewegingen of activiteiten zijn veilig voor mijn lichaam": 
-        {type: "positive",tag: "Activiteit en werk", synonyms: []},
+        {type: "positive", tag: "Activiteit en werk", synonyms: []},
     "Als ik wat meer ontspannen was, dan zou ik waarschijnlijk nu niet zoveel pijn hebben": 
-        {type: "positive",tag: "Activiteit en werk", synonyms: []},
+        {type: "positive", tag: "Activiteit en werk", synonyms: []},
 
     /* Gevolgen  - Negatief */ 
     "De pijn zal erger worden naarmate ik ouder word": 
-        {type: "negative",tag: "Gevolgen", synonyms: []},
+        {type: "negative", tag: "Gevolgen", synonyms: []},
     "Mijn pijn zal chronisch worden": 
-        {type: "negative",tag: "Gevolgen", synonyms: []},
+        {type: "negative", tag: "Gevolgen", synonyms: []},
     "Mijn pijn zal niet meer beter worden": 
-        {type: "negative",tag: "Gevolgen", synonyms: []},
+        {type: "negative", tag: "Gevolgen", synonyms: []},
     "Ik zal steeds minder kunnen doen door de pijn": 
-        {type: "negative",tag: "Gevolgen", synonyms: []},
+        {type: "negative", tag: "Gevolgen", synonyms: []},
     "Ik kan niet meer de dingen doen die ik wil door de pijn": 
-        {type: "negative",tag: "Gevolgen", synonyms: []},
+        {type: "negative", tag: "Gevolgen", synonyms: []},
     /* Gevolgen  - Positief */ 
     "Ik kan de dingen doen die ik wil ondanks de pijn. ": 
-        {type: "positive",tag: "Gevolgen", synonyms: []},
+        {type: "positive", tag: "Gevolgen", synonyms: []},
 
     /* Controle - Negatief */
     "Ik heb geen vertrouwen meer in mijn lichaam": 
-        {type: "negative",tag: "Controle", synonyms: []},
+        {type: "negative", tag: "Controle", synonyms: []},
     "Ik geef het op": 
-        {type: "negative",tag: "Controle", synonyms: ["give", "up"]},
+        {type: "negative", tag: "Controle", synonyms: ["give", "up"]},
     "Er is niets dan ik kan doen aan deze pijn": 
-        {type: "negative",tag: "Controle", synonyms: []},
+        {type: "negative", tag: "Controle", synonyms: []},
     "Ik heb weinig controle over mijn pijn": 
-        {type: "negative",tag: "Controle", synonyms: []},
+        {type: "negative", tag: "Controle", synonyms: []},
     "Ik kan mijn pijn niet voorspellen": 
-        {type: "negative",tag: "Controle", synonyms: ["voorspel", "onvoorspelbaar", "willekeur", "willekeurig", "random"]},
+        {type: "negative", tag: "Controle", synonyms: ["voorspel", "onvoorspelbaar", "willekeur", "willekeurig", "random"]},
     "Ik ben in de war omdat men al zoveel verschillende dingen heeft gezegd over de pijn die ik heb": 
-        {type: "negative",tag: "Controle", synonyms: []},
+        {type: "negative", tag: "Controle", synonyms: []},
     /* Controle - Positief */
     "Ik heb vertrouwen in mijn lichaam": 
-        {type: "positive",tag: "Controle", synonyms: []},
+        {type: "positive", tag: "Controle", synonyms: []},
     "Ik weet wat ik kan doen bij deze pijnopstoot": 
-        {type: "positive",tag: "Controle", synonyms: []},
+        {type: "positive", tag: "Controle", synonyms: []},
     "Ik kan met mijn pijn leven": 
-        {type: "positive",tag: "Controle", synonyms: ["oke", "okay", "oké", "draagbaar"]},
+        {type: "positive", tag: "Controle", synonyms: ["oke", "okay", "oké", "draagbaar"]},
     "Ik denk dat ik van deze pijn kan verlost geraken": 
-        {type: "positive",tag: "Controle", synonyms: []},
+        {type: "positive", tag: "Controle", synonyms: []},
 
     /* Psychosociale invloed - Negatief */
     "Hoe ik mij voel (gestresst/moe/angstig/somber) heeft geen invloed op de pijn die ik nu ervaar": 
-        {type: "negative",tag: "Psychosiciaal", synonyms: []},
+        {type: "negative", tag: "Psychosiciaal", synonyms: []},
     "Alleen al de gedachte aan bewegen of het uitvoeren van activiteiten met mijn pijn maakt me bang": 
-        {type: "negative",tag: "Psychosiciaal", synonyms: ["bang", "schrik", "eng"]},
+        {type: "negative", tag: "Psychosiciaal", synonyms: ["bang", "schrik", "eng"]},
     "Anderen weten niet wat het is om te leven met pijn": 
-        {type: "negative",tag: "Psychosiciaal", synonyms: []},
+        {type: "negative", tag: "Psychosiciaal", synonyms: []},
     "Ik voel me gefrustreerd en boos omdat dit mij weer overkomt": 
-        {type: "negative",tag: "Psychosiciaal", synonyms: ["waarom"]},
+        {type: "negative", tag: "Psychosiciaal", synonyms: ["waarom"]},
     "Deze pijn is zo intens dat ik niet kan nadenken": 
-        {type: "negative",tag: "Psychosiciaal", synonyms: ["intens", "fel", "concentratie", "concentreren", "denken", "helder"]},
+        {type: "negative", tag: "Psychosiciaal", synonyms: ["intens", "fel", "concentratie", "concentreren", "denken", "helder"]},
     "Ik heb alle hoop verloren": 
-        {type: "negative",tag: "Psychosiciaal", synonyms: ["geef"]},
+        {type: "negative", tag: "Psychosiciaal", synonyms: ["geef"]},
     "Ik word bang van deze pijn": 
-        {type: "negative",tag: "Psychosiciaal", synonyms: []},
+        {type: "negative", tag: "Psychosiciaal", synonyms: []},
     "Ik word wanhopig van deze pijn": 
-        {type: "negative",tag: "Psychosiciaal", synonyms: []},
+        {type: "negative", tag: "Psychosiciaal", synonyms: []},
     "Ik word gek van deze pijn": 
-        {type: "negative",tag: "Psychosiciaal", synonyms: []},
+        {type: "negative", tag: "Psychosiciaal", synonyms: []},
     /* Psychosociale invloed - Positief */
     "Hoe ik mij voel (gestresst/moe/angstig/somber) zorgt ervoor dat ik nu meer pijn ervaar": 
-        {type: "positive",tag: "Psychosiciaal", synonyms: []},
+        {type: "positive", tag: "Psychosiciaal", synonyms: []},
     "Ik mag niet opgeven, de pijn hoort erbij": 
-        {type: "positive",tag: "Psychosiciaal", synonyms: ["geef"]},
+        {type: "positive", tag: "Psychosiciaal", synonyms: ["geef"]},
     "Het is oké om pijn te hebben, ik moet niet bang zijn": 
-        {type: "positive",tag: "Gevolgen", synonyms: []}
+        {type: "positive", tag: "Gevolgen", synonyms: []}
 }
 
 export const reactions = {
@@ -153,18 +153,19 @@ export const reactions = {
 }
 
 export const conversation = {
-    "MESSAGE-1": {
+    /* Inleiding */
+    "MESSAGE-INTRO": {
         content: "Goeiedag! Wil jij je pijnlogboek invullen?",
         sentBy: "coach",
-        response: ["MESSAGE-1-OPTION-1", "MESSAGE-1-OPTION-2"]
+        response: ["RESPONSE-1-MESSAGE-INTRO", "RESPONSE-2-MESSAGE-INTRO"]
     },
-    "MESSAGE-1-OPTION-1": {
+    "RESPONSE-1-MESSAGE-INTRO": {
         content: "Ja, graag",
         sentBy: "user",
         choice: true,
-        response: ["MESSAGE-2"]
+        response: ["MESSAGE-1"]
     },
-    "MESSAGE-1-OPTION-2": {
+    "RESPONSE-2-MESSAGE-INTRO": {
         content: "Nee, ga terug",
         sentBy: "user",
         choice: true,
@@ -173,30 +174,91 @@ export const conversation = {
     "MESSAGE-EXIT": {
         content: "Oké geen probleem. Laat gerust weten wanneer je de volgende keer je pijnlogboek wilt invullen.",
         sentBy: "coach",
+        response: ["RESPONSE-MESSAGE-EXIT"]
+    },
+    "RESPONSE-MESSAGE-EXIT": {
+        content: "Afsluiten",
+        sentBy: "user",
+        type: "button",
+        action: "leave",
         response: []
     },
-    "MESSAGE-2": {
-        content: "Laten we beginnen. Waar was je toen je pijn kreeg of je pijn aanzienlijk steeg?",
+    /* Vraag 1 */
+    "MESSAGE-1": {
+        content: "Laten we beginnen. Waar was je toen de pijn (in sterke mate) toenam?",
         sentBy: "coach", 
-        response: ["MESSAGE-2-OPTION-1", "MESSAGE-2-OPTION-2"]
+        response: ["RESPONSE-1-MESSAGE-1", "RESPONSE-2-MESSAGE-1", "RESPONSE-3-MESSAGE-1", "RESPONSE-4-MESSAGE-1"]
     },
-    "MESSAGE-2-OPTION-1": {
-        content: "Tijdens het sporten",
+    "RESPONSE-1-MESSAGE-1": {
+        content: "Aan het sporten 🏃🏽",
         sentBy: "user",
         choice: true, 
-        response: []
+        response: ["MESSAGE-2"]
     },
-    "MESSAGE-2-OPTION-2": {
-        content: "Op het werk",
+    "RESPONSE-2-MESSAGE-1": {
+        content: "Op het werk 💼",
         sentBy: "user",
         choice: true, 
-        response: []
+        response: ["MESSAGE-2"]
     },
-    "MESSAGE-2-OPTION-3": {
-        content: "Thuis",
+    "RESPONSE-3-MESSAGE-1": {
+        content: "Thuis 🏠",
         sentBy: "user",
         choice: true, 
-        response: []
+        response: ["MESSAGE-2"]
     },
+    "RESPONSE-4-MESSAGE-1": {
+        content: "Overig 💬",
+        sentBy: "user",
+        choice: true, 
+        response: ["MESSAGE-2"]
+    },
+    /* Vraag 2 - Emoties */
+    "MESSAGE-2": {
+        content: "Kan je aanduiden welke van onderstaande gevoelens aanwezig waren toen de pijn (in sterke mate) toenam?",
+        sentBy: "coach", 
+        response: ["RESPONSE-1-MESSAGE-2", "RESPONSE-2-MESSAGE-2", "RESPONSE-3-MESSAGE-2", "RESPONSE-4-MESSAGE-2", "RESPONSE-5-MESSAGE-2"]
+    },
+    "RESPONSE-1-MESSAGE-2": {
+        content: "Angstig",
+        sentBy: "user",
+        choice: true, 
+        response: ["MESSAGE-3"]
+    },
+    "RESPONSE-2-MESSAGE-2": {
+        content: "Depressief",
+        sentBy: "user",
+        choice: true, 
+        response: ["MESSAGE-3"]
+    },
+    "RESPONSE-3-MESSAGE-2": {
+        content: "Boos",
+        sentBy: "user",
+        choice: true, 
+        response: ["MESSAGE-3"]
+    },
+    "RESPONSE-4-MESSAGE-2": {
+        content: "Vermoeid",
+        sentBy: "user",
+        choice: true, 
+        response: ["MESSAGE-3"]
+    },
+    "RESPONSE-5-MESSAGE-2": {
+        content: "Energiek",
+        sentBy: "user",
+        choice: true, 
+        response: ["MESSAGE-3"]
+    },
+    /* Vraag 3 - Gedachten */
+    "MESSAGE-3": {
+        content: "En kan je nu aanduiden welke van onderstaande gedachten aanwezig waren toen de pijn (in sterke mate) toenam?",
+        sentBy: "coach", 
+        response: ["RESPONSE-MESSAGE-3"]
+    },
+    "RESPONSE-MESSAGE-3": {
+        content: "emotions",
+        sentBy: "user", 
+        response: ["MESSAGE-3"]
+    }
 
 }

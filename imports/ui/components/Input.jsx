@@ -4,7 +4,7 @@ import './Input.scss';
 export default function Input(props) {
 
     return (
-        <input style={{width: props.width}} type={props.type} value={props.value} onChange={(event) => props.onChange(event.target.value)} placeholder={props.placeholder}>
+        <input type={props.type} className={props.noOutline ? "no-outline" : ""} style={{width: props.width}} value={props.value} onChange={(event) => props.onChange(event.target.value)} placeholder={props.placeholder}>
         </input>
     )
 }
