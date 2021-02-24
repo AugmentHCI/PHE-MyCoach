@@ -26,14 +26,14 @@ export default class LineGraph extends Component {
 
   componentDidMount(){
     this.updateData(this.props.parameter, false);
-    //if this.props.comparison = true -> graph for the insights tab, this one contains two parameters to compare
+    /* If this.props.comparison = true -> graph for the insights tab, this one contains two parameters to compare */
     if(this.props.comparison !== ""){
       this.updateData(this.state.comparisonParameter, true);
     }
     i18n.setLocale(this.props.locale);
   }
 
-  //check if data in MyProgress parent component has changed -> if so: update this component with new data
+  /* Check if data in MyProgress parent component has changed -> if so: update this component with new data */
   componentDidUpdate(prevProps) {
     if (prevProps.parameter != this.props.parameter) {
       this.setState({data: this.getData(this.props.parameter)})
@@ -41,10 +41,10 @@ export default class LineGraph extends Component {
     if (prevProps.comparison != this.props.comparison && this.props.comparison !== "") {
       this.setState({comparisonData: this.getData(this.props.comparison)})
     }
-    if(this.props.data !== prevProps.data){
+    if (this.props.data !== prevProps.data) {
       this.updateData(this.props.parameter, false);
-      if(this.props.comparison){
-        this.updateData(this.state.comparisonParameter, true);
+      if (this.props.comparison) {
+        this.updateData(this.props.comparison, true);
       }
     }
   } 
@@ -56,7 +56,7 @@ export default class LineGraph extends Component {
   }
 
   updateData = (parameter, comparison) => {
-    if(!comparison){
+    if (!comparison) {
       this.setState({parameter: parameter, data: this.getData(parameter)});
     } else {
       this.setState({comparisonData: this.getData(parameter)});
@@ -65,7 +65,7 @@ export default class LineGraph extends Component {
 
   //called when a different parameter is selected in dropdown
   updateParameter = (newParameter, comparison) => {
-    if(!comparison){
+    if (!comparison) {
       this.setState({parameter: newParameter})
     } else {
       this.setState({comparisonParameter: newParameter})
@@ -75,7 +75,7 @@ export default class LineGraph extends Component {
 
   //values = [1,2,3,4] for physical and mental tiredness, values = [0, ..., 100] for satisfaction and pain intensity
   getGridYValues = (data) => {
-    if(data.max===100) { return [0,10,20,30,40,50,60,70,80,90,100] } 
+    if (data.max===100) { return [0,10,20,30,40,50,60,70,80,90,100] } 
     else if (data.max===4) { return [1,2,3,4] }
     else { return [data.min, 2, data.max] }
   }
@@ -205,7 +205,7 @@ export default class LineGraph extends Component {
             <ResponsiveLine
               //linegraph parameter two
               data={[this.state.comparisonData]}
-              margin={{ top: 10, right: 50, bottom: 50, left: 70 }}
+              margin={{ top: 10, right: 70, bottom: 50, left: 70 }}
               xScale={{ type: 'point' }}
               yScale={{ type: 'linear', min: this.state.comparisonData.min, max: this.state.comparisonData.max, stacked: false, reverse: false }}
               curve="monotoneX"

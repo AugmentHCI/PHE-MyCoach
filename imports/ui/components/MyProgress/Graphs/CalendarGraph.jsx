@@ -166,7 +166,7 @@ export default class CalendarGraph extends Component {
   componentDidMount(){
     this.updateData(this.props.parameter, false);
     //if this.props.comparison = true -> graph for the insights tab, this one contains two parameters to compare
-    if (this.props.comparison !== "") { this.updateData(this.state.comparisonParameter, true); }
+    if (this.props.comparison !== "") { this.updateData(this.props.comparison, true); }
     i18n.setLocale(this.props.locale);
   }
 

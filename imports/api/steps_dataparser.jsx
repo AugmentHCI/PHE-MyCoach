@@ -60,10 +60,11 @@ export function getFitBitDataWeekly(data, type) {
         }
     })
     const max_value = Math.max.apply(Math, result) < 1 ? 1 : Math.max.apply(Math, result);
+    const colorAddition = type === "steps" ? "-dark" : "";
     return {
         id: type,
         measure: i18n.getTranslation('Common', `myProgress.parameters.${type}`),
-        color: "--idewe-blue",
+        color: "--idewe-blue" + colorAddition,
         min: 0,
         max: max_value,
         data: resultByDay
@@ -103,10 +104,11 @@ export function getFitBitDataMonthly(data, type) {
         }
     };
     const max_value = Math.max.apply(Math, results) < 1 ? 1 : Math.max.apply(Math, results);
+    const colorAddition = type === "steps" ? "-dark" : "";
     return {
         id: "distance",
         measure: i18n.getTranslation('Common', `myProgress.parameters.${type}`),
-        color: "--idewe-blue",
+        color: "--idewe-blue" + colorAddition,
         min: 0,
         max: max_value,
         data: resultsByDay
