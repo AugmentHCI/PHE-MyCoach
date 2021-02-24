@@ -37,6 +37,7 @@ import '../../db/LogMethods.jsx';
 import AppModal from '../components/AppModal.jsx';
 import NotificationAlert from '../components/Notification.jsx';
 import Card from '../components/Card.jsx';
+import Button from '../components/Button.jsx';
 import Icon from '../components/Illustrations/Icon.jsx';
 import Illustration from '../components/Illustrations/Illustration.jsx';
 
@@ -474,12 +475,21 @@ export default class MyProgress extends Component {
       <StepsGraph data={this.state.stepsData}></StepsGraph>
     </Card></FadeIn>
   }
+
+  renderDevModal() {
+    if (this.state.tap_count >= 5) {
+      return (<FadeIn>
+        <AppModal show={true} title={"Opties"} defaultOption={"Sluit"} notifyParent={() => this.setState({tap_count: 0})}>
+          <Button color="blue" onClick={() => navigator.clipboard.writeText(this.state.userToken)}>Kopieer JWT Token</Button>
+          <Button color="blue" onClick={() => navigator.clipboard.writeText(jwt_decode(this.state.userToken).rrnr)}>Kopieer DeelnemerID</Button>
+          <Button color="blue" onClick={() => navigator.clipboard.writeText(jwt_decode(this.state.userToken).deelnemerId)}>Kopieer RRNR-Nummer</Button>
+        </AppModal>
+      </FadeIn>)
+    }
+    else { return <React.Fragment/>} 
+  }
       
   render() {
-    if (this.state.tap_count === 5) {
-      this.setState({tap_count: 0});
-      FlowRouter.go('/mycoach');
-    }
     // OPTION 1: If no data is loaded and an error occured while retrieving data, display error screen
     if (!this.state.data && this.state.callError !== "") {
       return (<div className="container" style={{height:"100vh"}}>
@@ -495,12 +505,12 @@ export default class MyProgress extends Component {
     else return (
       <div className="container">
         {this.renderFitBitModal()}
+        {this.renderDevModal()}
         <div>
           <FadeIn><h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1></FadeIn>
         </div>
         <React.Fragment>
           <h2><FadeIn><T>{`myProgress.mysteps.mySteps`}</T></FadeIn></h2>
-          {this.state.tap_count > 3 && jwt_decode(this.state.userToken)}
           {this.renderFitBitCard()}
         </React.Fragment>
         <h2><FadeIn delay="150"><T>{`myProgress.myinsights`}</T></FadeIn></h2>
