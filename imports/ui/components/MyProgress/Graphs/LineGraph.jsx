@@ -109,7 +109,7 @@ export default class LineGraph extends Component {
             <ResponsiveLine
               //bottom axis
               data={[this.state.data]}
-              margin={{ top: 10, right: 50, bottom: 50, left: 70 }}
+              margin={{ top: 10, right: 70, bottom: 50, left: 70 }}
               xScale={{ type: 'point' }}
               yScale={{ type: 'linear', min: this.state.data.min, max: this.state.data.max, stacked: false, reverse: false }}
               curve="monotoneX"
@@ -141,7 +141,7 @@ export default class LineGraph extends Component {
             <ResponsiveLine
               //line graph parameter one
               data={[this.state.data]}
-              margin={{ top: 10, right: 50, bottom: 50, left: 70 }}
+              margin={{ top: 10, right: 70, bottom: 50, left: 70 }}
               xScale={{ type: 'point' }}
               yScale={{ type: 'linear', min: this.state.data.min, max: this.state.data.max, stacked: false, reverse: false }}
               curve="monotoneX"
