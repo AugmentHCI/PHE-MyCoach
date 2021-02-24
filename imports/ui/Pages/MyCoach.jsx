@@ -97,7 +97,7 @@ export default function MyCoach(props) {
                 trigger="click"
                 visible={userData.interactions.INTRODUCTION_TEXT && userData.interactions.INTRODUCTION_VIDEO && showTutorial1}
                 onVisibleChange={() => updateShowTutorial1(false)}>
-            <ActionButton icon={"writing"} action={() => FlowRouter.go(`/${language}/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
+            <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
             <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
             </Popover>
         </React.Fragment>)
@@ -110,7 +110,7 @@ export default function MyCoach(props) {
                     <h4>Coaching</h4>
                     Hier zie jij je persoonlijk coachingtraject.<br/>Je kan elke dag je coaching bekijken.<br/>
                     <div className="tutorial-button-row">
-                        <Button color="gray-light" width="fit" size="small" action={()=> updateShowTutorial1(true)}>Vorige</Button>
+                        <Button color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial1(true)}>Vorige</Button>
                         <Button color="blue" width="fit" size="small" style={{float:"right"}} action={()=> updateShowTutorial2(false)}>Volgende</Button>
                     </div>
                 </div>}

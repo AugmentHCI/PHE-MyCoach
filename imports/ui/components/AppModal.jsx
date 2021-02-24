@@ -25,7 +25,7 @@ export default function AppModal(props) {
       </Modal.Header>}
       <Modal.Body>{props.children}</Modal.Body>
       <Modal.Footer>
-        <Button color="blue" width="fit" action={handleClose}>{defaultOption}</Button>
+        <Button color="blue" width="fit" onClick={handleClose}>{defaultOption}</Button>
       </Modal.Footer>
     </Modal>
   )

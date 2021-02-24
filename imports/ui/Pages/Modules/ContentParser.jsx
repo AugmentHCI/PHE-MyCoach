@@ -72,7 +72,7 @@ function ContentParser(props) {
         }
         /* Make buttons for each of the options, and assign correct/incorrect actions to buttons */
         options.forEach((option, index) => {
-            buttonsHTML.push(<Button key={key + "-" + index} isSelected={selected[index]} action={() => selectButton(index)}>{option}</Button>);
+            buttonsHTML.push(<Button key={key + "-" + index} isSelected={selected[index]} onClick={() => selectButton(index)}>{option}</Button>);
         })
         /* Make the Question-Content element */
         return (<div key={key} className="content-question">

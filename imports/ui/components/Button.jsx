@@ -5,9 +5,9 @@ export default function Button(props) {
 
     const [isPressed, press] = useState(false);
 
-    function action() {
+    function handleOnClick() {
         press(false); 
-        if (props.action && !props.inactive) { props.action() };
+        if (props.onClick && !props.inactive) { props.onClick() };
     }
 
     /* Generate Button Class */
@@ -26,7 +26,7 @@ export default function Button(props) {
     return (
         <button className={buttonClass} 
                 onTouchStart={() => press(true)} 
-                onClick={() => action()} 
+                onClick={() => handleOnClick()} 
                 onTouchEnd={() => press(false)}
                 style={style}>
             <div className={props.size === "small" ? "button-text-small" : "button-text"}>

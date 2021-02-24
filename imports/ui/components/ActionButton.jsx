@@ -11,15 +11,15 @@ export default function ActionButton(props) {
 
     const pressClass = isPressed ? "actionbutton pressed" : "actionbutton"
 
-    function action() {
+    function handleOnClick() {
         press(false); 
-        if (props.action) {props.action()};
+        if (props.onClick) {props.onClick()};
     }
 
     return (
         <button className={pressClass} 
                 onTouchStart={() => press(true)} 
-                onClick={() => action()} 
+                onClick={() => handleOnClick()} 
                 onTouchEnd={() => press(false)}>
             {props.icon && <div className="actionbutton-icon">
                 <Icon width="22px" image={props.icon} color={"blue"} style={{marginTop: "7px", marginLeft: "2px"}}/>
