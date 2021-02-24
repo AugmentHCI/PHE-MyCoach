@@ -41,11 +41,10 @@ export default class LineGraph extends Component {
     if (prevProps.comparison != this.props.comparison && this.props.comparison !== "") {
       this.setState({comparisonData: this.getData(this.props.comparison)})
     }
-    if (this.props.data !== prevProps.data) {
-      //this.updateData(this.props.parameter, false);
-      if (this.props.comparison) {
-        console.log(this.props.comparison)
-        this.updateData(this.props.comparison, true);
+    if(this.props.data !== prevProps.data){
+      this.updateData(this.props.parameter, false);
+      if(this.props.comparison){
+        this.updateData(this.state.comparisonParameter, true);
       }
     }
   } 
