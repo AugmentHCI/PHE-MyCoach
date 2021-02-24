@@ -250,11 +250,11 @@ export default class MyProgress extends Component {
             // OPTION 1.1.1: DEVELOPMENT environment failed as well -> No data was fetched (Possibly an incorrect token)
             if (error) {
               this.setState({callError: error.message})
-              console.log(`QUESTIONNAIRE - Development environment failed as well: ${error.message}.`)
+              console.log(`FITBIT-DAILY - Development environment failed as well: ${error.message}.`)
             } 
             // OPTION 1.1.2: DEVELOPMENT environment successful -> Data is fetched (means that token was a DEV token)
             else {
-              console.log("QUESTIONNAIRE - Successful fallback to development environment.")
+              console.log("FITBIT-DAILY - Successful fallback to development environment.")
               this.setState({stepsData: result.data});
             }
           }); 

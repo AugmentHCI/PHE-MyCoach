@@ -111,7 +111,7 @@ export default function MyCoach(props) {
                     Hier zie jij je persoonlijk coachingtraject.<br/>Je kan elke dag je coaching bekijken.<br/>
                     <div className="tutorial-button-row">
                         <Button color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial1(true)}>Vorige</Button>
-                        <Button color="blue" width="fit" size="small" style={{float:"right"}} action={()=> updateShowTutorial2(false)}>Volgende</Button>
+                        <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial2(false)}>Volgende</Button>
                     </div>
                 </div>}
                 placement="topLeft"
@@ -128,8 +128,8 @@ export default function MyCoach(props) {
                     Voltooi je coaching om na een tijdje andere<br/>modules vrij te spelen!<br/>
                     <div className="tutorial-illustration"><Illustration image="voortgang" width={"100%"}></Illustration></div>
                     <div className="tutorial-button-row">
-                        <Button color="gray-light" width="fit" size="small" action={()=> updateShowTutorial2(true)}>Vorige</Button>
-                        <Button color="blue" width="fit" size="small" style={{float:"right"}} action={()=> updateShowTutorial3(false)}>Begrepen!</Button>
+                        <Button color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial2(true)}>Vorige</Button>
+                        <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial3(false)}>Begrepen!</Button>
                     </div>
                 </div>}
                 placement="top"
