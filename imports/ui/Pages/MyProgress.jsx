@@ -66,7 +66,7 @@ export default class MyProgress extends Component {
       stepsData: null,
       userToken: "",
       userID: null,
-      deelnemerID: null,
+      gebruikerId: null,
       parameter: "painIntensity",
       compareParameter: "",
       callError: "",
@@ -89,15 +89,15 @@ export default class MyProgress extends Component {
     try {
       this.setState({
         userID: jwt_decode(token).rrnr,
-        deelnemerID: jwt_decode(token).deelnemerId
+        gebruikerId: jwt_decode(token).gebruikerId
       })
       if (token === 'demo') {Meteor.call('logs.insert', 1111111, "MyProgress", "ACCESS"); }
       else { 
-        Meteor.call('logs.insert', {userID: jwt_decode(token).deelnemerId, context: "MyProgress", action: "ACCESS"}, (error, result) => {
+        Meteor.call('logs.insert', {userID: jwt_decode(token).gebruikerId, context: "MyProgress", action: "ACCESS"}, (error, result) => {
           if (error) console.log("[MyProgress] - Could not log ACCESS");
         });
        }
-       Meteor.call('logs.didSeeFitBit', {userID: jwt_decode(token).deelnemerId, context: "MyProgress"}, (error, result) => {
+       Meteor.call('logs.didSeeFitBit', {userID: jwt_decode(token).gebruikerId, context: "MyProgress"}, (error, result) => {
         if (error) console.log("[MyProgress] - Could not get 'didSeeFitBit' log");
         else {console.log(`Has seen: ${result}`); this.setState({didSeeFitBitPopup: result})}
       });
@@ -287,7 +287,7 @@ export default class MyProgress extends Component {
   }
 
   handleDidSeeFitBitPopup() {
-    Meteor.call('logs.insert', {userID: this.state.deelnemerID, context: "MyProgress", action: "FITBIT_POPUP"}, (error, result) => {
+    Meteor.call('logs.insert', {userID: this.state.gebruikerId, context: "MyProgress", action: "FITBIT_POPUP"}, (error, result) => {
       if (error) console.log("[MyProgress] - Could not log FITBIT_POPUP");
     });
     this.setState({didSeeFitBitPopup: true});
@@ -481,8 +481,8 @@ export default class MyProgress extends Component {
       return (<FadeIn>
         <AppModal show={true} title={"Opties"} defaultOption={"Sluit"} notifyParent={() => this.setState({tap_count: 0})}>
           <Button color="blue" onClick={() => navigator.clipboard.writeText(this.state.userToken)}>Kopieer JWT Token</Button>
-          <Button color="blue" onClick={() => navigator.clipboard.writeText(jwt_decode(this.state.userToken).rrnr)}>Kopieer DeelnemerID</Button>
-          <Button color="blue" onClick={() => navigator.clipboard.writeText(jwt_decode(this.state.userToken).deelnemerId)}>Kopieer RRNR-Nummer</Button>
+          <Button color="blue" onClick={() => navigator.clipboard.writeText(jwt_decode(this.state.userToken).rrnr)}>Kopieer GebruikerID</Button>
+          <Button color="blue" onClick={() => navigator.clipboard.writeText(jwt_decode(this.state.userToken).gebruikerId)}>Kopieer RRNR-Nummer</Button>
         </AppModal>
       </FadeIn>)
     }

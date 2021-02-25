@@ -23,7 +23,7 @@
       "satisfaction": "Satisfaction",
       "physicalTiredness": "Physical tiredness",
       "mentalTiredness": "Mental tiredness",
-      "distance": "Walked distance",
+      "distance": "Walked distance (km)",
       "steps": "Number of steps"
     },
     "activities": {

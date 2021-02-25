@@ -101,6 +101,15 @@ export default class LineGraph extends Component {
     return i18n.getTranslation('Common', 'myProgress.axes.day');
   }
 
+  /**
+   * Turns the number of steps into a 'k' representation if larger than 1000.
+   * Example: transformStepsValue(12000) = 12k, transformStepsValue(850) = 850
+   * @param {Int} value Number of steps 
+   */
+  transformStepsValue(value) {
+    return Math.abs(value) > 999 ? Math.sign(value)*((Math.abs(value)/1000).toFixed(1)) + 'k' : Math.sign(value)*Math.abs(value);
+  }
+
   render() {
     return(
       <div style={{height: "250px", width: "device-width"}}>
@@ -155,12 +164,10 @@ export default class LineGraph extends Component {
                 legendOffset: -40,
                 legendPosition: 'middle',
                 format: value => {
-                    if(this.state.data.max==100){
-                      return value;
-                    }else if (this.state.data.max==4){
-                      return Object.keys(ordinalData).find(key => ordinalData[key] === value);
-                    }
-                    else {return value;}
+                    if (this.state.data.max==100) { return value }
+                    else if (this.state.data.max==4) { return Object.keys(ordinalData).find(key => ordinalData[key] === value) }
+                    else if (this.state.data.id === "steps") { return this.transformStepsValue(value) }
+                    else { return value }
                   },
               }}
               enableGridX={false}

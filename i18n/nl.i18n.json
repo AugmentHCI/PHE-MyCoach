@@ -23,7 +23,7 @@
       "satisfaction": "Tevredenheid",
       "physicalTiredness": "Lichamelijke vermoeidheid",
       "mentalTiredness": "Mentale vermoeidheid",
-      "distance": "Gewandelde afstand",
+      "distance": "Gewandelde afstand (km)",
       "steps": "Aantal stappen"
     },
     "activities": {
