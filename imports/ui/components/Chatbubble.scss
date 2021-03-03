@@ -3,20 +3,21 @@
     display: inline-grid;
     position: relative;
 }
+
 .chatbubble {
     background-color: var(--idewe-blue);
     color: var(--idewe-white);
     font-family: var(--main-font);
     font-weight: 500;
     width: fit-content;
-    max-width: 300px;
+    max-width: 330px;
     padding: 10px;
     height: min-content;
     margin-bottom: 10px;
     margin-left: 30px;
     border-radius: 15px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
-    max-height: 350px;
+    max-height: 300px;
     overflow: scroll;
 
     &-own {
@@ -35,6 +36,11 @@
         font-size: 16px;
         border-radius: 15px 15px 0 15px;
         border: 2px solid var(--idewe-blue);
+
+        &-textinput {
+            @extend .chatbubble-ownchoice;
+            width: 80%;
+        }
     }
 
     &-ownchoicebutton {
@@ -48,3 +54,47 @@
     }
 }
 
+.chatbubble-title {
+    font-size: 18px;
+    font-family: var(--main-font);
+    font-weight: 500;
+    color: var(--idewe-blue-dark);
+}
+
+.chatbubble-information {
+    font-size: 14px;
+    font-family: var(--main-font);
+    font-weight: 400;
+    color: var(--idewe-blue);
+}
+
+
+.chat-text-option {
+    font-family: var(--main-font);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--idewe-blue-dark);
+
+    &-selected {
+        @extend .chat-text-option;
+        font-size: 14px;
+        color: var(--idewe-blue);
+    }
+}
+
+.highlighted {
+    color: var(--idewe-blue);
+    font-weight: 600;
+}
+
+mark {
+    background-color: transparent;
+    padding: 0;
+}
+
+.option-breakline {
+    border-color: var(--idewe-background-solid);
+    width: 95%;
+    margin-block-start: 1px;
+    margin-block-end: 1px;
+}

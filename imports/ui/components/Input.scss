@@ -34,23 +34,6 @@ input[type='text'] {
     }
 }
 
-.chat-text-option {
-    font-family: var(--main-font);
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--idewe-blue-dark);
-}
-
-.highlighted {
-    color: var(--idewe-blue);
-    font-weight: 600;
-}
-
-mark {
-    background-color: transparent;
-    padding: 0;
-}
-
 
 /* Checkbox */
 input[type='checkbox'],

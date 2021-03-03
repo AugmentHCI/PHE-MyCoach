@@ -39,8 +39,9 @@ const PainEducationScript = {
                         "question": "Wanneer je je voet omslaat wordt dit eerst waargenomen door de receptoren in de huid, gewrichten en spieren van je voet. Er zal een boodschap als waarschuwing van mogelijk gevaar worden gestuurd naar je ruggenmerg en hersenen.",
                         "options": ["Juist", "Fout"],
                         "correct": "Juist",
-                        "onCorrect": "Goed zo! Wanneer je je voet omslaat wordt dit geregistreerd door receptoren in de voet. Die receptoren werken als poorten en zorgen ervoor dat er ladingen de zenuwcel instromen. Bij voldoende ladingen wordt er een gevaarboodschap aangemaakt in de vorm van een elektrisch signaal.",
-                        "onIncorrect": "Deze stelling is juist. Wanneer je je voet omslaat wordt dit geregistreerd door receptoren in de voet. Die receptoren werken als poorten en zorgen ervoor dat er ladingen de zenuwcel instromen. Bij voldoende ladingen wordt er een gevaarboodschap aangemaakt in de vorm van een elektrisch signaal."
+                        "explanation": "Wanneer je je voet omslaat wordt dit geregistreerd door receptoren in de voet. Die receptoren werken als poorten en zorgen ervoor dat er ladingen de zenuwcel instromen. Bij voldoende ladingen wordt er een gevaarboodschap aangemaakt in de vorm van een elektrisch signaal.",
+                        "onCorrect": "Goed zo!",
+                        "onIncorrect": "Deze stelling is juist"
                     },
                     {
                         "id": "PE-MOD1-Q2",
@@ -48,8 +49,9 @@ const PainEducationScript = {
                         "question": "Al de gevaarboodschappen (zoals bij het omslaan van je enkel) komen toe in de hersenen.",
                         "options": ["Juist", "Fout"],
                         "correct": "Fout",
-                        "onCorrect": "Deze stelling is inderdaad fout! De receptoren in je enkel zullen de  druk of rek op je enkel door de val waarnemen. Een gevaarboodschap zal gestuurd worden naar de hersenen langs het ruggenmerg. De hersenen beslissen of de boodschap zal worden doorgestuurd in het ruggenmerg. Je aandacht, gedachten, emoties en eerdere ervaringen spelen een belangrijke rol in deze beslissing.",
-                        "onIncorrect": "Jammer, maar deze stelling is fout. De receptoren in je enkel zullen de  druk of rek op je enkel door de val waarnemen. Een gevaarboodschap zal gestuurd worden naar de hersenen langs het ruggenmerg. De hersenen beslissen of de boodschap zal worden doorgestuurd in het ruggenmerg. Je aandacht, gedachten, emoties en eerdere ervaringen spelen een belangrijke rol in deze beslissing."
+                        "explanation": "De receptoren in je enkel zullen de  druk of rek op je enkel door de val waarnemen. Een gevaarboodschap zal gestuurd worden naar de hersenen langs het ruggenmerg. De hersenen beslissen of de boodschap zal worden doorgestuurd in het ruggenmerg. Je aandacht, gedachten, emoties en eerdere ervaringen spelen een belangrijke rol in deze beslissing.",
+                        "onCorrect": "Deze stelling is inderdaad fout!",
+                        "onIncorrect": "Jammer, maar deze stelling is fout."
                     },
                     {
                         "id": "PE-MOD1-Q3",
@@ -57,8 +59,9 @@ const PainEducationScript = {
                         "question": "De hersenen beslissen of je pijn zal ervaren.",
                         "options": ["Juist", "Fout"],
                         "correct": "Juist",
-                        "onCorrect": "Inderdaad! Komt de gevaarboodschap in de hersenen toe, dan zullen de hersenen deze boodschap verwerken. Je emoties, gedachten, aandacht en eerdere pijnervaringen zullen hierin een belangrijke rol spelen en dat verwerkingsproces sturen. Pas dan zullen de hersenen beslissen of je pijn zal ervaren.",
-                        "onIncorrect": "Dit is fout... Komt de gevaarboodschap in de hersenen toe, dan zullen de hersenen deze boodschap verwerken. Je emoties, gedachten, aandacht en eerdere pijnervaringen zullen hierin een belangrijke rol spelen en dat verwerkingsproces sturen. Pas dan zullen de hersenen beslissen of je pijn zal ervaren."
+                        "explanation": "Komt de gevaarboodschap in de hersenen toe, dan zullen de hersenen deze boodschap verwerken. Je emoties, gedachten, aandacht en eerdere pijnervaringen zullen hierin een belangrijke rol spelen en dat verwerkingsproces sturen. Pas dan zullen de hersenen beslissen of je pijn zal ervaren.",
+                        "onCorrect": "Inderdaad!",
+                        "onIncorrect": "Dit is fout..."
                     }
                 ]
             },
@@ -283,8 +286,9 @@ const PainEducationScript = {
                     "question": "In welke situatie zal er het meeste pijn worden ervaren? Bij het rugbyspel, de overval of ongeveer gelijk in beide situaties?",
                     "options": ["Rugby", "Overval", "Beide"],
                     "correct": "Overval",
-                    "onCorrect": "Inderdaad! Ondanks dat de hoeveelheid schade in beide situaties ongeveer gelijk is, is de kans groter dat de man die wordt overvallen meer pijn gaat ervaren. De rugbyspeler zal waarschijnlijk niet eens pijn voelen. Misschien merkt hij de dag nadien pas op dat hij een paar blauwe plekken en schrammen heeft.",
-                    "onIncorrect": "Niet juist. Ondanks dat de hoeveelheid schade in beide situaties ongeveer gelijk is, is de kans groter dat de man die wordt overvallen meer pijn gaat ervaren. De rugbyspeler zal waarschijnlijk niet eens pijn voelen. Misschien merkt hij de dag nadien pas op dat hij een paar blauwe plekken en schrammen heeft."
+                    "explanation": "Ondanks dat de hoeveelheid schade in beide situaties ongeveer gelijk is, is de kans groter dat de man die wordt overvallen meer pijn gaat ervaren. De rugbyspeler zal waarschijnlijk niet eens pijn voelen. Misschien merkt hij de dag nadien pas op dat hij een paar blauwe plekken en schrammen heeft.",
+                    "onCorrect": "Inderdaad!",
+                    "onIncorrect": "Niet juist."
                 }
             ]
         }, 
@@ -362,7 +366,7 @@ const PainEducationScript = {
                     "correct": "Fout",
                     "explanation": "Onze hersenen interpreteren prikkels die toekomen uit de omgeving en bepalen dan of pijn de beste reactie is. Er zijn genoeg voorbeelden van lichamelijke schade zonder pijn, zoals jezelf verwonden tijdens het vluchten voor je leven.",
                     "onCorrect": "Fout inderdaad!",
-                    "onIncorrect": "Jammer, maar deze stelling is fout."
+                    "onIncorrect": "Deze stelling is fout."
                 },
                 {
                     "id": "PE-MOD4-Q3",
@@ -384,7 +388,7 @@ const PainEducationScript = {
                     "correct": "Juist",
                     "explanation": "Welke factoren bijdragen aan iemand zijn pijnervaring is heel persoonlijk. Gelukkig zijn er veel factoren waar je een invloed op hebt. Je kan de belasting op je lichaam beperken door ergonomisch te werken of je activiteiten goed aan te pakken. Je kan je belastbaarheid verhogen met een gezonde levensstijl en door voldoende te bewegen. Je kan ook leren om beter om te gaan met stress en negatieve gedachten en gevoelens te beperken. Probeer ook je aandacht en energie te steken in activiteiten die waardevol voor je zijn.",
                     "onCorrect": "Goed zo!",
-                    "onIncorrect": "Deze stelling was wel juist."
+                    "onIncorrect": "Deze stelling is wel juist."
                 },
                 {
                     "id": "PE-MOD4-Q5",
@@ -422,7 +426,7 @@ const PainEducationScript = {
                 {
                     "id": "PE-MOD4-Q8",
                     "type": "Question",
-                    "question": "De hersenen beslissen wanneer je pijn zal ervaren ",
+                    "question": "De hersenen beslissen wanneer je pijn zal ervaren.",
                     "number": 8,
                     "options": ["Juist", "Fout"],
                     "correct": "Juist",
@@ -467,7 +471,7 @@ const PainEducationScript = {
                     "type": "List",
                     "numbered": true,
                     "overview": true,
-                    "content": ["Men spreekt van chronische pijn wanneer de pijn langdurig (meer dan 3 maanden) aanwezig is. De pijn kan sterk wisselen van dag tot dag en verspreiden in het lichaam. Ook lichtere prikkels, die normaal geen pijn doen, kunnen pijnlijk zijn.", "Bij chronische pijn speelt het oorspronkelijke letsel nog maar een kleine rol. Vooral de overgevoeligheid van het zenuwstelsel is de oorzaak van de klachten.", "Verscheidene factoren verhogen het risico op een overgevoelig zenuwstelsel en chronische pijn zoals; jezelf vaak overbelasten, langdurige stress, focussen op je pijn en negatieve gedachten en gevoelens ten aanzien van je pijn.", "Een gezonde levensstijl, voldoende beweging en je aandacht en energie richten op waardevolle activiteiten in plaats van op de pijn kunnen de overgevoeligheid van het zenuwstelsel terug verlagen en de impact van de chronische pijn beperken"]
+                    "content": ["Men spreekt van chronische pijn wanneer de pijn langdurig (meer dan 3 maanden) aanwezig is. De pijn kan sterk wisselen van dag tot dag en verspreiden in het lichaam. Ook lichtere prikkels, die normaal geen pijn doen, kunnen pijnlijk zijn.", "Bij chronische pijn speelt het oorspronkelijke letsel nog maar een kleine rol. Vooral de overgevoeligheid van het zenuwstelsel is de oorzaak van de klachten.", "Verscheidene factoren verhogen het risico op een overgevoelig zenuwstelsel en chronische pijn zoals; jezelf vaak overbelasten, langdurige stress, focussen op je pijn en negatieve gedachten en gevoelens ten aanzien van je pijn.", "Een gezonde levensstijl, voldoende beweging en je aandacht en energie richten op waardevolle activiteiten in plaats van op de pijn kunnen de overgevoeligheid van het zenuwstelsel terug verlagen en de impact van de chronische pijn beperken."]
                 }
             ]
         }]

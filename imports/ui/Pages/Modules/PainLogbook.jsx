@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-import { Chatbubble, ChatbubbleTextField } from '../../components/Chatbubble.jsx';
+import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText } from '../../components/Chatbubble.jsx';
 import NavigationBar from '../../components/NavigationBar';
 
-import {reactions, options, fillerWords, conversation} from "./PainLogbookData.js";
+import {emotions, reactions, thoughts, fillerWords, conversation} from "./PainLogbookData.js";
 
 export default function PainLogbook() {
 
@@ -38,7 +38,6 @@ export default function PainLogbook() {
         message.response.forEach(messageResponse => {
             newQueue.push(conversation[messageResponse])
             if (conversation[messageResponse].sentBy === "coach") {
-                console.log(conversation[messageResponse].response)
                 conversation[messageResponse].response.forEach(option => responseMessages.push(conversation[option]));
             }
         });
@@ -46,27 +45,65 @@ export default function PainLogbook() {
         updateTempMessageQueue(responseMessages);
     }
 
+    function hangleTERinput(responses, nextmessage) {
+        /* Add users responses + next coach message to message queue */
+        let newQueue = [...messageQueue];
+        for (const [response] of Object.entries(responses)) {
+            newQueue.push({content: response, sentBy: "user"});
+        }
+        const nextCoachMessage = conversation[nextmessage.response[0]]
+        newQueue.push(nextCoachMessage);
+        /* Also add next responses to coach message to queue */
+        let responseMessages = [];
+        nextCoachMessage.response.forEach(response => {
+            responseMessages.push(conversation[response]);
+        })
+        /* Update queue states */
+        updateMessageQueue(newQueue);
+        updateTempMessageQueue(responseMessages);
+    };
+
     function renderMessages() {
         let messages = [];
         messageQueue.forEach((message, index) => {
             messages.push(<Chatbubble key={"message-"+index} own={message.sentBy === "user" ? true : false}>{message.content}</Chatbubble>)
         });
         tempMessageQueue.forEach((message, index) => {
-            if (message.content === "emotions") {
-                messages.push(<ChatbubbleTextField options={options} fillerWords={fillerWords}/>)
-            }
-            else { 
-                messages.push(<Chatbubble 
-                    key={"response-"+index+"-"+message.content}
-                    own={message.sentBy === "user" ? true : false}
-                    delayedDisplay
-                    choice 
-                    type={message.type}
-                    onClick={message.action ? 
-                        () => action(message.action) : 
-                        () => addResponseToMessageQueue({...message})}>
-                        {message.content}
-                    </Chatbubble>)
+            switch (message.content) {
+                case "input":
+                    messages.push(<ChatbubbleText
+                        message={message}
+                        onSubmit={addResponseToMessageQueue}
+                        />)
+                    break;
+                case "emotions":
+                    messages.push(<ChatbubbleEmotions
+                        message={message}
+                        options={emotions}
+                        onSubmit={hangleTERinput}
+                        />)
+                    break;
+                case "thoughts":
+                case "reactions":
+                    messages.push(<ChatbubbleThoughtsReactions 
+                        message={message}
+                        options={message.content === "thoughts" ? thoughts : reactions} 
+                        fillerWords={fillerWords}
+                        onSubmit={hangleTERinput}/>);
+                    break;
+                default:
+                    messages.push(<Chatbubble 
+                        key={"response-"+index+"-"+message.content}
+                        own={message.sentBy === "user" ? true : false}
+                        delayedDisplay
+                        choice 
+                        type={message.type}
+                        onClick={message.action ? 
+                            () => action(message.action) : 
+                            () => addResponseToMessageQueue({...message})}>
+                            {message.content}
+                        </Chatbubble>);
+                    break;
             }
         });
         return messages;
@@ -80,7 +117,7 @@ export default function PainLogbook() {
         const messages = document.getElementById("messages");
         /* Scroll immediately after new messages */
         messages.scrollTop = messages.scrollHeight;
-        /* Scroll again after messages have expanded/options have appeared (1000ms) */
+        /* Scroll again after messages have expanded/user options have appeared (1000ms) */
         setTimeout(function() { messages.scrollTop = messages.scrollHeight; }, 1001);
     });
 
@@ -92,6 +129,4 @@ export default function PainLogbook() {
             </div>
         </React.Fragment>
     )
-
-
 }

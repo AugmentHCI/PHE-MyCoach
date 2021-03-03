@@ -18,10 +18,17 @@ export default function Button(props) {
     /* Generate Button Style */
     let style = props.style ? props.style : {};
     if (!props.isSelected) {
-        style["backgroundColor"] = props.color ? `var(--idewe-${props.color})` : "var(--idewe-white)"
-        style["color"] = props.contentColor ? `var(--idewe-${props.color})` : (props.color ? "var(--idewe-white)" : "var(--idewe-blue)")
-        if (props.width === "fit" ) style["width"] = "fit-content";
+        if (props.outline) {
+            style["backgroundColor"] = "var(--idewe-white)";
+            style["color"] = props.color ? `var(--idewe-${props.color})` : "var(--idewe-blue)";
+        }
+        else {
+            style["backgroundColor"] = props.color ? `var(--idewe-${props.color})` : "var(--idewe-white)";
+            style["color"] = props.contentColor ? `var(--idewe-${props.color})` : (props.color ? "var(--idewe-white)" : "var(--idewe-blue)");
+        }
     }
+    if (props.width === "fit" ) style["width"] = "fit-content";
+    if (props.outline) {style["border"] = props.color ? `2px solid var(--idewe-${props.color})` : "2px solid var(--idewe-white)";}
 
     return (
         <button className={buttonClass} 
