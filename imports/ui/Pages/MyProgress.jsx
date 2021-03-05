@@ -446,8 +446,7 @@ export default class MyProgress extends Component {
       borderRadius:"10px", 
       margin:"0 30px 5px 30px",
       fontWeight:"500"};
-
-      console.log(this.state.stepsData)
+      
     if (steps === 0) infostyle["textAlign"] = "center";
 
     return <FadeIn delay="50"><Card title="myProgress.insights.steps" bodyStyle={{padding: '10px 5px'}} underline>
@@ -469,7 +468,7 @@ export default class MyProgress extends Component {
             <T>{`myProgress.mysteps.steps`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{steps}</div>
           </div>
           <div style={{float:"right"}}>
-          <T>{`myProgress.mysteps.distance`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{distance > 10 ? Math.round(distance): distance}</div>
+          <T>{`myProgress.mysteps.distance`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{distance.split(".")[0] > 10 ? distance.split(".")[0] + " km": distance}</div>
           </div>
         </div>}
         {(steps === 0) && <div style={infostyle}><T>{`myProgress.mysteps.noSteps`}</T></div>}
