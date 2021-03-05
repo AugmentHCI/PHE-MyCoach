@@ -468,7 +468,7 @@ export default class MyProgress extends Component {
             <T>{`myProgress.mysteps.steps`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{steps}</div>
           </div>
           <div style={{float:"right"}}>
-          <T>{`myProgress.mysteps.distance`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{distance.split(".")[0] > 10 ? distance.split(".")[0] + " km": distance}</div>
+          <T>{`myProgress.mysteps.distance`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{distance.split(".")[0] >= 10 ? distance.split(".")[0] + " km": distance}</div>
           </div>
         </div>}
         {(steps === 0) && <div style={infostyle}><T>{`myProgress.mysteps.noSteps`}</T></div>}
