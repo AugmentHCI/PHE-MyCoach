@@ -436,17 +436,18 @@ export default class MyProgress extends Component {
   )};
 
   renderFitBitCard() {
-    let steps = this.state.stepsData ? (this.state.stepsData.length > 0 ? this.state.stepsData[0].steps : 0) : 0;
-    let distance = this.state.stepsData ? (this.state.stepsData.length > 0 ? this.state.stepsData[0].distance : 0) : 0;
+    let steps = this.state.stepsData ? (this.state.stepsData.length > 0 ? this.state.stepsData[0].steps : this.state.stepsData.steps) : 0;
+    let distance = this.state.stepsData ? (this.state.stepsData.length > 0 ? this.state.stepsData[0].distance : this.state.stepsData.distance) : 0;
     distance = distance < 1 ? Math.round(distance * 1000) + " m" : (Math.round(distance * 100)/100) + " km";
     let infostyle = {
-      padding:"3px 20px 0 20px", 
+      padding:"4px 20px 0 20px", 
       height: "30px", 
       backgroundColor:"var(--idewe-background-solid)", 
       borderRadius:"10px", 
       margin:"0 30px 5px 30px",
       fontWeight:"500"};
 
+      console.log(this.state.stepsData)
     if (steps === 0) infostyle["textAlign"] = "center";
 
     return <FadeIn delay="50"><Card title="myProgress.insights.steps" bodyStyle={{padding: '10px 5px'}} underline>
@@ -468,7 +469,7 @@ export default class MyProgress extends Component {
             <T>{`myProgress.mysteps.steps`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{steps}</div>
           </div>
           <div style={{float:"right"}}>
-          <T>{`myProgress.mysteps.distance`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{distance}</div>
+          <T>{`myProgress.mysteps.distance`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{distance > 10 ? Math.round(distance): distance}</div>
           </div>
         </div>}
         {(steps === 0) && <div style={infostyle}><T>{`myProgress.mysteps.noSteps`}</T></div>}

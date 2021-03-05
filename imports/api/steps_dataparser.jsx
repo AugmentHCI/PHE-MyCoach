@@ -24,8 +24,8 @@ export function aggregateStepsByHour(data) {
 }
 
 function getWeekdaysTranslation(){
-    let weekdays = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
-    translatedWeekdays = weekdays.map( day =>
+    const weekdays = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+    const translatedWeekdays = weekdays.map( day =>
       i18n.getTranslation('Common', `myProgress.axes.${day}`))
     return translatedWeekdays;
   }
@@ -102,7 +102,7 @@ export function getFitBitDataMonthly(data, type) {
             results.push(0);
             resultsByDay[i] = 0;
         }
-    };
+    }
     const max_value = Math.max.apply(Math, results) < 1 ? 1 : Math.max.apply(Math, results);
     const colorAddition = type === "steps" ? "-dark" : "";
     return {
