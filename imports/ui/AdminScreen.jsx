@@ -68,7 +68,7 @@ function ControlPanel(props) {
   }
 
   function renderUserData() {
-    controlPanelHtml = [];
+    let controlPanelHtml = [];
     for (const [field, value] of Object.entries(userData)) {
       switch (field) {
         case "PROFILE":
@@ -111,6 +111,6 @@ function ControlPanel(props) {
   return (<div className="control-panel" width={"100%"}>
       <h1>MyCoach - Settings</h1>
       {renderUserData()}
-      <Button width={"fit"} action={() => props.updateData(JSON.parse(JSON.stringify(userData)))}>Pas toe</Button>
+      <Button width={"fit"} onClick={() => props.updateData(JSON.parse(JSON.stringify(userData)))}>Pas toe</Button>
     </div>)
 }

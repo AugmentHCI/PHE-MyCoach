@@ -13,9 +13,17 @@ export function Chatbubble(props) {
     const [renderLoading, setRenderLoading] = useState(props.own ? false : true);
     const [delayedDisplay, setDelayedDisplay] = useState(props.delayedDisplay ? true : false);
 
-    useEffect(() => {
-        setTimeout(function() { setRenderLoading(false); setDelayedDisplay(false); }, 1000)
-    }, []);
+    if (props.delayBy !== undefined) {
+        useEffect(() => {
+            setTimeout(function() { setDelayedDisplay(false) }, props.delayBy);
+            setTimeout(function() { setRenderLoading(false) }, props.delayBy + (props.typeLength ? props.typeLength : 1000));
+        }, []);
+    }
+    else {
+        useEffect(() => {
+            setTimeout(function() { setRenderLoading(false); setDelayedDisplay(false); }, (props.typeLength ? props.typeLength : 1000));
+        }, []);
+    }
 
     const classSuffix = props.own ? (props.choice ? (props.type === "button" ? "-ownchoicebutton": "-ownchoice") : "-own") : "";
 
@@ -24,8 +32,8 @@ export function Chatbubble(props) {
     }
 
     return (<div className="chatbubble-container">
-            {!props.own && <img src="/illustrations/avatar.png" width="35px" style={{position:"absolute"}}/>}
-            {!delayedDisplay && <div className={"chatbubble" + classSuffix} onClick={() => handleOnClick()}>
+            {(!props.own && !delayedDisplay) && <img src="/illustrations/avatar.png" width="35px" style={{position:"absolute"}}/>}
+            {!delayedDisplay && <div className={"chatbubble" + classSuffix + (props.disabled ? " disabled": "")} onClick={() => handleOnClick()}>
                 {renderLoading && <img src="/illustrations/loading.gif" width="50px" style={{}}/>}
                 {!renderLoading && props.children}
             </div>}
@@ -50,6 +58,11 @@ function Option(props) {
     )
 }
 
+/**
+ * Chatbubble for displaying Thoughts and Reactions user input
+ * @param {*} props 
+ * @returns Chatbubble for displaying Thoughts and Reactions user input
+ */
 export function ChatbubbleThoughtsReactions(props) {
 
     /* State */
@@ -61,8 +74,8 @@ export function ChatbubbleThoughtsReactions(props) {
 
     const title = props.message.content === "thoughts" ? "Mijn gedachten" : "Mijn reactie(s)";
     const text = props.message.content === "thoughts" ? 
-        "Selecteer gedachten hieronder die van toepassing zijn. (Hint: typ trefwoorden om een specifieke gedachte te zoeken)" : 
-        "Selecteer reacties hieronder die van toepassing zijn. (Hint: typ trefwoorden om een specifieke reactie te zoeken)" ;
+        "Hier komen je geselecteerde gedachten te staan. Scroll door de lijst hieronder of typ trefwoorden om een specifieke gedachte te zoeken." : 
+        "Hier komen je geselecteerde reacties te staan. Scroll door de lijst hieronder of typ trefwoorden om een specifieke reactie te zoeken." ;
 
     /**
      * Remove all filler and common words from the current search therm
@@ -170,6 +183,11 @@ export function ChatbubbleThoughtsReactions(props) {
     )
 }
 
+/**
+ * Chatbubble for displaying a text input field
+ * @param {*} props 
+ * @returns Chatbubble with a text input field
+ */
 export function ChatbubbleText(props) {
     const [hidden, setHidden] = useState(true);
     const [input, updateInput] = useState("");
@@ -181,11 +199,13 @@ export function ChatbubbleText(props) {
 
     return (<div className="chatbubble-container">
         {!hidden && <div className={"chatbubble-ownchoice-textinput"}>
-            <Input type="text" value={input} placeholder={"Typ wat je aan het doen was"} width={"100%"} onChange={updateInput} noOutline></Input>
+            <Input type="text" value={input} placeholder={"Typ je antwoord"} style={{width:"100% !important"}} onChange={updateInput} noOutline></Input>
         </div>}
-        {(!hidden && input.length > 0) && <div className={"chatbubble-ownchoice"} onClick={() => props.onSubmit({content: input, response: props.message.response, sentBy: "user"})}>
-            Verstuur
-        </div>}
+        {(!hidden && input.length > 0) && 
+            <div className={"chatbubble-ownchoice"} 
+                 onClick={() => props.onSubmit({content: input, response: props.message.response, sentBy: "user"})}>
+                Verstuur
+            </div>}
         </div>)
 
 }
@@ -209,21 +229,26 @@ export function ChatbubbleEmotions(props) {
     }
 
     function renderEmotions() {
-        emotionButtonsHTML = [];
+        let emotionButtonsHTML = [], emotionsRowHTML = [], counter = 0;
         for (const [emotion, information] of Object.entries(props.options)) {
             const isSelected = Object.keys(selectedEmotions).includes(emotion);
-            emotionButtonsHTML.push(<Button size="small" outline isSelected={isSelected} width="fit" color="blue" style={{marginRight: "8px"}} onClick={() => toggleEmotion(emotion, information)}>{emotion}</Button>)
+            emotionsRowHTML.push(<Button size="small" outline isSelected={isSelected} width="fit" color="blue" style={{float: "right", marginRight: "8px"}} onClick={() => toggleEmotion(emotion, information)}>{emotion}</Button>)
+            if (counter >= 2) {
+                emotionButtonsHTML.push(<div style={{width: "100%"}}>{emotionsRowHTML}</div>);
+                emotionsRowHTML = [];
+                counter = 0;
+            }
+            else { counter += 1 }
         }
         return emotionButtonsHTML;
     }
 
     return (<div className="chatbubble-container">
-        {!hidden && <div className={"chatbubble-ownchoice-textinput"}>
-            <div className="chatbubble-title">Mijn emoties</div>
+        {!hidden && <div>
             {renderEmotions()}
         </div>}
         {!hidden && <div className={"chatbubble-ownchoice"} onClick={() => props.onSubmit(selectedEmotions, props.message)}>
-           {selectedEmotions.length === 0 ? "Geen van toepassing" : "Verstuur selectie"}
+           {Object.keys(selectedEmotions).length === 0 ? "Geen van toepassing" : "Verstuur selectie"}
         </div>}
     </div>)
 }

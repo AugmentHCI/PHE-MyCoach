@@ -54,6 +54,25 @@
     }
 }
 
+.chatbubble.disabled {
+    background-color: var(--idewe-gray-light);
+    color: var(--idewe-white);
+    border: 2px solid var(--idewe-gray-light);
+}
+
+.chatbubble-ownchoice.disabled {
+    background-color: var(--idewe-gray-light);
+    color: var(--idewe-white);
+    border: 2px solid var(--idewe-gray-light);
+}
+
+.chatbubble-ownchoicebutton.disabled {
+    background-color: var(--idewe-gray-light);
+    color: var(--idewe-white);
+    border: 2px solid var(--idewe-gray-light);
+}
+
+
 .chatbubble-title {
     font-size: 18px;
     font-family: var(--main-font);
