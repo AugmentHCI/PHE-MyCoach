@@ -90,7 +90,7 @@ export default function MyCoach(props) {
                     <h4>Je todo's</h4>
                     Hier zie jij je dagelijkse todo's waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog shortcuts toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
                     <div className="tutorial-button-row">
-                        <Button color="blue" width="fit" size="small" style={{float:"right"}} action={()=> updateShowTutorial1(false)}>Volgende</Button>
+                        <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial1(false)}>Volgende</Button>
                     </div>
                 </div>}
                 placement="bottom"

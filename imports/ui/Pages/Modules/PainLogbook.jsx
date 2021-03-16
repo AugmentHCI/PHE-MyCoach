@@ -9,13 +9,16 @@ import RuleEngine from "../../../api/RuleEngine.jsx";
 
 export default function PainLogbook() {
 
-    /* States */
+    /* States and Constants */
+    const figmaLink = "https://www.figma.com/proto/1uQ546kVRnr7F0URcdtm85/Untitled?node-id=1%3A134&viewport=-1003%2C902%2C1.1312503814697266&scaling=scale-down";
     const ruleEngine = new RuleEngine(rules);
     const [matchedRecommendations, updateMatchedRecommendations] = useState([]);
     const [currentRecommendation, updateCurrentRecommendation] = useState(0);
 
     const [messageQueue, updateMessageQueue] = useState(["MESSAGE-INTRO"]);
     const [tempMessageQueue, updateTempMessageQueue] = useState([]);
+
+    const [visualRecommendation, toggleVisualRecommendation] = useState(FlowRouter.getParam('settings') === "visual")
 
     const [userInput, updateUserInput] = useState([]);
 
@@ -33,6 +36,11 @@ export default function PainLogbook() {
                 updateCurrentRecommendation(currentRecommendation + 1);
                 addResponseToMessageQueue(message);
                 break;
+            case "next":
+                toggleVisualRecommendation(!visualRecommendation);
+                break;
+            case "saveAndClose":
+                window.open(figmaLink, "_blank");
             default:
                 console.log(`Action ${actionType} not implemented.`)
         }
@@ -89,13 +97,18 @@ export default function PainLogbook() {
         messageQueue.forEach((message, index) => {
             /* Recommendation message (requires more complex handling) */
             if (message.content === "recommendation") { 
-                /* Update state, but use local variable as state update happens asynchronously */
-                let recommendations = matchedRecommendations.length === 0 ? ruleEngine.matchRules(userInput) : matchedRecommendations ;
-                if (matchedRecommendations.length === 0) updateMatchedRecommendations(recommendations);
-                const recommendationText = " Wil je hiervoor de aanbevolen tips bekijken in de module '" + moduleTranslation[recommendations[recommendationIndex].module]+ "'?";
-                messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-1"} typeLength={2000} own={false}>{recommendations[recommendationIndex].explanation}</Chatbubble>)
-                messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-2"} delayedDisplay delayBy={2000} typeLength={2000} own={false}>{recommendations[recommendationIndex].recommendation + recommendationText}</Chatbubble>)
-                recommendationIndex += 1;
+                if (visualRecommendation) {
+                    messages.push(<Chatbubble key={"message-recommendation-visual"} typeLength={2000} onClick={()=> window.open(figmaLink, "_blank")} own={false}>Aanbeveling gegenereerd: klik hier.</Chatbubble>)
+                }
+                else {
+                    /* Update state, but use local variable as state update happens asynchronously */
+                    let recommendations = matchedRecommendations.length === 0 ? ruleEngine.matchRules(userInput) : matchedRecommendations ;
+                    if (matchedRecommendations.length === 0) updateMatchedRecommendations(recommendations);
+                    const recommendationText = " Wil je hiervoor de aanbevolen tips bekijken in de module '" + moduleTranslation[recommendations[recommendationIndex].module]+ "'?";
+                    messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-1"} typeLength={2000} own={false}>{recommendations[recommendationIndex].explanation}</Chatbubble>)
+                    messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-2"} delayedDisplay delayBy={2000} typeLength={2000} own={false}>{recommendations[recommendationIndex].recommendation + recommendationText}</Chatbubble>)
+                    recommendationIndex += 1;
+                }
             }
             /* Normal messages */
             else {
@@ -127,8 +140,7 @@ export default function PainLogbook() {
                         onSubmit={hangleTERinput}/>);
                     break;
                 case "recommendation-next":
-                case "recommendation-answer":
-                    if (message.content === "recommendation-next" && recommendationIndex === matchedRecommendations.length) {
+                    if (recommendationIndex === matchedRecommendations.length && !visualRecommendation) {
                         messages.push(<Chatbubble 
                             key={"recommendation-response-"+message.text+"-"+currentRecommendation}
                             own={true}
@@ -138,6 +150,20 @@ export default function PainLogbook() {
                             disabled>Geen aanbevelingen meer</Chatbubble>);
                         break;
                     }
+                    else if (visualRecommendation) {
+                        messages.push(<Chatbubble 
+                            key={"recommendation-response-visual-next"}
+                            own={true}
+                            delayedDisplay
+                            delayBy={2000}
+                            choice
+                            onClick={() => action("next")}>
+                                Volgende
+                            </Chatbubble>);
+                        break;
+                    }
+                case "recommendation-answer":
+                    if (visualRecommendation) break;
                     let newMessage = {...message};
                     console.log(newMessage)
                     newMessage.content = newMessage.text;
@@ -191,7 +217,7 @@ export default function PainLogbook() {
     return (
         <React.Fragment>
             <NavigationBar title="Pijnlogboek"/>
-            <div id="messages" className="container" style={{paddingTop:"85px"}}>
+            <div id="messages" className="container" style={{paddingTop:"85px", paddingBottom: "30px"}}>
                 {renderMessages()}
             </div>
         </React.Fragment>

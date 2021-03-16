@@ -41,6 +41,15 @@ FlowRouter.route('/:language/mycoach/painlogbook', {
   }
 })
 
+FlowRouter.route('/:language/mycoach/painlogbook/:settings', {
+  name: 'PainLogbook',
+  action(){ 
+    mount( App, {
+      content: <PainLogbook /> 
+    })
+  }
+})
+
 FlowRouter.route('/:language/mycoach/module/:module', {
   name: 'Paineducation',
   action(){ 

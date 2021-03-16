@@ -278,7 +278,20 @@ const PainEducationScript = {
                 },
                 {
                     "type": "Sort-Exercise",
-                    "columns": ["Rugby", "Beide", "Overval"]
+                    "content": "Geef voor elke contextuele factor aan in welke situatie deze het meest aanwezig zal zijn. Bij het rugbyspel, de overval of ongeveer gelijk in beide situaties?",
+                    "columns": {
+                        "id1": {"name": "Rugby", "items": []}, 
+                        "id2": {"name": "Beide", "items": [
+                            {"id": "1", "content": "Vreugde"}, 
+                            {"id": "2", "content": "Angst"},
+                            {"id": "3", "content": "Boosheid"}, 
+                            {"id": "4", "content": "Uitbundigheid"},
+                            {"id": "5", "content": "Verdriet"}, 
+                            {"id": "6", "content": "Stress"},
+                            {"id": "7", "content": "Verbondenheid"}, 
+                        ]}, 
+                        "id3": {"name": "Overval", "items": []}
+                    }
                 },
                 {
                     "id": "PE-MOD3-Q1",
