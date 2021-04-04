@@ -1,5 +1,6 @@
 .content-backdrop {
     background-color: var(--idewe-background-solid);
+    font-family: var(--main-font);
     padding: 10px;
     margin-top: 10px;
     border-radius: 10px;
@@ -8,7 +9,6 @@
 /*   Content - QUESTION   */
 
 .content-question-title {
-    font-family: var(--main-font);
     width: 100%;
     font-weight: 500;
     font-size: 20px;
@@ -16,7 +16,6 @@
 }
 
 .content-question-text {
-    font-family: var(--main-font);
     font-weight: 400;
     font-size: 14px;
     color: var(--idewe-blue-dark);
@@ -27,11 +26,10 @@
     border-radius: 10px;
     color: var(--idewe-blue);
     background-color: var(--idewe-background-solid);
-    font-family: var(--main-font);
     font-weight: 600;
-    font-size: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
     margin-top: 10px;
     padding: 3px 15px;
 
@@ -51,7 +49,6 @@
 }
 
 .content-answer {
-    font-family: var(--main-font);
     font-weight: 600;
     font-size: 14px;
     margin-top: 10px;
@@ -77,6 +74,7 @@
     font-family: var(--main-font);
     font-weight: 400;
     color: var(--idewe-blue-dark);
+    margin-bottom: 5px;
 
     &-overview {
         @extend .content-text;
@@ -147,12 +145,20 @@
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
 }
 
+/* Content - TEXTINPUT */
+.content-textinput-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
 /* Other */
 .content-not-implemented {
     background-color: var(--idewe-background-solid);
     color: var(--idewe-blue-dark);
     font-family: var(--main-font);
-    padding: 10px;
+    padding: 8px;
+    padding-left: 15px;
     border-radius: 15px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -160,6 +166,7 @@
     &-title {
         @extend .content-not-implemented;
         padding: 0;
+        margin: 0;
         font-weight: 500;
     }
 }

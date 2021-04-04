@@ -109,7 +109,7 @@ function getActivityTranslation(activity){
 // output data format van deze functie: {id: ..., measure: ..., ..., data: [weekly/monthly data]}
 // input: data = data from API, parameter = id of selected parameter, timePeriod = "week" or "month"
 export function getParameterData(data, parameter, timePeriod){
-  paramData = [];
+  let paramData = [];
   let fullParamData = parameters.filter(function(param){
     return param.id == parameter;
   })

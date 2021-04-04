@@ -3,7 +3,7 @@ const PainEducationScript = {
     "title": "Pijneducatie",
     "submodule-parts": 6,
     "submodules": [{
-        "id": "PE_MOD1",
+        "id": "PE_MOD_1",
         "title": "Ontstaan van pijn",
         "title-markup": ["Ontstaan", "van pijn"],
         "part": 1,
@@ -13,7 +13,7 @@ const PainEducationScript = {
         "image": "learning",
         "imageWidth": "180px",
         "cards": [{
-                "id": "PE-MOD1-CARD1",
+                "id": "PE-MOD-1-CARD-1",
                 "title": "Inleiding",
                 "card-contents": [
                     {
@@ -26,7 +26,7 @@ const PainEducationScript = {
                     }]
             },
             {
-                "id": "PE-MOD1-CARD2",
+                "id": "PE-MOD-1-CARD-2",
                 "title": "Vragen",
                 "card-contents": [
                     {
@@ -34,7 +34,7 @@ const PainEducationScript = {
                         "content": "Goed zo, je hebt het eerste filmpje over hoe pijn ontstaat met succes doorlopen. Heb je het goed onthouden en begrepen?"
                     },
                     {
-                        "id": "PE-MOD1-Q1",
+                        "id": "PE-MOD-1-Q1",
                         "type": "Question",
                         "question": "Wanneer je je voet omslaat wordt dit eerst waargenomen door de receptoren in de huid, gewrichten en spieren van je voet. Er zal een boodschap als waarschuwing van mogelijk gevaar worden gestuurd naar je ruggenmerg en hersenen.",
                         "options": ["Juist", "Fout"],
@@ -44,7 +44,7 @@ const PainEducationScript = {
                         "onIncorrect": "Deze stelling is juist"
                     },
                     {
-                        "id": "PE-MOD1-Q2",
+                        "id": "PE-MOD-1-Q2",
                         "type": "Question",
                         "question": "Al de gevaarboodschappen (zoals bij het omslaan van je enkel) komen toe in de hersenen.",
                         "options": ["Juist", "Fout"],
@@ -54,7 +54,7 @@ const PainEducationScript = {
                         "onIncorrect": "Jammer, maar deze stelling is fout."
                     },
                     {
-                        "id": "PE-MOD1-Q3",
+                        "id": "PE-MOD-1-Q3",
                         "type": "Question",
                         "question": "De hersenen beslissen of je pijn zal ervaren.",
                         "options": ["Juist", "Fout"],
@@ -66,7 +66,7 @@ const PainEducationScript = {
                 ]
             },
             {
-                "id": "PE-MOD1-CARD3",
+                "id": "PE-MOD-1-CARD-3",
                 "title": "Klaar!",
                 "card-contents": [
                     {
@@ -75,7 +75,7 @@ const PainEducationScript = {
                     }]
             },
             {
-                "id": "PE-MOD1-OVERVIEW",
+                "id": "PE-MOD-1-OVERVIEW",
                 "title": "Overzicht",
                 "overview": true,
                 "card-contents": [
@@ -95,7 +95,7 @@ const PainEducationScript = {
         ]
     },
     {
-        "id": "PE_MOD2",
+        "id": "PE_MOD_2",
         "title": "Rol van het brein",
         "title-markup": ["Rol van", "het brein"],
         "part": 2,
@@ -104,7 +104,7 @@ const PainEducationScript = {
         "type": "Informatief",
         "image": "new_ideas",
         "cards": [{
-            "id": "PE-MOD2-CARD1",
+            "id": "PE-MOD-2-CARD-1",
             "title": "Recap",
             "card-contents": [
                 {
@@ -119,12 +119,12 @@ const PainEducationScript = {
             ]
         }, 
         {
-            "id": "PE-MOD2-CARD2",
+            "id": "PE-MOD-2-CARD-2",
             "title": "Video",
             "card-contents": [
                 {
                     "type": "Text",
-                    "content": "Bekijk nu het filmpje over TODO-PE-MOD2-CARD2"
+                    "content": "Bekijk nu het filmpje over TODO-PE-MOD-2-CARD-2"
                 },
                 {
                     "type": "Video",
@@ -133,7 +133,7 @@ const PainEducationScript = {
             ]
         },
         {
-            "id": "PE-MOD2-CARD3",
+            "id": "PE-MOD-2-CARD-3",
             "title": "Denkoefening",
             "card-contents": [
                 {
@@ -150,14 +150,14 @@ const PainEducationScript = {
                 },
                 {
                     "type": "Selection",
-                    "id": "PE-MOD2-Q1",
+                    "id": "PE-MOD-2-Q1",
                     "title": "Wat doe je?",
                     "question": "Je doet de deur van je slaapkamer open en er zit een dikke, harige spin in het midden van de kamer. Wat doe je?",
                     "options": ["Gillen, weglopen, hulp roepen of verstijven van angst", "Een schoen nemen en de spin plat slaan", "Gefascineerd bestuderen of een potje nemen om de spin buiten te zetten"]
                 },
                 {
                     "type": "Selection",
-                    "id": "PE-MOD2-Q2",
+                    "id": "PE-MOD-2-Q2",
                     "title": "En hoe voel jij je?",
                     "question": "Welke emoticon illustreert het best hoe je je op dat moment voelt?",
                     "options": ["😄", "😒", "😔", "😟", "😩", "😡"]
@@ -169,7 +169,7 @@ const PainEducationScript = {
             ]
         },
         {
-            "id": "PE-MOD2-CARD4",
+            "id": "PE-MOD-2-CARD-4",
             "title": "Even denken",
             "card-contents": [
                 {
@@ -178,12 +178,12 @@ const PainEducationScript = {
                 },
                 {
                     "type": "Image",
-                    "link": ["/images/paineducation/model-with-spider.png", "/images/paineducation/scared-of-spider.png"]
+                    "link": ["/images/paineducation/model-with-spider.jpg", "/images/paineducation/scared-of-spider.jpg"]
                 }
             ]
         },
         {
-            "id": "PE-MOD2-CARD5",
+            "id": "PE-MOD-2-CARD-5",
             "title": "Pijnervaring",
             "card-contents": [
                 {
@@ -192,7 +192,7 @@ const PainEducationScript = {
                 },
                 {
                     "type": "Image",
-                    "link": ["/images/paineducation/vaccin-relaxed.png", "/images/paineducation/vaccin-scared.png"]
+                    "link": ["/images/paineducation/vaccin-relaxed.jpg", "/images/paineducation/vaccin-scared.jpg"]
                 },
                 {
                     "type": "Text",
@@ -201,7 +201,7 @@ const PainEducationScript = {
             ]
         },
         {
-            "id": "PE-MOD2-OVERVIEW",
+            "id": "PE-MOD-2-OVERVIEW",
             "title": "Overzicht",
             "overview": true,
             "card-contents": [
@@ -219,7 +219,7 @@ const PainEducationScript = {
         }]
     },
     {
-        "id": "PE_MOD3",
+        "id": "PE_MOD_3",
         "title": "Gevoeligheid zenuwstelsel",
         "title-markup": ["Gevoeligheid", "zenuwstelsel"],
         "part": 3,
@@ -229,7 +229,7 @@ const PainEducationScript = {
         "image": "sensitivity",
         "imageWidth": "170px",
         "cards": [{
-            "id": "PE-MOD3-CARD1",
+            "id": "PE-MOD-3-CARD-1",
             "title": "Inleiding",
             "card-contents": [
                 {
@@ -243,7 +243,7 @@ const PainEducationScript = {
             ]
         },
         {
-            "id": "PE-MOD3-CARD2",
+            "id": "PE-MOD-3-CARD-2",
             "title": "Uitleg",
             "card-contents": [
                 {
@@ -253,7 +253,7 @@ const PainEducationScript = {
             ]
         }, 
         {
-            "id": "PE-MOD3-CARD3",
+            "id": "PE-MOD-3-CARD-3",
             "title": "Denkoefening",
             "card-contents": [
                 {
@@ -262,7 +262,7 @@ const PainEducationScript = {
                 },
                 {
                     "type": "Image",
-                    "link": "/images/paineducation/rugby.png"
+                    "link": "/images/paineducation/rugby.jpg"
                 },
                 {
                     "type": "Text",
@@ -270,7 +270,7 @@ const PainEducationScript = {
                 },
                 {
                     "type": "Image",
-                    "link": "/images/paineducation/robbery.png"
+                    "link": "/images/paineducation/robbery.jpg"
                 },
                 {
                     "type": "Text",
@@ -294,7 +294,7 @@ const PainEducationScript = {
                     }
                 },
                 {
-                    "id": "PE-MOD3-Q1",
+                    "id": "PE-MOD-3-Q1",
                     "type": "Question",
                     "question": "In welke situatie zal er het meeste pijn worden ervaren? Bij het rugbyspel, de overval of ongeveer gelijk in beide situaties?",
                     "options": ["Rugby", "Overval", "Beide"],
@@ -306,7 +306,7 @@ const PainEducationScript = {
             ]
         }, 
         {
-            "id": "PE-MOD3-OVERVIEW",
+            "id": "PE-MOD-3-OVERVIEW",
             "title": "Overzicht",
             "overview": true,
             "card-contents": [
@@ -324,7 +324,7 @@ const PainEducationScript = {
         }]
     },
     {
-        "id": "PE_MOD4",
+        "id": "PE_MOD_4",
         "title": "Chronische pijn",
         "title-markup": ["Chronische", "pijn"],
         "part": 4,
@@ -334,7 +334,7 @@ const PainEducationScript = {
         "image": "chronic",
         "imageWidth": "200px",
         "cards": [{
-            "id": "PE-MOD4-CARD1",
+            "id": "PE-MOD-4-CARD-1",
             "title": "Inleiding",
             "card-contents": [
                 {
@@ -348,7 +348,7 @@ const PainEducationScript = {
             ]
         },
         {
-            "id": "PE-MOD4-CARD2",
+            "id": "PE-MOD-4-CARD-2",
             "title": "Quiz",
             "card-contents": [
                 {
@@ -360,7 +360,7 @@ const PainEducationScript = {
                     "content": "[Noot - Quiz wat leuker maken]"
                 },
                 {
-                    "id": "PE-MOD4-Q1",
+                    "id": "PE-MOD-4-Q1",
                     "type": "Question",
                     "question": "Chronische pijn of pijn zonder duidelijke oorzaak is ingebeeld.",
                     "number": 1,
@@ -371,7 +371,7 @@ const PainEducationScript = {
                     "onIncorrect": "Jammer, maar deze stelling is fout."
                 },
                 {
-                    "id": "PE-MOD4-Q2",
+                    "id": "PE-MOD-4-Q2",
                     "type": "Question",
                     "question": "Wanneer je pijn hebt is er altijd sprake van lichamelijke schade.",
                     "number": 2,
@@ -382,7 +382,7 @@ const PainEducationScript = {
                     "onIncorrect": "Deze stelling is fout."
                 },
                 {
-                    "id": "PE-MOD4-Q3",
+                    "id": "PE-MOD-4-Q3",
                     "type": "Question",
                     "question": "Pijn kan alleen worden behandeld met medicatie of een operatie.",
                     "number": 3,
@@ -393,7 +393,7 @@ const PainEducationScript = {
                     "onIncorrect": "Ook deze stelling is fout."
                 },
                 {
-                    "id": "PE-MOD4-Q4",
+                    "id": "PE-MOD-4-Q4",
                     "type": "Question",
                     "question": "Je kan zelf een aantal zaken doen om pijnklachten te vermijden of beperken.",
                     "number": 4,
@@ -404,7 +404,7 @@ const PainEducationScript = {
                     "onIncorrect": "Deze stelling is wel juist."
                 },
                 {
-                    "id": "PE-MOD4-Q5",
+                    "id": "PE-MOD-4-Q5",
                     "type": "Question",
                     "question": "Als je pijn hebt kan je best rusten en zo min mogelijk doen.",
                     "number": 5,
@@ -415,7 +415,7 @@ const PainEducationScript = {
                     "onIncorrect": "Net niet!"
                 },
                 {
-                    "id": "PE-MOD4-Q6",
+                    "id": "PE-MOD-4-Q6",
                     "type": "Question",
                     "question": "Negatieve gedachten, emoties en langdurige stress kunnen pijn verergeren.",
                     "number": 6,
@@ -426,7 +426,7 @@ const PainEducationScript = {
                     "onIncorrect": "Dat is juist wel het geval."
                 },
                 {
-                    "id": "PE-MOD4-Q7",
+                    "id": "PE-MOD-4-Q7",
                     "type": "Question",
                     "question": "De intensiteit van de pijn stemt altijd overeen met de hoeveelheid prikkels die receptoren op de zenuwen waarnemen.",
                     "number": 7,
@@ -437,7 +437,7 @@ const PainEducationScript = {
                     "onIncorrect": "Dat is niet juist."
                 },
                 {
-                    "id": "PE-MOD4-Q8",
+                    "id": "PE-MOD-4-Q8",
                     "type": "Question",
                     "question": "De hersenen beslissen wanneer je pijn zal ervaren.",
                     "number": 8,
@@ -448,7 +448,7 @@ const PainEducationScript = {
                     "onIncorrect": "Juist wel."
                 },
                 {
-                    "id": "PE-MOD4-Q9",
+                    "id": "PE-MOD-4-Q9",
                     "type": "Question",
                     "question": "Er kunnen veranderingen in de zenuwen en het ruggenmerg optreden waardoor pijnprikkels makkelijker worden doorgestuurd.",
                     "number": 9,
@@ -459,7 +459,7 @@ const PainEducationScript = {
                     "onIncorrect": "Deze stelling klopt wel."
                 },
                 {
-                    "id": "PE-MOD4-Q10",
+                    "id": "PE-MOD-4-Q10",
                     "type": "Question",
                     "question": "Wanneer je een letsel oploopt zal de situatie waarin je je bevindt geen invloed hebben op de hoeveelheid pijn die je ervaart.",
                     "number": 10,
@@ -472,7 +472,7 @@ const PainEducationScript = {
             ]
         },
         {
-            "id": "PE-MOD4-OVERVIEW",
+            "id": "PE-MOD-4-OVERVIEW",
             "title": "Overzicht",
             "overview": true,
             "card-contents": [
@@ -490,7 +490,7 @@ const PainEducationScript = {
         }]
     },
     {
-        "id": "PE_MOD5",
+        "id": "PE_MOD_5",
         "title": "Omgaan met pijn",
         "title-markup": ["Omgaan", "met pijn"],
         "part": 5,
@@ -500,7 +500,7 @@ const PainEducationScript = {
         "image": "paininfluence",
         "imageWidth": "215px",
         "cards": [{
-            "id": "PE-MOD5-CARD1",
+            "id": "PE-MOD-5-CARD-1",
             "title": "Inleiding",
             "card-contents": [
                 {
@@ -519,7 +519,7 @@ const PainEducationScript = {
             ]
         },
         {
-            "id": "PE-MOD5-CARD2",
+            "id": "PE-MOD-5-CARD-2",
             "title": "Wat kan je doen",
             "card-contents": [
                 {
@@ -528,7 +528,7 @@ const PainEducationScript = {
                 }]
         },
         {
-            "id": "PE-MOD5-CARD3",
+            "id": "PE-MOD-5-CARD-3",
             "title": "Overbelasten",
             "icon": "🏋🏽‍♀️",
             "overview": true,
@@ -540,7 +540,7 @@ const PainEducationScript = {
                 }]
         },
         {
-            "id": "PE-MOD5-CARD4",
+            "id": "PE-MOD-5-CARD-4",
             "title": "Langdurige stress",
             "icon": "😩",
             "overview": true,
@@ -552,7 +552,7 @@ const PainEducationScript = {
                 }]
         },
         {
-            "id": "PE-MOD5-CARD5",
+            "id": "PE-MOD-5-CARD-5",
             "title": "Ongezonde levensstijl",
             "icon": "🍔",
             "overview": true,
@@ -564,7 +564,7 @@ const PainEducationScript = {
                 }]
         },
         {
-            "id": "PE-MOD5-CARD6",
+            "id": "PE-MOD-5-CARD-6",
             "title": "Ongezonde beweeggewoontes",
             "icon": "🏃🏾‍♂️",
             "overview": true,
@@ -581,7 +581,7 @@ const PainEducationScript = {
                 }]
         },
         {
-            "id": "PE-MOD5-CARD7",
+            "id": "PE-MOD-5-CARD-7",
             "title": "Gedachten en emoties",
             "icon": "🤔",
             "overview": true,
@@ -593,7 +593,7 @@ const PainEducationScript = {
                 }]
         },
         {
-            "id": "PE-MOD5-CARD8",
+            "id": "PE-MOD-5-CARD-8",
             "title": "Sociale omgeving",
             "icon": "👋🏽",
             "overview": true,
@@ -605,7 +605,7 @@ const PainEducationScript = {
                 }]
         },
         {
-            "id": "PE-MOD5-CARD9",
+            "id": "PE-MOD-5-CARD-9",
             "title": "Module afgerond! 🎉",
             "card-contents": [
                 {

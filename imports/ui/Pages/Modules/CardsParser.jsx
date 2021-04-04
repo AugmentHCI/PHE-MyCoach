@@ -5,7 +5,6 @@ import Card from '../../components/Card.jsx';
 import ContentParser from './ContentParser.jsx';
 
 /* [TEMP] Use dummy user data */
-import UserData from '../../../api/userdata_dummy.js';
 
 
 function CardsParser(props) {

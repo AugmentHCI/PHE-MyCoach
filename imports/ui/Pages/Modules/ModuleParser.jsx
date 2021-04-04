@@ -9,8 +9,10 @@ import "../../../../i18n/fr.i18n.json"
 import "../../../../i18n/en.i18n.json"
 
 /* [TEMP] Use dummy user data */
-import UserData from '../../../api/userdata_dummy.js';
+import { UserData } from '../../../api/dummydata.jsx';
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
+import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
+import ProgressManager from "../../../api/ProgressManager.jsx";
 
 /* Import components */
 import ActionButton from '../../components/ActionButton.jsx';
@@ -27,9 +29,13 @@ const T = i18n.createComponent("Common");
 export default function ModuleParser(props) {
 
     const [moduleData, updateModuleData] = useState({});
-    const [language, setLanguage] = useState(FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE");
-
+    const [userProgress, updateUserProgress] = useState(undefined);
     const [openSubmodule, updateOpenSubmodule] = useState("");
+    /* Get states from URL parameters */
+    const [module, setModule] = useState(FlowRouter.getParam('module').toUpperCase());
+    const [language, setLanguage] = useState(FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE");
+    const [userID, setUserID] = useState(FlowRouter.getParam('token') ? FlowRouter.getParam('token') : 1111111);
+
 
     /**
      * Fetches and sets the correct module data, depending on the 
@@ -39,8 +45,11 @@ export default function ModuleParser(props) {
             case "paineducation":
                 updateModuleData(PainEducationScript);
                 break;
+            case "thoughtsemotions":
+                updateModuleData(ThoughtsEmotionsScript);
+                break;
             default:
-                updateModuleData("invalid");
+                updateModuleData(undefined);
         }
     }
 
@@ -50,9 +59,9 @@ export default function ModuleParser(props) {
     function renderSubmodules() {
         const moduleCardsHTML = [];
         moduleData.submodules.forEach(submodule => {
-            const moduleProgress = UserData.progress.PAINEDUCATION[submodule.id];
-            const isClosed = moduleProgress === "COMPLETED" || moduleProgress === "NOT_STARTED" ? true : false;
-            const isLocked = moduleProgress === "NOT_STARTED" ? true : false;
+            const status = userProgress[module][submodule.id];
+            const isClosed = status === "COMPLETED" || status === "NOT_STARTED" ? true : false;
+            const isLocked = status === "NOT_STARTED" ? true : false;
             if (!isClosed && openSubmodule !== submodule.id && openSubmodule === "") { updateOpenSubmodule(submodule.id) }
             moduleCardsHTML.push(<ModuleCard 
                 key={submodule.id}
@@ -68,7 +77,7 @@ export default function ModuleParser(props) {
                 onToggleClosed={updateOpenSubmodule}
                 closed={openSubmodule !== submodule.id}
                 locked={isLocked}
-                status={UserData.progress.PAINEDUCATION[submodule.id]}>
+                status={status}>
             </ModuleCard>)
         });
         return <FadeIn delay="80">{moduleCardsHTML}</FadeIn>;
@@ -82,27 +91,42 @@ export default function ModuleParser(props) {
         FlowRouter.go(`/${language}/mycoach/module/${FlowRouter.getParam('module')}/${submodule}`);
     }
 
-    /* Fetch module data only once, avoids infinite re-rendering due to state-changes */
-    useEffect(() => {fetchModuleData()}, []);
+    /* Fetch module data and user progress only once, avoids infinite re-rendering due to state-changes */
+    useEffect(() => {
+        fetchModuleData();
+        /* Wrap in async function, as getModuleProgress is async */
+        async function fetchUserProgress() {
+            const progressManager = new ProgressManager(userID);
+            const progress = await progressManager.getModuleProgress(module);
+            updateUserProgress(progress);
+        }
+        fetchUserProgress();
+    }, []);
 
-    if (moduleData === "invalid") {return <div className="container">Module "{FlowRouter.getParam('module')}" does not exist.</div>}
-    if (Object.keys(moduleData).length === 0) {return <div className="container"><div className="module-loading-message">Loading</div></div>}
+    if (!moduleData) {return <div className="container">Module "{FlowRouter.getParam('module')}" does not exist.</div>}
+    if (Object.keys(moduleData).length === 0 || !userProgress) {
+        return (<React.Fragment> 
+            <NavigationBar title={moduleData.title}></NavigationBar>
+            <div className="container" style={{paddingTop: "85px"}}>
+                <div className="module-loading-message">Loading</div>
+            </div>
+        </React.Fragment>)}
 
     return (
         <React.Fragment>
             <NavigationBar title={moduleData.title}></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
                 <FadeIn>
-                <Card title="MIJN SHORTCUTS" noTranslate>
-                    <FadeIn delay="80">
-                        <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
-                        <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
-                    </FadeIn>
-                </Card>
+                    <Card title="MIJN SHORTCUTS" noTranslate>
+                        <FadeIn delay="80">
+                            <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
+                            <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
+                        </FadeIn>
+                    </Card>
 
-                <Card title="MIJN TRAJECT" noTranslate>
-                    {renderSubmodules()}
-                </Card>
+                    <Card title="MIJN TRAJECT" noTranslate>
+                        {renderSubmodules()}
+                    </Card>
                 </FadeIn>
             </div>
         </React.Fragment>

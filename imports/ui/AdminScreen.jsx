@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import MyProgress from "./Pages/MyProgress.jsx";
 import MyCoach from "./Pages/MyCoach.jsx";
 import Button from "./components/Button.jsx";
+import Slider from "./components/Slider.jsx";
 
 /* AntDesign Components */
 import Switch from 'antd/lib/switch';
@@ -10,9 +11,10 @@ import Select from 'antd/lib/select';
 import Collapse from 'antd/lib/collapse';
 import Radio from 'antd/lib/radio';
 
-
-import UserData from "../api/userdata_dummy.js";
 import './AdminScreen.scss';
+
+import { userDataLong, UserData } from "../api/dummydata.jsx";
+import { processBaselineQuestionnaires, getLatestBaselineQuestionnaire } from "../api/userdataparser.jsx";
 
 const { Option } = Select;
 const { Panel } = Collapse;
@@ -112,5 +114,6 @@ function ControlPanel(props) {
       <h1>MyCoach - Settings</h1>
       {renderUserData()}
       <Button width={"fit"} onClick={() => props.updateData(JSON.parse(JSON.stringify(userData)))}>Pas toe</Button>
+      <Button width={"fit"} onClick={() => getLatestBaselineQuestionnaire(userDataLong)}>Test</Button>
     </div>)
 }

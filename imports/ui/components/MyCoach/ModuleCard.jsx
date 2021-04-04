@@ -17,11 +17,12 @@ export default function ModuleCard(props) {
     const lockedSuffix = props.locked ? "-locked" : "";
     const iconColor = props.locked ? "gray-dark" : "blue";
     const iconImage = {"IN_PROGRESS": {image: "loading", color: "blue"}, "COMPLETED": {image: "check", color: "blue"}, "NOT_STARTED": {image: "locked", color: "gray-dark"}}
+    const status = props.status ? props.status : "NOT_STARTED";
 
     /* UI - Closed card */
     if (props.closed) return (<div className={"module-card-closed" + lockedSuffix} onClick={() => toggleClosed()}>
         <div className={"module-status-icon"}>
-            <Icon image={iconImage[props.status].image} color={iconImage[props.status].color} width={"18px"}></Icon>
+            <Icon image={iconImage[status].image} color={iconImage[status].color} width={"18px"}></Icon>
         </div>
         <div className="module-card-closed-text">
             <div className={"module-card-closed-number" + lockedSuffix}>Onderdeel {props.number}</div>
@@ -38,7 +39,7 @@ export default function ModuleCard(props) {
 
     const titleHTML = Array.isArray(props.title) ? createTitleHTML() : props.title;
 
-    const buttonText = props.status === "COMPLETED" ? "Herbekijk" : "Begin";
+    const buttonText = status === "COMPLETED" ? "Herbekijk" : "Begin";
 
     function createTitleHTML() {
         let prototypeTitleHTML = [];
@@ -53,7 +54,7 @@ export default function ModuleCard(props) {
         else if (props.onToggleClosed && !props.closed) {props.onToggleClosed("closed")}
     }
 
-    /* UI - Opened*/
+    /* UI - Opened Card */
     return (
         <div className="module-card-container">
             <div className={topClass}>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import FadeIn from 'react-fade-in';
 
@@ -8,26 +8,36 @@ import ModuleCard from '../../components/MyCoach/ModuleCard.jsx';
 import Button from '../../components/Button.jsx';
 
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
+import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
 import CardsParser from './CardsParser.jsx';
 
 import './SubmoduleParser.scss';
+import ProgressManager from '../../../api/ProgressManager.jsx';
 
 export default function SubmoduleParser(props) {
 
-    const submoduleID =  FlowRouter.getParam('submodule');
+    const module = FlowRouter.getParam('module').toUpperCase();
+    const submodule =  FlowRouter.getParam('submodule');
+    const userID = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : 1111111;
     
     let data = [];
     
-    switch (FlowRouter.getParam('module')) {
-        case 'paineducation':
-            PainEducationScript.submodules.forEach(submodule => {
-                if (submodule.id === submoduleID)  {data = submodule; return;}
+    switch (module) {
+        case 'PAINEDUCATION':
+            PainEducationScript.submodules.forEach(submoduleScript => {
+                if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
+            });
+            break;
+        case 'THOUGHTSEMOTIONS':
+            ThoughtsEmotionsScript.submodules.forEach(submodule => {
+                if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
             });
             break;
         default:
-            return <div>Module {FlowRouter.getParam('module')} not developed</div>
+            return <div>Module '{module}' not developed</div>
     }
 
+    /*
     useEffect(() => {
         function handleScroll() {
             const windowHeight = document.getElementsByClassName('container')[0].clientHeight;
@@ -50,6 +60,15 @@ export default function SubmoduleParser(props) {
             document.querySelector('.container').removeEventListener('scroll', handleScroll);
         };
     }, []);
+    */
+
+    function finishSubmodule() {
+        const progressManager = new ProgressManager(userID);
+        console.log(module)
+        console.log(submodule)
+        progressManager.finishSubmodule(module, submodule, "COMPLETED", false);
+        history.back();
+    }
 
     return (
         <React.Fragment>
@@ -68,7 +87,7 @@ export default function SubmoduleParser(props) {
                 </ModuleCard>
                 <hr className="module-hr-line"/>
                 <CardsParser cards={data.cards}></CardsParser>
-                <Button style={{marginBottom: "100px", textAlign: "center", justifyContent: "center"}} color="blue">Voltooi deze module</Button>
+                <Button style={{marginBottom: "100px", textAlign: "center", justifyContent: "center"}} color="blue" onClick={() => finishSubmodule()}>Voltooi deze module</Button>
                 </FadeIn>
             </div>
         </React.Fragment>

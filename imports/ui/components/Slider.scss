@@ -1,0 +1,42 @@
+.slider-box {
+    background-color: var(--idewe-background-solid);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.slider-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.slider-value {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    font-family: var(--main-font);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--idewe-blue-dark);
+
+    &-saved {
+        @extend .slider-value;
+        color: var(--idewe-gray-dark);
+    }
+}
+
+.slider-text {
+    font-family: var(--main-font);
+    font-weight: 400;
+    color: var(--idewe-blue-dark);
+}
+
+.selection-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

@@ -41,6 +41,7 @@ export default function PainLogbook() {
                 break;
             case "saveAndClose":
                 window.open(figmaLink, "_blank");
+                break;
             default:
                 console.log(`Action ${actionType} not implemented.`)
         }
@@ -165,7 +166,6 @@ export default function PainLogbook() {
                 case "recommendation-answer":
                     if (visualRecommendation) break;
                     let newMessage = {...message};
-                    console.log(newMessage)
                     newMessage.content = newMessage.text;
                     messages.push(<Chatbubble 
                         key={"recommendation-response-"+message.text+"-"+currentRecommendation}
@@ -217,7 +217,7 @@ export default function PainLogbook() {
     return (
         <React.Fragment>
             <NavigationBar title="Pijnlogboek"/>
-            <div id="messages" className="container" style={{paddingTop:"85px", paddingBottom: "30px"}}>
+            <div id="messages" className="container" style={{paddingTop:"85px", paddingBottom: "15px"}}>
                 {renderMessages()}
             </div>
         </React.Fragment>

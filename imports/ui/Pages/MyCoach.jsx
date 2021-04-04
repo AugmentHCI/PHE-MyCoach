@@ -6,7 +6,8 @@ import FadeIn from "react-fade-in";
 import Popover from 'antd/lib/popover';
 import 'antd/dist/antd.css';
 
-import UserData from "../../api/userdata_dummy.js";
+import { UserData } from "../../api/dummydata.jsx";
+import "../../db/MyCoachMethods.jsx";
 import "./MyCoach.scss";
 
 /* Import internationalization files */
@@ -31,8 +32,7 @@ export default function MyCoach(props) {
     const [updatePage, setUpdatePage] = useState(false);
     const [tapCount, updateTapCount] = useState(0);
     const [language, setLanguage] = useState(FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE");
-
-    console.log(userData.interactions.INTRODUCTION_POPUPS)
+    const [userID, setUserID] = useState(FlowRouter.getParam('token') ? FlowRouter.getParam('token') : 1111111);
 
     const [showTutorial1, updateShowTutorial1] = useState(!userData.interactions.INTRODUCTION_POPUPS);
     const [showTutorial2, updateShowTutorial2] = useState(!userData.interactions.INTRODUCTION_POPUPS);
@@ -71,6 +71,9 @@ export default function MyCoach(props) {
 
     function handleIntroductionVideoSeen() {
         userData.interactions.INTRODUCTION_VIDEO = true;
+        Meteor.call('mycoachprogress.setProgress', {userID: userID, moduleID: "PAINEDUCATION", submoduleID: "PE_MOD_1", status: "IN_PROGRESS"}, (error, result) => {
+            if (error) console.log(error);
+          });
         setUpdatePage(!updatePage);
     }
 
