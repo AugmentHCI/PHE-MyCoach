@@ -41,7 +41,6 @@ export default function MyCoach(props) {
     const progressManager = new ProgressManager(userID);
 
     /* STATES */
-    const [updatePage, setUpdatePage] = useState(false);
     const [tapCount, updateTapCount] = useState(0);
 
     const [userProgress, setUserProgress] = useState(undefined);
@@ -103,56 +102,25 @@ export default function MyCoach(props) {
     function renderTodos() {
         return (<React.Fragment>
             <h2>MIJN TODO'S</h2>
-            <Popover
-                content={<div className="tutorial-content">
-                    <h4>Je todo's</h4>
-                    Hier zie jij je dagelijkse todo's waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog shortcuts toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
-                    <div className="tutorial-button-row">
-                        <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial1(false)}>Volgende</Button>
-                    </div>
-                </div>}
-                placement="bottom"
-                trigger="click"
-                visible={showTutorial1}>
-            <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
-            <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
-            </Popover>
+            <Popover1>
+                <React.Fragment>
+                    <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
+                    <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
+                </React.Fragment>
+            </Popover1>
         </React.Fragment>)
     }
 
     function renderModules() {
         return (<React.Fragment>
-            <Popover
-                content={<div className="tutorial-content">
-                    <h4>Coaching</h4>
-                    Hier zie jij je persoonlijk coachingtraject.<br/>Je kan elke dag je coaching bekijken.<br/>
-                    <div className="tutorial-button-row">
-                        <Button color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial1(true)}>Vorige</Button>
-                        <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial2(false)}>Volgende</Button>
-                    </div>
-                </div>}
-                placement="topLeft"
-                trigger="click"
-                visible={!showTutorial1 && showTutorial2}>
+           <Popover2>
             <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
-            </Popover>
+            </Popover2>
             <div className="module-container">
                 <div className="module-topandbottom-row" style={{marginTop:"20px"}}>
-                <Popover
-                content={<div className="tutorial-content">
-                    <h4>Modules</h4>
-                    Voltooi je coaching om na een tijdje andere<br/>modules vrij te spelen!<br/>
-                    <div className="tutorial-illustration"><Illustration image="voortgang" width={"100%"}></Illustration></div>
-                    <div className="tutorial-button-row">
-                        <Button color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial2(true)}>Vorige</Button>
-                        <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> {updateShowTutorial3(false); interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONPOPUPS", "CONFIRM");}}>Begrepen!</Button>
-                    </div>
-                </div>}
-                placement="top"
-                trigger="click"
-                visible={!showTutorial2 && showTutorial3}>
-                    <ModuleButton code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/paineducation/`)} data={userProgress.PAINEDUCATION}/>
-                    </Popover>
+                    <Popover3>
+                        <ModuleButton code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/paineducation/`)} data={userProgress.PAINEDUCATION}/>
+                    </Popover3>
                     <div className="line-paineducation" style={{borderLeft:calculateLineColor("PAINEDUCATION")}}/>
                 </div>
                 <div className="module-middle-row">
@@ -174,6 +142,57 @@ export default function MyCoach(props) {
                 </div>    
             </div> 
         </React.Fragment>)
+    }
+
+    function Popover1(popoverProps) {
+        return (<Popover
+            content={<div className="tutorial-content">
+                <h4>Je todo's</h4>
+                Hier zie jij je dagelijkse todo's waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog shortcuts toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
+                <div className="tutorial-button-row">
+                    <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial1(false)}>Volgende</Button>
+                </div>
+            </div>}
+            placement="bottom"
+            trigger="click"
+            visible={showTutorial1}>
+                {popoverProps.children}
+        </Popover>)
+    }
+
+    function Popover2(popoverProps) {
+        return (<Popover
+            content={<div className="tutorial-content">
+                <h4>Coaching</h4>
+                Hier zie jij je persoonlijk coachingtraject.<br/>Je kan elke dag je coaching bekijken.<br/>
+                <div className="tutorial-button-row">
+                    <Button color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial1(true)}>Vorige</Button>
+                    <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial2(false)}>Volgende</Button>
+                </div>
+            </div>}
+            placement="topLeft"
+            trigger="click"
+            visible={!showTutorial1 && showTutorial2}>
+            {popoverProps.children}
+        </Popover>)
+    }
+
+    function Popover3(popoverProps) {
+        return (<Popover
+            content={<div className="tutorial-content">
+                <h4>Modules</h4>
+                Voltooi je coaching om na een tijdje andere<br/>modules vrij te spelen!<br/>
+                <div className="tutorial-illustration"><Illustration image="voortgang" width={"100%"}></Illustration></div>
+                <div className="tutorial-button-row">
+                    <Button color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial2(true)}>Vorige</Button>
+                    <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> {updateShowTutorial3(false); interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONPOPUPS", "CONFIRM");}}>Begrepen!</Button>
+                </div>
+            </div>}
+            placement="top"
+            trigger="click"
+            visible={!showTutorial2 && showTutorial3}>
+                {popoverProps.children}
+        </Popover>)
     }
 
     function renderSplashScreen() {
@@ -220,4 +239,9 @@ export default function MyCoach(props) {
             </FadeIn>}</React.Fragment>}
         </div>
     )
-};
+}
+
+/* The module priorities per profile */
+const modulePriorities = {
+    1: []
+}

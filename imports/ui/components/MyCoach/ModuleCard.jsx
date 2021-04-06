@@ -16,7 +16,7 @@ export default function ModuleCard(props) {
 
     const lockedSuffix = props.locked ? "-locked" : "";
     const iconColor = props.locked ? "gray-dark" : "blue";
-    const iconImage = {"IN_PROGRESS": {image: "loading", color: "blue"}, "COMPLETED": {image: "check", color: "blue"}, "NOT_STARTED": {image: "locked", color: "gray-dark"}}
+    const iconImage = {"IN_PROGRESS": {image: "loading", color: "blue"}, "TO_START": {image: "time", color: "gray-light"}, "COMPLETED": {image: "check", color: "blue"}, "NOT_STARTED": {image: "locked", color: "gray-dark"}}
     const status = props.status ? props.status : "NOT_STARTED";
 
     /* UI - Closed card */

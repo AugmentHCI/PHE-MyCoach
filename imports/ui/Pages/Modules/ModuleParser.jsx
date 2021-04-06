@@ -61,7 +61,7 @@ export default function ModuleParser(props) {
         moduleData.submodules.forEach(submodule => {
             const status = userProgress[module][submodule.id];
             const isClosed = status === "COMPLETED" || status === "NOT_STARTED" ? true : false;
-            const isLocked = status === "NOT_STARTED" ? true : false;
+            const isLocked = status === "NOT_STARTED" || status === "TO_START" ? true : false;
             if (!isClosed && openSubmodule !== submodule.id && openSubmodule === "") { updateOpenSubmodule(submodule.id) }
             moduleCardsHTML.push(<ModuleCard 
                 key={submodule.id}

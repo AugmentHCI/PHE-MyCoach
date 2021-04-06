@@ -133,6 +133,9 @@ function parseProgress(userData) {
                 progress[data.moduleID][data.submoduleID] = data.status;
                 break;
             case "NOT_STARTED":
+                if (["TO_START", "IN_PROGRESS", "COMPLETED"].includes(data.status)) progress[data.moduleID][data.submoduleID] = data.status;
+                break;
+            case "TO_START":
                 if (["IN_PROGRESS", "COMPLETED"].includes(data.status)) progress[data.moduleID][data.submoduleID] = data.status;
                 break;
             case "IN_PROGRESS":
