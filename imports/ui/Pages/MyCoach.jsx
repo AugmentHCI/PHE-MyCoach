@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FlowRouter } from "meteor/kadira:flow-router";
 import FadeIn from "react-fade-in";
 
@@ -6,9 +6,13 @@ import FadeIn from "react-fade-in";
 import Popover from 'antd/lib/popover';
 import 'antd/dist/antd.css';
 
+import ProgressManager from "../../api/ProgressManager.jsx";
+import InteractionManager from "../../api/InteractionManager.jsx";
 import { UserData } from "../../api/dummydata.jsx";
 import "../../db/MyCoachMethods.jsx";
 import "./MyCoach.scss";
+
+import jwt_decode from "jwt-decode";
 
 /* Import internationalization files */
 import i18n from 'meteor/universe:i18n';
@@ -28,15 +32,25 @@ const T = i18n.createComponent("Common");
 
 export default function MyCoach(props) {
 
-    const userData = props.data ? (Object.entries(props.data).length === 0 ? UserData : props.data) : UserData;
+    const userData = props.data ? (Object.entries(props.data).length === 0 ? UserData : props.data) : undefined;
+    const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
+    const userID = FlowRouter.getParam('token') ? jwt_decode(FlowRouter.getParam('token')).rrnr : 1111111;
+
+    /* Instantiate managers for progress and interaction retrieval/handling */
+    const interactionManager = new InteractionManager(userID);
+    const progressManager = new ProgressManager(userID);
+
+    /* STATES */
     const [updatePage, setUpdatePage] = useState(false);
     const [tapCount, updateTapCount] = useState(0);
-    const [language, setLanguage] = useState(FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE");
-    const [userID, setUserID] = useState(FlowRouter.getParam('token') ? FlowRouter.getParam('token') : 1111111);
 
-    const [showTutorial1, updateShowTutorial1] = useState(!userData.interactions.INTRODUCTION_POPUPS);
-    const [showTutorial2, updateShowTutorial2] = useState(!userData.interactions.INTRODUCTION_POPUPS);
-    const [showTutorial3, updateShowTutorial3] = useState(!userData.interactions.INTRODUCTION_POPUPS);
+    const [userProgress, setUserProgress] = useState(undefined);
+
+    const [showIntroductionModal, setShowIntroductionModal] = useState(undefined);
+    const [showIntroductionVideo, setShowIntroductionVideo] = useState(undefined);
+    const [showTutorial1, updateShowTutorial1] = useState(undefined);
+    const [showTutorial2, updateShowTutorial2] = useState(undefined);
+    const [showTutorial3, updateShowTutorial3] = useState(undefined);
 
     // Get locale from URL routing (see also routes.jsx file)
     function setLocale() {
@@ -48,41 +62,42 @@ export default function MyCoach(props) {
 
     function handleIntroduction() {
         const introText = userData.RECENT_PAIN ? "Welkom bij de HealthEmpower coaching. Heb je momenteel pijn? Dan ben je niet alleen. Eén op vier werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe  je op een goede manier kan omgaan met je pijn. Dit heeft een positieve impact op je functioneren. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Bekijk hier alvast het introductiefilmpje." : "Welkom bij de Health Empower coaching. Heb jij momenteel geen pijn? Gelukkig! 1 op de 4 werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe je het risico op pijn in de toekomst kan beperken. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Bekijk hier alvast het introductiefilmpje."
-        if (!userData.interactions.INTRODUCTION_TEXT) 
+        if (showIntroductionModal) {
         return (
             <AppModal show={true} title={"Welkom!"} defaultOption={"Naar het filmpje"} notifyParent={handleIntroductionSeen}>
-            {introText}
-        </AppModal>
-        )
-        if (!userData.interactions.INTRODUCTION_VIDEO) 
+                {introText}
+            </AppModal>)}
+        if (showIntroductionVideo) {
         return (
             <AppModal show={true} title={"Introduciefilmpje"} defaultOption={"Klaar"} notifyParent={handleIntroductionVideoSeen}>
                 Bekijk het introductiefilmpje over de HealthEmpower coaching.
                 <iframe src={"https://player.vimeo.com/video/485835694"} width="100%" style={{marginTop:"20px", borderRadius: "10px"}} frameBorder="0" allow="autoplay; fullscreen"></iframe>
-            </AppModal>
-        )
+            </AppModal>)}
         return (<React.Fragment/>);
     }
 
     function handleIntroductionSeen() {
-        userData.interactions.INTRODUCTION_TEXT = true;
-        setUpdatePage(!updatePage);
+        setShowIntroductionModal(false)
     }
 
     function handleIntroductionVideoSeen() {
-        userData.interactions.INTRODUCTION_VIDEO = true;
+        setShowIntroductionVideo(false);
+        interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONMODAL", "CONFIRM");
+        /* Unlock first module as well */
         Meteor.call('mycoachprogress.setProgress', {userID: userID, moduleID: "PAINEDUCATION", submoduleID: "PE_MOD_1", status: "IN_PROGRESS"}, (error, result) => {
             if (error) console.log(error);
-          });
-        setUpdatePage(!updatePage);
+        });
     }
 
-    function calculateLineColor(activity) {
-        switch (userData.progress[activity].OVERALL) {
-            case "NOT_STARTED": return "3px solid var(--idewe-gray-dark)";
-            case "IN_PROGRESS": return "3px solid var(--idewe-blue)";
-            case "COMPLETED":   return "3px solid var(--idewe-blue-dark)";
+    function calculateLineColor(module) {
+        let completed = true, notStarted = true;
+        for (const [, status] of Object.entries(userProgress[module])) {
+            if (status !== "COMPLETED")   completed  = false;
+            if (status !== "NOT_STARTED") notStarted = false;
         }
+        if (completed) return "3px solid var(--idewe-blue-dark)";
+        if (notStarted) return "3px solid var(--idewe-gray-dark)";
+        return "3px solid var(--idewe-blue)";
     }
 
     function renderTodos() {
@@ -98,8 +113,7 @@ export default function MyCoach(props) {
                 </div>}
                 placement="bottom"
                 trigger="click"
-                visible={userData.interactions.INTRODUCTION_TEXT && userData.interactions.INTRODUCTION_VIDEO && showTutorial1}
-                onVisibleChange={() => updateShowTutorial1(false)}>
+                visible={showTutorial1}>
             <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
             <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
             </Popover>
@@ -119,8 +133,7 @@ export default function MyCoach(props) {
                 </div>}
                 placement="topLeft"
                 trigger="click"
-                visible={!showTutorial1 && showTutorial2}
-                onVisibleChange={() => updateShowTutorial2(false)}>
+                visible={!showTutorial1 && showTutorial2}>
             <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
             </Popover>
             <div className="module-container">
@@ -132,32 +145,31 @@ export default function MyCoach(props) {
                     <div className="tutorial-illustration"><Illustration image="voortgang" width={"100%"}></Illustration></div>
                     <div className="tutorial-button-row">
                         <Button color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial2(true)}>Vorige</Button>
-                        <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial3(false)}>Begrepen!</Button>
+                        <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> {updateShowTutorial3(false); interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONPOPUPS", "CONFIRM");}}>Begrepen!</Button>
                     </div>
                 </div>}
                 placement="top"
                 trigger="click"
-                visible={!showTutorial2 && showTutorial3}
-                onVisibleChange={() => updateShowTutorial3(false)}>
-                    <ModuleButton code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/paineducation/`)} data={userData.progress.PAINEDUCATION}/>
+                visible={!showTutorial2 && showTutorial3}>
+                    <ModuleButton code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/paineducation/`)} data={userProgress.PAINEDUCATION}/>
                     </Popover>
                     <div className="line-paineducation" style={{borderLeft:calculateLineColor("PAINEDUCATION")}}/>
                 </div>
                 <div className="module-middle-row">
-                    <ModuleButton code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/thoughtsemotions/`)} data={userData.progress.THOUGHTSEMOTIONS}/>
+                    <ModuleButton code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/thoughtsemotions/`)} data={userProgress.THOUGHTSEMOTIONS}/>
                     <div className="coaching-circle">Mijn <br/>coaching</div>
-                    <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/activitywork/`)} data={userData.progress.ACTIVITYWORK}/>
+                    <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/activitywork/`)} data={userProgress.ACTIVITYWORK}/>
                 </div>     
                 <div className="module-middle-row">
-                    <ModuleButton code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/movement/`)} data={userData.progress.MOVEMENT}/>
-                    <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/social/`)} data={userData.progress.SOCIAL}/>
+                    <ModuleButton code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/movement/`)} data={userProgress.MOVEMENT}/>
+                    <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/social/`)} data={userProgress.SOCIAL}/>
                     <div className="line-emotions" style={{borderLeft:calculateLineColor("THOUGHTSEMOTIONS")}}/>
                     <div className="line-activity" style={{borderLeft:calculateLineColor("ACTIVITYWORK")}}/>
                     <div className="line-movement" style={{borderLeft:calculateLineColor("MOVEMENT")}}/>
                     <div className="line-social" style={{borderLeft:calculateLineColor("SOCIAL")}}/>
                 </div>
                 <div className="module-topandbottom-row">
-                    <ModuleButton code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/stress/`)} data={userData.progress.STRESS}/>
+                    <ModuleButton code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/stress/`)} data={userProgress.STRESS}/>
                     <div className="line-stress" style={{borderLeft:calculateLineColor("STRESS")}}/>
                 </div>    
             </div> 
@@ -172,16 +184,40 @@ export default function MyCoach(props) {
         </div>)
     }
 
+    /* Fetch user progress only once, avoids infinite re-rendering due to state-changes */
+    useEffect(() => {
+        /* Wrap in async function, as getModuleProgress is async */
+        async function fetchUserProgress() {
+            const progress = await progressManager.getUserProgress();
+            console.log(progress);
+            setUserProgress(progress);
+        }
+        async function fetchUserInteractionStatus() {
+            const result = await interactionManager.getMultipleInteractionStatuses(["GENERAL_INTRODUCTIONPOPUPS", "GENERAL_INTRODUCTIONMODAL"]);
+            if (!result.GENERAL_INTRODUCTIONPOPUPS.includes("CONFIRM")) 
+                {interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONPOPUPS", "SHOW")}
+            updateShowTutorial1(!result.GENERAL_INTRODUCTIONPOPUPS.includes("CONFIRM"));
+            updateShowTutorial2(!result.GENERAL_INTRODUCTIONPOPUPS.includes("CONFIRM"));
+            updateShowTutorial3(!result.GENERAL_INTRODUCTIONPOPUPS.includes("CONFIRM"));
+            if (!result.GENERAL_INTRODUCTIONMODAL.includes("CONFIRM")) 
+                {interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONMODAL", "SHOW")}
+            setShowIntroductionModal(!result.GENERAL_INTRODUCTIONMODAL.includes("CONFIRM"));
+            setShowIntroductionVideo(!result.GENERAL_INTRODUCTIONMODAL.includes("CONFIRM"));
+        }
+        fetchUserProgress();
+        fetchUserInteractionStatus();
+    }, []);
+
     return (
         <div className="container">
-            {(tapCount < 5 && !props.noSplash) && renderSplashScreen()}
-            {(tapCount >= 5 || props.noSplash) && <React.Fragment>
+            {(tapCount < 5 && !props.noSplash && ![1111111, 92422, 2327060].includes(userID)) && renderSplashScreen()}
+            {(tapCount >= 5 || props.noSplash || [1111111, 92422, 2327060].includes(userID)) && <React.Fragment>
             {handleIntroduction()}
-            <FadeIn>
+            {userProgress && <FadeIn>
                 <h1>My Coach</h1>
                 {renderTodos()}
                 {renderModules()}
-            </FadeIn></React.Fragment>}
+            </FadeIn>}</React.Fragment>}
         </div>
     )
 };

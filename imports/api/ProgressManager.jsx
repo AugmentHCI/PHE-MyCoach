@@ -4,10 +4,20 @@ export default class ProgressManager {
     constructor(userID, profile=3) {
         this.userID = userID;
         this.profile = profile;
+        this.hasToWait = [3, 4].includes(profile); /* TODO: navragen */
     }
 
     /**
-     * 
+     * Gets the user coaching progress.
+     * @returns A dictionary with the modules, and submodule progress
+     */
+    async getUserProgress() {
+        const moduleUserData = await Meteor.callPromise('mycoachprogress.getUserProgress', {userID: this.userID});
+        return parseProgress(moduleUserData);
+    }
+
+    /**
+     * Gets the user progress template, with the specific module filled in.
      * @param {String} module The module of which the progress needs to be retreived.
      * @returns A dictionary with the modules, and submodule progress
      */
@@ -30,11 +40,11 @@ export default class ProgressManager {
             console.log("Unlocking submodule");
             /* Unlock subsequent submodule within same module */
             const nextSubmodule = submodule.split("_")[0] + "_" + submodule.split("_")[1] + "_" + String(parseInt(submodule.split("_")[2]) + 1);
-            Meteor.call('mycoachprogress.setProgress', {userID: this.userID, moduleID: module, submoduleID: nextSubmodule, status: "IN_PROGRESS"});
+            const nextStatus = this.hasToWait ? "TO_START" : "IN_PROGRESS";
+            await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: module, submoduleID: nextSubmodule, status: nextStatus});
         }
         else {
             /* Unlock next module(s), depending on status and profile */
-            console.log("Unlocking next modules");
             switch (this.profile) {
                 case 1:
                 case 4:
@@ -105,7 +115,7 @@ export default class ProgressManager {
 
 function getModuleStatus(submodules) {
     let completed = true, notStarted = true;
-    for (const [submodule, status] of Object.entries(submodules)) {
+    for (const [, status] of Object.entries(submodules)) {
         if (status !== "COMPLETED")   completed  = false;
         if (status !== "NOT_STARTED") notStarted = false;
     }

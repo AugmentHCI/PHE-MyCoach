@@ -34,7 +34,7 @@ export default function ModuleParser(props) {
     /* Get states from URL parameters */
     const [module, setModule] = useState(FlowRouter.getParam('module').toUpperCase());
     const [language, setLanguage] = useState(FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE");
-    const [userID, setUserID] = useState(FlowRouter.getParam('token') ? FlowRouter.getParam('token') : 1111111);
+    const [userID, setUserID] = useState(FlowRouter.getParam('token') ? jwt_decode(FlowRouter.getParam('token')).rrnr : 1111111);
 
 
     /**

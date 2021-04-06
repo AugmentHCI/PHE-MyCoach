@@ -12,7 +12,7 @@ export default function ModuleButton(props) {
 
     const [isPressed, press] = useState(false);
 
-    let progressSuffix = props.data.OVERALL === "COMPLETED" ? " completed" : (props.data.OVERALL === "NOT_STARTED" ? " locked" : "")
+    let progressSuffix = calculateProgress() === 100 ? " completed" : (calculateProgress() === 0 ? " locked" : "")
     if (isPressed) progressSuffix += " pressed";
 
     /**
@@ -20,7 +20,7 @@ export default function ModuleButton(props) {
      */
     function handleOnClick() {
         press(false);
-        if (props.onClick && props.data.OVERALL !== "NOT_STARTED") props.onClick();
+        if (props.onClick && calculateProgress() !== 0) props.onClick();
     }
 
     /**
@@ -28,10 +28,14 @@ export default function ModuleButton(props) {
      */
     function calculateProgress() {
         let completed = 0;
-        for (const [moduleName, status] of Object.entries(props.data)) {
-            if (moduleName !== "OVERALL" && status == "COMPLETED") completed += 1;
+        if (Object.keys(props.data).length === 0) return 0;
+        for (const [, status] of Object.entries(props.data)) {
+            if (status == "COMPLETED") completed += 1;
+            else if (status == "IN_PROGRESS") completed += 0.5;
+            /* TODO: Check if still called TO_START */
+            else if (status == "TO_START") completed += 0.2;
         }
-        return Math.round(completed/(Object.keys(props.data).length - 1) * 100)
+        return Math.round(completed/(Object.keys(props.data).length) * 100)
     }
 
     /**
@@ -55,7 +59,7 @@ export default function ModuleButton(props) {
         onClick={() => handleOnClick()}
         onTouchStart={() => press(true)}
         onTouchEnd={() => press(false)}>
-            {props.data.OVERALL === "COMPLETED" && <div className="module-checkicon"><Icon color="blue-dark" image={"check"}></Icon></div>}
+            {calculateProgress() === 100 && <div className="module-checkicon"><Icon color="blue-dark" image={"check"}></Icon></div>}
             {generateTitle()}
             {calculateProgress() < 100 && calculateProgress() > 0 && <svg
             className="progress-ring"

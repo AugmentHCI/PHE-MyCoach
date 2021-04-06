@@ -1,8 +1,8 @@
 import { check } from 'meteor/check';
-import { MyCoachQuestionCollection, MyCoachProgressCollection } from './MyCoachCollection';
+import { MyCoachQuestionCollection, MyCoachProgressCollection, MyCoachInteractionCollection } from './MyCoachCollection';
 
+/* PROGRESS */
 Meteor.methods({
-    /* PROGRESS */
     'mycoachprogress.setProgress'({userID, moduleID, submoduleID, status}) {
         if (userID) check(userID, Number);
         check(moduleID, String);
@@ -33,9 +33,11 @@ Meteor.methods({
         if (userID) check(userID, Number);
         check(submoduleID, String);
         return MyCoachProgressCollection.find({userID: userID, submoduleID: submoduleID}).fetch();
-    },
-    
-    /* QUESTIONS */
+    }
+});
+
+/* QUESTIONS */
+Meteor.methods({
     'mycoachquestion.setQuestion'({userID, questionID, answer}) {
         if (userID) check(userID, Number);
         check(questionID, String);
@@ -51,5 +53,32 @@ Meteor.methods({
         if (userID) check(userID, Number);
         check(questionID, String);
         return MyCoachQuestionCollection.find({userID: userID, questionID: questionID}).fetch();
+    }
+});
+
+/* INTERACTIONS */
+Meteor.methods({
+    'mycoachinteraction.getInteractionStatuses'({userID, interactionID}) {
+        if (userID) check(userID, Number);
+        check(interactionID, String);
+   
+        const statusList = MyCoachInteractionCollection.find({userID: userID, interactionID: interactionID}).fetch();
+        let statuses = [];
+        for (const [, value] of Object.entries(statusList)) {
+            if (!statuses.includes(value.status)) statuses.push(value.status);
+        }
+        return statuses;
+    },
+    'mycoachinteraction.setInteractionStatus'({userID, interactionID, status}) {
+        if (userID) check(userID, Number);
+        check(interactionID, String);
+        check(status, String);
+
+        MyCoachInteractionCollection.insert({
+            userID: userID,
+            interactionID: interactionID,
+            status: status,
+            timestamp: new Date,
+        });
     }
 });

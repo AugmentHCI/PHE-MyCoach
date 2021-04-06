@@ -18,8 +18,9 @@ export default function SubmoduleParser(props) {
 
     const module = FlowRouter.getParam('module').toUpperCase();
     const submodule =  FlowRouter.getParam('submodule');
-    const userID = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : 1111111;
+    const userID = FlowRouter.getParam('token') ? jwt_decode(FlowRouter.getParam('token')).rrnr : 1111111;
     
+    const progressManager = new ProgressManager(userID);
     let data = [];
     
     switch (module) {
@@ -29,7 +30,7 @@ export default function SubmoduleParser(props) {
             });
             break;
         case 'THOUGHTSEMOTIONS':
-            ThoughtsEmotionsScript.submodules.forEach(submodule => {
+            ThoughtsEmotionsScript.submodules.forEach(submoduleScript => {
                 if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
             });
             break;
@@ -62,11 +63,8 @@ export default function SubmoduleParser(props) {
     }, []);
     */
 
-    function finishSubmodule() {
-        const progressManager = new ProgressManager(userID);
-        console.log(module)
-        console.log(submodule)
-        progressManager.finishSubmodule(module, submodule, "COMPLETED", false);
+    async function finishSubmodule() {
+        await progressManager.finishSubmodule(module, submodule, "COMPLETED", false);
         history.back();
     }
 
@@ -74,20 +72,26 @@ export default function SubmoduleParser(props) {
         <React.Fragment>
             <NavigationBar title={data.title}></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
-            <FadeIn>
-                <ModuleCard title={data["title-markup"]} 
-                            number={data.part}
-                            topColor={"white"}
-                            description={data.description}
-                            duration={data.duration}
-                            type={data.type}
-                            image={data.image}
-                            imageWidth={data.imageWidth}
-                            hideButton>
-                </ModuleCard>
-                <hr className="module-hr-line"/>
-                <CardsParser cards={data.cards}></CardsParser>
-                <Button style={{marginBottom: "100px", textAlign: "center", justifyContent: "center"}} color="blue" onClick={() => finishSubmodule()}>Voltooi deze module</Button>
+                <FadeIn>
+                    <ModuleCard title={data["title-markup"]} 
+                                number={data.part}
+                                topColor={"white"}
+                                description={data.description}
+                                duration={data.duration}
+                                type={data.type}
+                                image={data.image}
+                                imageWidth={data.imageWidth}
+                                hideButton>
+                    </ModuleCard>
+                    <hr className="module-hr-line"/>
+                    <CardsParser cards={data.cards}></CardsParser>
+                    <Button style={{marginBottom: "100px", 
+                                    textAlign: "center", 
+                                    justifyContent: "center"}} 
+                            color="blue" 
+                            onClick={() => finishSubmodule()}>
+                                Voltooi deze module
+                    </Button>
                 </FadeIn>
             </div>
         </React.Fragment>
