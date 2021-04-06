@@ -4,7 +4,7 @@ import { MyCoachQuestionCollection, MyCoachProgressCollection, MyCoachInteractio
 /* PROGRESS */
 Meteor.methods({
     'mycoachprogress.setProgress'({userID, moduleID, submoduleID, status}) {
-        if (userID) check(userID, Number);
+        check(userID, Number);
         check(moduleID, String);
         check(submoduleID, String);
    
@@ -19,18 +19,18 @@ Meteor.methods({
     },
     /* Gets all of a users proress*/
     'mycoachprogress.getUserProgress'({userID}) {
-        if (userID) check(userID, Number);
+        check(userID, Number);
         return MyCoachProgressCollection.find({userID: userID}).fetch();
     },
     /* Gets a users progress of a given module */
     'mycoachprogress.getModuleProgress'({userID, moduleID}) {
-        if (userID) check(userID, Number);
+        check(userID, Number);
         check(moduleID, String);
         return MyCoachProgressCollection.find({userID: userID, moduleID: moduleID,}).fetch();
     },
     /* Gets a users progress of a given submodule */
     'mycoachprogress.getSubmoduleProgress'({userID, submoduleID}) {
-        if (userID) check(userID, Number);
+        check(userID, Number);
         check(submoduleID, String);
         return MyCoachProgressCollection.find({userID: userID, submoduleID: submoduleID}).fetch();
     }
@@ -39,7 +39,7 @@ Meteor.methods({
 /* QUESTIONS */
 Meteor.methods({
     'mycoachquestion.setQuestion'({userID, questionID, answer}) {
-        if (userID) check(userID, Number);
+        check(userID, Number);
         check(questionID, String);
    
         MyCoachQuestionCollection.insert({
@@ -50,8 +50,9 @@ Meteor.methods({
         });
     },
     'mycoachquestion.getQuestion'({userID, questionID}) {
-        if (userID) check(userID, Number);
+        check(userID, Number);
         check(questionID, String);
+
         return MyCoachQuestionCollection.find({userID: userID, questionID: questionID}).fetch();
     }
 });
@@ -59,7 +60,7 @@ Meteor.methods({
 /* INTERACTIONS */
 Meteor.methods({
     'mycoachinteraction.getInteractionStatuses'({userID, interactionID}) {
-        if (userID) check(userID, Number);
+        check(userID, Number);
         check(interactionID, String);
    
         const statusList = MyCoachInteractionCollection.find({userID: userID, interactionID: interactionID}).fetch();
@@ -70,7 +71,7 @@ Meteor.methods({
         return statuses;
     },
     'mycoachinteraction.setInteractionStatus'({userID, interactionID, status}) {
-        if (userID) check(userID, Number);
+        check(userID, Number);
         check(interactionID, String);
         check(status, String);
 
@@ -79,6 +80,27 @@ Meteor.methods({
             interactionID: interactionID,
             status: status,
             timestamp: new Date,
+        });
+    }
+});
+
+/* PROFILE */
+Meteor.methods({
+    'mycoachinteraction.getProfile'({userID}) {
+        check(userID, Number);
+
+        const profiles = MyCoachInteractionCollection.find({userID: userID, interactionID: interactionID}).sort({date: -1}).limit(1);
+        return profiles;
+    },
+    'mycoachinteraction.setProfile'({userID, profile, date}) {
+        check(userID, Number);
+        check(profile, String);
+        check(date, String);
+
+        MyCoachInteractionCollection.insert({
+            userID: userID,
+            profile: profile,
+            date: date,
         });
     }
 });
