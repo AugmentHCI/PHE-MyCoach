@@ -52,10 +52,8 @@ export default class ProgressManager {
                     else if (getModuleStatus("MOVEMENT") === "COMPLETED") this.unlockModules(["THOUGHTSEMOTIONS", "ACTIVITYWORK", "STRESS", "SOCIAL"], progress);
                     break;
                 case 2:
-                    if (getModuleStatus(progress["MOVEMENT"]) === "NOT_STARTED") this.unlockModules(["MOVEMENT"], progress);
-                    else if (getModuleStatus(progress["MOVEMENT"]) === "COMPLETED" && getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") 
-                        this.unlockModules(["THOUGHTSEMOTIONS"], progress);
-                    else if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED") this.unlockModules(["ACTIVITYWORK", "STRESS", "SOCIAL"], progress);
+                    if (getModuleStatus(progress["MOVEMENT"]) === "NOT_STARTED" || getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") this.unlockModules(["MOVEMENT", "THOUGHTSEMOTIONS"], progress);
+                    else if (getModuleStatus(progress["MOVEMENT"]) === "COMPLETED" && getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED") this.unlockModules(["ACTIVITYWORK", "STRESS", "SOCIAL"], progress);
                     break; 
                 case 3:
                     if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") 
