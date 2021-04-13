@@ -213,12 +213,12 @@ export default function MyCoach(props) {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
             const progress = await progressManager.getUserProgress();
-            console.log(progress);
             setUserProgress(progress);
         }
         async function fetchUserData() {
             const latestUserData = await profileManager.getLatestQuestionnaire();
             setUserData(latestUserData.data);
+            progressManager.setProfile(latestUserData.data.profile);
         }
         async function fetchUserInteractionStatus() {
             const result = await interactionManager.getMultipleInteractionStatuses(["GENERAL_INTRODUCTIONPOPUPS", "GENERAL_INTRODUCTIONMODAL"]);

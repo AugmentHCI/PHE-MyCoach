@@ -1,10 +1,14 @@
 import "../db/MyCoachMethods.jsx";
 
 export default class ProgressManager {
-    constructor(userID, profile=3) {
+    constructor(userID, profile=1) {
         this.userID = userID;
         this.profile = profile;
         this.hasToWait = [].includes(profile); /* TODO: navragen */
+    }
+
+    setProfile(profile) {
+        this.profile = profile;
     }
 
     /**
