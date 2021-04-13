@@ -1,5 +1,5 @@
 const TEMOD1 = {
-    id: "TE_MOD1",
+    id: "TE_MOD_1",
     title: "Gedachten en emoties: een inleiding",
     "title-markup": ["Gedachten en emoties:", "een inleiding"],
     part: 1,
@@ -305,7 +305,7 @@ const TEMOD1 = {
 }
 
 const TEMOD2 = {
-    id: "TE_MOD2",
+    id: "TE_MOD_2",
     title: "Aan de slag met gedachten en emoties",
     "title-markup": ["Aan de slag met", "gedachten en emoties"],
     part: 2,

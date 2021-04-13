@@ -481,8 +481,8 @@ export default class MyProgress extends Component {
       return (<FadeIn>
         <AppModal show={true} title={"Opties"} defaultOption={"Sluit"} notifyParent={() => this.setState({tap_count: 0})}>
           <Button color="blue" onClick={() => navigator.clipboard.writeText(this.state.userToken)}>Kopieer JWT Token</Button>
-          <Button color="blue" onClick={() => navigator.clipboard.writeText(jwt_decode(this.state.userToken).rrnr)}>Kopieer GebruikerID</Button>
-          <Button color="blue" onClick={() => navigator.clipboard.writeText(jwt_decode(this.state.userToken).gebruikerId)}>Kopieer RRNR-Nummer</Button>
+          <Button color="blue" onClick={() => navigator.clipboard.writeText(jwt_decode(this.state.userToken).gebruikerId)}>Kopieer GebruikerID</Button>
+          <Button color="blue" onClick={() => navigator.clipboard.writeText(jwt_decode(this.state.userToken).rrnr)}>Kopieer RRNR-Nummer</Button>
         </AppModal>
       </FadeIn>)
     }

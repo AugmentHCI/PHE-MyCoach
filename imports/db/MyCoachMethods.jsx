@@ -86,19 +86,27 @@ Meteor.methods({
 
 /* PROFILE */
 Meteor.methods({
-    'mycoachinteraction.getLatestProfile'({userID}) {
+    'mycoachprofile.getLatestProfile'({userID}) {
         check(userID, Number);
 
         const profiles = MyCoachProfileCollection.find({userID: userID}, {sort: ({date: -1}), limit: 1}).fetch();
         return profiles.length > 0 ? profiles[0].profile : undefined;
     },
-    'mycoachprofile.addBaselineQuestionnaire'({ userID, date, profile, CPAQ_AE, CPAQ_PW, K, K_eph, K_ns, K_rug, PCS}) {
+    'mycoachprofile.getQuestionnaires'({userID}) {
+        check(userID, Number);
+
+        const questionnaires = MyCoachProfileCollection.find({userID: userID}).fetch();
+        return questionnaires;
+    },
+    'mycoachprofile.addQuestionnaire'({ userID, date, type, status, profile, CPAQ_AE, CPAQ_PW, K, K_eph, K_ns, K_rug, PCS}) {
         check(userID, Number);
         check(profile, Number);
 
         MyCoachProfileCollection.insert({
             userID: userID, 
             date: date, 
+            type: type, 
+            status: status,
             profile: profile,
             CPAQ_AE: CPAQ_AE,
             CPAQ_PW: CPAQ_PW,

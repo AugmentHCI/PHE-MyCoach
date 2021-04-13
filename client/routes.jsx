@@ -51,7 +51,7 @@ FlowRouter.route('/:language/mycoach/painlogbook/:settings', {
 })
 
 FlowRouter.route('/:language/mycoach/module/:module', {
-  name: 'Paineducation',
+  name: 'Module',
   action(){ 
     mount( App, {
       content: <ModuleParser /> 
@@ -60,7 +60,7 @@ FlowRouter.route('/:language/mycoach/module/:module', {
 })
 
 FlowRouter.route('/:language/mycoach/module/:module/:submodule', {
-  name: 'Paineducation',
+  name: 'Submodule',
   action(){ 
     mount( App, {
       content: <SubmoduleParser /> 
@@ -68,11 +68,30 @@ FlowRouter.route('/:language/mycoach/module/:module/:submodule', {
   }
 })
 
+/* With user token */
 FlowRouter.route('/:language/mycoach/:token', {
   name: 'MyCoach',
   action(){ 
     mount( App, {
       content: <MyCoach /> 
+    })
+  }
+})
+
+FlowRouter.route('/:language/mycoach/:token/module/:module', {
+  name: 'Module',
+  action(){ 
+    mount( App, {
+      content: <ModuleParser /> 
+    })
+  }
+})
+
+FlowRouter.route('/:language/mycoach/:token/module/:module/:submodule', {
+  name: 'Submodule',
+  action(){ 
+    mount( App, {
+      content: <SubmoduleParser /> 
     })
   }
 })

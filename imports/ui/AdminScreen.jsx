@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import MyCoach from "./Pages/MyCoach.jsx";
 import Button from "./components/Button.jsx";
 
+import moment from "moment";
+
 /* AntDesign Components */
 import Switch from 'antd/lib/switch';
 import Select from 'antd/lib/select';
@@ -126,8 +128,8 @@ function ControlPanel(props) {
       <Button width={"fit"} onClick={() => props.updateData(JSON.parse(JSON.stringify(userData)))}>Pas toe</Button>
       <Button width={"fit"} onClick={async () => {
         //parseCodes([{questionnaire: Profiel, name: "profiel"}, {questionnaire: Baseline, name: "baseline"}, {questionnaire: FollowUp, name: "followup"}])
-        const profileManager = new ProfileManager("11")
-        console.log(profileManager.processBaselineQuestionnaires(profileManager.getBaselineQuestionnaires()));
+        const time = "Fri Apr 09 2021 02:00:00 GMT+0200"
+        console.log(moment(time).format("YYYY-MM-DD"));
       }}>Test</Button>
     </div>)
 }

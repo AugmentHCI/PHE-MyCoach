@@ -4,7 +4,7 @@ export default class ProgressManager {
     constructor(userID, profile=3) {
         this.userID = userID;
         this.profile = profile;
-        this.hasToWait = [3, 4].includes(profile); /* TODO: navragen */
+        this.hasToWait = [].includes(profile); /* TODO: navragen */
     }
 
     /**
@@ -83,27 +83,27 @@ export default class ProgressManager {
      * Unlocks the given array of modules for the user (and does nothing for already unlocked modules).
      * @param {[String]} modules The array of module-codes that need to be unlocked
      */
-    unlockModules(modules, progress) {
-        modules.forEach(module => {
+    async unlockModules(modules, progress) {
+        modules.forEach(async module => {
             if (getModuleStatus(progress[module]) === "NOT_STARTED") {
                 switch (module) {
                     case "PAINEDUCATION": 
-                        Meteor.call('mycoachprogress.setProgress', {userID: this.userID, moduleID: "PAINEDUCATION", submoduleID: "PE_MOD_1", status: "IN_PROGRESS"}); 
+                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "PAINEDUCATION", submoduleID: "PE_MOD_1", status: "IN_PROGRESS"}); 
                         break;
                     case "THOUGHTSEMOTIONS": 
-                        Meteor.call('mycoachprogress.setProgress', {userID: this.userID, moduleID: "THOUGHTSEMOTIONS", submoduleID: "TE_MOD_1", status: "IN_PROGRESS"}); 
+                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "THOUGHTSEMOTIONS", submoduleID: "TE_MOD_1", status: "IN_PROGRESS"}); 
                         break;
                     case "ACTIVITYWORK": 
-                        Meteor.call('mycoachprogress.setProgress', {userID: this.userID, moduleID: "ACTIVITYWORK", submoduleID: "ACT_MOD_1", status: "IN_PROGRESS"}); 
+                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "ACTIVITYWORK", submoduleID: "ACT_MOD_1", status: "IN_PROGRESS"}); 
                         break;
                     case "MOVEMENT": 
-                        Meteor.call('mycoachprogress.setProgress', {userID: this.userID, moduleID: "MOVEMENT", submoduleID: "MOV_MOD_1", status: "IN_PROGRESS"}); 
+                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "MOVEMENT", submoduleID: "MOV_MOD_1", status: "IN_PROGRESS"}); 
                         break;
                     case "STRESS": 
-                        Meteor.call('mycoachprogress.setProgress', {userID: this.userID, moduleID: "STRESS", submoduleID: "STR_MOD_1", status: "IN_PROGRESS"}); 
+                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "STRESS", submoduleID: "STR_MOD_1", status: "IN_PROGRESS"}); 
                         break;
                     case "SOCIAL": 
-                        Meteor.call('mycoachprogress.setProgress', {userID: this.userID, moduleID: "SOCIAL", submoduleID: "SOC_MOD_1", status: "IN_PROGRESS"}); 
+                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "SOCIAL", submoduleID: "SOC_MOD_1", status: "IN_PROGRESS"}); 
                         break;
                 }
             }

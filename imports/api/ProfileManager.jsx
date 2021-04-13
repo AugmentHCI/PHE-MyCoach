@@ -2,10 +2,7 @@ import "../db/MyCoachMethods.jsx";
 import { baselineCodes, questionnaireMetadata, questionnaireCodes, fillerQuestionCodesNew } from './questionnaireCodes.jsx';
 import { userDataLong } from "./dummydata.jsx";
 import moment from "moment";
-import id from "date-fns/esm/locale/id/index.js";
 
-
-/* TODO: Test PW AND AW Questionnaires */
 
 export default class ProfileManager {
     constructor(userID, userToken) {
@@ -25,15 +22,22 @@ export default class ProfileManager {
 
     /* External Calls */
 
+    /**
+     * 
+     * @returns 
+     */
     async initializeUser() {
         const fromDate = "2020-01-01", toDate = moment().format("YYYY-MM-DD");
         const url = `https://connector.idewe.be/healthempower/jobstudenten/api/antwoorden/export?van=${fromDate}&tot=${toDate}&taal=DUTCH`;
         const data = await Meteor.callPromise("getData", { url: url, userToken: this.userToken });
-        let baselineQuestionnaires = this.processBaselineQuestionnaires(this.getBaselineQuestionnaires(data.data));
-        for (const [date, questionnaire] of Object.entries(baselineQuestionnaires)) {
-            Meteor.call('mycoachprofile.addBaselineQuestionnaire', {
+        let questionnaires = this.processQuestionnaires(this.convertRawDataToQuestionnaires(data.data));
+        for (const [date, questionnaire] of Object.entries(questionnaires)) {
+            if (questionnaire.status !== "AFGEROND") continue;
+            Meteor.call('mycoachprofile.addQuestionnaire', {
                 userID: this.userID, 
-                date: new Date(date), 
+                date: new Date(date),
+                type: questionnaire.type,
+                status: questionnaire.status,
                 profile: questionnaire.profile,
                 CPAQ_AE: questionnaire.CPAQ_AE,
                 CPAQ_PW: questionnaire.CPAQ_PW,
@@ -44,20 +48,19 @@ export default class ProfileManager {
                 PCS: questionnaire.PCS
             });
         }
-        console.log(baselineQuestionnaires)
-        return baselineQuestionnaires;
+        return questionnaires;
     }
 
     /**
-     * Fetches user-data from IDEWE over time-periods of 7 weeks, until at least 1 baseline questionnaire is found.
-     * @param {Int} number The minimum number of baseline questionnaires that needs to be found.
+     * Fetches user-data from IDEWE over time-periods of 7 weeks, until at least 1 questionnaire is found.
+     * @param {Int} number The minimum number of questionnaires that needs to be found.
      * @returns 
      */
-    async getExternalBaselineData(number=1) {
-        let baselineQuestionnaires = {};
+    async getExternalData(number=1) {
+        let questionnaires = {};
         let data = [];
         let weekOffset = -1;
-        while (Object.keys(baselineQuestionnaires).length < number) {
+        while (Object.keys(questionnaires).length < number) {
             weekOffset++;
             const fromDate = moment().subtract(7 + (weekOffset * 7), "weeks").add(1, "day").format("YYYY-MM-DD");
             if (dateComesAfter("2020-01-01", fromDate)) { break; }
@@ -65,15 +68,39 @@ export default class ProfileManager {
             const url = `https://connector.idewe.be/healthempower/jobstudenten/api/antwoorden/export?van=${fromDate}&tot=${toDate}&taal=DUTCH`;
             const fetchedData = await Meteor.callPromise("getData", { url: url, userToken: this.userToken });
             data = data.concat(fetchedData.data);
-            baselineQuestionnaires = this.getBaselineQuestionnaires(data);
+            questionnaires = this.convertRawDataToQuestionnaires(data);
         }
-        console.log(this.processBaselineQuestionnaires(baselineQuestionnaires))
-        return baselineQuestionnaires;
+        console.log(this.processQuestionnaires(questionnaires))
+        return questionnaires;
     }
 
-    getBaselineQuestionnaires(dataX) {
-        let data = userDataLong;
-        let baselineQuestionnaire = {};
+    async fetchNewUserData(fromDate) {
+        const toDate = moment().format("YYYY-MM-DD");
+        const url = `https://connector.idewe.be/healthempower/jobstudenten/api/antwoorden/export?van=${fromDate}&tot=${toDate}&taal=DUTCH`;
+        const data = await Meteor.callPromise("getData", { url: url, userToken: this.userToken });
+        let questionnaires = this.processQuestionnaires(this.convertRawDataToQuestionnaires(data.data));
+        for (const [date, questionnaire] of Object.entries(questionnaires)) {
+            if (questionnaire.status !== "AFGEROND") continue;
+            Meteor.call('mycoachprofile.addQuestionnaire', {
+                userID: this.userID, 
+                date: new Date(date),
+                type: questionnaire.type,
+                status: questionnaire.status,
+                profile: questionnaire.profile,
+                CPAQ_AE: questionnaire.CPAQ_AE,
+                CPAQ_PW: questionnaire.CPAQ_PW,
+                K: questionnaire.K,
+                K_eph: questionnaire.K_eph,
+                K_ns: questionnaire.K_ns,
+                K_rug: questionnaire.K_rug,
+                PCS: questionnaire.PCS
+            });
+        }
+        return questionnaires;
+    }
+
+    convertRawDataToQuestionnaires(data) {
+        let questionnaires = {};
         data.forEach(question => {
             if (Object.keys(questionnaireCodes).includes(String(question.vraagId)) && ["followup", "baseline"].includes(questionnaireCodes[question.vraagId].questionnaire)) {
                 /* Get answer, or decoded answer if coding exists */
@@ -84,9 +111,9 @@ export default class ProfileManager {
                     : question.antwoord;
                 const questionnaireDate = moment(question.datum).format("YYYY-MM-DD");
                 /* Create new questionnaire for that time-period if it doesn't exist yet */
-                if (!baselineQuestionnaire[questionnaireDate]) baselineQuestionnaire[questionnaireDate] = {};
+                if (!questionnaires[questionnaireDate]) questionnaires[questionnaireDate] = {};
                 /* Add answer to corresponding time-period */
-                baselineQuestionnaire[questionnaireDate][question.vraagId] = {
+                questionnaires[questionnaireDate][question.vraagId] = {
                     value: answer, 
                     date: question.datum, 
                     status: question.bevragingStatus, 
@@ -97,17 +124,17 @@ export default class ProfileManager {
                 if (question.vragenlijstId !== 3 && question.vragenlijstId !== 5 && Object.keys(fillerQuestionCodesNew).includes(question.vraagId)) console.log(question);
             }
         });
-        console.log(baselineQuestionnaire)
-        return baselineQuestionnaire;
+        console.log(questionnaires)
+        return questionnaires;
     }
     
-    processBaselineQuestionnaires(baselineQuestionnaires) {
-        console.log(baselineQuestionnaires);
+    processQuestionnaires(questionnaires) {
+        console.log(questionnaires);
         /* Initialize processedQuestionnaire */
         let processedQuestionnaire = {};
-        for (const [questionnaireDate,] of Object.entries(baselineQuestionnaires)) { processedQuestionnaire[questionnaireDate] = {} }
+        for (const [questionnaireDate,] of Object.entries(questionnaires)) { processedQuestionnaire[questionnaireDate] = {} }
         /* Populate processedQuestionnaire */
-        for (const [questionnaireDate, questionnaire] of Object.entries(baselineQuestionnaires)) {
+        for (const [questionnaireDate, questionnaire] of Object.entries(questionnaires)) {
             for (const [questionnaireCode, metadata] of Object.entries(questionnaireMetadata)) {
                 const filteredQuestionnaire = this.filterQuestionnaireBy(questionnaire, questionnaireCode);
                 processedQuestionnaire[questionnaireDate][questionnaireCode] = this.sumQuestionnaire(filteredQuestionnaire, metadata);
@@ -120,13 +147,30 @@ export default class ProfileManager {
         return processedQuestionnaire;
     }
     
-    getLatestBaselineQuestionnaire(data) {
-        const questionnaires = processBaselineQuestionnaires(data);
-        let latestQuestionnaire = {};
-        for (const [questionnaireDate, questionnaire] of Object.entries(questionnaires)) {
-            if (dateComesAfter(questionnaireDate, latestQuestionnaire.date)) latestQuestionnaire = questionnaire;
+    async getLatestQuestionnaire() {
+        let status = "NORMAL";
+        /* Fetch user questionnaires from MongoDB */
+        let questionnaires = await Meteor.callPromise('mycoachprofile.getQuestionnaires', {userID: this.userID});
+        /* If no questionnaires are present, fetch ALL data from external DB and initialize MongoDB with initializeUser() */
+        if (questionnaires.length === 0) {
+            console.log("[ProfileManager - getLatestQuestionnaire] Initizalizing user.")
+            status = "INITIALIZE";
+            questionnaires = await this.initializeUser();
         }
-        return latestQuestionnaire;
+        /* Fetch latest questionnaire from data */
+        let latestQuestionnaire = questionnaires.reduce((currentMax, newItem) => dateComesAfter(newItem.date, currentMax.date) ? newItem : currentMax, {date:"2000-01-01"} );
+        const daysSinceLastQuestionnaire = daysBetween(latestQuestionnaire.date, moment().format("YYYY-MM-DD"));
+        /* If latest questionnaire in MongoDB is older than 35 days, see if there are new questionnaires available from external DB and add them to MongoDB with fetchNewUserData() */
+        if (daysSinceLastQuestionnaire > 35) {
+            console.log("[ProfileManager - getLatestQuestionnaire] Getting new questionnaires")
+            let newQuestionnaires = await fetchNewUserData(moment(latestQuestionnaire.date).format("YYYY-MM-DD"));
+            /* If newer one is found, update status and latest questionnaire */
+            if (Object.keys(newQuestionnaires).length > 0) {
+                status = "NEWQUESTIONNAIRE";
+                latestQuestionnaire = newQuestionnaires.reduce((currentMax, newItem) => dateComesAfter(newItem.date, currentMax.date) ? newItem : currentMax, latestQuestionnaire );
+            }
+        }
+        return {data: latestQuestionnaire, status: status};
     }
     
     filterQuestionnaireBy(questionnaire, filter) {
@@ -180,7 +224,12 @@ function daysBetween(date1, date2, absolute=true) {
     return daysBetweenDates;
 }
 
-
+/**
+ * Returns true if date1 comes after date2, false otherwise.
+ * @param {String} date1 The first date
+ * @param {String} date2 The second date
+ * @returns 
+ */
 function dateComesAfter(date1, date2) {
     if (date2 === undefined || date2 === null) return true;
     return moment(date1).diff(moment(date2)) > 0;

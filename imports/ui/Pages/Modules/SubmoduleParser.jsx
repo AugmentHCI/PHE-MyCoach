@@ -7,6 +7,8 @@ import NavigationBar from '../../components/NavigationBar.jsx';
 import ModuleCard from '../../components/MyCoach/ModuleCard.jsx';
 import Button from '../../components/Button.jsx';
 
+import jwt_decode from "jwt-decode";
+
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
 import CardsParser from './CardsParser.jsx';
@@ -18,7 +20,7 @@ export default function SubmoduleParser(props) {
 
     const module = FlowRouter.getParam('module').toUpperCase();
     const submodule =  FlowRouter.getParam('submodule');
-    const userID = FlowRouter.getParam('token') ? jwt_decode(FlowRouter.getParam('token')).rrnr : 1111111;
+    const userID = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     
     const progressManager = new ProgressManager(userID);
     const [userProgress, setUserProgress] = useState(undefined) 

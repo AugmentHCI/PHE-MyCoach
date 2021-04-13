@@ -4,12 +4,11 @@ import FadeIn from 'react-fade-in';
 import Card from '../../components/Card.jsx';
 import ContentParser from './ContentParser.jsx';
 
-/* [TEMP] Use dummy user data */
-
 
 function CardsParser(props) {
 
     let contentsHTML = [];
+    console.log(props.moduleStatus)
 
     // DUMMY DATA
     const userProfile = {pain: "No pain", profile: 6, language: "nl-NL"};

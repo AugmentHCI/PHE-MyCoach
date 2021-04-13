@@ -8,8 +8,8 @@ import "../../../../i18n/nl.i18n.json"
 import "../../../../i18n/fr.i18n.json"
 import "../../../../i18n/en.i18n.json"
 
-/* [TEMP] Use dummy user data */
-import { UserData } from '../../../api/dummydata.jsx';
+import jwt_decode from "jwt-decode";
+
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
 import ProgressManager from "../../../api/ProgressManager.jsx";
@@ -34,8 +34,8 @@ export default function ModuleParser(props) {
     /* Get states from URL parameters */
     const [module, setModule] = useState(FlowRouter.getParam('module').toUpperCase());
     const [language, setLanguage] = useState(FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE");
-    const [userID, setUserID] = useState(FlowRouter.getParam('token') ? jwt_decode(FlowRouter.getParam('token')).rrnr : 1111111);
-
+    const userToken = FlowRouter.getParam('token');
+    const [userID, setUserID] = useState(FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111);
 
     /**
      * Fetches and sets the correct module data, depending on the 
@@ -88,7 +88,7 @@ export default function ModuleParser(props) {
      * @param {String} submodule Corresponding submodule
      */
     function routeToSubmodule(submodule) {
-        FlowRouter.go(`/${language}/mycoach/module/${FlowRouter.getParam('module')}/${submodule}`);
+        FlowRouter.go(`/${language}/mycoach/${userToken}/module/${FlowRouter.getParam('module')}/${submodule}`);
     }
 
     /* Fetch module data and user progress only once, avoids infinite re-rendering due to state-changes */
