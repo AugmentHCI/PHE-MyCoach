@@ -31,23 +31,24 @@ export default class ProfileManager {
         const url = `https://connector.idewe.be/healthempower/jobstudenten/api/antwoorden/export?van=${fromDate}&tot=${toDate}&taal=DUTCH`;
         const data = await Meteor.callPromise("getData", { url: url, userToken: this.userToken });
         let questionnaires = this.processQuestionnaires(this.convertRawDataToQuestionnaires(data.data));
-        for (const [date, questionnaire] of Object.entries(questionnaires)) {
-            if (questionnaire.status !== "AFGEROND") continue;
-            Meteor.call('mycoachprofile.addQuestionnaire', {
-                userID: this.userID, 
-                date: new Date(date),
-                type: questionnaire.type,
-                status: questionnaire.status,
-                profile: questionnaire.profile,
-                CPAQ_AE: questionnaire.CPAQ_AE,
-                CPAQ_PW: questionnaire.CPAQ_PW,
-                K: questionnaire.K,
-                K_eph: questionnaire.K_eph,
-                K_ns: questionnaire.K_ns,
-                K_rug: questionnaire.K_rug,
-                PCS: questionnaire.PCS
-            });
-        }
+        questionnaires.forEach(questionnaire => {
+            if (questionnaire.status === "AFGEROND") {
+                Meteor.call('mycoachprofile.addQuestionnaire', {
+                    userID: this.userID, 
+                    date: new Date(questionnaire.date),
+                    type: questionnaire.type,
+                    status: questionnaire.status,
+                    profile: questionnaire.profile,
+                    CPAQ_AE: questionnaire.CPAQ_AE,
+                    CPAQ_PW: questionnaire.CPAQ_PW,
+                    K: questionnaire.K,
+                    K_eph: questionnaire.K_eph,
+                    K_ns: questionnaire.K_ns,
+                    K_rug: questionnaire.K_rug,
+                    PCS: questionnaire.PCS
+                });
+            }
+        });
         return questionnaires;
     }
 
@@ -79,23 +80,24 @@ export default class ProfileManager {
         const url = `https://connector.idewe.be/healthempower/jobstudenten/api/antwoorden/export?van=${fromDate}&tot=${toDate}&taal=DUTCH`;
         const data = await Meteor.callPromise("getData", { url: url, userToken: this.userToken });
         let questionnaires = this.processQuestionnaires(this.convertRawDataToQuestionnaires(data.data));
-        for (const [date, questionnaire] of Object.entries(questionnaires)) {
-            if (questionnaire.status !== "AFGEROND") continue;
-            Meteor.call('mycoachprofile.addQuestionnaire', {
-                userID: this.userID, 
-                date: new Date(date),
-                type: questionnaire.type,
-                status: questionnaire.status,
-                profile: questionnaire.profile,
-                CPAQ_AE: questionnaire.CPAQ_AE,
-                CPAQ_PW: questionnaire.CPAQ_PW,
-                K: questionnaire.K,
-                K_eph: questionnaire.K_eph,
-                K_ns: questionnaire.K_ns,
-                K_rug: questionnaire.K_rug,
-                PCS: questionnaire.PCS
-            });
-        }
+        questionnaires.forEach(questionnaire => {
+            if (questionnaire.status === "AFGEROND") {
+                Meteor.call('mycoachprofile.addQuestionnaire', {
+                    userID: this.userID, 
+                    date: new Date(questionnaire.date),
+                    type: questionnaire.type,
+                    status: questionnaire.status,
+                    profile: questionnaire.profile,
+                    CPAQ_AE: questionnaire.CPAQ_AE,
+                    CPAQ_PW: questionnaire.CPAQ_PW,
+                    K: questionnaire.K,
+                    K_eph: questionnaire.K_eph,
+                    K_ns: questionnaire.K_ns,
+                    K_rug: questionnaire.K_rug,
+                    PCS: questionnaire.PCS
+                });
+            }
+        });
         return questionnaires;
     }
 
@@ -144,7 +146,7 @@ export default class ProfileManager {
             processedQuestionnaire[questionnaireDate]["type"]    = this.reduceQuestionnaireValue(questionnaire, "type");
             processedQuestionnaire[questionnaireDate]["status"]  = this.reduceQuestionnaireValue(questionnaire, "status");
         }
-        return processedQuestionnaire;
+        return Object.values(processedQuestionnaire);
     }
     
     async getLatestQuestionnaire() {
@@ -163,7 +165,7 @@ export default class ProfileManager {
         /* If latest questionnaire in MongoDB is older than 35 days, see if there are new questionnaires available from external DB and add them to MongoDB with fetchNewUserData() */
         if (daysSinceLastQuestionnaire > 35) {
             console.log("[ProfileManager - getLatestQuestionnaire] Getting new questionnaires")
-            let newQuestionnaires = await fetchNewUserData(moment(latestQuestionnaire.date).format("YYYY-MM-DD"));
+            let newQuestionnaires = await this.fetchNewUserData(moment(latestQuestionnaire.date).add(1, "day").format("YYYY-MM-DD"));
             /* If newer one is found, update status and latest questionnaire */
             if (Object.keys(newQuestionnaires).length > 0) {
                 status = "NEWQUESTIONNAIRE";
