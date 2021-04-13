@@ -27,7 +27,7 @@ export default function Button(props) {
             style["color"] = props.contentColor ? `var(--idewe-${props.color})` : (props.color ? "var(--idewe-white)" : "var(--idewe-blue)");
         }
     }
-    if (props.width === "fit" ) { style["width"] = "fit-content" } 
+    if (props.width === "fit" ) { style["width"] = "fit-content"; style["marginRight"] = "5px"; } 
     else if (props.width) style["width"] = props.width;
     if (props.outline) {style["border"] = props.color ? `2px solid var(--idewe-${props.color})` : "2px solid var(--idewe-white)";}
 

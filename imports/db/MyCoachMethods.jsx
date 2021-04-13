@@ -1,5 +1,5 @@
 import { check } from 'meteor/check';
-import { MyCoachQuestionCollection, MyCoachProgressCollection, MyCoachInteractionCollection } from './MyCoachCollection';
+import { MyCoachQuestionCollection, MyCoachProgressCollection, MyCoachInteractionCollection, MyCoachProfileCollection } from './MyCoachCollection';
 
 /* PROGRESS */
 Meteor.methods({
@@ -86,21 +86,27 @@ Meteor.methods({
 
 /* PROFILE */
 Meteor.methods({
-    'mycoachinteraction.getProfile'({userID}) {
+    'mycoachinteraction.getLatestProfile'({userID}) {
         check(userID, Number);
 
-        const profiles = MyCoachInteractionCollection.find({userID: userID, interactionID: interactionID}).sort({date: -1}).limit(1);
-        return profiles;
+        const profiles = MyCoachProfileCollection.find({userID: userID}, {sort: ({date: -1}), limit: 1}).fetch();
+        return profiles.length > 0 ? profiles[0].profile : undefined;
     },
-    'mycoachinteraction.setProfile'({userID, profile, date}) {
+    'mycoachprofile.addBaselineQuestionnaire'({ userID, date, profile, CPAQ_AE, CPAQ_PW, K, K_eph, K_ns, K_rug, PCS}) {
         check(userID, Number);
-        check(profile, String);
-        check(date, String);
+        check(profile, Number);
 
-        MyCoachInteractionCollection.insert({
-            userID: userID,
+        MyCoachProfileCollection.insert({
+            userID: userID, 
+            date: date, 
             profile: profile,
-            date: date,
+            CPAQ_AE: CPAQ_AE,
+            CPAQ_PW: CPAQ_PW,
+            K: K,
+            K_eph: K_eph,
+            K_ns: K_ns,
+            K_rug: K_rug,
+            PCS: PCS
         });
     }
 });

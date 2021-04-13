@@ -7,6 +7,7 @@ import Popover from 'antd/lib/popover';
 import 'antd/dist/antd.css';
 
 import ProgressManager from "../../api/ProgressManager.jsx";
+import ProfileManager from "../../api/ProfileManager.jsx";
 import InteractionManager from "../../api/InteractionManager.jsx";
 import { UserData } from "../../api/dummydata.jsx";
 import "../../db/MyCoachMethods.jsx";
@@ -35,10 +36,12 @@ export default function MyCoach(props) {
     const userData = props.data ? (Object.entries(props.data).length === 0 ? UserData : props.data) : undefined;
     const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
     const userID = FlowRouter.getParam('token') ? jwt_decode(FlowRouter.getParam('token')).rrnr : 1111111;
+    const userToken = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : "demo";
 
     /* Instantiate managers for progress and interaction retrieval/handling */
     const interactionManager = new InteractionManager(userID);
     const progressManager = new ProgressManager(userID);
+    // const profileManager = new ProfileManager(userID, userToken);
 
     /* STATES */
     const [tapCount, updateTapCount] = useState(0);
@@ -62,10 +65,11 @@ export default function MyCoach(props) {
     function handleIntroduction() {
         const introText = userData.RECENT_PAIN ? "Welkom bij de HealthEmpower coaching. Heb je momenteel pijn? Dan ben je niet alleen. Eén op vier werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe  je op een goede manier kan omgaan met je pijn. Dit heeft een positieve impact op je functioneren. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Bekijk hier alvast het introductiefilmpje." : "Welkom bij de Health Empower coaching. Heb jij momenteel geen pijn? Gelukkig! 1 op de 4 werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe je het risico op pijn in de toekomst kan beperken. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Bekijk hier alvast het introductiefilmpje."
         if (showIntroductionModal) {
-        return (
-            <AppModal show={true} title={"Welkom!"} defaultOption={"Naar het filmpje"} notifyParent={handleIntroductionSeen}>
-                {introText}
-            </AppModal>)}
+            // await profileManager.initializeUser();
+            return (
+                <AppModal show={true} title={"Welkom!"} defaultOption={"Naar het filmpje"} notifyParent={handleIntroductionSeen}>
+                    {introText}
+                </AppModal>)}
         if (showIntroductionVideo) {
         return (
             <AppModal show={true} title={"Introduciefilmpje"} defaultOption={"Klaar"} notifyParent={handleIntroductionVideoSeen}>

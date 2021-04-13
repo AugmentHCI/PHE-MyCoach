@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import MyProgress from "./Pages/MyProgress.jsx";
 import MyCoach from "./Pages/MyCoach.jsx";
 import Button from "./components/Button.jsx";
-import Slider from "./components/Slider.jsx";
 
 /* AntDesign Components */
 import Switch from 'antd/lib/switch';
@@ -14,7 +12,11 @@ import Radio from 'antd/lib/radio';
 import './AdminScreen.scss';
 
 import { userDataLong, UserData } from "../api/dummydata.jsx";
-import { processBaselineQuestionnaires, getLatestBaselineQuestionnaire } from "../api/userdataparser.jsx";
+import ProfileManager from "../api/ProfileManager.jsx";
+import { Profiel } from "../api/Profiel.js";
+import { FollowUp } from "../api/MySurvey.js";
+import { Baseline } from "../api/Voorgeschiedenis.js";
+import { parseCodes, printQuestions } from "../api/questionnaireCodes.jsx";
 
 const { Option } = Select;
 const { Panel } = Collapse;
@@ -25,11 +27,18 @@ export default function AdminScreen(props) {
 
   useEffect(() => { setMyCoachData(JSON.parse(JSON.stringify(UserData)))}, []);
 
+  /*
   return (<div>
       <ControlPanel updateData={setMyCoachData}/>
       <div className="phone-screen" style={{transform: `scale(${952/952})`, transformOrigin: "top right"}}>
               <MyCoach noSplash data={JSON.parse(JSON.stringify(myCoachData))}/>
         </div>
+      </div>
+  )*/
+
+
+  return (<div>
+      <ControlPanel updateData={setMyCoachData}/>
       </div>
   )
 }
@@ -110,10 +119,15 @@ function ControlPanel(props) {
     return controlPanelHtml;
   }
 
+
   return (<div className="control-panel" width={"100%"}>
       <h1>MyCoach - Settings</h1>
       {renderUserData()}
       <Button width={"fit"} onClick={() => props.updateData(JSON.parse(JSON.stringify(userData)))}>Pas toe</Button>
-      <Button width={"fit"} onClick={() => getLatestBaselineQuestionnaire(userDataLong)}>Test</Button>
+      <Button width={"fit"} onClick={async () => {
+        //parseCodes([{questionnaire: Profiel, name: "profiel"}, {questionnaire: Baseline, name: "baseline"}, {questionnaire: FollowUp, name: "followup"}])
+        const profileManager = new ProfileManager("11")
+        console.log(profileManager.processBaselineQuestionnaires(profileManager.getBaselineQuestionnaires()));
+      }}>Test</Button>
     </div>)
 }

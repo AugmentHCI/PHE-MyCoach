@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import moment from "moment"
+import moment from "moment";
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import FadeIn from 'react-fade-in';
 
