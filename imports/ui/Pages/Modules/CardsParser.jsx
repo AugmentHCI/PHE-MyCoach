@@ -19,14 +19,37 @@ function CardsParser(props) {
      * @param {Array} cards 
      */
     function createCards(cards) {
-        cards.forEach(card => {
-            if (Object.keys(card).length === 0) return; /* Empty card */
-            contentsHTML.push(
-                <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
-                    {createCardContent(card.id, card["card-contents"])}
-                </Card>
-            );
-        });
+        if (props.moduleStatus === "COMPLETED") {
+            cards.forEach(card => {
+                if (card.overview) {
+                    contentsHTML.push(
+                        <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
+                            {createCardContent(card.id, card["card-contents"])}
+                        </Card>
+                    );
+                }
+            });
+            contentsHTML.push(<hr className="module-hr-line"/>)
+            cards.forEach(card => {
+                if (!card.overview) {
+                    contentsHTML.push(
+                        <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
+                            {createCardContent(card.id, card["card-contents"])}
+                        </Card>
+                    );
+                }
+            });
+        }
+        else {
+            cards.forEach(card => {
+                if (Object.keys(card).length === 0) return; /* Empty card */
+                contentsHTML.push(
+                    <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
+                        {createCardContent(card.id, card["card-contents"])}
+                    </Card>
+                );
+            });
+        }
     }
 
     /**

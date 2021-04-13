@@ -21,6 +21,7 @@ export default function SubmoduleParser(props) {
     const userID = FlowRouter.getParam('token') ? jwt_decode(FlowRouter.getParam('token')).rrnr : 1111111;
     
     const progressManager = new ProgressManager(userID);
+    const [userProgress, setUserProgress] = useState(undefined) 
     let data = [];
     
     switch (module) {
@@ -63,16 +64,26 @@ export default function SubmoduleParser(props) {
     }, []);
     */
 
-    async function finishSubmodule() {
-        await progressManager.finishSubmodule(module, submodule, "COMPLETED", false);
+    async function finishSubmodule(save) {
+        if (save) { await progressManager.finishSubmodule(module, submodule, "COMPLETED", false) }
         history.back();
     }
+
+    /* Fetch user progress only once, avoids infinite re-rendering due to state-changes */
+    useEffect(() => {
+        /* Wrap in async function, as getModuleProgress is async */
+        async function fetchUserProgress() {
+            const progress = await progressManager.getModuleProgress("PAINEDUCATION");
+            setUserProgress(progress);
+        }
+        fetchUserProgress();
+    }, []);
 
     return (
         <React.Fragment>
             <NavigationBar title={data.title}></NavigationBar>
             <div className="container" style={{paddingTop: "85px"}}>
-                <FadeIn>
+                {userProgress && <FadeIn>
                     <ModuleCard title={data["title-markup"]} 
                                 number={data.part}
                                 topColor={"white"}
@@ -84,15 +95,15 @@ export default function SubmoduleParser(props) {
                                 hideButton>
                     </ModuleCard>
                     <hr className="module-hr-line"/>
-                    <CardsParser cards={data.cards}></CardsParser>
+                    <CardsParser cards={data.cards} moduleStatus={userProgress[module][submodule]}></CardsParser>
                     <Button style={{marginBottom: "100px", 
                                     textAlign: "center", 
                                     justifyContent: "center"}} 
                             color="blue" 
-                            onClick={() => finishSubmodule()}>
-                                Voltooi deze module
+                            onClick={() => finishSubmodule(userProgress[module][submodule] !== "COMPLETED")}>
+                                {userProgress[module][submodule] === "COMPLETED" ? "Keer terug" : "Voltooi deze module"}
                     </Button>
-                </FadeIn>
+                </FadeIn>}
             </div>
         </React.Fragment>
     )
