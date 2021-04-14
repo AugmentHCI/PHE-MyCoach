@@ -1,5 +1,5 @@
 import { data } from 'browserslist';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ContentParser.scss';
 import createSortingContent from './ContentSorting.jsx';
 
@@ -33,18 +33,25 @@ function ContentParser(props) {
      * @param {String} onCorrect   The text that needs to be displayed (or added to the explanation) when the user answers correctly
      * @param {String} onIncorrect The text that needs to be displayed (or added to the explanation) when the user answers incorrectly
      */
-    function createQuestionContent(key, question, number, options, correct, explanation, onCorrect, onIncorrect) {
+    function createQuestionContent(key, question, number, options, correct, explanation, onCorrect, onIncorrect, id) {
         let buttonsHTML = [];
         let [status, changeStatus] =  useState("default");
+        useEffect(() => {
+            async function fetchStatus() {
+                const answer = await props.questionManager.getLatestAnswerOnQuestion(id);
+                if (answer) changeStatus(answer);
+            }
+            fetchStatus();
+        }, []);
         /* Make buttons for each of the options, and assign correct/incorrect actions to buttons */
         options.forEach((option, index) => {
             if (option === correct) {
                 const correctButtonClass = status === "correct" ? "content-button-correct" : "content-button";
-                buttonsHTML.push(<button key={key + "-" + index} className={correctButtonClass} onClick={() => {if (status === "default") changeStatus("correct")}}>{option}</button>);
+                buttonsHTML.push(<button key={key + "-" + index} className={correctButtonClass} onClick={() => {props.questionManager.setModuleQuestion(props.module, id, "correct"); if (status === "default") changeStatus("correct")}}>{option}</button>);
             }
             else if (option !== correct) {
                 const incorrectButtonClass = status === "incorrect" ? "content-button-incorrect" : "content-button";
-                buttonsHTML.push(<button key={key + "-" + index} className={incorrectButtonClass} onClick={() => {if (status === "default") changeStatus("incorrect")}}>{option}</button>);
+                buttonsHTML.push(<button key={key + "-" + index} className={incorrectButtonClass} onClick={() => {props.questionManager.setModuleQuestion(props.module, id, "incorrect"); if (status === "default") changeStatus("incorrect")}}>{option}</button>);
             }
         })
         /* Make the Question-Content element */
@@ -199,7 +206,7 @@ function ContentParser(props) {
         case 'List':
             return createListContent(props.data.key, props.data.content, props.data.numbered, props.data.overview);
         case 'Question':
-            return createQuestionContent(props.data.key, props.data.question, props.data.number, props.data.options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect);
+            return createQuestionContent(props.data.key, props.data.question, props.data.number, props.data.options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect, props.data.id);
         case 'Video':
             return createVideoContent(props.data.key, props.data.link, props.userProfile.language);
         case 'Selection':

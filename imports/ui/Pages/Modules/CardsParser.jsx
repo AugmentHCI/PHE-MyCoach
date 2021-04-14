@@ -1,5 +1,6 @@
 import React from 'react';
 import FadeIn from 'react-fade-in';
+import QuestionManager from '../../../api/QuestionManager.jsx';
 
 import Card from '../../components/Card.jsx';
 import ContentParser from './ContentParser.jsx';
@@ -8,10 +9,10 @@ import ContentParser from './ContentParser.jsx';
 function CardsParser(props) {
 
     let contentsHTML = [];
-    console.log(props.moduleStatus)
 
     // DUMMY DATA
     const userProfile = {pain: "No pain", profile: 6, language: "nl-NL"};
+    const questionManager = new QuestionManager(props.userID);
 
     /**
      * Creates all the Cards HTML in a given array.
@@ -62,7 +63,9 @@ function CardsParser(props) {
             contentArray.push(
                 <ContentParser key={"content-" + key + "-" + index} 
                          data={content} 
-                         userProfile={userProfile}/>);
+                         module={props.module}
+                         userProfile={userProfile}
+                         questionManager={questionManager}/>);
         });
         return contentArray;
     }

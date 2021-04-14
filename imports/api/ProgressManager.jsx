@@ -40,6 +40,7 @@ export default class ProgressManager {
         await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: module, submoduleID: submodule, status: status});
         const allUserData = await Meteor.callPromise('mycoachprogress.getUserProgress', {userID: this.userID});
         const progress = parseProgress(allUserData);
+        console.log(progress)
         if (getModuleStatus(progress[module]) !== "COMPLETED") {
             console.log("Unlocking submodule");
             /* Unlock subsequent submodule within same module */
@@ -52,29 +53,15 @@ export default class ProgressManager {
             switch (this.profile) {
                 case 1:
                 case 4:
-                    if (getModuleStatus(progress["MOVEMENT"]) === "NOT_STARTED") this.unlockModules(["MOVEMENT"], progress);
-                    else if (getModuleStatus("MOVEMENT") === "COMPLETED") this.unlockModules(["THOUGHTSEMOTIONS", "ACTIVITYWORK", "STRESS", "SOCIAL"], progress);
-                    break;
-                case 2:
-                    if (getModuleStatus(progress["MOVEMENT"]) === "NOT_STARTED" || getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") this.unlockModules(["MOVEMENT", "THOUGHTSEMOTIONS"], progress);
-                    else if (getModuleStatus(progress["MOVEMENT"]) === "COMPLETED" && getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED") this.unlockModules(["ACTIVITYWORK", "STRESS", "SOCIAL"], progress);
-                    break; 
-                case 3:
-                    if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") 
-                        { this.unlockModules(["THOUGHTSEMOTIONS"], progress); }
-                    else if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED" && (getModuleStatus(progress["ACTIVITYWORK"]) === "NOT_STARTED" || getModuleStatus(progress["STRESS"]) === "NOT_STARTED" || getModuleStatus(progress["SOCIAL"]) === "NOT_STARTED")) 
-                        { this.unlockModules(["ACTIVITYWORK", "STRESS", "SOCIAL"], progress); }
-                    else if (getModuleStatus(progress["ACTIVITYWORK"]) === "COMPLETED" && getModuleStatus(progress["STRESS"]) === "COMPLETED" && getModuleStatus(progress["SOCIAL"]) === "COMPLETED") 
-                        { this.unlockModules(["MOVEMENT"], progress); }
-                    break; 
                 case 5:
                 case 6:
                     if (getModuleStatus(progress["ACTIVITYWORK"]) === "NOT_STARTED" || getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") 
-                        { this.unlockModules(["ACTIVITYWORK", "THOUGHTSEMOTIONS"], progress); }
-                    else if (getModuleStatus(progress["ACTIVITYWORK"]) === "COMPLETED" && getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED" && (getModuleStatus(progress["STRESS"]) === "NOT_STARTED" || getModuleStatus(progress["SOCIAL"]) === "NOT_STARTED")) 
-                        { this.unlockModules(["STRESS", "SOCIAL"], progress); }
-                    else if (getModuleStatus(progress["STRESS"]) === "COMPLETED" && getModuleStatus(progress["SOCIAL"]) === "COMPLETED") 
-                        { this.unlockModules(["MOVEMENT"], progress); }
+                        {this.unlockModules(["THOUGHTSEMOTIONS", "ACTIVITYWORK"], progress); }
+                    break;
+                case 2:
+                    case 3:
+                    if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") this.unlockModules(["THOUGHTSEMOTIONS"], progress);
+                    else if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED") this.unlockModules(["ACTIVITYWORK"], progress);
                     break;
                 default:
                     console.log("No profile provided for user.")
@@ -121,6 +108,11 @@ function getModuleStatus(submodules) {
         if (status !== "COMPLETED")   completed  = false;
         if (status !== "NOT_STARTED") notStarted = false;
     }
+    console.log(submodules);
+    if (completed) console.log("COMPLETED");
+    else if (notStarted) console.log("NOT_STARTED");
+    else console.log("IN_PROGRESS");
+
     if (completed) return "COMPLETED";
     if (notStarted) return "NOT_STARTED";
     return "IN_PROGRESS"
@@ -160,3 +152,40 @@ const template = {
         "STRESS": {},
         "SOCIAL": {}
 }
+
+
+
+
+/* IMORTANT - This is the final switch statement for unlocking, replace once all modules are available */
+/*
+    switch (this.profile) {
+        case 1:
+        case 4:
+            if (getModuleStatus(progress["MOVEMENT"]) === "NOT_STARTED") this.unlockModules(["MOVEMENT"], progress);
+            else if (getModuleStatus("MOVEMENT") === "COMPLETED") this.unlockModules(["THOUGHTSEMOTIONS", "ACTIVITYWORK", "STRESS", "SOCIAL"], progress);
+            break;
+        case 2:
+            if (getModuleStatus(progress["MOVEMENT"]) === "NOT_STARTED" || getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") this.unlockModules(["MOVEMENT", "THOUGHTSEMOTIONS"], progress);
+            else if (getModuleStatus(progress["MOVEMENT"]) === "COMPLETED" && getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED") this.unlockModules(["ACTIVITYWORK", "STRESS", "SOCIAL"], progress);
+            break; 
+        case 3:
+            if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") 
+                { this.unlockModules(["THOUGHTSEMOTIONS"], progress); }
+            else if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED" && (getModuleStatus(progress["ACTIVITYWORK"]) === "NOT_STARTED" || getModuleStatus(progress["STRESS"]) === "NOT_STARTED" || getModuleStatus(progress["SOCIAL"]) === "NOT_STARTED")) 
+                { this.unlockModules(["ACTIVITYWORK", "STRESS", "SOCIAL"], progress); }
+            else if (getModuleStatus(progress["ACTIVITYWORK"]) === "COMPLETED" && getModuleStatus(progress["STRESS"]) === "COMPLETED" && getModuleStatus(progress["SOCIAL"]) === "COMPLETED") 
+                { this.unlockModules(["MOVEMENT"], progress); }
+            break; 
+        case 5:
+        case 6:
+            if (getModuleStatus(progress["ACTIVITYWORK"]) === "NOT_STARTED" || getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") 
+                { this.unlockModules(["ACTIVITYWORK", "THOUGHTSEMOTIONS"], progress); }
+            else if (getModuleStatus(progress["ACTIVITYWORK"]) === "COMPLETED" && getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED" && (getModuleStatus(progress["STRESS"]) === "NOT_STARTED" || getModuleStatus(progress["SOCIAL"]) === "NOT_STARTED")) 
+                { this.unlockModules(["STRESS", "SOCIAL"], progress); }
+            else if (getModuleStatus(progress["STRESS"]) === "COMPLETED" && getModuleStatus(progress["SOCIAL"]) === "COMPLETED") 
+                { this.unlockModules(["MOVEMENT"], progress); }
+            break;
+        default:
+            console.log("No profile provided for user.")
+            break;
+    }*/

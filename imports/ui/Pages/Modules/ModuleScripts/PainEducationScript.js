@@ -494,6 +494,7 @@ const PainEducationScript = {
         "title": "Omgaan met pijn",
         "title-markup": ["Omgaan", "met pijn"],
         "part": 5,
+        "isLast": true,
         "description": "In dit onderdeel leer je op welke factoren je een invloed kan uitoefenen. Zo kan je pijn in de toekomst beperken of kan je beter met pijn leren omgaan.",
         "duration": "20 minuten",
         "type": "Informatief",

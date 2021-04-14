@@ -4,6 +4,7 @@ import FadeIn from 'react-fade-in';
 
 /* Import components */
 import NavigationBar from '../../components/NavigationBar.jsx';
+import AppModal from '../../components/AppModal.jsx';
 import ModuleCard from '../../components/MyCoach/ModuleCard.jsx';
 import Button from '../../components/Button.jsx';
 
@@ -15,15 +16,26 @@ import CardsParser from './CardsParser.jsx';
 
 import './SubmoduleParser.scss';
 import ProgressManager from '../../../api/ProgressManager.jsx';
+import QuestionManager from '../../../api/QuestionManager.jsx';
+import InteractionManager from '../../../api/InteractionManager.jsx';
+import ProfileManager from '../../../api/ProfileManager.jsx';
 
 export default function SubmoduleParser(props) {
 
     const module = FlowRouter.getParam('module').toUpperCase();
     const submodule =  FlowRouter.getParam('submodule');
+    const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
+    const userToken = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : "demo";
     const userID = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     
     const progressManager = new ProgressManager(userID);
-    const [userProgress, setUserProgress] = useState(undefined) 
+    const questionManager = new QuestionManager(userID);
+    const interactionManager = new InteractionManager(userID);
+    const profileManager = new ProfileManager(userID);
+    const [didSeeCompletionModal, setDidSeeCompletionModal] = useState(undefined);
+    const [showCompletionModal, setShowCompletionModal] = useState(false);
+    const [userProgress, setUserProgress] = useState(undefined);
+    const [userQuestions, setUserQuestions] = useState(undefined);
     let data = [];
     
     switch (module) {
@@ -66,17 +78,44 @@ export default function SubmoduleParser(props) {
     }, []);
     */
 
+    async function notifyModal() {
+        const didCompleteModule = data.isLast ? true : false;
+        await progressManager.finishSubmodule(module, submodule, "COMPLETED", didCompleteModule);
+        if (!didSeeCompletionModal) interactionManager.setInteractionStatus("MODULE_COMPLETION_MODAL", "CONFIRM");
+        setShowCompletionModal(false);
+        if (!didCompleteModule) { history.back() }
+        else { FlowRouter.go(`/${language}/mycoach/${userToken}`)}
+    }
+
+    function renderCompletionModal() {
+        if (!showCompletionModal || didSeeCompletionModal===undefined) return <React.Fragment/>;
+        if (!didSeeCompletionModal) interactionManager.setInteractionStatus("MODULE_COMPLETION_MODAL", "SHOW");
+        const text = didSeeCompletionModal 
+            ? "Goed zo, je hebt deze module voltooid. Doe zo verder!"
+            : "Super, je hebt net je allereerste onderdeel voltooid! Je kan nu verder met de volgende onderdelen. Als je een onderdeel wilt herbekijken, komt de overzichtskaart van boven te staan zodat je snel een overzicht hebt van de belangrijkste informatie. Doe zo verder!";
+        return (<AppModal show={true} title={"Klaar!"} defaultOption={"Sluit"} notifyParent={ notifyModal }>
+            {text}
+        </AppModal>);
+    }
+
     async function finishSubmodule(save) {
-        if (save) { await progressManager.finishSubmodule(module, submodule, "COMPLETED", false) }
-        history.back();
+        if (save) { setShowCompletionModal(true) }
+        else { history.back() }
     }
 
     /* Fetch user progress only once, avoids infinite re-rendering due to state-changes */
     useEffect(() => {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
-            const progress = await progressManager.getModuleProgress("PAINEDUCATION");
+            const profile = (await profileManager.getLatestQuestionnaire())?.data?.profile;
+            console.log(`Retrieved profile: ${profile}`)
+            progressManager.setProfile(profile);
+            const progress = await progressManager.getModuleProgress(module);
+            const questions = await questionManager.getModuleQuestions(module);
+            const modalStatus = await interactionManager.getInteractionStatuses("MODULE_COMPLETION_MODAL");
             setUserProgress(progress);
+            setUserQuestions(questions);
+            setDidSeeCompletionModal(modalStatus.includes("CONFIRM"));
         }
         fetchUserProgress();
     }, []);
@@ -84,8 +123,9 @@ export default function SubmoduleParser(props) {
     return (
         <React.Fragment>
             <NavigationBar title={data.title}></NavigationBar>
+            {renderCompletionModal()}
             <div className="container" style={{paddingTop: "85px"}}>
-                {userProgress && <FadeIn>
+                {userProgress && userQuestions && <FadeIn>
                     <ModuleCard title={data["title-markup"]} 
                                 number={data.part}
                                 topColor={"white"}
@@ -97,13 +137,13 @@ export default function SubmoduleParser(props) {
                                 hideButton>
                     </ModuleCard>
                     <hr className="module-hr-line"/>
-                    <CardsParser cards={data.cards} moduleStatus={userProgress[module][submodule]}></CardsParser>
+                    <CardsParser cards={data.cards} module={module} moduleStatus={userProgress[module][submodule]} userID={userID}></CardsParser>
                     <Button style={{marginBottom: "100px", 
                                     textAlign: "center", 
                                     justifyContent: "center"}} 
                             color="blue" 
                             onClick={() => finishSubmodule(userProgress[module][submodule] !== "COMPLETED")}>
-                                {userProgress[module][submodule] === "COMPLETED" ? "Keer terug" : "Voltooi deze module"}
+                                {userProgress[module][submodule] === "COMPLETED" ? "Keer terug" : "Voltooi dit onderdeel"}
                     </Button>
                 </FadeIn>}
             </div>

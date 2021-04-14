@@ -38,12 +38,14 @@ Meteor.methods({
 
 /* QUESTIONS */
 Meteor.methods({
-    'mycoachquestion.setQuestion'({userID, questionID, answer}) {
+    'mycoachquestion.setQuestion'({userID, module, questionID, answer}) {
         check(userID, Number);
+        check(module, String);
         check(questionID, String);
    
         MyCoachQuestionCollection.insert({
             userID: userID,
+            module: module,
             questionID: questionID,
             answer: answer,
             timestamp: new Date,
@@ -54,6 +56,12 @@ Meteor.methods({
         check(questionID, String);
 
         return MyCoachQuestionCollection.find({userID: userID, questionID: questionID}).fetch();
+    },
+    'mycoachquestion.getModuleQuestions'({userID, module}) {
+        check(userID, Number);
+        check(module, String);
+
+        return MyCoachQuestionCollection.find({userID: userID, module: module}).fetch();
     }
 });
 
