@@ -68,6 +68,7 @@ const PainEducationScript = {
             {
                 "id": "PE-MOD-1-CARD-3",
                 "title": "Klaar!",
+                "wrapup": true,
                 "card-contents": [
                     {
                         "type": "Text",
@@ -496,7 +497,7 @@ const PainEducationScript = {
         "part": 5,
         "isLast": true,
         "description": "In dit onderdeel leer je op welke factoren je een invloed kan uitoefenen. Zo kan je pijn in de toekomst beperken of kan je beter met pijn leren omgaan.",
-        "duration": "20 minuten",
+        "duration": "5 minuten",
         "type": "Informatief",
         "image": "paininfluence",
         "imageWidth": "215px",
@@ -608,6 +609,7 @@ const PainEducationScript = {
         {
             "id": "PE-MOD-5-CARD-9",
             "title": "Module afgerond! 🎉",
+            "wrapup": true,
             "card-contents": [
                 {
                     "type": "Text",
