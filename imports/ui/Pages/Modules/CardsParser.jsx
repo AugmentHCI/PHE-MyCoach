@@ -20,36 +20,26 @@ function CardsParser(props) {
      */
     function createCards(cards) {
         if (props.moduleStatus === "COMPLETED") {
-            cards.forEach(card => {
-                if (card.overview) {
-                    contentsHTML.push(
-                        <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
-                            {createCardContent(card.id, card["card-contents"])}
-                        </Card>
-                    );
-                }
-            });
-            contentsHTML.push(<hr className="module-hr-line"/>)
-            cards.forEach(card => {
-                if (!card.overview) {
-                    contentsHTML.push(
-                        <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
-                            {createCardContent(card.id, card["card-contents"])}
-                        </Card>
-                    );
-                }
-            });
+            generateCards(cards, "OVERVIEW");
+            contentsHTML.push(<hr className="module-hr-line"/>);
+            generateCards(cards, "NONOVERVIEW");
         }
         else {
-            cards.forEach(card => {
-                if (Object.keys(card).length === 0) return; /* Empty card */
-                contentsHTML.push(
-                    <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
-                        {createCardContent(card.id, card["card-contents"])}
-                    </Card>
-                );
-            });
+            generateCards(cards);
         }
+    }
+
+    function generateCards(cards, showonly=undefined) {
+        cards.forEach(card => {
+            if (showonly === "OVERVIEW" && !card.overview) continue;
+            if (showonly === "NONOVERVIEW" && (card.overview || card.wrapup)) continue;
+            if (Object.keys(card).length === 0) return; /* Empty card */
+            contentsHTML.push(
+                <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
+                    {createCardContent(card.id, card["card-contents"])}
+                </Card>);
+            
+        });
     }
 
     /**
