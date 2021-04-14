@@ -36,6 +36,7 @@ function ContentParser(props) {
     function createQuestionContent(key, questionID, question, number, options, correct, explanation, onCorrect, onIncorrect) {
         let buttonsHTML = [];
         let [status, changeStatus] =  useState("default");
+
         useEffect(() => {
             async function fetchStatus() {
                 const answer = await props.questionManager.getLatestAnswerOnQuestion(questionID);
@@ -43,15 +44,22 @@ function ContentParser(props) {
             }
             fetchStatus();
         }, []);
+
+        async function selectButton(option) {
+            await props.questionManager.setModuleQuestion(props.module, questionID, option); 
+            if (status === "default") changeStatus(option);
+            props.callback();
+        }
+
         /* Make buttons for each of the options, and assign correct/incorrect actions to buttons */
         options.forEach((option, index) => {
             if (option === correct) {
                 const correctButtonClass = status === "correct" ? "content-button-correct" : "content-button";
-                buttonsHTML.push(<button key={key + "-" + index} className={correctButtonClass} onClick={() => {props.questionManager.setModuleQuestion(props.module, questionID, "correct"); if (status === "default") changeStatus("correct")}}>{option}</button>);
+                buttonsHTML.push(<button key={key + "-" + index} className={correctButtonClass} onClick={() => selectButton("correct")}>{option}</button>);
             }
             else if (option !== correct) {
                 const incorrectButtonClass = status === "incorrect" ? "content-button-incorrect" : "content-button";
-                buttonsHTML.push(<button key={key + "-" + index} className={incorrectButtonClass} onClick={() => {props.questionManager.setModuleQuestion(props.module, questionID, "incorrect"); if (status === "default") changeStatus("incorrect")}}>{option}</button>);
+                buttonsHTML.push(<button key={key + "-" + index} className={incorrectButtonClass} onClick={() => selectButton("incorrect")}>{option}</button>);
             }
         })
         /* Make the Question-Content element */
@@ -71,7 +79,7 @@ function ContentParser(props) {
      * @param {String} question The question that is posed to the user
      * @param {Array[String]} options The possible options from which the user can choose to answer the question
      */
-    function createSelectionContent(key, questionID, title, question, options) {
+    function createSelectionContent(key, questionID, title, question, options, buttonWidth="100%") {
         let buttonsHTML = [];
         const [selected, changeSelected] =  useState(new Array(options.length).fill(false));
 
@@ -87,15 +95,16 @@ function ContentParser(props) {
             fetchStatus();
         }, []);
 
-        function selectButton(index) {
-            props.questionManager.setModuleQuestion(props.module, questionID, options[index], false);
+        async function selectButton(index) {
+            await props.questionManager.setModuleQuestion(props.module, questionID, options[index], false);
             let newArray = new Array(options.length).fill(false);
             newArray[index] = true;
             changeSelected(newArray);
+            props.callback();
         }
         /* Make buttons for each of the options, and assign correct/incorrect actions to buttons */
         options.forEach((option, index) => {
-            buttonsHTML.push(<Button key={key + "-" + index} isSelected={selected[index]} onClick={() => selectButton(index)}>{option}</Button>);
+            buttonsHTML.push(<Button key={key + "-" + index} width={buttonWidth} isSelected={selected[index]} onClick={() => selectButton(index)}>{option}</Button>);
         })
         /* Make the Question-Content element */
         return (<div key={key} className="content-backdrop">
@@ -148,7 +157,7 @@ function ContentParser(props) {
      */
     function createVideoContent(key, link, language) {
         if (link === false) {return <div className="content-video-todo">Video</div>}
-        return <iframe key={key} src={link} width="100%" height="350px" style={{marginTop:"20px", borderRadius: "10px"}} frameBorder="0" allow="autoplay; fullscreen"></iframe>
+        return <iframe key={key} src={link} width="100%" style={{marginTop:"20px", borderRadius: "10px"}} frameBorder="0" allow="autoplay; fullscreen"></iframe>
     }
 
     /**
@@ -223,7 +232,7 @@ function ContentParser(props) {
         case 'Video':
             return createVideoContent(props.data.key, props.data.link, props.userProfile.language);
         case 'Selection':
-            return createSelectionContent(props.data.key, props.data.id, props.data.title, props.data.question, props.data.options);
+            return createSelectionContent(props.data.key, props.data.id, props.data.title, props.data.question, props.data.options, props.data.width);
         case 'Sort-Exercise':
             return createSortingContent(props.data.key, props.data.content, props.data.columns, props.data.options);
         case 'Image':

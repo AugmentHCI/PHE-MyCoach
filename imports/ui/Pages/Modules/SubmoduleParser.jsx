@@ -6,7 +6,6 @@ import FadeIn from 'react-fade-in';
 import NavigationBar from '../../components/NavigationBar.jsx';
 import AppModal from '../../components/AppModal.jsx';
 import ModuleCard from '../../components/MyCoach/ModuleCard.jsx';
-import Button from '../../components/Button.jsx';
 
 import jwt_decode from "jwt-decode";
 
@@ -98,8 +97,9 @@ export default function SubmoduleParser(props) {
         </AppModal>);
     }
 
-    async function finishSubmodule(save) {
-        if (save) { setShowCompletionModal(true) }
+    /* Used as callback for CardsParser */
+    async function finishSubmodule(firstTime) {
+        if (firstTime) { setShowCompletionModal(true) }
         else { history.back() }
     }
 
@@ -108,7 +108,6 @@ export default function SubmoduleParser(props) {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
             const profile = (await profileManager.getLatestQuestionnaire())?.data?.profile;
-            console.log(`Retrieved profile: ${profile}`)
             progressManager.setProfile(profile);
             const progress = await progressManager.getModuleProgress(module);
             const questions = await questionManager.getModuleQuestions(module);
@@ -137,14 +136,7 @@ export default function SubmoduleParser(props) {
                                 hideButton>
                     </ModuleCard>
                     <hr className="module-hr-line"/>
-                    <CardsParser cards={data.cards} module={module} moduleStatus={userProgress[module][submodule]} userID={userID}></CardsParser>
-                    <Button style={{marginBottom: "100px", 
-                                    textAlign: "center", 
-                                    justifyContent: "center"}} 
-                            color="blue" 
-                            onClick={() => finishSubmodule(userProgress[module][submodule] !== "COMPLETED")}>
-                                {userProgress[module][submodule] === "COMPLETED" ? "Keer terug" : "Voltooi dit onderdeel"}
-                    </Button>
+                    <CardsParser cards={data.cards} module={module} moduleStatus={userProgress[module][submodule]} userID={userID} finishCallback={finishSubmodule}></CardsParser>
                 </FadeIn>}
             </div>
         </React.Fragment>

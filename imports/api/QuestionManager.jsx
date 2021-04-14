@@ -21,8 +21,8 @@ export default class QuestionManager {
         return undefined;
     }
 
-    setModuleQuestion(module, questionID, answer, allowMultiple=true) {
-        if (!allowMultiple) { Meteor.call('mycoachquestion.upsertQuestion', {userID: this.userID, module: module, questionID: questionID, answer: answer}) }
-        else { Meteor.call('mycoachquestion.setQuestion', {userID: this.userID, module: module, questionID: questionID, answer: answer}) }
+    async setModuleQuestion(module, questionID, answer, allowMultiple=true) {
+        if (!allowMultiple) { await Meteor.callPromise('mycoachquestion.upsertQuestion', {userID: this.userID, module: module, questionID: questionID, answer: answer}) }
+        else { await Meteor.callPromise('mycoachquestion.setQuestion', {userID: this.userID, module: module, questionID: questionID, answer: answer}) }
     }
 }

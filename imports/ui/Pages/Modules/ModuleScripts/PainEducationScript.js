@@ -69,6 +69,7 @@ const PainEducationScript = {
                 "id": "PE-MOD-1-CARD-3",
                 "title": "Klaar!",
                 "wrapup": true,
+                "showIfAnswered": ["PE-MOD-1-Q1", "PE-MOD-1-Q2", "PE-MOD-1-Q3"],
                 "card-contents": [
                     {
                         "type": "Text",
@@ -92,6 +93,12 @@ const PainEducationScript = {
                         "content": ["Receptoren op de zenuwen nemen prikkels uit de omgeving waar. Worden de receptoren sterk genoeg gestimuleerd, dan wordt er een boodschap gestuurd naar de hersenen.", "De boodschappen worden via het ruggenmerg naar de hersenen gestuurd. De hersenen bepalen welke boodschappen worden doorgestuurd in het ruggenmerg.", "De hersenen analyseren de binnenkomende boodschappen en kiezen een gepaste reactie."]
                     }
                 ]
+            },
+            {
+                "generateFinishSubmoduleButton": true,
+                "lastModule": false,
+                "text": "Voltooi dit onderdeel",
+                "textOnCompleted": "Keer terug"
             }
         ]
     },
@@ -101,12 +108,12 @@ const PainEducationScript = {
         "title-markup": ["Rol van", "het brein"],
         "part": 2,
         "description": "In dit onderdeel bespreken we welke rol ons brein heeft in het verwerken van onze prikkels, en onze pijnervaring.",
-        "duration": "15 minuten",
+        "duration": "5 minuten",
         "type": "Informatief",
         "image": "new_ideas",
         "cards": [{
             "id": "PE-MOD-2-CARD-1",
-            "title": "Recap",
+            "title": "Inleiding",
             "card-contents": [
                 {
                     "type": "Text",
@@ -115,17 +122,11 @@ const PainEducationScript = {
                 {
                     "type": "List",
                     "numbered": true,
-                    "content": ["Hoe een prikkel van je lichaam (receptoren in je huid, spieren en gewrichten) tot in het ruggenmerg (tussenstation) terechtkomt.", "Dat het de taak van de hersenen is om te beslissen of de prikkel wordt doorgestuurd naar de hersenen of blijft liggen in het ruggenmerg.", "Dat niet altijd wanneer een prikkel tot in de hersenen geraakt, dat tot pijn zal leiden. Het is aan de hersenen om daarover te oordelen. In dit onderdeel gaan we dieper in op de rol van onze hersenen."]
-                }
-            ]
-        }, 
-        {
-            "id": "PE-MOD-2-CARD-2",
-            "title": "Video",
-            "card-contents": [
+                    "content": ["Hoe een prikkel van je lichaam (receptoren in je huid, spieren en gewrichten) tot in het ruggenmerg (tussenstation) terechtkomt.", "Dat het de taak van de hersenen is om te beslissen of de prikkel wordt doorgestuurd naar de hersenen of blijft liggen in het ruggenmerg.", "Dat niet altijd wanneer een prikkel tot in de hersenen geraakt, dat tot pijn zal leiden. Het is aan de hersenen om daarover te oordelen."]
+                },
                 {
                     "type": "Text",
-                    "content": "Bekijk nu het filmpje over TODO-PE-MOD-2-CARD-2"
+                    "content": "In dit onderdeel gaan we dieper in op de rol van onze hersenen. We beginnen met het volgend filmpje:"
                 },
                 {
                     "type": "Video",
@@ -159,19 +160,17 @@ const PainEducationScript = {
                 {
                     "type": "Selection",
                     "id": "PE-MOD-2-Q2",
+                    "width": "fit",
                     "title": "En hoe voel jij je?",
                     "question": "Welke emoticon illustreert het best hoe je je op dat moment voelt?",
                     "options": ["😄", "😒", "😔", "😟", "😩", "😡"]
-                },
-                {
-                    "type": "Text",
-                    "content": "[Noot - Emoji's wat leuker maken, zoals design]"
                 }
             ]
         },
         {
             "id": "PE-MOD-2-CARD-4",
             "title": "Even denken",
+            "showIfAnswered": ["PE-MOD-2-Q1", "PE-MOD-2-Q2"],
             "card-contents": [
                 {
                     "type": "Text",
@@ -208,6 +207,7 @@ const PainEducationScript = {
             "card-contents": [
                 {
                     "type": "Text",
+                    "overview": true,
                     "content": "Je hersenen bepalen welke prikkels in het ruggenmerg worden doorgestuurd en kiezen een gepaste reactie op de prikkels."
                 },
                 {
@@ -217,6 +217,12 @@ const PainEducationScript = {
                     "content": ["De hersenen fungeren als een volumeknop: Ze beslissen over een hevige of gedempte reactie op binnenkomende prikkels.", "De interpretatie van de hersenen gebeurt op basis van aandacht, gedachten, emoties en ervaringen."]
                 }
             ]
+        },
+        {
+            "generateFinishSubmoduleButton": true,
+            "lastModule": false,
+            "text": "Voltooi dit onderdeel",
+            "textOnCompleted": "Keer terug"
         }]
     },
     {
@@ -225,7 +231,7 @@ const PainEducationScript = {
         "title-markup": ["Gevoeligheid", "zenuwstelsel"],
         "part": 3,
         "description": "In dit onderdeel leer je hoe de gevoeligheid van het zenuwstelsel kan worden verhoogd of verlaagd en je dus meer of minder pijn gaat ervaren.",
-        "duration": "15 minuten",
+        "duration": "10 minuten",
         "type": "Informatief",
         "image": "sensitivity",
         "imageWidth": "170px",
@@ -310,9 +316,11 @@ const PainEducationScript = {
             "id": "PE-MOD-3-OVERVIEW",
             "title": "Overzicht",
             "overview": true,
+            "showIfAnswered": ["PE-MOD-3-Q1"],
             "card-contents": [
                 {
                     "type": "Text",
+                    "overview": true,
                     "content": "Je zenuwstelsel kan gevoeliger of minder gevoelig worden. De manier waarop je denkt en omgaat met je pijn speelt een belangrijke rol in je pijnbeleving."
                 },
                 {
@@ -322,6 +330,12 @@ const PainEducationScript = {
                     "content": ["Er is geen mooi verband tussen pijn en de hoeveelheid schade. Er kan pijn zijn zonder veel schade maar er kan ook veel schade zijn zonder pijn. De hersenen bepalen of we pijn ervaren.", "Negatieve emoties zoals angst of boosheid, frustratie omwille van de pijn en negatieve gedachten omtrent je pijn fungeren als versterker waardoor je meer pijn zal ervaren. Ze onderdrukken ook de pijn dempende mechanismen en verhogen het risico op een overgevoelig zenuwstelsel.", "Na een acuut letsel wordt het zenuwstelsel gevoeliger waardoor meer prikkels naar de hersenen worden gestuurd. Prikkels die voordien niet pijnlijk waren, zoals lichte rek of druk, zullen nu wel pijnlijk zijn. Je hersenen willen dat je het aangedane lichaamsdeel ontziet zodat het kan herstellen.", "Fysieke inspanning zet pijn-dempende stoffen vrij. Deze stoffen zorgen ervoor dat er minder prikkels naar de hersenen worden gestuurd."]
                 }
             ]
+        },
+        {
+            "generateFinishSubmoduleButton": true,
+            "lastModule": false,
+            "text": "Voltooi dit onderdeel",
+            "textOnCompleted": "Keer terug"
         }]
     },
     {
@@ -411,7 +425,7 @@ const PainEducationScript = {
                     "number": 5,
                     "options": ["Juist", "Fout"],
                     "correct": "Fout",
-                    "explanation": "Langdurig rusten zorgt ervoor dat je lichaam gaat verzwakken waardoor je het risico op overbelasting vergroot. Tijdens beweging treden ook de pijn dempende mechanismen in werking. Als je je focust op werk en andere betekenisvolle activiteiten gaan je hersenen minder aandacht besteden aan pijn gerelateerde prikkels en wordt je er vanzelf minder door gehinderd. Probeer daarom je normale activiteiten binnen de mate van het mogelijke verder te zetten en deze geleidelijk terug op te bouwen.",
+                    "explanation": "Langdurig rusten zorgt ervoor dat je lichaam gaat verzwakken waardoor je het risico op overbelasting vergroot. Tijdens beweging treden ook de pijn dempende mechanismen in werking. Als je je focust op werk en andere betekenisvolle activiteiten gaan je hersenen minder aandacht besteden aan pijn gerelateerde prikkels en word je er vanzelf minder door gehinderd. Probeer daarom je normale activiteiten binnen de mate van het mogelijke verder te zetten en deze geleidelijk terug op te bouwen.",
                     "onCorrect": "Dit klopt inderdaad niet!",
                     "onIncorrect": "Net niet!"
                 },
@@ -476,9 +490,11 @@ const PainEducationScript = {
             "id": "PE-MOD-4-OVERVIEW",
             "title": "Overzicht",
             "overview": true,
+            "showIfAnswered": ["PE-MOD-4-Q1", "PE-MOD-4-Q2", "PE-MOD-4-Q3", "PE-MOD-4-Q4", "PE-MOD-4-Q5", "PE-MOD-4-Q6", "PE-MOD-4-Q7", "PE-MOD-4-Q8", "PE-MOD-4-Q9", "PE-MOD-4-Q10", ],
             "card-contents": [
                 {
                     "type": "Text",
+                    "overview": true,
                     "content": "Bij chronische pijn is het oorspronkelijke letsel al hersteld maar de overgevoeligheid van het zenuwstelsel blijft."
                 },
                 {
@@ -488,6 +504,12 @@ const PainEducationScript = {
                     "content": ["Men spreekt van chronische pijn wanneer de pijn langdurig (meer dan 3 maanden) aanwezig is. De pijn kan sterk wisselen van dag tot dag en verspreiden in het lichaam. Ook lichtere prikkels, die normaal geen pijn doen, kunnen pijnlijk zijn.", "Bij chronische pijn speelt het oorspronkelijke letsel nog maar een kleine rol. Vooral de overgevoeligheid van het zenuwstelsel is de oorzaak van de klachten.", "Verscheidene factoren verhogen het risico op een overgevoelig zenuwstelsel en chronische pijn zoals; jezelf vaak overbelasten, langdurige stress, focussen op je pijn en negatieve gedachten en gevoelens ten aanzien van je pijn.", "Een gezonde levensstijl, voldoende beweging en je aandacht en energie richten op waardevolle activiteiten in plaats van op de pijn kunnen de overgevoeligheid van het zenuwstelsel terug verlagen en de impact van de chronische pijn beperken."]
                 }
             ]
+        },
+        {
+            "generateFinishSubmoduleButton": true,
+            "lastModule": false,
+            "text": "Voltooi dit onderdeel",
+            "textOnCompleted": "Keer terug"
         }]
     },
     {
@@ -523,10 +545,11 @@ const PainEducationScript = {
         {
             "id": "PE-MOD-5-CARD-2",
             "title": "Wat kan je doen",
+            "wrapup": true,
             "card-contents": [
                 {
                     "type": "Text",
-                    "content": "Binnen de Health Empower app hebben we een aantal modules ontwikkeld waar al deze factoren aan bod komen! Je vindt er tal van tips en oefeningen. Hieronder heb je alvast een overzich van hoe we met elk van deze factoren aan de slag gaan."
+                    "content": "Binnen de Health Empower app hebben we een aantal modules ontwikkeld waar al deze factoren aan bod komen! Je vindt er tal van tips en oefeningen. Hieronder heb je alvast een overzicht van hoe we met elk van deze factoren aan de slag gaan."
                 }]
         },
         {
@@ -620,6 +643,12 @@ const PainEducationScript = {
                     "content": "Neem snel een kijkje op het startscherm van de MyCoach om je vrijgespeelde modules te bekijken!"
                 }]
         },
+        {
+            "generateFinishSubmoduleButton": true,
+            "lastModule": false,
+            "text": "Voltooi Pijneducatie",
+            "textOnCompleted": "Keer terug"
+        }
     ]
     }]
 }
