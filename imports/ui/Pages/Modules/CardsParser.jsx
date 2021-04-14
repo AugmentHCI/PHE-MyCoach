@@ -31,14 +31,13 @@ function CardsParser(props) {
 
     function generateCards(cards, showonly=undefined) {
         cards.forEach(card => {
-            if (showonly === "OVERVIEW" && !card.overview) continue;
-            if (showonly === "NONOVERVIEW" && (card.overview || card.wrapup)) continue;
+            if (showonly === "OVERVIEW" && !card.overview) return;
+            if (showonly === "NONOVERVIEW" && (card.overview || card.wrapup)) return;
             if (Object.keys(card).length === 0) return; /* Empty card */
             contentsHTML.push(
                 <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
                     {createCardContent(card.id, card["card-contents"])}
                 </Card>);
-            
         });
     }
 

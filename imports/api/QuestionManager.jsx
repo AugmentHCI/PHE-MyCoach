@@ -21,7 +21,8 @@ export default class QuestionManager {
         return undefined;
     }
 
-    setModuleQuestion(module, questionID, answer) {
-        Meteor.call('mycoachquestion.setQuestion', {userID: this.userID, module: module, questionID: questionID, answer: answer});
+    setModuleQuestion(module, questionID, answer, allowMultiple=true) {
+        if (!allowMultiple) { Meteor.call('mycoachquestion.upsertQuestion', {userID: this.userID, module: module, questionID: questionID, answer: answer}) }
+        else { Meteor.call('mycoachquestion.setQuestion', {userID: this.userID, module: module, questionID: questionID, answer: answer}) }
     }
 }

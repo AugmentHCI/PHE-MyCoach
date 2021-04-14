@@ -33,12 +33,12 @@ function ContentParser(props) {
      * @param {String} onCorrect   The text that needs to be displayed (or added to the explanation) when the user answers correctly
      * @param {String} onIncorrect The text that needs to be displayed (or added to the explanation) when the user answers incorrectly
      */
-    function createQuestionContent(key, question, number, options, correct, explanation, onCorrect, onIncorrect, id) {
+    function createQuestionContent(key, questionID, question, number, options, correct, explanation, onCorrect, onIncorrect) {
         let buttonsHTML = [];
         let [status, changeStatus] =  useState("default");
         useEffect(() => {
             async function fetchStatus() {
-                const answer = await props.questionManager.getLatestAnswerOnQuestion(id);
+                const answer = await props.questionManager.getLatestAnswerOnQuestion(questionID);
                 if (answer) changeStatus(answer);
             }
             fetchStatus();
@@ -47,11 +47,11 @@ function ContentParser(props) {
         options.forEach((option, index) => {
             if (option === correct) {
                 const correctButtonClass = status === "correct" ? "content-button-correct" : "content-button";
-                buttonsHTML.push(<button key={key + "-" + index} className={correctButtonClass} onClick={() => {props.questionManager.setModuleQuestion(props.module, id, "correct"); if (status === "default") changeStatus("correct")}}>{option}</button>);
+                buttonsHTML.push(<button key={key + "-" + index} className={correctButtonClass} onClick={() => {props.questionManager.setModuleQuestion(props.module, questionID, "correct"); if (status === "default") changeStatus("correct")}}>{option}</button>);
             }
             else if (option !== correct) {
                 const incorrectButtonClass = status === "incorrect" ? "content-button-incorrect" : "content-button";
-                buttonsHTML.push(<button key={key + "-" + index} className={incorrectButtonClass} onClick={() => {props.questionManager.setModuleQuestion(props.module, id, "incorrect"); if (status === "default") changeStatus("incorrect")}}>{option}</button>);
+                buttonsHTML.push(<button key={key + "-" + index} className={incorrectButtonClass} onClick={() => {props.questionManager.setModuleQuestion(props.module, questionID, "incorrect"); if (status === "default") changeStatus("incorrect")}}>{option}</button>);
             }
         })
         /* Make the Question-Content element */
@@ -71,11 +71,24 @@ function ContentParser(props) {
      * @param {String} question The question that is posed to the user
      * @param {Array[String]} options The possible options from which the user can choose to answer the question
      */
-    function createSelectionContent(key, title, question, options) {
+    function createSelectionContent(key, questionID, title, question, options) {
         let buttonsHTML = [];
         const [selected, changeSelected] =  useState(new Array(options.length).fill(false));
 
+        useEffect(() => {
+            async function fetchStatus() {
+                const answer = await props.questionManager.getLatestAnswerOnQuestion(questionID);
+                if (answer) {
+                    let newArray = new Array(options.length).fill(false);
+                    newArray[options.indexOf(answer)] = true;
+                    changeSelected(newArray);
+                }
+            }
+            fetchStatus();
+        }, []);
+
         function selectButton(index) {
+            props.questionManager.setModuleQuestion(props.module, questionID, options[index], false);
             let newArray = new Array(options.length).fill(false);
             newArray[index] = true;
             changeSelected(newArray);
@@ -92,7 +105,7 @@ function ContentParser(props) {
             {status === "correct" && <div className="content-answer-correct">{onCorrect}</div>}
             {status === "incorrect" && <div className="content-answer-incorrect">{onIncorrect}</div>}
         </div>);
-    };
+    }
 
     /**
      * Generates a List-content HTML
@@ -206,11 +219,11 @@ function ContentParser(props) {
         case 'List':
             return createListContent(props.data.key, props.data.content, props.data.numbered, props.data.overview);
         case 'Question':
-            return createQuestionContent(props.data.key, props.data.question, props.data.number, props.data.options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect, props.data.id);
+            return createQuestionContent(props.data.key, props.data.id, props.data.question, props.data.number, props.data.options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect);
         case 'Video':
             return createVideoContent(props.data.key, props.data.link, props.userProfile.language);
         case 'Selection':
-            return createSelectionContent(props.data.key, props.data.title, props.data.question, props.data.options);
+            return createSelectionContent(props.data.key, props.data.id, props.data.title, props.data.question, props.data.options);
         case 'Sort-Exercise':
             return createSortingContent(props.data.key, props.data.content, props.data.columns, props.data.options);
         case 'Image':

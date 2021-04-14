@@ -51,6 +51,27 @@ Meteor.methods({
             timestamp: new Date,
         });
     },
+    'mycoachquestion.upsertQuestion'({userID, module, questionID, answer}) {
+        check(userID, Number);
+        check(module, String);
+        check(questionID, String);
+   
+        MyCoachQuestionCollection.upsert({
+            // Selector
+            userID: userID,
+            module: module,
+            questionID: questionID,
+        }, {
+            // Modifier
+            $set: {
+                userID: userID,
+                module: module,
+                questionID: questionID,
+                answer: answer,
+                timestamp: new Date,
+            }
+        });
+    },
     'mycoachquestion.getQuestion'({userID, questionID}) {
         check(userID, Number);
         check(questionID, String);
