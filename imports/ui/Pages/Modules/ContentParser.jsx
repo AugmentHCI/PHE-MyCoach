@@ -10,6 +10,28 @@ import Icon from '../../components/Illustrations/Icon.jsx';
 
 function ContentParser(props) {
 
+    function parseTextMarkup(textArray) {
+        let contentHTML = [];
+        textArray.forEach((element, index) => {
+            if (!element.type) {contentHTML.push(element)} /* Normal text */
+            else if (element.type === "normal") {contentHTML.push(element.content)} /* Normal text */
+            else if (element.type === "bold") {contentHTML.push(<b key={props.childrenKey+"-text-"+index}>{element.content}</b>)} /* Bold text */
+            else if (element.type === "italic") {contentHTML.push(<i key={props.childrenKey+"-text-"+index}>{element.content}</i>)} /* Italic text */
+            else if (element.type === "answer") {
+                let [answer, setAnswer] = useState(undefined);
+                useEffect(() => {
+                    async function fetchAnswer() {
+                        const fetchedAnswer = await props.questionManager.getLatestAnswerOnQuestion(element.questionID);
+                        if (fetchedAnswer) setAnswer(fetchedAnswer);
+                    }
+                    fetchAnswer();
+                }, []);
+                contentHTML.push(answer)
+            } /* Insert Answer */
+        });
+        return contentHTML;
+    }
+
     /* Constructors for content */
 
     /**
@@ -19,27 +41,7 @@ function ContentParser(props) {
      */
     function createTextContent(text, isOverview) {
         if (typeof(text) === "string") return <div key={props.childrenKey+"-text"} className={isOverview ? "content-text-overview" : "content-text"}>{text}</div>;
-        else {
-            let contentHTML = [];
-            text.forEach((element, index) => {
-                if (!element.type) {contentHTML.push(element)} /* Normal text */
-                else if (element.type === "normal") {contentHTML.push(element.content)} /* Normal text */
-                else if (element.type === "bold") {contentHTML.push(<b key={props.childrenKey+"-text-"+index}>{element.content}</b>)} /* Bold text */
-                else if (element.type === "italic") {contentHTML.push(<i key={props.childrenKey+"-text-"+index}>{element.content}</i>)} /* Italic text */
-                else if (element.type === "answer") {
-                    let [answer, setAnswer] = useState(undefined);
-                    useEffect(() => {
-                        async function fetchAnswer() {
-                            const fetchedAnswer = await props.questionManager.getLatestAnswerOnQuestion(element.questionID);
-                            if (fetchedAnswer) setAnswer(fetchedAnswer);
-                        }
-                        fetchAnswer();
-                    }, []);
-                    contentHTML.push(answer)
-                } /* Insert Answer */
-            })
-            return <div key={props.childrenKey+"-text"} className={isOverview ? "content-text-overview" : "content-text"}>{contentHTML}</div>;
-        }
+        else { return <div key={props.childrenKey+"-text"} className={isOverview ? "content-text-overview" : "content-text"}>{parseTextMarkup(text)}</div>; }
     }
 
     /**
@@ -143,7 +145,8 @@ function ContentParser(props) {
     function createListContent(content, isNumbered, isOverview) {
         let listHTML = [];
         content.forEach((item, index) => {
-            listHTML.push(<li key={props.childrenKey + "-" + index} className={isOverview ? "content-list-item-overview" : "content-list-item"}>{item}</li>)
+            if (typeof(item) === "string") listHTML.push(<li key={props.childrenKey + "-" + index} className={isOverview ? "content-list-item-overview" : "content-list-item"}>{item}</li>)
+            else listHTML.push(<li key={props.childrenKey + "-" + index} className={isOverview ? "content-list-item-overview" : "content-list-item"}>{parseTextMarkup(item)}</li>)
         });
         if (isNumbered) return <ol className="content-list">{listHTML}</ol>;
         else return <ul className="content-list">{listHTML}</ul>;
