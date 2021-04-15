@@ -19,7 +19,17 @@ function ContentParser(props) {
      * @param {Boolean} isOverview True if the text is in an overview Card (will simply make text white)
      */
     function createTextContent(key, text, isOverview) {
-        return <div key={key} className={isOverview ? "content-text-overview" : "content-text"}>{text}</div>;
+        if (typeof(text) === "string") return <div key={key} className={isOverview ? "content-text-overview" : "content-text"}>{text}</div>;
+        else {
+            let contentHTML = [];
+            text.forEach(element => {
+                if (!element.type) {contentHTML.push(element)} /* Normal text */
+                else if (element.type === "normal") {contentHTML.push(element.content)} /* Normal text */
+                else if (element.type === "bold") {contentHTML.push(<b>{element.content}</b>)} /* Bold text */
+                else if (element.type === "italic") {contentHTML.push(<i>{element.content}</i>)} /* Italic text */
+            })
+            return <div key={key} className={isOverview ? "content-text-overview" : "content-text"}>{contentHTML}</div>;
+        }
     }
 
     /**

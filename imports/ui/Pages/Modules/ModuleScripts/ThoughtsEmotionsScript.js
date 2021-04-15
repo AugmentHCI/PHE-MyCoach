@@ -36,6 +36,7 @@ const TEMOD1 = {
                     content: "Moeilijke, lastige gedachten en emoties kunnen ons serieus parten spelen en een impact hebben op hoe we ons voelen. Worstel jij soms met moeilijke gedachten en gevoelens?"
                 },
                 {
+                    id: "TE-MOD1-SLIDER",
                     type: "Slider",
                     text: "Duid op een schaal van 1 tot 10 (waarbij 1 staat voor een heel sterke negatieve impact en 10 voor helemaal geen negatieve impact) aan hoe groot de impact van gedachten en gevoelens waar je mee worstelt is welbevinden.",
                     from: 1,
@@ -47,10 +48,11 @@ const TEMOD1 = {
         },
         {
             id: "TE-MOD1-CARD3",
+            showIfAnswered: ["TE-MOD1-SLIDER"],
             "card-contents": [
                 {
                     type: "Text",
-                    content: "Jij scoorde (TODO) op de schaalvraag. Na het doorlopen van deze module zullen we je opnieuw vragen om je score aan te duiden. Zo kan je zien of je score verbeterd, verminderd of hetzelfde gebleven is. Je kan dan ook in kaart proberen brengen welke factoren hiertoe bijgedragen hebben."
+                    content: ["Jij scoorde ", {type: "bold", content:"(TODO)"}, "op de schaalvraag. Na het doorlopen van deze module zullen we je opnieuw vragen om je score aan te duiden. Zo kan je zien of je score verbeterd, verminderd of hetzelfde gebleven is. Je kan dan ook in kaart proberen brengen welke factoren hiertoe bijgedragen hebben."]
                 }]
         },
         {
@@ -76,6 +78,7 @@ const TEMOD1 = {
         {
             id: "TE-MOD1-CARD5",
             title: "Even reflecteren",
+            showIfAnswered: ["TE-MOD1-Q1"], 
             "card-contents": [
                 {
                     id: "TE-MOD1-Q2",
@@ -114,7 +117,7 @@ const TEMOD1 = {
                 },
                 {
                     type: "Text",
-                    content: "En stop nu eens met te denken aan dat vliegende, rode paard. Denk er niet meer aan."
+                    content: ["En ", {type: "bold", content: "stop"}, " nu eens met te denken aan dat vliegende, rode paard. Denk er niet meer aan."]
                 },
                 {
                     type: "Image",
@@ -129,6 +132,7 @@ const TEMOD1 = {
         {
             id: "TE-MOD1-CARD6",
             title: "Terugkerende gedachten",
+            showIfAnswered: ["TE-MOD1-Q2", "TE-MOD1-Q3"],
             "card-contents": [
                 {
                     type: "Text",

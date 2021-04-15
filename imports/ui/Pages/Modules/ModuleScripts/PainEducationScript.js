@@ -371,10 +371,6 @@ const PainEducationScript = {
                     "content": "Ondertussen heb je al een goed zicht op hoe pijn ontstaat en hoe pijn chronisch wordt. Om te polsen of je alles goed hebt begrepen volgt hier een korte quiz van 10 vragen. Succes!"
                 },
                 {
-                    "type": "Text",
-                    "content": "[Noot - Quiz wat leuker maken]"
-                },
-                {
                     "id": "PE-MOD-4-Q1",
                     "type": "Question",
                     "question": "Chronische pijn of pijn zonder duidelijke oorzaak is ingebeeld.",
