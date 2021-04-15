@@ -40,7 +40,7 @@ function CardsParser(props) {
                 break;
             }
             if (card.generateFinishSubmoduleButton) {
-                contentsHTML.push( <Button 
+                contentsHTML.push(<Button 
                     key={"finish-submodule-button"+props.module}
                     style={{marginBottom: "100px", 
                         textAlign: "center", 
@@ -51,6 +51,7 @@ function CardsParser(props) {
                 </Button>);
                 continue;
             }
+            console.log(card.id)
             contentsHTML.push(
                 <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
                     {createCardContent(card.id, card.cardContents)}
@@ -83,11 +84,12 @@ function CardsParser(props) {
         contents.forEach((content, index) => {
             contentArray.push(
                 <ContentParser key={"content-" + key + "-" + index} 
-                         data={content} 
-                         module={props.module}
-                         userProfile={userProfile}
-                         questionManager={questionManager}
-                         callback={updateQuestionsCallback}/>);
+                        childrenKey={"content-" + key + "-" + index}
+                        data={content} 
+                        module={props.module}
+                        userProfile={userProfile}
+                        questionManager={questionManager}
+                        callback={updateQuestionsCallback}/>);
         });
         return contentArray;
     }

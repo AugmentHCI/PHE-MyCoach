@@ -39,7 +39,7 @@ const onDragEnd = (result, columns, setColumns) => {
     }
   };
   
-export default function createSortingContent(key, content, columnData, options) {
+export default function createSortingContent(content, columnData, options) {
     const [columns, setColumns] = useState(columnData);
     return (
       <div className="content-backdrop">
