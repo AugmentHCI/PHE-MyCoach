@@ -66,7 +66,7 @@ export default function ModuleParser(props) {
             moduleCardsHTML.push(<ModuleCard 
                 key={submodule.id}
                 id={submodule.id}
-                title={submodule["title-markup"]}
+                title={submodule.titleMarkup}
                 number={submodule.part}
                 duration={submodule.duration}
                 description={submodule.description}

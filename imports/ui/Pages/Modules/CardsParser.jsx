@@ -54,7 +54,7 @@ function CardsParser(props) {
             }
             contentsHTML.push(
                 <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
-                    {createCardContent(card.id, card["card-contents"])}
+                    {createCardContent(card.id, card.cardContents)}
                 </Card>);
         }
         return contentsHTML;

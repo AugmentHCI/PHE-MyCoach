@@ -125,7 +125,7 @@ export default function SubmoduleParser(props) {
             {renderCompletionModal()}
             <div className="container" style={{paddingTop: "85px"}}>
                 {userProgress && userQuestions && <FadeIn>
-                    <ModuleCard title={data["title-markup"]} 
+                    <ModuleCard title={data.titleMarkup} 
                                 number={data.part}
                                 topColor={"white"}
                                 description={data.description}

@@ -1,7 +1,7 @@
 const TEMOD1 = {
     id: "TE_MOD_1",
     title: "Gedachten en emoties: een inleiding",
-    "title-markup": ["Gedachten en emoties:", "een inleiding"],
+    titleMarkup: ["Gedachten en emoties:", "een inleiding"],
     part: 1,
     description: "TODO",
     duration: "20 minuten",
@@ -11,16 +11,16 @@ const TEMOD1 = {
     cards: [{
             id: "TE-MOD1-CARD1",
             title: "Inleiding",
-            "card-contents": [
+            cardContents: [
                 {
                     type: "Text",
                     content: "Moeilijke gedachten en gevoelens kunnen een grote impact hebben op ons welbevinden en op de manier waarop we ons gedragen. Zo kunnen ze er bijvoorbeeld voor zorgen dat we veel piekeren of bepaald gedrag niet (meer) gaan stellen. In deze module reiken we je een aantal handvaten aan die je kunnen helpen om minder te vechten tegen deze lastige gevoelens en gedachten. Hiernaast bekijken we met jou hoe je minder ‘in je hoofd’ kan zitten en meer in het hier en nu. Ook helpen we je onderzoeken hoe je het leven kan leiden dat je wil leiden.",
-                    "show-if": {"rule": "Profile", "profiles": [1]}
+                    showIf: {"rule": "Profile", "profiles": [1]}
                 },
                 {
                     type: "Text",
                     content: "Moeilijke gedachten en gevoelens kunnen een grote impact hebben op ons welbevinden en op de manier waarop we ons gedragen. Dat is ook zo met lastige gedachten en gevoelens rond pijn. Zo kunnen ze er bijvoorbeeld voor zorgen dat we veel piekeren en bepaald gedrag niet (meer) gaan stellen. In deze module reiken we je een aantal handvaten aan die je kunnen helpen om minder te vechten tegen deze lastige gevoelens en gedachten. Hiernaast bekijken we met jou hoe je minder ‘in je hoofd’ kan zitten maar en meer in het hier en nu. Ook helpen we je onderzoeken hoe je, ondanks de pijn, het leven kan leiden dat je wil leiden.",
-                    "show-if": {"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}
+                    showIf: {"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}
                 },
                 {
                     type: "Text",
@@ -30,7 +30,7 @@ const TEMOD1 = {
         },
         {
             id: "TE-MOD1-CARD2",
-            "card-contents": [
+            cardContents: [
                 {
                     type: "Text",
                     content: "Moeilijke, lastige gedachten en emoties kunnen ons serieus parten spelen en een impact hebben op hoe we ons voelen. Worstel jij soms met moeilijke gedachten en gevoelens?"
@@ -49,7 +49,7 @@ const TEMOD1 = {
         {
             id: "TE-MOD1-CARD3",
             showIfAnswered: ["TE-MOD-1-SLIDER"],
-            "card-contents": [
+            cardContents: [
                 {
                     type: "Text",
                     content: ["Jij scoorde een ", {type: "answer", questionID:"TE-MOD-1-SLIDER"}, " op de schaalvraag. Na het doorlopen van deze module zullen we je opnieuw vragen om je score aan te duiden. Zo kan je zien of je score verbeterd, verminderd of hetzelfde gebleven is. Je kan dan ook in kaart proberen brengen welke factoren hiertoe bijgedragen hebben."]
@@ -58,7 +58,7 @@ const TEMOD1 = {
         {
             id: "TE-MOD1-CARD4",
             title: "Veel gedachten!",
-            "card-contents": [
+            cardContents: [
                 {
                     type: "Text",
                     content: "Gedachten kunnen we niet tegenhouden. In een flits zijn ze daar. Zonder aankondiging. En zo heb je er wel duizenden per dag."
@@ -79,7 +79,7 @@ const TEMOD1 = {
             id: "TE-MOD1-CARD5",
             title: "Even reflecteren",
             showIfAnswered: ["TE-MOD-1-Q1"], 
-            "card-contents": [
+            cardContents: [
                 {
                     id: "TE-MOD-1-Q2",
                     type: "Selection",
@@ -133,7 +133,7 @@ const TEMOD1 = {
             id: "TE-MOD1-CARD6",
             title: "Terugkerende gedachten",
             showIfAnswered: ["TE-MOD-1-Q2", "TE-MOD-1-Q3"],
-            "card-contents": [
+            cardContents: [
                 {
                     type: "Text",
                     content: "Zoals bovenstaand experiment aantoont, kunnen we onze gedachten niet ‘uit’ zetten. We zijn voortdurend aan het denken. Vaak is dit onbewust en hebben we er geen last van."
@@ -163,7 +163,7 @@ const TEMOD1 = {
         {
             id: "TE-MOD1-CARD7",
             title: "Gevoelens",
-            "card-contents": [
+            cardContents: [
                 {
                     type: "Text",
                     content: "Naast gedachten hebben we ook heel wat emoties en gevoelens die ons lijf binnenkomen. Deze zijn net als wolken die aan de lucht verschijnen en dan weer verdwijnen."
@@ -192,7 +192,7 @@ const TEMOD1 = {
         {
             id: "TE-MOD1-CARD8",
             title: "Gedachten en gevoelens",
-            "card-contents": [
+            cardContents: [
                 {
                     type: "Text",
                     content: "Onze gedachten en gevoelens hangen bovendien sterk samen."
@@ -214,7 +214,7 @@ const TEMOD1 = {
         {
             id: "TE-MOD1-CARD9",
             title: "Afleiding van gedachten",
-            "card-contents": [
+            cardContents: [
                 {
                     type: "Text",
                     content: "Vaak hebben we de neiging om allerlei pogingen te ondernemen om met onze moeilijke gedachten en gevoelens (bijvoorbeeld rond pijn) om te gaan zoals bijvoorbeeld afleiding zoeken door tv te kijken, bepaalde activiteiten vermijden, bepaalde bewegingen niet meer doen, meer eten, drinken of roken, meer slapen, veel op onze smartphone bezig zijn, ..."
@@ -248,7 +248,7 @@ const TEMOD1 = {
                     link: "/images/thoughtsemotions/stress.jpg",
                 },
                 {
-                    id: "TE-MOD1-Q4",
+                    id: "TE-MOD-1-Q4",
                     type: "Selection",
                     question: "Hebben deze pogingen gewerkt en ervoor gezorgd dat je moeilijke gedachten en gevoelens verdwenen of verminderden?",
                     options: ["Ja, altijd", "Ja, tijdelijk wel", "Neen, eigenlijk niet"]
@@ -257,14 +257,15 @@ const TEMOD1 = {
         },
         {
             id: "TE-MOD1-CARD10",
-            "card-contents": [
+            showIfAnswered: ["TE-MOD-1-Q4"],
+            cardContents: [
                 {
                     type: "Text",
                     content: "Vaak hebben we de neiging om allerlei pogingen te ondernemen om met onze moeilijke gedachten en gevoelens (bijvoorbeeld rond pijn) om te gaan zoals bijvoorbeeld afleiding zoeken door tv te kijken, bepaalde activiteiten vermijden, bepaalde bewegingen niet meer doen, meer eten, drinken of roken, meer slapen, veel op onze smartphone bezig zijn, ..."
                 },
                 {
                     type: "Todo - Navragen Rosanne/Steffi",
-                    text: "Wat wordt er bedoeld met 'Je geeft aan dat je pogingen (insert antwoord ‘altijd’ of ‘tijdelijk’ of ‘eigenlijk niet’) verdwenen.', ik denk dat hier iets anders bedoeld wordt/de verwoording anders moet zijn? + hier gaan we dan ook verschillende tekst tonen o.b.v. hun pijnlogboek - zelfde bedenking: misschien wat te vroeg om hier al te verwachten dat ze het regelmatig invullen?"
+                    text: "Wat wordt er bedoeld met 'Je geeft aan dat je pogingen (insert antwoord ‘altijd’ of ‘tijdelijk’ of ‘eigenlijk niet’) verdwenen.', ik denk dat hier iets anders bedoeld wordt/de verwoording anders moet zijn (helpen ipv verdwenen?)? + hier gaan we dan ook verschillende tekst tonen o.b.v. hun pijnlogboek - zelfde bedenking: misschien wat te vroeg om hier al te verwachten dat ze het regelmatig invullen?"
                 },
                 {
                     type: "Text",
@@ -278,7 +279,7 @@ const TEMOD1 = {
         },
         {
             id: "TE-MOD1-CARD11",
-            "card-contents": [
+            cardContents: [
                 {
                     type: "Text",
                     content: "Het werd je ondertussen waarschijnlijk duidelijk dat we onze gedachten en emoties niet kunnen uitzetten."
@@ -297,7 +298,7 @@ const TEMOD1 = {
             "id": "TE-MOD1-OVERVIEW",
             "title": "Overzicht",
             "overview": true,
-            "card-contents": [
+            cardContents: [
                 {
                     type: "Text",
                     overview: true,
@@ -311,7 +312,7 @@ const TEMOD1 = {
 const TEMOD2 = {
     id: "TE_MOD_2",
     title: "Aan de slag met gedachten en emoties",
-    "title-markup": ["Aan de slag met", "gedachten en emoties"],
+    titleMarkup: ["Aan de slag met", "gedachten en emoties"],
     part: 2,
     description: "TODO",
     duration: "Meerdere dagen",
@@ -321,26 +322,26 @@ const TEMOD2 = {
     cards: [{
         id: "TE-MOD2-CARD1",
         title: "Gedachte-oefening",
-        "card-contents": [
+        cardContents: [
             {
                 type: "Text",
                 content: "We moedigen je aan om de komende twee dagen eens bewust stil te staan bij jouw gedachten. Welke gedachten komen vaak terug en spelen je best wel parten?",
-                "show-if": {"rule": "Profile", "profiles": [1]}
+                showIf: {"rule": "Profile", "profiles": [1]}
             },
             {
                 type: "Text",
                 content: "Je kan deze hier invullen en bijhouden.",
-                "show-if": {"rule": "Profile", "profiles": [1]}
+                showIf: {"rule": "Profile", "profiles": [1]}
             },
             {
                 type: "Text",
                 content: "We moedigen je aan om de komende twee dagen eens bewust stil te staan bij jouw gedachten. Welke gedachten komen vaak terug en spelen je best wel parten? Welke zijn pijngerelateerd?",
-                "show-if": {"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}
+                showIf: {"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}
             },
             {
                 type: "Text",
                 content: "Je kan deze hier invullen en bijhouden. De gedachten die je invult in je pijnlogboek verschijnen er automatisch bij.",
-                "show-if": {"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}
+                showIf: {"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}
             },
             {
                 type: "Multiple-Text-Input",
@@ -356,7 +357,7 @@ const TEMOD2 = {
     {
         id: "TE-MOD2-CARD2",
         title: "Eens reflecteren",
-        "card-contents": [
+        cardContents: [
             {
                 type: "Text",
                 content: "Bekijk de wederkerende, lastige gedachten die je voor jezelf hebt genoteerd de afgelopen dag.",
@@ -368,12 +369,12 @@ const TEMOD2 = {
             {
                 type: "Text",
                 content: "Meestal zijn de wederkerende gedachten die we hebben niet dadelijk helpend. Daarom gaan we in deze module verder in op hoe je anders met deze gedachten kunt leren omgaan zodat zij zo min mogelijk impact hebben op jouw leven.",
-                "show-if": {"rule": "Profile", "profiles": [1]}
+                showIf: {"rule": "Profile", "profiles": [1]}
             },
             {
                 type: "Text",
                 content: "Meestal zijn de wederkerende gedachten die we hebben niet dadelijk helpend. Door bv. te denken aan je pijn of welke gevolgen dit zal hebben voel je je vaak niet beter of biedt dat niet meteen een oplossing. Daarom gaan we in deze module verder in op hoe je anders met deze gedachten kunt leren omgaan zodat zij zo min mogelijk impact hebben op jouw leven.",
-                "show-if": {"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}
+                showIf: {"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}
             },
             {
                 type: "Text",
@@ -399,7 +400,6 @@ const TEMOD2 = {
 const ThoughtsEmotionsScript = {
     id: "TE",
     title: "Gedachten en Emoties",
-    "submodule-parts": 6,
     submodules: [TEMOD1, TEMOD2]
 }
 

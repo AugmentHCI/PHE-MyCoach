@@ -37,7 +37,7 @@ function ContentParser(props) {
                         fetchAnswer();
                     }, []);
                     contentHTML.push(answer)
-                } /* Italic text */
+                } /* Insert Answer */
             })
             return <div key={key} className={isOverview ? "content-text-overview" : "content-text"}>{contentHTML}</div>;
         }
@@ -225,7 +225,7 @@ function ContentParser(props) {
 
 
     /* Display-Rules */
-    switch (props.data["show-if"]?.rule) {
+    switch (props.data.showIf?.rule) {
         case undefined:
             break;
         case "Pain": 
@@ -235,10 +235,10 @@ function ContentParser(props) {
             if (props.userProfile.pain !== "No pain") return <React.Fragment></React.Fragment>;
             break;
         case "Profile":
-            if (!props.data["show-if"]?.profiles.includes(props.userProfile.profile)) return <React.Fragment></React.Fragment>;
+            if (!props.data.showIf?.profiles.includes(props.userProfile.profile)) return <React.Fragment></React.Fragment>;
             break;
         default:
-            console.log(`Card display rule '${props.data["show-if"]?.rule}' not implemented`);
+            console.log(`Card display rule '${props.data.showIf?.rule}' not implemented`);
             break;
     }
 
