@@ -9,8 +9,7 @@ import ContentParser from './ContentParser.jsx';
 
 function CardsParser(props) {
 
-    // DUMMY DATA
-    const userProfile = {pain: "No pain", profile: 6, language: "nl-NL"};
+    const userProfile = props.userProfile;
     const questionManager = new QuestionManager(props.userID);
     const [userQuestions, setUserQuestions] = useState(undefined);
 

@@ -15,7 +15,6 @@ import CardsParser from './CardsParser.jsx';
 
 import './SubmoduleParser.scss';
 import ProgressManager from '../../../api/ProgressManager.jsx';
-import QuestionManager from '../../../api/QuestionManager.jsx';
 import InteractionManager from '../../../api/InteractionManager.jsx';
 import ProfileManager from '../../../api/ProfileManager.jsx';
 
@@ -28,13 +27,13 @@ export default function SubmoduleParser(props) {
     const userID = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     
     const progressManager = new ProgressManager(userID);
-    const questionManager = new QuestionManager(userID);
     const interactionManager = new InteractionManager(userID);
     const profileManager = new ProfileManager(userID);
     const [didSeeCompletionModal, setDidSeeCompletionModal] = useState(undefined);
     const [showCompletionModal, setShowCompletionModal] = useState(false);
+    const [userProfile, setUserProfile] = useState(undefined);
     const [userProgress, setUserProgress] = useState(undefined);
-    const [userQuestions, setUserQuestions] = useState(undefined);
+
     let data = [];
     
     switch (module) {
@@ -107,13 +106,13 @@ export default function SubmoduleParser(props) {
     useEffect(() => {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
-            const profile = (await profileManager.getLatestQuestionnaire())?.data?.profile;
+            const latestUserProfile = (await profileManager.getLatestQuestionnaire())?.data;
+            const profile = latestUserProfile ? latestUserProfile.profile : 1;
             progressManager.setProfile(profile);
             const progress = await progressManager.getModuleProgress(module);
-            const questions = await questionManager.getModuleQuestions(module);
             const modalStatus = await interactionManager.getInteractionStatuses("MODULE_COMPLETION_MODAL");
+            setUserProfile(latestUserProfile);
             setUserProgress(progress);
-            setUserQuestions(questions);
             setDidSeeCompletionModal(modalStatus.includes("CONFIRM"));
         }
         fetchUserProgress();
@@ -124,7 +123,7 @@ export default function SubmoduleParser(props) {
             <NavigationBar title={data.title}></NavigationBar>
             {renderCompletionModal()}
             <div className="container" style={{paddingTop: "85px"}}>
-                {userProgress && userQuestions && <FadeIn>
+                {userProgress && userProfile && <FadeIn>
                     <ModuleCard title={data.titleMarkup} 
                                 number={data.part}
                                 topColor={"white"}
@@ -136,7 +135,7 @@ export default function SubmoduleParser(props) {
                                 hideButton>
                     </ModuleCard>
                     <hr className="module-hr-line"/>
-                    <CardsParser cards={data.cards} module={module} moduleStatus={userProgress[module][submodule]} userID={userID} finishCallback={finishSubmodule}></CardsParser>
+                    <CardsParser cards={data.cards} module={module} moduleStatus={userProgress[module][submodule]} userID={userID} userProfile={userProfile} finishCallback={finishSubmodule}></CardsParser>
                 </FadeIn>}
             </div>
         </React.Fragment>

@@ -223,16 +223,15 @@ function ContentParser(props) {
         </div>)
     }
 
-
     /* Display-Rules */
     switch (props.data.showIf?.rule) {
         case undefined:
             break;
         case "Pain": 
-            if (props.userProfile.pain !== "Pain") return <React.Fragment></React.Fragment>;
+            if (!props.userProfile.K) return <React.Fragment></React.Fragment>;
             break;
         case "No pain":
-            if (props.userProfile.pain !== "No pain") return <React.Fragment></React.Fragment>;
+            if (props.userProfile.K) return <React.Fragment></React.Fragment>;
             break;
         case "Profile":
             if (!props.data.showIf?.profiles.includes(props.userProfile.profile)) return <React.Fragment></React.Fragment>;
