@@ -27,6 +27,17 @@ function ContentParser(props) {
                 else if (element.type === "normal") {contentHTML.push(element.content)} /* Normal text */
                 else if (element.type === "bold") {contentHTML.push(<b>{element.content}</b>)} /* Bold text */
                 else if (element.type === "italic") {contentHTML.push(<i>{element.content}</i>)} /* Italic text */
+                else if (element.type === "answer") {
+                    let [answer, setAnswer] = useState(undefined);
+                    useEffect(() => {
+                        async function fetchAnswer() {
+                            const fetchedAnswer = await props.questionManager.getLatestAnswerOnQuestion(element.questionID);
+                            if (fetchedAnswer) setAnswer(fetchedAnswer);
+                        }
+                        fetchAnswer();
+                    }, []);
+                    contentHTML.push(answer)
+                } /* Italic text */
             })
             return <div key={key} className={isOverview ? "content-text-overview" : "content-text"}>{contentHTML}</div>;
         }
@@ -180,8 +191,8 @@ function ContentParser(props) {
      * @param {Boolean} show Whether the current value also needs to be displayed or not
      * @param {Boolean} save Whether the value needs to be saved (render button)
      */
-    function createSliderContent(key, text, from, to, valueText, show, save) {
-        return <Slider key={key} text={text} from={from} to={to} valueText={valueText} show={show} save={save}/>
+    function createSliderContent(key, id, text, from, to, valueText, show, save) {
+        return <Slider key={key} id={id} text={text} from={from} to={to} valueText={valueText} show={show} save={save} questionManager={props.questionManager} callback={props.callback} module={props.module}/>
     }
 
     /**
@@ -248,7 +259,7 @@ function ContentParser(props) {
         case 'Image':
             return createImageContent(props.data.key, props.data.link, props.data.width);
         case 'Slider':
-            return createSliderContent(props.data.key, props.data.text, props.data.from, props.data.to, props.data.valueText, props.data.show, props.data.save);
+            return createSliderContent(props.data.key, props.data.id, props.data.text, props.data.from, props.data.to, props.data.valueText, props.data.show, props.data.save);
         case 'Text-Input':
             return createTextInputContent(props.data.key, props.data.text, props.data.placeholder);
         case 'Break':

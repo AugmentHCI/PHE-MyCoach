@@ -36,7 +36,7 @@ const TEMOD1 = {
                     content: "Moeilijke, lastige gedachten en emoties kunnen ons serieus parten spelen en een impact hebben op hoe we ons voelen. Worstel jij soms met moeilijke gedachten en gevoelens?"
                 },
                 {
-                    id: "TE-MOD1-SLIDER",
+                    id: "TE-MOD-1-SLIDER",
                     type: "Slider",
                     text: "Duid op een schaal van 1 tot 10 (waarbij 1 staat voor een heel sterke negatieve impact en 10 voor helemaal geen negatieve impact) aan hoe groot de impact van gedachten en gevoelens waar je mee worstelt is welbevinden.",
                     from: 1,
@@ -48,11 +48,11 @@ const TEMOD1 = {
         },
         {
             id: "TE-MOD1-CARD3",
-            showIfAnswered: ["TE-MOD1-SLIDER"],
+            showIfAnswered: ["TE-MOD-1-SLIDER"],
             "card-contents": [
                 {
                     type: "Text",
-                    content: ["Jij scoorde ", {type: "bold", content:"(TODO)"}, "op de schaalvraag. Na het doorlopen van deze module zullen we je opnieuw vragen om je score aan te duiden. Zo kan je zien of je score verbeterd, verminderd of hetzelfde gebleven is. Je kan dan ook in kaart proberen brengen welke factoren hiertoe bijgedragen hebben."]
+                    content: ["Jij scoorde een ", {type: "answer", questionID:"TE-MOD-1-SLIDER"}, " op de schaalvraag. Na het doorlopen van deze module zullen we je opnieuw vragen om je score aan te duiden. Zo kan je zien of je score verbeterd, verminderd of hetzelfde gebleven is. Je kan dan ook in kaart proberen brengen welke factoren hiertoe bijgedragen hebben."]
                 }]
         },
         {
@@ -64,7 +64,7 @@ const TEMOD1 = {
                     content: "Gedachten kunnen we niet tegenhouden. In een flits zijn ze daar. Zonder aankondiging. En zo heb je er wel duizenden per dag."
                 },
                 {
-                    id: "TE-MOD1-Q1",
+                    id: "TE-MOD-1-Q1",
                     type: "Question",
                     question: "Enig idee hoeveel gedachten we zo hebben per dag?",
                     options: ["5.000", "20.000", "70.000"],
@@ -78,16 +78,16 @@ const TEMOD1 = {
         {
             id: "TE-MOD1-CARD5",
             title: "Even reflecteren",
-            showIfAnswered: ["TE-MOD1-Q1"], 
+            showIfAnswered: ["TE-MOD-1-Q1"], 
             "card-contents": [
                 {
-                    id: "TE-MOD1-Q2",
+                    id: "TE-MOD-1-Q2",
                     type: "Selection",
                     question: "Heb je soms het idee dat steeds opnieuw dezelfde gedachte jou achtervolgt?",
                     options: ["Ja", "Nee"]
                 },
                 {
-                    id: "TE-MOD1-Q3",
+                    id: "TE-MOD-1-Q3",
                     type: "Selection",
                     question: "Zou je soms je gedachten eens graag even op stop willen zetten?",
                     options: ["Ja", "Nee"]
@@ -132,7 +132,7 @@ const TEMOD1 = {
         {
             id: "TE-MOD1-CARD6",
             title: "Terugkerende gedachten",
-            showIfAnswered: ["TE-MOD1-Q2", "TE-MOD1-Q3"],
+            showIfAnswered: ["TE-MOD-1-Q2", "TE-MOD-1-Q3"],
             "card-contents": [
                 {
                     type: "Text",

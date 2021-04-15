@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Slider as SemanticSlider } from "react-semantic-ui-range";
 import Button from "./Button.jsx";
 import "./Slider.scss";
@@ -8,9 +8,10 @@ export default function Slider(props) {
   const [value, updateValue] = useState(5);
   const [saved, updateSaved] = useState(false);
 
-  function save() {
-    /* TODO: Implement saving logic */
+  async function save() {
     updateSaved(true);
+    await props.questionManager.setModuleQuestion(props.module, props.id, value); 
+    props.callback();
   }
 
   const settings = {
@@ -24,6 +25,14 @@ export default function Slider(props) {
         window.scrollTop = 0;
     }}
   };
+
+  useEffect(() => {
+    async function fetchStatus() {
+        const answer = await props.questionManager.getLatestAnswerOnQuestion(props.id);
+        if (answer) { updateValue(answer); updateSaved(true); }
+    }
+    fetchStatus();
+  }, []);
 
   return (
     <div className="slider-box">
