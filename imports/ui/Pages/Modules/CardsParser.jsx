@@ -21,7 +21,7 @@ function CardsParser(props) {
         let contentsHTML = [];
         if (props.moduleStatus === "COMPLETED") {
             generateCards(cards, contentsHTML, "OVERVIEW");
-            contentsHTML.push(<hr className="module-hr-line"/>);
+            contentsHTML.push(<hr key={"CARD-DIVIDER"} className="module-hr-line"/>);
             generateCards(cards, contentsHTML, "NONOVERVIEW");
         }
         else {
@@ -51,7 +51,6 @@ function CardsParser(props) {
                 </Button>);
                 continue;
             }
-            console.log(card.id)
             contentsHTML.push(
                 <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
                     {createCardContent(card.id, card.cardContents)}
