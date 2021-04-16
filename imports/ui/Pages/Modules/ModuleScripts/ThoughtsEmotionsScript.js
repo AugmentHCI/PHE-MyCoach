@@ -361,6 +361,14 @@ const TEMOD2 = {
         ]
     },
     {
+        id: "TE-MOD2-PAUZE-1",
+        cardContents: [
+            {
+                type: "Text",
+                content: [{type: "bold", content: "Hier komt een pauzemoment van 2 dagen ..."}],
+            }]
+    },
+    {
         id: "TE-MOD2-CARD2",
         title: "Eens reflecteren",
         cardContents: [
@@ -401,6 +409,14 @@ const TEMOD2 = {
         ]
     },
     {
+        id: "TE-MOD2-PAUZE-2",
+        cardContents: [
+            {
+                type: "Text",
+                content: [{type: "bold", content: "Hier komt een pauzemoment van 1 dag ..."}],
+            }]
+    },
+    {
         id: "TE-MOD2-CARD3",
         title: "Afstand nemen van gedachten",
         cardContents: [
@@ -434,6 +450,14 @@ const TEMOD2 = {
         ]
     },
     {
+        id: "TE-MOD2-PAUZE-3",
+        cardContents: [
+            {
+                type: "Text",
+                content: [{type: "bold", content: "Hier komt een pauzemoment van 1 dag ..."}],
+            }]
+    },
+    {
         id: "TE-MOD2-CARD4",
         title: "Invloed beperken",
         cardContents: [
@@ -452,7 +476,20 @@ const TEMOD2 = {
             {
                 type: "Text",
                 content: "Herinner je dat als je sterk focust op je pijngedachten dat er makkelijker prikkels doorkomen (TODO: Insert verwijzing naar module in kwestie). Ook deze kan je vergelijken met deze vervelende buurman. Zijn er wederkerende gedachten die je doen denken aan deze vervelende buurman? Probeer de komende dag verder in te zetten op bewust worden van je gedachten."
-            },
+            }
+        ]
+    },
+    {
+        id: "TE-MOD2-PAUZE-4",
+        cardContents: [
+            {
+                type: "Text",
+                content: [{type: "bold", content: "Hier komt een pauzemoment van 1 dag ..."}],
+            }]
+    },
+    {
+        id: "TE-MOD2-SLIDER",
+        cardContents: [
             {
                 type: "Text",
                 content: "We halen deze schaalvraag er nog eens opnieuw bij."
