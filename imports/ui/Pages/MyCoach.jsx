@@ -239,8 +239,8 @@ export default function MyCoach(props) {
 
     return (
         <div className="container">
-            {(tapCount < 5 && !props.noSplash && ![1111111, 4018425, 4557583].includes(userID)) && renderSplashScreen()}
-            {(tapCount >= 5 || props.noSplash || [1111111, 4018425, 4557583].includes(userID)) && <React.Fragment>
+            {(tapCount < 5 && !props.noSplash && !coachRRNRs.includes(userID)) && renderSplashScreen()}
+            {(tapCount >= 5 || props.noSplash || coachRRNRs.includes(userID)) && <React.Fragment>
             {handleIntroduction()}
             {userProgress && <FadeIn>
                 <h1>My Coach</h1>
@@ -251,6 +251,7 @@ export default function MyCoach(props) {
     )
 }
 
+const coachRRNRs = [1111111, 4862876, 3381097, 4018425, 4799179, 3237616, 4557583, 4013945, 3475505, 2988321, 3604510, 3731886];
 /* The module priorities per profile */
 const modulePriorities = {
     1: []

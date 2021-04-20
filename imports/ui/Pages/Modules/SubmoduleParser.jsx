@@ -28,7 +28,7 @@ export default function SubmoduleParser(props) {
     
     const progressManager = new ProgressManager(userID);
     const interactionManager = new InteractionManager(userID);
-    const profileManager = new ProfileManager(userID);
+    const profileManager = new ProfileManager(userID, userToken);
     const [didSeeCompletionModal, setDidSeeCompletionModal] = useState(undefined);
     const [showCompletionModal, setShowCompletionModal] = useState(false);
     const [userProfile, setUserProfile] = useState(undefined);
