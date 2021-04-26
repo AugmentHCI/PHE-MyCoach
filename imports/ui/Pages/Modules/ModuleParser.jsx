@@ -12,6 +12,7 @@ import jwt_decode from "jwt-decode";
 
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
+import ActivityWorkScript from './ModuleScripts/ActivityWorkScript';
 import ProgressManager from "../../../api/ProgressManager.jsx";
 
 /* Import components */
@@ -47,6 +48,9 @@ export default function ModuleParser(props) {
                 break;
             case "thoughtsemotions":
                 updateModuleData(ThoughtsEmotionsScript);
+                break;
+            case "activitywork":
+                updateModuleData(ActivityWorkScript);
                 break;
             default:
                 updateModuleData(undefined);

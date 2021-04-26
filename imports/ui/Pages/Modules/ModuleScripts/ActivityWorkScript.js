@@ -3,7 +3,7 @@ const ACTMOD1 = {
     title: "Belasting en belastbaarheid?",
     titleMarkup: ["Belasting en", "belastbaarheid?"],
     part: 1,
-    description: "TODO",
+    description: "Belasting is alles wat je fysiek en psychisch ondergaat in de loop van de dag. Bijvoorbeeld: je werk, huishoudelijke taken, vrije tijd, stress, … Ervaar jij een hoge of lage belasting? Hoe ga je hier mee om?",
     duration: "10 minuten",
     type: "Informatief",
     image: "learning",
@@ -36,7 +36,7 @@ const ACTMOD1 = {
             cardContents: [
                 {
                     type: "Text",
-                    text: ["Welzijn, je lichamelijk en mentaal goed voelen, bereik je wanneer de ", {type: "bold", content: "belasting"},  " (draaglast) die je te verwerken krijgt op het werk en tijdens je vrije tijd (bv. strijken, stofzuigen, …) en je ", {type: "bold", content: "belastbaarheid"},  " (draagkracht), datgene wat je fysiek en mentaal aankan, in balans zijn. Zijn beide gedurende langere tijd uit balans, dan vermindert je welzijn en kunnen er gezondheidsklachten ontstaan."]
+                    content: ["Welzijn, je lichamelijk en mentaal goed voelen, bereik je wanneer de ", {type: "bold", content: "belasting"},  " (draaglast) die je te verwerken krijgt op het werk en tijdens je vrije tijd (bv. strijken, stofzuigen, …) en je ", {type: "bold", content: "belastbaarheid"},  " (draagkracht), datgene wat je fysiek en mentaal aankan, in balans zijn. Zijn beide gedurende langere tijd uit balans, dan vermindert je welzijn en kunnen er gezondheidsklachten ontstaan."]
                 },
                 {
                     type: "Image",
@@ -105,12 +105,100 @@ const ACTMOD1 = {
 }
 
 
+const ACTMOD2 = {
+    id: "ACT_MOD_2",
+    title: "Werk",
+    titleMarkup: ["Belasting -", "Werk"],
+    part: 2,
+    description: "Kan je best rusten als je pijn hebt of net niet? Of ga je naar je werk als je pijn hebt? Vragen die we bespreken tijdens deze module.",
+    duration: "10 minuten",
+    type: "Informatief",
+    image: "learning",
+    imageWidth: "180px",
+    cards: [{
+            id: "ACT-MOD2-CARD1",
+            title: "Reflectie met stelling (Activiteiten)",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Laten we beginnen met een stelling. Wat denk jij van het volgende:",
+                },
+                {
+                    id: "ACT-MOD-2-SLIDER-1",
+                    type: "Slider",
+                    text: "Als je pijn hebt, kan je best rusten.",
+                    from: 1,
+                    to: 10,
+                    valueText: "Jouw selectie",
+                    show: true,
+                    save: true,
+                }
+            ]
+        },
+        {
+            id: "ACT-MOD1-CARD2",
+            title: "Reflectie",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Rusten en activiteiten vermijden is niet aangewezen bij pijn. Beweging en zoveel mogelijk je normale activiteiten verderzetten zijn essentieel voor het herstelproces. Beweging verhoogt de doorbloeding naar je spieren en gewrichten, waardoor ze soepel blijven en sterker worden. Daarnaast zetten je hersenen ook pijndempende stoffen vrij tijdens het bewegen. Werk en activiteiten kunnen je afleiden van je pijn. Door lang te rusten wordt je lichaam alleen maar zwakker waardoor het minder goed om kan met de belasting in je dagelijks leven. Dit wilt niet zeggen dat je bij een acute blessure de belasting niet tijdelijk mag verlagen om het herstelproces te bevorderen."
+                },
+            ]
+        },
+        {
+            id: "ACT-MOD1-CARD3",
+            title: "Belasting",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Wat denk jij van volgende stelling?"
+                },
+                {
+                    id: "ACT-MOD-2-SLIDER-2",
+                    type: "Slider",
+                    text: "Ik blijf beter thuis van het werk als ik pijn heb.",
+                    from: 1,
+                    to: 10,
+                    valueText: "Jouw selectie",
+                    show: true,
+                    save: true,
+                }
+            ]
+        },
+        {
+            id: "ACT-MOD1-CARD4",
+            title: "Reflectie met stelling (werk)",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Naast financiële onafhankelijkheid zijn er nog andere voordelen aan werken! Herken jij enkele voordelen in de woordwolk?"
+                },
+            ]
+        },
+        {
+            id: "ACT-MOD1-CARD5",
+            title: "Reflectie oefening",
+            cardContents: [
+                {
+                    type: "Selection",
+                    options: ["Waardering", "Erkenning"]
+                },
+            ]
+        },
+        {
+            generateFinishSubmoduleButton: true,
+            lastModule: false,
+            text: "Voltooi dit onderdeel",
+            textOnCompleted: "Keer terug"
+        }
+    ]
+}
 
 
 const ActivityWorkScript = {
     id: "TE",
     title: "Activiteit en Werk",
-    submodules: [ACTMOD1]
+    submodules: [ACTMOD1, ACTMOD2]
 }
 
 export default ActivityWorkScript;

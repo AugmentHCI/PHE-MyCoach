@@ -11,6 +11,7 @@ import jwt_decode from "jwt-decode";
 
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
+import ActivityWorkScript from './ModuleScripts/ActivityWorkScript.js';
 import CardsParser from './CardsParser.jsx';
 
 import './SubmoduleParser.scss';
@@ -44,6 +45,11 @@ export default function SubmoduleParser(props) {
             break;
         case 'THOUGHTSEMOTIONS':
             ThoughtsEmotionsScript.submodules.forEach(submoduleScript => {
+                if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
+            });
+            break;
+        case 'ACTIVITYWORK':
+            ActivityWorkScript.submodules.forEach(submoduleScript => {
                 if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
             });
             break;
