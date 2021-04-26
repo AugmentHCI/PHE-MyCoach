@@ -168,8 +168,23 @@ export default class ProfileManager {
             let newQuestionnaires = await this.fetchNewUserData(moment(latestQuestionnaire.date).add(1, "day").format("YYYY-MM-DD"));
             /* If newer one is found, update status and latest questionnaire */
             if (Object.keys(newQuestionnaires).length > 0) {
+                console.log("[ProfileManager - getLatestQuestionnaire] New questionnaire found")
                 status = "NEWQUESTIONNAIRE";
                 latestQuestionnaire = newQuestionnaires.reduce((currentMax, newItem) => dateComesAfter(newItem.date, currentMax.date) ? newItem : currentMax, latestQuestionnaire );
+                Meteor.call('mycoachprofile.addQuestionnaire', {
+                    userID: this.userID, 
+                    date: new Date(latestQuestionnaire.date),
+                    type: latestQuestionnaire.type,
+                    status: latestQuestionnaire.status,
+                    profile: latestQuestionnaire.profile,
+                    CPAQ_AE: latestQuestionnaire.CPAQ_AE,
+                    CPAQ_PW: latestQuestionnaire.CPAQ_PW,
+                    K: latestQuestionnaire.K,
+                    K_eph: latestQuestionnaire.K_eph,
+                    K_ns: latestQuestionnaire.K_ns,
+                    K_rug: latestQuestionnaire.K_rug,
+                    PCS: latestQuestionnaire.PCS
+                });
             }
         }
         return {data: latestQuestionnaire, status: status};
