@@ -35,10 +35,7 @@ function CardsParser(props) {
             if (showonly === "OVERVIEW" && !card.overview) continue;
             if (showonly === "NONOVERVIEW" && (card.overview || card.wrapup)) continue;
             if (Object.keys(card).length === 0) continue; /* Empty card */
-            if (card.showIfAnswered
-                && !card.showIfAnswered.every(question => Object.keys(userQuestions).includes(question))) {
-                break;
-            }
+            if (card.showIfAnswered && !card.showIfAnswered.every(question => Object.keys(userQuestions).includes(question))) break;
             if (card.generateFinishSubmoduleButton) {
                 contentsHTML.push(<Button 
                     key={"finish-submodule-button"+props.module}

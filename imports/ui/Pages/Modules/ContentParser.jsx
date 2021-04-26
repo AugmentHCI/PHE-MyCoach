@@ -10,6 +10,8 @@ import Icon from '../../components/Illustrations/Icon.jsx';
 
 function ContentParser(props) {
 
+    const [display, setDisplay] = useState(false);
+
     function parseTextMarkup(textArray) {
         let contentHTML = [];
         textArray.forEach((element, index) => {
@@ -218,54 +220,75 @@ function ContentParser(props) {
         </div>)
     }
 
+    useEffect(() => {
+        displayContent(props.data.showIf);
+    }, []);
 
-    /* Display-Rules */
-    switch (props.data.showIf?.rule) {
-        case undefined:
-            break;
-        case "Pain": 
-            if (!props.userProfile.K) return <React.Fragment></React.Fragment>;
-            break;
-        case "No pain":
-            if (props.userProfile.K) return <React.Fragment></React.Fragment>;
-            break;
-        case "Profile":
-            if (!props.data.showIf?.profiles.includes(props.userProfile.profile)) return <React.Fragment></React.Fragment>;
-            break;
-        default:
-            console.log(`Card display rule '${props.data.showIf?.rule}' not implemented`);
-            break;
+    async function displayContent(rules) {
+        if (!rules) { setDisplay(true); return; }
+        let ruleResults = true;
+        for (const rule of rules) {
+            /* Display-Rules */
+            switch (rule.rule) {
+                case "Pain": 
+                    console.log("Pain!");
+                    if (!props.userProfile.K) ruleResults = false;
+                    break;
+                case "No pain":
+                    if (props.userProfile.K) ruleResults = false;
+                    break;
+                case "Profile":
+                    if (!rule.profiles.includes(props.userProfile.profile)) ruleResults = false;
+                    break;
+                case "AnswerHigherThan":
+                    const answerHigher = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID);
+                    if (answerHigher <= rule.answer) ruleResults = false;
+                    break;
+                case "AnswerLowerThan":
+                    const answerLower = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID);
+                    if (answerLower >= rule.answer) ruleResults = false;
+                    break;
+                default:
+                    console.log(`Card display rule '${rule.rule}' not implemented`);
+                    break;
+            }
+        }
+        setDisplay(ruleResults);
     }
 
+    function generateContent() {
     /* Generate content according to content type */
-    switch (props.data.type) {
-        case 'Text':
-            return createTextContent(props.data.content, props.data.overview);
-        case 'List':
-            return createListContent(props.data.content, props.data.numbered, props.data.overview);
-        case 'Question':
-            return createQuestionContent(props.data.id, props.data.question, props.data.number, props.data.options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect);
-        case 'Video':
-            return createVideoContent(props.data.link, props.userProfile.language);
-        case 'Selection':
-            return createSelectionContent(props.data.id, props.data.title, props.data.question, props.data.options, props.data.width);
-        case 'Sort-Exercise':
-            return createSortingContent(props.data.content, props.data.columns, props.data.options);
-        case 'Image':
-            return createImageContent(props.data.link, props.data.width);
-        case 'Slider':
-            return createSliderContent(props.data.id, props.data.text, props.data.from, props.data.to, props.data.valueText, props.data.show, props.data.save);
-        case 'Text-Input':
-            return createTextInputContent(props.data.text, props.data.placeholder);
-        case 'Break':
-            return <hr/>;
-        default:
-            return (<div className="content-not-implemented">
-                <div className="content-not-implemented-title">NOT IMPLEMENTED</div>
-                Hier komt een: {props.data.type}
-                {props.data.text && <div><b>Noot: </b>{props.data.text}</div>}
-            </div>)
+        switch (props.data.type) {
+            case 'Text':
+                return createTextContent(props.data.content, props.data.overview);
+            case 'List':
+                return createListContent(props.data.content, props.data.numbered, props.data.overview);
+            case 'Question':
+                return createQuestionContent(props.data.id, props.data.question, props.data.number, props.data.options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect);
+            case 'Video':
+                return createVideoContent(props.data.link, props.userProfile.language);
+            case 'Selection':
+                return createSelectionContent(props.data.id, props.data.title, props.data.question, props.data.options, props.data.width);
+            case 'Sort-Exercise':
+                return createSortingContent(props.data.content, props.data.columns, props.data.options);
+            case 'Image':
+                return createImageContent(props.data.link, props.data.width);
+            case 'Slider':
+                return createSliderContent(props.data.id, props.data.text, props.data.from, props.data.to, props.data.valueText, props.data.show, props.data.save);
+            case 'Text-Input':
+                return createTextInputContent(props.data.text, props.data.placeholder);
+            case 'Break':
+                return <hr/>;
+            default:
+                return (<div className="content-not-implemented">
+                    <div className="content-not-implemented-title">NOT IMPLEMENTED</div>
+                    Hier komt een: {props.data.type}
+                    {props.data.text && <div><b>Noot: </b>{props.data.text}</div>}
+                </div>)
+        }
     }
+
+    return <div style={{display: display ? 'initial':'none'}}>{generateContent()}</div>;
 }
 
 export default ContentParser;

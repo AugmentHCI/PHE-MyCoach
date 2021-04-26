@@ -15,12 +15,12 @@ const TEMOD1 = {
                 {
                     type: "Text",
                     content: "Moeilijke gedachten en gevoelens kunnen een grote impact hebben op ons welbevinden en op de manier waarop we ons gedragen. Zo kunnen ze er bijvoorbeeld voor zorgen dat we veel piekeren of bepaald gedrag niet (meer) gaan stellen. In deze module reiken we je een aantal handvaten aan die je kunnen helpen om minder te vechten tegen deze lastige gevoelens en gedachten. Hiernaast bekijken we met jou hoe je minder ‘in je hoofd’ kan zitten en meer in het hier en nu. Ook helpen we je onderzoeken hoe je het leven kan leiden dat je wil leiden.",
-                    showIf: {rule: "Profile", profiles: [1]}
+                    showIf: [{rule: "Profile", profiles: [1]}]
                 },
                 {
                     type: "Text",
                     content: "Moeilijke gedachten en gevoelens kunnen een grote impact hebben op ons welbevinden en op de manier waarop we ons gedragen. Dat is ook zo met lastige gedachten en gevoelens rond pijn. Zo kunnen ze er bijvoorbeeld voor zorgen dat we veel piekeren en bepaald gedrag niet (meer) gaan stellen. In deze module reiken we je een aantal handvaten aan die je kunnen helpen om minder te vechten tegen deze lastige gevoelens en gedachten. Hiernaast bekijken we met jou hoe je minder ‘in je hoofd’ kan zitten maar en meer in het hier en nu. Ook helpen we je onderzoeken hoe je, ondanks de pijn, het leven kan leiden dat je wil leiden.",
-                    showIf: {rule: "Profile", profiles: [2, 3, 4, 5, 6]}
+                    showIf: [{rule: "Profile", profiles: [2, 3, 4, 5, 6]}]
                 },
                 {
                     type: "Text",
@@ -52,7 +52,8 @@ const TEMOD1 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: ["Jij scoorde een ", {type: "answer", questionID:"TE-MOD-1-SLIDER"}, " op de schaalvraag. Na het doorlopen van deze module zullen we je opnieuw vragen om je score aan te duiden. Zo kan je zien of je score verbeterd, verminderd of hetzelfde gebleven is. Je kan dan ook in kaart proberen brengen welke factoren hiertoe bijgedragen hebben."]
+                    content: ["Jij scoorde een ", {type: "answer", questionID:"TE-MOD-1-SLIDER"}, " op de schaalvraag. Na het doorlopen van deze module zullen we je opnieuw vragen om je score aan te duiden. Zo kan je zien of je score verbeterd, verminderd of hetzelfde gebleven is. Je kan dan ook in kaart proberen brengen welke factoren hiertoe bijgedragen hebben."],
+                    showIf: [{rule: "AnswerHigherThan", questionID: "TE-MOD-1-SLIDER", answer: 6}],
                 }]
         },
         {
@@ -332,22 +333,22 @@ const TEMOD2 = {
             {
                 type: "Text",
                 content: "We moedigen je aan om de komende twee dagen eens bewust stil te staan bij jouw gedachten. Welke gedachten komen vaak terug en spelen je best wel parten?",
-                showIf: {"rule": "Profile", "profiles": [1]}
+                showIf: [{"rule": "Profile", "profiles": [1]}]
             },
             {
                 type: "Text",
                 content: "Je kan deze hier invullen en bijhouden.",
-                showIf: {"rule": "Profile", "profiles": [1]}
+                showIf: [{"rule": "Profile", "profiles": [1]}]
             },
             {
                 type: "Text",
                 content: "We moedigen je aan om de komende twee dagen eens bewust stil te staan bij jouw gedachten. Welke gedachten komen vaak terug en spelen je best wel parten? Welke zijn pijngerelateerd?",
-                showIf: {"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}
+                showIf: [{"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}]
             },
             {
                 type: "Text",
                 content: "Je kan deze hier invullen en bijhouden. De gedachten die je invult in je pijnlogboek verschijnen er automatisch bij.",
-                showIf: {"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}
+                showIf: [{"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}]
             },
             {
                 type: "Multiple-Text-Input",
@@ -383,12 +384,12 @@ const TEMOD2 = {
             {
                 type: "Text",
                 content: "Meestal zijn de wederkerende gedachten die we hebben niet dadelijk helpend. Daarom gaan we in deze module verder in op hoe je anders met deze gedachten kunt leren omgaan zodat zij zo min mogelijk impact hebben op jouw leven.",
-                showIf: {"rule": "Profile", "profiles": [1]}
+                showIf: [{"rule": "Profile", "profiles": [1]}]
             },
             {
                 type: "Text",
                 content: "Meestal zijn de wederkerende gedachten die we hebben niet dadelijk helpend. Door bv. te denken aan je pijn of welke gevolgen dit zal hebben voel je je vaak niet beter of biedt dat niet meteen een oplossing. Daarom gaan we in deze module verder in op hoe je anders met deze gedachten kunt leren omgaan zodat zij zo min mogelijk impact hebben op jouw leven.",
-                showIf: {"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}
+                showIf: [{"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}]
             },
             {
                 type: "Text",
@@ -840,7 +841,7 @@ const TEMOD5 = {
         {
             id: "TE-MOD5-CARD1",
             title: "Inleiding",
-            showIf: {rule: "Profile", profiles: [1]},
+            showIf: [{rule: "Profile", profiles: [1]}],
             cardContents: [
                 {
                     type: "Text",
