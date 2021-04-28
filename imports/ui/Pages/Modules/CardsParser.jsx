@@ -19,7 +19,7 @@ function CardsParser(props) {
      */
     function createCards(cards) {
         let contentsHTML = [];
-        if (props.moduleStatus === "COMPLETED") {
+        if (props.moduleStatus === "COMPLETED_DEMO") {
             generateCards(cards, contentsHTML, "OVERVIEW");
             contentsHTML.push(<hr key={"CARD-DIVIDER"} className="module-hr-line"/>);
             generateCards(cards, contentsHTML, "NONOVERVIEW");

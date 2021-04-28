@@ -44,7 +44,8 @@ const TEMOD1 = {
                     valueText: "Jouw selectie",
                     show: true,
                     save: true,
-                }]
+                }
+            ]
         },
         {
             id: "TE-MOD1-CARD3",
@@ -279,7 +280,6 @@ const TEMOD1 = {
             ]
         },
         {
-            id: "TE-MOD1-CARD11",
             cardContents: [
                 {
                     type: "Text",
@@ -296,13 +296,11 @@ const TEMOD1 = {
             ]
         },
         {
-            "id": "TE-MOD1-OVERVIEW",
             "title": "Overzicht",
             "overview": true,
             cardContents: [
                 {
                     type: "Text",
-                    overview: true,
                     content: "Vaak hebben we de neiging om allerlei pogingen te ondernemen om van onze moeilijke gedachten en gevoelens af te raken. Deze hebben echter geen of slechts een tijdelijk effect. We kunnen onze gedachten en gevoelens niet zomaar aan- en uitzetten… Wél kunnen we leren om zo’n manier mee om te gaan dat we er minder last van ondervinden of zodat ze ons gedrag minder bepalen! Dit gaan we bekijken in het volgende onderdeel: 'Aan de slag met gedachten en emoties'"
                 }
             ]
