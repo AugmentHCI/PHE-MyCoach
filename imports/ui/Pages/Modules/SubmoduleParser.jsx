@@ -141,7 +141,7 @@ export default function SubmoduleParser(props) {
                                 hideButton>
                     </ModuleCard>
                     <hr className="module-hr-line"/>
-                    <CardsParser cards={data.cards} module={module} moduleStatus={userProgress[module][submodule]} userID={userID} userProfile={userProfile} finishCallback={finishSubmodule}></CardsParser>
+                    <CardsParser cards={data.cards} module={module} submodule={data.id} moduleStatus={userProgress[module][submodule]} userID={userID} userProfile={userProfile} finishCallback={finishSubmodule}></CardsParser>
                 </FadeIn>}
             </div>
         </React.Fragment>

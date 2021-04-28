@@ -31,6 +31,7 @@ function CardsParser(props) {
     }
 
     function generateCards(cards, contentsHTML, showonly=undefined) {
+        let cardIndex = 1;
         for (const card of cards) {
             if (showonly === "OVERVIEW" && !card.overview) continue;
             if (showonly === "NONOVERVIEW" && (card.overview || card.wrapup)) continue;
@@ -48,9 +49,10 @@ function CardsParser(props) {
                 </Button>);
                 continue;
             }
+            const cardID = card.overview ? props.submodule + "_CARD_OVERVIEW" : props.submodule + "_CARD_" + cardIndex++;
             contentsHTML.push(
-                <Card key={card.id} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
-                    {createCardContent(card.id, card.cardContents)}
+                <Card key={cardID} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
+                    {createCardContent(cardID, card.cardContents, card.overview)}
                 </Card>);
         }
         return contentsHTML;
@@ -75,9 +77,10 @@ function CardsParser(props) {
      * @param {String} key 
      * @param {Array} contents 
      */
-    function createCardContent(key, contents) {
+    function createCardContent(key, contents, isOverview) {
         let contentArray = [];
         contents.forEach((content, index) => {
+            if (isOverview) content["overview"] = true;
             contentArray.push(
                 <ContentParser key={"content-" + key + "-" + index} 
                         childrenKey={"content-" + key + "-" + index}
