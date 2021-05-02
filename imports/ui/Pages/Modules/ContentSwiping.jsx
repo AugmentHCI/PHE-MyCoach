@@ -16,25 +16,27 @@ export default function createSwipeContent(props) {
   
     const childRefs = useMemo(() => Array(props.options.length).fill(0).map(() => React.createRef()), []);
   
-    const swiped = (direction, nameToDelete, id) => {
-      alreadyRemoved.add(nameToDelete);
+    function swiped(direction, id) {
+      console.log("THIS")
+      alreadyRemoved.add(id);
       if (direction === 'left') updateUserState({...userState, [id]: "disagree"});
       else updateUserState({...userState, [id]: "agree"});
     }
   
-    const outOfFrame = (text) => {
-      console.log(text + ' left the screen!')
-      cardsState = cardsState.filter(character => character.text !== text);
+    const outOfFrame = (id) => {
+      console.log(id + ' left the screen!')
+      cardsState = cardsState.filter(character => character.id !== id);
       setCards(cardsState);
     }
   
-    const swipe = (dir) => {
-      const cardsLeft = cards.filter(card => !alreadyRemoved.has(card.text));
+    const swipe = (direction) => {
+      console.log("OTHER")
+      const cardsLeft = cards.filter(card => !alreadyRemoved.has(card.id));
       if (cardsLeft.length) {
-        const toBeRemoved = cardsLeft[cardsLeft.length - 1].text // Find the card object to be removed
-        const index = props.options.map(card => card.text).indexOf(toBeRemoved); // Find the index of which to make the reference to
+        const toBeRemoved = cardsLeft[cardsLeft.length - 1].id // Find the card object to be removed
+        const index = props.options.map(card => card.id).indexOf(toBeRemoved); // Find the index of which to make the reference to
         alreadyRemoved.add(toBeRemoved); // Make sure the next card gets removed next time if this card do not have time to exit the screen
-        childRefs[index].current.swipe(dir); // Swipe the card!
+        childRefs[index].current.swipe(direction); // Swipe the card!
       }
     }
 
@@ -47,9 +49,8 @@ export default function createSwipeContent(props) {
       <div>
         {alreadyRemoved.size < props.options.length && <React.Fragment>
         <div className='cardContainer'>
-          <div className="text-red-500">Hello</div>
           {props.options.map((card, index) =>
-            <TinderCard className='swipe'ref={childRefs[index]} key={card.text} onSwipe={(dir) => swiped(dir, card.text, card.id)} onCardLeftScreen={() => outOfFrame(card.text)}>
+            <TinderCard className='swipe' ref={childRefs[index]} key={card.text} onSwipe={(dir) => swiped(dir, card.id)} onCardLeftScreen={() => outOfFrame(card.id)}>
               <div style={{ backgroundImage: 'url(' + card.image + ')' }} className='swipecard'>
                 <h3>{card.text}</h3>
               </div>
@@ -57,7 +58,7 @@ export default function createSwipeContent(props) {
           )}
         </div>
         <div className='swipe-buttons'>
-          <Button style={{marginTop: "10px", textAlign: "center", justifyContent:"center"}} width={"48%"} color={"blue"} onClick={() => swipe('left')}>{props.buttons.disagree}</Button>
+          <Button style={{marginTop: "10px"}} width={"48%"} color={"blue"} onClick={() => swipe('left')}>{props.buttons.disagree}</Button>
           <Button style={{marginTop: "10px", float: "right"}} width={"48%"} color={"blue"} onClick={() => swipe('right')}>{props.buttons.agree}</Button>
         </div>
         </React.Fragment>}

@@ -152,6 +152,48 @@
     width: 100%;
 }
 
+.content-textinput-saved {
+    font-family: var(--main-font);
+    background-color: var(--idewe-white);
+    color: var(--idewe-gray-dark);
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    padding: 10px;
+    padding-left: 20px;
+    margin-top: 5px;
+    border-radius: 8px;
+}
+
+/* Content - MULTITEXTINPUT */
+.content-textinput-saved-container {
+    background-color: var(--idewe-white);
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.content-textinput-saved-text {
+    width: 80%;
+    padding: 10px;
+    font-family: var(--main-font);
+    color: var(--idewe-gray-dark);
+    font-size: 16px;
+    font-weight: 500;
+    float: left;
+}
+
+.content-textinput-saved-icon {
+    width: 10%;
+    float: right;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 10px;
+    height: 100%;
+}
+
 /* Other */
 .content-not-implemented {
     background-color: var(--idewe-background-solid);

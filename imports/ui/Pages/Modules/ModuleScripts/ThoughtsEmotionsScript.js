@@ -222,14 +222,6 @@ const TEMOD1 = {
                     content: "Vaak hebben we de neiging om allerlei pogingen te ondernemen om met onze moeilijke gedachten en gevoelens (bijvoorbeeld rond pijn) om te gaan zoals bijvoorbeeld afleiding zoeken door tv te kijken, bepaalde activiteiten vermijden, bepaalde bewegingen niet meer doen, meer eten, drinken of roken, meer slapen, veel op onze smartphone bezig zijn, ..."
                 },
                 {
-                    type: "Text",
-                    content: "In je pijnlogboek heb je volgende reacties reeds aangegeven de afgelopen periode:"
-                },
-                {
-                    type: "Content-From-Painlogbook",
-                    text: "Ik vraag mij wel af: het pijnlogboek is het laatste wat vrijkomt in de vorige module, en dit is het eerste onderdeel die ze te zien krijgen (dus eventueel zelfs al de dag erna). Wat als ze nog niks ingevuld hebben?"
-                }, 
-                {
                     type: "Image",
                     link: "/images/thoughtsemotions/lots-of-thoughts.jpg"
                 },
@@ -237,11 +229,7 @@ const TEMOD1 = {
                     type: "Break"
                 },
                 {
-                    type: "Multiple-Text-Input",
-                    text: "Toelaten om ze meerdere inputs te laten typen, en deze ook eventueel te verwijderen uit de lijst, en om op klaar te drukken om de volgende vraag te laten verschijnen."
-                },
-                {
-                    type: "Text-Input",
+                    type: "Multitext-Input",
                     text: "Wat heb jij verder al allemaal geprobeerd om je moeilijke gedachten en emoties te vermijden of kwijt te geraken?",
                     placeholder: "Schrijf ze hier neer:"
                 },

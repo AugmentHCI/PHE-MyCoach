@@ -216,7 +216,57 @@ function ContentParser(props) {
                 </Button>}
             </div>}
             {saved && <div className="content-textinput-row">
-                {value}
+                <div className="content-textinput-saved">{value}</div>
+            </div>}
+        </div>)
+    }
+
+
+    /**
+     * Returns a multitext-input element
+     * @param {String} text The text that explains the context of what the user needs to type
+     * @param {String} placeholder (Optional) The textual placeholder for the input-field
+     */
+     function createMultiTextInputContent(text, placeholder) {
+        const [currentValue, updateValue] = useState("");
+        const [values, updateValues] = useState([]);
+        const [saved, updateSave] = useState(false);
+        const buttonStyle = {height:"50px", marginTop:"10px", marginLeft:"0", paddingTop:"15px", paddingLeft:"10px"};
+
+        function addItem() {
+            updateValues([...values, currentValue]);
+            updateValue("");
+        }
+
+        function removeItem(index) {
+            const newArray = values.filter((value, i) => {if (i !== index) return value});
+            updateValues(newArray);
+        }
+
+        function save() {
+            updateSave(true);
+        }
+
+        return (<div className="content-backdrop">
+            {text}
+            {values.map((input, index) => <div className="content-textinput-row" key={index + input}>
+                <div className="content-textinput-saved-container">
+                    <div className="content-textinput-saved-text">{input}</div>
+                    {!saved && <div className="content-textinput-saved-icon" onClick={() => removeItem(index)}><Icon color="gray-dark" image="delete"/></div>}
+                </div>
+            </div>)}
+            {values.length > 0 && !saved && <hr/>}
+            {!saved && <div className="content-textinput-row">
+                <Input 
+                    type="text" key={props.childrenKey} value={currentValue} onChange={updateValue}
+                    style={{width: "100%", fontSize: "16px", fontWeight: 500, flexGrow: 1}} 
+                    placeholder={placeholder ? placeholder : "Typ hier"}/>
+                {currentValue.length > 0 && <Button color="blue" width="50px" style={buttonStyle} onClick={() => addItem()}>
+                    <Icon image="add" width="25px" color="white"/>
+                </Button>}
+            </div>}
+            {values.length > 0 && !saved && <div className="content-textinput-row">
+                <Button style={{float:"right"}} color={"blue"} onClick={() => save()}>Klaar</Button>
             </div>}
         </div>)
     }
@@ -278,6 +328,8 @@ function ContentParser(props) {
                 return createSliderContent(props.data.id, props.data.text, props.data.from, props.data.to, props.data.valueText, props.data.show, props.data.save);
             case 'Text-Input':
                 return createTextInputContent(props.data.text, props.data.placeholder);
+            case 'Multitext-Input':
+                return createMultiTextInputContent(props.data.text, props.data.placeholder);
             case 'Swipe':
                 return createSwipeContent(props.data);
             case 'Break':
