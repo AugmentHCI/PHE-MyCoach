@@ -35,10 +35,6 @@ const ACTMOD1 = {
                 {
                     type: "Text",
                     content: ["Welzijn, je lichamelijk en mentaal goed voelen, bereik je wanneer de ", {type: "bold", content: "belasting"},  " (draaglast) die je te verwerken krijgt op het werk en tijdens je vrije tijd (bv. strijken, stofzuigen, …) en je ", {type: "bold", content: "belastbaarheid"},  " (draagkracht), datgene wat je fysiek en mentaal aankan, in balans zijn. Zijn beide gedurende langere tijd uit balans, dan vermindert je welzijn en kunnen er gezondheidsklachten ontstaan."]
-                },
-                {
-                    type: "Image",
-                    link: "/images/activitywork/balance.jpg"
                 }
             ]
         },
@@ -527,7 +523,34 @@ const ACTMOD5 = {
             title: "Wat doe jij?",
             cardContents: [
                 {
-                    type: "TODO - Tindercard swipe",
+                    type: "Swipe",
+                    buttons: {disagree: "Nee", agree: "Ja"},
+                    options: [
+                        {
+                            text: "Ik heb een vast slaapritueel",
+                            image: "/images/activitywork/slaapritueel.jpg"
+                        },
+                        {
+                            text: "Ik bouw regelmatig een rustmoment in",
+                            image: "/images/activitywork/rustmomenten.jpg"
+                        },
+                        {
+                            text: "Ik eet gezond",
+                            image: "/images/activitywork/food.jpg"
+                        },
+                        {
+                            text: "Ik beperk mijn alcoholinname",
+                            image: "/images/activitywork/drinken.jpg"
+                        },
+                        {
+                            text: "Ik rook",
+                            image: "/images/activitywork/smoking.jpg"
+                        },
+                        {
+                            text: "Ik beweeg gemiddeld 30 minuten per dag aan een matige intensiteit (bv. wandelen, fietsen)",
+                            image: "/images/activitywork/bewegen.jpg"
+                        }
+                    ]
                 },
             ]
         },

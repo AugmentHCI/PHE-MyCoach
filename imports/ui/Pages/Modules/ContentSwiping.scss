@@ -1,0 +1,53 @@
+.swipe {
+    position: absolute;
+}
+  
+.cardContainer {
+    width: 100%;
+    height: 300px;
+    align-items: center;
+    margin: 0 auto;
+}
+  
+.swipecard {
+    position: relative;
+    background-color: #fff;
+    width: 80vw;
+    height: 300px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.10);
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+}
+  
+.cardContent {
+    width: 100%;
+    height: 100%;
+}
+  
+.swipe:last-of-type {
+    width: 20vw;
+}
+  
+.swipecard h3 {
+    position: absolute;
+    font-family: var(--main-font);
+    bottom: 0;
+    margin: 10px;
+    color: #fff;
+}
+
+.finishedSwiping {
+    height: 360px;
+    font: var(--main-font);
+    text-align: center;
+    padding-top: 120px;
+    color: var(--idewe-blue);
+}
+
+.finishedSwiping h4 {
+    font-family: var(--main-font);
+    font-size: 24px;
+    color: var(--idewe-blue);
+    font-weight: 500;
+}

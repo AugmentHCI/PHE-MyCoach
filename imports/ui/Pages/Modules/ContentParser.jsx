@@ -2,6 +2,7 @@ import { data } from 'browserslist';
 import React, { useState, useEffect } from 'react';
 import './ContentParser.scss';
 import createSortingContent from './ContentSorting.jsx';
+import createSwipeContent from './ContentSwiping';
 
 import Button from '../../components/Button.jsx';
 import Slider from '../../components/Slider.jsx';
@@ -277,6 +278,8 @@ function ContentParser(props) {
                 return createSliderContent(props.data.id, props.data.text, props.data.from, props.data.to, props.data.valueText, props.data.show, props.data.save);
             case 'Text-Input':
                 return createTextInputContent(props.data.text, props.data.placeholder);
+            case 'Swipe':
+                return createSwipeContent(props.data);
             case 'Break':
                 return <hr/>;
             default:

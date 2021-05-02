@@ -38,6 +38,7 @@
         "react-mounter": "^1.2.0",
         "react-scripts": "^4.0.0",
         "react-semantic-ui-range": "^0.7.1",
+        "react-tinder-card": "^1.4.0",
         "tslib": "^1.14.1",
         "webpack": "^5.0.0-rc.6",
         "yarn": "^1.22.10"
