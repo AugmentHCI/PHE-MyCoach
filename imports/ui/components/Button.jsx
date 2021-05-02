@@ -7,7 +7,7 @@ export default function Button(props) {
 
     function handleOnClick() {
         press(false); 
-        if (props.onClick && !props.inactive) { props.onClick() };
+        if (props.onClick && !props.disabled) { props.onClick() };
     }
 
     /* Generate Button Class */
@@ -17,12 +17,12 @@ export default function Button(props) {
 
     /* Generate Button Style */
     let style = props.style ? props.style : {};
-    if (!props.isSelected) {
+    if (!props.isSelected && !props.disabled) {
         if (props.outline) {
             style["backgroundColor"] = "var(--idewe-white)";
             style["color"] = props.color ? `var(--idewe-${props.color})` : "var(--idewe-blue)";
         }
-        else {
+        else if (!props.disabled) {
             style["backgroundColor"] = props.color ? `var(--idewe-${props.color})` : "var(--idewe-white)";
             style["color"] = props.contentColor ? `var(--idewe-${props.color})` : (props.color ? "var(--idewe-white)" : "var(--idewe-blue)");
         }

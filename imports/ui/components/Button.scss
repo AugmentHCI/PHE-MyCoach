@@ -12,6 +12,7 @@
     &-inactive {
         @extend .button;
         background-color: var(--idewe-gray-light);
+        color: var(--idewe-white);
     }
 
     .button-text {
