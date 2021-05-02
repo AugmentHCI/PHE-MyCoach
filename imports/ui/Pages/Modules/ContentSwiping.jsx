@@ -10,15 +10,16 @@ export default function createSwipeContent(props) {
 
     const [cards, setCards] = useState(props.options);
     const [saved, setSaved] = useState(false);
+    const [userState, updateUserState] = useState({});
 
     cardsState = props.options;
   
     const childRefs = useMemo(() => Array(props.options.length).fill(0).map(() => React.createRef()), []);
-
-    console.log(childRefs);
   
-    const swiped = (nameToDelete) => {
+    const swiped = (direction, nameToDelete, id) => {
       alreadyRemoved.add(nameToDelete);
+      if (direction === 'left') updateUserState({...userState, [id]: "disagree"});
+      else updateUserState({...userState, [id]: "agree"});
     }
   
     const outOfFrame = (text) => {
@@ -39,14 +40,16 @@ export default function createSwipeContent(props) {
 
     function saveResults() {
       setSaved(true);
+      console.log(userState);
     }
     
     return (
       <div>
         {alreadyRemoved.size < props.options.length && <React.Fragment>
         <div className='cardContainer'>
+          <div className="text-red-500">Hello</div>
           {props.options.map((card, index) =>
-            <TinderCard className='swipe'ref={childRefs[index]} key={card.text} onSwipe={() => swiped(card.text)} onCardLeftScreen={() => outOfFrame(card.text)}>
+            <TinderCard className='swipe'ref={childRefs[index]} key={card.text} onSwipe={(dir) => swiped(dir, card.text, card.id)} onCardLeftScreen={() => outOfFrame(card.text)}>
               <div style={{ backgroundImage: 'url(' + card.image + ')' }} className='swipecard'>
                 <h3>{card.text}</h3>
               </div>

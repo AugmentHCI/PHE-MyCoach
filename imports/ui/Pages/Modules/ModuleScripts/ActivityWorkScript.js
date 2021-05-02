@@ -527,26 +527,32 @@ const ACTMOD5 = {
                     buttons: {disagree: "Nee", agree: "Ja"},
                     options: [
                         {
+                            id: "ACT_MOD_5_SWIPE_SLEEP",
                             text: "Ik heb een vast slaapritueel",
                             image: "/images/activitywork/slaapritueel.jpg"
                         },
                         {
+                            id: "ACT_MOD_5_SWIPE_REST",
                             text: "Ik bouw regelmatig een rustmoment in",
                             image: "/images/activitywork/rustmomenten.jpg"
                         },
                         {
+                            id: "ACT_MOD_5_SWIPE_EAT",
                             text: "Ik eet gezond",
                             image: "/images/activitywork/food.jpg"
                         },
                         {
+                            id: "ACT_MOD_5_SWIPE_DRINK",
                             text: "Ik beperk mijn alcoholinname",
                             image: "/images/activitywork/drinken.jpg"
                         },
                         {
+                            id: "ACT_MOD_5_SWIPE_SMOKE",
                             text: "Ik rook",
                             image: "/images/activitywork/smoking.jpg"
                         },
                         {
+                            id: "ACT_MOD_5_SWIPE_MOVE",
                             text: "Ik beweeg gemiddeld 30 minuten per dag aan een matige intensiteit (bv. wandelen, fietsen)",
                             image: "/images/activitywork/bewegen.jpg"
                         }
