@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText } from '../../components/Chatbubble.jsx';
 import NavigationBar from '../../components/NavigationBar';
 
-import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules} from "./PainLogbookData.js";
+import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies} from "./PainLogbookData.js";
 
 import RuleEngine from "../../../api/RuleEngine.jsx";
 
@@ -21,6 +21,19 @@ export default function PainLogbook() {
     const [visualRecommendation, toggleVisualRecommendation] = useState(FlowRouter.getParam('settings') === "visual")
 
     const [userInput, updateUserInput] = useState([]);
+
+    function computeBars() {
+        let userCodes  = {};
+        userInput.forEach(input => {
+            if (input.level1 === "EMOTION" && Object.keys(codes).includes(input.level2)) {
+                userCodes[[input.level2]] = userCodes[[input.level2]] ? userCodes[[input.level2]]+2 : 2 ;
+            }
+            if (input.codes) input.codes.forEach(code => {
+                userCodes[[code]] = Object.keys(userCodes).includes(code) ? userCodes[[code]]+1 : 1 ;
+            });
+        })
+        return userCodes;
+    }
 
     /* Conversation Logic */
 
@@ -48,6 +61,8 @@ export default function PainLogbook() {
     }
 
     function initializeMessages() {
+        const codeFreqs = codeFrequencies();
+        console.log(codeFreqs)
         updateMessageQueue([conversation["MESSAGE-INTRO"]]);
         let temporaryMessageQueue = [];
         conversation["MESSAGE-INTRO"].response.forEach(message => {
@@ -98,6 +113,7 @@ export default function PainLogbook() {
         messageQueue.forEach((message, index) => {
             /* Recommendation message (requires more complex handling) */
             if (message.content === "recommendation") { 
+                console.log(computeBars());
                 if (visualRecommendation) {
                     messages.push(<Chatbubble key={"message-recommendation-visual"} typeLength={2000} onClick={()=> window.open(figmaLink, "_blank")} own={false}>Aanbeveling gegenereerd: klik hier.</Chatbubble>)
                 }
@@ -105,7 +121,7 @@ export default function PainLogbook() {
                     /* Update state, but use local variable as state update happens asynchronously */
                     let recommendations = matchedRecommendations.length === 0 ? ruleEngine.matchRules(userInput) : matchedRecommendations ;
                     if (matchedRecommendations.length === 0) updateMatchedRecommendations(recommendations);
-                    const recommendationText = " Wil je hiervoor de aanbevolen tips bekijken in de module '" + moduleTranslation[recommendations[recommendationIndex].module]+ "'?";
+                    const recommendationText = " Wil je hiervoor wat tips bekijken in de module '" + moduleTranslation[recommendations[recommendationIndex].module]+ "'?";
                     messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-1"} typeLength={2000} own={false}>{recommendations[recommendationIndex].explanation}</Chatbubble>)
                     messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-2"} delayedDisplay delayBy={2000} typeLength={2000} own={false}>{recommendations[recommendationIndex].recommendation + recommendationText}</Chatbubble>)
                     recommendationIndex += 1;
@@ -121,12 +137,14 @@ export default function PainLogbook() {
             switch (message.content) {
                 case "input":
                     messages.push(<ChatbubbleText
+                        key={"chatbubble-text-" + index + "-" + message}
                         message={message}
                         onSubmit={addResponseToMessageQueue}
                         />)
                     break;
                 case "emotions":
                     messages.push(<ChatbubbleEmotions
+                        key={"chatbubble-emotions-" + index + "-" + message}
                         message={message}
                         options={emotions}
                         onSubmit={hangleTERinput}
@@ -135,6 +153,7 @@ export default function PainLogbook() {
                 case "thoughts":
                 case "reactions":
                     messages.push(<ChatbubbleThoughtsReactions 
+                        key={"chatbubble-" + message.content+ "-" + index + "-" + message}
                         message={message}
                         options={message.content === "thoughts" ? thoughts : reactions} 
                         fillerWords={fillerWords}
