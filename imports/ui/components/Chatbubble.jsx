@@ -232,7 +232,7 @@ export function ChatbubbleEmotions(props) {
         let emotionButtonsHTML = [], emotionsRowHTML = [], counter = 0;
         for (const [emotion, information] of Object.entries(props.options)) {
             const isSelected = Object.keys(selectedEmotions).includes(emotion);
-            emotionsRowHTML.push(<Button size="small" outline isSelected={isSelected} width="fit" color="blue" style={{float: "right", marginRight: "8px"}} onClick={() => toggleEmotion(emotion, information)}>{emotion}</Button>)
+            emotionsRowHTML.push(<Button key={emotion} size="small" outline isSelected={isSelected} width="fit" color="blue" style={{float: "right", marginRight: "8px"}} onClick={() => toggleEmotion(emotion, information)}>{emotion}</Button>)
             if (counter >= 2) {
                 emotionButtonsHTML.push(<div style={{width: "100%"}}>{emotionsRowHTML}</div>);
                 emotionsRowHTML = [];

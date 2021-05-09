@@ -95,7 +95,7 @@ function ContentParser(props) {
         </div>);
     };
 
-        /**
+    /**
      * Generates a Selection-content HTML 
      * @param {String} title    The title of the selection (empty string for no title, null for default 'Question')
      * @param {String} question The question that is posed to the user

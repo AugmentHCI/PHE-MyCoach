@@ -28,9 +28,9 @@ export default function Button(props) {
         }
     }
     if (props.width === "fit" ) { style["width"] = "fit-content"; style["marginRight"] = "5px"; } 
-    if (props.center) { style["display"] = "flex"; style["justifyContent"] = "center"; } 
     else if (props.width) style["width"] = props.width;
-    if (props.outline) {style["border"] = props.color ? `2px solid var(--idewe-${props.color})` : "2px solid var(--idewe-white)";}
+    if (props.center) { style["display"] = "flex"; style["justifyContent"] = "center"; } 
+    if (props.outline) { style["border"] = props.color ? `2px solid var(--idewe-${props.color})` : "2px solid var(--idewe-white)"; }
 
     return (
         <button className={buttonClass} 
