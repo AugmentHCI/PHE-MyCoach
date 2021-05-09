@@ -1,6 +1,6 @@
 const TEMOD1 = {
     id: "TE_MOD_1",
-    title: "Gedachten en emoties: een inleiding",
+    title: "Gedachten en emoties",
     titleMarkup: ["Gedachten en emoties:", "een inleiding"],
     part: 1,
     description: "TODO",
@@ -93,19 +93,29 @@ const TEMOD1 = {
                     type: "Selection",
                     question: "Zou je soms je gedachten eens graag even op stop willen zetten?",
                     options: ["Ja", "Nee"]
-                }, 
+                }
+            ]
+        },
+        {
+            id: "TE-MOD1-CARD5-1",
+            title: "Gedachte-oefening",
+            showIfAnswered: ["TE-MOD-1-Q2", "TE-MOD-1-Q3"], 
+            cardContents: [
                 {
                     type: "Text",
                     content: "En laten we nu even de volgende gedachte-oefening proberen:"
                 },
                 {
-                    type: "Delayed Display",
-                    text: "Tekst één voor één laten verschijnen"
-                },
-                {
-                    type: "List",
+                    id: "TE-MOD-1-THOUGHT",
+                    type: "DelayedDisplay",
                     content: ["Denk eens aan een paard...", "Een rood paard...", "Met zes poten...", "Al vliegend door de lucht."]
-                },
+                }
+            ]
+        },
+        {
+            id: "TE-MOD1-CARD5-2",
+            showIfAnswered: ["TE-MOD-1-THOUGHT"], 
+            cardContents: [
                 {
                     type: "Text",
                     content: "Zelfs de meest absurde situaties kunnen we zomaar voor de geest halen."

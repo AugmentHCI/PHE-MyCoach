@@ -160,7 +160,7 @@ export const reactions = {
         {level4: "REACTION-POS-3", level3: "", level2: "POSITIVE", level1: "REACTION", synonyms: ["ok", "oke", "okay", "rustig", "schrik", "geen"]},
     "Ik probeer mijn gedachten van de pijn af te leiden": 
         {level4: "REACTION-POS-4", level3: "", level2: "POSITIVE", level1: "REACTION", synonyms: ["afleiden", "afleiding"]},
-    "Ik wordt me bewust van mijn gedachten en gevoelens": 
+    "Ik word me bewust van mijn gedachten en gevoelens": 
         {level4: "REACTION-POS-5", level3: "", level2: "POSITIVE", level1: "REACTION", synonyms: []},
     "Ik neem een korte pauze": 
         {level4: "REACTION-POS-6", level3: "", level2: "POSITIVE", level1: "REACTION", synonyms: ["stop", "pauzeer"]},

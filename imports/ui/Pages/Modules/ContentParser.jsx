@@ -1,4 +1,3 @@
-import { data } from 'browserslist';
 import React, { useState, useEffect } from 'react';
 import './ContentParser.scss';
 import createSortingContent from './ContentSorting.jsx';
@@ -78,12 +77,12 @@ function ContentParser(props) {
         /* Make buttons for each of the options, and assign correct/incorrect actions to buttons */
         options.forEach((option, index) => {
             if (option === correct) {
-                const correctButtonClass = status === "correct" ? "content-button-correct" : "content-button";
+                const correctButtonClass = status !== "default" ? (status === "correct" ? "content-button-correct" : "content-button-correctempty") : "content-button";
                 buttonsHTML.push(<button key={props.childrenKey + "-" + index} className={correctButtonClass} onClick={() => selectButton("correct")}>{option}</button>);
             }
             else if (option !== correct) {
-                const incorrectButtonClass = status === "incorrect" ? "content-button-incorrect" : "content-button";
-                buttonsHTML.push(<button key={props.childrenKey + "-" + index} className={incorrectButtonClass} onClick={() => selectButton("incorrect")}>{option}</button>);
+                const incorrectButtonClass = status === "incorrect-" + index ? "content-button-incorrect" : "content-button";
+                buttonsHTML.push(<button key={props.childrenKey + "-" + index} className={incorrectButtonClass} onClick={() => selectButton("incorrect-" + index)}>{option}</button>);
             }
         })
         /* Make the Question-Content element */
@@ -227,7 +226,7 @@ function ContentParser(props) {
      * @param {String} text The text that explains the context of what the user needs to type
      * @param {String} placeholder (Optional) The textual placeholder for the input-field
      */
-     function createMultiTextInputContent(text, placeholder) {
+    function createMultiTextInputContent(text, placeholder) {
         const [currentValue, updateValue] = useState("");
         const [values, updateValues] = useState([]);
         const [saved, updateSave] = useState(false);
@@ -269,6 +268,24 @@ function ContentParser(props) {
                 <Button style={{float:"right"}} color={"blue"} onClick={() => save()}>Klaar</Button>
             </div>}
         </div>)
+    }
+    
+    function createDelayedDisplayContent(data) {
+        const [started, setStarted] = useState(false);
+
+        async function confirmDone() {
+            await props.questionManager.setModuleQuestion(props.module, data.id, "CONFIRM"); 
+            props.callback();
+        }
+
+        if (!started) return (<div className="content-delayed-container">
+            <Button style={{marginTop:"80px"}} color="blue" onClick={() => setStarted(true)}>Begin</Button>
+        </div>)
+
+        return (<div className="content-delayed-container">{data.content.map((item, index) => {
+            return <div classNam="content-delayed-item" key={item+"-"+index} style={{opacity:"0", animation:"fadeIn 2s ease-in "+ index*4+"s 1 normal forwards"}}>{item}</div>
+        })}
+        <Button style={{marginTop: "10px", opacity:"0", animation:"fadeIn 2s ease-in "+ data.content.length*4+"s 1 normal forwards"}} onClick={() => confirmDone()}>Klaar</Button></div>)
     }
 
     useEffect(() => {
@@ -330,6 +347,8 @@ function ContentParser(props) {
                 return createTextInputContent(props.data.text, props.data.placeholder);
             case 'Multitext-Input':
                 return createMultiTextInputContent(props.data.text, props.data.placeholder);
+            case 'DelayedDisplay':
+                return createDelayedDisplayContent(props.data);
             case 'Swipe':
                 return createSwipeContent(props.data);
             case 'Break':
