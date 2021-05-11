@@ -74,6 +74,5 @@ export default function AdminSettings(props) {
             <Button color="red" disabled={deletedProgress} onClick={() => deleteProgress()}>{deletedProgress ? "Progressie gewist" : "Wis mijn progressie"}</Button>
             <Button color="red" disabled={deletedPainlogs} onClick={() => deletePainlogs()}>{deletedPainlogs ? "Pijnlogs gewist" : "Wis mijn pijnlogs"}</Button>
         </div>
-    </div>
-    )
+    </div>)
 }

@@ -70,24 +70,24 @@ export const thoughts = {
     "Mijn spieren zijn gespannen door deze bewegingen of activiteiten": 
         {level4: "THOUGHT-ACTIVITY-NEG-2", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "ANXIOUS"], synonyms: []},
     "Ik krijg slijtage van mijn lichaam door de herhaaldelijke belasting tijdens deze bewegingen of activiteiten": 
-        {level4: "THOUGHT-ACTIVITY-NEG-3", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT"], synonyms: ["versleten"]},
+        {level4: "THOUGHT-ACTIVITY-NEG-3", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT"], synonyms: ["versleten", "werken"]},
     "Ik moet mijn lichaam opspannen tijdens deze bewegingen of activiteiten": 
         {level4: "THOUGHT-ACTIVITY-NEG-4", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT"], synonyms: ["gespannen"]},
     "Ik heb teveel gedaan (mezelf overbelast), daardoor is de schade aan mijn lichaam toegenomen": 
         {level4: "THOUGHT-ACTIVITY-NEG-5", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "FATIGUE"], synonyms: ["te veel"]},
     "Deze bewegingen of activiteiten zijn gevaarlijk voor mijn lichaam": 
-        {level4: "THOUGHT-ACTIVITY-NEG-6", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "ANXIOUS"], synonyms: ["slecht", "niet goed"]},
+        {level4: "THOUGHT-ACTIVITY-NEG-6", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "ANXIOUS"], synonyms: ["slecht", "niet goed", "werken"]},
     "Nu kan ik maar beter al de bewegingen en activiteiten vermijden die mijn pijn nog kunnen verergeren": 
         {level4: "THOUGHT-ACTIVITY-NEG-7", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "ANXIOUS"], synonyms: ["stoppen"]},
     "Deze pijn is een teken dat ik best stop waarmee ik bezig ben of de activiteit aanpas": 
         {level4: "THOUGHT-ACTIVITY-NEG-8", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "ANXIOUS"], synonyms: []},
     /* Activiteiten en werk - Positief */
     "Als ik geleidelijk wat meer zou bewegen of deze activiteit zou opbouwen, dan zou mijn lichaam sterker en gezonder worden": 
-        {level4: "THOUGHT-ACTIVITY-POS-1", level3: "ACTIVITY-WORK", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["beetje"]},
+        {level4: "THOUGHT-ACTIVITY-POS-1", level3: "ACTIVITY-WORK", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["beetje", "werken"]},
     "Als ik een gezondere levensstijl zou hebben, dan zou ik nu misschien niet zoveel pijn hebben": 
         {level4: "THOUGHT-ACTIVITY-POS-2", level3: "ACTIVITY-WORK", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["beter", "actiever"]},
     "Het is oké, deze bewegingen of activiteiten zijn veilig voor mijn lichaam": 
-        {level4: "THOUGHT-ACTIVITY-POS-3", level3: "ACTIVITY-WORK", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["okay", "oke", "niet erg"]},
+        {level4: "THOUGHT-ACTIVITY-POS-3", level3: "ACTIVITY-WORK", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["okay", "oke", "niet erg", "werken"]},
     "Als ik wat meer ontspannen was, dan zou ik waarschijnlijk nu niet zoveel pijn hebben": 
         {level4: "THOUGHT-ACTIVITY-POS-4", level3: "ACTIVITY-WORK", level2: "POSITIVE", level1: "THOUGHT", codes: ["ANXIOUS"], synonyms: ["relaxed", "minder"]},
 
@@ -181,7 +181,7 @@ export const reactions = {
         {level4: "REACTION-NEG-9", level3: "", level2: "NEGATIVE", level1: "REACTION", codes: ["TIR"], synonyms: ["doordoen", "continue", "ga"]},
     /* Positief */
     "Ik pas de activiteit aan waar ik mee bezig ben of ga verder met een andere activiteit": 
-        {level4: "REACTION-POS-1", level3: "", level2: "POSITIVE", level1: "REACTION", codes: ["HR"], synonyms: ["aanpassen", "verander"]},
+        {level4: "REACTION-POS-1", level3: "", level2: "POSITIVE", level1: "REACTION", codes: ["HR"], synonyms: ["aanpassen", "verander", "werken"]},
     "Ik probeer te ontspannen": 
         {level4: "REACTION-POS-2", level3: "", level2: "POSITIVE", level1: "REACTION", codes: ["HR", "RELAXED"], synonyms: ["relaxen", "chillen"]},
     "Ik zeg tegen mezelf: Het is oké! Wees niet bang van de pijn, je veroorzaakt niet meer schade in je lichaam": 
@@ -392,10 +392,15 @@ export const conversation = {
     "MESSAGE-5": {
         content: "Had je iets anders/beter kunnen doen?",
         sentBy: "coach", 
-        response: ["RESPONSE-YES-MESSAGE-5", "RESPONSE-NO-MESSAGE-5"]
+        response: ["RESPONSE-YES-MESSAGE-5", "RESPONSE-MAYBE-MESSAGE-5", "RESPONSE-NO-MESSAGE-5"]
     },
     "RESPONSE-YES-MESSAGE-5": {
         content: "Ja",
+        sentBy: "user", 
+        response: ["MESSAGE-6"]
+    },
+    "RESPONSE-MAYBE-MESSAGE-5": {
+        content: "Niet zeker",
         sentBy: "user", 
         response: ["MESSAGE-6"]
     },
@@ -408,10 +413,15 @@ export const conversation = {
     "MESSAGE-6": {
         content: "Weet je hoe je in de toekomst hier aan kan werken?",
         sentBy: "coach", 
-        response: ["RESPONSE-YES-MESSAGE-6", "RESPONSE-NO-MESSAGE-6"]
+        response: ["RESPONSE-YES-MESSAGE-6", "RESPONSE-MAYBE-MESSAGE-6", "RESPONSE-NO-MESSAGE-6"]
     },
     "RESPONSE-YES-MESSAGE-6": {
         content: "Ja ",
+        sentBy: "user", 
+        response: ["RECOMMENDATION"]
+    },
+    "RESPONSE-MAYBE-MESSAGE-6": {
+        content: "Niet echt",
         sentBy: "user", 
         response: ["RECOMMENDATION"]
     },
