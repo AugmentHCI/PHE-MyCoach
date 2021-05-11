@@ -12,8 +12,12 @@ const T = i18n.createComponent("Common");
 
 export default function AppModal(props) {
 
-  function handleClose() {
+  function handleDefault() {
     if (props.notifyParent) props.notifyParent(true);
+  }
+
+  function handleBack() {
+    if (props.notifyBack) props.notifyBack();
   }
 
   const title = props.translate ? <T>{props.title}</T> : props.title
@@ -25,7 +29,11 @@ export default function AppModal(props) {
       </Modal.Header>}
       <Modal.Body>{props.children}</Modal.Body>
       <Modal.Footer>
-        <Button color="blue" width="fit" onClick={handleClose}>{defaultOption}</Button>
+        {!props.backOption && <Button color="blue" width="fit" center onClick={handleDefault}>{defaultOption}</Button>}
+        {props.backOption && <React.Fragment>
+          <Button color="gray-light" width="45%" center onClick={handleBack}>{props.backOption}</Button>
+          <Button color="blue" width="45%" center onClick={handleDefault}>{defaultOption}</Button>
+        </React.Fragment>}
       </Modal.Footer>
     </Modal>
   )

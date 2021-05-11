@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Highlighter from "react-highlight-words";
+import { FlowRouter } from "meteor/kadira:flow-router";
 
 import { copyOfDict } from "../../JSONlib.js";
 
 import Input from './Input.jsx';
 import Button from './Button.jsx';
 import "./Chatbubble.scss";
+
+const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
 
 export function Chatbubble(props) {
 
@@ -37,8 +40,7 @@ export function Chatbubble(props) {
                 {renderLoading && <img src="/illustrations/loading.gif" width="50px" style={{}}/>}
                 {!renderLoading && props.children}
             </div>}
-        </div>
-    )
+        </div>)
 }
 
 
@@ -229,14 +231,16 @@ export function ChatbubbleEmotions(props) {
     }
 
     function renderEmotions() {
-        let emotionButtonsHTML = [], emotionsRowHTML = [], counter = 0;
+        let emotionButtonsHTML = [], emotionsRowHTML = [], counter = 0, emotionRowKey = "";
         for (const [emotion, information] of Object.entries(props.options)) {
             const isSelected = Object.keys(selectedEmotions).includes(emotion);
+            emotionRowKey += emotion;
             emotionsRowHTML.push(<Button key={emotion} size="small" outline isSelected={isSelected} width="fit" color="blue" style={{float: "right", marginRight: "8px"}} onClick={() => toggleEmotion(emotion, information)}>{emotion}</Button>)
             if (counter >= 2) {
-                emotionButtonsHTML.push(<div style={{width: "100%"}}>{emotionsRowHTML}</div>);
+                emotionButtonsHTML.push(<div key={emotionRowKey} style={{width: "100%"}}>{emotionsRowHTML}</div>);
                 emotionsRowHTML = [];
                 counter = 0;
+                emotionRowKey = "";
             }
             else { counter += 1 }
         }
@@ -251,4 +255,57 @@ export function ChatbubbleEmotions(props) {
            {Object.keys(selectedEmotions).length === 0 ? "Geen van toepassing" : "Verstuur selectie"}
         </div>}
     </div>)
+}
+
+export function ChatbubbleInputSummary(props) {
+
+    const [renderLoading, setRenderLoading] = useState(true);
+
+    /* Initialize Chatbubble once */
+    useEffect(() => { 
+        setTimeout(function() { setRenderLoading(false) }, (props.typeLength ? props.typeLength : 1000));
+    }, [] );
+
+    function renderInputBars() {
+        let inputsHTML = [];
+        props.inputs.forEach((input, index) => {
+            inputsHTML.push(<React.Fragment>
+                <div className="chatbubble-inputs-row">
+                    <div className="chatbubble-inputs-inputtext">{translations[language].inputCodes[input[0]]}</div>
+                    <div className="chatbubble-inputs-barcontainer"><div className="chatbubble-inputs-bar" style={{width:(Math.round(input[1] * 100)) + "%"}}/></div>
+                </div>
+                {index < props.inputs.length-1 && <hr className="chatbubble-inputs-divider"/>}
+            </React.Fragment>)
+        })
+        return (<div className="chatbubble-inputs-container">
+            <div className="chatbubble-inputs-title">Jouw inputs</div>
+            <div className="chatbubble-inputs-text">Hier is een overzicht van je inputs. Tik op eentje waar jij een aanbeveling rond wilt zien:</div>
+            {inputsHTML}
+            </div>);
+    }
+
+    return (<div className="chatbubble-container">
+        <img src="/illustrations/avatar.png" width="35px" style={{position:"absolute"}}/>
+        <div className={"chatbubble"}>
+            {renderLoading && <img src="/illustrations/loading.gif" width="50px"/>}
+            {!renderLoading && renderInputBars()}
+        </div>
+    </div>)
+}
+
+const translations = {
+    "nl-BE": {
+        inputCodes: {
+            "TIR": "Te verbeteren reacties",
+            "TIT": "Te verbeteren gedachten",
+            "ANXIOUS": "Gespannen / angstig",
+            "DEPRESSED": "Ontmoedigd / hulpeloos",
+            "FATIGUE": "Vermoeid / uitgeput",
+            "ANGER": "Geergerd / kwaad",
+            "HT": "Helpende gedachten",
+            "HR": "Helpende reacties",
+            "VIGOR": "Vrolijk / energiek",
+            "RELAXED": "Rustig / ontspannen"
+        }
+    }
 }

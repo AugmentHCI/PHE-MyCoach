@@ -39,7 +39,6 @@
 
         &-textinput {
             @extend .chatbubble-ownchoice;
-            width: 80%;
         }
     }
 
@@ -74,7 +73,7 @@
 
 
 .chatbubble-title {
-    font-size: 18px;
+    font-size: 16px;
     font-family: var(--main-font);
     font-weight: 500;
     color: var(--idewe-blue-dark);
@@ -90,7 +89,7 @@
 
 .chat-text-option {
     font-family: var(--main-font);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 400;
     color: var(--idewe-blue-dark);
 
@@ -116,4 +115,46 @@ mark {
     width: 95%;
     margin-block-start: 1px;
     margin-block-end: 1px;
+}
+
+/* CHATBUBBLE - Inputs */
+.chatbubble-inputs-container {
+    display: grid;
+    row-gap: 5px;
+}
+
+.chatbubble-inputs-title {
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.chatbubble-inputs-text {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.chatbubble-inputs-row {
+    display: flex;
+}
+
+.chatbubble-inputs-inputtext {
+    width: 75%;
+}
+
+.chatbubble-inputs-barcontainer {
+    width: 25%;
+}
+
+.chatbubble-inputs-bar {
+    background-color: var(--idewe-white);
+    border-radius: 0 3px 3px 0;
+    height: 80%;
+    margin-top: 5%;
+}
+
+.chatbubble-inputs-divider {
+    border-top: 1px dashed var(--idewe-white);
+    height: 1px;
+    margin: 1px 5px;
+    opacity: 50%;
 }

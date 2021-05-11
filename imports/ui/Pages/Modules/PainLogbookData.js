@@ -204,12 +204,12 @@ export const codeFrequencies = () => {
 export const conversation = {
     /* Inleiding */
     "MESSAGE-INTRO": {
-        content: "Goeiedag! Wil jij je pijnlogboek invullen?",
+        content: "Goeiedag! Heb je recentelijk last gehad van een pijnscheut of een sterke toename van pijn?",
         sentBy: "coach",
         response: ["RESPONSE-YES-MESSAGE-INTRO", "RESPONSE-NO-MESSAGE-INTRO"]
     },
     "RESPONSE-YES-MESSAGE-INTRO": {
-        content: "Ja, graag",
+        content: "Ja, inderdaad",
         sentBy: "user",
         choice: true,
         response: ["MESSAGE-1"]
@@ -234,36 +234,60 @@ export const conversation = {
     },
     /* Vraag 1 */
     "MESSAGE-1": {
-        content: "Laten we beginnen. Waar was je toen de pijn (in sterke mate) toenam?",
+        content: "En waar was je / wat was je aan het doen toen de pijn (in sterke mate) toenam?",
         sentBy: "coach", 
-        response: ["RESPONSE-1-MESSAGE-1", "RESPONSE-2-MESSAGE-1", "RESPONSE-3-MESSAGE-1", "RESPONSE-4-MESSAGE-1"]
+        response: ["RESPONSE-1-MESSAGE-1", "RESPONSE-2-MESSAGE-1", "RESPONSE-3-MESSAGE-1", "RESPONSE-4-MESSAGE-1", "RESPONSE-5-MESSAGE-1", "RESPONSE-6-MESSAGE-1", "RESPONSE-7-MESSAGE-1", "RESPONSE-8-MESSAGE-1"]
     },
     "RESPONSE-1-MESSAGE-1": {
-        content: "Aan het sporten 🏃🏽",
+        content: "Sport / beweging 🏃🏽",
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "RESPONSE-2-MESSAGE-1": {
-        content: "Op het werk 💼",
+        content: "Werk 💼 (betaald, vrijwillig, studeren, ...)",
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "RESPONSE-3-MESSAGE-1": {
-        content: "Thuis 🏠",
+        content: "Huishouden 🏠 (tuinieren, koken, boodschappen doen, ...)",
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "RESPONSE-4-MESSAGE-1": {
+        content: "Sociale activiteit 😄 (activiteiten met vrienden, familie, collega's, ...)",
+        sentBy: "user",
+        choice: true, 
+        response: ["MESSAGE-1-INPUT"]
+    },
+    "RESPONSE-5-MESSAGE-1": {
+        content: "Vrije tijd 📚 (hobbies, TV kijken, relaxatie, iets wat je leuk vindt, )",
+        sentBy: "user",
+        choice: true, 
+        response: ["MESSAGE-1-INPUT"]
+    },
+    "RESPONSE-6-MESSAGE-1": {
+        content: "Verplaatsingen 🚘",
+        sentBy: "user",
+        choice: true, 
+        response: ["MESSAGE-1-INPUT"]
+    },
+    "RESPONSE-7-MESSAGE-1": {
+        content: "Rusten 😴",
+        sentBy: "user",
+        choice: true, 
+        response: ["MESSAGE-1-INPUT"]
+    },
+    "RESPONSE-8-MESSAGE-1": {
         content: "Overig 💬",
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "MESSAGE-1-INPUT": {
-        content: "En wat was je aan het doen op dat moment?",
+        content: "Specifieer kort wat je aan het doen was.",
         sentBy: "coach", 
         response: ["MESSAGE-1-INPUT-RESPONSE"]
     },

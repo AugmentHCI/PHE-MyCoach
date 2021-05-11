@@ -9,6 +9,7 @@ import 'antd/dist/antd.css';
 import ProgressManager from "../../api/ProgressManager.jsx";
 import ProfileManager from "../../api/ProfileManager.jsx";
 import InteractionManager from "../../api/InteractionManager.jsx";
+import ShortcutManager from "../../api/ShortcutManager.jsx";
 import { UserData } from "../../api/dummydata.jsx";
 import "../../db/MyCoachMethods.jsx";
 import "./MyCoach.scss";
@@ -33,20 +34,22 @@ const T = i18n.createComponent("Common");
 
 export default function MyCoach(props) {
 
-    const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
-    const userID = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
+    const language  = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
+    const userID    = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     const userToken = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : "demo";
 
 
     /* Instantiate managers for progress and interaction retrieval/handling */
     const interactionManager = new InteractionManager(userID);
-    const progressManager = new ProgressManager(userID);
-    const profileManager = new ProfileManager(userID, userToken);
+    const progressManager    = new ProgressManager(userID);
+    const profileManager     = new ProfileManager(userID, userToken);
+    const shortcutManager    = new ShortcutManager(userID, userToken);
 
     /* STATES */
     const [tapCount, updateTapCount] = useState(0);
 
     const [userProgress, setUserProgress] = useState(undefined);
+    const [userShortcuts, setUserShortcuts] = useState(undefined);
     const [userData, setUserData] = useState(props.data ? (Object.entries(props.data).length === 0 ? UserData : props.data) : undefined);
 
     const [showIntroductionModal, setShowIntroductionModal] = useState(undefined);
@@ -54,14 +57,6 @@ export default function MyCoach(props) {
     const [showTutorial1, updateShowTutorial1] = useState(undefined);
     const [showTutorial2, updateShowTutorial2] = useState(undefined);
     const [showTutorial3, updateShowTutorial3] = useState(undefined);
-
-    // Get locale from URL routing (see also routes.jsx file)
-    function setLocale() {
-        /*
-        let language = FlowRouter.getParam('language');
-        i18n.setLocale(language);
-        setDataParserLocale(language);*/
-    }
 
     function handleIntroduction() {
         if (!userData) return;
@@ -109,8 +104,8 @@ export default function MyCoach(props) {
             <h2>MIJN TODO'S</h2>
             <Popover1>
                 <React.Fragment>
-                    <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
-                    <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>
+                    {userShortcuts && userShortcuts.some(e => e.shortcut === 'PAINLOGBOOK') && <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>}
+                    {userShortcuts && userShortcuts.some(e => e.shortcut === 'DAILY-COACHING') && <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>}
                 </React.Fragment>
             </Popover1>
         </React.Fragment>)
@@ -220,6 +215,17 @@ export default function MyCoach(props) {
             setUserData(latestUserData.data);
             progressManager.setProfile(latestUserData.data.profile);
         }
+        async function fetchUserShortcuts() {
+            const shortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
+            if (shortcuts.length === 0) {
+                shortcutManager.upsertShortcut("DAILY-COACHING", "MAIN", "LOCKED");
+                setUserShortcuts([{shortcut: "DAILY-COACHING", screen: "MAIN", status: "LOCKED"}]);
+            }
+            else {
+                setUserShortcuts(shortcuts);
+            }
+            
+        }
         async function fetchUserInteractionStatus() {
             const result = await interactionManager.getMultipleInteractionStatuses(["GENERAL_INTRODUCTIONPOPUPS", "GENERAL_INTRODUCTIONMODAL"]);
             if (!result.GENERAL_INTRODUCTIONPOPUPS.includes("CONFIRM")) 
@@ -234,6 +240,7 @@ export default function MyCoach(props) {
         }
         fetchUserProgress();
         fetchUserData();
+        fetchUserShortcuts();
         fetchUserInteractionStatus();
     }, []);
 

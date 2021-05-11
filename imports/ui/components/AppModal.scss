@@ -1,5 +1,5 @@
 .modal-content {
-    border-radius: 15px;
+    border-radius: 20px !important;
 }
 
 .modal-header {
@@ -7,7 +7,7 @@
     color: var(--idewe-blue-dark);
     font-size: 22px;
     font-weight: 800;
-    border-bottom: none;
+    border-bottom: none !important;
 }
 
 .modal-body {
@@ -16,5 +16,5 @@
 }
 
 .modal-footer {
-    border-top: none;
+    border-top: none !important;
 }

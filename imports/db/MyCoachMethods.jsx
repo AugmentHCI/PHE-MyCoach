@@ -1,5 +1,11 @@
 import { check } from 'meteor/check';
-import { MyCoachQuestionCollection, MyCoachProgressCollection, MyCoachInteractionCollection, MyCoachProfileCollection } from './MyCoachCollection';
+import { 
+    MyCoachQuestionCollection, 
+    MyCoachProgressCollection, 
+    MyCoachInteractionCollection, 
+    MyCoachProfileCollection,  
+    MyCoachShortcutCollection
+} from './MyCoachCollection';
 
 /* PROGRESS */
 Meteor.methods({
@@ -146,4 +152,37 @@ Meteor.methods({
             PCS: PCS
         });
     }
+});
+
+/* SHORTCUTS */
+Meteor.methods({
+    'mycoachshortcut.getShortcuts'({userID, screen, status}) {
+        check(userID, Number);
+        check(screen, String);
+        check(status, String);
+        if (status === "ANY") return MyCoachShortcutCollection.find({userID: userID, screen: screen}).fetch();
+        return MyCoachShortcutCollection.find({userID: userID, screen: screen, status: status}).fetch();
+    },
+    'mycoachshortcut.upsertShortcut'({userID, shortcut, screen, status}) {
+        check(userID, Number);
+        check(shortcut, String);
+        check(screen, String);
+        check(status, String);
+
+        MyCoachQuestionCollection.upsert({
+            // Selector
+            userID: userID,
+            shortcut: shortcut,
+            screen: screen,
+            status: status,
+        }, {
+            // Modifier
+            $set: {
+                userID: userID,
+                shortcut: shortcut,
+                screen: screen,
+                status: status,
+            }
+        });
+    },
 });
