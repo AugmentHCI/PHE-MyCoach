@@ -14,6 +14,10 @@ export default class QuestionManager {
         return questionDict;
     }
 
+    async deleteUserQuestions() {
+       await Meteor.callPromise('mycoachquestion.deleteUserQuestions', {userID: this.userID});
+    }
+
     /* TODO: Fix */
     async getLatestAnswerOnQuestion(questionID) {
         let answers = await Meteor.callPromise('mycoachquestion.getQuestion', {userID: this.userID, questionID: questionID});

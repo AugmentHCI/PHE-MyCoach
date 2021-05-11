@@ -19,7 +19,7 @@ export default function NavigationBar(props) {
 
     function goBack() {
         if (props.back) FlowRouter.go(props.back);
-        else { history.back }
+        else { history.back() }
     }
 
     function renderButton() {

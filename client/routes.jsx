@@ -10,6 +10,7 @@ import SubmoduleParser  from '../imports/ui/Pages/Modules/SubmoduleParser.jsx';
 import PainLogbook      from '../imports/ui/Pages/Modules/PainLogbook.jsx';
 import PainLogbookEntry from '../imports/ui/Pages/Modules/PainLogbookEntry.jsx';
 import AdminScreen      from '../imports/ui/AdminScreen.jsx';
+import AdminSettings from '../imports/ui/Pages/AdminSettings.jsx';
 
 
 FlowRouter.route('/', {
@@ -53,6 +54,11 @@ FlowRouter.route('/:language/mycoach/module/:module/:submodule', {
 FlowRouter.route('/:language/mycoach/:token', {
   name: 'MyCoach',
   action(){  mount( App, { content: <MyCoach /> })}
+})
+
+FlowRouter.route('/:language/mycoach/:token/adminsettings', {
+  name: 'AdminSettings',
+  action(){  mount( App, { content: <AdminSettings /> })}
 })
 
 FlowRouter.route('/:language/mycoach/:token/painlogbook', {

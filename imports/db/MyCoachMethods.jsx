@@ -39,6 +39,13 @@ Meteor.methods({
         check(userID, Number);
         check(submoduleID, String);
         return MyCoachProgressCollection.find({userID: userID, submoduleID: submoduleID}).fetch();
+    },
+    /* Gets a users progress of a given submodule */
+    'mycoachprogress.resetUserProgress'({userID}) {
+        check(userID, Number);
+        MyCoachProgressCollection.find({userID: userID}).map(function(item){
+            MyCoachProgressCollection.remove(item._id);
+        });
     }
 });
 
@@ -89,7 +96,13 @@ Meteor.methods({
         check(module, String);
 
         return MyCoachQuestionCollection.find({userID: userID, module: module}).fetch();
-    }
+    },
+    'mycoachquestion.deleteUserQuestions'({userID}) {
+        check(userID, Number);
+        MyCoachQuestionCollection.find({userID: userID}).map(function(item){
+            MyCoachQuestionCollection.remove(item._id);
+        });
+    },
 });
 
 /* INTERACTIONS */
@@ -168,8 +181,16 @@ Meteor.methods({
         check(shortcut, String);
         check(screen, String);
         check(status, String);
-
-        MyCoachQuestionCollection.upsert({
+/*
+        MyCoachShortcutCollection.insert({
+            // Selector
+            userID: userID,
+            shortcut: shortcut,
+            screen: screen,
+            status: status,
+        });
+        */
+        MyCoachShortcutCollection.upsert({
             // Selector
             userID: userID,
             shortcut: shortcut,

@@ -30,6 +30,11 @@ export default class ProgressManager {
         return parseProgress(moduleUserData);
     }
 
+    async resetUserProgress() {
+        await Meteor.callPromise('mycoachprogress.resetUserProgress', {userID: this.userID});
+        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "PAINEDUCATION", submoduleID: "PE-MOD-1", status: "IN_PROGRESS"});
+    }
+
     /**
      * [DB] Marks a submodule as completed for a given user, and unlocks the subsequent module(s).
      * @param {String}  module    The module that the submodule belongs to.
