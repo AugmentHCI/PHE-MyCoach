@@ -1,34 +1,49 @@
 export const fillerWords = ["de", "het", "ik", "dat", "die", "er", "me", "mij", "deze"];
 
 export const codes = {
-    "TIR": {type: "NEGATIVE", description: "Te verbeteren reacties"},
-    "TIT": {type: "NEGATIVE", description: "Te verbeteren gedachten"},
-    "ANXIOUS": {type: "NEGATIVE", description: "Gespannen / angstig / paniekerig"},
-    "ANGER": {type: "NEGATIVE", description: "Kwaad / wrokkig / geergerd"},
-    "FATIGUE": {type: "NEGATIVE", description: "Vermoeid / afgemat / uitgeput"},
-    "DEPRESSED": {type: "NEGATIVE", description: "Hulpeloos / ontmoedigd / droevig"},
-    "HR": {type: "POSITIVE", description: "Helpende reacties"},
-    "HT": {type: "POSITIVE", description: "Helpende gedachten"},
-    "VIGOR": {type: "POSITIVE", description: "Energiek / vrolijk / levendig"},
-    "RELAXED": {type: "POSITIVE", description: "Rustig / ontspannen"},
+    "TIR":       {type: "NEGATIVE", translation: {"nl-BE": "Te verbeteren reacties",  "en-EN": "", "nl-FR": ""}},
+    "TIT":       {type: "NEGATIVE", translation: {"nl-BE": "Te verbeteren gedachten", "en-EN": "", "nl-FR": ""}},
+    "ANXIOUS":   {type: "NEGATIVE", translation: {"nl-BE": "Gespannen / angstig",     "en-EN": "", "nl-FR": ""}},
+    "ANGER":     {type: "NEGATIVE", translation: {"nl-BE": "Geergerd / kwaad",        "en-EN": "", "nl-FR": ""}},
+    "FATIGUE":   {type: "NEGATIVE", translation: {"nl-BE": "Vermoeid / uitgeput",     "en-EN": "", "nl-FR": ""}},
+    "DEPRESSED": {type: "NEGATIVE", translation: {"nl-BE": "Ontmoedigd / hulpeloos",  "en-EN": "", "nl-FR": ""}},
+    "HR":        {type: "POSITIVE", translation: {"nl-BE": "Helpende reacties",       "en-EN": "", "nl-FR": ""}},
+    "HT":        {type: "POSITIVE", translation: {"nl-BE": "Helpende gedachten",      "en-EN": "", "nl-FR": ""}},
+    "VIGOR":     {type: "POSITIVE", translation: {"nl-BE": "Energiek / levendig",     "en-EN": "", "nl-FR": ""},},
+    "RELAXED":   {type: "POSITIVE", translation: {"nl-BE": "Rustig / ontspannen",     "en-EN": "", "nl-FR": ""}},
 }
 
 export const emotions = {
-    "😄 Energiek":   {level4: "EMOTION-VIGOROUS",    level3: "VIGOR",     level2: "POSITIVE", level1: "EMOTION"},
-    "😊 Vrolijk":    {level4: "EMOTION-CHEERFUL",    level3: "VIGOR",     level2: "POSITIVE", level1: "EMOTION"},
-    "😆 Levendig":   {level4: "EMOTION-LIVELY",      level3: "VIGOR",     level2: "POSITIVE", level1: "EMOTION"},
-    "😧 Angstig":    {level4: "EMOTION-ANXIOUS",     level3: "ANXIOUS",   level2: "NEGATIVE", level1: "EMOTION"},
-    "😬 Gespannen":  {level4: "EMOTION-ONEDGE",      level3: "ANXIOUS",   level2: "NEGATIVE", level1: "EMOTION"},
-    "😰 Paniekerig": {level4: "EMOTION-UNEASY",      level3: "ANXIOUS",   level2: "NEGATIVE", level1: "EMOTION"},
-    "😔 Droevig":    {level4: "EMOTION-SAD",         level3: "DEPRESSED", level2: "NEGATIVE", level1: "EMOTION"},
-    "😓 Hulpeloos":  {level4: "EMOTION-HOPELESS",    level3: "DEPRESSED", level2: "NEGATIVE", level1: "EMOTION"},
-    "😨 Ontmoedigd": {level4: "EMOTION-DISCOURAGED", level3: "DEPRESSED", level2: "NEGATIVE", level1: "EMOTION"},
-    "😡 Kwaad":      {level4: "EMOTION-ANGRY",       level3: "ANGER",     level2: "NEGATIVE", level1: "EMOTION"},
-    "🤬 Wrokkig":    {level4: "EMOTION-RESENTFUL",   level3: "ANGER",     level2: "NEGATIVE", level1: "EMOTION"},
-    "😒 Geërgerd":   {level4: "EMOTION-ANNOYED",     level3: "ANGER",     level2: "NEGATIVE", level1: "EMOTION"},
-    "🥱 Vermoeid":   {level4: "EMOTION-FATIGUED",    level3: "FATIGUE",   level2: "NEGATIVE", level1: "EMOTION"},
-    "🥵 Afgemat":    {level4: "EMOTION-WORNOUT",     level3: "FATIGUE",   level2: "NEGATIVE", level1: "EMOTION"},
-    "😴 Uitgeput":   {level4: "EMOTION-EXHAUSTED",   level3: "FATIGUE",   level2: "NEGATIVE", level1: "EMOTION"},
+    "EMOTION-VIGOROUS":    {level4: "EMOTION-VIGOROUS",    level3: "VIGOR",     level2: "POSITIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😄 Energiek"}},
+    "EMOTION-CHEERFUL":    {level4: "EMOTION-CHEERFUL",    level3: "VIGOR",     level2: "POSITIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😊 Vrolijk", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-LIVELY":      {level4: "EMOTION-LIVELY",      level3: "VIGOR",     level2: "POSITIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😆 Levendig", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-ANXIOUS":     {level4: "EMOTION-ANXIOUS",     level3: "ANXIOUS",   level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😧 Angstig", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-ONEDGE":      {level4: "EMOTION-ONEDGE",      level3: "ANXIOUS",   level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😬 Gespannen", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-UNEASY":      {level4: "EMOTION-UNEASY",      level3: "ANXIOUS",   level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😰 Paniekerig", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-SAD":         {level4: "EMOTION-SAD",         level3: "DEPRESSED", level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😔 Droevig", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-HOPELESS":    {level4: "EMOTION-HOPELESS",    level3: "DEPRESSED", level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😓 Hulpeloos", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-DISCOURAGED": {level4: "EMOTION-DISCOURAGED", level3: "DEPRESSED", level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😨 Ontmoedigd", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-ANGRY":       {level4: "EMOTION-ANGRY",       level3: "ANGER",     level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😡 Kwaad", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-RESENTFUL":   {level4: "EMOTION-RESENTFUL",   level3: "ANGER",     level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "🤬 Wrokkig", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-ANNOYED":     {level4: "EMOTION-ANNOYED",     level3: "ANGER",     level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😒 Geërgerd", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-FATIGUED":    {level4: "EMOTION-FATIGUED",    level3: "FATIGUE",   level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "🥱 Vermoeid", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-WORNOUT":     {level4: "EMOTION-WORNOUT",     level3: "FATIGUE",   level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "🥵 Afgemat", "en-EN": "", "nl-FR": ""}},
+    "EMOTION-EXHAUSTED":   {level4: "EMOTION-EXHAUSTED",   level3: "FATIGUE",   level2: "NEGATIVE", level1: "EMOTION", 
+        translation: {"nl-BE": "😴 Uitgeput", "en-EN": "", "nl-FR": ""}},
 }
 
 export const thoughts = {
@@ -239,48 +254,64 @@ export const conversation = {
         response: ["RESPONSE-1-MESSAGE-1", "RESPONSE-2-MESSAGE-1", "RESPONSE-3-MESSAGE-1", "RESPONSE-4-MESSAGE-1", "RESPONSE-5-MESSAGE-1", "RESPONSE-6-MESSAGE-1", "RESPONSE-7-MESSAGE-1", "RESPONSE-8-MESSAGE-1"]
     },
     "RESPONSE-1-MESSAGE-1": {
+        id: "Sporten",
+        category: "CONTEXT",
         content: "Sport / beweging 🏃🏽",
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "RESPONSE-2-MESSAGE-1": {
+        id: "Werken",
+        category: "CONTEXT",
         content: "Werk 💼 (betaald, vrijwillig, studeren, ...)",
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "RESPONSE-3-MESSAGE-1": {
+        id: "Huishouden",
+        category: "CONTEXT",
         content: "Huishouden 🏠 (tuinieren, koken, boodschappen doen, ...)",
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "RESPONSE-4-MESSAGE-1": {
+        id: "Sociale activiteit",
+        category: "CONTEXT",
         content: "Sociale activiteit 😄 (activiteiten met vrienden, familie, collega's, ...)",
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "RESPONSE-5-MESSAGE-1": {
+        id: "Vrije tijd",
+        category: "CONTEXT",
         content: "Vrije tijd 📚 (hobbies, TV kijken, relaxatie, iets wat je leuk vindt, )",
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "RESPONSE-6-MESSAGE-1": {
-        content: "Verplaatsingen 🚘",
+        id: "Verplaatsing",
+        category: "CONTEXT",
+        content: "Verplaatsing 🚘",
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "RESPONSE-7-MESSAGE-1": {
+        id: "Rusten",
+        category: "CONTEXT",
         content: "Rusten 😴",
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "RESPONSE-8-MESSAGE-1": {
+        id: "Overig",
+        category: "CONTEXT",
         content: "Overig 💬",
         sentBy: "user",
         choice: true, 
@@ -292,6 +323,7 @@ export const conversation = {
         response: ["MESSAGE-1-INPUT-RESPONSE"]
     },
     "MESSAGE-1-INPUT-RESPONSE": {
+        category: "ACTIVITY",
         content: "input",
         sentBy: "user",
         response: ["MESSAGE-1-INTENSITY"]
@@ -302,16 +334,22 @@ export const conversation = {
         response: ["MESSAGE-1-INTENSITY-RESPONSE-1", "MESSAGE-1-INTENSITY-RESPONSE-2", "MESSAGE-1-INTENSITY-RESPONSE-3"]
     },
     "MESSAGE-1-INTENSITY-RESPONSE-1": {
+        id: "Licht",
+        category: "INTENSITY",
         content: "Licht",
         sentBy: "user",
         response: ["MESSAGE-2"]
     },
     "MESSAGE-1-INTENSITY-RESPONSE-2": {
+        id: "Matig",
+        category: "INTENSITY",
         content: "Matig",
         sentBy: "user",
         response: ["MESSAGE-2"]
     },
     "MESSAGE-1-INTENSITY-RESPONSE-3": {
+        id: "Zwaar",
+        category: "INTENSITY",
         content: "Zwaar",
         sentBy: "user",
         response: ["MESSAGE-2"]

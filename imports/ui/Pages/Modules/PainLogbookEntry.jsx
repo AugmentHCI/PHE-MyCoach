@@ -5,7 +5,10 @@ import NavigationBar from '../../components/NavigationBar';
 
 import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies, options} from "./PainLogbookData.js";
 
+import jwt_decode from "jwt-decode";
+
 import RuleEngine from "../../../api/RuleEngine.jsx";
+import PainLogbookManager from '../../../api/PainLogbookManager.jsx';
 
 
 const testInputs = [
@@ -81,18 +84,21 @@ const testInputs = [
         "alles"
       ]
     }
-  ]
+]
 
 export default function PainLogbookEntry() {
 
     /* States and Constants */
     const ruleEngine = new RuleEngine(rules);
+    const painLogbookManager = new PainLogbookManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
+    const language  = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
+    /* Recommendations */
     const [matchedRecommendations, updateMatchedRecommendations] = useState([]);
     const [currentRecommendation, updateCurrentRecommendation] = useState(0);
-
+    /* Message Queues */
     const [messageQueue, updateMessageQueue] = useState(["MESSAGE-INTRO"]);
     const [tempMessageQueue, updateTempMessageQueue] = useState([]);
-
+    /* User input */
     const [userInput, updateUserInput] = useState([]);
 
     function computeBars(inputs) {
@@ -148,15 +154,27 @@ export default function PainLogbookEntry() {
                 addResponseToMessageQueue(message);
                 break;
             case "saveAndClose":
-                console.log(`Action ${actionType} not implemented.`)
+                saveLog();
+                history.back();
                 break;
             default:
                 console.log(`Action ${actionType} not implemented.`)
         }
     }
 
+    function saveLog() {
+        let userLog = {THOUGHT: [], REACTION: [], EMOTION: [], CONTEXT: undefined, INTENSITY: undefined, ACTIVITY: undefined}
+        userInput.forEach(input => {
+            if (input.level1) userLog[input.level1].push(input.level4);
+            else { userLog[input.category] = input.content }
+        });
+        Object.keys(userLog).forEach(key => {
+            if (["THOUGHT", "REACTION", "EMOTION"].includes(key)) { userLog[key] = userLog[key].join("|") }
+        })
+        painLogbookManager.addPainLog(userLog.CONTEXT, userLog.ACTIVITY, userLog.INTENSITY, userLog.THOUGHT, userLog.EMOTION, userLog.REACTION);
+    }
+
     function initializeMessages() {
-        const codeFreqs = codeFrequencies();
         updateMessageQueue([conversation["MESSAGE-INTRO"]]);
         let temporaryMessageQueue = [];
         conversation["MESSAGE-INTRO"].response.forEach(message => {
@@ -168,6 +186,8 @@ export default function PainLogbookEntry() {
     function addResponseToMessageQueue(message) {
         let newQueue = [...messageQueue];
         newQueue.push(message);
+        if (message.id) {updateUserInput([...userInput, {category: message.category, content: message.id}])}
+        if (message.category === "ACTIVITY") {updateUserInput([...userInput, {category: message.category, content: message.content}])}
         let responseMessages = [];
         message.response.forEach(messageResponse => {
             newQueue.push(conversation[messageResponse])
@@ -185,7 +205,7 @@ export default function PainLogbookEntry() {
         let newUserInput = [...userInput];
         for (const [response, information] of Object.entries(responses)) {
             newUserInput.push(information);
-            newQueue.push({content: response, sentBy: "user"});
+            newQueue.push({content: information.translation ? information.translation[language] : response, sentBy: "user"});
         }
         const nextCoachMessage = conversation[nextmessage.response[0]]
         newQueue.push(nextCoachMessage);
@@ -236,6 +256,7 @@ export default function PainLogbookEntry() {
                         key={"chatbubble-emotions-" + index + "-" + message}
                         message={message}
                         options={emotions}
+                        language={language}
                         onSubmit={hangleTERinput}
                         />)
                     break;

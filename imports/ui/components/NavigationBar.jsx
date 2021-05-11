@@ -14,7 +14,12 @@ export default function NavigationBar(props) {
 
     function modalClicked(close) {
         setShowModal(false);
-        if (close) history.back();
+        if (close) goBack();
+    }
+
+    function goBack() {
+        if (props.back) FlowRouter.go(props.back);
+        else { history.back }
     }
 
     function renderButton() {
@@ -23,7 +28,7 @@ export default function NavigationBar(props) {
                 <Icon width="18px" image={"delete"} color={"blue-dark"} style={{marginTop: "2px"}}/>
             </button>)
         }
-        return (<button className="navigation-bar-button" onClick={() => history.back()}>
+        return (<button className="navigation-bar-button" onClick={() => goBack()}>
             <Icon width="18px" image={"back"} color={"blue-dark"} style={{marginTop: "2px"}}/>
         </button>)
     }

@@ -124,7 +124,7 @@ Meteor.methods({
     'mycoachprofile.getLatestProfile'({userID}) {
         check(userID, Number);
 
-        const profiles = MyCoachProfileCollection.find({userID: userID}, {sort: ({date: -1}), limit: 1}).fetch();
+        const profiles = MyCoachProfileCollection.find({userID: userID}, {sort: ({timestamp: -1}), limit: 1}).fetch();
         return profiles.length > 0 ? profiles[0].profile : undefined;
     },
     'mycoachprofile.getQuestionnaires'({userID}) {

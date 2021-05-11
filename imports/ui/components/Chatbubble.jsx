@@ -205,7 +205,7 @@ export function ChatbubbleText(props) {
         </div>}
         {(!hidden && input.length > 0) && 
             <div className={"chatbubble-ownchoice"} 
-                 onClick={() => props.onSubmit({content: input, response: props.message.response, sentBy: "user"})}>
+                 onClick={() => props.onSubmit({content: input, category: props.message.category, response: props.message.response, sentBy: "user"})}>
                 Verstuur
             </div>}
         </div>)
@@ -232,10 +232,10 @@ export function ChatbubbleEmotions(props) {
 
     function renderEmotions() {
         let emotionButtonsHTML = [], emotionsRowHTML = [], counter = 0, emotionRowKey = "";
-        for (const [emotion, information] of Object.entries(props.options)) {
-            const isSelected = Object.keys(selectedEmotions).includes(emotion);
-            emotionRowKey += emotion;
-            emotionsRowHTML.push(<Button key={emotion} size="small" outline isSelected={isSelected} width="fit" color="blue" style={{float: "right", marginRight: "8px"}} onClick={() => toggleEmotion(emotion, information)}>{emotion}</Button>)
+        for (const [emotionID, information] of Object.entries(props.options)) {
+            const isSelected = Object.keys(selectedEmotions).includes(emotionID);
+            emotionRowKey += emotionID;
+            emotionsRowHTML.push(<Button key={emotionID} size="small" outline isSelected={isSelected} width="fit" color="blue" style={{float: "right", marginRight: "8px"}} onClick={() => toggleEmotion(emotionID, information)}>{information.translation[props.language]}</Button>)
             if (counter >= 2) {
                 emotionButtonsHTML.push(<div key={emotionRowKey} style={{width: "100%"}}>{emotionsRowHTML}</div>);
                 emotionsRowHTML = [];
