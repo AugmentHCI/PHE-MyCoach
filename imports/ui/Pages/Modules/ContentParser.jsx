@@ -90,8 +90,8 @@ function ContentParser(props) {
             <div className="content-question-title">Vraag {number ? number : ""}</div>
             <div className="content-question-text">{question}</div>
             <div className="content-buttons">{buttonsHTML}</div>
-            {status === "correct" && <div className="content-answer-correct">{explanation ? onCorrect + " " + explanation : onCorrect}</div>}
-            {status === "incorrect" && <div className="content-answer-incorrect">{explanation ? onIncorrect + " " + explanation : onIncorrect}</div>}
+            {status !== "default" && !status.includes("incorrect") && <div className="content-answer-correct">{explanation ? onCorrect + " " + explanation : onCorrect}</div>}
+            {status !== "default" && status.includes("incorrect") && <div className="content-answer-incorrect">{explanation ? onIncorrect + " " + explanation : onIncorrect}</div>}
         </div>);
     };
 

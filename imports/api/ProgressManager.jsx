@@ -32,7 +32,11 @@ export default class ProgressManager {
 
     async resetUserProgress() {
         await Meteor.callPromise('mycoachprogress.resetUserProgress', {userID: this.userID});
-        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "PAINEDUCATION", submoduleID: "PE-MOD-1", status: "IN_PROGRESS"});
+        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "PAINEDUCATION", submoduleID: "PE_MOD_1", status: "IN_PROGRESS"});
+    }
+
+    async unlockAllUserProgress() {
+        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "PAINEDUCATION", submoduleID: "PE_MOD_1", status: "IN_PROGRESS"});
     }
 
     /**
@@ -151,8 +155,8 @@ function parseProgress(userData) {
 
 const template = {
         "PAINEDUCATION":    {"PE_MOD_1": "NOT_STARTED", "PE_MOD_2": "NOT_STARTED", "PE_MOD_3": "NOT_STARTED", "PE_MOD_4": "NOT_STARTED", "PE_MOD_5": "NOT_STARTED"},
-        "THOUGHTSEMOTIONS": {"TE_MOD_1": "NOT_STARTED", "TE_MOD_2": "NOT_STARTED"},
-        "ACTIVITYWORK":     {"ACT_MOD_1": "COMPLETED", "ACT_MOD_2": "COMPLETED", "ACT_MOD_3": "COMPLETED", "ACT_MOD_4": "COMPLETED", "ACT_MOD_5": "COMPLETED", "ACT_MOD_6": "COMPLETED", "ACT_MOD_7": "COMPLETED", "ACT_MOD_8": "COMPLETED", "ACT_MOD_9": "COMPLETED"},
+        "THOUGHTSEMOTIONS": {"TE_MOD_1": "NOT_STARTED", "TE_MOD_2": "NOT_STARTED", "TE_MOD_3": "NOT_STARTED", "TE_MOD_4": "NOT_STARTED", "TE_MOD_5": "NOT_STARTED", "TE_MOD_6": "NOT_STARTED"},
+        "ACTIVITYWORK":     {"ACT_MOD_1": "COMPLETED", "ACT_MOD_2": "COMPLETED", "ACT_MOD_3": "COMPLETED", "ACT_MOD_4": "COMPLETED", "ACT_MOD_5": "COMPLETED", "ACT_MOD_6": "COMPLETED", "ACT_MOD_7": "COMPLETED", "ACT_MOD_8": "COMPLETED", "ACT_MOD_9": "COMPLETED", "ACT_MOD_10": "COMPLETED"},
         "MOVEMENT": {},
         "STRESS": {},
         "SOCIAL": {}

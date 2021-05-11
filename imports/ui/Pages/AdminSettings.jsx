@@ -22,6 +22,9 @@ export default function AdminSettings(props) {
     const [deletedPainlogs, setDeletedPainlogs] = useState(false);
     const [unlockedPainlogbook, setUnlockedPainlogbook] = useState(false);
     const [addedPainlogs, setAddedPainlogs] = useState(false);
+    const [copiedRRNR, setCopiedRRNR] = useState(false);
+    const [copiedDeelnemerID, setCopiedDeelnemerID] = useState(false);
+    const [copiedJWT, setCopiedJWT] = useState(false);
 
     async function deletePainlogs() {
         await painLogbookManager.deleteUserLogs();
@@ -53,9 +56,23 @@ export default function AdminSettings(props) {
             <h3>Help-acties</h3>
             <Button color="blue" disabled={unlockedPainlogbook} onClick={() => unlockPainLogbook()}>{unlockedPainlogbook ? "Pijnlogboek ontgrendeld" : "Ontgrendel pijnlogboek"}</Button>
             <Button color="blue" disabled={addedPainlogs} onClick={() => addExamplePainlogs()}>{addedPainlogs ? "Voorbeeldlogs toegevoegd" : "Voeg voorbeeld-pijnlogs toe"}</Button>
+            <hr/>
+            <Button color="blue" disabled={copiedRRNR} 
+                onClick={() => {navigator.clipboard.writeText(jwt_decode(FlowRouter.getParam('token')).rrnr); setCopiedRRNR(true);}}>
+                    {copiedRRNR ? `RRNR-nummer gekopieerd: ${jwt_decode(FlowRouter.getParam('token')).rrnr}` : `Kopieer RRNR-nummer: ${jwt_decode(FlowRouter.getParam('token')).rrnr}`}
+            </Button>
+            {jwt_decode(FlowRouter.getParam('token')).deelnemerId && <Button color="blue" disabled={copiedDeelnemerID} 
+                onClick={() => {navigator.clipboard.writeText(jwt_decode(FlowRouter.getParam('token')).deelnemerId); setCopiedDeelnemerID(true);}}>
+                    {copiedDeelnemerID ? `Deelnemer ID gekopieerd: ${jwt_decode(FlowRouter.getParam('token')).deelnemerId}` : `Kopieer deelnemer ID: ${jwt_decode(FlowRouter.getParam('token')).deelnemerId}`}
+            </Button>}
+            <Button color="blue" disabled={copiedJWT} 
+                onClick={() => {navigator.clipboard.writeText(FlowRouter.getParam('token')); setCopiedJWT(true);}}>
+                    {copiedJWT ? `JWT token gekopieerd` : `Kopieer JWT token`}
+            </Button>
+            <hr/>
             <h3>Reset-acties</h3>
-            <Button color="blue" disabled={deletedProgress} onClick={() => deleteProgress()}>{deletedProgress ? "Progressie gewist" : "Wis mijn progressie"}</Button>
-            <Button color="blue" disabled={deletedPainlogs} onClick={() => deletePainlogs()}>{deletedPainlogs ? "Pijnlogs gewist" : "Wis mijn pijnlogs"}</Button>
+            <Button color="red" disabled={deletedProgress} onClick={() => deleteProgress()}>{deletedProgress ? "Progressie gewist" : "Wis mijn progressie"}</Button>
+            <Button color="red" disabled={deletedPainlogs} onClick={() => deletePainlogs()}>{deletedPainlogs ? "Pijnlogs gewist" : "Wis mijn pijnlogs"}</Button>
         </div>
     </div>
     )

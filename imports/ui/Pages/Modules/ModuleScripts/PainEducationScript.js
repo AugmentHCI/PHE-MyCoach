@@ -37,7 +37,7 @@ const PEMOD1 = {
                     correct: "Juist",
                     explanation: "Wanneer je je voet omslaat wordt dit geregistreerd door receptoren in de voet. Die receptoren werken als poorten en zorgen ervoor dat er ladingen de zenuwcel instromen. Bij voldoende ladingen wordt er een gevaarboodschap aangemaakt in de vorm van een elektrisch signaal.",
                     onCorrect: "Goed zo!",
-                    onIncorrect: "Deze stelling is juist"
+                    onIncorrect: "Deze stelling is juist."
                 },
                 {
                     id: "PE-MOD-1-Q2",
