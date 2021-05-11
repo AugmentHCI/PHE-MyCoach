@@ -60,7 +60,7 @@ export default function PainLogbook() {
         <div className="painlogbook-body">
             <div>
                 <div className="painlogbook-explanation">Heb je momenteel of recent last van een pijnscheut of aanzienlijk meer pijn? Voeg dit aan je pijnlogboek.</div>
-                <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>
+                <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/painlogbook/newentry`)}>Voeg toe aan je pijnlogboek</ActionButton>
             </div>
             <hr/>
             <h3>Jouw pijnlogs</h3>
