@@ -28,6 +28,7 @@ import AppModal from "../components/AppModal.jsx";
 import ModuleButton from "../components/MyCoach/ModuleButton.jsx";
 import Button from "../components/Button.jsx";
 import Illustration from "../components/Illustrations/Illustration.jsx";
+import Icon from "../components/Illustrations/Icon.jsx";
 
 /* Instance of React translate component, "Common" refers to the namespace of the i18n files */
 const T = i18n.createComponent("Common");
@@ -104,7 +105,7 @@ export default function MyCoach(props) {
             <h2>MIJN TODO'S</h2>
             <Popover1>
                 <React.Fragment>
-                    {userShortcuts && userShortcuts.some(e => e.shortcut === 'PAINLOGBOOK') && <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/painlogbook`)}>Voeg toe aan je pijnlogboek</ActionButton>}
+                    {userShortcuts && userShortcuts.some(e => e.shortcut === 'PAINLOGBOOK') && <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/painlogbook`)}>Bekijk je pijnlogboek</ActionButton>}
                     {userShortcuts && userShortcuts.some(e => e.shortcut === 'DAILY-COACHING') && <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>}
                 </React.Fragment>
             </Popover1>
@@ -250,7 +251,10 @@ export default function MyCoach(props) {
             {(tapCount >= 5 || props.noSplash || coachRRNRs.includes(userID)) && <React.Fragment>
             {handleIntroduction()}
             {userProgress && <FadeIn>
-                <h1>My Coach</h1>
+                <div style={{display: "flex"}}>
+                    <h1>My Coach</h1>
+                    <button className="settings-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/adminsettings`)}> <Icon width="24px" image={"settings"} color={"blue-dark"}/></button>
+                </div>
                 {renderTodos()}
                 {renderModules()}
             </FadeIn>}</React.Fragment>}
