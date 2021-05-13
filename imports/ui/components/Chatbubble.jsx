@@ -127,7 +127,7 @@ export function ChatbubbleThoughtsReactions(props) {
         else {
             const optionsHTML = [];
             for (const [option, information] of Object.entries(selectedOptions)) {
-                optionsHTML.push(<Option key={"selected-"+option} checked onChange={() => toggleOption(option, "deselect")}>{option}</Option>)
+                optionsHTML.push(<Option key={"selected-"+option} checked onChange={() => toggleOption(option, "deselect")}>{information.translation[props.language]}</Option>)
             }
             optionsHTML.push()
             return optionsHTML;
@@ -135,13 +135,13 @@ export function ChatbubbleThoughtsReactions(props) {
     }
 
     /**
-     * Render all options that the user van choose from.
+     * Render all options that the user can choose from.
      */
     function renderUnselectedOptions() {
         const optionsHTML = [];
         for (const [option, information] of Object.entries(unselectedOptions)) {
             if (filterSearchTerms(searchTerm).length < 1) {
-                optionsHTML.push(<Option key={"unselected-"+option} onChange={() => toggleOption(option, "select")}>{option}</Option>)
+                optionsHTML.push(<Option key={"unselected-"+option} onChange={() => toggleOption(option, "select")}>{information.translation[props.language]}</Option>)
             }
             else {
                 let highlighted = null;

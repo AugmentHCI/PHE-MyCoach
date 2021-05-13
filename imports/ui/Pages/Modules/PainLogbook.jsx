@@ -48,7 +48,7 @@ export default function PainLogbook() {
             painLogsHTML.push(<div key={painLog._id} className="painlogbook-entry">
                 <p><b>Datum:</b> {moment(painLog.timestamp).format("DD MMMM")}</p>
                 <p><b>Activiteit:</b> {painLog.context} - {painLog.activity}</p>
-                <p><b>Inteinsiteit:</b> {painLog.intensity}</p>
+                <p><b>Intensiteit:</b> {painLog.intensity}</p>
                 <p><b>Emoties:</b> {emotionsHTML}</p>
             </div>)
         })

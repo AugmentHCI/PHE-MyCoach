@@ -267,6 +267,7 @@ export default function PainLogbookEntry() {
                         message={message}
                         options={message.content === "thoughts" ? thoughts : reactions} 
                         fillerWords={fillerWords}
+                        language={language}
                         onSubmit={hangleTERinput}/>);
                     break;
                 case "recommendation-next":
