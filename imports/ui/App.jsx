@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import NavigationBar from '../ui/components/NavigationBar.jsx';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../client/main.scss';
 
@@ -15,6 +13,6 @@ class App extends Component {
       </div>
     )
   }
-};
+}
 
 export default App;

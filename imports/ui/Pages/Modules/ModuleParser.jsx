@@ -142,7 +142,7 @@ export default function ModuleParser(props) {
 
     function renderSubmodules() {
         if (module === "ACTIVITYWORK") return (<div>
-            <hr/>
+            <hr color="var(--idewe-blue)"/>
             <h3>MIJN TRAJECT</h3>
             <div className="category-scale-text">Belasting</div>
             <Icon image="scale" width="10%" color="blue-dark"/>
