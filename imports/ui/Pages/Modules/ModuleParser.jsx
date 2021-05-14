@@ -33,10 +33,10 @@ export default function ModuleParser(props) {
     const [userProgress, updateUserProgress] = useState(undefined);
     const [openSubmodule, updateOpenSubmodule] = useState("");
     /* Get states from URL parameters */
-    const [module, setModule] = useState(FlowRouter.getParam('module').toUpperCase());
-    const [language, setLanguage] = useState(FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE");
+    const module = FlowRouter.getParam('module').toUpperCase();
+    const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
     const userToken = FlowRouter.getParam('token');
-    const [userID, setUserID] = useState(FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111);
+    const userID = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
 
     /**
      * Fetches and sets the correct module data, depending on the 
