@@ -109,14 +109,13 @@ export default function ModuleParser(props) {
         const moduleCardsCol2HTML = [];
         moduleData.submodules.forEach(submodule => {
             const status = userProgress[module][submodule.id];
-            const moduleTile = <ModuleTile 
+            const moduleTile = <FadeIn><ModuleTile 
                 key={submodule.id}
                 id={submodule.id}
                 title={submodule.shortTitle}
                 icon={submodule.icon}
                 onClick={() => showSubmoduleModal(submodule.id)}
-                status={status}>
-            </ModuleTile>
+                status={status}/></FadeIn>;
             if (submodule.part < 5) moduleCardsCol1HTML.push(moduleTile);
             else { moduleCardsCol2HTML.push(moduleTile); }
         });
@@ -142,11 +141,11 @@ export default function ModuleParser(props) {
 
     function renderSubmodules() {
         if (module === "ACTIVITYWORK") return (<div>
-            <hr color="var(--idewe-blue)"/>
+            <hr style={{borderTop:"var(--idewe-blue) 1px solid", width:"85%"}}/>
             <h3>MIJN TRAJECT</h3>
             <div className="category-scale-text">Belasting</div>
             <Icon image="scale" width="10%" color="blue-dark"/>
-            <div className="category-scale-text">Belastbaarheid</div>
+            <div className="category-scale-text-last">Belastbaarheid</div>
             { renderSubmodulesTiles() }
         </div>);
         return (<FadeIn>
@@ -172,12 +171,12 @@ export default function ModuleParser(props) {
             defaultColor={settings[userProgress[module][submodule.id]].color} 
             show={showModal}>
             <div className="modalpopup-top">
-                <Illustration image={submodule.image} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
-                <div className={"module-card-number"}>Onderdeel {submodule.part}</div>
-                <div className={"modalpopup-card-title"}>{submodule.titleMarkup[0]}</div>
-                {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title"}>{submodule.titleMarkup[1]}</div>}
+                <Illustration image={submodule.image + (locked ? "-locked" : "")} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
+                <div className={"module-card-number" + (locked ? "-locked" : "")}>Onderdeel {submodule.part}</div>
+                <div className={"modalpopup-card-title" + (locked ? "-locked" : "")}>{submodule.titleMarkup[0]}</div>
+                {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title" + (locked ? "-locked" : "")}>{submodule.titleMarkup[1]}</div>}
             </div>
-            <div className="modalpopup-body">
+            <div className={"modalpopup-body" + (locked ? "-locked" : "")}>
                 <div>
                     <PillButton contentColor="white" fillColor={locked ? "gray-light" : "blue"} icon="time">{submodule.duration}</PillButton>
                     <PillButton contentColor="white" fillColor={locked ? "gray-light" : "blue"} icon="information">{submodule.type}</PillButton>

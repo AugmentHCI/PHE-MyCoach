@@ -19,4 +19,6 @@
 .modal-footer {
     border-top: none !important;
     justify-content: center !important;
+    display: flex;
+    gap: 10px;
 }
