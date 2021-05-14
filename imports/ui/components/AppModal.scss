@@ -13,8 +13,10 @@
 .modal-body {
     font-family: var(--main-font);
     color: var(--idewe-black);
+    padding: 0 !important;
 }
 
 .modal-footer {
     border-top: none !important;
+    justify-content: center !important;
 }

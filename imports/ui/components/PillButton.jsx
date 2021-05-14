@@ -33,7 +33,7 @@ export default function PillButton(props) {
         if (!needsOutline) return (<div className={"pill-button-icon"} style={{backgroundColor: color}}>       
             <Icon width="12px" image={props.icon} color={backgroundColor}/>
         </div>);
-        else return (<Icon width="16px" image={props.icon} color={props.contentColor ? props.contentColor : "blue"} style={{float:"left", marginTop:"3px"}}></Icon>);
+        else return (<Icon width="16px" image={props.icon} color={props.contentColor ? props.contentColor : "blue"} style={{float:"left", marginTop:"2px"}}></Icon>);
     }
 
     return (

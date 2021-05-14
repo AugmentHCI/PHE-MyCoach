@@ -14,3 +14,94 @@
     font-weight: 500;
     color: var(--idewe-blue-dark);
 }
+
+.container h3 {
+    font-family: var(--main-font);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--idewe-blue-dark);
+}
+
+.tiles-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.tiles-column {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.tiles-column:not(:last-child) {
+    border-right: var(--idewe-blue) solid 2px;
+    padding-right: 5px;
+}
+
+.tiles-hr {
+    position: relative;
+    background: white;
+    height: 3px;
+    width: 75px;
+    align-self: flex-start;
+    margin: 0;
+}
+
+.category-scale-text {
+    width: 43%;
+    font-family: var(--main-font);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--idewe-blue-dark);
+    display: inline-flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.category-scale-text:last-child {
+    font-size: 16px;
+    width: 47%;
+}
+
+.modalpopup-top {
+    position: relative;
+    height: 160px;
+    width: 100%;
+    background-color: var(--idewe-background-solid);
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.modalpopup-body {
+    padding: 15px;
+    padding-bottom: 0;
+    font-family: var(--main-font);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--idewe-blue-dark);
+    line-height: 1.5em;
+}
+
+.modalpopup-card-title {
+    color: var(--idewe-blue-dark);
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 30px;
+    margin-left: 20px;
+    line-height: 35px;
+    z-index: 2;
+
+    &-locked {
+        @extend .modalpopup-card-title;
+        color: var(--idewe-gray-dark);
+    }
+}
+
+.modalpopup-card-title:last-child {
+    margin-bottom: 15px;
+}

@@ -27,12 +27,12 @@ export default function AppModal(props) {
       {props.title && <Modal.Header>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>}
-      <Modal.Body>{props.children}</Modal.Body>
+      <Modal.Body style={{padding: "0 !important"}}>{props.children}</Modal.Body>
       <Modal.Footer>
         {!props.backOption && <Button color="blue" width="fit" center onClick={handleDefault}>{defaultOption}</Button>}
         {props.backOption && <React.Fragment>
           <Button color="gray-light" width="45%" center onClick={handleBack}>{props.backOption}</Button>
-          <Button color="blue" width="45%" center onClick={handleDefault}>{defaultOption}</Button>
+          <Button color={props.defaultColor ? props.defaultColor : "blue"} width="45%" center onClick={handleDefault}>{defaultOption}</Button>
         </React.Fragment>}
       </Modal.Footer>
     </Modal>

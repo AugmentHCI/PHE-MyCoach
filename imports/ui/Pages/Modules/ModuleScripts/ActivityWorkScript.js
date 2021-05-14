@@ -1,12 +1,14 @@
 const ACTMOD1 = {
     id: "ACT_MOD_1",
-    title: "Belasting en belastbaarheid?",
-    titleMarkup: ["Belasting en", "belastbaarheid?"],
+    title: "Wat is belasting?",
+    titleMarkup: ["Wat is", "belasting?"],
+    shortTitle: "Belasting",
     part: 1,
     description: "Belasting is alles wat je fysiek en psychisch ondergaat in de loop van de dag. Bijvoorbeeld: je werk, huishoudelijke taken, vrije tijd, stress, … Ervaar jij een hoge of lage belasting? Hoe ga je hier mee om?",
     duration: "10 minuten",
     type: "Informatief",
     image: "learning",
+    icon: "weight",
     imageWidth: "180px",
     cards: [{
             title: "Inleiding",
@@ -102,11 +104,13 @@ const ACTMOD2WORK = {
     id: "ACT_MOD_2",
     title: "Werk",
     titleMarkup: ["Belasting -", "Werk"],
+    shortTitle: "Werk",
     part: 2,
     description: "Kan je best rusten als je pijn hebt of net niet? Of ga je naar je werk als je pijn hebt? Vragen die we bespreken tijdens deze module.",
     duration: "10 minuten",
     type: "Informatief",
     image: "learning",
+    icon: "work",
     imageWidth: "180px",
     cards: [{
             title: "Reflectie met stelling (Activiteiten)",
@@ -270,11 +274,13 @@ const ACTMOD3ERGO = {
     id: "ACT_MOD_3",
     title: "Ergonomie",
     titleMarkup: ["Belasting -", "Ergonomie"],
+    shortTitle: "Ergonomie",
     part: 3,
     description: "Heb jij soms pijn bij het uitvoeren van werkgerelateerde taken? Weet je niet goed hoe je een taak op een ergonomische manier kan uitvoeren? Lees dan zeker deze module!",
     duration: "10 minuten",
     type: "Informatief",
     image: "learning",
+    icon: "ergo",
     imageWidth: "180px",
     cards: [{
             title: "Ergonomie",
@@ -403,16 +409,17 @@ const ACTMOD3ERGO = {
     ]
 }
 
-
 const ACTMOD4MGMT = {
     id: "ACT_MOD_4",
     title: "Activiteitenmanagement",
-    titleMarkup: ["Belasting -", "Activiteitenmanagement"],
+    titleMarkup: ["Activiteiten-", "management"],
+    shortTitle: "Act.management",
     part: 4,
     description: "Vind je het moeilijk om een evenwicht te vinden tussen jouw activiteiten en rust? In de module activiteitenmanagement krijg je tips om beter te leren omgaan met je energie.",
     duration: "10 minuten",
     type: "Informatief",
     image: "learning",
+    icon: "writing",
     imageWidth: "180px",
     cards: [{
             title: "Inleiding",
@@ -503,12 +510,14 @@ const ACTMOD4MGMT = {
 const ACTMOD5 = {
     id: "ACT_MOD_5",
     title: "Belastbaarheid",
-    titleMarkup: ["Belastbaarheid"],
+    titleMarkup: ["Wat is belast-", "baarheid?"],
+    shortTitle: "Belastbaarheid",
     part: 5,
     description: "Belastbaarheid of draagkracht is datgene wat je fysiek en mentaal aan kan. Hoe is jouw belastbaarheid? In deze module krijg je handvaten om je belastbaarheid te verhogen.",
     duration: "10 minuten",
     type: "Informatief",
     image: "learning",
+    icon: "lifting",
     imageWidth: "180px",
     cards: [{
             title: "Inleiding",
@@ -590,12 +599,14 @@ const ACTMOD5 = {
 const ACTMOD6MOV = {
     id: "ACT_MOD_6",
     title: "Gezond bewegen",
-    titleMarkup: ["Belastbaarheid - Gezond bewegen"],
+    titleMarkup: ["Belastbaarheid -", "Gezond bewegen"],
+    shortTitle: "Gezond bewegen",
     part: 6,
     description: "Hoe kan je gezond bewegen inbouwen in jouw dagelijks leven? Dit leer in je deze module.",
     duration: "10 minuten",
     type: "Informatief",
     image: "learning",
+    icon: "running",
     imageWidth: "180px",
     cards: [{
             title: "Inleiding",
@@ -624,12 +635,14 @@ const ACTMOD6MOV = {
 const ACTMOD7FOOD = {
     id: "ACT_MOD_7",
     title: "Gezonde voeding",
-    titleMarkup: ["Belastbaarheid - Gezonde voeding"],
+    titleMarkup: ["Belastbaarheid-", "Gezonde voeding"],
+    shortTitle: "Gezonde voeding",
     part: 7,
     description: "Hoe kan je gezond bewegen inbouwen in jouw dagelijks leven? Dit leer in je deze module.",
     duration: "10 minuten",
     type: "Informatief",
     image: "learning",
+    icon: "food",
     imageWidth: "180px",
     cards: [
         {
@@ -897,12 +910,14 @@ const ACTMOD7FOOD = {
 const ACTMOD8RES = {
     id: "ACT_MOD_8",
     title: "Veerkracht",
-    titleMarkup: ["Belastbaarheid - Veerkracht"],
+    titleMarkup: ["Belastbaarheid -" , "Veerkracht"],
+    shortTitle: "Veerkracht",
     part: 8,
     description: "Veerkracht is het vermogen om je aan te passen aan stress en tegenslag en daar misschien zelfs sterker uit te komen. Hoe veer je terug na herval of na een acute pijn op stoot?",
     duration: "10 minuten",
     type: "Informatief",
     image: "learning",
+    icon: "feather",
     imageWidth: "180px",
     cards: [
         {
@@ -936,12 +951,14 @@ const ACTMOD8RES = {
 const ACTMOD9SLP = {
     id: "ACT_MOD_9",
     title: "Nachtrust",
-    titleMarkup: ["Belastbaarheid - Nachtrust"],
+    titleMarkup: ["Belastbaarheid -", "Nachtrust"],
+    shortTitle: "Nachtrust",
     part: 9,
     description: "Slaap je goed? Ook slaap versterkt je basis. Lees hier de belangrijkste tips rond slaapkwaliteit.",
     duration: "10 minuten",
     type: "Informatief",
     image: "learning",
+    icon: "sleep",
     imageWidth: "180px",
     cards: [
         {
