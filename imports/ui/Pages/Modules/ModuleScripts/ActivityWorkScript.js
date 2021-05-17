@@ -746,11 +746,7 @@ const ACTMOD7FOOD = {
                     content: "Vaak praten we onszelf enkele smoesjes in om ons te doen geloven dat gezond eten niet haalbaar is. Maar we gaan met enkele voorbeelden aantonen waarom deze smoesjes toch niet goed zijn..."
                 },
                 {
-                    type: "Textballon",
-                    content: "Maak van de quotes nog leuke tekstballonnen of quotes"
-                },
-                {
-                    type: "Text",
+                    type: "TextBubble",
                     content: "“Ik ontbijt niet want ik wil vermageren”"
                 },
                 {
@@ -758,15 +754,16 @@ const ACTMOD7FOOD = {
                     content: ["Je eet de calorieën er toch weer aan!", "Niet ontbijten doet je in de loop van de voormiddag grijpen naar suikers en vetrijke tussendoortjes"]
                 },
                 {
-                    type: "Text",
-                    content: "“Ik kan onmogelijk 300 gram groenten eten per dag”"
+                    type: "TextBubble",
+                    content: "“Ik kan onmogelijk 300 gram groenten eten per dag”",
+                    float: "right"
                 },
                 {
                     type: "List",
                     content: ["Zet voor het eten alvast een schaaltje met kerstomaten, stukjes komkommer of wortelreepjes op tafel", "Of zet een schaaltje snoepgroenten op je bureau of in de keuken naast je werkblad.", "Leg groenten tussen je boterhammen", "Verwerk ook groenten in puree", "Maak een lekkere, verse soep", "Haal diepvriesgroenten in huis: ze zijn op drukke dagen een goed en snel alternatief"]
                 },
                 {
-                    type: "Text",
+                    type: "TextBubble",
                     content: "“Als tussendoortjes neem ik een koek, dit is makkelijk en snel”"
                 },
                 {

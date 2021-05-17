@@ -288,6 +288,13 @@ function ContentParser(props) {
         <Button style={{marginTop: "10px", opacity:"0", animation:"fadeIn 2s ease-in "+ data.content.length*4+"s 1 normal forwards"}} onClick={() => confirmDone()}>Klaar</Button></div>)
     }
 
+    function createTextBubbleContent(data) {
+        const className = data.float === "right" ? "tri-left content-textbubble-container-right left-in" : "tri-right content-textbubble-container right-in";
+        return (<div className={className}>
+            {data.content}
+        </div>)
+    }
+
     useEffect(() => {
         displayContent(props.data.showIf);
     }, []);
@@ -351,6 +358,8 @@ function ContentParser(props) {
                 return createDelayedDisplayContent(props.data);
             case 'Swipe':
                 return createSwipeContent(props.data);
+            case 'TextBubble':
+                return createTextBubbleContent(props.data);
             case 'Break':
                 return <hr/>;
             default:
