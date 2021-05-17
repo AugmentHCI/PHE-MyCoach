@@ -29,6 +29,14 @@ import ModuleButton from "../components/MyCoach/ModuleButton.jsx";
 import Button from "../components/Button.jsx";
 import Illustration from "../components/Illustrations/Illustration.jsx";
 import Icon from "../components/Illustrations/Icon.jsx";
+import PillButton from "../components/PillButton.jsx";
+
+/* Import coaching modules */
+import PainEducationScript from './Modules/ModuleScripts/PainEducationScript.js';
+import ThoughtsEmotionsScript from './Modules/ModuleScripts/ThoughtsEmotionsScript.js';
+import ActivityWorkScript from './Modules/ModuleScripts/ActivityWorkScript.js';
+
+import { shortcuts } from "../Pages/Modules/ModuleScripts/Shortcuts"
 
 /* Instance of React translate component, "Common" refers to the namespace of the i18n files */
 const T = i18n.createComponent("Common");
@@ -38,7 +46,6 @@ export default function MyCoach(props) {
     const language  = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
     const userID    = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     const userToken = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : "demo";
-
 
     /* Instantiate managers for progress and interaction retrieval/handling */
     const interactionManager = new InteractionManager(userID);
@@ -51,10 +58,12 @@ export default function MyCoach(props) {
 
     const [userProgress, setUserProgress] = useState(undefined);
     const [userShortcuts, setUserShortcuts] = useState(undefined);
+    const [userDailyCoaching, setUserDailyCoaching] = useState(undefined);
     const [userData, setUserData] = useState(props.data ? (Object.entries(props.data).length === 0 ? UserData : props.data) : undefined);
 
-    const [showIntroductionModal, setShowIntroductionModal] = useState(undefined);
-    const [showIntroductionVideo, setShowIntroductionVideo] = useState(undefined);
+    const [showIntroductionModal, setShowIntroductionModal] = useState(false);
+    const [showIntroductionVideo, setShowIntroductionVideo] = useState(false);
+    const [showCoachingModal, setShowCoachingModal] = useState(false);
     const [showTutorial1, updateShowTutorial1] = useState(undefined);
     const [showTutorial2, updateShowTutorial2] = useState(undefined);
     const [showTutorial3, updateShowTutorial3] = useState(undefined);
@@ -102,11 +111,17 @@ export default function MyCoach(props) {
 
     function renderTodos() {
         return (<React.Fragment>
-            <h2>MIJN TODO'S</h2>
+            <h2>MIJN SHORTCUTS</h2>
             <Popover1>
                 <React.Fragment>
-                    {userShortcuts && userShortcuts.some(e => e.shortcut === 'PAINLOGBOOK') && <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/painlogbook`)}>Bekijk je pijnlogboek</ActionButton>}
-                    {userShortcuts && userShortcuts.some(e => e.shortcut === 'DAILY-COACHING') && <ActionButton icon={"idea"}>Bekijk je coaching van de dag</ActionButton>}
+                    <ActionButton icon={shortcuts["DAILY-COACHING"].icon} onClick={() => setShowCoachingModal(true)}>{shortcuts["DAILY-COACHING"].translation[language]}</ActionButton>
+                    {userShortcuts && userShortcuts.map(shortcut => {
+                        return <ActionButton icon={shortcuts[shortcut.shortcut].icon} 
+                                             onClick={() => {
+                                                 if (shortcuts[shortcut.shortcut].link) { FlowRouter.go(`/${language}/mycoach/${userToken}/${shortcuts[shortcut.shortcut].link}`) } 
+                                                 else { setShowCoachingModal(true) } }}>
+                                    {shortcuts[shortcut.shortcut].translation[language]}
+                                </ActionButton>})}
                 </React.Fragment>
             </Popover1>
         </React.Fragment>)
@@ -145,11 +160,49 @@ export default function MyCoach(props) {
         </React.Fragment>)
     }
 
+    function renderDailyCoachingModal() {
+        if (!userDailyCoaching) return <React.Fragment/>;
+        let submodule = "";
+        switch (userDailyCoaching.split("_")[0]) {
+            case "PE":
+                submodule = PainEducationScript.submodules.filter(submoduleData => submoduleData.id === userDailyCoaching)[0];
+                break;
+            case "TE":
+                submodule = ThoughtsEmotionsScript.submodules.filter(submoduleData => submoduleData.id === userDailyCoaching)[0];
+                break;
+            case "ACT":
+                submodule = ActivityWorkScript.submodules.filter(submoduleData => submoduleData.id === userDailyCoaching)[0];
+                break;
+        }
+
+        return (<AppModal
+            backOption="Sluit" 
+            notifyBack={() => setShowCoachingModal(false)} 
+            notifyParent={() => {console.log("Implement")}}
+            defaultOption="Bekijk" 
+            defaultColor="blue"
+            show={showCoachingModal}>
+            <div className="modalpopup-top">
+                <Illustration image={submodule.image} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
+                <div className={"module-card-number"}>Onderdeel {submodule.part}</div>
+                <div className={"modalpopup-card-title"}>{submodule.titleMarkup[0]}</div>
+                {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title"}>{submodule.titleMarkup[1]}</div>}
+            </div>
+            <div className={"modalpopup-body"}>
+                <div>
+                    <PillButton contentColor="white" fillColor={"blue"} icon="time">{submodule.duration}</PillButton>
+                    <PillButton contentColor="white" fillColor={"blue"} icon="information">{submodule.type}</PillButton>
+                </div>
+                {submodule.description}
+            </div>
+        </AppModal>)
+    }
+
     function Popover1(popoverProps) {
         return (<Popover
             content={<div className="tutorial-content">
-                <h4>Je todo's</h4>
-                Hier zie jij je dagelijkse todo's waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog shortcuts toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
+                <h4>Je shortcuts</h4>
+                Hier zie jij je snelkoppelingen waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog snelkoppelingen toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
                 <div className="tutorial-button-row">
                     <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial1(false)}>Volgende</Button>
                 </div>
@@ -209,7 +262,9 @@ export default function MyCoach(props) {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
             const progress = await progressManager.getUserProgress();
+            const dailyCoaching = await progressManager.getDailyCoaching();
             setUserProgress(progress);
+            setUserDailyCoaching(dailyCoaching);
         }
         async function fetchUserData() {
             const latestUserData = await profileManager.getLatestQuestionnaire();
@@ -217,13 +272,13 @@ export default function MyCoach(props) {
             progressManager.setProfile(latestUserData.data.profile);
         }
         async function fetchUserShortcuts() {
-            const shortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
-            if (shortcuts.length === 0) {
+            const fetchedShortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
+            if (fetchedShortcuts.length === 0) {
                 shortcutManager.upsertShortcut("DAILY-COACHING", "MAIN", "LOCKED");
                 setUserShortcuts([{shortcut: "DAILY-COACHING", screen: "MAIN", status: "LOCKED"}]);
             }
             else {
-                setUserShortcuts(shortcuts);
+                setUserShortcuts(fetchedShortcuts);
             }
             
         }
@@ -250,6 +305,7 @@ export default function MyCoach(props) {
             {(tapCount < 5 && !props.noSplash && !coachRRNRs.includes(userID)) && renderSplashScreen()}
             {(tapCount >= 5 || props.noSplash || coachRRNRs.includes(userID)) && <React.Fragment>
             {handleIntroduction()}
+            {showCoachingModal && renderDailyCoachingModal()}
             {userProgress && <FadeIn>
                 <div style={{display: "flex"}}>
                     <h1>My Coach</h1>

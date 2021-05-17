@@ -181,15 +181,7 @@ Meteor.methods({
         check(shortcut, String);
         check(screen, String);
         check(status, String);
-/*
-        MyCoachShortcutCollection.insert({
-            // Selector
-            userID: userID,
-            shortcut: shortcut,
-            screen: screen,
-            status: status,
-        });
-        */
+
         MyCoachShortcutCollection.upsert({
             // Selector
             userID: userID,

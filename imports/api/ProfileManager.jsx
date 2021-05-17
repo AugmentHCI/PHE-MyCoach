@@ -71,7 +71,6 @@ export default class ProfileManager {
             data = data.concat(fetchedData.data);
             questionnaires = this.convertRawDataToQuestionnaires(data);
         }
-        console.log(this.processQuestionnaires(questionnaires))
         return questionnaires;
     }
 
@@ -126,12 +125,10 @@ export default class ProfileManager {
                 if (question.vragenlijstId !== 3 && question.vragenlijstId !== 5 && Object.keys(fillerQuestionCodesNew).includes(question.vraagId)) console.log(question);
             }
         });
-        console.log(questionnaires)
         return questionnaires;
     }
     
     processQuestionnaires(questionnaires) {
-        console.log(questionnaires);
         /* Initialize processedQuestionnaire */
         let processedQuestionnaire = {};
         for (const [questionnaireDate,] of Object.entries(questionnaires)) { processedQuestionnaire[questionnaireDate] = {} }

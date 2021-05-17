@@ -1123,7 +1123,6 @@ const TEMOD6 = {
     ]
 }
 
-
 const ThoughtsEmotionsScript = {
     id: "TE",
     title: "Gedachten en Emoties",

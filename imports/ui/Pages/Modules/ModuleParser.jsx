@@ -2,18 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import FadeIn from 'react-fade-in';
 
-/* Import internationalization files */
-import i18n from 'meteor/universe:i18n';
-import "../../../../i18n/nl.i18n.json"
-import "../../../../i18n/fr.i18n.json"
-import "../../../../i18n/en.i18n.json"
-
 import jwt_decode from "jwt-decode";
 
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
 import ActivityWorkScript from './ModuleScripts/ActivityWorkScript';
 import ProgressManager from "../../../api/ProgressManager.jsx";
+import ShortcutManager from "../../../api/ShortcutManager.jsx";
 
 /* Import components */
 import ActionButton from '../../components/ActionButton.jsx';
@@ -24,13 +19,11 @@ import Illustration from "../../components/Illustrations/Illustration.jsx";
 import NavigationBar from '../../components/NavigationBar.jsx';
 import ModuleCard from '../../components/MyCoach/ModuleCard.jsx';
 import ModuleTile from '../../components/MyCoach/ModuleTile.jsx';
-import './ModuleParser.scss';
 import AppModal from '../../components/AppModal';
 
+import { shortcuts as shortcutData } from "./ModuleScripts/Shortcuts";
 
-
-// Instance of React translate component, "Common" refers to the namespace of the i18n files
-const T = i18n.createComponent("Common");
+import './ModuleParser.scss';
 
 export default function ModuleParser(props) {
 
@@ -41,11 +34,17 @@ export default function ModuleParser(props) {
     const [showModal, setShowModal] = useState(false);
     const [selectedSubmodule, setSelectedSubmodule] = useState(undefined);
 
+    const [shortcuts, setShortcuts] = useState([]);
+    const [dailyCoaching, setDailyCoaching] = useState(undefined);
+
     /* Get states from URL parameters */
     const module = FlowRouter.getParam('module').toUpperCase();
     const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
     const userToken = FlowRouter.getParam('token');
     const userID = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
+
+    const progressManager = new ProgressManager(userID);
+    const shortcutManager = new ShortcutManager(userID);
 
     /**
      * Fetches and sets the correct module data, depending on the 
@@ -131,10 +130,19 @@ export default function ModuleParser(props) {
     }
 
     function renderShortcuts() {
+        let shortcutButtonsHTML = [];
+        shortcuts.forEach(shortcut => {
+            if (["DEFAULT", "PINNED"].includes(shortcut.status)) shortcutButtonsHTML.push(<ActionButton size="small" icon={shortcutData[shortcut.shortcut].icon}>
+                {shortcutData[shortcut.shortcut].translation[language]}
+            </ActionButton>);
+            if (["LOCKED"].includes(shortcut.status)) shortcutButtonsHTML.push(<ActionButton size="small" icon="locked" color="gray-dark">
+                {shortcutData[shortcut.shortcut].translation[language]}
+            </ActionButton>);
+        })
         return (<Card title="MIJN SHORTCUTS" noTranslate>
             <FadeIn delay="80">
-                <ActionButton size="small">Voeg toe aan je pijnlogboek</ActionButton>
-                <ActionButton size="small">Bekijk je coaching van de dag</ActionButton>
+                <ActionButton icon={"idea"} size="small" onClick={() => showSubmoduleModal(dailyCoaching)}>Bekijk je dagelijkse coaching</ActionButton>
+                { shortcutButtonsHTML }
             </FadeIn>
         </Card>)
     }
@@ -164,7 +172,7 @@ export default function ModuleParser(props) {
         const locked = ["NOT_STARTED", "TO_START"].includes(userProgress[module][submodule.id]);
 
         return (<AppModal 
-            backOption="Terug" 
+            backOption="Sluit" 
             notifyBack={() => setShowModal(false)} 
             notifyParent={() => {if (!locked) routeToSubmodule(selectedSubmodule)}}
             defaultOption={settings[userProgress[module][submodule.id]].text} 
@@ -191,11 +199,18 @@ export default function ModuleParser(props) {
         fetchModuleData();
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
-            const progressManager = new ProgressManager(userID);
             const progress = await progressManager.getModuleProgress(module);
             updateUserProgress(progress);
         }
+        /* Wrap in async function, as getModuleProgress is async */
+        async function fetchShortcuts() {
+            const fetchedShortcuts = await shortcutManager.getShortcuts(module, "ANY");
+            const fetchedDailyCoaching = await progressManager.getModuleDailyCoaching(module);
+            setShortcuts(fetchedShortcuts);
+            setDailyCoaching(fetchedDailyCoaching);
+        }
         fetchUserProgress();
+        fetchShortcuts();
     }, []);
 
     if (!moduleData) {return <div className="container">Module "{FlowRouter.getParam('module')}" does not exist.</div>}

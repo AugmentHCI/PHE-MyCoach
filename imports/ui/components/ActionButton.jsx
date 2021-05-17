@@ -4,12 +4,13 @@ import './ActionButton.scss';
 import Icon from './Illustrations/Icon.jsx';
 
 export default function ActionButton(props) {
-    
-    const T = i18n.createComponent("Common");
 
     const [isPressed, press] = useState(false);
 
     const pressClass = isPressed ? "actionbutton pressed" : "actionbutton"
+
+    let style = {};
+    style["backgroundColor"] = props.color ? `var(--idewe-${props.color})` : "var(--idewe-blue)";
 
     function handleOnClick() {
         press(false); 
@@ -20,9 +21,10 @@ export default function ActionButton(props) {
         <button className={pressClass} 
                 onTouchStart={() => press(true)} 
                 onClick={() => handleOnClick()} 
-                onTouchEnd={() => press(false)}>
+                onTouchEnd={() => press(false)}
+                style={style}>
             {props.icon && <div className="actionbutton-icon">
-                <Icon width="22px" image={props.icon} color={"blue"} style={{marginTop: "7px", marginLeft: "2px"}}/>
+                <Icon width="22px" image={props.icon} color={props.color ? props.color : "blue"} style={{marginTop: "6px"}}/>
             </div>}
             <div className={props.size === "small" ? "actionbutton-text-small" : "actionbutton-text"}>
                 {props.children}

@@ -30,6 +30,28 @@ export default class ProgressManager {
         return parseProgress(moduleUserData);
     }
 
+    async getDailyCoaching() {
+        const moduleUserData = await Meteor.callPromise('mycoachprogress.getUserProgress', {userID: this.userID});
+        const parsedModuleData = parseProgress(moduleUserData);
+        for (const module in parsedModuleData) {
+            /* Return first IN_PROGRESS module if available */
+            for (const submodule of Object.keys(parsedModuleData[module])) { if (parsedModuleData[module][submodule] === "IN_PROGRESS") return submodule; }
+            /* Return first NOT_STARTED module if available */
+            for (const submodule of Object.keys(parsedModuleData[module])) { if (parsedModuleData[module][submodule] === "TO_START") return submodule; }
+        }
+        return undefined;
+    }
+
+    async getModuleDailyCoaching(module) {
+        const moduleUserData = await Meteor.callPromise('mycoachprogress.getModuleProgress', {userID: this.userID, moduleID: module});
+        const parsedModuleData = parseProgress(moduleUserData)[module];
+        /* Return first IN_PROGRESS module if available */
+        for (const submodule of Object.keys(parsedModuleData)) { if (parsedModuleData[submodule] === "IN_PROGRESS") return submodule; }
+        /* Return first NOT_STARTED module if available */
+        for (const submodule of Object.keys(parsedModuleData)) { if (parsedModuleData[submodule] === "TO_START") return submodule; }
+        return undefined;
+    }
+
     async resetUserProgress() {
         await Meteor.callPromise('mycoachprogress.resetUserProgress', {userID: this.userID});
         await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "PAINEDUCATION", submoduleID: "PE_MOD_1", status: "IN_PROGRESS"});
@@ -49,13 +71,14 @@ export default class ProgressManager {
         await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: module, submoduleID: submodule, status: status});
         const allUserData = await Meteor.callPromise('mycoachprogress.getUserProgress', {userID: this.userID});
         const progress = parseProgress(allUserData);
-        console.log(progress)
         if (getModuleStatus(progress[module]) !== "COMPLETED") {
             console.log("Unlocking submodule");
             /* Unlock subsequent submodule within same module */
             const nextSubmodule = submodule.split("_")[0] + "_" + submodule.split("_")[1] + "_" + String(parseInt(submodule.split("_")[2]) + 1);
-            const nextStatus = this.hasToWait ? "TO_START" : "IN_PROGRESS";
-            await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: module, submoduleID: nextSubmodule, status: nextStatus});
+            if (nextSubmodule !== "ACT_MOD_5") {
+                const nextStatus = this.hasToWait ? "TO_START" : "IN_PROGRESS";
+                await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: module, submoduleID: nextSubmodule, status: nextStatus});
+            }
         }
         else {
             /* Unlock next module(s), depending on status and profile */
@@ -94,7 +117,8 @@ export default class ProgressManager {
                         await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "THOUGHTSEMOTIONS", submoduleID: "TE_MOD_1", status: "IN_PROGRESS"}); 
                         break;
                     case "ACTIVITYWORK": 
-                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "ACTIVITYWORK", submoduleID: "ACT_MOD_1", status: "IN_PROGRESS"}); 
+                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "ACTIVITYWORK", submoduleID: "ACT_MOD_1", status: "IN_PROGRESS"});
+                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "ACTIVITYWORK", submoduleID: "ACT_MOD_5", status: "IN_PROGRESS"});  
                         break;
                     case "MOVEMENT": 
                         await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "MOVEMENT", submoduleID: "MOV_MOD_1", status: "IN_PROGRESS"}); 
@@ -117,11 +141,6 @@ function getModuleStatus(submodules) {
         if (status !== "COMPLETED")   completed  = false;
         if (status !== "NOT_STARTED") notStarted = false;
     }
-    console.log(submodules);
-    if (completed) console.log("COMPLETED");
-    else if (notStarted) console.log("NOT_STARTED");
-    else console.log("IN_PROGRESS");
-
     if (completed) return "COMPLETED";
     if (notStarted) return "NOT_STARTED";
     return "IN_PROGRESS"
@@ -156,7 +175,7 @@ function parseProgress(userData) {
 const template = {
         "PAINEDUCATION":    {"PE_MOD_1": "NOT_STARTED", "PE_MOD_2": "NOT_STARTED", "PE_MOD_3": "NOT_STARTED", "PE_MOD_4": "NOT_STARTED", "PE_MOD_5": "NOT_STARTED"},
         "THOUGHTSEMOTIONS": {"TE_MOD_1": "NOT_STARTED", "TE_MOD_2": "NOT_STARTED", "TE_MOD_3": "NOT_STARTED", "TE_MOD_4": "NOT_STARTED", "TE_MOD_5": "NOT_STARTED", "TE_MOD_6": "NOT_STARTED"},
-        "ACTIVITYWORK":     {"ACT_MOD_1": "COMPLETED", "ACT_MOD_2": "COMPLETED", "ACT_MOD_3": "COMPLETED", "ACT_MOD_4": "IN_PROGRESS", "ACT_MOD_5": "COMPLETED", "ACT_MOD_6": "COMPLETED", "ACT_MOD_7": "IN_PROGRESS", "ACT_MOD_8": "NOT_STARTED", "ACT_MOD_9": "NOT_STARTED", "ACT_MOD_10": "NOT_STARTED"},
+        "ACTIVITYWORK":     {"ACT_MOD_1": "COMPLETED", "ACT_MOD_2": "COMPLETED", "ACT_MOD_3": "COMPLETED", "ACT_MOD_4": "IN_PROGRESS", "ACT_MOD_5": "COMPLETED", "ACT_MOD_6": "COMPLETED", "ACT_MOD_7": "IN_PROGRESS", "ACT_MOD_8": "NOT_STARTED", "ACT_MOD_9": "NOT_STARTED"},
         "MOVEMENT": {},
         "STRESS": {},
         "SOCIAL": {}
