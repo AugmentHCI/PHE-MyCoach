@@ -532,6 +532,7 @@ const ACTMOD5 = {
             title: "Wat doe jij?",
             cardContents: [
                 {
+                    id: "ACT-MOD-5-SWIPE",
                     type: "Swipe",
                     buttons: {disagree: "Nee", agree: "Ja"},
                     options: [
@@ -847,11 +848,11 @@ const ACTMOD7FOOD = {
             cardContents: [
                 {
                     type: "Text",
-                    content: ["Alcohol werkt pijnstillend en kan effect hebben op je stemming. Met als gevolg dat je meer wordt afgeleid van je pijn. Op zich hoeft alcoholgebruik in die omstandigheden geen probleem te zijn, maar het kan wel " , {type: "italic", content: "problematisch worden wanneer je het systematisch gaat gebruiken"}, ". Veelvuldig drinken is immers geen ideaal middel tegen pijn, spanning of angst."]
+                    content: ["Alcohol werkt pijnstillend en kan effect hebben op je stemming. Met als gevolg dat je meer wordt afgeleid van je pijn. Op zich hoeft alcoholgebruik in die omstandigheden geen probleem te zijn, maar het kan wel " , {type: "bold", content: "problematisch worden wanneer je het systematisch gaat gebruiken"}, ". Veelvuldig drinken is immers geen ideaal middel tegen pijn, spanning of angst."]
                 },
                 {
                     type: "Text",
-                    content: ["De opluchting en de ontspanning zijn het gevolg van de eerste glazen. Als je meer drinkt blijkt alcohol ", {type: "italic", content:"dikwijls negatieve gevoelens te versterken"}, ". Uit onderzoek weten we dat veel drinken de gevoelens van angst of somberheid doet toenemen. Hoe meer en hoe frequenter je drinkt, hoe meer de negatieve gevoelens zullen versterkt worden. De kans op algemene somberheid of depressie neemt toe. Bij veel drinken voel je je nadien miserabel omwille van de bekende 'kater'. ", {type: "italic", content: "Je wordt dan net gevoeliger voor pijn"}, ", terwijl je er tegelijkertijd minder 'weerbaar' tegenover wordt. Opnieuw drinken lijkt even een oplossing te bieden, maar je komt in een vicieuze cirkel terecht."]
+                    content: ["De opluchting en de ontspanning zijn het gevolg van de eerste glazen. Als je meer drinkt blijkt alcohol ", {type: "bold", content:"dikwijls negatieve gevoelens te versterken"}, ". Uit onderzoek weten we dat veel drinken de gevoelens van angst of somberheid doet toenemen. Hoe meer en hoe frequenter je drinkt, hoe meer de negatieve gevoelens zullen versterkt worden. De kans op algemene somberheid of depressie neemt toe. Bij veel drinken voel je je nadien miserabel omwille van de bekende 'kater'. ", {type: "bold", content: "Je wordt dan net gevoeliger voor pijn"}, ", terwijl je er tegelijkertijd minder 'weerbaar' tegenover wordt. Opnieuw drinken lijkt even een oplossing te bieden, maar je komt in een vicieuze cirkel terecht."]
                 },
                 {
                     type: "Foto - Alcohol",
