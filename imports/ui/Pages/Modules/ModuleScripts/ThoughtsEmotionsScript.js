@@ -1,7 +1,21 @@
+const values = [ 
+    {id: "VALUE_NICE",        text: "Aardig"},
+    {id: "VALUE_ACCEPTING",   text: "Accepterend"},
+    {id: "VALUE_AMBITIOUS",   text: "Ambitieus"},
+    {id: "VALUE_ASSERTIVE",   text: "Assertief"},
+    {id: "VALUE_ATTENTIVE",   text: "Attent"},
+    {id: "VALUE_AUTHENTIC",   text: "Authentiek"},
+    {id: "VALUE_ADVENTUROUS", text: "Avontuurlijk"},
+    {id: "VALUE_POLITE",      text: "Beleefd"},
+    {id: "VALUE_ENCOURAGING", text: "Bemoedigend"},
+    {id: "VALUE_MODEST",      text: "Bescheiden"},
+    {id: "VALUE_RELIABLE",    text: "Betrouwbaar"},
+]
+
 const TEMOD1 = {
     id: "TE_MOD_1",
-    title: "Gedachten en emoties",
-    titleMarkup: ["Gedachten en emoties:", "een inleiding"],
+    title: "G&E: een inleiding",
+    titleMarkup: ["G&E: een", "inleiding"],
     part: 1,
     description: "TODO",
     duration: "20 minuten",
@@ -314,8 +328,8 @@ const TEMOD1 = {
 
 const TEMOD2 = {
     id: "TE_MOD_2",
-    title: "Aan de slag met gedachten en emoties",
-    titleMarkup: ["Aan de slag met", "gedachten en emoties"],
+    title: "Aan de slag met G&E",
+    titleMarkup: ["Aan de slag", "met G&E"],
     part: 2,
     description: "TODO",
     duration: "Meerdere dagen",
@@ -660,7 +674,7 @@ const TEMOD3 = {
 
 const TEMOD4 = {
     id: "TE_MOD_4",
-    title: "CONTROLE OVER JE GEDRAG",
+    title: "Controle over je gedrag",
     titleMarkup: ["Controle", "over je gedrag"],
     part: 4,
     description: "TODO",
@@ -848,26 +862,31 @@ const TEMOD5 = {
                     content: "Om erachter te komen wat jij belangrijk vindt, wat jouw waarden zijn, kan het helpend zijn om de komende periode stil te staan bij de volgende vragen:",
                 },
                 {
+                    id: "TE_MOD_5_INPUT_1",
                     type: "Text-Input",
                     text: "Wat zou ik (anders) doen als pijnlijke gedachten en gevoelens m.b.t. mijn pijn mij niet meer belemmerden?",
                     placeholder: "Schrijf hier"
                 },
                 {
+                    id: "TE_MOD_5_INPUT_2",
                     type: "Text-Input",
                     text: "Welke projecten of activiteiten zou ik oppakken (of met welke zou ik doorgaan) als mijn tijd en energie niet werden opgeslokt door verontrustende emoties rond het ervaren van pijn?",
                     placeholder: "Schrijf hier"
                 },
                 {
+                    id: "TE_MOD_5_INPUT_3",
                     type: "Text-Input",
                     text: "Wat zou ik doen als angst voor pijn geen probleem meer was?",
                     placeholder: "Schrijf hier"
                 },
                 {
+                    id: "TE_MOD_5_INPUT_4",
                     type: "Text-Input",
                     text: "Wat zou ik proberen als gedachten over het ervaren van pijn me niet zouden afschrikken?",
                     placeholder: "Schrijf hier"
                 },
                 {
+                    id: "TE_MOD_5_INPUT_5",
                     type: "Text-Input",
                     text: "Wat vind ik, ondanks mijn pijn, belangrijk in mijn leven?",
                     placeholder: "Schrijf hier"
@@ -895,7 +914,7 @@ const TEMOD5 = {
                 },
                 {
                     type: "Text",
-                    content: "Op het volgende scherm ga je een reeks waarden te zien krijgen. Geef aan in hoeverre deze waarde bij jou aansluit als persoon."
+                    content: "Hieronder ga je een 50-tal waarden te zien krijgen. Neem hier even de tijd voor om aan te geven of deze waarde bij jou aansluit als persoon."
                 }
             ]
         },
@@ -904,54 +923,115 @@ const TEMOD5 = {
             title: "Jouw waarden",
             cardContents: [
                 {
-                    type: "Waarden-Oefening",
-                    content: "Je kan een waarde vergelijken met een vuurtoren in de verte, die je door slecht weer gidst en de richting aanwijst."
+                    type: "Text",
+                    content: ["Je krijgt nu ongeveer 50 waarden te zien. Als je een waarde ziet dat bij je past, tik je op ", {type: "bold", content:"'akkoord'"}, "of veeg je de kaart naar rechts. Indien de waarde niet bij je past, tik je op ", {type: "bold", content:"'niet akkoord'"}, " of je veegt naar links. Succes er mee!"]
+                },
+                {
+                    id: "TE-MOD-5-SWIPE-50",
+                    type: "Swipe",
+                    buttons: {disagree: "Niet akkoord", agree: "Akkoord"},
+                    randomize: true,
+                    options: values,
+                    specialCaseTE: true
                 },
             ]
         },
+        /* Als ze uit de 50 kaarten, 10 hebben kunnen kiezen -> 10 kiezen dan 5 */
         {
-            id: "TE-MOD5-CARD4",
+            id: "TE-MOD5-CARD4_MORETHAN10",
             title: "Jouw top 10",
+            showIfAnswered: ["TE-MOD-5-SWIPE-50"],
+            showIf: [{rule:"SwipeAgreeCount", questionID: "TE-MOD-5-SWIPE-50", atLeast: 11}],
             cardContents: [
                 {
                     type: "Text",
                     content: "Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Als je hieruit je top 10 zou moeten kiezen, welke zijn dan de belangrijkste voor jou?"
                 },
                 {
-                    type: "Top-10-Oefening",
-                    content: ""
-                }
+                    id: "TE-MOD-5-SELECT-10",
+                    type: "Multiple-Choice",
+                    options: values,
+                    useSelectionFrom: "TE-MOD-5-SWIPE-50",
+                    needsSelectedAtLeast: 10,
+                    needsSelectedAtMost: 10
+                },
             ]
         },
+        /* Als ze uit de 50 kaarten, tussen de 6 en 10 hebben kunnen kiezen -> meteen oefening van 5 kaarten */
         {
-            id: "TE-MOD5-CARD5",
+            id: "TE-MOD5-CARD4_LESSTHAN10",
             title: "Jouw top 5",
+            showIfAnswered: ["TE-MOD-5-SWIPE-50"],
+            showIf: [{rule:"SwipeAgreeCount", questionID: "TE-MOD-5-SWIPE-50", atLeast: 6}, {rule:"SwipeAgreeCount", questionID: "TE-MOD-5-SWIPE-50", atMost: 10}],
             cardContents: [
                 {
                     type: "Text",
-                    content: "Je waarden zijn erg belangrijk en wegen erg zwaar. Stel je voor dat je ze in een rugzak hebt en je bent met de boot op weg naar het bereiken van deze waarden. Maar, de boot lekt en begint te zinken. Je moet 5 waarden uit je rugzak halen, welke 5 waarden blijven dan over?"
+                    content: "Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Je hebt er al minder dan 10 kunnen aanduiden, goed! Stel je voor dat je ze in een rugzak hebt en je bent met de boot op weg naar het bereiken van deze waarden. Maar, de boot lekt en begint te zinken. Je moet 5 waarden uit je rugzak halen om te redden, welke 5 waarden blijven dan over?"
                 },
                 {
-                    type: "Top-5-Oefening",
-                    content: ""
+                    id: "TE-MOD-5-SELECT-5",
+                    type: "Multiple-Choice",
+                    options: values,
+                    useSelectionFrom: "TE-MOD-5-SWIPE-50",
+                    needsSelectedAtLeast: 5,
+                    needsSelectedAtMost: 5
                 },
+            ]
+        },
+        /* Als ze uit de 50 kaarten, minder dan 5 hebben kunnen kiezen -> Geen oefening meer */
+        {
+            id: "TE-MOD5-CARD4_LESSTHAN5",
+            title: "Jouw top 5",
+            showIfAnswered: ["TE-MOD-5-SWIPE-50"],
+            showIf: [{rule:"SwipeAgreeCount", questionID: "TE-MOD-5-SWIPE-50", atMost: 5}],
+            cardContents: [
                 {
                     type: "Text",
-                    content: "Proficiat! Je eigen waarden bekomen is geen makkelijke opdracht, maar wel oh zo belangrijk!"
-                }
+                    content: "Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Je hebt meteen al je top 5 kunnen kiezen uit de lijst van 50 waarden, wat geen makkelijke opgave is. Goed bezig!"
+                },
+                {
+                    id: "TE-MOD-5-SELECT-5",
+                    type: "Multiple-Choice",
+                    options: values,
+                    useSelectionFrom: "TE-MOD-5-SWIPE-50",
+                    needsSelectedAtLeast: 5,
+                    needsSelectedAtMost: 5
+                },
+            ]
+        },
+        /* Show if selected 50, then did 10 -> Nu 5 */
+        {
+            id: "TE-MOD5-CARD5_10THEN5",
+            title: "Jouw top 5",
+            showIfAnswered: ["TE-MOD-5-SELECT-10"],
+            showIf: [{rule:"SwipeAgreeCount", questionID: "TE-MOD-5-SWIPE-50", atLeast: 11}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Je waarden zijn erg belangrijk en wegen erg zwaar. Stel je voor dat je ze in een rugzak hebt en je bent met de boot op weg naar het bereiken van deze waarden. Maar, de boot lekt en begint te zinken. Je moet 5 waarden uit je rugzak halen om te redden, welke 5 waarden blijven dan over?"
+                },
+                {
+                    id: "TE-MOD-5-SELECT-5",
+                    type: "Multiple-Choice",
+                    options: values,
+                    useSelectionFrom: "TE-MOD-5-SELECT-10",
+                    needsSelectedAtLeast: 5,
+                    needsSelectedAtMost: 5
+                },
             ]
         },
         {
             id: "TE-MOD5-CARD6",
             title: "En nu je doelen",
+            showIfAnswered: ["TE-MOD-5-SELECT-5"],
             cardContents: [
                 {
                     type: "Text",
-                    content: "Je hebt je waarden benoemd: goed gedaan! En nu? Nu is het tijd om actie te ondernemen en doelen te proberen stellen die gebaseerd zijn op jouw waarden. Let’s go!"
+                    content: "Proficiat! Je hebt je waarden benoemd: goed gedaan! Je waarden benoemen is dan ook geen gemakkelijke opdracht. En nu?"
                 },
                 {
                     type: "Text",
-                    content: [{type: "bold", content: "Je hebt je waarden benoemd: goed gedaan! En nu? Nu is het tijd om actie te ondernemen en doelen te proberen stellen die gebaseerd zijn op jouw waarden. Let’s go!"}]
+                    content: [{type: "bold", content: "Nu is het tijd om actie te ondernemen en doelen te proberen stellen die gebaseerd zijn op jouw waarden. Let’s go!"}]
                 },
                 {
                     type: "Doelen vermelden",

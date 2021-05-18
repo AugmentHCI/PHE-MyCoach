@@ -299,6 +299,10 @@ function ContentParser(props) {
         displayContent(props.data.showIf);
     }, []);
 
+    /**
+     * Sets the display state accordingly depending on whether the display-rules are met.
+     * @param rules The rules that need to be met in order to display the card.
+     */
     async function displayContent(rules) {
         if (!rules) { setDisplay(true); return; }
         let ruleResults = true;
@@ -339,13 +343,13 @@ function ContentParser(props) {
             case 'List':
                 return createListContent(props.data.content, props.data.numbered, props.data.overview);
             case 'Question':
-                return createQuestionContent(props.data.id, props.data.question, props.data.number, props.data.options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect);
+                return createQuestionContent(props.data.id, props.data.question, props.data.number, options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect);
             case 'Video':
                 return createVideoContent(props.data.link, props.userProfile.language);
             case 'Selection':
-                return createSelectionContent(props.data.id, props.data.title, props.data.question, props.data.options, props.data.width);
+                return createSelectionContent(props.data.id, props.data.title, props.data.question, options, props.data.width);
             case 'Sort-Exercise':
-                return createSortingContent(props.data.content, props.data.columns, props.data.options);
+                return createSortingContent(props.data.content, props.data.columns, options);
             case 'Image':
                 return createImageContent(props.data.link, props.data.width);
             case 'Slider':
@@ -357,9 +361,11 @@ function ContentParser(props) {
             case 'DelayedDisplay':
                 return createDelayedDisplayContent(props.data);
             case 'Swipe':
-                return createSwipeContent(props.data);
+                return createSwipeContent(props);
             case 'TextBubble':
                 return createTextBubbleContent(props.data);
+            case 'Multiple-Choice':
+                return createMultipleChoiceContent(props);
             case 'Break':
                 return <hr/>;
             default:
@@ -375,3 +381,67 @@ function ContentParser(props) {
 }
 
 export default ContentParser;
+
+
+function createMultipleChoiceContent(props) {
+
+    const [options, setOptions] = useState(props.data.options);
+    const [checked, updateChecked] = useState(Object.assign({}, ...options.map((x) => ({[x.id]: false}))));
+    const [saved, setSaved] = useState(false);
+
+    function toggleChecked(selection) {
+        let newChecked = {...checked};
+        newChecked[selection] = !newChecked[selection];
+        updateChecked(newChecked);
+    }
+
+    function selectedCount() {
+        return Object.keys(checked).reduce((count, key) => (checked[key] ? count + 1 : count), 0);
+    }
+
+    async function save() { 
+        await props.questionManager.setModuleQuestion(props.module, props.data.id, JSON.stringify(checked));
+        setSaved(true);
+        props.callback();
+    }
+
+    useEffect(() => {
+        async function fetchAnswers() {
+            const answer = await props.questionManager.getLatestAnswerOnQuestion(props.data.id);
+            if (answer) { updateChecked(JSON.parse(answer)); setSaved(true); }
+            else if (props.data.useSelectionFrom) { 
+                let answers = await props.questionManager.getLatestAnswerOnQuestion(props.data.useSelectionFrom);
+                if (answers) { 
+                    let newChecked = {};
+                    let newOptions = [];
+                    answers = JSON.parse(answers);
+                    Object.keys(answers).forEach(key => {if (answers[key]) { newChecked[key] = false; newOptions.push({id: key, text: getTextFromOption(key)})}});
+                    console.log(newOptions);
+                    setOptions(newOptions);
+                    updateChecked(newChecked);
+                }
+            }
+        }
+        fetchAnswers();
+    }, []);
+
+    function getTextFromOption(id) {
+        for (const option of props.data.options) {if (option.id === id) return option.text}
+    }
+
+    return (<div>
+        { saved && options.map(option => {
+            if (checked[option.id]) return <div key={option.id} className={"content-multiplechoice-option-presented"}>{option.text}</div>})
+        }
+        { !saved && <React.Fragment>
+            {options.map(option => { return <div key={option.id} className={"content-multiplechoice-option" + (checked[option.id] ? "-selected" : "")}>
+                <input style={{marginRight: "7px"}} type="checkbox" checked={checked[option.id]} onChange={() => toggleChecked(option.id)}/>
+                {option.text}
+            </div>})}
+            {(props.data.needsSelectedAtLeast && props.data.needsSelectedAtLeast >= selectedCount()) && (props.data.needsSelectedAtMost && props.data.needsSelectedAtMost <= selectedCount()) && <Button center color="blue" onClick={() => save()}>Verstuur</Button>}
+            {selectedCount() === 0 && <Button center color="gray-light">Selecteer er minstens {props.data.needsSelectedAtLeast - selectedCount()}</Button>}
+            {(props.data.needsSelectedAtLeast && selectedCount() !== 0 && selectedCount() < props.data.needsSelectedAtLeast) && <Button center color="gray-light">Selecteer er nog {props.data.needsSelectedAtLeast - selectedCount()}</Button>}
+            {(props.data.needsSelectedAtMost && selectedCount() > props.data.needsSelectedAtMost) && <Button center color="gray-light">{selectedCount() - props.data.needsSelectedAtMost} te veel aangeduid</Button>}
+        </React.Fragment>}
+    </div>)
+}

@@ -77,27 +77,32 @@ export default class ProfileManager {
     async fetchNewUserData(fromDate) {
         const toDate = moment().format("YYYY-MM-DD");
         const url = `https://connector.idewe.be/healthempower/jobstudenten/api/antwoorden/export?van=${fromDate}&tot=${toDate}&taal=DUTCH`;
-        const data = await Meteor.callPromise("getData", { url: url, userToken: this.userToken });
-        let questionnaires = this.processQuestionnaires(this.convertRawDataToQuestionnaires(data.data));
-        questionnaires.forEach(questionnaire => {
-            if (questionnaire.status === "AFGEROND") {
-                Meteor.call('mycoachprofile.addQuestionnaire', {
-                    userID: this.userID, 
-                    date: new Date(questionnaire.date),
-                    type: questionnaire.type,
-                    status: questionnaire.status,
-                    profile: questionnaire.profile,
-                    CPAQ_AE: questionnaire.CPAQ_AE,
-                    CPAQ_PW: questionnaire.CPAQ_PW,
-                    K: questionnaire.K,
-                    K_eph: questionnaire.K_eph,
-                    K_ns: questionnaire.K_ns,
-                    K_rug: questionnaire.K_rug,
-                    PCS: questionnaire.PCS
-                });
-            }
-        });
-        return questionnaires;
+        try {
+            const data = await Meteor.callPromise("getData", { url: url, userToken: this.userToken });
+            let questionnaires = this.processQuestionnaires(this.convertRawDataToQuestionnaires(data.data));
+            questionnaires.forEach(questionnaire => {
+                if (questionnaire.status === "AFGEROND") {
+                    Meteor.call('mycoachprofile.addQuestionnaire', {
+                        userID: this.userID, 
+                        date: new Date(questionnaire.date),
+                        type: questionnaire.type,
+                        status: questionnaire.status,
+                        profile: questionnaire.profile,
+                        CPAQ_AE: questionnaire.CPAQ_AE,
+                        CPAQ_PW: questionnaire.CPAQ_PW,
+                        K: questionnaire.K,
+                        K_eph: questionnaire.K_eph,
+                        K_ns: questionnaire.K_ns,
+                        K_rug: questionnaire.K_rug,
+                        PCS: questionnaire.PCS
+                    });
+                }
+            });
+            return questionnaires;
+        }
+        catch (error) {
+            console.log("Error")
+        }
     }
 
     convertRawDataToQuestionnaires(data) {

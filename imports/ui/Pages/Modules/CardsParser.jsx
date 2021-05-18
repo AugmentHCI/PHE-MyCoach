@@ -12,6 +12,7 @@ function CardsParser(props) {
     const userProfile = props.userProfile;
     const questionManager = new QuestionManager(props.userID);
     const [userQuestions, setUserQuestions] = useState(undefined);
+    const [displayRules, updateDisplayRules] = useState([]);
 
     /**
      * Creates all the Cards HTML in a given array.
@@ -36,7 +37,12 @@ function CardsParser(props) {
             if (showonly === "OVERVIEW" && !card.overview) continue;
             if (showonly === "NONOVERVIEW" && (card.overview || card.wrapup)) continue;
             if (Object.keys(card).length === 0) continue; /* Empty card */
-            if (card.showIfAnswered && !card.showIfAnswered.every(question => Object.keys(userQuestions).includes(question))) break;
+            if (card.showIfAnswered && !card.showIfAnswered.every(question => Object.keys(userQuestions).includes(question))) {
+                if (!card.showIf || (card.showIf && showCard(card.showIf))) {console.log("Case 1 - breaking rendering: " + card.id); break; }
+                else if (card.showIf && !showCard(card.showIf)) {console.log("Case 2 - continue rendering: " + card.id); continue; }
+                else {console.log("Case 3 - UNHANDLED! "); }
+            };
+            if (card.showIf && !showCard(card.showIf)) continue;
             if (card.generateFinishSubmoduleButton) {
                 contentsHTML.push(<Button 
                     key={"finish-submodule-button"+props.module}
@@ -61,6 +67,30 @@ function CardsParser(props) {
     async function updateQuestionsCallback() {
         const questions = await questionManager.getModuleQuestions(props.module);
         setUserQuestions(questions);
+    }
+
+    function showCard(rules) {
+        console.log(rules)
+        for (const rule of rules) {
+            switch (rule.rule) {
+                case "Profile": 
+                    if (rule.profiles.includes(props.userProfile.profile)) return false;
+                    break;
+                case "SwipeAgreeCount": 
+                    let swipeAnswers = userQuestions[rule.questionID];
+                    if (!swipeAnswers) return false;
+                    swipeAnswers = JSON.parse(swipeAnswers);
+                    let count = 0;
+                    Object.keys(swipeAnswers).forEach(answer => { if (swipeAnswers[answer]) count++; })
+                    if (rule.atLeast && count < rule.atLeast) {console.log("IS false: count is " + count); return false;}
+                    else if (rule.atMost && count > rule.atMost) return false;
+                    else {console.log("SwipeAgreeCount - unhandled case"); break;}
+                default:
+                    console.log(`Card-rule ${rule.rule} not implemented.`);
+                    return true;
+            }
+        }
+        return true;
     }
 
     useEffect(() => {

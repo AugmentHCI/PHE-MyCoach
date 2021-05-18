@@ -300,6 +300,34 @@
     transform: scaleX(-1);
 }
 
+/* Content - MULTIPLE-CHOICE */
+
+.content-multiplechoice-option {
+    font-family: var(--main-font);
+    color: var(--idewe-blue);
+    font-size: 15px;
+    font-weight: 400;
+    padding: 8px;
+    margin: 10px 0;
+    background-color: var(--idewe-background-solid);
+    border-radius: 10px;
+    transition: 0.2s ease-in-out;
+
+    &-selected {
+        @extend .content-multiplechoice-option;
+        font-weight: 500;
+        background-color: var(--idewe-blue-dark-tint1);
+        color: var(--idewe-white);
+    }
+
+    &-presented {
+        @extend .content-multiplechoice-option;
+        font-weight: 500;
+        background-color: var(--idewe-blue);
+        color: var(--idewe-white);
+    }
+}
+
 /* Other */
 .content-not-implemented {
     background-color: var(--idewe-background-solid);
