@@ -152,44 +152,49 @@ export default class ProfileManager {
     }
     
     async getLatestQuestionnaire() {
-        let status = "NORMAL";
-        /* Fetch user questionnaires from MongoDB */
-        let questionnaires = await Meteor.callPromise('mycoachprofile.getQuestionnaires', {userID: this.userID});
-        /* If no questionnaires are present, fetch ALL data from external DB and initialize MongoDB with initializeUser() */
-        if (questionnaires.length === 0) {
-            console.log("[ProfileManager - getLatestQuestionnaire] Initizalizing user.")
-            status = "INITIALIZE";
-            questionnaires = await this.initializeUser();
-        }
-        /* Fetch latest questionnaire from data */
-        let latestQuestionnaire = questionnaires.reduce((currentMax, newItem) => dateComesAfter(newItem.date, currentMax.date) ? newItem : currentMax, {date:"2000-01-01"} );
-        const daysSinceLastQuestionnaire = daysBetween(latestQuestionnaire.date, moment().format("YYYY-MM-DD"));
-        /* If latest questionnaire in MongoDB is older than 35 days, see if there are new questionnaires available from external DB and add them to MongoDB with fetchNewUserData() */
-        if (daysSinceLastQuestionnaire > 35) {
-            console.log("[ProfileManager - getLatestQuestionnaire] Getting new questionnaires")
-            let newQuestionnaires = await this.fetchNewUserData(moment(latestQuestionnaire.date).add(1, "day").format("YYYY-MM-DD"));
-            /* If newer one is found, update status and latest questionnaire */
-            if (Object.keys(newQuestionnaires).length > 0) {
-                console.log("[ProfileManager - getLatestQuestionnaire] New questionnaire found")
-                status = "NEWQUESTIONNAIRE";
-                latestQuestionnaire = newQuestionnaires.reduce((currentMax, newItem) => dateComesAfter(newItem.date, currentMax.date) ? newItem : currentMax, latestQuestionnaire );
-                Meteor.call('mycoachprofile.addQuestionnaire', {
-                    userID: this.userID, 
-                    date: new Date(latestQuestionnaire.date),
-                    type: latestQuestionnaire.type,
-                    status: latestQuestionnaire.status,
-                    profile: latestQuestionnaire.profile,
-                    CPAQ_AE: latestQuestionnaire.CPAQ_AE,
-                    CPAQ_PW: latestQuestionnaire.CPAQ_PW,
-                    K: latestQuestionnaire.K,
-                    K_eph: latestQuestionnaire.K_eph,
-                    K_ns: latestQuestionnaire.K_ns,
-                    K_rug: latestQuestionnaire.K_rug,
-                    PCS: latestQuestionnaire.PCS
-                });
+        try {
+            let status = "NORMAL";
+            /* Fetch user questionnaires from MongoDB */
+            let questionnaires = await Meteor.callPromise('mycoachprofile.getQuestionnaires', {userID: this.userID});
+            /* If no questionnaires are present, fetch ALL data from external DB and initialize MongoDB with initializeUser() */
+            if (questionnaires.length === 0) {
+                console.log("[ProfileManager - getLatestQuestionnaire] Initizalizing user.")
+                status = "INITIALIZE";
+                questionnaires = await this.initializeUser();
             }
+            /* Fetch latest questionnaire from data */
+            let latestQuestionnaire = questionnaires.reduce((currentMax, newItem) => dateComesAfter(newItem.date, currentMax.date) ? newItem : currentMax, {date:"2000-01-01"} );
+            const daysSinceLastQuestionnaire = daysBetween(latestQuestionnaire.date, moment().format("YYYY-MM-DD"));
+            /* If latest questionnaire in MongoDB is older than 35 days, see if there are new questionnaires available from external DB and add them to MongoDB with fetchNewUserData() */
+            if (daysSinceLastQuestionnaire > 35) {
+                console.log("[ProfileManager - getLatestQuestionnaire] Getting new questionnaires")
+                let newQuestionnaires = await this.fetchNewUserData(moment(latestQuestionnaire.date).add(1, "day").format("YYYY-MM-DD"));
+                /* If newer one is found, update status and latest questionnaire */
+                if (Object.keys(newQuestionnaires).length > 0) {
+                    console.log("[ProfileManager - getLatestQuestionnaire] New questionnaire found")
+                    status = "NEWQUESTIONNAIRE";
+                    latestQuestionnaire = newQuestionnaires.reduce((currentMax, newItem) => dateComesAfter(newItem.date, currentMax.date) ? newItem : currentMax, latestQuestionnaire );
+                    Meteor.call('mycoachprofile.addQuestionnaire', {
+                        userID: this.userID, 
+                        date: new Date(latestQuestionnaire.date),
+                        type: latestQuestionnaire.type,
+                        status: latestQuestionnaire.status,
+                        profile: latestQuestionnaire.profile,
+                        CPAQ_AE: latestQuestionnaire.CPAQ_AE,
+                        CPAQ_PW: latestQuestionnaire.CPAQ_PW,
+                        K: latestQuestionnaire.K,
+                        K_eph: latestQuestionnaire.K_eph,
+                        K_ns: latestQuestionnaire.K_ns,
+                        K_rug: latestQuestionnaire.K_rug,
+                        PCS: latestQuestionnaire.PCS
+                    });
+                }
+            }
+            return {data: latestQuestionnaire, status: status};
         }
-        return {data: latestQuestionnaire, status: status};
+        catch (error) {
+            console.log("Error in fetching latest questionnaire");
+        }
     }
     
     filterQuestionnaireBy(questionnaire, filter) {

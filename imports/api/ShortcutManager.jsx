@@ -20,5 +20,4 @@ export default class ShortcutManager {
          async upsertShortcut(shortcut, screen, status) {
             return await Meteor.callPromise('mycoachshortcut.upsertShortcut', {userID: this.userID, shortcut: shortcut, screen: screen, status: status});
         }
-
 }

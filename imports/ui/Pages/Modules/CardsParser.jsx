@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import FadeIn from 'react-fade-in';
 import QuestionManager from '../../../api/QuestionManager.jsx';
+import ShortcutManager from '../../../api/ShortcutManager.jsx';
 
 import Button from '../../components/Button.jsx';
 import Card from '../../components/Card.jsx';
@@ -11,8 +12,9 @@ function CardsParser(props) {
 
     const userProfile = props.userProfile;
     const questionManager = new QuestionManager(props.userID);
+    const shortcutManager = new ShortcutManager(props.userID);
     const [userQuestions, setUserQuestions] = useState(undefined);
-    const [displayRules, updateDisplayRules] = useState([]);
+    const [userShortcuts, setUserShortcuts] = useState(undefined);
 
     /**
      * Creates all the Cards HTML in a given array.
@@ -70,7 +72,6 @@ function CardsParser(props) {
     }
 
     function showCard(rules) {
-        console.log(rules)
         for (const rule of rules) {
             switch (rule.rule) {
                 case "Profile": 
@@ -82,9 +83,15 @@ function CardsParser(props) {
                     swipeAnswers = JSON.parse(swipeAnswers);
                     let count = 0;
                     Object.keys(swipeAnswers).forEach(answer => { if (swipeAnswers[answer]) count++; })
-                    if (rule.atLeast && count < rule.atLeast) {console.log("IS false: count is " + count); return false;}
+                    if (rule.atLeast && count < rule.atLeast) return false;
                     else if (rule.atMost && count > rule.atMost) return false;
                     else {console.log("SwipeAgreeCount - unhandled case"); break;}
+                case "HasUnlockedShortcut":
+                    if (userShortcuts && userShortcuts.every(shortcut => shortcut.shortcut !== rule.shortcut)) return false;
+                    break;
+                case "HasNotUnlockedShortcut":
+                    if (userShortcuts && userShortcuts.some(shortcut => shortcut.shortcut === rule.shortcut)) return false;
+                    break;
                 default:
                     console.log(`Card-rule ${rule.rule} not implemented.`);
                     return true;
@@ -95,11 +102,13 @@ function CardsParser(props) {
 
     useEffect(() => {
         /* Wrap in async function, as getModuleProgress is async */
-        async function fetchQuestions() {
+        async function fetchQuestionsAndShortcuts() {
             const questions = await questionManager.getModuleQuestions(props.module);
+            const shortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
             setUserQuestions(questions);
+            setUserShortcuts(shortcuts);
         }
-        fetchQuestions();
+        fetchQuestionsAndShortcuts();
     }, []);
 
     /**

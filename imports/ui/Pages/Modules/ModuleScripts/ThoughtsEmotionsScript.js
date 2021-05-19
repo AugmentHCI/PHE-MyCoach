@@ -1033,41 +1033,97 @@ const TEMOD5 = {
                     type: "Text",
                     content: [{type: "bold", content: "Nu is het tijd om actie te ondernemen en doelen te proberen stellen die gebaseerd zijn op jouw waarden. Let’s go!"}]
                 },
-                {
-                    type: "Doelen vermelden",
-                    text: "Optie 1: Nog geen formuleren van doelstellingen vrijgespeeld in module activiteiten en werk of in module bewegen - Boodschap: Er is een tegel toegevoegd aan je coaching met jouw waarden. Eventueel wel al doelstellingen formuleren om te koppelen aan activiteiten. Optie 2:  Wel al formuleren van doelstellingen vrijgespeeld - link om te koppelen aan geformuleerde waarden."
-                }
             ]
         },
+        /* 
+            DOELEN NOG NIET VRIJGESPEELD
+        */
         {
             id: "TE-MOD5-CARD7",
-            title: "Even denken",
+            title: "Leef naar je waarden",
+            showIf: [{rule:"HasNotUnlockedShortcut", shortcut: "GOALSETTING"}],
             cardContents: [
                 {
                     type: "Text",
-                    content: "Er zijn verschillende manieren om naar je waarden te leven. Stel dat jij bijvoorbeeld veel belang hecht aan gezondheid en zelfzorg. Dan kan je dit in je leven incorporeren door een marathon te lopen, maar evenzeer door dagelijks een wandeling rond de blok te doen of ook door voldoende rustmomenten in te bouwen of door op je voeding te letten, ... Stel dat jij belang hecht aan het leveren van een zinvolle bijdrage, dan zou je dat kunnen doen door te gaan werken, door vrijwilligerswerk te doen, door boodschappen te doen voor je zieke buurvrouw, ..."
+                    content: "Er zijn verschillende manieren om naar je waarden te leven. Stel dat jij bijvoorbeeld veel belang hecht aan gezondheid en zelfzorg. Dan kan je dit in je leven incorporeren door een marathon te lopen, maar evenzeer door dagelijks een wandeling rond de blok te doen of ook door voldoende rustmomenten in te bouwen of door op je voeding te letten, ... Stel dat jij belang hecht aan het leveren van een zinvolle bijdrage, dan zou je dat kunnen doen door te gaan werken, door vrijwilligerswerk te doen, door boodschappen te doen voor je zieke buurvrouw, ... Of stel dat je graag meer quality time wilt met je familie. Bijvoorbeeld door wekelijks met je ouders te bellen of door de kinderen met de fiets naar school te brengen."
+                },
+                {
+                    type: "Break"
                 },
                 {
                     type: "Text",
-                    content: "Het hoeven niet altijd grootse dingen te zijn die jou leven waardevol maken. Denk gewoon al eens terug aan de afgelopen dagen – welke (kleine) zaken heb je gedaan die eigenlijk best goed aansluiten met de 5 waarden die je net bent bekomen?"
+                    content: "Het stellen van doelen maakt heel duidelijk wat belangrijk voor je is en wat je wilt bereiken (of je nu last hebt van pijn of niet). Hier zijn alvast enkele tips bij het stellen van doelen:"
+                },
+                {
+                    type: "List",
+                    content: ["Laat je leiden door je visie, waarden en principes: Doelen kies je in functie van wat voor jou als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen.", "Maak concrete doelen: Je kan een doel pas bereiken als je weet wat je hiervoor moet doen. Werken aan je gezondheid is bijvoorbeeld geen doel, maar een waarde (je hecht belang aan jouw gezondheid). Een concreet doel om deze waarde te bereiken kan zijn dat je dagelijks een wandeling van 30 minuten maakt, of dat je maar 1 keer per week een dessertje eet.", "Stel realistische doelen: Een goed gekozen doen kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te neme. Je kan beter starten met een doel van 5km, dan 10km, enz.", "Houd rekening met de termijn: Hoe verder weg in de toekomst een bepaald doel ligt, hoe moeilijker het wordt om dit te bereiken. Splits daarom ambitieuze doelen op in tussentijdse doelen, zo bewaar je het overzicht. Let op dat je je ook niet laat leiden door strakke tijdschema's, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."]
                 }
             ]
         },
         {
             id: "TE-MOD5-CARD8",
-            title: "Leef naar je waarden",
+            title: "Enkele voorbeelden",
+            showIf: [{rule:"HasNotUnlockedShortcut", shortcut: "GOALSETTING"}],
             cardContents: [
                 {
                     type: "Text",
-                    content: "Wat kunnen verder nog manieren zijn om naar je waarden te leven voor jou?"
+                    content: "Hier volgen 2 voorbeelden van hoe je goede doelen kan stellen."
                 },
                 {
-                    type: "Waarden herhalen",
-                    text: "Vijf ingevulde waarden herhalen en hier per waarde een invulveld aan koppelen."
+                    type: "List",
+                    content: ["Els is 35 jaar, getrouwd, heeft een dochter van 5 jaar en werkt op een kantoor. Ze heeft tijdens het werken geregeld last van haar nek, zeker op dagen dat ze vaak met klanten moet bellen. Omdat gezondheid een belangrijke rol heeft in haar leven, wilt ze hieraan werken. Ze weet dat het belangrijk is om te bewegen en regelmatig van houding te wisselen. Daarom neemt ze haar voor om 2 minuten recht te staan en te bewegen na ieder uur te werken.", "Paul is 52 jaar, gescheiden, zijn kinderen zijn al uit huis en werkt als schrijnwerker. Zijn vrienden gaan iedere zaterdag 100 km samen fietsen. Omdat hij veel belang hecht aan vriendschap, zou hij graag meegaan. Conditioneel is hij nog niet zo sterk en hij heeft ook wat last van zijn knie. Daarom besluit hij om zijn fietsen op te bouwen. Hij wilt 1 keer per week trainen en op zaterdag rijdt hij een stukje mee met zijn vrienden."]
                 },
                 {
                     type: "Text",
-                    content: "Hoe kan je een eerste kleine stap zetten om deze acties te doen? Probeer hier de komende periode extra aandacht aan te besteden. Je kan hiervoor altijd terugkomen naar dit onderdeel, om het opnieuw onder je aandacht te brengen."
+                    content: "Nu is het aan jou! We hebben de shortcut waarden op het startscherm toegevoegd, en ook uitgebreid met doelen. Hier kan je zelf jouw persoonlijke doelen stellen. De tool helpt om jouw doelen concreet te maken en te realiseren. Neem dus zeker een kijkje, en succes!"
+                }
+            ]
+        },
+        /* 
+            DOELEN ONTGRENDELD
+        */
+        {
+            id: "TE-MOD5-CARD7_U",
+            title: "Leef naar je waarden",
+            showIf: [{rule:"HasUnlockedShortcut", shortcut: "GOALSETTING"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Het stellen van doelen maakt heel duidelijk wat belangrijk voor je is en wat je wilt bereiken (of je nu last hebt van pijn of niet).   Doelen zijn een ideale manier om naar je waarden te leven. Stel dat jij bijvoorbeeld veel belang hecht aan gezondheid en zelfzorg. Dan kan je dit in je leven incorporeren door een marathon te lopen, maar evenzeer door dagelijks een wandeling rond de blok te doen of ook door voldoende rustmomenten in te bouwen of door op je voeding te letten,... Stel dat jij belang hecht aan het leveren van een zinvolle bijdrage, dan zou je dat kunnen doen door te gaan werken, door vrijwilligerswerk te doen, door boodschappen te doen voor je zieke buurvrouw,... Of stel dat je graag meer quality time wilt met je familie. Bijvoorbeeld door wekelijks met je ouders te bellen of door de kinderen met de fiets naar school te brengen."
+                },
+                {
+                    type: "Text",
+                    content: "Bij het stellen van doelen kan je nu ook jouw doelen koppelen aan de waarden die jij belangrijk vindt. Werken aan waardevolle doelen is motiverend en je hebt een grotere kans om deze doelen te realiseren. Probeer dit eens te doen voor de doelen die jij reeds hebt aangemaakt. Heb je nog geen persoonlijke doelen aangemaakt? Dan is dit het ideale moment om daar mee te beginnen! Succes!"
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Text",
+                    content: "Hier zijn alvast enkele tips bij het stellen van doelen:"
+                },
+                {
+                    type: "List",
+                    content: ["Laat je leiden door je visie, waarden en principes: Doelen kies je in functie van wat voor jou als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen.", "Maak concrete doelen: Je kan een doel pas bereiken als je weet wat je hiervoor moet doen. Werken aan je gezondheid is bijvoorbeeld geen doel, maar een waarde (je hecht belang aan jouw gezondheid). Een concreet doel om deze waarde te bereiken kan zijn dat je dagelijks een wandeling van 30 minuten maakt, of dat je maar 1 keer per week een dessertje eet.", "Stel realistische doelen: Een goed gekozen doen kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te neme. Je kan beter starten met een doel van 5km, dan 10km, enz.", "Houd rekening met de termijn: Hoe verder weg in de toekomst een bepaald doel ligt, hoe moeilijker het wordt om dit te bereiken. Splits daarom ambitieuze doelen op in tussentijdse doelen, zo bewaar je het overzicht. Let op dat je je ook niet laat leiden door strakke tijdschema's, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."]
+                }
+            ]
+        },
+        {
+            id: "TE-MOD5-CARD8_U",
+            title: "Enkele voorbeelden",
+            showIf: [{rule:"HasUnlockedShortcut", shortcut: "GOALSETTING"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Hier volgen 2 voorbeelden van hoe je goede doelen kan stellen."
+                },
+                {
+                    type: "List",
+                    content: ["Els is 35 jaar, getrouwd, heeft een dochter van 5 jaar en werkt op een kantoor. Ze heeft tijdens het werken geregeld last van haar nek, zeker op dagen dat ze vaak met klanten moet bellen. Omdat gezondheid een belangrijke rol heeft in haar leven, wilt ze hieraan werken. Ze weet dat het belangrijk is om te bewegen en regelmatig van houding te wisselen. Daarom neemt ze haar voor om 2 minuten recht te staan en te bewegen na ieder uur te werken.", "Paul is 52 jaar, gescheiden, zijn kinderen zijn al uit huis en werkt als schrijnwerker. Zijn vrienden gaan iedere zaterdag 100 km samen fietsen. Omdat hij veel belang hecht aan vriendschap, zou hij graag meegaan. Conditioneel is hij nog niet zo sterk en hij heeft ook wat last van zijn knie. Daarom besluit hij om zijn fietsen op te bouwen. Hij wilt 1 keer per week trainen en op zaterdag rijdt hij een stukje mee met zijn vrienden."]
+                },
+                {
+                    type: "Text",
+                    content: "Nu is het aan jou! We hebben de shortcut waarden op het startscherm toegevoegd, en ook uitgebreid met doelen. Hier kan je zelf jouw persoonlijke doelen stellen. De tool helpt om jouw doelen concreet te maken en te realiseren. Neem dus zeker een kijkje, en succes!"
                 }
             ]
         },
