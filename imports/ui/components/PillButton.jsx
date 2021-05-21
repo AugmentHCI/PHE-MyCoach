@@ -28,6 +28,10 @@ export default function PillButton(props) {
         color: color,
         marginTop: needsOutline ? "0px !important" : ""
     }
+
+    function handleOnClick() {
+        if (props.handleOnClick) props.handleOnClick();
+    }
     
     function createIcon() {
         if (!needsOutline) return (<div className={"pill-button-icon"} style={{backgroundColor: color}}>       
@@ -37,7 +41,7 @@ export default function PillButton(props) {
     }
 
     return (
-        <button className="pill-button" style={style}>
+        <button className="pill-button" style={style} onClick={() => handleOnClick()}>
             {createIcon()}
             <div className='pill-button-text'>
                 {props.children}
