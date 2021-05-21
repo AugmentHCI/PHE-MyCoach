@@ -43,7 +43,7 @@ function CardsParser(props) {
                 if (!card.showIf || (card.showIf && showCard(card.showIf))) {console.log("Case 1 - breaking rendering: " + card.id); break; }
                 else if (card.showIf && !showCard(card.showIf)) {console.log("Case 2 - continue rendering: " + card.id); continue; }
                 else {console.log("Case 3 - UNHANDLED! "); }
-            };
+            }
             if (card.showIf && !showCard(card.showIf)) continue;
             if (card.generateFinishSubmoduleButton) {
                 contentsHTML.push(<Button 
@@ -52,12 +52,14 @@ function CardsParser(props) {
                         textAlign: "center", 
                         justifyContent: "center"}} 
                     color="blue" 
+                    center
                     onClick={() => props.finishCallback(props.moduleStatus !== "COMPLETED")}>
                         {props.moduleStatus === "COMPLETED" ? card.textOnCompleted : card.text}
                 </Button>);
                 continue;
             }
             const cardID = card.overview ? props.submodule + "_CARD_OVERVIEW" : props.submodule + "_CARD_" + cardIndex++;
+            if (card.titleCard) { contentsHTML.push( <Card key={cardID} title={card.title} noTranslate titleCard={true}></Card>); continue; }
             contentsHTML.push(
                 <Card key={cardID} title={card.title} icon={card.icon} noTranslate overview={card.overview}>
                     {createCardContent(cardID, card.cardContents, card.overview)}
@@ -73,6 +75,7 @@ function CardsParser(props) {
 
     function showCard(rules) {
         for (const rule of rules) {
+            /* Only return false if one of the rules is not met */
             switch (rule.rule) {
                 case "Profile": 
                     if (rule.profiles.includes(props.userProfile.profile)) return false;
@@ -86,6 +89,11 @@ function CardsParser(props) {
                     if (rule.atLeast && count < rule.atLeast) return false;
                     else if (rule.atMost && count > rule.atMost) return false;
                     else {console.log("SwipeAgreeCount - unhandled case"); break;}
+                case "HasSelected": 
+                    let swipeAnswersSelection = userQuestions[rule.questionID];
+                    console.log(!swipeAnswersSelection || !JSON.parse(swipeAnswersSelection)[rule.answerID]);
+                    if (!swipeAnswersSelection || !JSON.parse(swipeAnswersSelection)[rule.answerID]) return false;
+                    break;
                 case "HasUnlockedShortcut":
                     if (userShortcuts && userShortcuts.every(shortcut => shortcut.shortcut !== rule.shortcut)) return false;
                     break;
@@ -94,7 +102,7 @@ function CardsParser(props) {
                     break;
                 default:
                     console.log(`Card-rule ${rule.rule} not implemented.`);
-                    return true;
+                    break;
             }
         }
         return true;

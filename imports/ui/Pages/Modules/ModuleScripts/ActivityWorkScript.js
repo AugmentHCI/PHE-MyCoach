@@ -166,24 +166,27 @@ const ACTMOD2WORK = {
                     type: "Text",
                     content: "Naast financiële onafhankelijkheid zijn er nog andere voordelen aan werken! Herken jij enkele voordelen in de woordwolk?"
                 },
-            ]
-        },
-        {
-            title: "Reflectie oefening",
-            cardContents: [
                 {
-                    type: "Selection",
+                    type: "Multiple-Choice",
                     id: "ACT-MOD-2-Q1",
-                    options: ["Waardering", "Erkenning", "Betrokken in de samenleving", "Sociale steun", "Sociale status"]
+                    options: [{id:"WORK_APPRECIATION", text: "Waardering"}, {id:"WORK_ACKNOWLEGDEMENT", text: "Erkenning"}, {id:"WORK_INVOLVEMENT", text: "Betrokken in de samenleving"}, {id:"WORK_SOCIALSUPPORT", text: "Sociale steun"}, {id:"WORK_SOCIALSTATUS", text: "Sociale status"}],
+                    needsSelectedAtLeast: 1,
+                    needsSelectedAtMost: 5
                 },
                 {
-                    type: "Text",
-                    content: "Kan je nog meer voordelen van werk vinden?"
+                    type: "Break"
+                },
+                {
+                    type: "Multitext-Input",
+                    id: "ACT-MOD-2-T1",
+                    text: "Kan je nog meer voordelen van werk vinden?",
+                    placeholder: "Schrijf ze hier neer:"
                 },
             ]
         },
         {
             title: "Voordelen werk",
+            showIfAnswered: ["ACT-MOD-2-Q1"],
             cardContents: [
                 {
                     type: "Text",
@@ -233,15 +236,23 @@ const ACTMOD2WORK = {
                 },
                 {
                     type: "Text",
-                    content: "Er zijn een aantal voorwaarden verbonden om te kunnen (blijven werken) met pijn zoals:"
+                    content: "Er zijn een aantal voorwaarden verbonden om te kunnen (blijven werken). We geven enkele voorbeelden, duid aan in welke jij je kan vinden:"
                 },
                 {
-                    type: "List",
-                    content: ["Regelmogelijkheden privé", "Werkmotivatie", "Zelfmanagementvaardigheden", "Persoonlijke kenmerken", "Regelmogelijkheden werk"]
+                    type: "Multiple-Choice",
+                    id: "ACT-MOD-2-Q1",
+                    options: [{id:"WORK_PRIVATE", text: "Regelmogelijkheden privé"}, {id:"WORK_MOTIVATION", text: "Werkmotivatie"}, {id:"WORK_SELFMANAGEMENT", text: "Zelfmanagementvaardigheden"}, {id:"WORK_PERSONAL", text: "Persoonlijke kenmerken"}, {id:"WORK_WORK", text: "Regelmogelijkheden werk"}],
+                    needsSelectedAtLeast: 1,
+                    needsSelectedAtMost: 5
                 },
                 {
-                    type: "Todo - Invullen en aanduiden",
-                    text: "Tekst: Duid aan welke voorwaarden voor jou belangrijk zijn. Vul aan wat jij belangrijk vindt."
+                    type: "Break"
+                },
+                {
+                    type: "Multitext-Input",
+                    id: "ACT-MOD-2-T2",
+                    text: "Kan je nog wat voorwaarden opsommen die jij nog belangrijk vindt?",
+                    placeholder: "Schrijf ze hier neer:"
                 },
             ]
         },
@@ -341,6 +352,7 @@ const ACTMOD3ERGO = {
         },
         {
             title: "Wervelkolom",
+            showIfAnswered: ["ACT-MOD-3-Q1", "ACT-MOD-3-Q2", "ACT-MOD-3-Q3"],
             cardContents: [
                 {
                     type: "Text",
@@ -396,16 +408,473 @@ const ACTMOD3ERGO = {
                     content: "Duid aan welk van de drie activiteiten het beste past bij jouw situatie (werk en vrije tijd). Je kan meerdere activiteiten aanduiden, indien er meerdere voor jou van toepassing zijn."
                 },
                 {
-                    type: "Selection",
-                    id: "ACT-MOD-3-Q4",
-                    options: ["Fysiek werk", "Zorghandelingen", "Kantoor"]
+                    id: "ACT-MOD-3-MULTISELECT",
+                    type: "Multiple-Choice",
+                    options: [{id: "FYS_WORK", text: "Fysiek werk"}, {id: "CARE_WORK", text: "Zorghandelingen"}, {id: "OFFICE_WORK", text: "Kantoor/Bureauwerk"}],
+                    needsSelectedAtLeast: 1,
+                    needsSelectedAtMost: 2,
+                },
+            ]
+        },
+        {
+            title: "Principes voor fysiek werk",
+            titleCard: true,
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            cardContents: []
+        },
+        {
+            title: "Principe 1 - Sta in evenwicht",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/activitywork/cleaning.jpg"
                 },
                 {
-                    type: "TODO-Multiple select",
-                    text: "Maak er een multiple select van. Verder moeten hier ook nog de kaarten komen wanneer ze de opties aanduiden, die wat uitleg geven over hoe ze elk van de situaties het best aanpakken!"
+                    type: "Image",
+                    link: "/images/activitywork/cleaning.jpg"
+                },
+                {
+                    id: "ACT-MOD-3-FYS-Q1",
+                    type: "Question",
+                    question: "Staan deze personen in evenwicht?",
+                    options: ["Ja", "Nee"],
+                    correct: "Nee",
+                    explanation: "Deze persoon hebben een smalle steunbasis. De voeten staan bijna tegen elkaar. Je ziet ook dat de hielen loskomen van de grond. Dit is dus een onstabiele houding. Bovendien is het langdurig werken in een gehurkte houding erg belastend voor het kniegewricht.",
+                    onCorrect: "Interdaad!",
+                    onIncorrect: "Nee, ze staan niet in evenwicht!"
                 }
             ]
         },
+        {
+            showIfAnswered: ["ACT-MOD-3-FYS-Q1"],
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/activitywork/drill.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "Hier staat de persoon in evenwicht, en heeft hij een brede steunbasis. Hierdoor sta je niet alleen stabieler, maar ga je ook meer kracht kunnen leveren. Bovendien zal je vanuit deze positie minder diep door de knieën moeten buigen om iets op te rapen. Zoek tijdens het tillen naar bijkomende steunpunten in je omgeving (bijv. op een tafel, kast, muur …) of op je eigen lichaam (bijv. bovenbenen)."
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/foot_positioning.png"
+                },
+            ]
+        },
+        {
+            title: "Principe 2 - Houd gewrichten in neutrale zone",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "De neutrale zone is die zone waarin je gewrichten het minst belast worden en je spieren het efficiëntst kunnen werken. Hou alvast rekening met de volgende basisprincipes:"
+                },
+                {
+                    type: "List",
+                    content: [[{type: "bold", content: "Wervelkolom"}, ": behoud zo veel mogelijk de neutrale krommingen"], [{type: "bold", content: "Knieën "}, {type: "italic", content: "(tijdens het tillen)"}, ": buig niet dieper dan 90°"], [{type: "bold", content: "Knieën "}, {type: "italic", content: "(tijdens het stilstaan)"}, ": buig knieën lichtjes en overstrek ze niet"], [{type: "bold", content: "Schouders"}, ": houd bovenarmen zo dicht mogelijk bij je romp, je schouder ontspannen (niet optrekken en lichtjes naar achteren)"], [{type: "bold", content: "Pols"}, ": behoud zo veel mogelijk de verticale stand van de pols (zoals een hand geven)"]]
+                },
+            ]
+        },
+        {
+            title: "Principe 3 - Werk met handen dicht bij romp",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "In het derde basisprincipe proberen we zo dicht mogelijk met de handen bij de romp te werken;  Dit verkleint de hefboom; hoe kunnen we dit nu doen?"
+                },
+                {
+                    type: "List",
+                    content: ["Breng het werk of de last dicht naar je toe", "Verplaats je dichter naar het werk of naar de last"]
+                },
+            ]
+        },
+        {
+            title: "Principe 4 - Gebruik je lichaamsgewicht en beenspieren",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Je beenspieren zijn de sterkste spieren in je lichaam. Gebruik deze zoveel mogelijk. Wanneer je iets moet tillen van de grond, buig dan goed door je knieën (buig niet dieper dan een hoek van 90° in de knieën) en breng je rug niet te ver naar voren. Je lichaamsgewicht kun je effectief inzetten tijdens het trekken en duwen."
+                },
+                {
+                    type: "Text",
+                    content: [{type:"bold", content:"Trekken of duwen?"}]
+                },
+                {
+                    id: "ACT-MOD-3-FYS-Q2",
+                    type: "Question",
+                    question: "Is het trekken of duwen van zware lasten beter voor je lichaam?",
+                    options: ["Trekken", "Duwen"],
+                    correct: "Duwen",
+                    explanation: "Het zorgt voor minder belasting van de schouders, door het inzetten van je eigen lichaamsgewicht. Het is ook minder vermoeiend.",
+                    onCorrect: "Duwen is inderdaad beter dan trekken!",
+                    onIncorrect: "Fout, duwen is juist beter dan trekken."
+                }
+            ]
+        },
+        {
+            title: "Principe 5 - Zet de beweging rustig in",
+            showIfAnswered: ["ACT-MOD-3-FYS-Q2"],
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            cardContents: [
+                {
+                    type: "List",
+                    content: ["Sta in evenwicht", "Gebruik steeds twee (gestrekte) armen zodat schouders en rug symmetrisch worden belast", "Zet de beweging rustig in. Gebruik de 3 seconden-regel: neem altijd drie tellen de tijd om een kar rustig in  beweging te krijgen"]
+                },
+            ]
+        },
+        {
+            title: "Principe 6 - Beweeg handen en voeten in dezelfde richting",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/activitywork/boxes.jpg"
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/lifting.jpg"
+                },
+                {
+                    id: "ACT-MOD-3-FYS-Q3",
+                    type: "Question",
+                    question: "Bewegen deze personen hun handen en voeten in dezelfde richting?",
+                    options: ["Ja", "Nee"],
+                    correct: "Nee",
+                    explanation: "Beide personen roteren hun rug tijdens het uitvoeren van hun taak. Je beweegt je handen en voeten best in dezelde richting. Door handen en voeten in dezelfde richting te bewegen, vermijd je rotaties ter hoogte van de rug. Hierdoor zorg je ervoor dat het lichaam zich altijd mee verplaatst op een rugvriendelijke manier.",
+                    onCorrect: "Nee, inderdaad.",
+                    onIncorrect: "Juist niet."
+                }
+            ]
+        },
+        {
+            title: "Principes voor kantoorwerk",
+            titleCard: true,
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            cardContents: []
+        },
+        {
+            title: "Principe 1 - Sta in evenwicht",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            cardContents: [
+               {
+                   type: "Text",
+                   content: "In zittende positie zit je best op een stabiele stoel met je voeten plat op de grond. Een brede steunbasis zorgt er eveneens voor dat je goed ondersteunt wordt in je zittende werkhouding."
+               },
+               {
+                   type: "Text",
+                   content: "Het is belangrijk om het zittend werken af te wisselen met .bv. staand werken of vergaderen. Waar kan je op letten wanneer je rechtstaat vergadert?"
+               },
+               {
+                   type: "List",
+                   content: ["Zet je voeten op heupbreedte", "Neem af en toe een steunpunt. Leun bv. tegen de tafel", ["Varieer regelmatig van houding houding ", {type:"italic", content: "(bijvoorbeeld: beweeg je lichaamsgewicht van het ene been naar het andere)"}]]
+               }
+            ]
+        },
+        {
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: [{type:"bold", content:"Varieer - beweeg - doseer"}]
+                },
+                {
+                    type: "Text",
+                    content: "Probeer zo veel mogelijk te variëren van houding, beweeg en sta. Sta niet meer dan 30 min aan één stuk."
+                },
+                {
+                    type: "List",
+                    content: ["Verdeel je gewicht over je beide benen en voeten.", "Plaats je voeten op gelijke lijn met je schouders.", "Buig lichtjes door de knieën.", "Voorkom een ‘doorgezakte’ houding.", "Trek je schouderbladen naar achteren en werk aan je schouders door ze te laten ‘rollen’. Hoe doe je dat? Beweeg je schouders van voren naar achteren, ontspan ze en laat ze dan weer op hun plaats ‘vallen’.", "Hou je kin lichtjes ingetrokken en omhoog: een kleine moeite, maar van groot belang voor een goede lichaamshouding."]
+                }
+            ]
+        },
+        {
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Een goed evenwicht zoeken tussen zitten en staand werken is een uitdaging. Hieronder geven we enkele tips mee:"
+                },
+                {
+                    type: "TextBubble",
+                    content: "Een korte vergadering? Vergader eens staand. Zo kom je sneller tot betere besluiten en duurt het overleg korter."
+                },
+                {
+                    type: "TextBubble",
+                    content: "Integreer werkvormen die af en toe rechtstaan vereisen.",
+                    float: "right"
+                },
+                {
+                    type: "List",
+                    content: ["Een brainstormsessie met post-its die je ergens op moet plakken.", "Een vragenronde waarbij iedereen die akkoord is met een stelling recht staat.", "Een overleg waarbij degene die aan het woord is, rechtstaat.", "Brainstorm in groepjes met rotatie."]
+                },
+                {
+                    type: "TextBubble",
+                    content: "Neem in een ruimte alle stoelen eens weg, zo ervaar je om rechtstaand te vergaderen.",
+                },
+                {
+                    type: "TextBubble",
+                    content: "Voorzie kleine beweegmomenten in je vergadering.",
+                    float: "right"
+                },
+                {
+                    type: "List",
+                    content: ["Vergader op een andere verdieping of in een ander gebouw. Zo beweeg je al voor je in de vergadering toekomt. Gebruik de trap in plaats van de lift.", "Spreek vooraf af met iemand om het sein te geven voor een korte beweegpauze."]
+                }
+            ]
+        },
+        {
+            title: "Principe 2 - Houd gewrichten in neutrale zone",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/activitywork/beeldschermwerk_voorover.jpg"
+                },
+                {
+                    id: "ACT-MOD-3-OFFICE-Q1",
+                    type: "Question",
+                    question: "Neemt onderstaande persoon een goede houding aan?",
+                    options: ["Ja", "Nee"],
+                    correct: "Nee",
+                    explanation: "Dit is een foute houding. We gaan je nu uitleggen waarom.",
+                    onCorrect: "Correct.",
+                    onIncorrect: "Helaas."
+                }
+            ]
+        },
+        {
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            showIfAnswered: ["ACT-MOD-3-OFFICE-Q1"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Wanneer je werkt aan een laptop, is je nek voorovergebogen. Als je gedurende meer dan 30 min aan één stuk gebruik maakt van een laptop is het aangewezen om een laptophouder, dockingstation (op hoogte) of een extra scherm in combinatie met een extern toetsenbord en muis te voorzien. Plaats de bovenkant van het scherm op ooghoogte."
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/beeldschermwerk_zitten.jpg"
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/beeldschermwerk_scherm.jpg"
+                },
+            ]
+        },
+        {
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/activitywork/zitten_incorrect.png"
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/zitten_correct.png"
+                },
+                {
+                    id: "ACT-MOD-3-OFFICE-Q2",
+                    type: "Question",
+                    question: "Op welke van de bovenstaande twee foto's heeft de persoon haar bureaustoel goed ingesteld?",
+                    options: ["Bovenste foto", "Onderste foto"],
+                    correct: "Onderste foto",
+                    explanation: "Op de bovenste foto staat de bureaustoel te laag waardoor de knieën zich boven de heupen bevinden. Hierdoor wordt de rug afgevlakt en ga je doorhangen in de onderrug. Stel de hoogte van je bureaustoel zo in dat je bovenbenen lichtjes afhellen.",
+                    onCorrect: "Correct.",
+                    onIncorrect: "Niet correct."
+                }
+            ]
+        },
+        {
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            showIfAnswered: ["ACT-MOD-3-OFFICE-Q2"],
+            cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/activitywork/beeldschermwerk_knie.jpg",
+                },
+            ]
+        },
+        {
+            title: "Principe 3 - Handen dichtbij de romp",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/activitywork/beeldschermwerk_voorover.jpg"
+                },
+                {
+                    id: "ACT-MOD-3-OFFICE-Q3",
+                    type: "Question",
+                    question: "Op deze foto zie je dat de persoon een ‘doorgezakte’ houding heeft ter hoogte van de bovenrug. Hoe komt dit?",
+                    options: ["Toetsenbord te ver van tafelrand", "Tafel te hoog", "Tafel te laag"],
+                    correct: "Toetsenbord te ver van tafelrand",
+                    explanation: "Het toetsenbord ligt inderdaad te ver van de rand van de tafel, waardoor deze persoon zich voorover moet buigen om er aan te kunnen. De persoon heeft trouwens ook geen armsteunen, wat bijdraagt voor de slechte houding.",
+                    onCorrect: "Juist!",
+                    onIncorrect: "Dat is niet juist."
+                }
+            ]
+        },
+        {
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            showIfAnswered: ["ACT-MOD-3-OFFICE-Q3"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Hier enkele tips om je handen dichtbij je romp te houden:"
+                },
+                {
+                    type: "List",
+                    content: ["Plaats het klavier voldoende kort (5 tot 15 cm) tegen de rand van het bureau met de muis er vlak naast.", "Zet het bureau op dezelfde hoogte als de ellebogen: ellebogen 90° en schouders ontspannen.", "Is je bureautafel te hoog? Verhoog je stoel en gebruik een voetensteun.", "Is je bureautafel te laag? Probeer de tafel te verhogen door bijvoorbeeld blokjes onder de tafel te plaatsen.", "Kies liefst voor een bureaustoel met armsteunen. Zijn die er niet? Schuif dan met je buik tot tegen de bureautafel."]
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/beeldschermwerk_docuhouder.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "Tip: Werk je vaak met documenten? Gebruik een documentenhouder en plaats deze tussen het toetsenbord en het scherm."
+                }
+            ]
+        },
+        {
+            title: "Principe 4 - Gebruik je lichaamsgewicht en beenspieren",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Til een papierendoos op. Wat ervaar je?"
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Text",
+                    content: "Je beenspieren zijn de sterkste spieren in je lichaam. Gebruik deze zoveel mogelijk. Wanneer je iets moet tillen van de grond, buig dan goed door je knieën. Let op: buig niet dieper dan een hoek van 90° in de knieën en beweeg in de natuurlijke krommingen van je rug."
+                }
+            ]
+        },
+        {
+            title: "Principe 5 - Zet de beweging rustig in",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Langzaam opbouwen van de kracht is de boodschap! Er is een spectaculair verschil tussen een snelle en rustige start bij duw- en trekbewegingen. Je hebt minder kracht nodig en het is minder belastend indien je een kracht langzaam opbouwt in drie tellen. Als je snel en hevig te werk gaat, ontstaan er enorme piekkrachten in je lichaam."
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Text",
+                    content: "Je beenspieren zijn de sterkste spieren in je lichaam. Gebruik deze zoveel mogelijk. Wanneer je iets moet tillen van de grond, buig dan goed door je knieën. Let op: buig niet dieper dan een hoek van 90° in de knieën en beweeg in de natuurlijke krommingen van je rug."
+                }
+            ]
+        },
+        {
+            title: "Principe 6 - Beweeg je handen en voeten in dezelfde richting",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Door handen en voeten in dezelfde richting te bewegen, vermijd je rotaties ter hoogte van de rug. Hierdoor zorg je ervoor dat het lichaam zich altijd mee verplaatst op een rugvriendelijke manier."
+                },
+            ]
+        },
+        {
+            title: "Stappenplan: stel je werkplek correct in",
+            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: [{type:"bold", content:"Stap 1: De bureaustoel correct instellen"}]
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/beeldschermwerk_knie.jpg"
+                },
+                {
+                    type: "List",
+                    content: ["Ga diep in de stoel zitten.", "Kies voor een open hoek: bovenbeen licht afhellend.", "Voor de zitdiepte moeten er 4 vingers tussen zitting en knieholte zijn.", "Zorg voor een goede rugsteun door een bolling te maken tegen de lage rug of lende.", "Plaats de armsteunen (indien u hierover beschikt) op ellebooghoogte met ontspannen schouders.", "Zit dynamisch en stel de bureaustoel in op het lichaamsgewicht."]
+                },
+                {
+                    type: "Text",
+                    content: [{type:"bold", content:"Stap 2: Bureauhoogte"}]
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/beeldschermwerk_elleboog.jpg"
+                },
+                {
+                    type: "List",
+                    content: ["Zet het bureau op dezelfde hoogte als de ellebogen: ellebogen 90° en schouders ontspannen.", "Is je bureautafel te hoog? Verhoog je stoel en gebruik een voetensteun.", "Is je bureautafel te laag? Probeer de tafel te verhogen door bijvoorbeeld blokjes onder de tafel te plaatsen.", "Kies liefst voor een bureaustoel met armsteunen. Zijn die er niet? Schuif dan met je buik tot tegen de bureautafel."]
+                },
+                {
+                    type: "Text",
+                    content: [{type:"bold", content:"Stap 3: Scherm"}]
+                },
+                {
+                    type: "Text",
+                    content: "Plaats het externe scherm of de laptop op armlengte en de bovenrand van het scherm op ooghoogte."
+                },
+                {
+                    type: "Text",
+                    content: [{type:"bold", content:"Stap 4: Toetsenbord"}]
+                },
+                {
+                    type: "Text",
+                    content: "Plaats het klavier voldoende kort (5 tot 15 cm) tegen de rand van het bureau met de muis er vlak naast."
+                },
+                {
+                    type: "Text",
+                    content: [{type:"bold", content:"Stap 5: Documenten"}]
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/beeldschermwerk_docuhouder.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "Werken je vaak met documenten? Gebruik een documentenhouder en plaats deze tussen het toetsenbord en het scherm. scherm, liefst lichtjes gekanteld naar hen toe."
+                },
+                {
+                    type: "Text",
+                    content: [{type:"bold", content:"Stap 6: Beweeg en varieer"}]
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/meeting.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "Doe aan actief zitten. Verander regelmatig van houding, werk eens rechtstaand, of ga even op een andere soort stoel zitten (bijvoorbeeld een zitbal). De beste houding ... is de volgende!"
+                }
+            ]
+        },
+        {
+            title: "Overzicht",
+            showIfAnswered: ["ACT-MOD-3-MULTISELECT"],
+            overview: true,
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Je lichaamshouding en de manier waarop je beweegt en handelingen uitvoert, bepalen mee hoe zwaar je lichaam wordt belast. Een slappe of een te gespannen lichaamshouding, bruuske bewegingen of een zware last tillen vanuit een ongunstige houding kan fysieke klachten in de hand werken. Door aandacht te besteden aan je houding, je bewegingen en de uitvoering van je handelingen kun je de fysieke belasting verminderen."
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/fys_principes.png",
+                }
+            ]
+        },
+        {
+            generateFinishSubmoduleButton: true,
+            lastModule: false,
+            text: "Voltooi dit onderdeel",
+            textOnCompleted: "Keer terug"
+        }
     ]
 }
 
@@ -415,7 +884,7 @@ const ACTMOD4MGMT = {
     titleMarkup: ["Activiteiten-", "management"],
     shortTitle: "Act.management",
     part: 4,
-    description: "Vind je het moeilijk om een evenwicht te vinden tussen jouw activiteiten en rust? In de module activiteitenmanagement krijg je tips om beter te leren omgaan met je energie.",
+    description: "In de module activiteitenmanagement krijg je tips om beter te leren omgaan met je energie.",
     duration: "10 minuten",
     type: "Informatief",
     image: "learning",
@@ -426,81 +895,90 @@ const ACTMOD4MGMT = {
             cardContents: [
                 {
                     type: "Text",
-                    content: ["In het onderdeel activiteitenmanagement geven we je een leidraad mee om een beter evenwicht te vinden tussen activiteit en rust om zo binnen je eigen grenzen terug actiever te worden. Het is niet aangewezen om je rust te laten variëren op basis van je klachten. Dat is immers een klachtafhankelijk patroon. Dit patroon zal de ", {type: "italic", content: "klachten op langere termijn in stand houden en verergeren"}, ". Activiteitenmanagement heeft als doel (beter) te leren omgaan met je energie. Verwacht niet dat je onmiddellijk meer actief zal zijn, maar op lange termijn is dit wel de doestelling. Op korte termijn is het de bedoeling om je activiteiten vooraf in te plannen en je activiteiten geleidelijk op te bouwen."]
+                    content: "In het onderdeel activiteitenmanagement geven we je een leidraad mee om een beter evenwicht te vinden tussen activiteit en rust om zo binnen je eigen grenzen actiever te worden. Activiteitenmanagement heeft als doel (beter) te leren omgaan met je energie. Verwacht niet dat je onmiddellijk meer actief zal zijn, maar op lange termijn is dit wel de doelstelling. Op korte termijn is het de bedoeling om je activiteiten vooraf in te plannen en je activiteiten geleidelijk op te bouwen."
                 },
             ]
         },
         {
-            title: "Doe de test",
+            title: "Activiteitenpatronen",
             cardContents: [
                 {
                     type: "Text",
-                    content: "Bedenk eerst voor jezelf welke activiteiten je graag weer zou willen oppakken of zou willen uitbreiden. Misschien wil je naar de supermarkt kunnen wandelen of naar het voetbalveld kunnen fietsen. Misschien wil je wel iets heel specifieks zoals eten in een bepaald restaurant, weer eens op vakantie naar de plek waar je vroeger zo graag kwam. Of je kindje te voet naar school brengen. Bedenk wat daarvoor nodig is en stel dat als je doel. De afstand tussen mijn huis en de school is 3km. Ik verdeel dit doel op in stapjes van bijvoorbeeld 0,5km."
-                },
-                {
-                    type: "Text",
-                    content: "Door doelen te stellen wordt het duidelijk wat je wil gaan bereiken ondanks dat je pijn ervaart. Het maakt duidelijk wat waarde heeft en wat belangrijk voor je is. Schrijf voor jezelf op welke doelen je wil bereiken op korte termijn en op lange termijn."
-                },
-                {
-                    type: "TODO - Text input",
-                },
-            ]
-        },
-        {
-            title: "Basisprincipes om je omgeving aan te passen",
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Laat je bij het stellen van doelen niet leiden door strakke tijdsschema’s, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons terug uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."
-                },
-                {
-                    type: "Text",
-                    content: "Probeer bij het stellen van doelen je te laten leiden door je visie, waarden en principes. Doelen kies je in functie van wat je als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen."
-                },
-            ]
-        },
-        {
-            title: "Je activiteiten",
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Om een zicht te krijgen van jouw activiteiten, dien je een overzicht te maken van de activiteiten van de afgelopen week."
-                },
-                {
-                    type: "Text",
-                    content: "Bepaal per activiteit/taak de mate van belasting. Op deze manier kunnen wij gerichte tips geven na het invullen van het schema."
-                },
-                {
-                    type: "Text",
-                    content: [{type: "bold", content: "Licht"}]
+                    content: "Er zijn 4 activiteitenpatronen of niveaus die frequent voorkomen:"
                 },
                 {
                     type: "List",
-                    content: ["Deze activiteit kan je comfortabel uitvoeren", "Er is geen verandering in je pijn", "Deze activiteit kan voor een langere tijd worden uitgevoerd", "Deze taak kan je veilig uitvoeren"]
-                },
-                {
-                    type: "Text",
-                    content: [{type: "bold", content: "Middelzwaar"}]
-                },
-                {
-                    type: "List",
-                    content: ["Deze activiteit kan je voor kortere tijd uitvoeren", "Te lange uitvoering geeft toename van je pijn", "Het is oké indien je dit niet te vaak of niet te lang moet doen", "Er is geen probleem om deze activiteit af en toe te moeten uitvoeren"]
-                },
-                {
-                    type: "Text",
-                    content: [{type: "bold", content: "Zwaar"}]
-                },
-                {
-                    type: "List",
-                    content: ["Deze activiteit zorgt voor een overbelasting van je lichaam", "Geeft te sterke toename van je pijn", "Dient te worden vermeden in je job", "Het is niet oké ook al dien je de activiteit kort of uitzonderlijk uit te voeren"]
-                },
+                    content: [[{type: "bold", content: "Laag activiteitenniveau"}, ": Deze personen voeren over het algemeen weinig activiteiten uit. Of, in geval van pijn, hebben de neiging om activiteiten te vermijden. Voldoende bewegen en het uitvoeren van waardevolle activiteiten is echter super belangrijk. Beweging verhoogt de doorbloeding naar je spieren en gewrichten, waardoor ze soepel blijven en sterker worden. Door een laag activiteitenniveau wordt je lichaam zwakker waardoor het de belasting in je dagelijks leven minder goed aan kan. Naast de lichamelijke voordelen dragen waardevolle activiteiten ook bij aan je mentale welzijn. Ook bij pijn zijn beweging en zoveel mogelijk je normale activiteiten verderzetten essentieel voor het herstelproces. Krijg je bijvoorbeeld veel last tijdens een specifieke activiteit, dan kan je nog altijd verder gaan met iets anders in plaats van lang te rusten of in de zetel te hangen."], [{type: "bold", content: "Fluctuerend activiteitenpatroon"}, ": Bij mensen met een fluctuerend patroon varieert de hoeveelheid activiteiten sterk van dag tot dag. Hoewel een evenwichtig activiteitenpatroon beter is, is dit niet noodzakelijk een probleem. Tenzij jij je laat leiden door je klachten. Dit wil zeggen dat je op goede dagen heel veel doet en de dagen nadien maar heel weinig kan doen door een sterke toename van je klachten. Deze sterk afwisselende over- en onderbelasting brengt je op termijn nergens. Ook al vind je het niet altijd gemakkelijk om te stoppen wanneer je een activiteit wilt afwerken, toch is het belangrijk om een pauze in te lassen of een andere activiteit te doen wanneer je een sterke toename van je klachten krijgt. Lukt dat je, dan boek je winst. Je gaat minder in het rood en hoeft minder te herstellen, waardoor de daaropvolgende dagen een stuk comfortabeler zijn."], [{type: "bold", content: "Belastend activiteitenpatroon"}, ": Deze mensen hebben constant een hoog activiteitenniveau of voeren veel activiteiten uit die ze als belastend ervaren. Steeds activiteiten uitvoeren die belastend zijn of elke dag in het rood gaan, is uitputtend voor je lichaam. Op een moment zal dit zich wreken. Daarom is het belangrijk om af te wisselen met activiteiten die minder belastend zijn en rustmomenten in te lassen."], [{type: "bold", content: "Evenwichtig activiteitenpatroon"}, ": mensen met een evenwichtig activiteitenpatroon hebben een goede balans gevonden tussen rust en activiteit. Ze wisselen zwaardere taken af met minder zware taken. Ze bewegen voldoende, maar plannen ook voldoende rust in."]]
+                }
             ]
         },
         {
-            title: "Activiteitenlogboek",
+            title: "Doelen en opbouwschema",
+            showIf: [{rule:"HasNotUnlockedShortcut", shortcut: "GOALSETTING"}],
             cardContents: [
                 {
-                    type: "Activiteitenlogboek",
+                    type: "Text",
+                    content: "Om te beginnen is het belangrijk om stil te staan bij welke activiteiten voor jou belangrijk zijn. Het stellen van doelen maakt heel duidelijk wat belangrijk voor je is en wat je wilt bereiken (of je nu last hebt van pijn of niet). Stel dat jij bijvoorbeeld veel belang hecht aan gezondheid en zelfzorg. Dan kan je dit in je leven incorporeren door een marathon te lopen, maar evenzeer door dagelijks een wandeling rond de blok te doen of ook door voldoende rustmomenten in te bouwen of door op je voeding te letten,... Stel dat jij belang hecht aan het leveren van een zinvolle bijdrage, dan zou je dat kunnen doen door te gaan werken, door vrijwilligerswerk te doen, door boodschappen te doen voor je zieke buurvrouw,... Of stel dat je graag meer quality time wilt met je familie. Bijvoorbeeld door wekelijks met je ouders te bellen of door de kinderen met de fiets naar school te brengen."
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Text",
+                    content: "Hier zijn alvast enkele tips bij het stellen van doelen:"
+                },
+                {
+                    type: "List",
+                    numbered: true, 
+                    content: ["Laat je leiden door je visie, waarden en principes: Doelen kies je in functie van wat voor jou als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen.", "Maak concrete doelen: Je kan een doel pas bereiken als je weet wat je hiervoor moet doen. Werken aan je gezondheid is bijvoorbeeld geen doel, maar een waarde (je hecht belang aan jouw gezondheid). Een concreet doel om deze waarde te bereiken kan zijn dat je dagelijks een wandeling van 30 minuten maakt, of dat je maar 1 keer per week een dessertje eet.", "Stel realistische doelen: Een goed gekozen doen kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te neme. Je kan beter starten met een doel van 5km, dan 10km, enz.", "Houd rekening met de termijn: Hoe verder weg in de toekomst een bepaald doel ligt, hoe moeilijker het wordt om dit te bereiken. Splits daarom ambitieuze doelen op in tussentijdse doelen, zo bewaar je het overzicht. Let op dat je je ook niet laat leiden door strakke tijdschema's, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."]
+                }
+            ]
+        },
+        {
+            title: "Voorbeelden",
+            showIf: [{rule:"HasNotUnlockedShortcut", shortcut: "GOALSETTING"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Hier volgen 2 voorbeelden van hoe je goede doelen kan stellen."
+                },
+                {
+                    type: "List",
+                    numbered: true, 
+                    content: ["Els is 35 jaar, getrouwd, heeft een dochter van 5 jaar en werkt op een kantoor. Ze heeft tijdens het werken geregeld last van haar nek, zeker op dagen dat ze vaak met klanten moet bellen. Omdat gezondheid een belangrijke rol heeft in haar leven, wilt ze hieraan werken. Ze weet dat het belangrijk is om te bewegen en regelmatig van houding te wisselen. Daarom neemt ze haar voor om 2 minuten recht te staan en te bewegen na ieder uur te werken.", "Paul is 52 jaar, gescheiden, zijn kinderen zijn al uit huis en werkt als schrijnwerker. Zijn vrienden gaan iedere zaterdag 100 km samen fietsen. Omdat hij veel belang hecht aan vriendschap, zou hij graag meegaan. Conditioneel is hij nog niet zo sterk en hij heeft ook wat last van zijn knie. Daarom besluit hij om zijn fietsen op te bouwen. Hij wilt 1 keer per week trainen en op zaterdag rijdt hij een stukje mee met zijn vrienden."]
+                },
+                {
+                    type: "Text",
+                    content: "Sommige doelen zal je niet zomaar kunnen bereiken. Hiervoor heb je een goed opbouwschema nodig. Ook om je belastbaarheid te verhogen en actiever te worden is een veilig opbouwschema essentieel."
+                }
+            ]
+        },
+        {
+            title: "Opbouwschema",
+            showIf: [{rule:"HasNotUnlockedShortcut", shortcut: "GOALSETTING"}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Hier heb je een overzicht van hoe je een opbouwschema kan maken:"
+                },
+                {
+                    type: "Text",
+                    content: "Om je activiteitenniveau langzaam op te gaan bouwen moeten we eerst je basisniveau vaststellen. Je basisniveau bepaal je door de tijd te meten dat je met een activiteit bezig kunt zijn totdat je moe wordt of de pijn toeneemt. Je bepaalt je basisniveau liefst meerdere keren, zodat je een betrouwbaar gemiddelde krijgt. Je hebt namelijk goede en slechte dagen. Van deze basis haal je 20% af om je startniveau te bepalen. Houd dit één tot twee weken vol, afhankelijk van je hersteltijd. Daarna breiden we uit met ± 10%. Wanneer je gaat opbouwen mag de hersteltijd niet toenemen. Het kan zijn dat pijn en vermoeidheid erger worden, maar dat is niet erg, zolang de hersteltijd maar niet langer wordt. Het is super belangrijk dat je je aan het schema houdt. Hoe verleidelijk misschien ook, maar het is niet goed dat je al je activiteiten tegelijk gaat opbouwen."
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Text",
+                    content: "Hier volgen 2 voorbeelden:"
+                },
+                {
+                    type: "List",
+                    content: ["Na 10 minuten fietsen neemt mijn pijn toe. Dan is je startniveau 8 minuten. Na één tot twee weken verhoog je dit naar 9 minuten.", "Na 500 meter stappen neemt mijn pijn toe. Dan is je startniveau 400 meter. Na één tot twee weken verhoog je dit naar 440 meter."]
+                },
+                {
+                    type: "Text",
+                    content: "Nu is het aan jou! We hebben een handige tool toegevoegd aan de shortcuts, waarmee je zelf persoonlijke doelen kan stellen. De app kan ook automatisch een opbouwschema maken voor doelen waar dit nodig is (bijvoorbeeld als je wilt opbouwen naar 10 000 stappen per dag)."
                 }
             ]
         },
@@ -594,6 +1072,12 @@ const ACTMOD5 = {
                 },
             ]
         },
+        {
+            generateFinishSubmoduleButton: true,
+            lastModule: false,
+            text: "Voltooi dit onderdeel",
+            textOnCompleted: "Keer terug"
+        }
     ]
 }
 
@@ -630,6 +1114,12 @@ const ACTMOD6MOV = {
                 },
             ]
         },
+        {
+            generateFinishSubmoduleButton: true,
+            lastModule: false,
+            text: "Voltooi dit onderdeel",
+            textOnCompleted: "Keer terug"
+        }
     ]
 }
 
@@ -804,7 +1294,8 @@ const ACTMOD7FOOD = {
                     content: ["Regelmaat is belangrijk", "Eet zoveel mogelijk volgens een vast maaltijdpatroon (probeer de structuur van 3 hoofdmaaltijden zoveel mogelijk aan te houden).", "Neem een gezond tussendoortje, bijv. fruit, hapklare groenten, ...", "Te laat en te vet eten ligt zwaar op de maag en verstoort de slaap.", "Begin van de werkdag: eiwitten houden je wakker en alert. Bijvoorbeeld: yoghurt, mager vlees, noten, ...", "Einde van de werkdag: koolhydraten maken je slaperig. Bijvoorbeeld: brood, pasta, granen, fruit, ...", "Tijdens de nachtshift: licht verteerbaar voedsel.", "Na de nachtshift: een licht ontbijt met weinig eiwitten."]
                 },
                 {
-                    type: "Foto - Eten met tijd",
+                    type: "Image",
+                    link: "/images/activitywork/food_clock.jpg"
                 },
             ]
         },
@@ -839,7 +1330,8 @@ const ACTMOD7FOOD = {
                     content: ["Hou je aandacht bij de eetervaring", "Maak gebruik van al je zintuigen. Ze helpen je om te genieten van je maaltijd en er met je aandacht bij te blijven", "Pauzeer regelmatig. Leg je bestek even neer, zo kun je altijd bewust beslissen of je nog meer wilt eten of niet. Je zult merken dat je daardoor vaak minder gaat eten.", "Eet langzaam en kauw goed. Je spijsvertering krijgt op die manier beter de kans om haar werk te doen en je voelt zelf beter aan wanneer je genoeg hebt.", "Kies voor kleinere porties en kleine hapjes. Dat geeft je meer smaakprikkels en doet je ook minder eten."]
                 },
                 {
-                    type: "Foto - Mindful eten",
+                    type: "Image",
+                    link: "/images/activitywork/mindful_eating.jpg"
                 },
             ]
         },
@@ -855,7 +1347,8 @@ const ACTMOD7FOOD = {
                     content: ["De opluchting en de ontspanning zijn het gevolg van de eerste glazen. Als je meer drinkt blijkt alcohol ", {type: "bold", content:"dikwijls negatieve gevoelens te versterken"}, ". Uit onderzoek weten we dat veel drinken de gevoelens van angst of somberheid doet toenemen. Hoe meer en hoe frequenter je drinkt, hoe meer de negatieve gevoelens zullen versterkt worden. De kans op algemene somberheid of depressie neemt toe. Bij veel drinken voel je je nadien miserabel omwille van de bekende 'kater'. ", {type: "bold", content: "Je wordt dan net gevoeliger voor pijn"}, ", terwijl je er tegelijkertijd minder 'weerbaar' tegenover wordt. Opnieuw drinken lijkt even een oplossing te bieden, maar je komt in een vicieuze cirkel terecht."]
                 },
                 {
-                    type: "Foto - Alcohol",
+                    type: "Image",
+                    link: "/images/activitywork/alcohol.jpg"
                 },
                 {
                     type: "Text",
@@ -869,6 +1362,10 @@ const ACTMOD7FOOD = {
                 {
                     type: "Text",
                     content: "Het verband tussen roken en pijn is complex en ze beïnvloeden elkaar in beide richtingen. Bij acute pijn kan een nicotineshot tijdelijk een klein pijnstillend effect hebben, maar bij chronische pijn is roken slecht."
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/smoking.jpg"
                 },
                 {
                     type: "Text",
@@ -902,6 +1399,12 @@ const ACTMOD7FOOD = {
                 },
             ]
         },
+        {
+            generateFinishSubmoduleButton: true,
+            lastModule: false,
+            text: "Voltooi dit onderdeel",
+            textOnCompleted: "Keer terug"
+        }
     ]
 }
 
@@ -926,7 +1429,8 @@ const ACTMOD8RES = {
                     content: "Veerkracht is het vermogen om je aan te passen aan stress en tegenslag en daar misschien zelfs sterker uit te komen. Het gaat niet alleen over ‘terugveren’ naar de oorspronkelijke positie, maar ook om doorgroeivermogen."
                 },
                 {
-                    type: "Snelkoppeling module Stress",
+                    type: "Shortcut",
+                    module: "Stress",
                 },
             ]
         },

@@ -4,6 +4,7 @@ import createSortingContent from './ContentSorting.jsx';
 import createSwipeContent from './ContentSwiping';
 
 import Button from '../../components/Button.jsx';
+import PillButton from '../../components/PillButton.jsx';
 import Slider from '../../components/Slider.jsx';
 import Input from '../../components/Input.jsx';
 import Icon from '../../components/Illustrations/Icon.jsx';
@@ -220,7 +221,6 @@ function ContentParser(props) {
         </div>)
     }
 
-
     /**
      * Returns a multitext-input element
      * @param {String} text The text that explains the context of what the user needs to type
@@ -343,13 +343,13 @@ function ContentParser(props) {
             case 'List':
                 return createListContent(props.data.content, props.data.numbered, props.data.overview);
             case 'Question':
-                return createQuestionContent(props.data.id, props.data.question, props.data.number, options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect);
+                return createQuestionContent(props.data.id, props.data.question, props.data.number, props.data.options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect);
             case 'Video':
                 return createVideoContent(props.data.link, props.userProfile.language);
             case 'Selection':
-                return createSelectionContent(props.data.id, props.data.title, props.data.question, options, props.data.width);
+                return createSelectionContent(props.data.id, props.data.title, props.data.question, props.data.options, props.data.width);
             case 'Sort-Exercise':
-                return createSortingContent(props.data.content, props.data.columns, options);
+                return createSortingContent(props.data.content, props.data.columns, props.data.options);
             case 'Image':
                 return createImageContent(props.data.link, props.data.width);
             case 'Slider':
@@ -366,6 +366,8 @@ function ContentParser(props) {
                 return createTextBubbleContent(props.data);
             case 'Multiple-Choice':
                 return createMultipleChoiceContent(props);
+            case 'Shortcut':
+                return createShortcutContent(props);
             case 'Break':
                 return <hr/>;
             default:
@@ -438,10 +440,17 @@ function createMultipleChoiceContent(props) {
                 <input style={{marginRight: "7px"}} type="checkbox" checked={checked[option.id]} onChange={() => toggleChecked(option.id)}/>
                 {option.text}
             </div>})}
-            {(props.data.needsSelectedAtLeast && props.data.needsSelectedAtLeast >= selectedCount()) && (props.data.needsSelectedAtMost && props.data.needsSelectedAtMost <= selectedCount()) && <Button center color="blue" onClick={() => save()}>Verstuur</Button>}
+            {(props.data.needsSelectedAtLeast && selectedCount() >= props.data.needsSelectedAtLeast) && (props.data.needsSelectedAtMost && selectedCount() <= props.data.needsSelectedAtMost) && <Button center color="blue" onClick={() => save()}>Verstuur</Button>}
             {selectedCount() === 0 && <Button center color="gray-light">Selecteer er minstens {props.data.needsSelectedAtLeast - selectedCount()}</Button>}
             {(props.data.needsSelectedAtLeast && selectedCount() !== 0 && selectedCount() < props.data.needsSelectedAtLeast) && <Button center color="gray-light">Selecteer er nog {props.data.needsSelectedAtLeast - selectedCount()}</Button>}
             {(props.data.needsSelectedAtMost && selectedCount() > props.data.needsSelectedAtMost) && <Button center color="gray-light">{selectedCount() - props.data.needsSelectedAtMost} te veel aangeduid</Button>}
         </React.Fragment>}
     </div>)
+}
+
+
+function createShortcutContent(props) {
+
+    const [showModal, setShowModal] = useState(false);
+    return (<PillButton contentColor={"white"} fillColor={"blue"} icon="information">{props.data.module}</PillButton>)
 }
