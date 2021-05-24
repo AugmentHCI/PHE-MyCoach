@@ -62,6 +62,16 @@ export default class ProgressManager {
     }
 
     /**
+     * [DB] Assign a status to a specific submodule.
+     * @param {String}  module    The module that the submodule belongs to.
+     * @param {String}  submodule The submodule that is completed.
+     * @param {String}  status    The new status of the given submodule ("COMPLETED", "IN_PROGRESS", "NOT_STARTED" or "TO_START").
+     */
+    async setSubmoduleStatus(module, submodule, status) {
+        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: module, submoduleID: submodule, status: status});
+    }
+
+    /**
      * [DB] Marks a submodule as completed for a given user, and unlocks the subsequent module(s).
      * @param {String}  module    The module that the submodule belongs to.
      * @param {String}  submodule The submodule that is completed.
@@ -175,7 +185,7 @@ function parseProgress(userData) {
 const template = {
         "PAINEDUCATION":    {"PE_MOD_1": "NOT_STARTED", "PE_MOD_2": "NOT_STARTED", "PE_MOD_3": "NOT_STARTED", "PE_MOD_4": "NOT_STARTED", "PE_MOD_5": "NOT_STARTED"},
         "THOUGHTSEMOTIONS": {"TE_MOD_1": "NOT_STARTED", "TE_MOD_2": "NOT_STARTED", "TE_MOD_3": "NOT_STARTED", "TE_MOD_4": "NOT_STARTED", "TE_MOD_5": "NOT_STARTED", "TE_MOD_6": "NOT_STARTED"},
-        "ACTIVITYWORK":     {"ACT_MOD_1": "COMPLETED", "ACT_MOD_2": "COMPLETED", "ACT_MOD_3": "COMPLETED", "ACT_MOD_4": "IN_PROGRESS", "ACT_MOD_5": "COMPLETED", "ACT_MOD_6": "COMPLETED", "ACT_MOD_7": "IN_PROGRESS", "ACT_MOD_8": "NOT_STARTED", "ACT_MOD_9": "NOT_STARTED"},
+        "ACTIVITYWORK":     {"ACT_MOD_1": "NOT_STARTED", "ACT_MOD_2": "NOT_STARTED", "ACT_MOD_3": "NOT_STARTED", "ACT_MOD_4": "NOT_STARTED", "ACT_MOD_5": "NOT_STARTED", "ACT_MOD_6": "NOT_STARTED", "ACT_MOD_7": "NOT_STARTED", "ACT_MOD_8": "NOT_STARTED", "ACT_MOD_9": "NOT_STARTED"},
         "MOVEMENT": {},
         "STRESS": {},
         "SOCIAL": {}

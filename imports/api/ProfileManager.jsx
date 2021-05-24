@@ -29,7 +29,9 @@ export default class ProfileManager {
     async initializeUser() {
         const fromDate = "2020-01-01", toDate = moment().format("YYYY-MM-DD");
         const url = `https://connector.idewe.be/healthempower/jobstudenten/api/antwoorden/export?van=${fromDate}&tot=${toDate}&taal=DUTCH`;
+        console.log("Doing");
         const data = await Meteor.callPromise("getData", { url: url, userToken: this.userToken });
+        console.log("Failed");
         let questionnaires = this.processQuestionnaires(this.convertRawDataToQuestionnaires(data.data));
         questionnaires.forEach(questionnaire => {
             if (questionnaire.status === "AFGEROND") {
@@ -164,11 +166,12 @@ export default class ProfileManager {
             }
             /* Fetch latest questionnaire from data */
             let latestQuestionnaire = questionnaires.reduce((currentMax, newItem) => dateComesAfter(newItem.date, currentMax.date) ? newItem : currentMax, {date:"2000-01-01"} );
-            const daysSinceLastQuestionnaire = daysBetween(latestQuestionnaire.date, moment().format("YYYY-MM-DD"));
+            const lastDate = latestQuestionnaire.date ? latestQuestionnaire.date : "2021-01-01";
+            const daysSinceLastQuestionnaire = daysBetween(lastDate, moment().format("YYYY-MM-DD"));
             /* If latest questionnaire in MongoDB is older than 35 days, see if there are new questionnaires available from external DB and add them to MongoDB with fetchNewUserData() */
             if (daysSinceLastQuestionnaire > 35) {
-                console.log("[ProfileManager - getLatestQuestionnaire] Getting new questionnaires")
-                let newQuestionnaires = await this.fetchNewUserData(moment(latestQuestionnaire.date).add(1, "day").format("YYYY-MM-DD"));
+                console.log("[ProfileManager - getLatestQuestionnaire] Getting new questionnaires");
+                let newQuestionnaires = await this.fetchNewUserData(moment(lastDate).add(1, "day").format("YYYY-MM-DD"));
                 /* If newer one is found, update status and latest questionnaire */
                 if (Object.keys(newQuestionnaires).length > 0) {
                     console.log("[ProfileManager - getLatestQuestionnaire] New questionnaire found")

@@ -62,7 +62,7 @@ export default function ModuleCard(props) {
                     <div className={"module-card-number" + lockedSuffix}>Onderdeel {props.number}</div>
                     <div className={"module-card-title" + lockedSuffix}>{titleHTML}</div>
                 </div>
-                <Illustration image={props.image + lockedSuffix} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}></Illustration>
+                <Illustration image={props.image + lockedSuffix} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
             </div>
             <div className={"module-card-bottom" + lockedSuffix}>
                 <div className="module-card-bottom-row">

@@ -208,7 +208,7 @@ export default function MyCoach(props) {
                 <h4>Je shortcuts</h4>
                 Hier zie jij je snelkoppelingen waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog snelkoppelingen toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
                 <div className="tutorial-button-row">
-                    <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial1(false)}>Volgende</Button>
+                    <Button center color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial1(false)}>Volgende</Button>
                 </div>
             </div>}
             placement="bottom"
@@ -224,8 +224,8 @@ export default function MyCoach(props) {
                 <h4>Coaching</h4>
                 Hier zie jij je persoonlijk coachingtraject.<br/>Je kan elke dag je coaching bekijken.<br/>
                 <div className="tutorial-button-row">
-                    <Button color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial1(true)}>Vorige</Button>
-                    <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial2(false)}>Volgende</Button>
+                    <Button center color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial1(true)}>Vorige</Button>
+                    <Button center color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial2(false)}>Volgende</Button>
                 </div>
             </div>}
             placement="topLeft"
@@ -242,8 +242,8 @@ export default function MyCoach(props) {
                 Voltooi je coaching om na een tijdje andere<br/>modules vrij te spelen!<br/>
                 <div className="tutorial-illustration"><Illustration image="voortgang" width={"100%"}></Illustration></div>
                 <div className="tutorial-button-row">
-                    <Button color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial2(true)}>Vorige</Button>
-                    <Button color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> {updateShowTutorial3(false); interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONPOPUPS", "CONFIRM");}}>Begrepen!</Button>
+                    <Button center color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial2(true)}>Vorige</Button>
+                    <Button center color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> {updateShowTutorial3(false); interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONPOPUPS", "CONFIRM");}}>Begrepen!</Button>
                 </div>
             </div>}
             placement="top"
@@ -265,7 +265,11 @@ export default function MyCoach(props) {
     useEffect(() => {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
-            const progress = await progressManager.getUserProgress();
+            let progress = await progressManager.getUserProgress();
+            if (progress["PAINEDUCATION"]["PE_MOD_1"] === "NOT_STARTED") {
+                progress["PAINEDUCATION"]["PE_MOD_1"] = "IN_PROGRESS";
+                await progressManager.setSubmoduleStatus("PAINEDUCATION", "PE_MOD_1", "IN_PROGRESS");
+            }
             const dailyCoaching = await progressManager.getDailyCoaching();
             setUserProgress(progress);
             setUserDailyCoaching(dailyCoaching);
