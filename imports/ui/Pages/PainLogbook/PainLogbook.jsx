@@ -5,6 +5,7 @@ import moment from "moment";
 import 'moment/locale/nl';
 import 'moment/locale/fr';
 import { emotions } from "./PainLogbookData.js";
+import FadeIn from "react-fade-in";
 
 import jwt_decode from "jwt-decode";
 
@@ -52,18 +53,20 @@ export default function PainLogbook() {
                 <p><b>Emoties:</b> {emotionsHTML}</p>
             </div>)
         })
-        return painLogsHTML;
+        return <FadeIn>{painLogsHTML}</FadeIn>;
     }
 
     return (<React.Fragment>
         <NavigationBar title="Pijnlogboek" back={`/${language}/mycoach/${FlowRouter.getParam('token')}`}/>
         <div className="painlogbook-body">
+        <FadeIn>
             <div>
                 <div className="painlogbook-explanation">Heb je momenteel of recent last van een pijnscheut of aanzienlijk meer pijn? Neem een momentje om hierover te reflecteren en krijg persoonlijke tips.</div>
                 <ActionButton icon={"writing"} onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/painlogbook/newentry`)}>Voeg toe aan je pijnlogboek</ActionButton>
             </div>
             <hr/>
             <h3>Jouw pijnlogs</h3>
+            </FadeIn>
             {renderPainLogs()}
         </div>
     </React.Fragment>);

@@ -180,7 +180,7 @@ export default function ModuleParser(props) {
             noPadding
             show={showModal}>
             <div className="modalpopup-top">
-                <Illustration image={submodule.image + (locked ? "-locked" : "")} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
+                <Illustration image={submodule.image + (locked ? "-locked" : "")} width={submodule.imageWidth ? submodule.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "10px", zIndex: "1"}}/>
                 <div className={"module-card-number" + (locked ? "-locked" : "")}>Onderdeel {submodule.part}</div>
                 <div className={"modalpopup-card-title" + (locked ? "-locked" : "")}>{submodule.titleMarkup[0]}</div>
                 {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title" + (locked ? "-locked" : "")}>{submodule.titleMarkup[1]}</div>}

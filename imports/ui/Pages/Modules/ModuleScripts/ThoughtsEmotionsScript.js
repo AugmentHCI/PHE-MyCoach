@@ -1285,6 +1285,12 @@ const TEMOD6 = {
                 },
             ]
         },
+        {
+            generateFinishSubmoduleButton: true,
+            lastModule: false,
+            text: "Voltooi dit onderdeel",
+            textOnCompleted: "Keer terug"
+        }
     ]
 }
 

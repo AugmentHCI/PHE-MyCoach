@@ -109,9 +109,9 @@ const ACTMOD2WORK = {
     description: "Kan je best rusten als je pijn hebt of net niet? Of ga je naar je werk als je pijn hebt? Vragen die we bespreken tijdens deze module.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "act-mod-work",
     icon: "work",
-    imageWidth: "180px",
+    imageWidth: "230px",
     cards: [{
             title: "Reflectie met stelling (Activiteiten)",
             cardContents: [
@@ -290,7 +290,7 @@ const ACTMOD3ERGO = {
     description: "Heb jij soms pijn bij het uitvoeren van werkgerelateerde taken? Weet je niet goed hoe je een taak op een ergonomische manier kan uitvoeren? Lees dan zeker deze module!",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "act-mod-ergo",
     icon: "ergo",
     imageWidth: "180px",
     cards: [{
@@ -887,9 +887,9 @@ const ACTMOD4MGMT = {
     description: "In de module activiteitenmanagement krijg je tips om beter te leren omgaan met je energie.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "act-mod-mgmt",
     icon: "writing",
-    imageWidth: "180px",
+    imageWidth: "240px",
     cards: [{
             title: "Inleiding",
             cardContents: [
@@ -982,6 +982,13 @@ const ACTMOD4MGMT = {
                 }
             ]
         },
+        {
+            generateFinishSubmoduleButton: true,
+            lastModule: true,
+            text: "Voltooi onderdeel belasting",
+            textOnCompleted: "Keer terug",
+            action: "UnlockActivityLogbook"
+        },
     ]
 }
 
@@ -994,9 +1001,9 @@ const ACTMOD5 = {
     description: "Belastbaarheid of draagkracht is datgene wat je fysiek en mentaal aan kan. Hoe is jouw belastbaarheid? In deze module krijg je handvaten om je belastbaarheid te verhogen.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "act-mod-intro",
     icon: "lifting",
-    imageWidth: "180px",
+    imageWidth: "200px",
     cards: [{
             title: "Inleiding",
             cardContents: [
@@ -1090,7 +1097,7 @@ const ACTMOD6MOV = {
     description: "Hoe kan je gezond bewegen inbouwen in jouw dagelijks leven? Dit leer in je deze module.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "act-mod-mov",
     icon: "running",
     imageWidth: "180px",
     cards: [{
@@ -1132,7 +1139,7 @@ const ACTMOD7FOOD = {
     description: "Hoe kan je gezond bewegen inbouwen in jouw dagelijks leven? Dit leer in je deze module.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "act-mod-food",
     icon: "food",
     imageWidth: "180px",
     cards: [
@@ -1417,9 +1424,9 @@ const ACTMOD8RES = {
     description: "Veerkracht is het vermogen om je aan te passen aan stress en tegenslag en daar misschien zelfs sterker uit te komen. Hoe veer je terug na herval of na een acute pijn op stoot?",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "act-mod-res",
     icon: "feather",
-    imageWidth: "180px",
+    imageWidth: "190px",
     cards: [
         {
             title: "Inleiding",
@@ -1467,9 +1474,9 @@ const ACTMOD9SLP = {
     description: "Slaap je goed? Ook slaap versterkt je basis. Lees hier de belangrijkste tips rond slaapkwaliteit.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "te-mod-sleep",
     icon: "sleep",
-    imageWidth: "180px",
+    imageWidth: "220px",
     cards: [
         {
             title: "Inleiding",
@@ -1481,11 +1488,12 @@ const ACTMOD9SLP = {
                 {
                     id: "ACT-MOD-9-SLIDER-1",
                     type: "Slider",
-                    text: "Slaap je goed",
+                    text: "Slaap je goed?",
                     from: 1,
-                    to: 10,
+                    to: 5,
                     valueText: "Jouw selectie",
-                    show: true,
+                    showValue: true,
+                    mapping: "5-AGREE",
                     save: true,
                 },
                 {
