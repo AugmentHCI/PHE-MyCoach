@@ -504,7 +504,7 @@ const PEMOD4 = {
         generateFinishSubmoduleButton: true,
         lastModule: false,
         text: "Voltooi dit onderdeel",
-        textOnCompleted: "Keer terug"
+        textOnCompleted: "Keer terug",
     }]
 }
 
@@ -643,7 +643,8 @@ const PEMOD5 = {
         generateFinishSubmoduleButton: true,
         lastModule: false,
         text: "Voltooi Pijneducatie",
-        textOnCompleted: "Keer terug"
+        textOnCompleted: "Keer terug",
+        action: "UnlockPainLogbook"
     }]
 }
 

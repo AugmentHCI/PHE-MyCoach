@@ -18,6 +18,7 @@ import './SubmoduleParser.scss';
 import ProgressManager from '../../../api/ProgressManager.jsx';
 import InteractionManager from '../../../api/InteractionManager.jsx';
 import ProfileManager from '../../../api/ProfileManager.jsx';
+import ShortcutManager from '../../../api/ShortcutManager.jsx';
 
 export default function SubmoduleParser(props) {
 
@@ -30,6 +31,7 @@ export default function SubmoduleParser(props) {
     const progressManager = new ProgressManager(userID);
     const interactionManager = new InteractionManager(userID);
     const profileManager = new ProfileManager(userID, userToken);
+    const shortcutManager = new ShortcutManager(userID);
     const [didSeeCompletionModal, setDidSeeCompletionModal] = useState(undefined);
     const [showCompletionModal, setShowCompletionModal] = useState(false);
     const [userProfile, setUserProfile] = useState(undefined);
@@ -103,7 +105,22 @@ export default function SubmoduleParser(props) {
     }
 
     /* Used as callback for CardsParser */
-    async function finishSubmodule(firstTime) {
+    async function finishSubmodule(firstTime, extraAction=undefined) {
+        console.log(`firstTime: ${firstTime}, extraAction: ${extraAction}`)
+        if (firstTime) {
+            switch (extraAction) {
+                case 'UnlockPainLogbook':
+                    await shortcutManager.upsertShortcut("PAINLOGBOOK", "MAIN", "DEFAULT");
+                    await shortcutManager.upsertShortcut("PAINLOGBOOK", "PAINEDUCATION", "DEFAULT");
+                    break;
+                case 'UnlockActivityLogbook':
+                    await shortcutManager.upsertShortcut("ACTIVITYLOGBOOK", "MAIN", "DEFAULT");
+                    await shortcutManager.upsertShortcut("ACTIVITYLOGBOOK", "ACTIVITYWORK", "DEFAULT");
+                    break;
+                default:
+                    break;
+            }
+        }
         if (firstTime) { setShowCompletionModal(true) }
         else { history.back() }
     }

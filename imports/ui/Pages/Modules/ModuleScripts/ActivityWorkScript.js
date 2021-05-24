@@ -1431,6 +1431,8 @@ const ACTMOD8RES = {
                 {
                     type: "Shortcut",
                     module: "Stress",
+                    buttonText: "Snelkoppeling - Module Stress",
+                    modalText: "Dit is een snelkoppeling naar de module 'Stress'. Maar, deze wordt pas deze zomer ontwikkeld, dus de inhoud van deze module 'Veerkracht' is nog beperkt. Kom zeker terug wanneer de module 'Stress' is toegevoegd!"
                 },
             ]
         },
@@ -1439,7 +1441,7 @@ const ACTMOD8RES = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Bekijk onderstaande video."
+                    content: "Bekijk even de onderstaande video. Dit geeft je wat meer informatie over hoe je om kan gaan met stress op het werk."
                 },
                 {
                     type: "Video",
@@ -1447,6 +1449,12 @@ const ACTMOD8RES = {
                 },
             ]
         },
+        {
+            generateFinishSubmoduleButton: true,
+            lastModule: false,
+            text: "Voltooi dit onderdeel",
+            textOnCompleted: "Keer terug"
+        }
     ]
 }
 
@@ -1704,6 +1712,12 @@ const ACTMOD9SLP = {
                     content: ["Zorg voor een vast slaapritueel", "Reageer op signalen van je lichaam", "Ga voor regelmaat", "Wakker? Opstaan!", "Gebruik je slaapkamer om te slapen", "Let op je eet- en drinkpatroon", "Beweeg voldoende overdag", "Zorg voor ontspanning", "Vermijd computer-, tablet- of smartphonegebruik vlak voor het slapengaan", "Slaap zoveel als nodig en volgens je eigen behoefte", "Zorg voor een goed slaapsysteem"]
                 },
             ]
+        },
+        {
+            generateFinishSubmoduleButton: true,
+            lastModule: true,
+            text: "Voltooi onderdeel belasting",
+            textOnCompleted: "Keer terug"
         },
     ]
 }

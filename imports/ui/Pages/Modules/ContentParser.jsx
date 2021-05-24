@@ -3,6 +3,7 @@ import './ContentParser.scss';
 import createSortingContent from './ContentSorting.jsx';
 import createSwipeContent from './ContentSwiping';
 
+import AppModal from '../../components/AppModal.jsx';
 import Button from '../../components/Button.jsx';
 import PillButton from '../../components/PillButton.jsx';
 import Slider from '../../components/Slider.jsx';
@@ -105,29 +106,35 @@ function ContentParser(props) {
     function createSelectionContent(questionID, title, question, options, buttonWidth="100%") {
         let buttonsHTML = [];
         const [selected, changeSelected] =  useState(new Array(options.length).fill(false));
+        const [locked, setLocked] = useState(false);
 
         useEffect(() => {
             async function fetchStatus() {
                 const answer = await props.questionManager.getLatestAnswerOnQuestion(questionID);
                 if (answer) {
                     let newArray = new Array(options.length).fill(false);
-                    newArray[options.indexOf(answer)] = true;
+                    newArray[options.findIndex(option => option.id === answer)] = true;
                     changeSelected(newArray);
+                    if (props.data.lockOnAnswer) setLocked(true);
                 }
             }
             fetchStatus();
         }, []);
 
         async function selectButton(index) {
-            await props.questionManager.setModuleQuestion(props.module, questionID, options[index], false);
-            let newArray = new Array(options.length).fill(false);
-            newArray[index] = true;
-            changeSelected(newArray);
-            props.callback();
+            if (!locked) {
+                await props.questionManager.setModuleQuestion(props.module, questionID, options[index].id, false);
+                let newArray = new Array(options.length).fill(false);
+                newArray[index] = true;
+                changeSelected(newArray);
+                props.callback();
+                if (props.data.lockOnAnswer) setLocked(true);
+            }
         }
         /* Make buttons for each of the options, and assign correct/incorrect actions to buttons */
         options.forEach((option, index) => {
-            buttonsHTML.push(<Button key={props.childrenKey + "-" + index} width={buttonWidth} isSelected={selected[index]} onClick={() => selectButton(index)}>{option}</Button>);
+            const buttonLocked = selected[index] && locked;
+            buttonsHTML.push(<Button key={props.childrenKey + "-" + index} width={buttonWidth} disabled={buttonLocked} isSelected={selected[index] && !locked} onClick={() => selectButton(index)}>{option.text}</Button>);
         })
         /* Make the Question-Content element */
         return (<div key={props.childrenKey} className="content-backdrop">
@@ -151,8 +158,8 @@ function ContentParser(props) {
             if (typeof(item) === "string") listHTML.push(<li key={props.childrenKey + "-" + index} className={isOverview ? "content-list-item-overview" : "content-list-item"}>{item}</li>)
             else listHTML.push(<li key={props.childrenKey + "-" + index} className={isOverview ? "content-list-item-overview" : "content-list-item"}>{parseTextMarkup(item)}</li>)
         });
-        if (isNumbered) return <ol className="content-list">{listHTML}</ol>;
-        else return <ul className="content-list">{listHTML}</ul>;
+        if (isNumbered) return <ol className="content-list-numbered">{listHTML}</ol>;
+        else return <ul className={"content-list"}>{listHTML}</ul>;
     }
 
     /**
@@ -191,7 +198,7 @@ function ContentParser(props) {
      * @param {Boolean} save Whether the value needs to be saved (render button)
      */
     function createSliderContent(id, text, from, to, valueText, show, save) {
-        return <Slider key={props.childrenKey} id={id} text={text} from={from} to={to} valueText={valueText} show={show} save={save} questionManager={props.questionManager} callback={props.callback} module={props.module}/>
+        return <Slider key={props.childrenKey} id={id} text={text} from={from} to={to} valueText={valueText} showValue={show} mapping={props.data.mapping} save={save} questionManager={props.questionManager} callback={props.callback} module={props.module}/>
     }
 
     /**
@@ -279,13 +286,13 @@ function ContentParser(props) {
         }
 
         if (!started) return (<div className="content-delayed-container">
-            <Button style={{marginTop:"80px"}} color="blue" onClick={() => setStarted(true)}>Begin</Button>
+            <Button center style={{marginTop:"80px"}} color="blue" onClick={() => setStarted(true)}>Begin</Button>
         </div>)
 
         return (<div className="content-delayed-container">{data.content.map((item, index) => {
-            return <div classNam="content-delayed-item" key={item+"-"+index} style={{opacity:"0", animation:"fadeIn 2s ease-in "+ index*4+"s 1 normal forwards"}}>{item}</div>
+            return <div className="content-delayed-item" key={item+"-"+index} style={{opacity:"0", animation:"fadeIn 2s ease-in "+ index*4+"s 1 normal forwards"}}>{item}</div>
         })}
-        <Button style={{marginTop: "10px", opacity:"0", animation:"fadeIn 2s ease-in "+ data.content.length*4+"s 1 normal forwards"}} onClick={() => confirmDone()}>Klaar</Button></div>)
+        <Button center style={{marginTop: "10px", opacity:"0", animation:"fadeIn 2s ease-in "+ data.content.length*4+"s 1 normal forwards"}} onClick={() => confirmDone()}>Klaar</Button></div>)
     }
 
     function createTextBubbleContent(data) {
@@ -327,6 +334,10 @@ function ContentParser(props) {
                     const answerLower = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID);
                     if (answerLower >= rule.answer) ruleResults = false;
                     break;
+                case "HasAnswered":
+                    const answer = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID);
+                    if (rule.answerID !== answer) ruleResults = false;
+                    break;
                 default:
                     console.log(`Card display rule '${rule.rule}' not implemented`);
                     break;
@@ -353,7 +364,7 @@ function ContentParser(props) {
             case 'Image':
                 return createImageContent(props.data.link, props.data.width);
             case 'Slider':
-                return createSliderContent(props.data.id, props.data.text, props.data.from, props.data.to, props.data.valueText, props.data.show, props.data.save);
+                return createSliderContent(props.data.id, props.data.text, props.data.from, props.data.to, props.data.valueText, props.data.showValue, props.data.save);
             case 'Text-Input':
                 return createTextInputContent(props.data.text, props.data.placeholder);
             case 'Multitext-Input':
@@ -452,5 +463,9 @@ function createMultipleChoiceContent(props) {
 function createShortcutContent(props) {
 
     const [showModal, setShowModal] = useState(false);
-    return (<PillButton contentColor={"white"} fillColor={"blue"} icon="information">{props.data.module}</PillButton>)
+
+    return (<div style={{marginTop: "5px"}}>
+        {showModal && <AppModal title="Snelkoppeling" defaultOption={"Sluit"} notifyParent={() => setShowModal(false)} show={showModal}>{props.data.modalText}</AppModal>}
+        <PillButton contentColor={"white"} fillColor={"blue"} icon="information" onClick={() => setShowModal(true)}>{props.data.buttonText}</PillButton>
+    </div>)
 }

@@ -30,7 +30,7 @@ export default function PillButton(props) {
     }
 
     function handleOnClick() {
-        if (props.handleOnClick) props.handleOnClick();
+        if (props.onClick) props.onClick();
     }
     
     function createIcon() {

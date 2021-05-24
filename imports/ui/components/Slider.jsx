@@ -5,8 +5,10 @@ import "./Slider.scss";
 
 export default function Slider(props) {
 
-  const [value, updateValue] = useState(5);
+  const [value, updateValue] = useState(1);
   const [saved, updateSaved] = useState(false);
+
+  console.log(props.mapping)
 
   async function save() {
     updateSaved(true);
@@ -48,7 +50,8 @@ export default function Slider(props) {
           </div>
         {props.endValue && <div style={{flexShrink:1}}>{props.endValue}</div>}
       </div>
-      {props.show && <div className={"slider-value" + (saved ? "-saved" : "")}>{props.valueText ? props.valueText + ": " : ""}{value}</div>}
+      {props.showValue && !props.mapping && <div className={"slider-value" + (saved ? "-saved" : "")}>{props.valueText ? props.valueText + ": " : ""}{value}</div>}
+      {props.showValue && props.mapping && <div className={"slider-value" + (saved ? "-saved" : "")}>{mappings[props.mapping][value]}</div>}
       {props.save && !saved && 
         <div className="selection-button-container">
           <Button width="fit" color="blue" onClick={() => save()} style={{}}>
@@ -60,5 +63,6 @@ export default function Slider(props) {
 }
 
 const mappings = {
-  "3-ITEM": {1: "Heel"}
+  "5-AGREE": {1: "Helemaal niet akkoord", 2: "Niet akkoord", 3: "Neutraal", 4: "Akkoord", 5: "Helemaal akkoord"},
+  "10-IMPACT": {1: "Heel negatief", 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "Geen impact"},
 }

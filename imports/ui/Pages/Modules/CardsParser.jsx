@@ -48,12 +48,10 @@ function CardsParser(props) {
             if (card.generateFinishSubmoduleButton) {
                 contentsHTML.push(<Button 
                     key={"finish-submodule-button"+props.module}
-                    style={{marginBottom: "100px", 
-                        textAlign: "center", 
-                        justifyContent: "center"}} 
+                    style={{marginBottom: "100px"}}
                     color="blue" 
                     center
-                    onClick={() => props.finishCallback(props.moduleStatus !== "COMPLETED")}>
+                    onClick={() => props.finishCallback(props.moduleStatus !== "COMPLETED", card.action)}>
                         {props.moduleStatus === "COMPLETED" ? card.textOnCompleted : card.text}
                 </Button>);
                 continue;

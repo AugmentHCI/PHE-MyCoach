@@ -51,7 +51,6 @@ export default function createSortingContent(content, columnData, options) {
     flex: 1,
     flexDirection: "column",
   }
-  console.log(columnData)
   const [columns, setColumns] = useState(columnData);
   return (
     <div className="content-backdrop">

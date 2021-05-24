@@ -177,6 +177,7 @@ export default function ModuleParser(props) {
             notifyParent={() => {if (!locked) routeToSubmodule(selectedSubmodule)}}
             defaultOption={settings[userProgress[module][submodule.id]].text} 
             defaultColor={settings[userProgress[module][submodule.id]].color} 
+            noPadding
             show={showModal}>
             <div className="modalpopup-top">
                 <Illustration image={submodule.image + (locked ? "-locked" : "")} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>

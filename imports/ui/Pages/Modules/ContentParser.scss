@@ -94,6 +94,11 @@
     margin-top: 10px;
     list-style-position: outside;
     padding-left: 10px;
+
+    &-numbered {
+        @extend .content-list;
+        padding-left: 25px;
+    }
 }
 
 .content-list-item {

@@ -162,25 +162,29 @@ export default function MyCoach(props) {
 
     function renderDailyCoachingModal() {
         if (!userDailyCoaching) return <React.Fragment/>;
-        let submodule = "";
+        let submodule = [], module = "";
         switch (userDailyCoaching.split("_")[0]) {
             case "PE":
                 submodule = PainEducationScript.submodules.filter(submoduleData => submoduleData.id === userDailyCoaching)[0];
+                module = "paineducation";
                 break;
             case "TE":
                 submodule = ThoughtsEmotionsScript.submodules.filter(submoduleData => submoduleData.id === userDailyCoaching)[0];
+                module = "thoughtsemotions";
                 break;
             case "ACT":
                 submodule = ActivityWorkScript.submodules.filter(submoduleData => submoduleData.id === userDailyCoaching)[0];
+                module = "activitywork";
                 break;
         }
 
         return (<AppModal
             backOption="Sluit" 
             notifyBack={() => setShowCoachingModal(false)} 
-            notifyParent={() => {console.log("Implement")}}
+            notifyParent={() => {FlowRouter.go(`/${language}/mycoach/${userToken}/module/${module}/${userDailyCoaching}`)}}
             defaultOption="Bekijk" 
             defaultColor="blue"
+            noPadding
             show={showCoachingModal}>
             <div className="modalpopup-top">
                 <Illustration image={submodule.image} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
@@ -273,14 +277,7 @@ export default function MyCoach(props) {
         }
         async function fetchUserShortcuts() {
             const fetchedShortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
-            if (fetchedShortcuts.length === 0) {
-                shortcutManager.upsertShortcut("DAILY-COACHING", "MAIN", "LOCKED");
-                setUserShortcuts([{shortcut: "DAILY-COACHING", screen: "MAIN", status: "LOCKED"}]);
-            }
-            else {
-                setUserShortcuts(fetchedShortcuts);
-            }
-            
+            setUserShortcuts(fetchedShortcuts);
         }
         async function fetchUserInteractionStatus() {
             const result = await interactionManager.getMultipleInteractionStatuses(["GENERAL_INTRODUCTIONPOPUPS", "GENERAL_INTRODUCTIONMODAL"]);

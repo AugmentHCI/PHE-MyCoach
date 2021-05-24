@@ -10,6 +10,7 @@ export default function Button(props) {
         if (props.onClick && !props.disabled) { props.onClick() };
     }
 
+    console.log(props.disabled)
     /* Generate Button Class */
     let buttonClass = props.disabled ? "button-inactive" : "button";
     buttonClass += isPressed ? " pressed" : "";

@@ -58,15 +58,15 @@ export default function AdminSettings(props) {
             <Button color="blue" disabled={addedPainlogs} onClick={() => addExamplePainlogs()}>{addedPainlogs ? "Voorbeeldlogs toegevoegd" : "Voeg voorbeeld-pijnlogs toe"}</Button>
             <hr/>
             <Button color="blue" disabled={copiedRRNR} 
-                onClick={() => {navigator.clipboard.writeText(jwt_decode(FlowRouter.getParam('token')).rrnr); setCopiedRRNR(true);}}>
+                onClick={() => {navigator.clipboard.writeText(jwt_decode(FlowRouter.getParam('token')).rrnr); setCopiedRRNR(true); setCopiedDeelnemerID(false); setCopiedJWT(false);}}>
                     {copiedRRNR ? `RRNR-nummer gekopieerd: ${jwt_decode(FlowRouter.getParam('token')).rrnr}` : `Kopieer RRNR-nummer: ${jwt_decode(FlowRouter.getParam('token')).rrnr}`}
             </Button>
             {jwt_decode(FlowRouter.getParam('token')).deelnemerId && <Button color="blue" disabled={copiedDeelnemerID} 
-                onClick={() => {navigator.clipboard.writeText(jwt_decode(FlowRouter.getParam('token')).deelnemerId); setCopiedDeelnemerID(true);}}>
+                onClick={() => {navigator.clipboard.writeText(jwt_decode(FlowRouter.getParam('token')).deelnemerId); setCopiedRRNR(false); setCopiedDeelnemerID(true); setCopiedJWT(false);}}>
                     {copiedDeelnemerID ? `Deelnemer ID gekopieerd: ${jwt_decode(FlowRouter.getParam('token')).deelnemerId}` : `Kopieer deelnemer ID: ${jwt_decode(FlowRouter.getParam('token')).deelnemerId}`}
             </Button>}
             <Button color="blue" disabled={copiedJWT} 
-                onClick={() => {navigator.clipboard.writeText(FlowRouter.getParam('token')); setCopiedJWT(true);}}>
+                onClick={() => {navigator.clipboard.writeText(FlowRouter.getParam('token')); setCopiedRRNR(false); setCopiedDeelnemerID(false); setCopiedJWT(true);}}>
                     {copiedJWT ? `JWT token gekopieerd` : `Kopieer JWT token`}
             </Button>
             <hr/>

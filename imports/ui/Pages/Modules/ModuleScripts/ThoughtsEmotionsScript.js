@@ -17,10 +17,10 @@ const TEMOD1 = {
     title: "G&E: een inleiding",
     titleMarkup: ["G&E: een", "inleiding"],
     part: 1,
-    description: "TODO",
+    description: "Dit onderdeel zal je een blik geven op wat de module gedachten en emoties (G&E) te bieden heeft.",
     duration: "20 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "te-part-1",
     imageWidth: "180px",
     cards: [{
             id: "TE-MOD1-CARD1",
@@ -55,8 +55,8 @@ const TEMOD1 = {
                     text: "Duid op een schaal van 1 tot 10 (waarbij 1 staat voor een heel sterke negatieve impact en 10 voor helemaal geen negatieve impact) aan hoe groot de impact van gedachten en gevoelens waar je mee worstelt is welbevinden.",
                     from: 1,
                     to: 10,
-                    valueText: "Jouw selectie",
-                    show: true,
+                    mapping: "10-IMPACT",
+                    showValue: true,
                     save: true,
                 }
             ]
@@ -68,7 +68,6 @@ const TEMOD1 = {
                 {
                     type: "Text",
                     content: ["Jij scoorde een ", {type: "answer", questionID:"TE-MOD-1-SLIDER"}, " op de schaalvraag. Na het doorlopen van deze module zullen we je opnieuw vragen om je score aan te duiden. Zo kan je zien of je score verbeterd, verminderd of hetzelfde gebleven is. Je kan dan ook in kaart proberen brengen welke factoren hiertoe bijgedragen hebben."],
-                    showIf: [{rule: "AnswerHigherThan", questionID: "TE-MOD-1-SLIDER", answer: 6}],
                 }]
         },
         {
@@ -100,13 +99,13 @@ const TEMOD1 = {
                     id: "TE-MOD-1-Q2",
                     type: "Selection",
                     question: "Heb je soms het idee dat steeds opnieuw dezelfde gedachte jou achtervolgt?",
-                    options: ["Ja", "Nee"]
+                    options: [{id: "YES", text: "Ja"}, {id: "NO", text: "Nee"}]
                 },
                 {
                     id: "TE-MOD-1-Q3",
                     type: "Selection",
                     question: "Zou je soms je gedachten eens graag even op stop willen zetten?",
-                    options: ["Ja", "Nee"]
+                    options: [{id: "YES", text: "Ja"}, {id: "NO", text: "Nee"}]
                 }
             ]
         },
@@ -195,8 +194,8 @@ const TEMOD1 = {
                     content: "Naast gedachten hebben we ook heel wat emoties en gevoelens die ons lijf binnenkomen. Deze zijn net als wolken die aan de lucht verschijnen en dan weer verdwijnen."
                 },
                 {
-                    type: "Image-TODO-Wolkenfoto-opvragen", 
-                    text: "In het Word-documentje is dit een iStock-video, maar cfr. de mail van Comaco: iStock video's kunnen ze met hun abonnement niet downladen. Is een gewone foto van wolken hier ook oké? En zo ja, zouden jullie mij zo ééntje kunnen bezorgen?"
+                    type: "Image", 
+                    link: "/images/thoughtsemotions/cloud.png"
                 },
                 {
                     type: "Text",
@@ -246,10 +245,6 @@ const TEMOD1 = {
                     content: "Vaak hebben we de neiging om allerlei pogingen te ondernemen om met onze moeilijke gedachten en gevoelens (bijvoorbeeld rond pijn) om te gaan zoals bijvoorbeeld afleiding zoeken door tv te kijken, bepaalde activiteiten vermijden, bepaalde bewegingen niet meer doen, meer eten, drinken of roken, meer slapen, veel op onze smartphone bezig zijn, ..."
                 },
                 {
-                    type: "Image",
-                    link: "/images/thoughtsemotions/lots-of-thoughts.jpg"
-                },
-                {
                     type: "Break"
                 },
                 {
@@ -260,12 +255,18 @@ const TEMOD1 = {
                 {
                     type: "Image",
                     link: "/images/thoughtsemotions/stress.jpg",
-                },
+                }
+            ]
+        },
+        {
+            title: "En helpt het?",
+            cardContents: [
                 {
                     id: "TE-MOD-1-Q4",
                     type: "Selection",
-                    question: "Hebben deze pogingen gewerkt en ervoor gezorgd dat je moeilijke gedachten en gevoelens verdwenen of verminderden?",
-                    options: ["Ja, altijd", "Ja, tijdelijk wel", "Neen, eigenlijk niet"]
+                    question: "En hebben deze pogingen gewerkt en ervoor gezorgd dat je moeilijke gedachten en gevoelens verdwenen of verminderden?",
+                    options: [{id: "ALWAYS", text: "Altijd"}, {id: "SOMETIMES", text: "Tijdelijk wel"}, {id: "NEVER", text: "Eigenlijk niet"}],
+                    lockOnAnswer: true
                 },
             ]
         },
@@ -275,11 +276,18 @@ const TEMOD1 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Vaak hebben we de neiging om allerlei pogingen te ondernemen om met onze moeilijke gedachten en gevoelens (bijvoorbeeld rond pijn) om te gaan zoals bijvoorbeeld afleiding zoeken door tv te kijken, bepaalde activiteiten vermijden, bepaalde bewegingen niet meer doen, meer eten, drinken of roken, meer slapen, veel op onze smartphone bezig zijn, ..."
+                    content: "Je geeft aan dat je pogingen altijd helpen om je gedachten te doen verdwijnen. Hoe hard we ook moeilijke gedachten en emoties proberen vermijden of kwijt geraken, diep vanbinnen zijn ze er nog steeds en steken ze vroeg of laat opnieuw de kop op. Het is dus belangrijk om ook te leren omgaan met deze gedachten en emoties, zodanig dat hun effect op jou minder groot is.",
+                    showIf: [{rule: "HasAnswered", questionID: "TE-MOD-1-Q4", answerID: "ALWAYS"}]
                 },
                 {
-                    type: "Todo - Navragen Rosanne/Steffi",
-                    text: "Wat wordt er bedoeld met 'Je geeft aan dat je pogingen (insert antwoord ‘altijd’ of ‘tijdelijk’ of ‘eigenlijk niet’) verdwenen.', ik denk dat hier iets anders bedoeld wordt/de verwoording anders moet zijn (helpen ipv verdwenen?)? + hier gaan we dan ook verschillende tekst tonen o.b.v. hun pijnlogboek - zelfde bedenking: misschien wat te vroeg om hier al te verwachten dat ze het regelmatig invullen?"
+                    type: "Text",
+                    content: "Je geeft aan dat je pogingen soms helpen om je gedachten te doen verdwijnen. We hebben allemaal wel eens de neiging hebben om allerlei pogingen te ondernemen om moeilijke gedachten en gevoelens uit de weg te gaan of te onderdrukken. Je gaat waarschijnlijk merken dat ze vaak geen of slechts tijdelijk een effect hebben. Hoe hard we ook ons best doen, diep vanbinnen zijn ze er nog steeds en steken ze vroeg of laat opnieuw de kop op.",
+                    showIf: [{rule: "HasAnswered", questionID: "TE-MOD-1-Q4", answerID: "SOMETIMES"}]
+                },
+                {
+                    type: "Text",
+                    content: "Je geeft aan dat je pogingen eigenlijk niet helpen om je gedachten te doen verdwijnen. We hebben allemaal wel eens de neiging hebben om allerlei pogingen te ondernemen om moeilijke gedachten en gevoelens uit de weg te gaan of te onderdrukken. Je gaat waarschijnlijk merken dat ze vaak geen of slechts tijdelijk een effect hebben. Hoe hard we ook ons best doen, diep vanbinnen zijn ze er nog steeds en steken ze vroeg of laat opnieuw de kop op.",
+                    showIf: [{rule: "HasAnswered", questionID: "TE-MOD-1-Q4", answerID: "NEVER"}]
                 },
                 {
                     type: "Text",
@@ -331,11 +339,11 @@ const TEMOD2 = {
     title: "Aan de slag met G&E",
     titleMarkup: ["Aan de slag", "met G&E"],
     part: 2,
-    description: "TODO",
-    duration: "Meerdere dagen",
+    description: "Nu is het tijd om enkele dagen stil te staan bij jouw gedachten.",
+    duration: "Dagen",
     type: "Oefeningen",
-    image: "learning",
-    imageWidth: "180px",
+    image: "te-mod-2",
+    imageWidth: "130px",
     cards: [{
         id: "TE-MOD2-CARD1",
         title: "Gedachte-oefening",
@@ -357,17 +365,14 @@ const TEMOD2 = {
             },
             {
                 type: "Text",
-                content: "Je kan deze hier invullen en bijhouden. De gedachten die je invult in je pijnlogboek verschijnen er automatisch bij.",
+                content: "Je kan deze hier invullen en bijhouden.",
                 showIf: [{"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}]
             },
             {
-                type: "Multiple-Text-Input",
-                text: "Toelaten om ze meerdere inputs te laten typen, en deze ook eventueel te verwijderen uit de lijst, en om hoer automatisch ook de pijnlogboek-gedachten te tonen."
-            },
-            {
-                type: "Text-Input",
+                type: "Multitext-Input",
+                id: "TE-MOD-2-NEGTHOUGHTS",
                 text: "Welke (negatieve) gedachten komen de laatste tijd bij jou vaak terug?",
-                placeholder: "Schrijf hier een gedachte"
+                placeholder: "Schrijf ze hier neer:"
             },
         ]
     },
@@ -511,9 +516,9 @@ const TEMOD2 = {
                 text: "Hoe zou je, na het doorlopen van deze module, op een schaal van 1 tot 10 - waarbij 1 staat voor een heel sterke negatieve impact en 10 voor helemaal geen negatieve impact - de impact van moeilijke gedachten en gevoelens op jouw welbevinden scoren?",
                 from: 1,
                 to: 10,
-                valueText: "Jouw selectie",
-                show: true,
+                showValue: true,
                 save: true,
+                mapping: "10-IMPACT"
             }
         ]
     },
@@ -544,11 +549,11 @@ const TEMOD3 = {
     title: "Mindfulness",
     titleMarkup: ["Mindfulness"],
     part: 3,
-    description: "TODO",
+    description: "In dit onderdeel gaan we een techniek bekijken dat je kan helpen omgaan met verschillende gedachten.",
     duration: "10 minuten",
     type: "Oefeningen",
-    image: "learning",
-    imageWidth: "180px",
+    image: "te-mod-3",
+    imageWidth: "210px",
     cards: [{
         id: "TE-MOD3-CARD1",
         title: "Inleiding",
@@ -677,11 +682,11 @@ const TEMOD4 = {
     title: "Controle over je gedrag",
     titleMarkup: ["Controle", "over je gedrag"],
     part: 4,
-    description: "TODO",
+    description: "In dit onderdeel leren wij hoe je controle kunt uitoefenen over je gedrag.",
     duration: "10 minuten",
     type: "Oefeningen",
-    image: "learning",
-    imageWidth: "180px",
+    image: "te-mod-4",
+    imageWidth: "150px",
     cards: [
         {
             id: "TE-MOD4-CARD1",
@@ -710,14 +715,22 @@ const TEMOD4 = {
                     content: "Echter – op langere termijn kan dit een hele hoop negatieve gevolgen hebben. Weet je nog wat deze zijn? Meerdere antwoorden mogelijk.",
                 },
                 {
-                    type: "Multiple Choice",
-                    options: ["Je zenuwstelsel wordt overgevoelig en gaat sneller pijnprikkels doorsturen waardoor ook normale prikkels pijnlijk kunnen worden", "Door je angst ga je meer focussen op pijnprikkels en dus sneller pijn krijgen en hier harder van af zien", "Je fysieke capaciteit gaat achteruit waardoor je je sneller overbelast en dus sneller pijn gaat ervaren", "Je raakt meer geïsoleerd van je omgeving en dit is niet goed voor je mentale welzijn"]
+                    id: "TE-MOD-4-NEGAVTIVE-CONSEQUENCES",
+                    type: "Multiple-Choice",
+                    options: [
+                        {id: "SENSITIVE", text: "Je zenuwstelsel wordt overgevoelig en gaat sneller pijnprikkels doorsturen waardoor ook normale prikkels pijnlijk kunnen worden"}, 
+                        {id: "FOCUS_ON_PAIN", text: "Door je angst ga je meer focussen op pijnprikkels en dus sneller pijn krijgen en hier harder van af zien"}, 
+                        {id: "CAPACITY", text: "Je fysieke capaciteit gaat achteruit waardoor je je sneller overbelast en dus sneller pijn gaat ervaren"}, 
+                        {id: "ISOLATED", text: "Je raakt meer geïsoleerd van je omgeving en dit is niet goed voor je mentale welzijn"}],
+                    needsSelectedAtLeast: 1,
+                    needsSelectedAtMost: 4
                 },
             ]
         },
         {
             id: "TE-MOD4-CARD3",
             title: "Eens denken",
+            showIfAnswered: ["TE-MOD-4-NEGAVTIVE-CONSEQUENCES"],
             cardContents: [
                 {
                     type: "Text",
@@ -808,17 +821,26 @@ const TEMOD4 = {
                     content: "Hopelijk is het tijdens deze module duidelijk geworden dat stilstaan bij hetgene dat je kan controleren en bewust zijn van je gedachten en emoties zinvol kan zijn. We hebben hiervoor verschillende oefeningen en tips doorlopen. Welke zijn het meest geschikt voor jou en ga je mee aan de slag? Je kan er meerdere aanduiden:"
                 },
                 {
-                    type: "Multiple choice",
-                },
-                {
-                    type: "List",
-                    content: ["Oefening 'ik heb de gedachte dat ...'", "Filmpje van de vervelende buurman", "Filmpje van gedachten als auto’s op een drukke baan", "Mindfulness oefening zoals 5,4,3,2,1", "Oefening mindful tandenpoetsen (niet voor profiel 1 en 3)", "Gedachten en emoties van op een afstand bekijken", "Activiteiten rustig opbouwen (zie modules ‘activiteiten en werk’ en ‘bewegen’)", "Analyse van mijn activiteiten door gebruik van het pijnlogboek"]
+                    type: "Multiple-Choice",
+                    id: "TE-MOD-4-EXERCISES",
+                    options: [
+                        {id: "THOUGHT-EXERCISE", text: "Oefening 'ik heb de gedachte dat ...'"}, 
+                        {id: "VIDEO-NEIGHBOUR", text: "Filmpje van de vervelende buurman"}, 
+                        {id: "VIDEO-CARS", text: "Filmpje van gedachten als auto’s op een drukke baan"}, 
+                        {id: "MINDFULNESS", text: "Mindfulness oefening zoals 5,4,3,2,1"}, 
+                        {id: "MINDFUL_BRUSHING", text: "Oefening mindful tandenpoetsen"}, 
+                        {id: "REFLECTION", text: "Gedachten en emoties van op een afstand bekijken"}, 
+                        {id: "ACTIVITY", text: "Activiteiten rustig opbouwen (zie modules ‘activiteiten en werk’ en ‘bewegen’)"}, 
+                        {id: "PAINLOGBOOK", text: "Analyse van mijn activiteiten door gebruik van het pijnlogboek"}],
+                    needsSelectedAtLeast: 1,
+                    needsSelectedAtMost: 8
                 }
             ]
         },
         {
             id: "TE-MOD4-OVERVIEW",
             title: "Key take-away",
+            showIfAnswered: ["TE-MOD-4-EXERCISES"],
             overview: true,
             cardContents: [
                 {
@@ -842,11 +864,11 @@ const TEMOD5 = {
     title: "Waarden",
     titleMarkup: ["Waarden"],
     part: 5,
-    description: "TODO",
+    description: "Leven naar je waarden helpt je om doelen te stellen en activiteiten te plannen, ondanks de pijn.",
     duration: "10 minuten",
     type: "Oefeningen",
-    image: "learning",
-    imageWidth: "180px",
+    image: "te-mod-5",
+    imageWidth: "170px",
     cards: [
         {
             id: "TE-MOD5-CARD1",
@@ -1139,6 +1161,13 @@ const TEMOD5 = {
                 },
             ]
         },
+        {
+            generateFinishSubmoduleButton: true,
+            lastModule: false,
+            text: "Voltooi dit onderdeel",
+            textOnCompleted: "Keer terug",
+            action: "UnlockGoalSetting"
+        }
     ]
 }
 
@@ -1147,11 +1176,11 @@ const TEMOD6 = {
     title: "Afronding",
     titleMarkup: ["Afronding"],
     part: 6,
-    description: "TODO",
+    description: "In het laatste onderdeel gaan wij nog een keer over alles wat wij gezien hebben.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
-    imageWidth: "180px",
+    image: "te-mod-6",
+    imageWidth: "200px",
     cards: [
         {
             id: "TE-MOD6-CARD1",
@@ -1213,8 +1242,8 @@ const TEMOD6 = {
                     text: "Hoe zou je, na het doorlopen van deze module, op een schaal van 1 tot 10 - waarbij 1 staat voor een heel sterke negatieve impact en 10 voor helemaal geen negatieve impact - de impact van moeilijke gedachten en gevoelens op jouw welbevinden scoren?",
                     from: 1,
                     to: 10,
-                    valueText: "Jouw selectie",
-                    show: true,
+                    mapping: "10-IMPACT",
+                    showValue: true,
                     save: true,
                 }
             ]
