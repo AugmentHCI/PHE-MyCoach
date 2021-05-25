@@ -160,7 +160,7 @@ const PEMOD2 = {
                 "width": "fit",
                 title: "En hoe voel jij je?",
                 question: "Welke emoticon illustreert het best hoe je je op dat moment voelt?",
-                options: [{id: "😄", text: "😄"}, {id: "😒", text: "😒"},{id: "😔", text: "😔"},{id: "😟", text: "😟"},{id: "😩", text: "😩"},{id: "😡", text: "😡"}]
+                options: [{id: "😄", text: "😄"}, {id: "😒", text: "😒"},{id: "😔", text: "😔"},{id: "😟", text: "😟"},{id: "😩", text: "😩"},{id: "😡", text: "😡"}, {id: "🥴", text: "🥴"}, {id: "😰", text: "😰"}]
             }
         ]
     },

@@ -132,7 +132,7 @@ export default function ModuleParser(props) {
     function renderShortcuts() {
         let shortcutButtonsHTML = [];
         shortcuts.forEach(shortcut => {
-            if (["DEFAULT", "PINNED"].includes(shortcut.status)) shortcutButtonsHTML.push(<ActionButton size="small" icon={shortcutData[shortcut.shortcut].icon}>
+            if (["DEFAULT", "PINNED"].includes(shortcut.status)) shortcutButtonsHTML.push(<ActionButton size="small" icon={shortcutData[shortcut.shortcut].icon} onClick={() =>  {FlowRouter.go(`/${language}/mycoach/${userToken}/${shortcutData[shortcut.shortcut].link}`) }}>
                 {shortcutData[shortcut.shortcut].translation[language]}
             </ActionButton>);
             if (["LOCKED"].includes(shortcut.status)) shortcutButtonsHTML.push(<ActionButton size="small" icon="locked" color="gray-dark">

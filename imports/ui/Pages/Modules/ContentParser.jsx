@@ -293,9 +293,11 @@ function ContentParser(props) {
     
     function createDelayedDisplayContent(data) {
         const [started, setStarted] = useState(false);
+        const [saved, setSaved] = useState(false);
 
         async function confirmDone() {
-            await props.questionManager.setModuleQuestion(props.module, data.id, "CONFIRM"); 
+            await props.questionManager.setModuleQuestion(props.module, data.id, "CONFIRM", false); 
+            setSaved(true);
             props.callback();
         }
 
@@ -303,10 +305,17 @@ function ContentParser(props) {
             <Button center style={{marginTop:"80px"}} color="blue" onClick={() => setStarted(true)}>Begin</Button>
         </div>)
 
+        /*
         return (<div className="content-delayed-container">{data.content.map((item, index) => {
             return <div className="content-delayed-item" key={item+"-"+index} style={{opacity:"0", animation:"fadeIn 2s ease-in "+ index*4+"s 1 normal forwards"}}>{item}</div>
         })}
-        <Button center style={{marginTop: "10px", opacity:"0", animation:"fadeIn 2s ease-in "+ data.content.length*4+"s 1 normal forwards"}} onClick={() => confirmDone()}>Klaar</Button></div>)
+        <Button center style={{marginTop: "10px", opacity:"0", animation:"fadeIn 2s ease-in "+ data.content.length*4+"s 1 normal forwards"}} onClick={() => confirmDone()}>Klaar</Button></div>)*/
+
+
+        return (<div className="content-delayed-container">{data.content.map((item, index) => {
+            return <div className="content-delayed-item" key={item+"-"+index}>{item}</div>
+        })}
+        <Button center style={{marginTop: "10px"}} disabled={saved} onClick={() => confirmDone()}>Klaar</Button></div>)
     }
 
     function createTextBubbleContent(data) {

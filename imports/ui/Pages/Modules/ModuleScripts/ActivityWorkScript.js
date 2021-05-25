@@ -160,12 +160,12 @@ const ACTMOD2WORK = {
             ]
         },
         {
-            title: "Reflectie met stelling (werk)",
+            title: "Nog meer voordelen",
             showIfAnswered: ["ACT-MOD-2-SLIDER-2"],
             cardContents: [
                 {
                     type: "Text",
-                    content: "Naast financiële onafhankelijkheid zijn er nog andere voordelen aan werken! Herken jij enkele voordelen in de woordwolk?"
+                    content: "Naast financiële onafhankelijkheid zijn er nog andere voordelen aan werken! Herken jij enkele voordelen in de lijst?"
                 },
                 {
                     type: "Multiple-Choice",
@@ -678,7 +678,7 @@ const ACTMOD3ERGO = {
                     question: "Op welke van de bovenstaande twee foto's heeft de persoon haar bureaustoel goed ingesteld?",
                     options: ["Bovenste foto", "Onderste foto"],
                     correct: "Onderste foto",
-                    explanation: "Op de bovenste foto staat de bureaustoel te laag waardoor de knieën zich boven de heupen bevinden. Hierdoor wordt de rug afgevlakt en ga je doorhangen in de onderrug. Stel de hoogte van je bureaustoel zo in dat je bovenbenen lichtjes afhellen.",
+                    explanation: "Op de bovenste foto staat de bureaustoel te laag waardoor de knieën zich boven de heupen bevinden. Hierdoor wordt de rug afgevlakt en ga je doorhangen in de onderrug.",
                     onCorrect: "Correct.",
                     onIncorrect: "Niet correct."
                 }
@@ -688,6 +688,10 @@ const ACTMOD3ERGO = {
             showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
             showIfAnswered: ["ACT-MOD-3-OFFICE-Q2"],
             cardContents: [
+                {
+                    type: "Text",
+                    content: "Stel daarom de hoogte van je bureaustoel zo in dat je bovenbenen lichtjes afhellen, zoals op de onderstaande foto:"
+                },
                 {
                     type: "Image",
                     link: "/images/activitywork/beeldschermwerk_knie.jpg",

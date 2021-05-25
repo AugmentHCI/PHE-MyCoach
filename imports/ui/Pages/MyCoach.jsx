@@ -112,31 +112,62 @@ export default function MyCoach(props) {
     function renderTodos() {
         return (<React.Fragment>
             <h2>MIJN SHORTCUTS</h2>
-            <Popover1>
-                <React.Fragment>
-                    <ActionButton icon={shortcuts["DAILY-COACHING"].icon} onClick={() => setShowCoachingModal(true)}>{shortcuts["DAILY-COACHING"].translation[language]}</ActionButton>
-                    {userShortcuts && userShortcuts.map(shortcut => {
-                        return <ActionButton icon={shortcuts[shortcut.shortcut].icon} 
-                                             onClick={() => {
-                                                 if (shortcuts[shortcut.shortcut].link) { FlowRouter.go(`/${language}/mycoach/${userToken}/${shortcuts[shortcut.shortcut].link}`) } 
-                                                 else { setShowCoachingModal(true) } }}>
-                                    {shortcuts[shortcut.shortcut].translation[language]}
-                                </ActionButton>})}
-                </React.Fragment>
-            </Popover1>
+            <Popover
+            content={<div className="tutorial-content">
+                <h4>Je shortcuts</h4>
+                Hier zie jij je snelkoppelingen waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog snelkoppelingen toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
+                <div className="tutorial-button-row">
+                    <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> updateShowTutorial1(false)}>Volgende</Button>
+                </div>
+            </div>}
+            placement="bottom"
+            trigger="click"
+            visible={showTutorial1}>
+                <ActionButton icon={shortcuts["DAILY-COACHING"].icon} onClick={() => setShowCoachingModal(true)}>{shortcuts["DAILY-COACHING"].translation[language]}</ActionButton>
+                {userShortcuts && userShortcuts.map(shortcut => {
+                    return <ActionButton icon={shortcuts[shortcut.shortcut].icon} 
+                                            onClick={() => {
+                                                if (shortcuts[shortcut.shortcut].link) { FlowRouter.go(`/${language}/mycoach/${userToken}/${shortcuts[shortcut.shortcut].link}`) } 
+                                                else { setShowCoachingModal(true) } }}>
+                                {shortcuts[shortcut.shortcut].translation[language]}
+                            </ActionButton>})}
+            </Popover>
         </React.Fragment>)
     }
 
     function renderModules() {
         return (<React.Fragment>
-           <Popover2>
-            <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
-            </Popover2>
+           <Popover
+            content={<div className="tutorial-content">
+                <h4>Coaching</h4>
+                Hier zie jij je persoonlijk coachingtraject.<br/>Je kan elke dag je coaching bekijken.<br/>
+                <div className="tutorial-button-row">
+                    <Button center color="gray-light" size="small" style={{flex: 1, marginRight: "10px"}} onClick={()=> updateShowTutorial1(true)}>Vorige</Button>
+                    <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> updateShowTutorial2(false)}>Volgende</Button>
+                </div>
+            </div>}
+            placement="topLeft"
+            trigger="click"
+            visible={!showTutorial1 && showTutorial2}>
+                <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
+            </Popover>
             <div className="module-container">
                 <div className="module-topandbottom-row" style={{marginTop:"20px"}}>
-                    <Popover3>
+                <Popover
+                    content={<div className="tutorial-content">
+                        <h4>Modules</h4>
+                        Voltooi je coaching om na een tijdje andere<br/>modules vrij te spelen!<br/>
+                        <div className="tutorial-illustration"><Illustration image="voortgang" width={"100%"}></Illustration></div>
+                        <div className="tutorial-button-row">
+                            <Button center color="gray-light" size="small" style={{flex: 1, marginRight: "10px"}} onClick={()=> updateShowTutorial2(true)}>Vorige</Button>
+                            <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> {updateShowTutorial3(false); interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONPOPUPS", "CONFIRM");}}>Begrepen!</Button>
+                        </div>
+                    </div>}
+                    placement="top"
+                    trigger="click"
+                    visible={!showTutorial2 && showTutorial3}>
                         <ModuleButton code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/paineducation/`)} data={userProgress.PAINEDUCATION}/>
-                    </Popover3>
+                    </Popover>
                     <div className="line-paineducation" style={{borderLeft:calculateLineColor("PAINEDUCATION")}}/>
                 </div>
                 <div className="module-middle-row">
@@ -208,57 +239,6 @@ export default function MyCoach(props) {
                 {submodule.description}
             </div>
         </AppModal>)
-    }
-
-    function Popover1(popoverProps) {
-        return (<Popover
-            content={<div className="tutorial-content">
-                <h4>Je shortcuts</h4>
-                Hier zie jij je snelkoppelingen waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog snelkoppelingen toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
-                <div className="tutorial-button-row">
-                    <Button center color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial1(false)}>Volgende</Button>
-                </div>
-            </div>}
-            placement="bottom"
-            trigger="click"
-            visible={showTutorial1}>
-                {popoverProps.children}
-        </Popover>)
-    }
-
-    function Popover2(popoverProps) {
-        return (<Popover
-            content={<div className="tutorial-content">
-                <h4>Coaching</h4>
-                Hier zie jij je persoonlijk coachingtraject.<br/>Je kan elke dag je coaching bekijken.<br/>
-                <div className="tutorial-button-row">
-                    <Button center color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial1(true)}>Vorige</Button>
-                    <Button center color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> updateShowTutorial2(false)}>Volgende</Button>
-                </div>
-            </div>}
-            placement="topLeft"
-            trigger="click"
-            visible={!showTutorial1 && showTutorial2}>
-            {popoverProps.children}
-        </Popover>)
-    }
-
-    function Popover3(popoverProps) {
-        return (<Popover
-            content={<div className="tutorial-content">
-                <h4>Modules</h4>
-                Voltooi je coaching om na een tijdje andere<br/>modules vrij te spelen!<br/>
-                <div className="tutorial-illustration"><Illustration image="voortgang" width={"100%"}></Illustration></div>
-                <div className="tutorial-button-row">
-                    <Button center color="gray-light" width="fit" size="small" onClick={()=> updateShowTutorial2(true)}>Vorige</Button>
-                    <Button center color="blue" width="fit" size="small" style={{float:"right"}} onClick={()=> {updateShowTutorial3(false); interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONPOPUPS", "CONFIRM");}}>Begrepen!</Button>
-                </div>
-            </div>}
-            placement="top"
-            trigger="click"
-            visible={!showTutorial2 && showTutorial3}>
-                {popoverProps.children}
-        </Popover>)
     }
 
     function renderSplashScreen() {

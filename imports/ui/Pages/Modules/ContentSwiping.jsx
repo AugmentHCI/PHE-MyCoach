@@ -88,7 +88,7 @@ export default function createSwipeContent(props) {
         </React.Fragment>}
         {alreadyRemoved.size === props.data.options.length && <div className="finishedSwiping">
           <h4>Je bent er door!</h4>
-          <Button width={"fit"} center color={"blue"} style={{marginTop:"20px"}} onClick={()=>saveResults()} disabled={saved}>{saved ? "Opgeslagen!" : "Sla op"}</Button>
+          <Button center color={"blue"} style={{marginTop:"20px"}} onClick={()=>saveResults()} disabled={saved}>{saved ? "Opgeslagen!" : "Sla op"}</Button>
         </div>
           }
       </div>
