@@ -249,9 +249,20 @@ function ContentParser(props) {
             updateValues(newArray);
         }
 
-        function save() {
+        async function save() {
             updateSave(true);
+            await props.questionManager.setModuleQuestion(props.module, props.data.id, JSON.stringify(values), false); 
+            props.callback();
         }
+
+        useEffect(() => {
+            async function fetchStatus() {
+                const answer = await props.questionManager.getLatestAnswerOnQuestion(props.data.id);
+                if (answer) { updateValues(JSON.parse(answer)) }
+            }
+            console.log(props.data.id);
+            fetchStatus();
+        }, []);
 
         return (<div className="content-backdrop">
             {text}
@@ -317,7 +328,6 @@ function ContentParser(props) {
             /* Display-Rules */
             switch (rule.rule) {
                 case "Pain": 
-                    console.log("Pain!");
                     if (!props.userProfile.K) ruleResults = false;
                     break;
                 case "No pain":
@@ -337,6 +347,15 @@ function ContentParser(props) {
                 case "HasAnswered":
                     const answer = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID);
                     if (rule.answerID !== answer) ruleResults = false;
+                    break;
+                case "SelectionCount":
+                    let answers = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID);
+                    if (!answers) return false;
+                    answers = JSON.parse(answers);
+                    let count = 0;
+                    Object.keys(answers).forEach(id => { if (answers[id]) count++; });
+                    console.log(count);
+                    if (!rule.count.includes(count)) return false;
                     break;
                 default:
                     console.log(`Card display rule '${rule.rule}' not implemented`);

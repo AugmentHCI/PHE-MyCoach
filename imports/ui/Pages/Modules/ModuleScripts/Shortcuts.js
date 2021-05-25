@@ -26,4 +26,13 @@ export const shortcuts = {
             "en-EN": "Open your painlogbook"
         }
     },
+    "VALUES": {
+        icon: "feather",
+        link: "values",
+        translation: {
+            "nl-BE": "Mijn waarden en doelen",
+            "nl-FR": "Mes valeurs et objectifs",
+            "en-EN": "My values ​​and goals"
+        }
+    },
 }

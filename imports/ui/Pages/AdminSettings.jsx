@@ -10,12 +10,14 @@ import jwt_decode from "jwt-decode";
 import "./AdminSettings.scss";
 import PainLogbookManager from '../../api/PainLogbookManager';
 import ShortcutManager from '../../api/ShortcutManager';
+import InteractionManager from '../../api/InteractionManager';
 
 export default function AdminSettings(props) {
 
     const progressManager = new ProgressManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
     const questionManager = new QuestionManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
     const shortcutManager = new ShortcutManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
+    const interactionManager = new InteractionManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
     const painLogbookManager = new PainLogbookManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
 
     const [deletedProgress, setDeletedProgress] = useState(false);
@@ -34,6 +36,8 @@ export default function AdminSettings(props) {
     async function deleteProgress() {
         await progressManager.resetUserProgress();
         await questionManager.deleteUserQuestions();
+        await shortcutManager.resetUserShortcuts();
+        await interactionManager.resetUserInteractions();
         setDeletedProgress(true);
     }
 

@@ -89,7 +89,6 @@ function CardsParser(props) {
                     else {console.log("SwipeAgreeCount - unhandled case"); break;}
                 case "HasSelected": 
                     let swipeAnswersSelection = userQuestions[rule.questionID];
-                    console.log(!swipeAnswersSelection || !JSON.parse(swipeAnswersSelection)[rule.answerID]);
                     if (!swipeAnswersSelection || !JSON.parse(swipeAnswersSelection)[rule.answerID]) return false;
                     break;
                 case "HasUnlockedShortcut":

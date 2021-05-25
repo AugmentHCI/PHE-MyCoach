@@ -10,15 +10,22 @@ export default class ShortcutManager {
      * @returns A list of shortcut titles.
      */
     async getShortcuts(screen, status) {
-        return await Meteor.callPromise('mycoachshortcut.getShortcuts', {userID: this.userID, screen: screen, status: status});
+        const shortcuts = await Meteor.callPromise('mycoachshortcut.getShortcuts', {userID: this.userID, screen: screen, status: status});
+        return shortcuts;
     }
 
     /**
-     * Gets the user shortcuts on the main progress screen.
-     * @returns A list of shortcut titles.
+     * Sets a new status of a given shortcut.
      */
-         async upsertShortcut(shortcut, screen, status) {
-             console.log("Unlocking " + shortcut)
-            return await Meteor.callPromise('mycoachshortcut.upsertShortcut', {userID: this.userID, shortcut: shortcut, screen: screen, status: status});
-        }
+    async upsertShortcut(shortcut, screen, status) {
+        console.log("Unlocking " + shortcut)
+        await Meteor.callPromise('mycoachshortcut.upsertShortcut', {userID: this.userID, shortcut: shortcut, screen: screen, status: status});
+    }
+
+    /**
+     * Resets (deletes) all shortcut settings of this user.
+     */
+    async resetUserShortcuts() {
+        await Meteor.callPromise('mycoachshortcut.deleteUserShortcuts', {userID: this.userID});
+    }
 }

@@ -117,6 +117,10 @@ export default function SubmoduleParser(props) {
                     await shortcutManager.upsertShortcut("ACTIVITYLOGBOOK", "MAIN", "DEFAULT");
                     await shortcutManager.upsertShortcut("ACTIVITYLOGBOOK", "ACTIVITYWORK", "DEFAULT");
                     break;
+                case 'UnlockValues':
+                    await shortcutManager.upsertShortcut("VALUES", "MAIN", "DEFAULT");
+                    await shortcutManager.upsertShortcut("VALUES", "THOUGHTSEMOTIONS", "DEFAULT");
+                    break;
                 default:
                     break;
             }

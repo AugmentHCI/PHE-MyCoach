@@ -152,7 +152,7 @@ const PEMOD2 = {
                 id: "PE-MOD-2-Q1",
                 title: "Wat doe je?",
                 question: "Je doet de deur van je slaapkamer open en er zit een dikke, harige spin in het midden van de kamer. Wat doe je?",
-                options: ["Gillen, weglopen, hulp roepen of verstijven van angst", "Een schoen nemen en de spin plat slaan", "Gefascineerd bestuderen of een potje nemen om de spin buiten te zetten"]
+                options: [{id: "SCREAM", text: "Gillen, weglopen, hulp roepen of verstijven van angst"}, {id: "SHOE", text: "Een schoen nemen en de spin plat slaan"}, {id: "FASCINATED", text: "Gefascineerd bestuderen of een potje nemen om de spin buiten te zetten"}]
             },
             {
                 type: "Selection",
@@ -160,7 +160,7 @@ const PEMOD2 = {
                 "width": "fit",
                 title: "En hoe voel jij je?",
                 question: "Welke emoticon illustreert het best hoe je je op dat moment voelt?",
-                options: ["😄", "😒", "😔", "😟", "😩", "😡"]
+                options: [{id: "😄", text: "😄"}, {id: "😒", text: "😒"},{id: "😔", text: "😔"},{id: "😟", text: "😟"},{id: "😩", text: "😩"},{id: "😡", text: "😡"}]
             }
         ]
     },

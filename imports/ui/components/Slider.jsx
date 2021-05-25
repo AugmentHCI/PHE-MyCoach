@@ -8,8 +8,6 @@ export default function Slider(props) {
   const [value, updateValue] = useState(1);
   const [saved, updateSaved] = useState(false);
 
-  console.log(props.mapping)
-
   async function save() {
     updateSaved(true);
     await props.questionManager.setModuleQuestion(props.module, props.id, value); 
@@ -64,5 +62,5 @@ export default function Slider(props) {
 
 const mappings = {
   "5-AGREE": {1: "Helemaal niet akkoord", 2: "Niet akkoord", 3: "Neutraal", 4: "Akkoord", 5: "Helemaal akkoord"},
-  "10-IMPACT": {1: "Heel negatief", 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "Geen impact"},
+  "10-IMPACT": {1: "Heel negatieve impact", 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "Geen negatieve impact"},
 }

@@ -129,7 +129,13 @@ Meteor.methods({
             status: status,
             timestamp: new Date,
         });
-    }
+    },
+    'mycoachinteraction.deleteUserInteractions'({userID}) {
+        check(userID, Number);
+        MyCoachInteractionCollection.find({userID: userID}).map(function(item){
+            MyCoachInteractionCollection.remove(item._id);
+        });
+    },
 });
 
 /* PROFILE */
@@ -196,6 +202,12 @@ Meteor.methods({
                 screen: screen,
                 status: status,
             }
+        });
+    },
+    'mycoachshortcut.deleteUserShortcuts'({userID}) {
+        check(userID, Number);
+        MyCoachShortcutCollection.find({userID: userID}).map(function(item){
+            MyCoachShortcutCollection.remove(item._id);
         });
     },
 });

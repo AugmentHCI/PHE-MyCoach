@@ -14,7 +14,7 @@ export default class QuestionManager {
         return questionDict;
     }
 
-    async deleteUserQuestions() {
+    async resetUserQuestions() {
        await Meteor.callPromise('mycoachquestion.deleteUserQuestions', {userID: this.userID});
     }
 

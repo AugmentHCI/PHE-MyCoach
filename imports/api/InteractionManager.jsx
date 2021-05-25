@@ -29,4 +29,8 @@ export default class InteractionManager {
     setInteractionStatus(interactionID, status) {
         Meteor.call('mycoachinteraction.setInteractionStatus', {userID: this.userID, interactionID: interactionID, status: status});
     }
+
+    async resetUserInteractions() {
+        await Meteor.call('mycoachinteraction.deleteUserInteractions', {userID: this.userID});
+    }
 }

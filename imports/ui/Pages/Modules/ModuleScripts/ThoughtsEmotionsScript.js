@@ -249,6 +249,7 @@ const TEMOD1 = {
                 },
                 {
                     type: "Multitext-Input",
+                    id: "TE-MOD-1-THOUGHTACTIONS",
                     text: "Wat heb jij verder al allemaal geprobeerd om je moeilijke gedachten en emoties te vermijden of kwijt te geraken?",
                     placeholder: "Schrijf ze hier neer:"
                 },
@@ -734,11 +735,18 @@ const TEMOD4 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Goed zo – alle antwoorden waren juist. Je hebt dus al goed door dat bewegen op lange termijn ook heel wat negatieve gevolgen kan hebben."
+                    content: "Goed zo – alle antwoorden waren juist. Je hebt dus al goed door dat bewegen op lange termijn ook heel wat negatieve gevolgen kan hebben.",
+                    showIf: [{rule: "SelectionCount", questionID: "TE-MOD-4-NEGAVTIVE-CONSEQUENCES", count: [4]}]
                 },
                 {
                     type: "Text",
-                    content: "Indien 0 1 of 2 juist: Je hebt nog wat juiste antwoorden laten liggen – kan je ze verder aanvullen?"
+                    content: "Je hebt drie antwoorden aangeduid van de vier, wat al goed is! Ze waren eigenlijk allemaal juist, maar je hebt dus al door dat bewegen op lange termijn ook heel wat negatieve gevolgen kan hebben.",
+                    showIf: [{rule: "SelectionCount", questionID: "TE-MOD-4-NEGAVTIVE-CONSEQUENCES", count: [3]}]
+                },
+                {
+                    type: "Text",
+                    content: "Je hebt nog wat juiste antwoorden laten liggen – kan je ze verder aanvullen?",
+                    showIf: [{rule: "SelectionCount", questionID: "TE-MOD-4-NEGAVTIVE-CONSEQUENCES", count: [0, 1, 2]}]
                 },
                 {
                     type: "Text",
@@ -1166,7 +1174,7 @@ const TEMOD5 = {
             lastModule: false,
             text: "Voltooi dit onderdeel",
             textOnCompleted: "Keer terug",
-            action: "UnlockGoalSetting"
+            action: "UnlockValues"
         }
     ]
 }
