@@ -386,7 +386,6 @@ function ContentParser(props) {
     function createAudioContent(data) {
         return (<ReactAudioPlayer
             src={data.source}
-            autoPlay
             controls/>)
     }
 

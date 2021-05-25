@@ -9,6 +9,8 @@ import FadeIn from "react-fade-in";
 
 import jwt_decode from "jwt-decode";
 
+import Illustration from '../../components/Illustrations/Illustration';
+
 import NavigationBar from '../../components/NavigationBar';
 import ActionButton from '../../components/ActionButton';
 
@@ -56,6 +58,7 @@ export default function PainLogbook() {
         return <FadeIn>{painLogsHTML}</FadeIn>;
     }
 
+    /*
     return (<React.Fragment>
         <NavigationBar title="Pijnlogboek" back={`/${language}/mycoach/${FlowRouter.getParam('token')}`}/>
         <div className="painlogbook-body">
@@ -69,5 +72,14 @@ export default function PainLogbook() {
             </FadeIn>
             {renderPainLogs()}
         </div>
-    </React.Fragment>);
+    </React.Fragment>);*/
+
+    return (
+        <React.Fragment>
+        <NavigationBar title="Pijnlogboek" back={`/${language}/mycoach/${FlowRouter.getParam('token')}`}/><div style={{display:"flex", flexDirection: "column", alignItems: "center", textAlign:"center", justifyContent: "center", fontSize:"18px", color: "var(--idewe-blue)", paddingTop: "190px", fontFamily:"var(--main-font)"}}>
+        Error: Fout bij het ophalen van profiel
+        <Illustration image="working" width="230px" style={{marginTop: "10px", marginBottom: "10px"}}/>
+        Wij zijn er van op de hoogte gesteld
+    </div>
+    </React.Fragment>)
 }
