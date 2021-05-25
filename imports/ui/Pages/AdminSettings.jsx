@@ -35,7 +35,7 @@ export default function AdminSettings(props) {
 
     async function deleteProgress() {
         await progressManager.resetUserProgress();
-        await questionManager.deleteUserQuestions();
+        await questionManager.resetUserQuestions();
         await shortcutManager.resetUserShortcuts();
         await interactionManager.resetUserInteractions();
         setDeletedProgress(true);
