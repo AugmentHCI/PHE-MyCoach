@@ -442,7 +442,8 @@ const TEMOD2 = {
                 content: "Tijd om een volgende manier te bekijken om wat afstand te leren nemen van moeilijke gedachten die door je hoofd gaan. Ga even rustig zitten beluister volgend audiofragment.",
             },
             {
-                type: "Audiofile"
+                type: "Audiofile",
+                source: "/audio/mindfulBrushing.m4a"
             },
             {
                 type: "Text",
@@ -638,7 +639,8 @@ const TEMOD3 = {
                 content: "We bekijken met jou graag nog een mindfulness oefening die je gemakkelijk kan integreren in je dagelijks leven, nl. tijdens het tandenpoetsen. Zet het volgende audiofragment aan de volgende keer dat je je tanden poetst of luister hier alvast naar en denk eraan terug wanneer je je tanden aan het poetsen bent."
             },
             {
-                type: "Audiofragment",
+                type: "Audiofile",
+                source: "/audio/mindfulBrushing.m4a"
             },
             {
                 type: "Text",
@@ -1271,7 +1273,39 @@ const TEMOD6 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Indien score is verhoogd",
+                    content: "Je score is verhoogd ten opzichte van de keer dat wij jou deze vraag hebben gesteld in de eerste module, super! ",
+                    showIf: [{rule: "ScoresHigher", questionID1: "TE-MOD-6-SLIDER-FINAL", questionID2: "TE-MOD-1-SLIDER"}]
+                },
+                {
+                    id: "TE-MOD-6-INPUT-1",
+                    type: "Text-Input",
+                    text: "Wat was hierbij helpend? Hoe kan je proberen om hier meer van te doen? Hoe zou je je score nog met één punt kunnen verhogen? Maak dit zo concreet mogelijk voor jezelf!",
+                    placeholder: "Schrijf hier",
+                    showIf: [{rule: "ScoresHigher", questionID1: "TE-MOD-6-SLIDER-FINAL", questionID2: "TE-MOD-1-SLIDER"}]
+                },
+                {
+                    type: "Text",
+                    content: "Je score is wat verlaagd ten opzichte van de keer dat wij jou deze vraag hebben gesteld in de eerste module.",
+                    showIf: [{rule: "ScoresLower", questionID1: "TE-MOD-6-SLIDER-FINAL", questionID2: "TE-MOD-1-SLIDER"}]
+                },
+                {
+                    id: "TE-MOD-6-INPUT-1",
+                    type: "Text-Input",
+                    text: "Wat heeft hiertoe bijgedragen? Wat zou kunnen helpen om je score opnieuw met één punt te verhogen?",
+                    placeholder: "Schrijf hier",
+                    showIf: [{rule: "ScoresLower", questionID1: "TE-MOD-6-SLIDER-FINAL", questionID2: "TE-MOD-1-SLIDER"}]
+                },
+                {
+                    type: "Text",
+                    content: "Je score is onveranderd gebleven ten opzichte van de keer dat wij jou deze vraag hebben gesteld in de eerste module.",
+                    showIf: [{rule: "ScoresSame", questionID1: "TE-MOD-6-SLIDER-FINAL", questionID2: "TE-MOD-1-SLIDER"}]
+                },
+                {
+                    id: "TE-MOD-5-INPUT-1",
+                    type: "Text-Input",
+                    text: "Wat zou kunnen helpen om je score opnieuw met één punt te verhogen? Maak dit zo concreet mogelijk voor jezelf!",
+                    placeholder: "Schrijf hier",
+                    showIf: [{rule: "ScoresSame", questionID1: "TE-MOD-6-SLIDER-FINAL", questionID2: "TE-MOD-1-SLIDER"}]
                 },
             ]
         },

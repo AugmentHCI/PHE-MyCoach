@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './ContentParser.scss';
+
+import ReactAudioPlayer from 'react-audio-player';
+
 import createSortingContent from './ContentSorting.jsx';
 import createSwipeContent from './ContentSwiping';
 
@@ -348,6 +351,21 @@ function ContentParser(props) {
                     const answer = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID);
                     if (rule.answerID !== answer) ruleResults = false;
                     break;
+                case "ScoresSame":
+                    const answer1s = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID1);
+                    const answer2s = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID2);
+                    if (answer1s !== answer2s) ruleResults = false;
+                    break;
+                case "ScoresHigher":
+                    const answer1h = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID1);
+                    const answer2h = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID2);
+                    if (answer1h <= answer2h) ruleResults = false;
+                    break;
+                case "ScoresLower":
+                    const answer1l = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID1);
+                    const answer2l = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID2);
+                    if (answer1l >= answer2l) ruleResults = false;
+                    break;
                 case "SelectionCount":
                     let answers = await props.questionManager.getLatestAnswerOnQuestion(rule.questionID);
                     if (!answers) return false;
@@ -363,6 +381,13 @@ function ContentParser(props) {
             }
         }
         setDisplay(ruleResults);
+    }
+
+    function createAudioContent(data) {
+        return (<ReactAudioPlayer
+            src={data.source}
+            autoPlay
+            controls/>)
     }
 
     function generateContent() {
@@ -394,6 +419,8 @@ function ContentParser(props) {
                 return createSwipeContent(props);
             case 'TextBubble':
                 return createTextBubbleContent(props.data);
+            case 'Audiofile':
+                return createAudioContent(props.data);
             case 'Multiple-Choice':
                 return createMultipleChoiceContent(props);
             case 'Shortcut':
