@@ -13,6 +13,7 @@ import AdminSettings    from '../imports/ui/Pages/AdminSettings.jsx';
 import PainLogbook      from '../imports/ui/Pages/PainLogbook/PainLogbook.jsx';
 import PainLogbookEntry from '../imports/ui/Pages/PainLogbook/PainLogbookEntry.jsx';
 import ActivityLogbook  from '../imports/ui/Pages/ActivityLogbook/ActivityLogbook.jsx';
+import ValueLogbook from '../imports/ui/Pages/ValueLogbook/ValueLogbook.jsx';
 
 
 FlowRouter.route('/', {
@@ -72,6 +73,11 @@ FlowRouter.route('/:language/mycoach/:token/painlogbook/newentry', {
 FlowRouter.route('/:language/mycoach/:token/activitylogbook', {
   name: 'ActivityLogbook',
   action(){ mount( App, { content: <ActivityLogbook /> })}
+});
+
+FlowRouter.route('/:language/mycoach/:token/values', {
+  name: 'ValueLogbook',
+  action(){ mount( App, { content: <ValueLogbook /> })}
 });
 
 FlowRouter.route('/:language/mycoach/:token/module/:module', {

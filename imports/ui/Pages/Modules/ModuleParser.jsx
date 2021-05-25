@@ -164,6 +164,15 @@ export default function ModuleParser(props) {
     }
 
     function renderModal() {
+        if (!selectedSubmodule) {
+            return (<AppModal 
+                notifyParent={() => {setShowModal(false)}}
+                defaultOption={"Begrepen"} 
+                title="Module voltooid"
+                show={showModal}>
+                Je hebt alle modules doorlopen, goed zo! Herbekijk gerust één van de modules die jij al eens doorlopen hebt.
+            </AppModal>)}
+
         const settings = {"TO_START": {text: "Vergrendeld", color: "gray-dark"}, 
                           "NOT_STARTED": {text: "Vergrendeld", color: "gray-dark"}, 
                           "IN_PROGRESS": {text: "Bekijk", color: "blue"}, 

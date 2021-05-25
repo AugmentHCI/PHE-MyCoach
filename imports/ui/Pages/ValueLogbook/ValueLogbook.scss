@@ -1,0 +1,74 @@
+.valuelogbook {
+    font-family: var(--main-font);
+    color: var(--idewe-blue-dark);
+    font-size: 600;
+    padding: 80px 20px 20px 20px;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.valuelogbook-tabbar {
+    display: flex;
+    padding: 15px 30px;
+}
+
+.valuelogbook-tabitem {
+    font-family: var(--main-font);
+    color: var(--idewe-blue-dark);
+    font-weight: 500;
+    font-size: 20px;
+    flex: 1;
+    text-align: center;
+    transition: 0.2s ease-out;
+
+    &-selected {
+        @extend .valuelogbook-tabitem;
+        text-decoration: underline;
+        font-weight: 600;
+        color: var(--idewe-blue);
+    }
+}
+
+.value-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.value-container {
+    background-color: var(--idewe-white);
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+}
+
+.value-text {
+    width: 80%;
+    padding: 10px;
+    font-family: var(--main-font);
+    color: var(--idewe-blue-dark);
+    font-size: 16px;
+    font-weight: 500;
+    float: left;
+}
+
+.value-icon {
+    width: 10%;
+    float: right;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 10px;
+    height: 100%;
+    transition: 0.2s ease-out;
+    opacity: 100%;
+    margin-right: 0;
+
+    &-disabled {
+        @extend .value-icon;
+        opacity: 0%;
+        margin-right: -15px;
+    }
+}

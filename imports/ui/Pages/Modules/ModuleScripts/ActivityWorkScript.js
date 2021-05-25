@@ -124,9 +124,9 @@ const ACTMOD2WORK = {
                     type: "Slider",
                     text: "Als je pijn hebt, kan je best rusten.",
                     from: 1,
-                    to: 10,
-                    valueText: "Jouw selectie",
-                    show: true,
+                    to: 5,
+                    mapping: "5-AGREE",
+                    showValue: true,
                     save: true,
                 }
             ]
@@ -152,15 +152,16 @@ const ACTMOD2WORK = {
                     type: "Slider",
                     text: "Ik blijf beter thuis van het werk als ik pijn heb.",
                     from: 1,
-                    to: 10,
-                    valueText: "Jouw selectie",
-                    show: true,
+                    to: 5,
+                    showValue: true,
+                    mapping: "5-AGREE",
                     save: true,
                 }
             ]
         },
         {
             title: "Reflectie met stelling (werk)",
+            showIfAnswered: ["ACT-MOD-2-SLIDER-2"],
             cardContents: [
                 {
                     type: "Text",
@@ -240,7 +241,7 @@ const ACTMOD2WORK = {
                 },
                 {
                     type: "Multiple-Choice",
-                    id: "ACT-MOD-2-Q1",
+                    id: "ACT-MOD-2-Q2",
                     options: [{id:"WORK_PRIVATE", text: "Regelmogelijkheden privé"}, {id:"WORK_MOTIVATION", text: "Werkmotivatie"}, {id:"WORK_SELFMANAGEMENT", text: "Zelfmanagementvaardigheden"}, {id:"WORK_PERSONAL", text: "Persoonlijke kenmerken"}, {id:"WORK_WORK", text: "Regelmogelijkheden werk"}],
                     needsSelectedAtLeast: 1,
                     needsSelectedAtMost: 5
@@ -259,6 +260,7 @@ const ACTMOD2WORK = {
         {
             title: "Overzicht",
             overview: true,
+            showIfAnswered: ["ACT-MOD-2-Q2"],
             cardContents: [
                 {
                     type: "Text",
@@ -328,7 +330,7 @@ const ACTMOD3ERGO = {
                 {
                     type: "Selection",
                     id: "ACT-MOD-3-Q1",
-                    options: ["Onderrug hol", "Onderrug bol"]
+                    options: [{id: "CONCAVE", text: "Onderrug hol"}, {id: "CONVEX", text: "Onderrug bol"}]
                 },
                 {
                     type: "Text",
@@ -337,7 +339,7 @@ const ACTMOD3ERGO = {
                 {
                     type: "Selection",
                     id: "ACT-MOD-3-Q2",
-                    options: ["Bovenrug hol", "Bovenrug bol"]
+                    options: [{id: "CONCAVE", text: "Bovenrug hol"}, {id: "CONVEX", text: "Bovenrug bol"}]
                 },
                 {
                     type: "Text",
@@ -346,7 +348,7 @@ const ACTMOD3ERGO = {
                 {
                     type: "Selection",
                     id: "ACT-MOD-3-Q3",
-                    options: ["Nek hol", "Nek bol"]
+                    options: [{id: "CONCAVE", text: "Nek hol"}, {id: "CONVEX", text: "Nek bol"}]
                 },
             ]
         },
@@ -391,12 +393,6 @@ const ACTMOD3ERGO = {
                 {
                     type: "Text",
                     content: "Daarnaast is het belangrijk om je eigen handelingen te optimaliseren. Gebruik onderstaande zes basisprincipes om een goede houding aan te nemen."
-                },
-                {
-                    type: "Todo-Foto",
-                },
-                {
-                    type: "Todo-Brochure",
                 },
             ]
         },
@@ -983,6 +979,16 @@ const ACTMOD4MGMT = {
             ]
         },
         {
+            overview: true,
+            title: "Key take-away",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Activiteitenmanagement heeft als doel te leren omgaan met je energie. Het stellen van doelen maakt duidelijk wat jij belangrijk vindt en vormen een basis voor de activiteiten waarin jij energie wilt steken. Om sommige doelen te kunnen bereiken heb je een goed opbouwschema nodig. Met een goede planning kan je je grenzen bewaken, een evenwicht vinden tussen activiteiten en rust en binnen je eigen grenzen actiever worden."
+                }
+            ]
+        },
+        {
             generateFinishSubmoduleButton: true,
             lastModule: true,
             text: "Voltooi onderdeel belasting",
@@ -1114,10 +1120,13 @@ const ACTMOD6MOV = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Wil je meer weten over dit topic? Klik dan op de brochure:"
+                    content: ["Wil je meer weten over dit topic? Bekijk dan later de module ", {type: "bold", text: "beweging"}, "."]
                 },
                 {
-                    type: "TODO - Brochure",
+                    type: "Shortcut",
+                    module: "Beweging",
+                    buttonText: "Snelkoppeling - Module Beweging",
+                    modalText: "Dit is een snelkoppeling naar de module 'Beweging'. Maar, deze wordt pas deze zomer ontwikkeld, dus de inhoud van dit onderdeel is nog beperkt. Kom zeker terug wanneer de module 'Beweging' is toegevoegd!"
                 },
             ]
         },
@@ -1164,15 +1173,16 @@ const ACTMOD7FOOD = {
                     type: "Slider",
                     text: "Ben je bewust van wat je eet?",
                     from: 1,
-                    to: 10,
-                    valueText: "Jouw selectie",
-                    show: true,
+                    to: 5,
+                    mapping: "5-AGREE",
+                    showValue: true,
                     save: true,
                 }
             ]
         },
         {
             title: "Eten en diëten tegen chronische pijn",
+            showIfAnswered: ["ACT-MOD-7-SLIDER-1"],
             cardContents: [
                 {
                     type: "Text",
@@ -1282,15 +1292,16 @@ const ACTMOD7FOOD = {
                     type: "Slider",
                     text: "Ben je bewust van wanneer je eet?",
                     from: 1,
-                    to: 10,
-                    valueText: "Jouw selectie",
-                    show: true,
+                    to: 5,
+                    mapping: "5-AGREE",
+                    showValue: true,
                     save: true,
                 }
             ]
         },
         {
             title: "Tijdstip eten",
+            showIfAnswered: ["ACT-MOD-7-SLIDER-2"],
             cardContents: [
                 {
                     type: "Text",
@@ -1318,15 +1329,16 @@ const ACTMOD7FOOD = {
                     type: "Slider",
                     text: "Eet je aandachtig?",
                     from: 1,
-                    to: 10,
-                    valueText: "Jouw selectie",
-                    show: true,
+                    to: 5,
+                    mapping: "5-AGREE",
+                    showValue: true,
                     save: true,
                 }
             ]
         },
         {
             title: "Mindful eten",
+            showIfAnswered: ["ACT-MOD-7-SLIDER-3"],
             cardContents: [
                 {
                     type: "Text",

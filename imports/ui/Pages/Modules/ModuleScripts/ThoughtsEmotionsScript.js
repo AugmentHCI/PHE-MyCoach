@@ -1,4 +1,4 @@
-const values = [ 
+export const values = [ 
     {id: "VALUE_NICE",        text: "Aardig"},
     {id: "VALUE_ACCEPTING",   text: "Accepterend"},
     {id: "VALUE_AMBITIOUS",   text: "Ambitieus"},
@@ -595,23 +595,32 @@ const TEMOD3 = {
         title: "Mindfulness oefening",
         cardContents: [
             {
-                type: "Oefening"
-            },
-            {
                 type: "Text",
                 content: ["Kijk rond je heen en merk ", {type: "bold", content: "5 dingen"}, " op die je kan zien, zoals bijvoorbeeld een boom, je koffietas voor je, je schoenen, ..."]
+            },
+            {
+                type: "Break"
             },
             {
                 type: "Text",
                 content: ["Let op ", {type: "bold", content: "4 dingen"}, " die je kunt horen, zoals het fluiten van de vogels, een wasmachine dat staat te draaien, iemand die iets zegt in de kamer langs je, ..."]
             },
             {
+                type: "Break"
+            },
+            {
                 type: "Text",
                 content: ["Let op ", {type: "bold", content: "3 dingen"}, " die je fysiek kan voelen, zoals je voeten die op de grond staan, je kleren op je lichaam, de warmte doorheen je koffietas, ..."]
             },
             {
+                type: "Break"
+            },
+            {
                 type: "Text",
                 content: ["Let op ", {type: "bold", content: "2 dingen"}, " die je kan ruiken, zoals de geur van de koffie in je koffietas, het wasproduct van je kleren, ..."]
+            },
+            {
+                type: "Break"
             },
             {
                 type: "Text",
@@ -975,7 +984,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Als je hieruit je top 10 zou moeten kiezen, welke zijn dan de belangrijkste voor jou?"
+                    content: ["Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Als je hieruit je ",  {type:"bold", text: "top 10"}, " zou moeten kiezen, welke zijn dan de belangrijkste voor jou?"]
                 },
                 {
                     id: "TE-MOD-5-SELECT-10",
@@ -996,7 +1005,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Je hebt er al minder dan 10 kunnen aanduiden, goed! Stel je voor dat je ze in een rugzak hebt en je bent met de boot op weg naar het bereiken van deze waarden. Maar, de boot lekt en begint te zinken. Je moet 5 waarden uit je rugzak halen om te redden, welke 5 waarden blijven dan over?"
+                    content: ["Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Je hebt er al minder dan 10 kunnen aanduiden, goed! Stel je voor dat je ze in een rugzak hebt en je bent met de boot op weg naar het bereiken van deze waarden. Maar, de boot lekt en begint te zinken. Je moet 5 waarden uit je rugzak halen om te redden, ",  {type:"bold", text: "welke 5 waarden blijven dan over"}, "?"]
                 },
                 {
                     id: "TE-MOD-5-SELECT-5",
@@ -1038,7 +1047,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Je waarden zijn erg belangrijk en wegen erg zwaar. Stel je voor dat je ze in een rugzak hebt en je bent met de boot op weg naar het bereiken van deze waarden. Maar, de boot lekt en begint te zinken. Je moet 5 waarden uit je rugzak halen om te redden, welke 5 waarden blijven dan over?"
+                    content: ["Je waarden zijn erg belangrijk en wegen erg zwaar. Stel je voor dat je ze in een rugzak hebt en je bent met de boot op weg naar het bereiken van deze waarden. Maar, de boot lekt en begint te zinken. Je moet 5 waarden uit je rugzak halen om te redden, ",  {type:"bold", text: "welke 5 waarden blijven dan over"}, "?"]
                 },
                 {
                     id: "TE-MOD-5-SELECT-5",

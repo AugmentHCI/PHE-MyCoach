@@ -161,7 +161,15 @@ export default function MyCoach(props) {
     }
 
     function renderDailyCoachingModal() {
-        if (!userDailyCoaching) return <React.Fragment/>;
+        if (!userDailyCoaching) {
+            return (<AppModal 
+                notifyParent={() => {setShowCoachingModal(false)}}
+                defaultOption={"Begrepen"} 
+                title="Coaching voltooid"
+                show={showCoachingModal}>
+                Je hebt alle modules doorlopen, goed zo! Herbekijk gerust één van de modules die jij al eens doorlopen hebt. Denk af en toe ook aan jouw logboeken!
+            </AppModal>)
+        }
         let submodule = [], module = "";
         switch (userDailyCoaching.split("_")[0]) {
             case "PE":
