@@ -320,7 +320,6 @@ export default function PainLogbookEntry() {
         return messages;
     }
 
-
     function renderExplanationModal() {
         return (<AppModal
             notifyParent={() => {setShowExplanationModal(false)}}

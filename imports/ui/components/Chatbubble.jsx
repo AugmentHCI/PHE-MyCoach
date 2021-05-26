@@ -149,12 +149,12 @@ export function ChatbubbleThoughtsReactions(props) {
                 (filterSearchTerms(searchTerm).split(" ")).forEach (term => {
                     if (!(term === "" || term === " ")) 
                     {
-                        if (information.synonyms.join("").includes(term.toLowerCase()) || option.toLowerCase().includes(term.toLowerCase())) {
+                        if (information.synonyms.join("").includes(term.toLowerCase()) || information.translation[props.language].toLowerCase().includes(term.toLowerCase())) {
                             highlighted = <Highlighter
                             highlightClassName="highlighted"
                             searchWords={filterSearchTerms(searchTerm).split(" ")}
                             autoEscape={true}
-                            textToHighlight={option}
+                            textToHighlight={information.translation[props.language]}
                             key={option}
                         />
                         }

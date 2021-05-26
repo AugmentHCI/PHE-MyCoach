@@ -256,8 +256,8 @@ export default function MyCoach(props) {
 
     function renderSplashScreen() {
         return (<div className="container" style={{justifyContent: "center", textAlign: "center", margin: "0 auto"}}>
-            <h2 style={{marginTop: "60px", color:"var(--idewe-blue", fontSize:"20px", fontWeight:"600"}} onClick={() => updateTapCount(tapCount+1)}>Nog even geduld</h2>
-            <p style={{fontFamily:"var(--main-font)", color:"var(--idewe-blue-dark)"}}>We zijn nog even bezig aan de MyCoach.</p>
+            <h2 style={{marginTop: "60px", color:"var(--idewe-blue", fontSize:"20px", fontWeight:"600"}} onClick={() => updateTapCount(tapCount+1)}>Still in the works</h2>
+            <p style={{fontFamily:"var(--main-font)", color:"var(--idewe-blue-dark)"}}>We are still working on translating some parts of MyCoach. Come back in two weeks!</p>
             <img src="/illustrations/working.svg" width={"70%"} style={{marginTop:"80px"}}></img>
         </div>)
     }
@@ -306,8 +306,8 @@ export default function MyCoach(props) {
 
     return (
         <div className="container">
-            {(tapCount < 5 && !props.noSplash && !coachRRNRs.includes(userID)) && renderSplashScreen()}
-            {(tapCount >= 5 || props.noSplash || coachRRNRs.includes(userID)) && <React.Fragment>
+            {(tapCount < 5 && !props.noSplash && language !== "nl-BE") && renderSplashScreen()}
+            {(tapCount >= 5 || props.noSplash || language === "nl-BE") && <React.Fragment>
             {handleIntroduction()}
             {showCoachingModal && renderDailyCoachingModal()}
             {userProgress && showFinishPainEducationModal && userProgress["PAINEDUCATION"]["PE_MOD_5"] === "COMPLETED" && renderFinishPainEducationModal()}
@@ -326,11 +326,11 @@ export default function MyCoach(props) {
                     trigger="click"
                     visible={!showTutorial3 && showTutorial4}>
                     <div className="mycoach-feedback-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/feedback`)}>
-                        <Icon color="white" image="feather" width="20px"/>
+                        <Icon color="white" image="add-text" width="26px"/>
                     </div>
                     </Popover>
                     <h1>My Coach</h1>
-                    {false && <button className="settings-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/adminsettings`)}> <Icon width="24px" image={"settings"} color={"blue-dark"}/></button>}
+                    {coachRRNRs.includes(userID) && <button className="settings-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/adminsettings`)}> <Icon width="24px" image={"settings"} color={"blue-dark"}/></button>}
                 </div>
                 { renderTodos() }
                 { renderModules() }

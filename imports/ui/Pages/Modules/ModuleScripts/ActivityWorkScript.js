@@ -983,6 +983,68 @@ const ACTMOD4MGMT = {
             ]
         },
         {
+            title: "Activiteitenmanagement",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Nu je weet welke activiteiten belangrijk voor je zijn en welke doelen je wilt bereiken, is de volgende stap een agenda maken. Het is belangrijk om je dag goed te plannen, zodat je niet te veel over je eigen grenzen gaat. Hou bij het plannen rekening met hoe zwaar iedere activiteit is. Maak in je agenda ook ruimte voor de doelen die jij hebt vooropgesteld. Het is belangrijk om je te houden aan je agenda - dus niet méér doen op een goede dag, maar ook niet minder doen op een slechte dag!"
+                },
+                {
+                    type: "Text",
+                    content: "Hier heb je alvast enkele tips die je kunnen helpen bij het maken van een evenwichtige agenda:"
+                },
+                {
+                    type: "Text",
+                    content: [{type:"bold", content: "Afwisseling"}]
+                },
+                {
+                    type: "List",
+                    content: ["Wissel af tussen zwaardere en lichtere taken.", "Wissel af tussen taken met een verschillende lichamelijke belasting.", "Wissel staande en zittende taken af. Beweeg en wandel af en toe.", "Wissel af tussen inspanning en ontspanning.", "Wissel af tussen taken die je leuk vindt en taken die je minder leuk vindt."]
+                },
+                {
+                    type: "Text",
+                    content: [{type:"bold", content: "Maak zware taken lichter"}]
+                },
+                {
+                    type: "List",
+                    content: ["Splits op in deeltaken (minder lange duur)", "Beperk de taak in tijd (bv. wasmand in 2x strijken)", "Onderbreek met een rustpauze", "Voer de taak op een ergonomische manier uit"]
+                },
+                {
+                    type: "Text",
+                    content: [{type:"bold", content: "Rust"}]
+                },
+                {
+                    type: "Text",
+                    content: "Rusten is een manier om energie te geven aan je lichaam, maar het betekent niet niets doen of slapen."
+                },
+                {
+                    type: "List",
+                    content: ["Neem veel korte rustpauzes op een dag in plaats van één lange rustpauze.", "Probeer zoveel mogelijk te rusten vooraleer de vermoeidheid of pijn de kop opsteekt", "Wissel taken (activiteiten) af met rust", "Rust op vaste tijdstippen doorheen de dag", "Plan je rustmomenten in!"]
+                },
+                {
+                    type: "Text",
+                    content: [{type:"bold", content: "Leren weigeren"}]
+                },
+                {
+                    type: "Text",
+                    content: "Neen kunnen zeggen is belangrijk. Je hebt het recht om te beslissen of je iets wil of niet wil. Kunnen weigeren is belangrijk om te kunnen omgaan met anderen. Durven weigeren is voor je eigen behoeften durven opkomen."
+                },
+                {
+                    type: "List",
+                    content: ["Je weigering moet een duidelijke neen omvatten", "Maak duidelijk waarom je neen zegt", "Aanvaard de ontgoocheling van de ander en laat dit ook merken"]
+                },
+            ]
+        },
+        {
+            title: "Activiteitenlogboek",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "We hebben een agenda met activiteiten management toegevoegd aan de shortcuts. Dit kan je helpen bij het plannen van je activiteiten. Zo kan je nog meer evenwicht in je activiteiten bekomen of proberen actiever te worden. Je bent vrij om hier gebruik van te maken. Heb je op 7 verschillende dagen je agenda ingevuld, dan krijg je ook feedback."
+                }
+            ]
+        },
+        {
             overview: true,
             title: "Key take-away",
             cardContents: [
