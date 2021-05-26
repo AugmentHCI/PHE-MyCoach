@@ -24,16 +24,12 @@ Meteor.methods({
     },
     'painlogbook.getLogs'({userID}) {
         check(userID, Number);
-        console.log("DIDIT")
         return PainLogbookCollection.find({ userID: userID }, {sort: ({timestamp: -1})}).fetch();
     },
     'painlogbook.getLog'({userID, logID}) {
         check(userID, Number);
-        console.log("DIDIT")
         let newMongoObjectId = new Mongo.Collection.ObjectID();
         newMongoObjectId._str = logID;
-        let results = PainLogbookCollection.find({ _id: newMongoObjectId._str }).fetch();
-        console.log(results)
         return PainLogbookCollection.findOne({ _id: newMongoObjectId._str });
     },
     'painlogbook.deleteUserLogs'({userID}) {
