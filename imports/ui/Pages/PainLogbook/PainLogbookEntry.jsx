@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText, ChatbubbleInputSummary } from '../../components/Chatbubble.jsx';
+import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText, ChatbubbleInputSummary, ChatbubbleRecommendation } from '../../components/Chatbubble.jsx';
 import NavigationBar from '../../components/NavigationBar';
 
 import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies, options} from "./PainLogbookData.js";
@@ -9,6 +9,13 @@ import jwt_decode from "jwt-decode";
 
 import RuleEngine from "../../../api/RuleEngine.jsx";
 import PainLogbookManager from '../../../api/PainLogbookManager.jsx';
+
+import PainEducationScript from '../Modules/ModuleScripts/PainEducationScript.js';
+import ThoughtsEmotionsScript from '../Modules/ModuleScripts/ThoughtsEmotionsScript.js';
+import ActivityWorkScript from '../Modules/ModuleScripts/ActivityWorkScript.js';
+import AppModal from '../../components/AppModal.jsx';
+import Illustration from '../../components/Illustrations/Illustration.jsx';
+import PillButton from '../../components/PillButton.jsx';
 
 
 const testInputs = [
@@ -95,6 +102,8 @@ export default function PainLogbookEntry() {
     /* Recommendations */
     const [matchedRecommendations, updateMatchedRecommendations] = useState([]);
     const [currentRecommendation, updateCurrentRecommendation] = useState(0);
+    const [showModuleModal, setShowModuleModal] = useState(false);
+    const [disabledAutoScroll, setDisabledAutoScroll] = useState(false);
     /* Message Queues */
     const [messageQueue, updateMessageQueue] = useState(["MESSAGE-INTRO"]);
     const [tempMessageQueue, updateTempMessageQueue] = useState([]);
@@ -147,11 +156,10 @@ export default function PainLogbookEntry() {
                 history.back();
                 break;
             case "openRecommendation":
-                console.log("Opening module" + matchedRecommendations[currentRecommendation].module);
+                setShowModuleModal(true);
                 break;
             case "nextRecommendation":
                 updateCurrentRecommendation(currentRecommendation + 1);
-                addResponseToMessageQueue(message);
                 break;
             case "saveAndClose":
                 saveLog();
@@ -223,18 +231,27 @@ export default function PainLogbookEntry() {
     function renderMessages() {
         let messages = [];
         /* Step 1: Render Coach messages */
-        let recommendationIndex = 0;
+        let recommendationIndex = currentRecommendation;
         messageQueue.forEach((message, index) => {
             /* Recommendation message (requires more complex handling) */
             if (message.content === "recommendation") { 
                 /* Update state, but use local variable as state update happens asynchronously */
-                messages.push(<ChatbubbleInputSummary key={"message-recommendation-"+recommendationIndex+"-inputs"} typeLength={1000} inputs={computeBars(userInput)}/>);
                 let recommendations = matchedRecommendations.length === 0 ? ruleEngine.matchRules(userInput) : matchedRecommendations ;
                 if (matchedRecommendations.length === 0) updateMatchedRecommendations(recommendations);
+                messages.push(<ChatbubbleInputSummary key={"message-recommendation-inputs"} typeLength={recommendationIndex > 0 ? 0 : 2000} inputs={computeBars(userInput)} highlights={recommendations[recommendationIndex].codeMarkings}/>);
                 const recommendationText = " Wil je hiervoor wat tips bekijken in de module '" + moduleTranslation[recommendations[recommendationIndex].module]+ "'?";
-                messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-1"} typeLength={2000} own={false}>{recommendations[recommendationIndex].explanation}</Chatbubble>)
-                messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-2"} delayedDisplay delayBy={2000} typeLength={2000} own={false}>{recommendations[recommendationIndex].recommendation + recommendationText}</Chatbubble>)
-                recommendationIndex += 1;
+                /*messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-1"} typeLength={2000} own={false}>{recommendations[recommendationIndex].explanation}</Chatbubble>) */
+                /*
+                messages.push(<Chatbubble key={"message-recommendation-2"} delayedDisplay delayBy={recommendationIndex > 0 ? 0 : 2000} typeLength={recommendationIndex > 0 ? 0 : 2000} own={false}>{recommendations[recommendationIndex].recommendation + recommendationText}</Chatbubble>) */
+                messages.push(<ChatbubbleRecommendation 
+                    key={"message-recommendation-2"} 
+                    recommendationIndex={recommendationIndex}
+                    recommendationLength={recommendations.length-1}
+                    nextRecommendation={() => updateCurrentRecommendation(currentRecommendation+1)}
+                    prevRecommendation={() => updateCurrentRecommendation(currentRecommendation-1)}>
+                        {recommendations[recommendationIndex].recommendation + recommendationText}
+                    </ChatbubbleRecommendation>) ;
+
             }
             /* Normal messages */
             else {
@@ -270,17 +287,6 @@ export default function PainLogbookEntry() {
                         language={language}
                         onSubmit={hangleTERinput}/>);
                     break;
-                case "recommendation-next":
-                    if (recommendationIndex === matchedRecommendations.length) {
-                        messages.push(<Chatbubble 
-                            key={"recommendation-response-"+message.text+"-"+currentRecommendation}
-                            own={true}
-                            delayedDisplay
-                            delayBy={4000}
-                            choice 
-                            disabled>Geen aanbevelingen meer</Chatbubble>);
-                        break;
-                    }
                 case "recommendation-answer":
                     let newMessage = {...message};
                     newMessage.content = newMessage.text;
@@ -288,7 +294,7 @@ export default function PainLogbookEntry() {
                         key={"recommendation-response-"+message.text+"-"+currentRecommendation}
                         own={true}
                         delayedDisplay
-                        delayBy={4000}
+                        delayBy={disabledAutoScroll > 0 ? 0 : 4000}
                         choice 
                         type={message.type}
                         onClick={() => action(message.action, {...newMessage})}>
@@ -311,7 +317,47 @@ export default function PainLogbookEntry() {
             }
         });
         return messages;
-    };
+    }
+
+    function renderModuleModal() {
+        let submodule = [], recModule = matchedRecommendations[currentRecommendation].module.toLowerCase(), recSubmodule = matchedRecommendations[currentRecommendation].submodule;
+        switch (recSubmodule.split("_")[0]) {
+            case "PE":
+                submodule = PainEducationScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
+                break;
+            case "TE":
+                submodule = ThoughtsEmotionsScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
+                break;
+            case "ACT":
+                submodule = ActivityWorkScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
+                break;
+        }
+
+        return (<AppModal
+            backOption="Sluit" 
+            notifyBack={() => setShowModuleModal(false)} 
+            notifyParent={() => {saveLog(); FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/module/${recModule}/${recSubmodule}`)}}
+            defaultOption="Open" 
+            defaultColor="blue"
+            noPadding
+            show={showModuleModal}>
+            <div className="modalpopup-top">
+                <Illustration image={submodule.image} width={submodule.imageWidth ? submodule.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
+                <div className={"module-card-number"}>Onderdeel {submodule.part}</div>
+                <div className={"modalpopup-card-title"}>{submodule.titleMarkup[0]}</div>
+                {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title"}>{submodule.titleMarkup[1]}</div>}
+            </div>
+            <div className={"modalpopup-body"}>
+                <div>
+                    <PillButton contentColor="white" fillColor={"blue"} icon="time">{submodule.duration}</PillButton>
+                    <PillButton contentColor="white" fillColor={"blue"} icon="information">{submodule.type}</PillButton>
+                </div>
+                {submodule.description}
+                <hr/>
+                Jouw pijnlog wordt opgeslagen en je wordt doorverwezen naar dit onderdeel.
+            </div>
+        </AppModal>)
+    }
     
     /* Initialize first message once */
     useEffect(() => { initializeMessages() }, []);
@@ -320,14 +366,17 @@ export default function PainLogbookEntry() {
     useEffect(() => {
         const messages = document.getElementById("messages");
         /* Scroll immediately after new messages */
-        messages.scrollTop = messages.scrollHeight;
-        /* Scroll again after messages have expanded/user options have appeared (1000ms) */
-        if (messageQueue[messageQueue.length-1].content === "recommendation") {
-            setTimeout(function() { messages.scrollTop = messages.scrollHeight; }, 2001);
-            setTimeout(function() { messages.scrollTop = messages.scrollHeight; }, 4001);
-        }
-        else {
-            setTimeout(function() { messages.scrollTop = messages.scrollHeight; }, 1001);
+        if (!disabledAutoScroll) {
+            messages.scrollTop = messages.scrollHeight;
+            /* Scroll again after messages have expanded/user options have appeared (1000ms) */
+            if (messageQueue[messageQueue.length-1].content === "recommendation") {
+                setTimeout(function() { messages.scrollTop = messages.scrollHeight; }, 2001);
+                setTimeout(function() { messages.scrollTop = messages.scrollHeight; }, 4001);
+                setDisabledAutoScroll(true);
+            }
+            else {
+                setTimeout(function() { messages.scrollTop = messages.scrollHeight; }, 1001);
+            }
         }
     });
 
@@ -335,6 +384,7 @@ export default function PainLogbookEntry() {
         <React.Fragment>
             <NavigationBar title="Nieuwe pijnlog" action="close"/>
             <div id="messages" className="container" style={{paddingTop:"85px", paddingBottom: "15px"}}>
+                {showModuleModal && renderModuleModal()}
                 {renderMessages()}
             </div>
         </React.Fragment>

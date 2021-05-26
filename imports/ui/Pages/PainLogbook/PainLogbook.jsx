@@ -49,7 +49,7 @@ export default function PainLogbook() {
                 emotionsHTML += emotions[emotion].translation[language];
             });
             painLogsHTML.push(<div key={painLog._id} className="painlogbook-entry">
-                <p><b>Datum:</b> {moment(painLog.timestamp).format("DD MMMM")}</p>
+                <h3>{weekdays[language][moment(painLog.timestamp).isoWeekday()] + " " + moment(painLog.timestamp).format("DD MMMM")}</h3>
                 <p><b>Activiteit:</b> {painLog.context} - {painLog.activity}</p>
                 <p><b>Intensiteit:</b> {painLog.intensity}</p>
                 <p><b>Emoties:</b> {emotionsHTML}</p>
@@ -58,7 +58,7 @@ export default function PainLogbook() {
         return <FadeIn>{painLogsHTML}</FadeIn>;
     }
 
-    /*
+    
     return (<React.Fragment>
         <NavigationBar title="Pijnlogboek" back={`/${language}/mycoach/${FlowRouter.getParam('token')}`}/>
         <div className="painlogbook-body">
@@ -72,14 +72,11 @@ export default function PainLogbook() {
             </FadeIn>
             {renderPainLogs()}
         </div>
-    </React.Fragment>);*/
+    </React.Fragment>);
+}
 
-    return (
-        <React.Fragment>
-        <NavigationBar title="Pijnlogboek" back={`/${language}/mycoach/${FlowRouter.getParam('token')}`}/><div style={{display:"flex", flexDirection: "column", alignItems: "center", textAlign:"center", justifyContent: "center", fontSize:"18px", color: "var(--idewe-blue)", paddingTop: "190px", fontFamily:"var(--main-font)"}}>
-        Error: Fout bij het ophalen van profiel
-        <Illustration image="working" width="230px" style={{marginTop: "10px", marginBottom: "10px"}}/>
-        Wij zijn er van op de hoogte gesteld
-    </div>
-    </React.Fragment>)
+const weekdays = {
+    "nl-BE": {1: "Maandag", 2: "Dinsdag", 3: "Woensdag", 4: "Donderdag", 5: "Vrijdag", 6: "Zaterdag", 7: "Zondag"},
+    "nl-FR": {1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: ""},
+    "en-EN": {1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday", 6: "Saturday", 7: "Sunday"}
 }

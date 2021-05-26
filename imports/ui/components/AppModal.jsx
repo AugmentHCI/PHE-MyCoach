@@ -30,9 +30,9 @@ export default function AppModal(props) {
       {props.noPadding && <Modal.Body>{props.children}</Modal.Body>}
       {!props.noPadding && <Modal.Body><div style={{padding: "0 16px", color:"var(--idewe-blue-dark)"}}>{props.children}</div></Modal.Body>}
       <Modal.Footer>
-        {!props.backOption && <Button color="blue" width="fit" center onClick={handleDefault}>{defaultOption}</Button>}
+        {!props.backOption && <Button color="blue" center onClick={handleDefault}>{defaultOption}</Button>}
         {props.backOption && <React.Fragment>
-          <Button color="gray-light" width="45%" center onClick={handleBack}>{props.backOption}</Button>
+          <Button color="gray-light" width="45%" center onClick={handleBack} style={{marginRight:"10px"}}>{props.backOption}</Button>
           <Button color={props.defaultColor ? props.defaultColor : "blue"} width="45%" center onClick={handleDefault}>{defaultOption}</Button>
         </React.Fragment>}
       </Modal.Footer>

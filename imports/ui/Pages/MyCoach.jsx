@@ -226,7 +226,7 @@ export default function MyCoach(props) {
             noPadding
             show={showCoachingModal}>
             <div className="modalpopup-top">
-                <Illustration image={submodule.image} width={props.imageWidth ? props.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
+                <Illustration image={submodule.image} width={submodule.imageWidth ? submodule.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
                 <div className={"module-card-number"}>Onderdeel {submodule.part}</div>
                 <div className={"modalpopup-card-title"}>{submodule.titleMarkup[0]}</div>
                 {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title"}>{submodule.titleMarkup[1]}</div>}

@@ -7,6 +7,7 @@ import { copyOfDict } from "../../JSONlib.js";
 import Input from './Input.jsx';
 import Button from './Button.jsx';
 import "./Chatbubble.scss";
+import Icon from "./Illustrations/Icon.jsx";
 
 const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
 
@@ -271,7 +272,8 @@ export function ChatbubbleInputSummary(props) {
         props.inputs.forEach((input, index) => {
             inputsHTML.push(<React.Fragment>
                 <div className="chatbubble-inputs-row">
-                    <div className="chatbubble-inputs-inputtext">{translations[language].inputCodes[input[0]]}</div>
+                    {!props.highlights.includes(input[0]) && <div className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput-disabled">{translations[language].inputCodes[input[0]]}</div></div>}
+                    {props.highlights.includes(input[0]) && <div className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput">{translations[language].inputCodes[input[0]]}</div></div>}
                     <div className="chatbubble-inputs-barcontainer"><div className="chatbubble-inputs-bar" style={{width:(Math.round(input[1] * 100)) + "%"}}/></div>
                 </div>
                 {index < props.inputs.length-1 && <hr className="chatbubble-inputs-divider"/>}
@@ -279,7 +281,8 @@ export function ChatbubbleInputSummary(props) {
         })
         return (<div className="chatbubble-inputs-container">
             <div className="chatbubble-inputs-title">Jouw inputs</div>
-            <div className="chatbubble-inputs-text">Hier is een overzicht van je inputs. Tik op eentje waar jij een aanbeveling rond wilt zien:</div>
+            <div className="chatbubble-inputs-text">Hier is een overzicht van je inputs. Er wordt ook een aanbeveling getoond rond je gemarkeerde input(s).</div>
+            <hr className="chatbubble-inputs-divider"/>
             {inputsHTML}
             </div>);
     }
@@ -291,6 +294,47 @@ export function ChatbubbleInputSummary(props) {
             {!renderLoading && renderInputBars()}
         </div>
     </div>)
+}
+
+export function ChatbubbleRecommendation(props) {
+
+    const [renderLoading, setRenderLoading] = useState(true);
+    const [delayedDisplay, setDelayedDisplay] = useState(true);
+
+    /* Initialize Chatbubble once */
+    useEffect(() => { 
+        setTimeout(function() { setDelayedDisplay(false) }, (2000));
+        setTimeout(function() { setRenderLoading(false) }, (4000));
+    }, [] );
+
+    function updateRecommendationIndex(update) {
+        console.log(props.recommendationLength)
+        if (update === "next" && props.recommendationIndex < props.recommendationLength) props.nextRecommendation();
+        if (update === "prev" && props.recommendationIndex > 0) props.prevRecommendation();
+    }
+
+    function renderTopBar() {
+        return (<div>
+            <div style={{display:"flex"}}>
+                <Icon onClick={() => updateRecommendationIndex("prev")} 
+                    image={"next"} style={{flexGrow:1, transform:"rotate(180deg)", maxWidth:"18px", maxHeight:"18px", marginTop: "5px", marginLeft:"10px"}} width="15px" color={props.recommendationIndex === 0 ? "blue-light" : "white"}/>
+                <div  style={{flexGrow:2, textAlign:"center", fontSize:"20px"}}>Aanbeveling {props.recommendationIndex + 1}</div>
+                <Icon onClick={() => updateRecommendationIndex("next")} image={"next"} style={{flexGrow:1, maxWidth:"18px", maxHeight:"18px", marginTop: "5px", marginRight:"10px"}} width="15px" color={props.recommendationLength === props.recommendationIndex ? "blue-light" : "white"}/>
+            </div>
+            <hr style={{margin: "5px", borderTop:"1px solid rgba(255,255,255,.3)"}}/>
+        </div>);
+    }
+
+    return (<React.Fragment>{!delayedDisplay && <div className="chatbubble-container">
+        <img src="/illustrations/avatar.png" width="35px" style={{position:"absolute"}}/>
+        <div className={"chatbubble"}>
+            {renderLoading && <img src="/illustrations/loading.gif" width="50px"/>}
+            {!renderLoading && <div>
+                {renderTopBar()}
+                {<div style={{fontWeight:400}}>{props.children}</div>}
+            </div>}
+        </div>
+    </div>}</React.Fragment>)
 }
 
 const translations = {

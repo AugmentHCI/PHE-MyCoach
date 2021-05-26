@@ -17,7 +17,6 @@
     margin-left: 30px;
     border-radius: 15px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
-    max-height: 300px;
     overflow-x: hidden; 
 
     &-own {
@@ -139,6 +138,22 @@ mark {
 
 .chatbubble-inputs-inputtext {
     width: 75%;
+}
+
+.chatbubble-inputs-highlightinput {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 1px 5px;
+    width: fit-content;
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+
+    &-disabled {
+        @extend .chatbubble-inputs-highlightinput;
+        background-color: rgba(255, 255, 255, 0);
+        //padding: 0;
+    }
 }
 
 .chatbubble-inputs-barcontainer {
