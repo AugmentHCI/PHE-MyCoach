@@ -10,6 +10,7 @@
     font-size: 20px;
     font-weight: 500;
     margin-top: 10px;
+    clear: both;
 }
 
 .painlogbook-body h4 {
@@ -53,6 +54,20 @@
     margin: 10px 0;
     border-radius: 15px;
     box-shadow: var(--card-shadow);
+    position: relative;
+}
+
+.painlogbook-entry-button {
+    background-color: var(--idewe-blue);
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding-top: 6px;
+    padding-left: 8px;
+    box-shadow: var(--card-shadow);
 }
 
 .painlogbook-emptylogs {
@@ -63,4 +78,27 @@
     font-weight: 500;
     font-size: 20px;
     margin-top: 50px;
+}
+
+.chatbubble-overview {
+    background-color: var(--idewe-white);
+    color: var(--idewe-blue);
+    font-size: 14px;
+    border-radius: 15px 15px 15px 0px;
+    float: left;
+    border: 2px solid var(--idewe-blue);
+    font-family: var(--main-font);
+    font-weight: 500;
+    width: fit-content;
+    max-width: 330px;
+    padding: 8px 10px;
+    height: min-content;
+    margin-bottom: 10px;
+    box-shadow: var(--card-shadow);
+
+    &-rounded {
+        @extend .chatbubble-overview;
+        border-radius: 15px;
+        margin-right: 10px;
+    }
 }

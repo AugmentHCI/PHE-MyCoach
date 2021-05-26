@@ -12,6 +12,7 @@ import AdminSettings    from '../imports/ui/Pages/AdminSettings.jsx';
 /* Logbooks */
 import PainLogbook      from '../imports/ui/Pages/PainLogbook/PainLogbook.jsx';
 import PainLogbookEntry from '../imports/ui/Pages/PainLogbook/PainLogbookEntry.jsx';
+import PainLogbookDetail from '../imports/ui/Pages/PainLogbook/PainLogbookDetail.jsx';
 import ActivityLogbook  from '../imports/ui/Pages/ActivityLogbook/ActivityLogbook.jsx';
 import ValueLogbook from '../imports/ui/Pages/ValueLogbook/ValueLogbook.jsx';
 
@@ -68,6 +69,11 @@ FlowRouter.route('/:language/mycoach/:token/painlogbook', {
 FlowRouter.route('/:language/mycoach/:token/painlogbook/newentry', {
   name: 'PainLogbook',
   action(){ mount( App, { content: <PainLogbookEntry /> })}
+});
+
+FlowRouter.route('/:language/mycoach/:token/painlogbook/:id', {
+  name: 'PainLogbook',
+  action(){ mount( App, { content: <PainLogbookDetail /> })}
 });
 
 FlowRouter.route('/:language/mycoach/:token/activitylogbook', {

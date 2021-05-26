@@ -9,7 +9,7 @@ import FadeIn from "react-fade-in";
 
 import jwt_decode from "jwt-decode";
 
-import Illustration from '../../components/Illustrations/Illustration';
+import Icon from '../../components/Illustrations/Icon';
 
 import NavigationBar from '../../components/NavigationBar';
 import ActionButton from '../../components/ActionButton';
@@ -49,7 +49,8 @@ export default function PainLogbook() {
                 emotionsHTML += emotions[emotion].translation[language];
             });
             painLogsHTML.push(<div key={painLog._id} className="painlogbook-entry">
-                <h3>{weekdays[language][moment(painLog.timestamp).isoWeekday()] + " " + moment(painLog.timestamp).format("DD MMMM")}</h3>
+                <div className="painlogbook-entry-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/painlogbook/${painLog._id}`)}><Icon image="next" color="white"/></div>
+                <h3>{weekdays[language][moment(painLog.timestamp).isoWeekday()] + " " + moment(painLog.timestamp).format("D MMMM")}</h3>
                 <p><b>Activiteit:</b> {painLog.context} - {painLog.activity}</p>
                 <p><b>Intensiteit:</b> {painLog.intensity}</p>
                 <p><b>Emoties:</b> {emotionsHTML}</p>
