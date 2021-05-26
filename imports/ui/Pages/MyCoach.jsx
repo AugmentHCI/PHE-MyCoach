@@ -63,7 +63,8 @@ export default function MyCoach(props) {
 
     const [showIntroductionModal, setShowIntroductionModal] = useState(false);
     const [showIntroductionVideo, setShowIntroductionVideo] = useState(false);
-    const [showCoachingModal, setShowCoachingModal] = useState(false);
+    const [showFinishPainEducationModal, setShowFinishPainEducationModal] = useState(false);
+    const [showCoachingModal, setShowCoachingModal] = useState(false); 
     const [showTutorial1, updateShowTutorial1] = useState(undefined);
     const [showTutorial2, updateShowTutorial2] = useState(undefined);
     const [showTutorial3, updateShowTutorial3] = useState(undefined);
@@ -241,6 +242,17 @@ export default function MyCoach(props) {
         </AppModal>)
     }
 
+    function renderFinishPainEducationModal() {
+        return <AppModal
+        notifyParent={() => {setShowFinishPainEducationModal(false); interactionManager.setInteractionStatus("GENERAL_PAINEDUCATIONFINISHEDMODAL", "CONFIRM");}}
+        defaultOption="Begrepen" 
+        defaultColor="blue"
+        title="Proficiat!"
+        show={userProgress["PAINEDUCATION"]["PE_MOD_5"] === "COMPLETED" && showFinishPainEducationModal}>
+            Je hebt de module pijneducatie doorlopen, super! Je kan nu de module rond gedachten en emoties bekijken, oftewel de module rond activiteit en werk. Wij hebben ook een snelkoppeling naar je pijnlogboek toegevoegd, neem daar zeker ook eens een kijkje!
+    </AppModal>
+    }
+
     function renderSplashScreen() {
         return (<div className="container" style={{justifyContent: "center", textAlign: "center", margin: "0 auto"}}>
             <h2 style={{marginTop: "60px", color:"var(--idewe-blue", fontSize:"20px", fontWeight:"600"}} onClick={() => updateTapCount(tapCount+1)}>Nog even geduld</h2>
@@ -272,7 +284,7 @@ export default function MyCoach(props) {
             setUserShortcuts(fetchedShortcuts);
         }
         async function fetchUserInteractionStatus() {
-            const result = await interactionManager.getMultipleInteractionStatuses(["GENERAL_INTRODUCTIONPOPUPS", "GENERAL_INTRODUCTIONMODAL"]);
+            const result = await interactionManager.getMultipleInteractionStatuses(["GENERAL_INTRODUCTIONPOPUPS", "GENERAL_INTRODUCTIONMODAL", "GENERAL_PAINEDUCATIONFINISHEDMODAL"]);
             if (!result.GENERAL_INTRODUCTIONPOPUPS.includes("CONFIRM")) 
                 {interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONPOPUPS", "SHOW")}
             updateShowTutorial1(!result.GENERAL_INTRODUCTIONPOPUPS.includes("CONFIRM"));
@@ -282,6 +294,7 @@ export default function MyCoach(props) {
                 {interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONMODAL", "SHOW");}
             setShowIntroductionModal(!result.GENERAL_INTRODUCTIONMODAL.includes("CONFIRM"));
             setShowIntroductionVideo(!result.GENERAL_INTRODUCTIONMODAL.includes("CONFIRM"));
+            setShowFinishPainEducationModal(!result.GENERAL_PAINEDUCATIONFINISHEDMODAL.includes("CONFIRM"));
         }
         fetchUserProgress();
         fetchUserData();
@@ -295,6 +308,7 @@ export default function MyCoach(props) {
             {(tapCount >= 5 || props.noSplash || coachRRNRs.includes(userID)) && <React.Fragment>
             {handleIntroduction()}
             {showCoachingModal && renderDailyCoachingModal()}
+            {userProgress && showFinishPainEducationModal && userProgress["PAINEDUCATION"]["PE_MOD_5"] === "COMPLETED" && renderFinishPainEducationModal()}
             {userProgress && <FadeIn>
                 <div style={{display: "flex"}}>
                     <h1>My Coach</h1>

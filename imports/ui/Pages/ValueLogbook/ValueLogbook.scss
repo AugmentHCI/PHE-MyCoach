@@ -62,16 +62,23 @@
     flex-direction: column;
     padding-top: 10px;
     height: 100%;
-    -webkit-transition: opacity .5s ease-out;
-    -moz-transition: opacity .5s ease-out;
-    -o-transition: opacity .5s ease-out;
-    transition: opacity .5s ease-out;
-    opacity: 100%;
+    -webkit-transition: .2s ease-out;
+    -moz-transition: .2s ease-out;
+    -o-transition: .2s ease-out;
+    transition: .2s ease-out;
+
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; // IE8
+    filter: alpha(opacity=100); // IE 5-7
+    opacity: 100;
+
     margin-right: 0;
 
     &-disabled {
         @extend .value-icon;
-        opacity: 0%;
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; // IE8
+        filter: alpha(opacity=0); // IE 5-7
+        opacity: 0;
+
         margin-right: -15px;
     }
 }
