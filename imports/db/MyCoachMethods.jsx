@@ -4,7 +4,8 @@ import {
     MyCoachProgressCollection, 
     MyCoachInteractionCollection, 
     MyCoachProfileCollection,  
-    MyCoachShortcutCollection
+    MyCoachShortcutCollection,
+    MyCoachFeedbackCollection
 } from './MyCoachCollection';
 
 /* PROGRESS */
@@ -210,4 +211,20 @@ Meteor.methods({
             MyCoachShortcutCollection.remove(item._id);
         });
     },
+});
+
+/* FEEDBACK */
+Meteor.methods({
+    'mycoachfeedback.insertFeedback'({userID, feedback, screen}) {
+        check(userID, Number);
+        check(feedback, String);
+        check(screen, String);
+   
+        MyCoachFeedbackCollection.insert({
+            userID: userID,
+            feedback: feedback,
+            screen: screen,
+            timestamp: new Date,
+        });
+    }
 });

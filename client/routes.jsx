@@ -15,6 +15,7 @@ import PainLogbookEntry from '../imports/ui/Pages/PainLogbook/PainLogbookEntry.j
 import PainLogbookDetail from '../imports/ui/Pages/PainLogbook/PainLogbookDetail.jsx';
 import ActivityLogbook  from '../imports/ui/Pages/ActivityLogbook/ActivityLogbook.jsx';
 import ValueLogbook from '../imports/ui/Pages/ValueLogbook/ValueLogbook.jsx';
+import FeedbackScreen from '../imports/ui/Pages/FeedbackScreen.jsx';
 
 
 FlowRouter.route('/', {
@@ -25,31 +26,6 @@ FlowRouter.route('/', {
 /*
   MY COACH ROUTES
 */
-FlowRouter.route('/:language/mycoach/', {
-  name: 'MyCoach',
-  action(){ mount( App, { content: <MyCoach /> })}
-});
-
-FlowRouter.route('/:language/mycoach/painlogbook', {
-  name: 'PainLogbook',
-  action(){ mount( App, { content: <PainLogbook /> })}
-});
-
-FlowRouter.route('/:language/mycoach/painlogbook/:settings', {
-  name: 'PainLogbook',
-  action(){ mount( App, { content: <PainLogbook /> })}
-});
-
-FlowRouter.route('/:language/mycoach/module/:module', {
-  name: 'Module',
-  action(){ mount( App, { content: <ModuleParser /> })}
-});
-
-FlowRouter.route('/:language/mycoach/module/:module/:submodule', {
-  name: 'Submodule',
-  action(){ mount( App, { content: <SubmoduleParser /> })}
-});
-
 /* With user token */
 FlowRouter.route('/:language/mycoach/:token', {
   name: 'MyCoach',
@@ -59,6 +35,11 @@ FlowRouter.route('/:language/mycoach/:token', {
 FlowRouter.route('/:language/mycoach/:token/adminsettings', {
   name: 'AdminSettings',
   action(){ mount( App, { content: <AdminSettings /> })}
+});
+
+FlowRouter.route('/:language/mycoach/:token/feedback', {
+  name: 'Feedback',
+  action(){ mount( App, { content: <FeedbackScreen /> })}
 });
 
 FlowRouter.route('/:language/mycoach/:token/painlogbook', {

@@ -103,6 +103,7 @@ export default function PainLogbookEntry() {
     const [matchedRecommendations, updateMatchedRecommendations] = useState([]);
     const [currentRecommendation, updateCurrentRecommendation] = useState(0);
     const [showModuleModal, setShowModuleModal] = useState(false);
+    const [showExplanationModal, setShowExplanationModal] = useState(false);
     const [disabledAutoScroll, setDisabledAutoScroll] = useState(false);
     /* Message Queues */
     const [messageQueue, updateMessageQueue] = useState(["MESSAGE-INTRO"]);
@@ -158,8 +159,8 @@ export default function PainLogbookEntry() {
             case "openRecommendation":
                 setShowModuleModal(true);
                 break;
-            case "nextRecommendation":
-                updateCurrentRecommendation(currentRecommendation + 1);
+            case "explainRecommendation":
+                setShowExplanationModal(true);
                 break;
             case "saveAndClose":
                 saveLog();
@@ -319,6 +320,18 @@ export default function PainLogbookEntry() {
         return messages;
     }
 
+
+    function renderExplanationModal() {
+        return (<AppModal
+            notifyParent={() => {setShowExplanationModal(false)}}
+            defaultOption="Begrepen" 
+            defaultColor="blue"
+            title="Waarom deze aanbeveling?"
+            show={showExplanationModal}>
+                {matchedRecommendations[currentRecommendation].explanation}
+        </AppModal>)
+    }
+
     function renderModuleModal() {
         let submodule = [], recModule = matchedRecommendations[currentRecommendation].module.toLowerCase(), recSubmodule = matchedRecommendations[currentRecommendation].submodule;
         switch (recSubmodule.split("_")[0]) {
@@ -384,8 +397,9 @@ export default function PainLogbookEntry() {
         <React.Fragment>
             <NavigationBar title="Nieuwe pijnlog" action="close"/>
             <div id="messages" className="container" style={{paddingTop:"85px", paddingBottom: "15px"}}>
-                {showModuleModal && renderModuleModal()}
-                {renderMessages()}
+                { showModuleModal && renderModuleModal() }
+                { showExplanationModal && renderExplanationModal() }
+                { renderMessages() }
             </div>
         </React.Fragment>
     )

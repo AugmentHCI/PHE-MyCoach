@@ -623,13 +623,20 @@ export const conversation = {
     "RECOMMENDATION": {
         content: "recommendation",
         sentBy: "coach",
-        response: ["OPEN-RECOMMENDATION", "CLOSE-LOGBOOK"]
+        response: ["OPEN-RECOMMENDATION", "EXPLAIN-RECOMMENDATION", "CLOSE-LOGBOOK"]
     }, 
     "OPEN-RECOMMENDATION": {
         content: "recommendation-answer",
         text: "Ja, open aanbeveling",
         sentBy: "user",
         action: "openRecommendation",
+        response: ["RECOMMENDATION"]
+    },
+    "EXPLAIN-RECOMMENDATION": {
+        content: "recommendation-answer",
+        text: "Leg uit waarom ik aanbeveling krijg",
+        sentBy: "user",
+        action: "explainRecommendation",
         response: ["RECOMMENDATION"]
     },
     "CLOSE-LOGBOOK": {

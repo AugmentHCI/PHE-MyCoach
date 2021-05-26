@@ -4,4 +4,5 @@ export const MyCoachProfileCollection     = new Mongo.Collection('mycoachprofile
 export const MyCoachQuestionCollection    = new Mongo.Collection('mycoachquestion');
 export const MyCoachProgressCollection    = new Mongo.Collection('mycoachprogress');
 export const MyCoachShortcutCollection    = new Mongo.Collection('mycoachshortcut');
+export const MyCoachFeedbackCollection    = new Mongo.Collection('mycoachfeedback');
 export const MyCoachInteractionCollection = new Mongo.Collection('mycoachinteraction');

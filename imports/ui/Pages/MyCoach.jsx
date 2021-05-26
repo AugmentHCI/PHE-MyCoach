@@ -68,6 +68,7 @@ export default function MyCoach(props) {
     const [showTutorial1, updateShowTutorial1] = useState(undefined);
     const [showTutorial2, updateShowTutorial2] = useState(undefined);
     const [showTutorial3, updateShowTutorial3] = useState(undefined);
+    const [showTutorial4, updateShowTutorial4] = useState(undefined);
 
     function handleIntroduction() {
         if (!userData) return;
@@ -161,7 +162,7 @@ export default function MyCoach(props) {
                         <div className="tutorial-illustration"><Illustration image="voortgang" width={"100%"}></Illustration></div>
                         <div className="tutorial-button-row">
                             <Button center color="gray-light" size="small" style={{flex: 1, marginRight: "10px"}} onClick={()=> updateShowTutorial2(true)}>Vorige</Button>
-                            <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> {updateShowTutorial3(false); interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONPOPUPS", "CONFIRM");}}>Begrepen!</Button>
+                            <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> {updateShowTutorial3(false);}}>Volgende</Button>
                         </div>
                     </div>}
                     placement="top"
@@ -290,6 +291,7 @@ export default function MyCoach(props) {
             updateShowTutorial1(!result.GENERAL_INTRODUCTIONPOPUPS.includes("CONFIRM"));
             updateShowTutorial2(!result.GENERAL_INTRODUCTIONPOPUPS.includes("CONFIRM"));
             updateShowTutorial3(!result.GENERAL_INTRODUCTIONPOPUPS.includes("CONFIRM"));
+            updateShowTutorial4(!result.GENERAL_INTRODUCTIONPOPUPS.includes("CONFIRM"));
             if (!result.GENERAL_INTRODUCTIONMODAL.includes("CONFIRM"))
                 {interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONMODAL", "SHOW");}
             setShowIntroductionModal(!result.GENERAL_INTRODUCTIONMODAL.includes("CONFIRM"));
@@ -310,18 +312,34 @@ export default function MyCoach(props) {
             {showCoachingModal && renderDailyCoachingModal()}
             {userProgress && showFinishPainEducationModal && userProgress["PAINEDUCATION"]["PE_MOD_5"] === "COMPLETED" && renderFinishPainEducationModal()}
             {userProgress && <FadeIn>
-                <div style={{display: "flex"}}>
+                <div style={{display: "flex", position: "relative"}}>
+                <Popover
+                    content={<div className="tutorial-content">
+                        <h4>Geef feedback</h4>
+                        Je kan op elk moment op deze knop drukken om feedback te geven over de app (als er iets niet correct werkt, of niet werkt zoals verwacht). Deze feedback nemen wij dan mee bij het verbeteren van de coaching!
+                        <div className="tutorial-button-row">
+                            <Button center color="gray-light" size="small" style={{flex: 1, marginRight: "10px"}} onClick={()=> updateShowTutorial3(true)}>Vorige</Button>
+                            <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> {updateShowTutorial4(false); interactionManager.setInteractionStatus("GENERAL_INTRODUCTIONPOPUPS", "CONFIRM");}}>Begrepen!</Button>
+                        </div>
+                    </div>}
+                    placement="bottomRight"
+                    trigger="click"
+                    visible={!showTutorial3 && showTutorial4}>
+                    <div className="mycoach-feedback-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/feedback`)}>
+                        <Icon color="white" image="feather" width="20px"/>
+                    </div>
+                    </Popover>
                     <h1>My Coach</h1>
-                    <button className="settings-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/adminsettings`)}> <Icon width="24px" image={"settings"} color={"blue-dark"}/></button>
+                    {false && <button className="settings-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/adminsettings`)}> <Icon width="24px" image={"settings"} color={"blue-dark"}/></button>}
                 </div>
-                {renderTodos()}
-                {renderModules()}
+                { renderTodos() }
+                { renderModules() }
             </FadeIn>}</React.Fragment>}
         </div>
     )
 }
 
-const coachRRNRs = [1111111, 4862876, 3381097, 4018425, 4799179, 3237616, 4557583, 4013945, 3475505, 2988321, 3604510, 3731886];
+const coachRRNRs = [1111111, 4862876, 3381097, 4018425, 4799179, 3237616, 4013945, 3475505, 4557583, 2988321, 3604510, 3731886];
 /* The module priorities per profile */
 const modulePriorities = {
     1: []

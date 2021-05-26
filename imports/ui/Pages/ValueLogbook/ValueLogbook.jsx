@@ -72,6 +72,31 @@ export default function ValueLogbook() {
         fetchValues();
     }, []);
 
+    function renderValuesTab() {
+        return (<div>
+            <FadeIn>
+            Hier zie je een overzicht van jouw waarden. Je kan waarden toevoegen of verwijderen, om ze dan te gebruiken in het tabblad 'Doelen'.
+            { renderValues() }
+            { addingMode && <Input 
+                type="text" value={addingValue} onChange={updateAddingValue}
+                style={{width: "100%", fontSize: "16px", fontWeight: 500, flexGrow: 1}} 
+                placeholder={"Typ hier"}/> }
+            <div style={{display: "flex"}}>
+            {!addingMode && <Button center color="blue" onClick={() => setEditMode(!editMode)} style={{marginTop: "20px", flex: 1, marginRight: editMode ? 0 : "10px"}}>{editMode ? "Opslaan" : "Wijzig"}</Button>}
+            {!editMode && <Button center color="blue" onClick={() => saveButton()} style={{marginTop: "20px", flex: 1}}>{addingMode ? (addingValue.length > 0 ? "Voeg toe" : "Annuleer") : "Voeg waarde toe"}</Button>}
+            </div>
+            </FadeIn>
+        </div>)
+    }
+
+    function renderGoalsTab() {
+        return (<div style={{display:"flex", flexDirection: "column", alignItems: "center", textAlign:"center", justifyContent: "center", fontSize:"18px", color: "var(--idewe-blue)", paddingTop: "40px"}}>
+        Error: Fout bij het ophalen van profiel
+        <Illustration image="working" width="230px" style={{marginTop: "10px", marginBottom: "10px"}}/>
+        Wij zijn er van op de hoogte gesteld
+    </div>)
+    }
+
     return (<React.Fragment>
         <NavigationBar title="Waarden en doelen" back={`/${language}/mycoach/${FlowRouter.getParam('token')}`}/>
         <div className="valuelogbook">
@@ -79,25 +104,8 @@ export default function ValueLogbook() {
             <div className={"valuelogbook-tabitem" + (selectedTab === "VALUES" ? "-selected" : "")} onClick={() => setSelectedTab("VALUES")}>Waarden</div>
             <div className={"valuelogbook-tabitem" + (selectedTab === "GOALS" ? "-selected" : "")} onClick={() => setSelectedTab("GOALS")}>Doelen</div>
         </div>
-            {selectedTab === "VALUES" && <div>
-                <FadeIn>
-                Hier zie je een overzicht van jouw waarden. Je kan waarden toevoegen of verwijderen, om ze dan te gebruiken in het tabblad 'Doelen'.
-                { renderValues() }
-                { addingMode && <Input 
-                    type="text" value={addingValue} onChange={updateAddingValue}
-                    style={{width: "100%", fontSize: "16px", fontWeight: 500, flexGrow: 1}} 
-                    placeholder={"Typ hier"}/> }
-                <div style={{display: "flex"}}>
-                {!addingMode && <Button center color="blue" onClick={() => setEditMode(!editMode)} style={{marginTop: "20px", flex: 1, marginRight: editMode ? 0 : "10px"}}>{editMode ? "Opslaan" : "Wijzig"}</Button>}
-                {!editMode && <Button center color="blue" onClick={() => saveButton()} style={{marginTop: "20px", flex: 1}}>{addingMode ? (addingValue.length > 0 ? "Voeg toe" : "Annuleer") : "Voeg waarde toe"}</Button>}
-                </div>
-                </FadeIn>
-            </div>}
-            {selectedTab === "GOALS" && <div style={{display:"flex", flexDirection: "column", alignItems: "center", textAlign:"center", justifyContent: "center", fontSize:"18px", color: "var(--idewe-blue)", paddingTop: "40px"}}>
-                Error: Fout bij het ophalen van profiel
-                <Illustration image="working" width="230px" style={{marginTop: "10px", marginBottom: "10px"}}/>
-                Wij zijn er van op de hoogte gesteld
-            </div>}
+            {selectedTab === "VALUES" && renderValuesTab()}
+            {selectedTab === "GOALS" && renderGoalsTab()}
         </div>
     </React.Fragment>);
 }
