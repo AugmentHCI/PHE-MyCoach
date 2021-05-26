@@ -62,7 +62,10 @@
     flex-direction: column;
     padding-top: 10px;
     height: 100%;
-    transition: 0.2s ease-out;
+    -webkit-transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+    transition: opacity .5s ease-out;
     opacity: 100%;
     margin-right: 0;
 
