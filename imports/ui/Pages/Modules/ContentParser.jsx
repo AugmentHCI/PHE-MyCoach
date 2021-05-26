@@ -313,7 +313,7 @@ function ContentParser(props) {
 
 
         return (<div className="content-delayed-container">{data.content.map((item, index) => {
-            return <div className="content-delayed-item" key={item+"-"+index}>{item}</div>
+            return <div className="content-delayed-item" style={{animation:"fadeIn 2s ease-in "+ index*4+"s 1 normal forwards"}} key={item+"-"+index}>{item}</div>
         })}
         <Button center style={{marginTop: "10px"}} disabled={saved} onClick={() => confirmDone()}>Klaar</Button></div>)
     }

@@ -18,7 +18,9 @@ export default function NavigationBar(props) {
     }
 
     function goBack() {
-        if (props.back) FlowRouter.go(props.back);
+        if (FlowRouter.current().queryParams.goPainlogbookOnBack === "true") FlowRouter.go(`/${FlowRouter.getParam('language')}/mycoach/${FlowRouter.getParam('token')}/painlogbook`);
+        else if (FlowRouter.current().queryParams.goHomeOnBack === "true") FlowRouter.go(`/${FlowRouter.getParam('language')}/mycoach/${FlowRouter.getParam('token')}`);
+        else if (props.back) FlowRouter.go(props.back);
         else { history.back() }
     }
 

@@ -336,7 +336,7 @@ export default function PainLogbookEntry() {
         return (<AppModal
             backOption="Sluit" 
             notifyBack={() => setShowModuleModal(false)} 
-            notifyParent={() => {saveLog(); FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/module/${recModule}/${recSubmodule}`)}}
+            notifyParent={() => {saveLog(); FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/module/${recModule}/${recSubmodule}?goPainlogbookOnBack=true`)}}
             defaultOption="Open" 
             defaultColor="blue"
             noPadding
