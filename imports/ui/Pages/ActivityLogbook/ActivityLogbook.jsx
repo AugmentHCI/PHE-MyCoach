@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import FadeIn from 'react-fade-in';
-import Illustration from '../../components/Illustrations/Illustration';
+import "./ActivityLogbook.scss";
 
+import Illustration from '../../components/Illustrations/Illustration';
 import NavigationBar from '../../components/NavigationBar';
 
 export default function PainLogbook() {

@@ -12,17 +12,24 @@ import QuestionManager from '../../../api/QuestionManager';
 import Icon from '../../components/Illustrations/Icon';
 import Illustration from '../../components/Illustrations/Illustration';
 import Input from '../../components/Input';
+import Slider from '../../components/Slider';
+import { FormControlLabel, RadioGroup, Radio } from '@material-ui/core';
+import GoalSettingManager from '../../../api/GoalSettingManager';
+
+
 
 export default function ValueLogbook() {
 
     const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
     const userID   = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     const questionManager = new QuestionManager(userID);
+    const goalSettingManager = new GoalSettingManager(userID);
 
+    const [goals, setGoals] = useState([]);
     const [values, setValues] = useState({});
     const [editMode, setEditMode] = useState(false);
     const [addingMode, setAddingMode] = useState(false);
-    const [selectedTab, setSelectedTab] = useState("VALUES");
+    const [selectedTab, setSelectedTab] = useState("GOALS");
     const [addingValue, updateAddingValue] = useState("");
 
     function removeItem(value) {
@@ -38,6 +45,7 @@ export default function ValueLogbook() {
         if (foundValues.length > 0) return foundValues[0].text;
         return value;
     }
+    
     function renderValues() {
         let valueHTML = [];
         Object.keys(values).forEach((value, index) => {
@@ -69,7 +77,13 @@ export default function ValueLogbook() {
             const fetchedValues = await questionManager.getLatestAnswerOnQuestion("TE-MOD-5-SELECT-5");
             setValues(JSON.parse(fetchedValues));
         }
+        async function fetchGoals() {
+            const fetchedGoals = await goalSettingManager.getUserGoals();
+            console.log(fetchedGoals)
+            setGoals(fetchedGoals);
+        }
         fetchValues();
+        fetchGoals();
     }, []);
 
     function renderValuesTab() {
@@ -80,7 +94,7 @@ export default function ValueLogbook() {
             { addingMode && <Input 
                 type="text" value={addingValue} onChange={updateAddingValue}
                 style={{width: "100%", fontSize: "16px", fontWeight: 500, flexGrow: 1}} 
-                placeholder={"Typ hier"}/> }
+                placeholder="Typ hier"/> }
             <div style={{display: "flex"}}>
             {!addingMode && <Button center color="blue" onClick={() => setEditMode(!editMode)} style={{marginTop: "20px", flex: 1, marginRight: editMode ? 0 : "10px"}}>{editMode ? "Opslaan" : "Wijzig"}</Button>}
             {!editMode && <Button center color="blue" onClick={() => saveButton()} style={{marginTop: "20px", flex: 1}}>{addingMode ? (addingValue.length > 0 ? "Voeg toe" : "Annuleer") : "Voeg waarde toe"}</Button>}
@@ -89,23 +103,73 @@ export default function ValueLogbook() {
         </div>)
     }
 
+
+
+    function renderGoalCard(goal) {
+        const days = JSON.parse(goal.days);
+        const values = JSON.parse(goal.values);
+        return (<div className="valuelogbook-entry" key={goal._id}>
+            <div className="valuelogbook-entry-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/values/${goal._id}`)}><Icon image="pen" color="white"/></div>
+            <div className="valuelogbook-entry-title">{goal.title}</div>
+            <div className="valuelogbook-entry-description" style={{maxWidth: "80%", display: "flex"}}>{goal.description}</div>
+            Doel: <div className="valuelogbook-entry-description">{goal.quantity + " " + quantityT[goal.quantifier]}</div>
+            <div style={{display:"flex", "flexDirection": "row", marginTop:".5em"}}>
+                {values.map(value => { return (<div key={value.id} className="valuelogbook-entry-value">{value.value}</div>)})}
+            </div>
+            <hr style={{marginTop:"1em", marginBottom: ".5em"}}/>
+            <div style={{display:"flex", "flexDirection": "row"}}>
+                {Object.keys(days).map(day => {
+                    const color = days[day] ? "var(--idewe-blue)" : "var(--idewe-gray-light)";
+                    return (<div key={day} style={{color: color, flex: 1, textAlign: "center"}}>{daysT[day]}</div>)})}
+            </div>
+            <hr style={{marginTop:".5em", marginBottom: "1em"}}/>
+            Mijn belemmering: <div className="valuelogbook-entry-description">{goal.threshold}</div><br/>
+            Mijn oplossing: <div className="valuelogbook-entry-description">{goal.thresholdDescription}</div><br/>
+            Mijn beloning: <div className="valuelogbook-entry-description">{goal.reward}</div>
+        </div>)
+    }
+
     function renderGoalsTab() {
-        return (<div style={{display:"flex", flexDirection: "column", alignItems: "center", textAlign:"center", justifyContent: "center", fontSize:"18px", color: "var(--idewe-blue)", paddingTop: "40px"}}>
-        Error: Fout bij het ophalen van profiel
-        <Illustration image="working" width="230px" style={{marginTop: "10px", marginBottom: "10px"}}/>
-        Wij zijn er van op de hoogte gesteld
-    </div>)
+        return (<div className="goals-tab">
+            <FadeIn>
+                {goals.length === 0 && <div style={{display: "flex", justifyContent:"center", flexDirection:"column"}}>
+                    <div className="valuelogbook-nogoalsmessage">Je hebt nog geen doelen toegevoegd!</div>
+                    <Illustration image="act-mod-res" width="70%" style={{margin: "auto", marginBottom: "50px"}}/>
+                </div>}
+                {goals.length > 0 && <div> <h2>Jouw doelen</h2>
+                    {goals.map(goal => {return (renderGoalCard(goal))})}
+                </div>}
+                <Button width="100%" center color="blue" onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/values/newgoal`)}>Voeg een nieuw doel toe</Button>
+            </FadeIn>
+        </div>)
     }
 
     return (<React.Fragment>
         <NavigationBar title="Waarden en doelen" back={`/${language}/mycoach/${FlowRouter.getParam('token')}`}/>
         <div className="valuelogbook">
         <div className="valuelogbook-tabbar">
-            <div className={"valuelogbook-tabitem" + (selectedTab === "VALUES" ? "-selected" : "")} onClick={() => setSelectedTab("VALUES")}>Waarden</div>
             <div className={"valuelogbook-tabitem" + (selectedTab === "GOALS" ? "-selected" : "")} onClick={() => setSelectedTab("GOALS")}>Doelen</div>
+            <div className={"valuelogbook-tabitem" + (selectedTab === "VALUES" ? "-selected" : "")} onClick={() => setSelectedTab("VALUES")}>Waarden</div>
         </div>
             {selectedTab === "VALUES" && renderValuesTab()}
             {selectedTab === "GOALS" && renderGoalsTab()}
         </div>
     </React.Fragment>);
+}
+
+const quantityT = {
+    distance: "kilometer",
+    steps: "stappen", 
+    time: "minuten",
+    amount: "keer per dag"
+}
+
+const daysT = {
+    mo: "ma",
+    tu: "di",
+    we: "wo",
+    th: "do",
+    fr: "vr",
+    sa: "za",
+    su: "zo"
 }

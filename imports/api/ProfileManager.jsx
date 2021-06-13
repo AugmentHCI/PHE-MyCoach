@@ -1,6 +1,5 @@
 import "../db/MyCoachMethods.jsx";
-import { baselineCodes, questionnaireMetadata, questionnaireCodes, fillerQuestionCodesNew } from './questionnaireCodes.jsx';
-import { userDataLong } from "./dummydata.jsx";
+import { baselineCodes, questionnaireMetadata, questionnaireCodes, fillerQuestionCodesNew } from './questionnaireCodes.js';
 import moment from "moment";
 
 

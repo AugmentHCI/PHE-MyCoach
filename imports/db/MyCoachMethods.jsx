@@ -226,5 +226,8 @@ Meteor.methods({
             screen: screen,
             timestamp: new Date,
         });
+    },
+    'mycoachfeedback.getAllFeedback'() {
+        return MyCoachFeedbackCollection.find({}).fetch();
     }
 });

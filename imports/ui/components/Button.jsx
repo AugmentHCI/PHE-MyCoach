@@ -35,6 +35,7 @@ export default function Button(props) {
     return (
         <button className={buttonClass} 
                 onTouchStart={() => press(true)} 
+                onMouseDown={() => press(true)}
                 onClick={() => handleOnClick()} 
                 onTouchEnd={() => press(false)}
                 style={style}>

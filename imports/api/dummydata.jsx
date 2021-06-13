@@ -1,3 +1,5 @@
+import { progressData } from "./mycoachprogress";
+
 //dummy data voor één week
 //data format zoals door API wordt gegenereerd (JSON)
 export const UserData = {
@@ -10507,3 +10509,14 @@ export const userDataLong = [
         "datum": "2021-01-13T19:35:11.679"
     }
 ]
+
+export function userProgressParser() {
+    let progress = {}
+    progressData.forEach(entry => {
+        if (entry.status === "IN_PROGRESS") {
+            if (progress[entry.submoduleID]) progress[entry.submoduleID] += 1;
+            else progress[entry.submoduleID] = 1;
+        }
+    });
+    console.log(progress);
+}

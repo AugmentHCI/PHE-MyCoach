@@ -1,4 +1,4 @@
-{
+export const daily = {
     "id": 3,
     "naam": "My Daily",
     "vragen": [

@@ -1,0 +1,123 @@
+@mixin styling() {
+    background-color: var(--idewe-white);
+    border-radius: 15px;
+    border-style: none;
+    box-shadow: var(--card-shadow);
+}
+  
+/* DROPDOWN
+============================================ */
+
+.dd-wrapper {
+    display: flex;
+    min-height: 38px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+
+    .dd-header {
+        @include styling();
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        width: 100%;
+        padding: 0 20px;
+        height: 50px;
+
+        &__title {
+            font-size: 16px;
+            font-weight: 500;
+            margin: auto 0;
+        }
+
+        &__title-noselection {
+            font-weight: 500;
+            font-size: 16px;
+            color: var(--idewe-gray-light);
+            margin: auto 0;
+        }
+
+        &__action {
+            padding-top: 15px;
+        }
+    }
+
+    hr {
+        margin: 0 1em;
+    }
+
+    .dd-element-list-container {
+        z-index: 2;
+        position: absolute;
+        margin-top: 60px;
+        width: 100%;
+    }
+
+    .dd-list {
+        box-shadow: var(--card-shadow);
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        border-radius: 15px;
+        background-color: var(--idewe-white);
+        transform-origin: top right;
+
+        li {
+            list-style-type: none;
+
+            &:first-of-type {
+                > button {
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+                }
+            }
+
+            &:last-of-type > button {
+                border-bottom-left-radius: 15px;
+                border-bottom-right-radius: 15px;
+            }
+
+            button {
+                display: flex;
+                justify-content: space-between;
+                background-color: var(--idewe-white);
+                font-size: 16px;
+                padding: 10px 20px;
+                border: 0;
+                width: 100%;
+                text-align: left;
+
+                &:hover, &:focus {
+                    cursor: pointer;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+/* ANIMATION
+============================================ */
+
+.example-enter {
+    opacity: 0.01;
+    transform: scale(.85);
+  }
+  
+  .example-enter.example-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 100ms ease-out;
+  }
+  
+  .example-leave {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .example-leave.example-leave-active {
+    opacity: 0.01;
+    transform: scale(.85);
+    transition: all 100ms ease-in;
+  }

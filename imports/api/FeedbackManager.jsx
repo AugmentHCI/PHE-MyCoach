@@ -11,4 +11,11 @@ export default class FeedbackManager {
     async insertFeedback(feedback, screen) {
         await Meteor.callPromise('mycoachfeedback.insertFeedback', {userID: this.userID, feedback: feedback, screen: screen});
     }
+
+    /**
+     * Fetches all user feedback from database.
+     */
+         async getAllFeedback() {
+            return await Meteor.callPromise('mycoachfeedback.getAllFeedback', {});
+        }
 }

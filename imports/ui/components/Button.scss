@@ -8,6 +8,7 @@
     border-radius: 15px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
     transition: .1s ease-in-out;
+    align-items: center;
 
     &-inactive {
         @extend .button;

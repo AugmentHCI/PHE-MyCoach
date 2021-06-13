@@ -30,6 +30,7 @@
         "moment": "^2.29.1",
         "nivo": "^0.31.0",
         "react": "^17.0.0",
+        "react-addons-css-transition-group": "^15.6.2",
         "react-audio-player": "^0.17.0",
         "react-beautiful-dnd": "^13.0.0",
         "react-bootstrap": "^1.4.3",
@@ -40,6 +41,8 @@
         "react-scripts": "^4.0.0",
         "react-semantic-ui-range": "^0.7.1",
         "react-tinder-card": "^1.4.0",
+        "semantic-ui-react": "^2.0.3",
+        "styled-components": "^5.3.0",
         "tslib": "^1.14.1",
         "webpack": "^5.0.0-rc.6",
         "yarn": "^1.22.10"

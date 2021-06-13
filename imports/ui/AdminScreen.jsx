@@ -1,135 +1,104 @@
 import React, { useState, useEffect } from "react";
 
-import MyCoach from "./Pages/MyCoach.jsx";
 import Button from "./components/Button.jsx";
-
-import moment from "moment";
-
-/* AntDesign Components */
-import Switch from 'antd/lib/switch';
-import Select from 'antd/lib/select';
-import Collapse from 'antd/lib/collapse';
-import Radio from 'antd/lib/radio';
 
 import './AdminScreen.scss';
 
-import { userDataLong, UserData } from "../api/dummydata.jsx";
-import ProfileManager from "../api/ProfileManager.jsx";
-import { Profiel } from "../api/Profiel.js";
-import { FollowUp } from "../api/MySurvey.js";
-import { Baseline } from "../api/Voorgeschiedenis.js";
-import { parseCodes, printQuestions } from "../api/questionnaireCodes.jsx";
-
-const { Option } = Select;
-const { Panel } = Collapse;
+import { userDataLong, userProgressParser } from "../api/dummydata.jsx";
+import { parseUserQuestions, groupUserQuestions } from "../api/QuestionnaireProcessor";
+import Input from "./components/Input"
 
 export default function AdminScreen(props) {
 
-  const [myCoachData, setMyCoachData] = useState({});
+  const [sentSMSCode, toggleSentSMSCode] = useState(false);
+  const [smsCode, updateSMSCode] = useState("");
+  /* Analist token */
+  const [analistToken, setAnalistToken] = useState("");
+  const [analistMessage, setAnalistMessage] = useState(undefined);
+  /* UserIDs */
+  const [userIdsMessage, setUserIdsMessage] = useState(undefined);
+  const [userIds, setUserIds] = useState([]);
+  const [fetchCount, updateFetchCount] = useState(0);
 
-  useEffect(() => { setMyCoachData(JSON.parse(JSON.stringify(UserData)))}, []);
+  /* Data retrieval functions */
+  async function getAnalistToken() {
+    const result = await Meteor.callPromise('getAnalistToken', {smsCode: smsCode});
+    updateSMSCode("");
+    toggleSentSMSCode(false);
+    if (result.statusCode === 200 || result.response?.statusCode === 200) {
+      setAnalistToken(result.headers.authorization.split(" ")[1]);
+      setAnalistMessage({status:"success", message: "Analist-token succesvol opgehaald!"});
+    }
+    else {
+      const statusCode = result.response?.statusCode ? result.response?.statusCode : result.statusCode;
+      setAnalistMessage({status:"error", message: `Fout bij het ophalen van code [Error ${statusCode}]`});
+    }
+  }
 
-  /*
-  return (<div>
-      <ControlPanel updateData={setMyCoachData}/>
-      <div className="phone-screen" style={{transform: `scale(${952/952})`, transformOrigin: "top right"}}>
-              <MyCoach noSplash data={JSON.parse(JSON.stringify(myCoachData))}/>
+  async function getUserData() {
+    const result = await Meteor.callPromise('getUserIds', {analistToken: analistToken});
+    if (result.statusCode === 200 || result.response?.statusCode === 200) {
+      setUserIdsMessage({status:"success", message: `GebruikerIDs succesvol opgehaald! Aantal gebruikers: ${result.data.length}`});
+      setUserIds(result.data);
+    }
+    else {
+      const statusCode = result.response?.statusCode ? result.response?.statusCode : result.statusCode;
+      setUserIdsMessage({status:"error", message: `Fout bij het ophalen van gebruikerIDs [Error ${statusCode}]`});
+    }
+  }
+
+  async function fetchUserData(limit) {
+    const userIdSlice = userIds.slice(0, limit)
+    const fetchPromises = [];
+    for (const user of userIdSlice) {
+      fetchPromises.push(Meteor.callPromise('getUserData', {userId: user.gebruikerId, analistToken: analistToken})
+        .then((result) => {console.log(`Done for user ${user.gebruikerId}`); updateFetchCount(prevState => (prevState+1)); return groupUserQuestions(parseUserQuestions(result.data))})
+        .catch(error => console.log(error)))
+    }
+    Promise.all(fetchPromises).then((results) => {
+      console.log(results);
+    });
+  }
+
+  /* Render functions */
+  function renderStepOne() {
+    return (<React.Fragment>
+      <h3>Stap 1: Vraag SMS code op</h3>
+        <p style={{maxWidth:"500px"}}>Vraag eerst een SMS code op. Deze zal gebruikt worden om een data-analist token op te halen zodat je de gebruikergegevens op kan vragen.</p>
+        <Button width="300px" disabled={sentSMSCode} color="blue" center onClick={() => { Meteor.call('getSMSCode'); toggleSentSMSCode(true) }}>{ sentSMSCode ? "Verstuurd" : "Stuur SMS code"}</Button>
+    </React.Fragment>)
+  }
+
+  function renderStepTwo() {
+    return (<React.Fragment>
+      <h3>Stap 2: Vul je SMS code in</h3>
+        <p style={{maxWidth:"500px"}}>Je zou nu een SMS code moeten ontvangen op nummer +32 473 55 70 38. Vul deze code in om de data-analist token op te halen.</p>
+        <div style={{display: "flex", flexDirection:"row", maxWidth:"300px"}}>
+          <Input type="text" style={{flex: 2}} placeholder="Vul SMS code in" onChange={updateSMSCode}/>
+          <Button width="fit" style={{marginTop: "10px", marginBottom: "10px"}} color="blue" center onClick={() => getAnalistToken() }>Verstuur</Button>
         </div>
-      </div>
-  )*/
-
-
-  return (<div>
-      <ControlPanel updateData={setMyCoachData}/>
-      </div>
-  )
-}
-
-function ControlPanel(props) {
-
-  const [userData, setUserData] = useState({});
-
-  useEffect(() => { setUserData(JSON.parse(JSON.stringify(UserData))); }, []);
-
-  function handleProfileChange(value) {
-    handleChange("profile", value);
+        {analistMessage && <p className={analistMessage.status}>{analistMessage.message}</p>}
+    </React.Fragment>)
   }
 
-  function handleInteractionChange(interaction) {
-    const value = !userData.interactions[interaction];
-    handleChange("interactions", value, interaction);
+  function renderStepThree() {
+    return (<React.Fragment>
+      <h3>Stap 3: Haal gebruikergegevens op</h3>
+        <p style={{maxWidth:"500px"}}>Je kan nu alle gebruikergegevens ophalen.</p>
+        <Button width="300px" color="blue" center onClick={() => getUserData() }>Haal gegevens op</Button>
+        {userIdsMessage && <p className={userIdsMessage.status}>{userIdsMessage.message}</p>}
+        {userIds.length > 0 && <Button width="300px" color="blue" center onClick={() => fetchUserData(300) }>Verwerk gebruikers</Button>}
+        {userIds.length > 0 && fetchCount < userIds.length && <p className="info">Data opgehaald van {fetchCount} van {userIds.length} gebruikers.</p>}
+        {userIds.length > 0 && fetchCount === userIds.length && <p className="success">Data opgehaald van alle {userIds.length} gebruikers!</p>}
+    </React.Fragment>)
   }
 
-  function handleProgressChange(module, progress) {
-    let newUserData = JSON.parse(JSON.stringify(userData));
-    let moduleLength = Object.keys(newUserData.progress[module]).length;
-    for (const [submodule, status] of Object.entries(newUserData.progress[module])) {
-      if (submodule === "OVERALL" && progress === 0) {newUserData.progress[module][submodule] = "NOT_STARTED"} 
-      else if (submodule === "OVERALL" && progress < moduleLength) {newUserData.progress[module][submodule] = "IN_PROGRESS"} 
-      else if (submodule === "OVERALL" && progress === moduleLength) {newUserData.progress[module][submodule] = "COMPLETED"} 
-      else if (submodule.slice(-1) < progress) {newUserData.progress[module][submodule] = "COMPLETED"} 
-      else if (submodule.slice(-1) === progress) {newUserData.progress[module][submodule] = "IN_PROGRESS"} 
-      else if (submodule.slice(-1) > progress) {newUserData.progress[module][submodule] = "NOT_STARTED"} 
-    }
-    setUserData(newUserData);
-  }
-
-  function handleChange(id, value, subId) {
-    let newUserData = JSON.parse(JSON.stringify(userData));
-    subId ? newUserData[id][subId] = value : newUserData[id] = value;
-    setUserData(newUserData);
-  }
-
-  function renderUserData() {
-    let controlPanelHtml = [];
-    for (const [field, value] of Object.entries(userData)) {
-      switch (field) {
-        case "PROFILE":
-          controlPanelHtml.push(<div>Coaching-profiel: <Select defaultValue={value} style={{ width: 120 }} onChange={handleProfileChange}>
-          <Option value={1}>Profiel 1</Option>
-          <Option value={2}>Profiel 2</Option>
-          <Option value={3}>Profiel 3</Option>
-          <Option value={4}>Profiel 4</Option>
-          <Option value={5}>Profiel 5</Option>
-          <Option value={6}>Profiel 6</Option></Select></div>)
-          break;
-        case "RECENT_PAIN":
-          controlPanelHtml.push(<div>Recentelijk pijn gehad: <Switch checked={userData.RECENT_PAIN} onChange={() => handleChange("RECENT_PAIN", !userData.RECENT_PAIN)}></Switch></div>)
-          break;
-        case "interactions":
-          controlPanelHtml.push(<h4>Interactions</h4>)
-          for (const [interaction, didInteract] of Object.entries(userData.interactions)) 
-            { controlPanelHtml.push(<div>{interaction}: <Switch checked={didInteract} onChange={() => handleInteractionChange(interaction)}></Switch></div>) }
-          break;
-        case "progress":
-          controlPanelHtml.push(<h4>Progress</h4>)
-          let collapseHtml = [];
-          for (const [module, submodules] of Object.entries(userData.progress)) {
-            let panelHtml = [];
-            let current = userData.progress[module].OVERALL === "COMPLETED" ? 6 : 0;
-            for (const [submodule, status] of Object.entries(userData.progress[module])) {
-              if (status === "IN_PROGRESS") current = submodule.slice(-1);
-              panelHtml.push( <div><Radio value={submodule.slice(-1) === "L" ? 0 : submodule.slice(-1)}>{submodule === "OVERALL" ? "Geen": submodule}</Radio></div>);
-            }
-            panelHtml.push( <div><Radio value={Object.keys(userData.progress[module]).length}>Alle</Radio></div>);
-            collapseHtml.push(<Panel header={module}><Radio.Group onChange={(e) => handleProgressChange(module, e.target.value)} value={current}>{panelHtml}</Radio.Group></Panel>) 
-          }
-          controlPanelHtml.push(<div style={{width:"300px"}}><Collapse accordion>{collapseHtml}</Collapse></div>);
-          break;
-      }
-    }
-    return controlPanelHtml;
-  }
-
-
-  return (<div className="control-panel" width={"100%"}>
+  return (<div className="control-panel">
       <h1>MyCoach - Settings</h1>
-      {renderUserData()}
-      <Button width={"fit"} onClick={() => props.updateData(JSON.parse(JSON.stringify(userData)))}>Pas toe</Button>
-      <Button width={"fit"} onClick={async () => {
-        //parseCodes([{questionnaire: Profiel, name: "profiel"}, {questionnaire: Baseline, name: "baseline"}, {questionnaire: FollowUp, name: "followup"}])
-        const time = "Fri Apr 09 2021 02:00:00 GMT+0200"
-        console.log(moment(time).format("YYYY-MM-DD"));
-      }}>Test</Button>
+      <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
+        { renderStepOne() }
+        { renderStepTwo() }
+        { renderStepThree() }
+      </div>
     </div>)
 }
