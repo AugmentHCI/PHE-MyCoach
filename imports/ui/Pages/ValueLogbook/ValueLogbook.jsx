@@ -12,8 +12,6 @@ import QuestionManager from '../../../api/QuestionManager';
 import Icon from '../../components/Illustrations/Icon';
 import Illustration from '../../components/Illustrations/Illustration';
 import Input from '../../components/Input';
-import Slider from '../../components/Slider';
-import { FormControlLabel, RadioGroup, Radio } from '@material-ui/core';
 import GoalSettingManager from '../../../api/GoalSettingManager';
 
 

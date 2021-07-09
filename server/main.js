@@ -52,6 +52,16 @@ Meteor.methods({
 
     this.unblock();
     return HTTP.call("GET", url, { headers: { "X-KEY": Meteor.settings.XKEY, "Authorization": `Bearer ${analistToken}` } });
+  },
+
+  'getFitBitData'({userId, analistToken, from="start", to="now"}) {
+    const env = "connector.idewe.be";
+    const fromDate = from !== "start" ? from : "2020-01-01"  ;
+    const toDate =   to   !== "now"   ? to   : moment(new Date()).format("YYYY-MM-DD")  ;
+    const url = `https://${env}/healthempower/phe/api/fit-data?van=${fromDate}&tot=${toDate}&gebruiker=${userId}`;
+
+    this.unblock();
+    return HTTP.call("GET", url, { headers: { "X-KEY": Meteor.settings.XKEY, "Authorization": `Bearer ${analistToken}` } });
   }
 });
 
