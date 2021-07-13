@@ -7,9 +7,12 @@ import jwt_decode from "jwt-decode";
 import Icon from '../../components/Illustrations/Icon';
 import NavigationBar from '../../components/NavigationBar';
 import Input from '../../components/Input';
+import Dropdown from '../../components/Dropdown';
 import AppModal from '../../components/AppModal';
 import moment from 'moment';
 import ActivityLogbookManager from '../../../api/ActivityLogbookManager';
+import GoalSettingManager from '../../../api/GoalSettingManager';
+
 
 export default function PainLogbook() {
 
@@ -17,6 +20,7 @@ export default function PainLogbook() {
     const userId    = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     const userToken = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : "demo";
     const activityLogbookManager = new ActivityLogbookManager(userId);
+    const goalSettingManager = new GoalSettingManager(userId);
 
     const [selectedDay, setSelectedDay] = useState(moment(new Date()));
     const [weekOffset, updateWeekOffset] = useState(0);
@@ -33,8 +37,11 @@ export default function PainLogbook() {
     const [endTimeMins,   updateEndTimeMins]   = useState("");
     const [intensity, updateIntensity]         = useState("LIGHT");
     const [editingId, updateEditingId]         = useState("");
+    const [selectedGoal, updateSelectedGoal]   = useState({});
 
     const [activities, setActivities] = useState([]);
+    const [goals, setGoals] = useState([]);
+    const [fullGoals, setFullGoals] = useState([]);
     const filteredActivities = activities.filter(activity => moment(activity.date).isSame(selectedDay, "day"));
 
     function generateDays() {
@@ -55,7 +62,11 @@ export default function PainLogbook() {
 
     function renderActivities() {
         //if (loading) return (<div><img src="/illustrations/loading.gif" width="50px" style={{}}/></div>);
-        return (<FadeIn>{activities.sort((act1, act2) => toMinutes(act1.startTime) > toMinutes(act2.startTime)).map(activity => {
+        if (filteredActivities.length === 0) return <React.Fragment/>
+        return (<FadeIn>
+            <div className="planned-activities">
+            <h2>Je planning</h2>
+            {activities.sort((act1, act2) => toMinutes(act1.startTime) > toMinutes(act2.startTime)).map(activity => {
             if (moment(activity.date).isSame(selectedDay, "day")) return (<Activity 
                 key={activity._id} 
                 id={activity._id}
@@ -65,9 +76,11 @@ export default function PainLogbook() {
                 intensity={activity.intensity}
                 startTime={activity.startTime}
                 toggleDone={toggleDone}
+                goal={activity.goal ? JSON.parse(activity.goal) : undefined}
                 openActivityEditor={openActivityEditor}
                 endTime={activity.endTime}/>)
-        })}</FadeIn>)
+        })}
+        </div></FadeIn>)
     }
 
     async function fetchActivities() {
@@ -77,10 +90,22 @@ export default function PainLogbook() {
         setLoading(false);
     }
 
+    async function fetchGoals() {
+        let fetchedGoals = await goalSettingManager.getUserGoals();
+        let abbreviatedGoals = [...fetchedGoals].map(goal => {return {id: goal._id, value: goal.title}});
+        abbreviatedGoals.unshift({id:null, value: "Geen"});
+        setGoals(abbreviatedGoals);
+        setFullGoals(fetchedGoals);
+    }
+
     useEffect(() => {
         setDays(generateDays(weekOffset+1));
         fetchActivities();
     }, [selectedDay]);
+
+    useEffect(() => {
+        fetchGoals();
+    }, []);
 
     function switchWeek(direction) {
         if (direction === "previous") {
@@ -105,25 +130,27 @@ export default function PainLogbook() {
         updateStartTimeHour(""); updateStartTimeMins(""); updateEndTimeHour(""); updateEndTimeMins("");
         updateIntensity("LIGHT");
         updateActivityTitle("");
+        updateSelectedGoal({});
         updateEditingId("");
     }
 
     async function addActivity() {
         const startTime = startTimeHour + ":" + startTimeMins;
         const endTime = endTimeHour + ":" + endTimeMins;
-        await activityLogbookManager.insertActivity(selectedDay.toDate(), startTime, endTime, activityTitle, intensity);
+        await activityLogbookManager.insertActivity(selectedDay.toDate(), startTime, endTime, activityTitle, intensity, JSON.stringify(selectedGoal));
         fetchActivities();
     }
 
     async function updateActivity() {
         const startTime = startTimeHour + ":" + startTimeMins;
         const endTime = endTimeHour + ":" + endTimeMins;
-        await activityLogbookManager.updateActivity(editingId, activityTitle, startTime, endTime, intensity);
+        await activityLogbookManager.updateActivity(editingId, activityTitle, startTime, endTime, intensity, JSON.stringify(selectedGoal));
         toggleShowModal(false);
         updateStartTimeHour(""); updateStartTimeMins(""); updateEndTimeHour(""); updateEndTimeMins("");
         updateIntensity("LIGHT");
         updateActivityTitle("");
         updateEditingId("");
+        updateSelectedGoal({});
         fetchActivities();
     }
 
@@ -135,9 +162,21 @@ export default function PainLogbook() {
         updateIntensity("LIGHT");
         updateActivityTitle("");
         updateEditingId("");
+        updateSelectedGoal({});
     }
 
-    function openActivityEditor(activityId) {
+    function checkActivityInputValidity() {
+        if (!activityTitle || !intensity || !startTimeHour || !startTimeMins || !endTimeHour || !endTimeMins) return false;
+        if (startTimeHour * 60 + startTimeMins >= endTimeHour * 60 + endTimeMins) return false;
+        return true;
+    }
+
+    function openActivityEditor(activityId, isGoal=false, goal=undefined) {
+        if (isGoal) {
+            updateSelectedGoal(goal);
+            toggleShowModal(true);
+            return;
+        }
         const selectedActivity = activities.find(act => act._id === activityId);
         updateStartTimeHour(selectedActivity.startTime.split(":")[0]); 
         updateStartTimeMins(selectedActivity.startTime.split(":")[1]); 
@@ -145,6 +184,8 @@ export default function PainLogbook() {
         updateEndTimeMins(selectedActivity.endTime.split(":")[1]);
         updateIntensity(selectedActivity.intensity);
         updateActivityTitle(selectedActivity.title);
+        if (selectedActivity.goal) updateSelectedGoal(JSON.parse(selectedActivity.goal)) 
+        else updateSelectedGoal({});
         updateEditingId(activityId);
         toggleShowModal(true);
     }
@@ -194,25 +235,54 @@ export default function PainLogbook() {
         return Math.round(aggregate.sum / aggregate.total * 100, 2);
     }
 
+    function renderPlanActivities() {
+        const day = moment(selectedDay).locale('en').format('dddd').slice(0, 2).toLowerCase();
+        const selectedDayGoals = [...fullGoals].filter(goal => {
+            const selectedDays = Object.keys(JSON.parse(goal.days)).filter(function(d){return JSON.parse(goal.days)[d]});
+            if (!selectedDays.includes(day)) return false;
+            for (const act of filteredActivities) {
+                const activityGoal = act.goal ? JSON.parse(act.goal) : undefined;
+                if (activityGoal && activityGoal?.id === goal._id) { console.log(`${activityGoal?.id} and ${goal._id} match`); return false;}
+            }
+            return true;
+        });
+        console.log(selectedDayGoals);
+        if (selectedDayGoals.length === 0) return <React.Fragment/>
+        return (<div className="planned-activities">
+            <h2>Plan deze activiteiten in</h2>
+            {selectedDayGoals.map(goal => {return (<Activity 
+                key={goal._id} 
+                id={goal._id}
+                done={false}
+                manager={activityLogbookManager}
+                title={goal.title} 
+                toggleDone={toggleDone}
+                isGoal
+                openActivityEditor={openActivityEditor}/>)})}
+            <hr className="break"/>
+        </div>)
+    }
+
     function renderAddActivityModal() {
-        if (!AppModal) return <React.Fragment/>
+        if (!showModal) return <React.Fragment/>
         return (<AppModal 
                 show={showModal} 
                 title="Nieuwe activiteit"
                 defaultOption={editingId ? "Pas aan" : "Voeg toe"}
+                disabledDefault={!checkActivityInputValidity()}
                 notifyParent={() => saveActivity()}
                 backOption="Annuleer"
                 notifyBack={() => closeActivityModal()}>
             <Input type="text" value={activityTitle} onChange={updateActivityTitle} placeholder="Naam activiteit" style={{width:"100%"}}/>
             <div className="activity-input-row">
                 <Icon image="time" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>
-                <Input type="text" value={startTimeHour} onChange={updateStartTimeHour} id="startHour" placeholder="08" style={{width:"50px"}} focusNextAfter={2} focusNextId="startMinutes"/>
+                <Input type="tel" value={startTimeHour} onChange={updateStartTimeHour} id="startHour" placeholder="08" style={{width:"55px"}} between={[0, 23]} maxLength={2}/>
                 <div style={{marginRight:"5px"}}>:</div>
-                <Input value={startTimeMins} onChange={updateStartTimeMins} id="startMinutes" type="text" placeholder="30" style={{width:"50px"}} focusNextAfter={2} focusNextId="endHour"/> 
+                <Input type="tel" value={startTimeMins} onChange={updateStartTimeMins} id="startMinutes" placeholder="30" style={{width:"55px"}} between={[0, 59]} maxLength={2}/> 
                 <div style={{marginRight:"10px"}}>-</div>
-                <Input value={endTimeHour} onChange={updateEndTimeHour} id="endHour" type="text" placeholder="10" style={{width:"50px"}} focusNextAfter={2} focusNextId="endMins"/>
+                <Input type="tel" value={endTimeHour} onChange={updateEndTimeHour} id="endHour" placeholder="10" style={{width:"55px"}} between={[0, 23]} maxLength={2}/>
                 <div style={{marginRight:"5px"}}>:</div>
-                <Input value={endTimeMins} onChange={updateEndTimeMins} id="endMins" type="text" placeholder="00" style={{width:"50px"}}/> 
+                <Input type="tel" value={endTimeMins} onChange={updateEndTimeMins} id="endMins" placeholder="00" style={{width:"55px"}} between={[0, 59]} maxLength={2}/> 
             </div>
             <div className="activity-input-row">
                 <Icon image="lifting" width="20px" color="blue-dark" style={{marginRight: "10px"}}/>
@@ -222,6 +292,13 @@ export default function PainLogbook() {
                     <Icon image="sweat-moderate" width="18px" color={intensity==="MODERATE" ? "white" : "blue-dark"} style={{marginBottom:0}}/> Matig</button>
                 <button className={"intensity-btn-heavy" + (intensity==="HEAVY" ? "-selected" : "")} onClick={() => updateIntensity("HEAVY")}>
                     <Icon image="sweat-heavy" width="18px" color={intensity==="HEAVY" ? "white" : "blue-dark"} style={{marginBottom:0}}/> Zwaar</button>
+            </div>
+            <div className="activity-input-row">
+                <Icon image="goal" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>
+                <Dropdown defaultText={"Kies een doel (optioneel)"} defaultItems={Object.keys(selectedGoal).length > 0 ? [selectedGoal] :  []} items={goals} style={{flex: 2}} onChange={(goal) => {
+                    if (!goal[0].id ) updateSelectedGoal({})
+                    else { updateSelectedGoal(goal[0]) }
+                }}/>
             </div>
         </AppModal>)
     }
@@ -241,15 +318,17 @@ export default function PainLogbook() {
                     const isSelected = selectedDay.isSame(days[index], "day");
                     const isDisabled = days[index].isAfter(moment(new Date()));
                     const buttonClass = "activity-day" + (isSelected ? "-selected" : (isDisabled ? "-disabled" : ""));
+                    const dayActivities = activities.filter(activity => moment(activity.date).isSame(days[index], "day"));
                     return (<div 
                         key={day} 
-                        className={buttonClass}
+                        className={buttonClass + (dayActivities.length > 0 ? (isSelected ? " bordered-selected" : " bordered") : "")}
                         onClick={() => setSelectedDay(days[index])}>
                         {daysT[day][0].toUpperCase() + daysT[day][1]}<br/>{days[index].format("D")}
                     </div>)})}
             </div>
             <div>
                 {renderInformationCard()}
+                {renderPlanActivities()}
                 {renderActivities()}
             </div>
             <div className="activity-add" onClick={() => toggleShowModal(prevState => !prevState)}>
@@ -261,17 +340,23 @@ export default function PainLogbook() {
 
 function Activity(props) {
     return (<div className={"activity" + (props.done ? "-done" : "")}>
-        <div className="activity-content" onClick={() => props.openActivityEditor(props.id)}>
+        <div className="activity-content" onClick={() => props.openActivityEditor(props.id, props.isGoal, {id: props.id, value:props.title})}>
             <div className="activity-header">
                 <div className="activity-title">{props.title}</div>
-                <div className={"activity-intensity-" + props.intensity.toLowerCase()}>
-                    <Icon image={"sweat-"+props.intensity.toLowerCase()} style={{margin:"0 10px 0 0"}} color="white" width={intensityIconWidth[props.intensity]} />{intensityT[props.intensity]}</div>
             </div>
-            <div className="activity-time">{props.startTime} - {props.endTime}</div>
+            <div style={{display:"flex"}}>
+                {props.intensity && <div className={"activity-intensity-" + props.intensity.toLowerCase()}>
+                        <Icon image={"sweat-"+props.intensity.toLowerCase()} style={{margin:"0 10px 0 0"}} color="white" width={intensityIconWidth[props.intensity]} />{intensityT[props.intensity]}
+                </div>}
+                {(props.goal && Object.keys(props.goal).length > 0) && <div className="activity-goal"> <Icon image={"goal"} style={{margin:"0 10px 0 0"}} color="white" width={"12px"} /> {props.goal.value} </div>}
+            </div>
+            { props.startTime && props.endTime && <div className="activity-time">{props.startTime} - {props.endTime}</div> }
         </div>
-        <div className="activity-toggle">
-            <Input type="checkbox" value={props.done} onChange={() => props.toggleDone(props.id, !props.done)}/>
-        </div>
+        {!props.isGoal && <div className="activity-toggle">
+            Klaar
+            <Input type="checkbox" value={props.done} style={{marginTop:"3px"}} onChange={() => props.toggleDone(props.id, !props.done)}/>
+        </div>}
+        {props.isGoal && <div className="activity-toggle" onClick={() => props.openActivityEditor(props.id, props.isGoal, {id: props.id, value:props.title})}> <Icon image="next" color="blue" style={{marginTop:"3px"}}/> </div>}
     </div>)
 }
 

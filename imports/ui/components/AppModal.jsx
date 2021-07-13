@@ -13,6 +13,7 @@ const T = i18n.createComponent("Common");
 export default function AppModal(props) {
 
   function handleDefault() {
+    if (props.disabledDefault) return;
     if (props.notifyParent) props.notifyParent(true);
   }
 
@@ -33,7 +34,7 @@ export default function AppModal(props) {
         {!props.backOption && <Button color="blue" center onClick={handleDefault}>{defaultOption}</Button>}
         {props.backOption && <React.Fragment>
           <Button color="gray-light" width="45%" center onClick={handleBack} style={{marginRight:"10px"}}>{props.backOption}</Button>
-          <Button color={props.defaultColor ? props.defaultColor : "blue"} width="45%" center onClick={handleDefault}>{defaultOption}</Button>
+          <Button color={props.defaultColor ? props.defaultColor : (props.disabledDefault ? "gray-light" : "blue")} width="45%" center onClick={handleDefault}>{defaultOption}</Button>
         </React.Fragment>}
       </Modal.Footer>
     </Modal>

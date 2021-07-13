@@ -1,17 +1,22 @@
 .activitylogbook {
     padding-top: 75px;
+    padding-bottom: 70px;
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .activity-days {
     display: flex;
     margin-bottom: 20px;
+    padding: 0 .75em;
+    grid-row-gap: .75em;
+    gap: 0.75em;
 }
 
 .activity-day {
-    width: 10%;
-    margin: auto;
-    height: 0;
-    padding-bottom: 10%;
+    display: flex;
+    flex: 1;
+    height: 40px;
     border-radius: 50%;
     background-color: var(--idewe-white);
     color: var(--idewe-blue);
@@ -19,6 +24,7 @@
     font-weight: 500;
     text-align: center;
     justify-content: center;
+    align-items: center;
     line-height: 16px;
     box-shadow: var(--card-shadow);
     font-size: 12px;
@@ -33,6 +39,18 @@
         @extend .activity-day;
         background-color: var(--idewe-gray-light);
         color: var(--idewe-white);
+    }
+}
+
+.bordered {
+    border: 3px solid var(--idewe-blue);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+
+    &-selected {
+        @extend .bordered;
+        border: 3px solid var(--idewe-blue-dark-tint4);
     }
 }
 
@@ -67,12 +85,16 @@
 }
 
 .activity-content {
-    flex: 2;
+    flex: 4;
 }
 
 .activity-toggle {
     flex: 1;
     display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--idewe-blue);
     justify-content: center;
     align-items: center;
 }
@@ -83,7 +105,7 @@
     font-size: 18px;
 }
 
-.activity-time{
+.activity-time {
     font-weight: 500;
     color: var(--idewe-gray-dark);
     font-size: 14px;
@@ -95,7 +117,6 @@
     font-size: 12px;
     padding: 5px 10px;
     border-radius: 50px;
-    margin-left: 10px;
     margin-top: 3px;
     display: flex;
     align-items: center;
@@ -117,6 +138,23 @@
     }
 }
 
+.activity-goal {
+    font-weight: 500;
+    color: var(--idewe-white);
+    background-color: var(--idewe-blue);
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 50px;
+    margin-left: 10px;
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    height: 22px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .activity-add {
     background-color: var(--idewe-blue);
     display: flex;
@@ -128,7 +166,7 @@
     border-radius: 50%;
     position: absolute;
     bottom: 25px;
-    right: 25px;
+    right: 15px;
 }
 
 .activity-input-row {
@@ -250,5 +288,13 @@
 .description {
     display: inline;
     font-weight: bold;
+    color: var(--idewe-blue-dark);
+}
+
+.planned-activities h2 {
+    font-family: var(--main-font);
+    font-size: 18px;
+    margin-left: 30px;
+    margin-top: 10px;
     color: var(--idewe-blue-dark);
 }

@@ -1,5 +1,6 @@
 input[type='text'],
-input[type='number'] {
+input[type='number'],
+input[type='tel'] {
     height: 50px;
     border: none;
     width: 100px;
@@ -33,6 +34,10 @@ input[type='number'] {
         outline-width: 0 !important;
         outline: none !important;
     }
+}
+
+.red-outline {
+  border: 2px solid var(--idewe-red) !important;
 }
 
 

@@ -9,7 +9,7 @@ export const shortcuts = {
         }
     },
     "ACTIVITYLOGBOOK": {
-        icon: "writing",
+        icon: "calendar",
         link: "activitylogbook",
         translation: {
             "nl-BE": "Bekijk je activiteitenlogboek",
@@ -27,7 +27,7 @@ export const shortcuts = {
         }
     },
     "VALUES": {
-        icon: "feather",
+        icon: "star",
         link: "values",
         translation: {
             "nl-BE": "Mijn waarden en doelen",

@@ -72,7 +72,7 @@ export default function NewGoalScreen() {
                 <p>Geef je doel ook een korte beschrijving:</p>
                 <Input type="text" placeholder="Beschrijf kort je doel" style={{width:"100%"}} value={goalDescription} onChange={updateGoalDescription}/>
                 <p>Kies een waarde waar jouw doel bij aansluit. Je kan er meerdere aanduiden indien van toepassing.</p>
-                <Dropdown defaultText={"Kies een waarde"} defaultItems={goalValues} multiselect items={values} style={{flex: 2}} onChange={updateGoalValues}></Dropdown>
+                <Dropdown defaultText={"Kies een waarde"} defaultItems={goalValues} multiselect items={values} style={{flex: 2}} onChange={updateGoalValues}/>
                 <hr/>
                 <h3>Kwantificeer je doel</h3>
                 Probeer je doel te kwantificeren zodat je er naartoe kunt streven. Dit helpt je ook om je doel op te bouwen de komende weken.
