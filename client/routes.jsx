@@ -3,26 +3,92 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { mount } from 'react-mounter';
 
 import App              from '../imports/ui/App.jsx';
-import MyProgress       from '../imports/ui/Pages/MyProgress.jsx';
-import MyCoach          from '../imports/ui/Pages/MyCoach.jsx';
-import ModuleParser     from '../imports/ui/Pages/Modules/ModuleParser.jsx';
-import SubmoduleParser  from '../imports/ui/Pages/Modules/SubmoduleParser.jsx';
+import MyProgress       from '../imports/ui/pages/MyProgress.jsx';
+import MyCoach          from '../imports/ui/pages/MyCoach.jsx';
+import ModuleParser     from '../imports/ui/pages/modules/ModuleParser.jsx';
+import SubmoduleParser  from '../imports/ui/pages/modules/SubmoduleParser.jsx';
 import AdminScreen      from '../imports/ui/AdminScreen.jsx';
-import AdminSettings    from '../imports/ui/Pages/AdminSettings.jsx';
+import AdminSettings    from '../imports/ui/pages/AdminSettings.jsx';
 /* Logbooks */
-import PainLogbook      from '../imports/ui/Pages/PainLogbook/PainLogbook.jsx';
-import PainLogbookEntry from '../imports/ui/Pages/PainLogbook/PainLogbookEntry.jsx';
-import PainLogbookDetail from '../imports/ui/Pages/PainLogbook/PainLogbookDetail.jsx';
-import ActivityLogbook  from '../imports/ui/Pages/ActivityLogbook/ActivityLogbook.jsx';
-import ValueLogbook from '../imports/ui/Pages/ValueLogbook/ValueLogbook.jsx';
-import NewGoalScreen from '../imports/ui/Pages/ValueLogbook/NewGoalScreen';
-import FeedbackScreen from '../imports/ui/Pages/FeedbackScreen.jsx';
+import PainLogbook      from '../imports/ui/pages/PainLogbook/PainLogbook.jsx';
+import PainLogbookEntry from '../imports/ui/pages/PainLogbook/PainLogbookEntry.jsx';
+import PainLogbookDetail from '../imports/ui/pages/PainLogbook/PainLogbookDetail.jsx';
+import ActivityLogbook  from '../imports/ui/pages/ActivityLogbook/ActivityLogbook.jsx';
+import ValueLogbook from '../imports/ui/pages/ValueLogbook/ValueLogbook.jsx';
+import NewGoalScreen from '../imports/ui/pages/ValueLogbook/NewGoalScreen';
+import FeedbackScreen from '../imports/ui/pages/FeedbackScreen.jsx';
+/* User study */
+import PainLogbookHybrid from '../imports/ui/pages/userstudy/PainLogbookHybrid.jsx';
+import QuestionnairePage from '../imports/ui/pages/userstudy/QuestionnairePage';
+import PainLogbookTextual from '../imports/ui/pages/userstudy/PainLogbookTextual.jsx';
+import PainLogbookVisual from '../imports/ui/pages/userstudy/PainLogbookVisual.jsx';
+import Introduction from '../imports/ui/pages/userstudy/Introduction.jsx';
+import Information from '../imports/ui/pages/userstudy/Information.jsx';
+import Explanation from '../imports/ui/pages/userstudy/Explanation.jsx';
+import StudyFlow from '../imports/ui/pages/userstudy/StudyFlow.jsx';
+import Conclusion from '../imports/ui/pages/userstudy/Conclusion.jsx';
+import ThankYou from '../imports/ui/pages/userstudy/ThankYou.jsx';
 
 
 FlowRouter.route('/', {
   name: 'Admin',
   action(){ mount( App, { content: <AdminScreen/> })}
 });
+
+/*
+  USER STUDY ROUTES
+*/
+
+FlowRouter.route('/mycoach/userstudy/introduction', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <Introduction /> })}
+});
+
+FlowRouter.route('/mycoach/userstudy/information', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <Information /> })}
+});
+
+FlowRouter.route('/mycoach/userstudy/explanation', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <Explanation /> })}
+});
+
+FlowRouter.route('/mycoach/userstudy/studyflow', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <StudyFlow /> })}
+});
+
+FlowRouter.route('/mycoach/userstudy/textual', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <PainLogbookTextual /> })}
+});
+
+FlowRouter.route('/mycoach/userstudy/visual', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <PainLogbookVisual /> })}
+});
+
+FlowRouter.route('/mycoach/userstudy/hybrid', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <PainLogbookHybrid /> })}
+});
+
+FlowRouter.route('/mycoach/userstudy/questionnaire/:type', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <QuestionnairePage /> })}
+});
+
+FlowRouter.route('/mycoach/userstudy/conclusion', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <Conclusion /> })}
+});
+
+FlowRouter.route('/mycoach/userstudy/thankyou', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <ThankYou /> })}
+});
+
 
 /*
   MY COACH ROUTES
@@ -52,6 +118,7 @@ FlowRouter.route('/:language/mycoach/:token/painlogbook/newentry', {
   name: 'PainLogbook',
   action(){ mount( App, { content: <PainLogbookEntry /> })}
 });
+
 
 FlowRouter.route('/:language/mycoach/:token/painlogbook/:id', {
   name: 'PainLogbook',

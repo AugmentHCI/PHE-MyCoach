@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText, ChatbubbleInputSummary, ChatbubbleRecommendation } from '../../components/Chatbubble.jsx';
-import NavigationBar from '../../components/NavigationBar';
+import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText, ChatbubbleTextualExplanation, ChatbubbleRecommendation } from '../../components/Chatbubble.jsx';
 
-import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies, options} from "./PainLogbookData.js";
-
-import jwt_decode from "jwt-decode";
+import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies, options} from "./PainLogbookData_Textual";
 
 import RuleEngine from "../../../api/RuleEngine.jsx";
-import PainLogbookManager from '../../../api/PainLogbookManager.jsx';
 
 import PainEducationScript from '../modules/ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from '../modules/ModuleScripts/ThoughtsEmotionsScript.js';
@@ -17,88 +13,14 @@ import AppModal from '../../components/AppModal.jsx';
 import Illustration from '../../components/Illustrations/Illustration.jsx';
 import PillButton from '../../components/PillButton.jsx';
 
+import "./UserStudyStyles.scss";
 
-const testInputs = [
-    {
-      "level4": "EMOTION-EXHAUSTED",
-      "level3": "FATIGUE",
-      "level2": "NEGATIVE",
-      "level1": "EMOTION"
-    },
-    {
-      "level4": "EMOTION-ANNOYED",
-      "level3": "ANGER",
-      "level2": "NEGATIVE",
-      "level1": "EMOTION"
-    },
-    {
-      "level4": "EMOTION-ANGRY",
-      "level3": "ANGER",
-      "level2": "NEGATIVE",
-      "level1": "EMOTION"
-    },
-    {
-      "level4": "THOUGHT-CAUSE-NEG-1",
-      "level3": "CAUSE",
-      "level2": "NEGATIVE",
-      "level1": "THOUGHT",
-      "codes": [
-        "TIT"
-      ],
-      "synonyms": [
-        "kapot",
-        "versleten"
-      ]
-    },
-    {
-      "level4": "THOUGHT-CAUSE-NEG-3",
-      "level3": "CAUSE",
-      "level2": "NEGATIVE",
-      "level1": "THOUGHT",
-      "codes": [
-        "TIT"
-      ],
-      "synonyms": [
-        "versleten",
-        "slijt"
-      ]
-    },
-    {
-      "level4": "REACTION-NEG-2",
-      "level3": "",
-      "level2": "NEGATIVE",
-      "level1": "REACTION",
-      "codes": [
-        "TIR",
-        "ANXIOUS",
-        "DEPRESSED"
-      ],
-      "synonyms": [
-        "paniek"
-      ]
-    },
-    {
-      "level4": "REACTION-NEG-4",
-      "level3": "",
-      "level2": "NEGATIVE",
-      "level1": "REACTION",
-      "codes": [
-        "TIR",
-        "ANXIOUS"
-      ],
-      "synonyms": [
-        "stop",
-        "alles"
-      ]
-    }
-]
 
-export default function PainLogbookEntry() {
+export default function PainLogbookTextual() {
 
     /* States and Constants */
     const ruleEngine = new RuleEngine(rules);
-    const painLogbookManager = new PainLogbookManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
-    const language  = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
+    const language  = "nl-BE";
     /* Recommendations */
     const [matchedRecommendations, updateMatchedRecommendations] = useState([]);
     const [currentRecommendation, updateCurrentRecommendation] = useState(0);
@@ -110,44 +32,6 @@ export default function PainLogbookEntry() {
     const [tempMessageQueue, updateTempMessageQueue] = useState([]);
     /* User input */
     const [userInput, updateUserInput] = useState([]);
-
-    function computeBars(inputs) {
-        let userCodes  = {};
-        /* Compute user frequencies */
-        inputs.forEach(input => {
-            if (input.level1 === "EMOTION" && Object.keys(codes).includes(input.level3)) {
-                userCodes[[input.level3]] = userCodes[[input.level3]] ? userCodes[[input.level3]]+2 : 2 ;
-            }
-            if (input.codes) input.codes.forEach(code => {
-                userCodes[[code]] = Object.keys(userCodes).includes(code) ? userCodes[[code]]+1 : 1 ;
-            });
-        });
-        /* Compute user relative frequencies */
-        const userTotal = inputs.reduce((total, input) => (input.level1) ? ((input.level1 === "EMOTION") ? total + 2 : total + 1) : total , 0);
-        let relUserCodes = {};
-        Object.keys(userCodes).forEach(code => {
-            relUserCodes[[code]] = userCodes[code] / userTotal;
-        });
-        /* Compute user total frequencies */
-        const codeFreqs = codeFrequencies();
-        let totUserCodes = {};
-        Object.keys(userCodes).forEach(code => {
-            totUserCodes[[code]] = userCodes[code] / codeFreqs[code];
-        });
-        /* Compute avg between both frequencies */
-        let userFrequencies = {};
-        Object.keys(userCodes).forEach(code => {
-            userFrequencies[code] = (totUserCodes[code] + relUserCodes[code]) / 2;
-        });
-        /* Sort and scale user inputs */
-        let codesArray = Object.keys(userFrequencies).map(key => [key, userFrequencies[key]] );
-        codesArray.sort((first, second) => second[1] - first[1]);
-        const max = codesArray[0][1];
-        for (let i = 0; i < codesArray.length; i++) {
-            codesArray[i][1] = codesArray[i][1] / max ; 
-        }
-        return codesArray;
-    }
 
     /* Conversation Logic */
 
@@ -162,25 +46,35 @@ export default function PainLogbookEntry() {
             case "explainRecommendation":
                 setShowExplanationModal(true);
                 break;
+            case "noneRelevant":
             case "saveAndClose":
-                saveLog();
-                history.back();
+                Meteor.callPromise('userstudy.insert', {
+                    mail: localStorage.getItem('mail'), 
+                    settings: localStorage.getItem('studysettings'), 
+                    type: 'action-textual', 
+                    content: actionType});
+                Meteor.callPromise('userstudy.insert', {
+                    mail: localStorage.getItem('mail'), 
+                    settings: localStorage.getItem('studysettings'), 
+                    type: 'recommendations-textual', 
+                    content: JSON.stringify(matchedRecommendations)});
+                Meteor.callPromise('userstudy.insert', {
+                    mail: localStorage.getItem('mail'), 
+                    settings: localStorage.getItem('studysettings'), 
+                    type: 'inputs-textual', 
+                    content: JSON.stringify(userInput)});
+                if (actionType === "saveAndClose") {
+                    Meteor.callPromise('userstudy.insert', {
+                        mail: localStorage.getItem('mail'), 
+                        settings: localStorage.getItem('studysettings'), 
+                        type: 'selected-textual', 
+                        content: currentRecommendation + "-" + JSON.stringify(matchedRecommendations[currentRecommendation])});
+                }
+                FlowRouter.go(`/mycoach/userstudy/questionnaire/textual`);
                 break;
             default:
                 console.log(`Action ${actionType} not implemented.`)
-        }
-    }
-
-    function saveLog() {
-        let userLog = {THOUGHT: [], REACTION: [], EMOTION: [], CONTEXT: undefined, INTENSITY: undefined, ACTIVITY: undefined}
-        userInput.forEach(input => {
-            if (input.level1) userLog[input.level1].push(input.level4);
-            else { userLog[input.category] = input.content }
-        });
-        Object.keys(userLog).forEach(key => {
-            if (["THOUGHT", "REACTION", "EMOTION"].includes(key)) { userLog[key] = userLog[key].join("|") }
-        })
-        painLogbookManager.addPainLog(userLog.CONTEXT, userLog.ACTIVITY, userLog.INTENSITY, userLog.THOUGHT, userLog.EMOTION, userLog.REACTION);
+            }
     }
 
     function initializeMessages() {
@@ -239,7 +133,7 @@ export default function PainLogbookEntry() {
                 /* Update state, but use local variable as state update happens asynchronously */
                 let recommendations = matchedRecommendations.length === 0 ? ruleEngine.matchRules(userInput) : matchedRecommendations ;
                 if (matchedRecommendations.length === 0) updateMatchedRecommendations(recommendations);
-                messages.push(<ChatbubbleInputSummary key={"message-recommendation-inputs"} typeLength={recommendationIndex > 0 ? 0 : 2000} inputs={computeBars(userInput)} highlights={recommendations[recommendationIndex].codeMarkings}/>);
+                messages.push(<ChatbubbleTextualExplanation key={"message-recommendation-1"} explanation={recommendations[currentRecommendation].explanation}/>);
                 const recommendationText = " Wil je hiervoor wat tips bekijken in de module '" + moduleTranslation[recommendations[recommendationIndex].module]+ "'?";
                 /*messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-1"} typeLength={2000} own={false}>{recommendations[recommendationIndex].explanation}</Chatbubble>) */
                 /*
@@ -346,10 +240,10 @@ export default function PainLogbookEntry() {
         }
 
         return (<AppModal
-            backOption="Sluit" 
+            backOption="Terug" 
             notifyBack={() => setShowModuleModal(false)} 
-            notifyParent={() => {saveLog(); FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/module/${recModule}/${recSubmodule}?goPainlogbookOnBack=true`)}}
-            defaultOption="Open" 
+            notifyParent={() => {action("saveAndClose");}}
+            defaultOption="Akkoord" 
             defaultColor="blue"
             noPadding
             show={showModuleModal}>
@@ -366,7 +260,7 @@ export default function PainLogbookEntry() {
                 </div>
                 {submodule.description}
                 <hr/>
-                Jouw pijnlog wordt opgeslagen en je wordt doorverwezen naar dit onderdeel.
+                Klik op 'Akkoord' indien je akkoord gaat met de aanbeveling. Hiermee rond jij je pijnlogboek af.
             </div>
         </AppModal>)
     }
@@ -393,14 +287,23 @@ export default function PainLogbookEntry() {
     });
 
     return (
-        <React.Fragment>
-            <NavigationBar title="Nieuwe pijnlog" action="close"/>
-            <div id="messages" className="container" style={{paddingTop:"85px", paddingBottom: "15px"}}>
-                { showModuleModal && renderModuleModal() }
-                { showExplanationModal && renderExplanationModal() }
-                { renderMessages() }
+        <div className="userstudy">
+            <div className="logbookpanel">
+                <div id="messages" className="container" style={{paddingBottom: "15px"}}>
+                    { showModuleModal && renderModuleModal() }
+                    { showExplanationModal && renderExplanationModal() }
+                    { renderMessages() }
+                </div>
             </div>
-        </React.Fragment>
+            <div className="infopanel">
+                <h2>Pijnlogboek - Deel 1 (van 2)</h2>
+                <PillButton contentColor="blue" fillColor="white" icon="time">5 minuten</PillButton>
+                <PillButton contentColor="blue" fillColor="white" icon="information">Interactief</PillButton><br/>
+                Links zie je nu het pijnlogboek. Hierin ga jij een conversatie aan met een virtuele health coach die je gaat bevragen naar een recente situatie wanneer je pijn hebt ervaren. Probeer je even zo een situatie voor te stellen (stoot tegen de tafel, last van rug- of kniepijn, chronische pijn-opstoot, etc.), en vul dan het pijnlogboek in voor die pijnsituatie m.b.v. de antwoord-opties die rechts in het gesprek staan.
+                {matchedRecommendations.length > 0 && <hr/>}
+                {matchedRecommendations.length > 0 && <p>Je krijgt nu enkele aanbevelingen rond jouw inputs, alsook een <b>tekstuele uitleg</b> van waarom je de aanbeveling te zien krijgt. Ga door de aanbevelingen en indien je een aanbeveling ziet dat je aanspreekt, open je deze en klik je op <i>"Akkoord"</i>. Als geen aanbeveling je aanspreekt, kies je de optie <i>"Geen aanbeveling relevant"</i>.</p>}
+            </div>
+        </div>
     )
 }
 

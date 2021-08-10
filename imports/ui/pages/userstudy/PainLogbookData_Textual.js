@@ -392,8 +392,7 @@ export const reactions = {
 export const options = Object.assign({}, thoughts, emotions, reactions);
 
 export const codeFrequencies = () => {
-    let codesFreqs = {};
-    Object.keys(codes).forEach(code => codesFreqs[code] = 0);
+    let codesFreqs = {}
     Object.keys(options).forEach(key => {
         if (options[key].level1 === "EMOTION" && Object.keys(codesFreqs).includes(options[key].level3))
             { codesFreqs[[options[key].level3]] = codesFreqs[[options[key].level3]] ? codesFreqs[[options[key].level3]] + 2 : 2 }
@@ -411,7 +410,7 @@ export const conversation = {
     "MESSAGE-INTRO": {
         content: "Goeiedag! Heb je recentelijk last gehad van een pijnscheut of een sterke toename van pijn?",
         sentBy: "coach",
-        response: ["RESPONSE-YES-MESSAGE-INTRO", "RESPONSE-NO-MESSAGE-INTRO"]
+        response: ["RESPONSE-YES-MESSAGE-INTRO", "RESPONSE-YES2-MESSAGE-INTRO"]
     },
     "RESPONSE-YES-MESSAGE-INTRO": {
         content: "Ja, inderdaad",
@@ -419,23 +418,11 @@ export const conversation = {
         choice: true,
         response: ["MESSAGE-1"]
     },
-    "RESPONSE-NO-MESSAGE-INTRO": {
-        content: "Nee, ga terug",
+    "RESPONSE-YES2-MESSAGE-INTRO": {
+        content: "Klopt",
         sentBy: "user",
         choice: true,
-        response: ["MESSAGE-EXIT"]
-    },
-    "MESSAGE-EXIT": {
-        content: "Oké geen probleem. Laat gerust weten wanneer je de volgende keer je pijnlogboek wilt invullen.",
-        sentBy: "coach",
-        response: ["RESPONSE-MESSAGE-EXIT"]
-    },
-    "RESPONSE-MESSAGE-EXIT": {
-        content: "Afsluiten",
-        sentBy: "user",
-        level3: "button",
-        action: "leave",
-        response: []
+        response: ["MESSAGE-1"]
     },
     /* Vraag 1 */
     "MESSAGE-1": {
@@ -624,7 +611,7 @@ export const conversation = {
     "RECOMMENDATION": {
         content: "recommendation",
         sentBy: "coach",
-        response: ["OPEN-RECOMMENDATION", "EXPLAIN-RECOMMENDATION", "CLOSE-LOGBOOK"]
+        response: ["OPEN-RECOMMENDATION", "NONERELEVANT"]
     }, 
     "OPEN-RECOMMENDATION": {
         content: "recommendation-answer",
@@ -633,18 +620,11 @@ export const conversation = {
         action: "openRecommendation",
         response: ["RECOMMENDATION"]
     },
-    "EXPLAIN-RECOMMENDATION": {
+    "NONERELEVANT": {
         content: "recommendation-answer",
-        text: "Leg uit waarom ik aanbeveling krijg",
-        sentBy: "user",
-        action: "explainRecommendation",
-        response: ["RECOMMENDATION"]
-    },
-    "CLOSE-LOGBOOK": {
-        content: "recommendation-answer",
-        text: "Sla mijn log op en keer terug",
+        text: "Geen aanbeveling relevant",
         sentBy: "user", 
-        action: "saveAndClose",
+        action: "noneRelevant",
         response: ["RECOMMENDATION"]
     },
 }

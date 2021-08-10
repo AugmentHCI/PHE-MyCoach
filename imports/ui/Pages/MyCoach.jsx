@@ -32,11 +32,11 @@ import Icon from "../components/Illustrations/Icon.jsx";
 import PillButton from "../components/PillButton.jsx";
 
 /* Import coaching modules */
-import PainEducationScript from './Modules/ModuleScripts/PainEducationScript.js';
-import ThoughtsEmotionsScript from './Modules/ModuleScripts/ThoughtsEmotionsScript.js';
-import ActivityWorkScript from './Modules/ModuleScripts/ActivityWorkScript.js';
+import PainEducationScript from './modules/ModuleScripts/PainEducationScript.js';
+import ThoughtsEmotionsScript from './modules/ModuleScripts/ThoughtsEmotionsScript.js';
+import ActivityWorkScript from './modules/ModuleScripts/ActivityWorkScript.js';
 
-import { shortcuts } from "../Pages/Modules/ModuleScripts/Shortcuts"
+import { shortcuts } from "./modules/ModuleScripts/Shortcuts"
 
 /* Instance of React translate component, "Common" refers to the namespace of the i18n files */
 const T = i18n.createComponent("Common");
@@ -277,8 +277,8 @@ export default function MyCoach(props) {
         }
         async function fetchUserData() {
             const latestUserData = await profileManager.getLatestQuestionnaire();
-            setUserData(latestUserData.data);
-            progressManager.setProfile(latestUserData.data.profile);
+            latestUserData?.data ? setUserData(latestUserData.data) : setUserData({profile: 1});
+            latestUserData?.data?.profile ? progressManager.setProfile(latestUserData.data.profile) : progressManager.setProfile(1);
         }
         async function fetchUserShortcuts() {
             const fetchedShortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");

@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText, ChatbubbleInputSummary, ChatbubbleRecommendation } from '../../components/Chatbubble.jsx';
-import NavigationBar from '../../components/NavigationBar';
 
-import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies, options} from "./PainLogbookData.js";
-
-import jwt_decode from "jwt-decode";
+import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies, options} from "./PainLogbookData_Visual";
 
 import RuleEngine from "../../../api/RuleEngine.jsx";
-import PainLogbookManager from '../../../api/PainLogbookManager.jsx';
 
 import PainEducationScript from '../modules/ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from '../modules/ModuleScripts/ThoughtsEmotionsScript.js';
@@ -17,88 +13,14 @@ import AppModal from '../../components/AppModal.jsx';
 import Illustration from '../../components/Illustrations/Illustration.jsx';
 import PillButton from '../../components/PillButton.jsx';
 
+import "./UserStudyStyles.scss";
 
-const testInputs = [
-    {
-      "level4": "EMOTION-EXHAUSTED",
-      "level3": "FATIGUE",
-      "level2": "NEGATIVE",
-      "level1": "EMOTION"
-    },
-    {
-      "level4": "EMOTION-ANNOYED",
-      "level3": "ANGER",
-      "level2": "NEGATIVE",
-      "level1": "EMOTION"
-    },
-    {
-      "level4": "EMOTION-ANGRY",
-      "level3": "ANGER",
-      "level2": "NEGATIVE",
-      "level1": "EMOTION"
-    },
-    {
-      "level4": "THOUGHT-CAUSE-NEG-1",
-      "level3": "CAUSE",
-      "level2": "NEGATIVE",
-      "level1": "THOUGHT",
-      "codes": [
-        "TIT"
-      ],
-      "synonyms": [
-        "kapot",
-        "versleten"
-      ]
-    },
-    {
-      "level4": "THOUGHT-CAUSE-NEG-3",
-      "level3": "CAUSE",
-      "level2": "NEGATIVE",
-      "level1": "THOUGHT",
-      "codes": [
-        "TIT"
-      ],
-      "synonyms": [
-        "versleten",
-        "slijt"
-      ]
-    },
-    {
-      "level4": "REACTION-NEG-2",
-      "level3": "",
-      "level2": "NEGATIVE",
-      "level1": "REACTION",
-      "codes": [
-        "TIR",
-        "ANXIOUS",
-        "DEPRESSED"
-      ],
-      "synonyms": [
-        "paniek"
-      ]
-    },
-    {
-      "level4": "REACTION-NEG-4",
-      "level3": "",
-      "level2": "NEGATIVE",
-      "level1": "REACTION",
-      "codes": [
-        "TIR",
-        "ANXIOUS"
-      ],
-      "synonyms": [
-        "stop",
-        "alles"
-      ]
-    }
-]
 
-export default function PainLogbookEntry() {
+export default function PainLogbookVisual() {
 
     /* States and Constants */
     const ruleEngine = new RuleEngine(rules);
-    const painLogbookManager = new PainLogbookManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
-    const language  = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
+    const language  = "nl-BE";
     /* Recommendations */
     const [matchedRecommendations, updateMatchedRecommendations] = useState([]);
     const [currentRecommendation, updateCurrentRecommendation] = useState(0);
@@ -162,25 +84,35 @@ export default function PainLogbookEntry() {
             case "explainRecommendation":
                 setShowExplanationModal(true);
                 break;
+            case "noneRelevant":
             case "saveAndClose":
-                saveLog();
-                history.back();
+                Meteor.callPromise('userstudy.insert', {
+                    mail: localStorage.getItem('mail'), 
+                    settings: localStorage.getItem('studysettings'), 
+                    type: 'action-visual', 
+                    content: actionType});
+                Meteor.callPromise('userstudy.insert', {
+                    mail: localStorage.getItem('mail'), 
+                    settings: localStorage.getItem('studysettings'), 
+                    type: 'recommendations-visual', 
+                    content: JSON.stringify(matchedRecommendations)});
+                Meteor.callPromise('userstudy.insert', {
+                    mail: localStorage.getItem('mail'), 
+                    settings: localStorage.getItem('studysettings'), 
+                    type: 'inputs-visual', 
+                    content: JSON.stringify(userInput)});
+                if (actionType === "saveAndClose") {
+                    Meteor.callPromise('userstudy.insert', {
+                        mail: localStorage.getItem('mail'), 
+                        settings: localStorage.getItem('studysettings'), 
+                        type: 'selected-visual', 
+                        content: currentRecommendation + "-" + JSON.stringify(matchedRecommendations[currentRecommendation])});
+                }
+                FlowRouter.go(`/mycoach/userstudy/questionnaire/visual`);
                 break;
             default:
                 console.log(`Action ${actionType} not implemented.`)
         }
-    }
-
-    function saveLog() {
-        let userLog = {THOUGHT: [], REACTION: [], EMOTION: [], CONTEXT: undefined, INTENSITY: undefined, ACTIVITY: undefined}
-        userInput.forEach(input => {
-            if (input.level1) userLog[input.level1].push(input.level4);
-            else { userLog[input.category] = input.content }
-        });
-        Object.keys(userLog).forEach(key => {
-            if (["THOUGHT", "REACTION", "EMOTION"].includes(key)) { userLog[key] = userLog[key].join("|") }
-        })
-        painLogbookManager.addPainLog(userLog.CONTEXT, userLog.ACTIVITY, userLog.INTENSITY, userLog.THOUGHT, userLog.EMOTION, userLog.REACTION);
     }
 
     function initializeMessages() {
@@ -346,10 +278,10 @@ export default function PainLogbookEntry() {
         }
 
         return (<AppModal
-            backOption="Sluit" 
+            backOption="Terug" 
             notifyBack={() => setShowModuleModal(false)} 
-            notifyParent={() => {saveLog(); FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/module/${recModule}/${recSubmodule}?goPainlogbookOnBack=true`)}}
-            defaultOption="Open" 
+            notifyParent={() => {action("saveAndClose");}}
+            defaultOption="Akkoord" 
             defaultColor="blue"
             noPadding
             show={showModuleModal}>
@@ -366,7 +298,7 @@ export default function PainLogbookEntry() {
                 </div>
                 {submodule.description}
                 <hr/>
-                Jouw pijnlog wordt opgeslagen en je wordt doorverwezen naar dit onderdeel.
+                Klik op 'Akkoord' indien je akkoord gaat met de aanbeveling. Hiermee rond jij je pijnlogboek af.
             </div>
         </AppModal>)
     }
@@ -393,14 +325,23 @@ export default function PainLogbookEntry() {
     });
 
     return (
-        <React.Fragment>
-            <NavigationBar title="Nieuwe pijnlog" action="close"/>
-            <div id="messages" className="container" style={{paddingTop:"85px", paddingBottom: "15px"}}>
-                { showModuleModal && renderModuleModal() }
-                { showExplanationModal && renderExplanationModal() }
-                { renderMessages() }
+        <div className="userstudy">
+            <div className="logbookpanel">
+                <div id="messages" className="container" style={{paddingBottom: "15px"}}>
+                    { showModuleModal && renderModuleModal() }
+                    { showExplanationModal && renderExplanationModal() }
+                    { renderMessages() }
+                </div>
             </div>
-        </React.Fragment>
+            <div className="infopanel">
+                <h2>Pijnlogboek - Deel 1 (van 2)</h2>
+                <PillButton contentColor="blue" fillColor="white" icon="time">5 minuten</PillButton>
+                <PillButton contentColor="blue" fillColor="white" icon="information">Interactief</PillButton><br/>
+                Links zie je nu het pijnlogboek. Hierin ga jij een conversatie aan met een virtuele health coach die je gaat bevragen naar een recente situatie wanneer je pijn hebt ervaren. Probeer je even zo een situatie voor te stellen (stoot tegen de tafel, last van rug- of kniepijn, chronische pijn-opstoot, etc.), en vul dan het pijnlogboek in voor die pijnsituatie m.b.v. de antwoord-opties die rechts in het gesprek staan.
+                {matchedRecommendations.length > 0 && <hr/>}
+                {matchedRecommendations.length > 0 && <p>Je krijgt nu enkele aanbevelingen rond jouw inputs, alsook een <b>visuele uitleg</b> met de balkjes, van waarom je de aanbeveling te zien krijgt. Ga door de aanbevelingen en indien je een aanbeveling ziet dat je aanspreekt, open je deze en klik je op <i>"Akkoord"</i>. Als geen aanbeveling je aanspreekt, kies je de optie <i>"Geen aanbeveling relevant"</i>.</p>}
+            </div>
+        </div>
     )
 }
 

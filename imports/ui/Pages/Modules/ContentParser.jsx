@@ -453,6 +453,7 @@ export default ContentParser;
 function createMultipleChoiceContent(props) {
 
     const [options, setOptions] = useState(props.data.options);
+    const [uncheckedOptions, setUncheckedOptions] = useState([]);
     const [checked, updateChecked] = useState(Object.assign({}, ...options.map((x) => ({[x.id]: false}))));
     const [saved, setSaved] = useState(false);
 
@@ -475,7 +476,16 @@ function createMultipleChoiceContent(props) {
     useEffect(() => {
         async function fetchAnswers() {
             const answer = await props.questionManager.getLatestAnswerOnQuestion(props.data.id);
-            if (answer) { updateChecked(JSON.parse(answer)); setSaved(true); }
+            if (answer) { 
+                const parsedAnswers = JSON.parse(answer);
+                let newUncheckedOptions = [];
+                updateChecked(parsedAnswers); 
+                props.data.options.forEach(option => {
+                    if (!parsedAnswers[option.id]) { newUncheckedOptions.push(option) }
+                });
+                setUncheckedOptions(newUncheckedOptions);
+                setSaved(true); 
+            }
             else if (props.data.useSelectionFrom) { 
                 let answers = await props.questionManager.getLatestAnswerOnQuestion(props.data.useSelectionFrom);
                 if (answers) { 
@@ -483,7 +493,6 @@ function createMultipleChoiceContent(props) {
                     let newOptions = [];
                     answers = JSON.parse(answers);
                     Object.keys(answers).forEach(key => {if (answers[key]) { newChecked[key] = false; newOptions.push({id: key, text: getTextFromOption(key)})}});
-                    console.log(newOptions);
                     setOptions(newOptions);
                     updateChecked(newChecked);
                 }
@@ -500,8 +509,11 @@ function createMultipleChoiceContent(props) {
         { saved && options.map(option => {
             if (checked[option.id]) return <div key={option.id} className={"content-multiplechoice-option-presented"}>{option.text}</div>})
         }
+        { uncheckedOptions.length > 0 && uncheckedOptions.map(option => {
+            return <div key={option.id} className={"content-multiplechoice-option-unchecked"}>{option.text}</div>})
+        }
         { !saved && <React.Fragment>
-            {options.map(option => { return <div key={option.id} className={"content-multiplechoice-option" + (checked[option.id] ? "-selected" : "")}>
+            {options.map(option => { return <div key={option.id} className={"content-multiplechoice-option" + (checked[option.id] ? "-selected" : "")} onClick={() => toggleChecked(option.id)}>
                 <input style={{marginRight: "7px"}} type="checkbox" checked={checked[option.id]} onChange={() => toggleChecked(option.id)}/>
                 {option.text}
             </div>})}

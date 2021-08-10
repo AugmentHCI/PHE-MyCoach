@@ -5,6 +5,7 @@ import '../imports/db/MyCoachMethods.jsx';
 import '../imports/db/PainLogbookMethods.jsx';
 import '../imports/db/GoalSettingMethods.jsx';
 import '../imports/db/ActivityLogbookMethods.jsx';
+import '../imports/db/UserStudyMethods.jsx';
 import moment from 'moment';
 
 
@@ -64,4 +65,3 @@ Meteor.methods({
     return HTTP.call("GET", url, { headers: { "X-KEY": Meteor.settings.XKEY, "Authorization": `Bearer ${analistToken}` } });
   }
 });
-

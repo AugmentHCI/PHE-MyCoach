@@ -270,13 +270,13 @@ export function ChatbubbleInputSummary(props) {
     function renderInputBars() {
         let inputsHTML = [];
         props.inputs.forEach((input, index) => {
-            inputsHTML.push(<React.Fragment>
-                <div className="chatbubble-inputs-row">
+            inputsHTML.push(<React.Fragment key={index + input}>
+                <div key={index + input} className="chatbubble-inputs-row">
                     {!props.highlights.includes(input[0]) && <div className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput-disabled">{translations[language].inputCodes[input[0]]}</div></div>}
                     {props.highlights.includes(input[0]) && <div className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput">{translations[language].inputCodes[input[0]]}</div></div>}
                     <div className="chatbubble-inputs-barcontainer"><div className="chatbubble-inputs-bar" style={{width:(Math.round(input[1] * 100)) + "%"}}/></div>
                 </div>
-                {index < props.inputs.length-1 && <hr className="chatbubble-inputs-divider"/>}
+                {index < props.inputs.length-1 && <hr key={"bar" + index + input} className="chatbubble-inputs-divider"/>}
             </React.Fragment>)
         })
         return (<div className="chatbubble-inputs-container">
@@ -294,6 +294,38 @@ export function ChatbubbleInputSummary(props) {
             {!renderLoading && renderInputBars()}
         </div>
     </div>)
+}
+
+export function ChatbubbleTextualExplanation(props) {
+
+    const [renderLoading, setRenderLoading] = useState(true);
+    const [delayedDisplay, setDelayedDisplay] = useState(true);
+
+    /* Initialize Chatbubble once */
+    useEffect(() => { 
+        setTimeout(function() { setDelayedDisplay(false) }, (2000));
+        setTimeout(function() { setRenderLoading(false) }, (4000));
+    }, [] );
+
+    function renderTopBar() {
+        return (<div>
+            <div style={{display:"flex"}}>
+                <div  style={{flexGrow:2, textAlign:"center", fontSize:"20px"}}>Uitleg</div>
+            </div>
+            <hr style={{margin: "5px", borderTop:"1px solid rgba(255,255,255,.3)"}}/>
+        </div>);
+    }
+
+    return (<React.Fragment>{!delayedDisplay && <div className="chatbubble-container">
+        <img src="/illustrations/avatar.png" width="35px" style={{position:"absolute"}}/>
+        <div className={"chatbubble"}>
+            {renderLoading && <img src="/illustrations/loading.gif" width="50px"/>}
+            {!renderLoading && <div>
+                {renderTopBar()}
+                {<div style={{fontWeight:400}}>{props.explanation}</div>}
+            </div>}
+        </div>
+    </div>}</React.Fragment>)
 }
 
 export function ChatbubbleRecommendation(props) {

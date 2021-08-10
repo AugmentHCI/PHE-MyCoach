@@ -5,6 +5,7 @@ export class UserQuestions {
 
     constructor(questions) {
         this.result = questions;
+        console.log(questions)
     }
     
     parseUserQuestions() {
@@ -42,11 +43,47 @@ export class UserQuestions {
     groupUserQuestions() {
         let questionnaires = { "profiel": {}, "baseline": {}, "followup": {}, "daily": {} }
         this.result.forEach(question => { this.addQuestionToQuestionnaire(question, questionnaires[question.questionnaire]) });
+        questionnaires.followup = this.#groupFollowup(questionnaires.followup);
         this.result = questionnaires;
         return this;
     }
 
-    tagUserQuestions(userId) {
+    #groupFollowup = function(followup) {
+        console.log(followup);
+        let newFollowup = {};
+        let dates = Object.keys(followup);
+        while (dates.length > 0) {
+            console.log(`At start: ${JSON.stringify(dates)}`);
+            const date = dates.pop(); /* Date currently checking */
+            console.log(`Popped: ${date} Current: ${JSON.stringify(dates)}`);
+            let questionnaire = followup[date]; /* Corresponding questionnaire */
+            for (let i = 0; i < dates.length; i++) {
+                const otherDate = dates[i];
+                if (daysBetween(date, otherDate, true, "DD-MM-YYYY") < 10) {
+                    console.log(dates);
+                    console.log(`Removing ${otherDate}`)
+                    dates.splice(i, 1); /* Remove date */
+                    i--;
+                    console.log(dates);
+                    questionnaire = this.#mergeQuestionnaires(questionnaire, followup[otherDate]) /* Merge questionnaires */
+                }
+            }
+            console.log(`Adding date ${date}`)
+            newFollowup[date] = questionnaire; /* Add (merged) questionnaire to new dictionary */
+        }
+        return newFollowup;
+    }
+
+    #mergeQuestionnaires = function(q1, q2) {
+        const newQuestionnaire = {...q1};
+        Object.keys(q2).forEach(q => {
+            if (Object.keys(newQuestionnaire).includes(q)) newQuestionnaire[q] = newQuestionnaire[q].concat(q2[q]);
+            else { newQuestionnaire[q] = q2[q] }
+        })
+        return newQuestionnaire;
+    }
+
+    tagUserQuestions(userId, rrnr) {
         let earliestDate = undefined;
         let latestDate = undefined;
         for (const questionnaireType of Object.keys(this.result)) {
@@ -55,7 +92,20 @@ export class UserQuestions {
                 if (dateComesBefore(questionnaireDate, earliestDate, "DD-MM-YYYY")) earliestDate = questionnaireDate;
             }
         }
-        this.result["info"] = {user: userId, from: earliestDate, to: latestDate, period: daysBetween(earliestDate, latestDate, true, "DD-MM-YYYY")}
+        const period = daysBetween(earliestDate, latestDate, true, "DD-MM-YYYY");
+        const followupsPercent = Math.round(Object.keys(this.result.followup).length / Math.floor(period / 42) * 10000 ) / 100;
+        this.result["info"] = {
+            rrnr: rrnr, 
+            user: userId, 
+            from: earliestDate, 
+            to: latestDate, 
+            period: period, 
+            dailiesDone: Object.keys(this.result.daily).length,
+            dailiesPercent: Math.round(Object.keys(this.result.daily).length / period * 10000) / 100,
+            followupsReceived: Math.floor(period / 42),
+            followupsDone: Object.keys(this.result.followup).length,
+            followupsPercent: isNaN(followupsPercent) ? 0 : followupsPercent
+        }
         return this;
     }
 
@@ -103,6 +153,6 @@ function dateComesAfter(date1, date2, format=undefined) {
 function daysBetween(date1, date2, absolute=true, format=undefined) {
     let difference = format ? moment(date1, format).diff(moment(date2, format)) : moment(date1).diff(moment(date2));
     let daysBetweenDates = Math.round(moment.duration(difference).asDays());
-    if (absolute) return Math.abs(daysBetweenDates);
-    return daysBetweenDates;
+    if (absolute) return Math.abs(daysBetweenDates)+1;
+    return daysBetweenDates+1;
 }

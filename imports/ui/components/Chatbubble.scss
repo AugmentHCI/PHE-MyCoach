@@ -10,6 +10,8 @@
     font-family: var(--main-font);
     font-weight: 500;
     width: fit-content;
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
     max-width: 330px;
     padding: 8px 10px;
     height: min-content;
@@ -145,6 +147,8 @@ mark {
     border-radius: 8px;
     padding: 1px 5px;
     width: fit-content;
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
     -webkit-transition: background-color 1000ms linear;
     -ms-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;

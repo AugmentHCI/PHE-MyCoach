@@ -53,7 +53,7 @@ export default function AdminScreen(props) {
     }
   }
 
-  /* USER DATA */
+  /* USER DATA */ 
   async function fetchUserData(totalSize, steps) {
     let data = [];
     for (let i = 0; i < totalSize; i += steps) {
@@ -61,6 +61,21 @@ export default function AdminScreen(props) {
       await fetchUserDataChunk(i, upperBound).then(( res ) => data = [...data, ...res.map(user => user.value)]);
     }
     setUserQuestionnaires(data);
+    return data;
+  }
+
+  async function fetchUserTestData() {
+    const data = await Meteor.callPromise('getUserData', {userId: 2618594, analistToken: analistToken}).then((result) => {
+      console.log(`Done for user`); 
+      updateFetchCount(prevState => (prevState+1)); 
+      updateActiveCount(prevState => (prevState-1));
+      return new UserQuestions(result.data)
+        .parseUserQuestions()
+        .groupUserQuestions()
+        .tagUserQuestions(2618594, 2618594)
+        .result})
+    console.log(data)
+    setUserQuestionnaires([data]);
     return data;
   }
 
@@ -77,7 +92,7 @@ export default function AdminScreen(props) {
           return new UserQuestions(result.data)
             .parseUserQuestions()
             .groupUserQuestions()
-            .tagUserQuestions(user.gebruikerId)
+            .tagUserQuestions(user.gebruikerId, user.rrnr)
             .result})
         .catch(error => console.error(error)))
     }
@@ -113,7 +128,7 @@ export default function AdminScreen(props) {
     }
 
   function downloadCSV(file) {
-    console.log(JSON.parse(exampleLog))
+    console.log(userQuestionnaires)
     var blob = new Blob([file], { type: "csv" });
     var a = window.document.createElement("a");
     a.href = window.URL.createObjectURL(blob, {  type: "data:attachment/xlsx" });
@@ -151,7 +166,7 @@ export default function AdminScreen(props) {
         <Button width="300px" color="blue" center onClick={() => getUserData() }>Haal gegevens op</Button>
         <Button width="300px" color="blue" center onClick={() => fetchFitBitData(userIds.length, 10) }>Haal fitbit op</Button>
         {userIdsMessage && <p className={userIdsMessage.status}>{userIdsMessage.message}</p>}
-        {userIds.length > 0 && <Button width="300px" color="blue" center onClick={() => fetchUserData(userIds.length, 10) }>Verwerk gebruikers</Button>}
+        {userIds.length > 0 && <Button width="300px" color="blue" center onClick={() => fetchUserData(userIds.length, 13) }>Verwerk gebruikers</Button>}
         {userIds.length > 0 && fetchCount < userIds.length && <p className="info">Data opgehaald van {fetchCount} van {userIds.length} gebruikers.</p>}
         {userIds.length > 0 && fetchCount < userIds.length && <p className="info">Momenteel aan het pollen: {activeCount}.</p>}
         {userIds.length > 0 && fetchCount === userIds.length && <p className="success">Data opgehaald van alle {userIds.length} gebruikers!</p>}

@@ -1,0 +1,51 @@
+.userstudy {
+    display: flex;
+    flex-direction: row;
+}
+
+.logbookpanel {
+    width: 50vw;
+    max-width: 550px; 
+    box-shadow: var(--big-shadow);
+    z-index: 2;
+}
+
+.infopanel {
+    padding: 3em;
+    background-color: var(--idewe-blue);
+    font-family: var(--main-font);
+    font-size: 16px;
+    color: var(--idewe-white);
+    flex: 2;
+    z-index: 1;
+}
+
+.infopanel h2 {
+    color: var(--idewe-white);
+    font-weight: 600;
+}
+
+
+.ant-radio-checked .ant-radio-inner{
+    border-color: var(--idewe-blue) !important ;
+}
+
+.ant-radio-checked .ant-radio-inner:after{
+    background-color: var(--idewe-blue);
+}
+
+.ant-radio:hover .ant-radio-inner {
+    border-color: var(--idewe-blue) ;
+}
+
+.ant-radio-group span {
+    transition: color .2s ease-in;
+}
+
+.ant-radio-group span:hover {
+    color: var(--idewe-gray) !important;
+}
+
+.whiteoptions * {
+    color: white;
+}

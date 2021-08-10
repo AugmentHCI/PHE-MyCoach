@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import "./ValueLogbook.scss";
 
-import { values as valueCodes } from "../Modules/ModuleScripts/ThoughtsEmotionsScript.js";
+import { values as valueCodes } from "../modules/ModuleScripts/ThoughtsEmotionsScript.js";
 import FadeIn from "react-fade-in";
 import jwt_decode from "jwt-decode";
 

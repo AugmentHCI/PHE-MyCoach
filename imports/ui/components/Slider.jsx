@@ -8,7 +8,6 @@ export default function Slider(props) {
   const [value, updateValue] = useState(props.value ? props.value : 1);
   const [saved, updateSaved] = useState(false);
 
-  console.log(value)
   async function save() {
     if (!props.questionManager) return;
     updateSaved(true);

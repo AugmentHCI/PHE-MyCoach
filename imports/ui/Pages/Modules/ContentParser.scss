@@ -342,6 +342,13 @@
         background-color: var(--idewe-blue);
         color: var(--idewe-white);
     }
+
+    &-unchecked {
+        @extend .content-multiplechoice-option;
+        font-weight: 500;
+        background-color: var(--idewe-background-solid);
+        color: var(--idewe-white);
+    }
 }
 
 /* Other */

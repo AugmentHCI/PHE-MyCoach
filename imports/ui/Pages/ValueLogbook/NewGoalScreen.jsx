@@ -12,7 +12,7 @@ import Slider from '../../components/Slider';
 import GoalSettingManager from '../../../api/GoalSettingManager.jsx';
 import QuestionManager from '../../../api/QuestionManager';
 
-import { values as valueCodes } from "../Modules/ModuleScripts/ThoughtsEmotionsScript.js";
+import { values as valueCodes } from "../modules/ModuleScripts/ThoughtsEmotionsScript.js";
 
 import "./ValueLogbook.scss";
 

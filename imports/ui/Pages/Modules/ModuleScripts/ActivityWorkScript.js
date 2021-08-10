@@ -1581,6 +1581,7 @@ const ACTMOD9SLP = {
             ]
         },
         {
+            showIfAnswered: ["ACT-MOD-9-SLIDER-1"],
             cardContents: [
                 {
                     type: "Text",
@@ -1621,6 +1622,10 @@ const ACTMOD9SLP = {
                 {
                     type: "Text",
                     content: "Ga zoveel mogelijk op hetzelfde uur slapen en sta op hetzelfde uur op, ook op vrije dagen. Op die manier ontwikkel je een vast slaap-waakritme dat de kwaliteit van je slaap bevordert."
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/alarm.jpg"
                 },
             ]
         },
@@ -1689,18 +1694,6 @@ const ACTMOD9SLP = {
                 {
                     type: "Image",
                     link: "/images/activitywork/gezin.jpg"
-                },
-            ]
-        },
-        {
-            cardContents: [
-                {
-                    type: "Text",
-                    content: [{type: "bold", content: "ZORG VOOR EEN VAST SLAAPRITUEEL"}]
-                },
-                {
-                    type: "Text",
-                    content: "Ga elke avond op dezelfde manier naar bed. Bouw een routine op met activiteiten en handelingen die je elke avond uitvoert voor je gaat slapen, zoals lezen, rustige muziek beluisteren of een warm bad nemen. Zo bereiden je lichaam en geest zich voor op wat komen gaat: slapen."
                 },
             ]
         },

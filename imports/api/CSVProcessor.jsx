@@ -35,7 +35,7 @@ export class CSVProcessor {
     addUser = function(userIndex) {
         const userQuestionnaire = this.userQuestionnaires[userIndex];
         /* Do not add empty user or IDEWE employee */
-        if (userQuestionnaire.info.period === NaN || coachRRNRs.includes(userQuestionnaire.info.user)) return this;
+        if (isNaN(userQuestionnaire.info.period) || coachRRNRs.includes(userQuestionnaire.info.rrnr)) return this;
         let days = userQuestionnaire.info.period, daysWithinPeriod = 0, date = userQuestionnaire.info.from;
         this.#appendUserQuestionnaire(userIndex, "info");
         this.#appendUserQuestionnaire(userIndex, "profiel", date);
@@ -62,7 +62,7 @@ export class CSVProcessor {
     #appendUserQuestionnaire = function(userIndex, type, date=undefined) {
         if (type === "info") {
             const info = this.userQuestionnaires[userIndex].info;
-            this.csv += [info.user, info.from, info.to, info.period].join(",") + ",";
+            this.csv += [info.rrnr, info.user, info.from, info.to, info.period, info.dailiesDone, info.dailiesPercent, info.followupsReceived, info.followupsDone, info.followupsPercent].join(",") + ",";
             return;
         }
         /* Get user questionnaire of correct date */
@@ -75,9 +75,18 @@ export class CSVProcessor {
                 /* Go over each individual question within subquestionnaire template */
                 for (const question of templates[type][subquestionnaire]) {
                     /* Find users answer to question and append to csv*/
-                    if (!userQuestionnaire[subquestionnaire]) {
-                        this.csv += "*,"; 
-                        console.log(`Did not find ${subquestionnaire}`);
+                    if (subquestionnaire === "K" && userQuestionnaire[subquestionnaire]) {
+                        const question_codes = question.split("_");
+                        let answer = false;
+                        userQuestionnaire[subquestionnaire].forEach(K_question => {if (question_codes.includes(K_question.answer)) answer = true;})
+                        this.csv += answer ? "1," : "0,";
+                    }
+                    else if (!userQuestionnaire[subquestionnaire]) {
+                        if (["FABQ", "V", "Ch", "CPAQ_AE", "CPAQ_PW"].includes(subquestionnaire)) {this.csv += "0,";}
+                        else {
+                            this.csv += "*,"; 
+                            console.log(`Did not find ${subquestionnaire}`);
+                        }
                     }
                     else {
                         switch (subquestionnaire) {
@@ -88,7 +97,8 @@ export class CSVProcessor {
                                 break;
                             default:
                                 const answer = userQuestionnaire[subquestionnaire].find(a => a.questioncode === question);
-                                this.csv += answer?.answer !== undefined ? answer.answer + "," : "*,"; 
+                                if (["V", "Ch", "IPAQ", "K"].includes(subquestionnaire)) this.csv += answer?.answer === undefined ? "0," : answer.answer + ",";
+                                else { this.csv += answer?.answer !== undefined ? answer.answer + "," : "*,"; }
                         }
                     }
                 }
@@ -107,7 +117,7 @@ export class CSVProcessor {
     #getLongestPeriod = function() {
         let maxPeriod = 0;
         this.userQuestionnaires.forEach(user => { 
-            if (user.info?.period > maxPeriod && !coachRRNRs.includes(user.info.user)) maxPeriod = user.info.period
+            if (user.info?.period > maxPeriod && !coachRRNRs.includes(user.info.rrnr)) maxPeriod = user.info.period
         });
         console.log(maxPeriod)
         return maxPeriod;
@@ -123,24 +133,20 @@ export class CSVProcessor {
 
 const templates = {
     info: {
-        info:  ["R-Nummer",  "Begindatum",  "Laatste datum",  "Aantal dagen"] },
+        info:  ["R-Nummer", "DeelnemerId", "Begindatum",  "Laatste datum",  "Aantal dagen", "Aantal dailies", "Procent dailies", "Followups gekregegen", "Followups ingevuld", "Procent followup"] },
     profiel: {
         D:  ["D1",  "D2",  "D3",  "D4",  "D5",  "D6"], 
         WS: ["WS1", "WS2", "WS3", "WS4", "WS5", "WS6"], 
         WF: ["WF1", "WF2", "WF3", "WF4", "WF5", "WF6", "WF7", "WF8", "WF9", "WF10", "WF11"] },
     baseline: {
-     /* K:      ["K"], */
-        K_ns:   ["K_ns"], 
-        K_rug:  ["K_rug"],
-        K_eph:  ["K_eph"],
-        K_hkev: ["K_hkev"],
+        K:    ["K_nek", "K_sch", "K_rug", "K_el", "K_ph", "K_heup", "K_knie", "K_ev"],
         Ch:   ["Ch_ns", "Ch_rug", "Ch_eph", "Ch_hkev"], 
         V:    ["V_ns", "V_rug", "V_eph", "V_hkev"], 
         SF:   ["SF"], 
         WAS:  ["WAS"], 
-        "MHI-5":  ["MHI1", "MHI2", "MHI3", "MHI4", "MHI5"], 
+        MHI:  ["MHI1", "MHI2", "MHI3", "MHI4", "MHI5"], 
         PCS:  ["PCS1", "PCS2", "PCS3", "PCS4", "PCS5", "PCS6", "PCS7", "PCS8", "PCS9", "PCS10", "PCS11", "PCS12", "PCS13"], 
-        FABQ: ["FABQ1", "FABQ2", "FABQ3", "FABQ4", "FABQ5", "FABQ6", "FABQ7", "FABQ8", "FABQ9", "FABQ10", "FABQ11"], 
+        FABQ: ["FABQ1A", "FABQ2A", "FABQ3A", "FABQ4A", "FABQ5W", "FABQ6W", "FABQ7W", "FABQ8W", "FABQ9W", "FABQ10W", "FABQ11W"], 
         CPAQ_AE: ["CPAQ1", "CPAQ2", "CPAQ3", "CPAQ4"], 
         CPAQ_PW: ["CPAQ5", "CPAQ6", "CPAQ7", "CPAQ8"], 
         IPAQ: ["IPAQ_V1", "IPAQ_V2", "IPAQ_M1", "IPAQ_M2", "IPAQ_W1", "IPAQ_W2", "IPAQ_Z"], 
@@ -153,18 +159,13 @@ const templates = {
         SN:   ["SN1", "SN2"], 
         ZEC:  ["ZEC1", "ZEC2", "ZEC3", "ZEC4"] },
     followup: {
-    /*  K:      ["K"], */
-        K_ns:   ["K_ns"], 
-        K_rug:  ["K_rug"],
-        K_eph:  ["K_eph"],
-        K_hkev: ["K_hkev"],
-        Ch:   ["Ch_ns", "Ch_rug", "Ch_eph", "Ch_hkev"], 
+        K:    ["K_nek", "K_sch", "K_rug", "K_el", "K_ph", "K_heup", "K_knie", "K_ev"],
         V:    ["V_ns", "V_rug", "V_eph", "V_hkev"], 
         SF:   ["SF"], 
         WAS:  ["WAS"], 
-        "MHI-5": ["MHI1", "MHI2", "MHI3", "MHI4", "MHI5"], 
+        MHI: ["MHI1", "MHI2", "MHI3", "MHI4", "MHI5"], 
         PCS:  ["PCS1", "PCS2", "PCS3", "PCS4", "PCS5", "PCS6", "PCS7", "PCS8", "PCS9", "PCS10", "PCS11", "PCS12", "PCS13"], 
-        FABQ: ["FABQ1", "FABQ2", "FABQ3", "FABQ4", "FABQ5", "FABQ6", "FABQ7", "FABQ8", "FABQ9", "FABQ10", "FABQ11"], 
+        FABQ: ["FABQ1A", "FABQ2A", "FABQ3A", "FABQ4A", "FABQ5W", "FABQ6W", "FABQ7W", "FABQ8W", "FABQ9W", "FABQ10W", "FABQ11W"], 
         CPAQ_AE: ["CPAQ1", "CPAQ2", "CPAQ3", "CPAQ4"], 
         CPAQ_PW: ["CPAQ5", "CPAQ6", "CPAQ7", "CPAQ8"], 
         IPAQ: ["IPAQ_V1", "IPAQ_V2", "IPAQ_M1", "IPAQ_M2", "IPAQ_W1", "IPAQ_W2", "IPAQ_Z"], 
