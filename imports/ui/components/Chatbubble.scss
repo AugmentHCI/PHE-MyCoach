@@ -20,6 +20,7 @@
     border-radius: 15px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
     overflow-x: hidden; 
+    cursor:default;
 
     &-own {
         @extend .chatbubble;
@@ -37,6 +38,7 @@
         font-size: 14px;
         border-radius: 15px 15px 0 15px;
         border: 2px solid var(--idewe-blue);
+        cursor: pointer;
 
         &-textinput {
             @extend .chatbubble-ownchoice;

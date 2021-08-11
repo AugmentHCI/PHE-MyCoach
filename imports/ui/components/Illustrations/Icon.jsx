@@ -5,7 +5,7 @@ import './Icon.scss';
 
 export default function Icon(props) {
 
-    const iconClass = props.color ? "icon-" + props.color : "icon-black";
+    const iconClass = props.color ? "icon-" + props.color : (props.noFilter ? "icon" : "icon-black");
 
     function handleOnClick() {
         if (props.onClick && !props.disabled) props.onClick();

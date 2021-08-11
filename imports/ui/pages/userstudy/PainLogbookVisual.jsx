@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText, ChatbubbleInputSummary, ChatbubbleRecommendation } from '../../components/Chatbubble.jsx';
 
-import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies, options} from "./PainLogbookData_Visual";
+import {thoughts, emotions, reactions, fillerWords, conversation, rules, codes, codeFrequencies} from "./PainLogbookData_Visual";
 
 import RuleEngine from "../../../api/RuleEngine.jsx";
 
@@ -15,6 +16,12 @@ import PillButton from '../../components/PillButton.jsx';
 
 import "./UserStudyStyles.scss";
 
+const Photo = styled.div`
+    width: 500px;
+    border: 5px solid var(--idewe-white);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 20px;
+`
 
 export default function PainLogbookVisual() {
 
@@ -172,7 +179,7 @@ export default function PainLogbookVisual() {
                 let recommendations = matchedRecommendations.length === 0 ? ruleEngine.matchRules(userInput) : matchedRecommendations ;
                 if (matchedRecommendations.length === 0) updateMatchedRecommendations(recommendations);
                 messages.push(<ChatbubbleInputSummary key={"message-recommendation-inputs"} typeLength={recommendationIndex > 0 ? 0 : 2000} inputs={computeBars(userInput)} highlights={recommendations[recommendationIndex].codeMarkings}/>);
-                const recommendationText = " Wil je hiervoor wat tips bekijken in de module '" + moduleTranslation[recommendations[recommendationIndex].module]+ "'?";
+                const recommendationText = " Ga je akkoord met de aanbeveling?";
                 /*messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-1"} typeLength={2000} own={false}>{recommendations[recommendationIndex].explanation}</Chatbubble>) */
                 /*
                 messages.push(<Chatbubble key={"message-recommendation-2"} delayedDisplay delayBy={recommendationIndex > 0 ? 0 : 2000} typeLength={recommendationIndex > 0 ? 0 : 2000} own={false}>{recommendations[recommendationIndex].recommendation + recommendationText}</Chatbubble>) */
@@ -326,20 +333,23 @@ export default function PainLogbookVisual() {
 
     return (
         <div className="userstudy">
+            <div className="infopanel">
+                <h2>Pijnlogboek - Deel 1 (van 2)</h2>
+                <PillButton contentColor="blue" fillColor="white" icon="time">5 minuten</PillButton>
+                <PillButton contentColor="blue" fillColor="white" icon="information">Interactief</PillButton><br/>
+                Rechts zie je nu het pijnlogboek. Hierin ga jij een conversatie aan met een virtuele health coach die je gaat bevragen naar een recente situatie wanneer je pijn hebt ervaren. Probeer je even zo een situatie voor te stellen (stoot tegen de tafel, last van rug- of kniepijn, chronische pijn-opstoot, etc.), en vul dan het pijnlogboek in voor die pijnsituatie door te klikken de antwoord-opties (chatbubbels) die rechts in het gesprek staan.
+                {matchedRecommendations.length > 0 && <hr/>}
+                {matchedRecommendations.length > 0 && <p>Je krijgt nu enkele aanbevelingen rond jouw inputs, alsook een <b>visuele uitleg</b> met de balkjes, van waarom je de aanbeveling te zien krijgt. Ga door de aanbevelingen met behulp van de pijlen (<i>zie foto</i>) en indien je een aanbeveling ziet dat je aanspreekt, open je deze en klik je op <i>"Akkoord"</i>. Als geen aanbeveling je aanspreekt, kies je de optie <i>"Geen aanbeveling relevant"</i>.</p>}
+                {matchedRecommendations.length > 0 && <Photo>
+                    <img src={`/images/userstudy/visual-explanation.jpg`} width="490px"/>
+                </Photo>}
+            </div>
             <div className="logbookpanel">
                 <div id="messages" className="container" style={{paddingBottom: "15px"}}>
                     { showModuleModal && renderModuleModal() }
                     { showExplanationModal && renderExplanationModal() }
                     { renderMessages() }
                 </div>
-            </div>
-            <div className="infopanel">
-                <h2>Pijnlogboek - Deel 1 (van 2)</h2>
-                <PillButton contentColor="blue" fillColor="white" icon="time">5 minuten</PillButton>
-                <PillButton contentColor="blue" fillColor="white" icon="information">Interactief</PillButton><br/>
-                Links zie je nu het pijnlogboek. Hierin ga jij een conversatie aan met een virtuele health coach die je gaat bevragen naar een recente situatie wanneer je pijn hebt ervaren. Probeer je even zo een situatie voor te stellen (stoot tegen de tafel, last van rug- of kniepijn, chronische pijn-opstoot, etc.), en vul dan het pijnlogboek in voor die pijnsituatie m.b.v. de antwoord-opties die rechts in het gesprek staan.
-                {matchedRecommendations.length > 0 && <hr/>}
-                {matchedRecommendations.length > 0 && <p>Je krijgt nu enkele aanbevelingen rond jouw inputs, alsook een <b>visuele uitleg</b> met de balkjes, van waarom je de aanbeveling te zien krijgt. Ga door de aanbevelingen en indien je een aanbeveling ziet dat je aanspreekt, open je deze en klik je op <i>"Akkoord"</i>. Als geen aanbeveling je aanspreekt, kies je de optie <i>"Geen aanbeveling relevant"</i>.</p>}
             </div>
         </div>
     )

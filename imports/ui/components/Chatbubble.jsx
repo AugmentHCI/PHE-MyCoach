@@ -310,7 +310,7 @@ export function ChatbubbleTextualExplanation(props) {
     function renderTopBar() {
         return (<div>
             <div style={{display:"flex"}}>
-                <div  style={{flexGrow:2, textAlign:"center", fontSize:"20px"}}>Uitleg</div>
+                <div  style={{flexGrow:2, textAlign:"center", fontSize:"20px"}}>Uitleg {props.recommendationIndex + 1}</div>
             </div>
             <hr style={{margin: "5px", borderTop:"1px solid rgba(255,255,255,.3)"}}/>
         </div>);
@@ -340,7 +340,6 @@ export function ChatbubbleRecommendation(props) {
     }, [] );
 
     function updateRecommendationIndex(update) {
-        console.log(props.recommendationLength)
         if (update === "next" && props.recommendationIndex < props.recommendationLength) props.nextRecommendation();
         if (update === "prev" && props.recommendationIndex > 0) props.prevRecommendation();
     }
@@ -349,9 +348,9 @@ export function ChatbubbleRecommendation(props) {
         return (<div>
             <div style={{display:"flex"}}>
                 <Icon onClick={() => updateRecommendationIndex("prev")} 
-                    image={"next"} style={{flexGrow:1, transform:"rotate(180deg)", maxWidth:"18px", maxHeight:"18px", marginTop: "5px", marginLeft:"10px"}} width="15px" color={props.recommendationIndex === 0 ? "blue-light" : "white"}/>
+                    image={"next-logbook" + (props.recommendationIndex === 0 ? "-disabled" : "")} style={{flexGrow:1, transform:"rotate(180deg)", maxWidth:"26px", maxHeight:"26px", marginTop: "4px", marginLeft:"10px"}} width="15px" noFilter/>
                 <div  style={{flexGrow:2, textAlign:"center", fontSize:"20px"}}>Aanbeveling {props.recommendationIndex + 1}</div>
-                <Icon onClick={() => updateRecommendationIndex("next")} image={"next"} style={{flexGrow:1, maxWidth:"18px", maxHeight:"18px", marginTop: "5px", marginRight:"10px"}} width="15px" color={props.recommendationLength === props.recommendationIndex ? "blue-light" : "white"}/>
+                <Icon onClick={() => updateRecommendationIndex("next")} image={"next-logbook" + (props.recommendationIndex === props.recommendationLength ? "-disabled" : "")} style={{flexGrow:1, maxWidth:"26px", maxHeight:"26px", marginTop: "4px", marginRight:"10px"}} width="15px" noFilter/>
             </div>
             <hr style={{margin: "5px", borderTop:"1px solid rgba(255,255,255,.3)"}}/>
         </div>);

@@ -54,6 +54,26 @@ export const questionnaires = {
             }
         }
     },
+    use: {
+        title: "General / Algemeen",
+        questions: {
+            q1: {
+                en: "I agreed with the recommendation(s).",
+                nl: "Ik ging akkoord met de aanbevelingen.",
+                optionType: "agree"
+            },
+            q2: {
+                en: "I agreed with the explanation(s).",
+                nl: "Ik ging akkoord met de uitleg.",
+                optionType: "agree"
+            },
+            q3: {
+                en: "I made use of the explanations.",
+                nl: "Ik heb gebruik gemaakt van de explanations.",
+                optionType: "agree"
+            }
+        }
+    },
     trust: {
         title: "Trust / Vertrouwen",
         questions: {
@@ -99,7 +119,7 @@ export const questionnaires = {
             },
             q4: {
                 en: "The explanation presents more in-depth information on how the recommendation came about.",
-                nl: "De uitleg geeft uitgebreidere informatie weer over hoe mijn aanbeveling is ontstaan.",
+                nl: "De uitleg geeft uitgebreide informatie weer over hoe mijn aanbeveling is ontstaan.",
                 optionType: "agree"
             }
         }
@@ -109,12 +129,12 @@ export const questionnaires = {
         questions: {
             q1: {
                 en: "The explanation shows me how my inputs are aligned with the recommendation.",
-                nl: "De aanbeveling toont mij hoe mijn inputs overeenkomen met de recommendation.",
+                nl: "De uitleg toont mij hoe mijn inputs overeenkomen met de aanbeveling.",
                 optionType: "agree"
             },
             q2: {
                 en: "The explanation has a friendly, easy-to-use interface.",
-                nl: "De explanation heeft een aangename, makkelijk te gebruiken interface.",
+                nl: "De uitleg heeft een aangename, makkelijk te gebruiken interface (ontwerp).",
                 optionType: "agree"
             },
             q3: {

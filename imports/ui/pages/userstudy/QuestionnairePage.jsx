@@ -57,6 +57,12 @@ export default function QuestionnairePage() {
 
     const [answers, setAnswers] = useState({});
 
+    const text1 = {
+        "visual": "de balkjes die je uitleggen  waarom je de aanbeveling krijgt",
+        "textual": "de tekst die je uitleg geeft waarom je de aanbeveling krijgt",
+        "hybrid": "zowel de balkjes als de tekst, die je uitleg geven waarom je de aanbeveling krijgt"
+    }
+
     function isCompleted() {
         if (Object.keys(answers).length === 0) return false;
         for (const questionnaire of Object.keys(answers)) {
@@ -95,7 +101,7 @@ export default function QuestionnairePage() {
             setAnswers(JSON.parse(localStorage.getItem('questionnaire-' + type)));
         }
         else {
-            let answerTemplate = type === "profile" ? {ncs: {}, eos: {}} : {trust: {}, transparency: {}, persuasiveness: {}, acceptance: {}};
+            let answerTemplate = type === "profile" ? {ncs: {}, eos: {}} : {use: {}, trust: {}, transparency: {}, persuasiveness: {}, acceptance: {}};
             setAnswers(answerTemplate);
         }
     }, []);
@@ -112,7 +118,7 @@ export default function QuestionnairePage() {
             <PillButton contentColor="white" fillColor="blue" icon="time">3 minuten</PillButton>
             <PillButton contentColor="white" fillColor="blue" icon="information">Invullen</PillButton>
         </Row>
-        <InfoContainer>Je krijgt om te beginnen een korte vragenlijst. De vragen zijn in het Engels, maar er staat telkens een Nederlandse vertaling bij. Vul deze in en klik op <i>"Volgende"</i> onderaan wanneer je klaar bent.</InfoContainer>
+        <InfoContainer>We beginnen deze gebruikersstudie met een korte vragenlijst. De vragen zijn in het Engels, maar er staat telkens een Nederlandse vertaling bij. Vul deze in en klik op <i>"Volgende"</i> onderaan wanneer je klaar bent.<br/> De eerste vragen hieronder gaan over <b>algemene problemen in het dagelijks leven</b> (werk, thuis, etc.), en zijn dus niet pijn-gerelateerd.</InfoContainer>
         <Questionnaire id={"ncs"} title={questionnaires.ncs.title} questions={questionnaires.ncs.questions} changeCallback={updateQuestionnaire}/>
         <hr style={{width:"80%"}}/>
         <Questionnaire id={"eos"} title={questionnaires.eos.title} questions={questionnaires.eos.questions} changeCallback={updateQuestionnaire}/>
@@ -130,6 +136,16 @@ export default function QuestionnairePage() {
         <Photo>
             <img src={`/images/userstudy/${type}.jpg`} width="390px"/>
         </Photo>
+        <InfoContainer>
+        Het is belangrijk om een onderscheid te maken tussen (zie foto):
+        <ul>
+            <li><b>Uitleg (explanation):</b> hiermee bedoelen wij {text1[type]}</li>
+            <li><b>Aanbeveling (recommendation):</b> hiermee bedoelen wij het kort tekstje onderaan dat je een tip of aanbeveling geeft.</li>
+        </ul>
+        Maak hier een goed onderscheid tussen wanneer je de vragen invult!
+        </InfoContainer>
+        <Questionnaire id={"use"} title={questionnaires.use.title}          questions={questionnaires.use.questions} changeCallback={updateQuestionnaire}/>
+        <hr style={{width:"80%"}}/>
         <Questionnaire id={"trust"} title={questionnaires.trust.title}          questions={questionnaires.trust.questions} changeCallback={updateQuestionnaire}/>
         <hr style={{width:"80%"}}/>
         <Questionnaire id={"transparency"} title={questionnaires.transparency.title}   questions={questionnaires.transparency.questions} changeCallback={updateQuestionnaire}/>

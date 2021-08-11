@@ -21,7 +21,7 @@ const QuestionnaireTitle = styled.div`
     color: var(--idewe-blue);
 
     ${props => props.isCompleted && css`
-        color: var(--idewe-background-solid);
+        color: var(--idewe-gray-dark);
     `};
 `
 
@@ -34,6 +34,7 @@ const QuestionnaireText = styled.div`
 
 const QuestionnaireTip = styled.div`
     font-family: var(--main-font);
+    display: inline;
     font-size: 16px;
     font-style: italic;
     font-weight: 400;
@@ -84,6 +85,14 @@ export function AcceptanceQuestionnaire({id, changeCallback}) {
 
     const [answers, setAnswers] = useState({});
 
+    const type = FlowRouter.getParam('type');
+
+    const text = {
+        "visual": "balkjes",
+        "textual": "bovenste tekstje",
+        "hybrid": "balkjes + bovenste tekstje"
+    }
+
     function isCompleted() {
         for (const question of Object.keys(answers)) {
             if (answers[question] === 0) return false;
@@ -106,8 +115,7 @@ export function AcceptanceQuestionnaire({id, changeCallback}) {
 
     return (<QuestionnaireContent>
         <QuestionnaireTitle isCompleted={isCompleted()}>{questionnaires.acceptance.title}</QuestionnaireTitle>
-        <QuestionnaireText>Ik vond de uitleg eerder ... </QuestionnaireText>
-        <QuestionnaireTip>Ga met je muis over de woorden om de vertaling te zien.</QuestionnaireTip>
+        <QuestionnaireText>Ik vond de <b>uitleg</b> <i>({text[type]})</i> eerder ... <QuestionnaireTip>(Ga met je muis over de woorden om de vertaling te zien.)</QuestionnaireTip></QuestionnaireText>
         <FadeIn>
             { Object.keys(questionnaires.acceptance.questions).map(question => { return <Question 
                 acceptance

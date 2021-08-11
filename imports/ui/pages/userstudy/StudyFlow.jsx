@@ -8,7 +8,7 @@ const Content = styled.div`
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: safe center;
     overflow-y: scroll;
     background: var(--idewe-blue);
     color: var(--idewe-white);

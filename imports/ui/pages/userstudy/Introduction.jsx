@@ -7,7 +7,7 @@ const Content = styled.div`
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: safe center;
     overflow-y: scroll;
     background: var(--idewe-blue);
     color: var(--idewe-white);
@@ -61,7 +61,7 @@ export default function Introduction() {
     
     return (<Content>
         <Title>Welkom bij de HealthEmpower gebruikersstudie!</Title>
-        <Text delay={1000}>Bedankt dat je mee wilt doen aan de gebruikersstudie van HealthEmpower, een Europees project in samenwerking met de KULeuven en IDEWE. Hierbij ontwikkelen wij een slimme applicatie voor gebruikers die te kampen hebben met chronische en muskoloskeletale pijn. Zij worden door deze applicatie opgevolgd met behulp van een gepersonaliseerde coaching, zodat ze beter kunnen omgaan met hun klachten.</Text>
+        <Text delay={1000}>Bedankt dat je mee wilt doen aan de gebruikersstudie van HealthEmpower, een Europees project in samenwerking met de KULeuven en IDEWE. Hierbij ontwikkelen wij een slimme applicatie voor gebruikers die te kampen hebben met chronische en muskuloskeletale (spieren, botten, gewrichten) pijn. Zij worden door deze applicatie opgevolgd met behulp van een gepersonaliseerde coaching, zodat ze beter kunnen omgaan met hun klachten.</Text>
         <Text delay={6000}>In deze gebruikersstudie gaan wij een klein onderdeel bekijken van de coaching, namelijk het <b>pijnlogboek</b>. Dit is een applicatie dat gebruikers kunnen invullen wanneer ze last hebben van een pijn-opstoot, en met behulp van hun inputs worden er gepersonaliseerde aanbevelingen gegeven de de gebruiker in de toekomst zouden kunnen helpen.</Text>
         <Text delay={14000}>Deze studie zou hoogstens een <b>half uurtje</b> in beslag nemen, en hierbij verzamelen wij enkel geanonomiseerde data. Ben je bereid om mee te doen?</Text>
         <Group delay={14000}>

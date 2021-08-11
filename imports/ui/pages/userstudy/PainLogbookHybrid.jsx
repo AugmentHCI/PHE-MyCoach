@@ -177,9 +177,16 @@ export default function PainLogbookHybrid() {
                 /* Update state, but use local variable as state update happens asynchronously */
                 let recommendations = matchedRecommendations.length === 0 ? ruleEngine.matchRules(userInput) : matchedRecommendations ;
                 if (matchedRecommendations.length === 0) updateMatchedRecommendations(recommendations);
-                messages.push(<ChatbubbleInputSummary key={"message-recommendation-inputs"} typeLength={recommendationIndex > 0 ? 0 : 2000} inputs={computeBars(userInput)} highlights={recommendations[recommendationIndex].codeMarkings}/>);
-                messages.push(<ChatbubbleTextualExplanation key={"message-recommendation-1"} explanation={recommendations[currentRecommendation].explanation}/>);
-                const recommendationText = " Wil je hiervoor wat tips bekijken in de module '" + moduleTranslation[recommendations[recommendationIndex].module]+ "'?";
+                messages.push(<ChatbubbleInputSummary 
+                    key={"message-recommendation-inputs"} 
+                    typeLength={recommendationIndex > 0 ? 0 : 2000} 
+                    inputs={computeBars(userInput)} 
+                    highlights={recommendations[recommendationIndex].codeMarkings}/>);
+                messages.push(<ChatbubbleTextualExplanation 
+                    key={"message-recommendation-1"} 
+                    recommendationIndex={recommendationIndex}
+                    explanation={recommendations[currentRecommendation].explanation}/>);
+                const recommendationText = " Ga je akkoord met de aanbeveling?";
                 /*messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-1"} typeLength={2000} own={false}>{recommendations[recommendationIndex].explanation}</Chatbubble>) */
                 /*
                 messages.push(<Chatbubble key={"message-recommendation-2"} delayedDisplay delayBy={recommendationIndex > 0 ? 0 : 2000} typeLength={recommendationIndex > 0 ? 0 : 2000} own={false}>{recommendations[recommendationIndex].recommendation + recommendationText}</Chatbubble>) */
@@ -333,20 +340,20 @@ export default function PainLogbookHybrid() {
 
     return (
         <div className="userstudy">
+            <div className="infopanel">
+                <h2>Pijnlogboek - Deel 2 (van 2)</h2>
+                <PillButton contentColor="blue" fillColor="white" icon="time">5 minuten</PillButton>
+                <PillButton contentColor="blue" fillColor="white" icon="information">Interactief</PillButton><br/>
+                Rechts zie je weer het pijnlogboek. Dit kan je nu invullen voor een <b>andere situatie waarin je pijn hebt ervaren.</b> Wanneer je klaar bent, krijg je weer enkele aanbevelingen, maar deze keer met een <b>tekstuele én visuele uitleg</b> van waarom je de aanbeveling krijgt.
+                {matchedRecommendations.length > 0 && <hr/>}
+                {matchedRecommendations.length > 0 && <p>Je krijgt nu enkele aanbevelingen rond jouw inputs, alsook een visuele <b>en tekstuele uitleg</b> van waarom je de aanbeveling te zien krijgt. Ga gerust door de aanbevelingen met behulp van de pijlen en indien je een aanbeveling ziet dat je aanspreekt, open je deze en klik je op <i>"Akkoord"</i>. Als geen aanbeveling je aanspreekt, kies je de optie <i>"Geen aanbeveling relevant"</i>.</p>}
+            </div>
             <div className="logbookpanel">
                 <div id="messages" className="container" style={{paddingBottom: "15px"}}>
                     { showModuleModal && renderModuleModal() }
                     { showExplanationModal && renderExplanationModal() }
                     { renderMessages() }
                 </div>
-            </div>
-            <div className="infopanel">
-                <h2>Pijnlogboek - Deel 2 (van 2)</h2>
-                <PillButton contentColor="blue" fillColor="white" icon="time">5 minuten</PillButton>
-                <PillButton contentColor="blue" fillColor="white" icon="information">Interactief</PillButton><br/>
-                Links zie je weer het pijnlogboek. Dit kan je nu invullen voor een <b>andere situatie waarin je pijn hebt ervaren.</b> Wanneer je klaar bent, krijg je weer enkele aanbevelingen, maar deze keer met een <b>tekstuele én visuele uitleg</b> van waarom je de aanbeveling krijgt.
-                {matchedRecommendations.length > 0 && <hr/>}
-                {matchedRecommendations.length > 0 && <p>Je krijgt nu enkele aanbevelingen rond jouw inputs, alsook een visuele <b>en tekstuele uitleg</b> van waarom je de aanbeveling te zien krijgt. Ga er gerust door en indien je een aanbeveling ziet dat je aanspreekt, open je deze en klik je op <i>"Akkoord"</i>. Als geen aanbeveling je aanspreekt, kies je de optie <i>"Geen aanbeveling relevant"</i>.</p>}
             </div>
         </div>
     )

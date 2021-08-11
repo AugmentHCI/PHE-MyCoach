@@ -427,7 +427,7 @@ export const conversation = {
     },
     /* Vraag 1 */
     "MESSAGE-1": {
-        content: "En waar was je / wat was je aan het doen toen de pijn (in sterke mate) toenam?",
+        content: "En waar was je / wat was je aan het doen toen je pijn of (in sterke mate) toenam?",
         sentBy: "coach", 
         response: ["RESPONSE-1-MESSAGE-1", "RESPONSE-2-MESSAGE-1", "RESPONSE-3-MESSAGE-1", "RESPONSE-4-MESSAGE-1", "RESPONSE-5-MESSAGE-1", "RESPONSE-6-MESSAGE-1", "RESPONSE-7-MESSAGE-1", "RESPONSE-8-MESSAGE-1"]
     },
@@ -534,7 +534,7 @@ export const conversation = {
     },
     /* Vraag 2 - Emoties */
     "MESSAGE-2": {
-        content: "Kan je aanduiden welke van onderstaande gevoelens aanwezig waren toen de pijn (in sterke mate) toenam?",
+        content: "Kan je aanduiden welke van onderstaande gevoelens aanwezig waren toen je pijn kreeg of (in sterke mate) toenam? (Je kan er meerdere aanduiden)",
         sentBy: "coach", 
         response: ["RESPONSE-MESSAGE-2"]
     },
@@ -546,7 +546,7 @@ export const conversation = {
     },
     /* Vraag 3 - Gedachten */
     "MESSAGE-3": {
-        content: "Kan je aanduiden welke van onderstaande gedachten aanwezig waren toen de pijn (in sterke mate) toenam?",
+        content: "Kan je aanduiden welke van onderstaande gedachten aanwezig waren toen je pijn kreeg of (in sterke mate) toenam?",
         sentBy: "coach", 
         response: ["RESPONSE-MESSAGE-3"]
     },
@@ -616,14 +616,14 @@ export const conversation = {
     }, 
     "OPEN-RECOMMENDATION": {
         content: "recommendation-answer",
-        text: "Ja, open aanbeveling",
+        text: "Ja, deze aanbeveling spreekt aan",
         sentBy: "user",
         action: "openRecommendation",
         response: ["RECOMMENDATION"]
     },
     "NONERELEVANT": {
         content: "recommendation-answer",
-        text: "Geen aanbeveling relevant",
+        text: "Geen enkele aanbeveling relevant",
         sentBy: "user", 
         action: "noneRelevant",
         response: ["RECOMMENDATION"]
