@@ -67,7 +67,7 @@ export default class MyProgress extends Component {
       userToken: "",
       userID: null,
       gebruikerId: null,
-      parameter: "painIntensity",
+      parameter: "t",
       compareParameter: "",
       callError: "",
       devEnvironment: false,
@@ -193,22 +193,23 @@ export default class MyProgress extends Component {
           Meteor.call("getData", {
             url: devUrl,
             userToken: token
-          }, (error, result) => {
+          }, (errorDev, resultDev) => {
             // OPTION 1.1.1: DEVELOPMENT environment failed as well -> No data was fetched (Possibly an incorrect token)
             if (error) {
-              this.setState({callError: error.message})
-              console.log(`${dataType} - Development environment failed as well: ${error.message}.`)
+              this.setState({callError: errorDev.message})
+              console.log(`${dataType} - Development environment failed as well: ${errorDev.message}.`)
             } 
             // OPTION 1.1.2: DEVELOPMENT environment successful -> Data is fetched (means that token was a DEV token)
             else {
               console.log(`${dataType} -  Successful fallback to development environment.`)
-              dataType === "FitBit" ? this.setState({fitData: result.data}) : this.setState({data: result.data, devEnvironment: true}); 
+              dataType === "FitBit" ? this.setState({fitData: resultDev.data}) : this.setState({data: resultDev.data, devEnvironment: true}); 
             }
           }); 
         } else {
-          if (!result.data) {console.log(`${dataType} - Successfully retreived FitBit data (Statuscode ${result.statusCode}). Data empty however.`); this.setState({fitData: []}); }
+          if (!result.data) {console.log(`${dataType} - Successfully retreived data (Statuscode ${result.statusCode}). Data empty however.`); this.setState({fitData: []}); }
           else {
-            console.log(`${dataType} - Successfully retreived FitBit data (Statuscode ${result.statusCode}).`); 
+            console.log(`${dataType} - Successfully retreived data (Statuscode ${result.statusCode}).`);
+            console.log(result.data) 
             dataType === "FitBit" ? this.setState({fitData: result.data}) : this.setState({data: result.data});
           }
         }
@@ -352,7 +353,7 @@ export default class MyProgress extends Component {
   renderInsightsCard() {
     const compareWidth = this.state.compareParameter === "" ? "100%" : "70%";
     return (
-      <FadeIn delay="200"><Card title="myProgress.insights.title" underline>
+      <FadeIn delay="200"><Card title="Mijn Inzichten" underline>
           <p className="subtitle"><T>myProgress.insights.showMe</T></p>
           <ParameterPicker 
             currentParameter={this.state.parameter} 
@@ -393,7 +394,7 @@ export default class MyProgress extends Component {
     return (
       <React.Fragment>
         <FadeIn delay="300">
-        <Card title="myProgress.insights.insights" bodyStyle={{padding: '0', paddingBottom: '15px'}} underline>
+        <Card title="Mijn Inzichten" bodyStyle={{padding: '0', paddingBottom: '15px'}} underline>
             <LineGraph 
               parameter = {this.state.parameter}
               data = {this.state.data}
@@ -402,7 +403,7 @@ export default class MyProgress extends Component {
               locale = {i18n.getLocale()}
             />
         </Card>
-        <Card title="myProgress.activities.activities" underline>
+        <Card title="Mijn Emoties" underline>
           <ActivityGraph 
             data = {this.state.data}
             locale = {i18n.getLocale()}
@@ -416,19 +417,13 @@ export default class MyProgress extends Component {
   renderOverviewMonthly() {
     return (
       <React.Fragment>
-        <Card title="myProgress.insights.insights" bodyStyle={{padding: '10px 5px'}} underline>
+        <Card title="Mijn Inzichten" bodyStyle={{padding: '10px 5px'}} underline>
           <CalendarGraph 
             parameter = {this.state.parameter}
             data = {this.state.data}
             date = {this.state.selectedDate}
             fitData = {this.state.fitData}
             comparison = {this.state.compareParameter}
-            locale = {i18n.getLocale()}
-          />
-        </Card>
-        <Card title="myProgress.activities.activities" bodyStyle={{paddingBottom: '0', paddingRight: '0'}} underline>
-          <MonthlyActivityGraph
-            data = {this.state.data}
             locale = {i18n.getLocale()}
           />
         </Card>
@@ -449,7 +444,7 @@ export default class MyProgress extends Component {
       
     if (steps === 0) infostyle["textAlign"] = "center";
 
-    return <FadeIn delay="50"><Card title="myProgress.insights.steps" bodyStyle={{padding: '10px 5px'}} underline>
+    return <FadeIn delay="50"><Card title="Mijn Stappen" bodyStyle={{padding: '10px 5px'}} underline>
       <div style={{width: "100%", display: "flex", paddingLeft: "10px", paddingRight: "10px", marginBottom:"20px"}}>
         <button className="day-button-left" onClick={() => this.updateFitDay("backward")}>
           <Icon width="18px" image={"next"} color={"white"} style={{marginTop: "2px", transform:"rotate(-180deg)"}}/>
@@ -510,10 +505,10 @@ export default class MyProgress extends Component {
           <FadeIn><h1 onClick={() => this.setState({tap_count: this.state.tap_count+1})}>My Progress {this.state.devEnvironment && <b className="dev-icon">DEV</b>}</h1></FadeIn>
         </div>
         <React.Fragment>
-          <h2><FadeIn><T>{`myProgress.mysteps.mySteps`}</T></FadeIn></h2>
+          <h2><FadeIn>Mijn Stappen</FadeIn></h2>
           {this.renderFitBitCard()}
         </React.Fragment>
-        <h2><FadeIn delay="150"><T>{`myProgress.myinsights`}</T></FadeIn></h2>
+        <h2><FadeIn delay="150">Mijn Inzichten</FadeIn></h2>
         {this.renderInsightsCard()}
         {this.state.timeFrame == "weekly" && this.renderOverviewWeekly()}
         {this.state.timeFrame == "monthly" && this.renderOverviewMonthly()}

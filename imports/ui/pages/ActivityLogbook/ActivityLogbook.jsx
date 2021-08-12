@@ -99,7 +99,7 @@ export default function PainLogbook() {
     }
 
     useEffect(() => {
-        setDays(generateDays(weekOffset+1));
+        setDays(generateDays());
         fetchActivities();
     }, [selectedDay]);
 
@@ -174,6 +174,7 @@ export default function PainLogbook() {
     function openActivityEditor(activityId, isGoal=false, goal=undefined) {
         if (isGoal) {
             updateSelectedGoal(goal);
+            updateActivityTitle(goal.value);
             toggleShowModal(true);
             return;
         }
@@ -242,11 +243,10 @@ export default function PainLogbook() {
             if (!selectedDays.includes(day)) return false;
             for (const act of filteredActivities) {
                 const activityGoal = act.goal ? JSON.parse(act.goal) : undefined;
-                if (activityGoal && activityGoal?.id === goal._id) { console.log(`${activityGoal?.id} and ${goal._id} match`); return false;}
+                if (activityGoal && activityGoal?.id === goal._id) { return false; }
             }
             return true;
         });
-        console.log(selectedDayGoals);
         if (selectedDayGoals.length === 0) return <React.Fragment/>
         return (<div className="planned-activities">
             <h2>Plan deze activiteiten in</h2>

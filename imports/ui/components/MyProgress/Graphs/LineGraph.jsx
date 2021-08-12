@@ -18,9 +18,9 @@ export default class LineGraph extends Component {
     super(props);
     this.state = {
       parameter: this.props.parameter,
-      comparisonParameter: "satisfaction",
+      comparisonParameter: "",
       data: this.getData(this.props.parameter),
-      comparisonData: this.getData("satisfaction"),
+      comparisonData: [],
     };
   }
 
@@ -51,8 +51,7 @@ export default class LineGraph extends Component {
 
   getData = (parameter) => {
     if (parameter === "distance" || parameter === "steps") return getFitBitDataWeekly(this.props.fitData, parameter);
-    let dataArray = getParameterData(this.props.data, parameter, "week");
-    return dataArray;
+    return getParameterData(this.props.data, parameter, "week");
   }
 
   updateData = (parameter, comparison) => {

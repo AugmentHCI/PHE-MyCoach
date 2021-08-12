@@ -1,165 +1,127 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getActivityData } from '../../../../api/dataparser';
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";
 import "../../../../../i18n/en.i18n.json";
+import moment from 'moment';
 
 const T = i18n.createComponent("Common");
 
-const blue = getComputedStyle(document.documentElement).getPropertyValue('--idewe-blue-dark');
-const grey = getComputedStyle(document.documentElement).getPropertyValue('--idewe-gray-light');
+const answerToValue = {
+  "Absoluut niet": 0,
+  "Een beetje": 1,
+  "Middelmatig": 2,
+  "Veel": 3,
+  "Heel veel": 4
+}
 
-//circle component for when an activity was completed that day
-class FullCircle extends Component {
-  render() {
+const emotionToString = {
+  "poms1a": "Angstig",
+  "poms2s": "Somber",
+  "poms3k": "Kwaad",
+  "poms4v": "Vermoeid",
+  "poms5b": "Vrolijk",
+  "stress": "Stress"
+}
+
+function Circle({tint, isEmpty}) {
     const circleStyle = {
-      backgroundColor: blue,
+      backgroundColor: isEmpty ? "transparant" : `var(--idewe-blue-dark-tint${tint})`,
       borderStyle: "solid", 
       borderWidth: "1.5px",
-      borderColor: blue,
+      borderColor: isEmpty ? "var(--idewe-blue-tint3)" : `var(--idewe-blue-dark-tint${tint})`,
       borderRadius: "50%",
       width: "20px",
       height: "20px",
       margin: "2px"
     };
+
     return (
       <div style={circleStyle}></div>
     );
-  }
 }
 
-//circle component for when an activity wasn't completed that day
-class EmptyCircle extends Component {
-  render() {
-    const circleStyle = {
-      backgroundColor: "transparant",
-      borderStyle: "solid", 
-      borderWidth: "1.5px",
-      borderColor: blue,
-      borderRadius: "50%",
-      width: "20px",
-      height: "20px",
-      margin: "2px"
-    };
-    return (
-      <div style={circleStyle}></div>
-    );
-  }
-}
-
-//circle component for when no data was recorded that day (currently this isn't implemented, EmptyCircle is used for this)
-class GreyCircle extends Component {
-  render() {
-    const circleStyle = {
-      backgroundColor: grey,
-      borderStyle: "solid", 
-      borderWidth: "1.5px",
-      borderColor: grey,
-      borderRadius: "50%",
-      width: "20px",
-      height: "20px",
-      margin: "2px"
-    };
-    return (
-      <div style={circleStyle}></div>
-    );
-  }
-}
-
-export default class ActivityGraph extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      data: this.getData()
-    };
-  }
+export default function ActivityGraph({data, locale}) {
   
-  componentDidMount(){
-    this.updateData();
-    i18n.setLocale(this.props.locale);
-  }
+  useEffect(() => { 
+    i18n.setLocale(locale);
+    setPomsData(parsePomsData(data));
+  }, [] );
 
-  //check if data in MyProgress parent component has changed -> if so: update this component with new data
-  componentDidUpdate(prevProps) {
-    if(this.props.data !== prevProps.data){
-      this.updateData();
+  const [pomsData, setPomsData] = useState({});
+
+  function parsePomsData(questionnaireData) {
+    const week = {1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: ""}
+    const poms = {
+      "poms1a": JSON.parse(JSON.stringify(week)),
+      "poms2s": JSON.parse(JSON.stringify(week)),
+      "poms3k": JSON.parse(JSON.stringify(week)),
+      "poms4v": JSON.parse(JSON.stringify(week)),
+      "poms5b": JSON.parse(JSON.stringify(week)),
+      "stress": JSON.parse(JSON.stringify(week)),
     }
-  } 
-
-  updateData = () => {
-    this.setState({data: this.getData()});
-  }
-
-  getData = () => {
-    return getActivityData(this.props.data);
-  }
-
-  //sort activities based on how often they were completed that week (activity at the top = most often completed)
-  sortActivities = (unsortedActivities) => {
-    let sortable = [];
-    let sortedActivities = [];
-  
-    Object.keys(unsortedActivities).forEach(activity => {
-      let amountOfDays = this.countDays(Object.values(unsortedActivities[activity]));
-      sortable.push([activity, amountOfDays])
+    /* If no questionnaire data available */
+    if (!questionnaireData) return poms;
+    /* If questionnaire data available */
+    questionnaireData.forEach(question => {
+      if (Object.keys(poms).includes(question.vraag)) {
+        const answer = answerToValue[question.antwoord.replace("\n", "")];
+        poms[question.vraag][moment(question.datum).isoWeekday()] = question.vraag === "stress" ? answer + 1 : answer;
+      }
     });
-  
-    sortable.sort(function(a, b) {
-      if (a[1] < b[1]) return 1;
-      if (a[1] > b[1]) return -1;
-      return 0;
-    })
-  
-    sortable.forEach(activity => {
-      sortedActivities.push(activity[0]);
-    });
-    return sortedActivities;
-  }
-  
-  //helper function for sortActivities function above
-  countDays = (days) => {
-    let count = 0;
-    for(var i = 0; i < days.length; ++i){
-        if(days[i] == true)
-            count++;
-    }
-    return count;
+    return poms;
   }
 
-  render() {
-    const activities = this.state.data;
-    
-    return (
-      <div style={{display: 'flex', flexDirection: 'column'}}>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <div style={{width:'45%', paddingRight: '10px'}}></div>
-          {["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"].map((day) =>
-              <div className='small-text' style={{width: '24px', textAlign: 'center'}} key={day}>{<T>{`myProgress.axes.${day}`}</T>}</div>
-            )}
-        </div>
-        {this.sortActivities(activities).map((activity) => //unsorted: Object.keys(activities)
-          <div style={{display: 'flex', flexDirection: 'row', margin: "5px"}} key={activity}>
-            <div className='small-text' style={{width:'45%', paddingRight: '10px', textAlign: 'right'}}>{activity}</div>
-            {Object.keys(activities[activity]).map((day) =>
-              <div key={day}>
-                {activities[activity][day] ? (
-                  <FullCircle />
-                ) : (
-                  //TODO: if the data says "null" for an activity this means no data was recorded that day
-                  //currently this type of data is registered as "false" instead of "null" in the dataparser
-                  (activities[activity][day] == null) ? (
-                    <GreyCircle/>
-                  ) : (
-                    <EmptyCircle />
-                  )
-                )}
-              </div>
-            )} 
-          </div>
+  parsePomsData();
+
+  /* Render Functions */
+  function renderVariableColumn() {
+    return (<div style={{display: 'flex', flexDirection: 'column', marginRight: "1em", marginLeft: "7%"}}>
+      <div className='small-text' style={{height: "24px", textAlign: 'right'}}/>
+      {Object.keys(pomsData).map((variable) => {
+          return <div key={variable} className='small-text' style={{height: "24px", textAlign: 'right'}}>{emotionToString[variable]}</div>
+        })}
+    </div>);
+  }
+
+  function renderCircles() {
+    return (<div style={{display: 'flex', flexDirection: 'column'}}>
+      <div style={{display: "flex", flexDirection: "row"}}>
+        {["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"].map((day) =>
+          <div className='small-text' style={{width: '24px', textAlign: 'center'}} key={day}>{<T>{`myProgress.axes.${day}`}</T>}</div>
         )}
-        </div>
-    );
+      </div>
+    {Object.keys(pomsData).map((variable) => {
+      return <div key={variable + "-row"} style={{display: "flex", flexDirection: "row"}}>
+        { Object.keys(pomsData[variable]).map((day) => {
+            if (pomsData[variable][day]) return  <Circle key={variable + day} tint={pomsData[variable][day]}/>
+            return <Circle key={variable + day}  isEmpty/>
+        })}
+      </div>
+    })}
+    </div>);
   }
+
+  function renderLegend() {
+    return (<div style={{display: 'flex', flexDirection: 'row', width: "80%", marginLeft: "10%"}}>
+      <div className='small-text' style={{height: "24px"}}>Legende:</div>
+      <div style={{flex: 1, height: "16px", marginTop: "4px", backgroundColor: "var(--idewe-blue-dark-tint1", borderRadius: "20px 0 0 20px", marginLeft: "1em", display: "flex", justifyContent:"center", alignItems: "center", color: "var(--idewe-blue-dark-tint4)"}}>-</div>
+      <div style={{flex: 1, height: "16px", marginTop: "4px", backgroundColor: "var(--idewe-blue-dark-tint2"}}/>
+      <div style={{flex: 1, height: "16px", marginTop: "4px", backgroundColor: "var(--idewe-blue-dark-tint3"}}/>
+      <div style={{flex: 1, height: "16px", marginTop: "4px", backgroundColor: "var(--idewe-blue-dark-tint4"}}/>
+      <div style={{flex: 1, height: "16px", marginTop: "4px", backgroundColor: "var(--idewe-blue-dark-tint5", borderRadius: "0 20px 20px 0", display: "flex", justifyContent:"center", alignItems: "center", color: "var(--idewe-white)"}}>+</div>
+    </div>)
+  }
+    
+  return (
+    <div>
+      <div style={{display: 'flex', flexDirection: 'row'}}>
+        { renderVariableColumn() }
+        { renderCircles() }
+      </div>
+      <hr style={{width: "80%"}}/>
+      { renderLegend() }
+    </div>
+  );
 }

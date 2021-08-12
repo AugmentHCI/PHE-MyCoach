@@ -12,60 +12,60 @@ export function setDataParserLocale(locale){
 
 //define color, min, max and measure (= title shown on the axis when plotted) for each parameter
 //code = key that is used for this parameter by the JSON that is returned by the API
-const parameters = [
+export const parameters = [
   {
-    "id": "satisfaction",
-    "measure": "satisfaction",
+    "id": "t",
+    "measure": "Tevredenheid",
     "color": '--idewe-yellow',
     "min": 0,
     "max": 100,
-    "code": "phe.dagelijks.tevredenheid.dag"
   },
   {
-    "id": "painIntensity",
-    "measure": "painIntensity",
+    "id": "vas",
+    "measure": "Pijn",
     "color": '--idewe-red',
     "min": 0,
     "max": 100,
-    "code": "phe.dagelijks.pijn.intensiteit"
   },
   {
-    "id": "physicalTiredness",
-    "measure": "physicalTiredness", //"physicalTiredness",
+    "id": "bb1",
+    "measure": "Belasting",
+    "color": '--idewe-blue',
+    "min": 0,
+    "max": 100,
+  },
+  {
+    "id": "bb2",
+    "measure": "Belastbaarheid",
+    "color": '--idewe-blue-dark',
+    "min": 0,
+    "max": 100,
+  },
+  {
+    "id": "steps",
+    "measure": "Stappen",
     "color": '--idewe-purple',
-    "min": 1,
-    "max": 4,
-    "code": "phe.dagelijks.lichamelijke.vermoeidheid"
+    "min": 0,
+    "max": 100,
   },
   {
-    "id": "mentalTiredness",
-    "measure": "mentalTiredness", //"mentalTiredness",
-    "color": '--idewe-green-dark',
-    "min": 1,
-    "max": 4,
-    "code": "phe.dagelijks.mentale.vermoeidheid"
-  }
+    "id": "distance",
+    "measure": "Afstand",
+    "color": '--idewe-green',
+    "min": 0,
+    "max": 100,
+  },
 ]
-
-//array om NL data (zoals het wordt opgevraagd) om te zetten naar codes uit i18n files
-const activities = {
-  "Werken": "work", 
-  "Huishouden": "domesticChores", 
-  "Relaxatie oefeningen": "relaxationExercises", 
-  "Lichamelijke oefeningen": "physicalExercises", 
-  "Tijd spenderen met familie of vrienden": "familyOrFriends",  
-  "Iets wat ik leuk vind": "somethingIEnjoy", 
-  "TV/Computer/Lezen": "TV", 
-  "Rusten": "resting", 
-  "Overig": "other"
-}
 
 //array om ordinale data om te zetten naar discrete schaal (om te kunnen plotten)
 const ordinalData = {
-  "Niet vermoeid": 1, 
-  "Enigszins vermoeid": 2, 
-  "Tamelijk vermoeid": 3, 
-  "Erg vermoeid": 4}
+  "Zeer lage belasting": 0, 
+  "Zeer hoge belasting": 100, 
+  "Zeer lage belastbaarheid": 0, 
+  "Zeer hoge belastbaarheid": 100,
+  "Geen pijn": 0,
+  "Ergste pijn voorspelbaar": 100
+}
 
 //array om data die niet als int wordt teruggegeven door API om te zetten van string naar int
 const stringData = {
@@ -110,17 +110,15 @@ function getActivityTranslation(activity){
 // input: data = data from API, parameter = id of selected parameter, timePeriod = "week" or "month"
 export function getParameterData(data, parameter, timePeriod){
   let paramData = [];
-  let fullParamData = parameters.filter(function(param){
-    return param.id == parameter;
-  })
+  let fullParamData = parameters.filter(param => param.id === parameter);
   fullParamData = fullParamData[0];
-  if(fullParamData.measure == fullParamData.id){
+  if(fullParamData.measure === fullParamData.id){
     fullParamData.measure = getMeasureTranslation(fullParamData.measure);
   }
 
   let preFiltered = preFilterData(data);
   let filtered = preFiltered.filter(function(el){
-    return el.vraag==fullParamData.code;
+    return el.vraag==fullParamData.id;
   })
   if(timePeriod == "week"){
     paramData = getDataForWeek(filtered);
@@ -129,6 +127,7 @@ export function getParameterData(data, parameter, timePeriod){
   }
   
   fullParamData.data = paramData;
+  console.log(fullParamData);
   return fullParamData;
 }
 

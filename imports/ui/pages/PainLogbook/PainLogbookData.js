@@ -54,28 +54,28 @@ export const thoughts = {
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-CAUSE-NEG-2": 
-        {level4: "THOUGHT-CAUSE-NEG-2", level3: "CAUSE", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT"], synonyms: ["vorig", "vorige", "voorgaande", "bijdragen", "dokter", "ziekenhuis"], translation: {
+        {level4: "THOUGHT-CAUSE-NEG-2", level3: "CAUSE", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT"], synonyms: ["vorige", "voorgaande", "bijdragen", "dokter", "ziekenhuis"], translation: {
             "nl-BE": "Ik moet een scan laten nemen om de oorzaak van deze pijn te achterhalen",
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-CAUSE-NEG-3": 
-        {level4: "THOUGHT-CAUSE-NEG-3", level3: "CAUSE", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT"], synonyms: ["versleten", "slijt"], translation: {
+        {level4: "THOUGHT-CAUSE-NEG-3", level3: "CAUSE", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT"], synonyms: ["versleten", "kapot"], translation: {
             "nl-BE": "Ik heb slijtage van mijn gewrichten, daardoor heb ik nu pijn",
             "nl-FR": "",
             "en-EN": ""}},
     /* Oorzaak - Positief */
     "THOUGHT-CAUSE-POS-1": 
-        {level4: "THOUGHT-CAUSE-POS-1", level3: "CAUSE", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["gevolg", "versleten"], translation: {
+        {level4: "THOUGHT-CAUSE-POS-1", level3: "CAUSE", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["gevolg", "versleten", "kapot"], translation: {
             "nl-BE": "De pijn, die ik nu ervaar, wilt niet noodzakelijk zeggen dat er iets beschadigd is",
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-CAUSE-POS-2": 
-        {level4: "THOUGHT-CAUSE-POS-2", level3: "CAUSE", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["leeftijd", "parte"], translation: {
+        {level4: "THOUGHT-CAUSE-POS-2", level3: "CAUSE", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["leeftijd", "parten"], translation: {
             "nl-BE": "Normale ouderdomsverschijnselen, zoals slijtage van de gewrichten, spelen maar deels mee in de pijn die ik nu ervaar",
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-CAUSE-POS-3": 
-        {level4: "THOUGHT-CAUSE-POS-3", level3: "CAUSE", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["slechte", "gezonde", "niet-gezonde"], translation: {
+        {level4: "THOUGHT-CAUSE-POS-3", level3: "CAUSE", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["slechte", "niet-gezonde"], translation: {
             "nl-BE": "Ik denk dat ongezonde gewoontes leiden tot de pijn die ik nu ervaar",
             "nl-FR": "",
             "en-EN": ""}},
@@ -92,12 +92,12 @@ export const thoughts = {
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-ACTIVITY-NEG-2": 
-        {level4: "THOUGHT-ACTIVITY-NEG-2", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "ANXIOUS"], synonyms: [], translation: {
+        {level4: "THOUGHT-ACTIVITY-NEG-2", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "ANXIOUS"], synonyms: ["opspannen", "opgespannen"], translation: {
             "nl-BE": "Mijn spieren zijn gespannen door deze bewegingen of activiteiten",
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-ACTIVITY-NEG-3": 
-        {level4: "THOUGHT-ACTIVITY-NEG-3", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT"], synonyms: ["versleten", "werken"], translation: {
+        {level4: "THOUGHT-ACTIVITY-NEG-3", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT"], synonyms: ["versleten", "werken", "repetitief", "dezelfde"], translation: {
             "nl-BE": "Ik krijg slijtage van mijn lichaam door de herhaaldelijke belasting tijdens deze bewegingen of activiteiten",
             "nl-FR": "",
             "en-EN": ""}},
@@ -122,13 +122,13 @@ export const thoughts = {
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-ACTIVITY-NEG-8": 
-        {level4: "THOUGHT-ACTIVITY-NEG-8", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "ANXIOUS"], synonyms: [], translation: {
+        {level4: "THOUGHT-ACTIVITY-NEG-8", level3: "ACTIVITY-WORK", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "ANXIOUS"], synonyms: ["stoppen"], translation: {
             "nl-BE": "Deze pijn is een teken dat ik best stop waarmee ik bezig ben of de activiteit aanpas",
             "nl-FR": "",
             "en-EN": ""}},
     /* Activiteiten en werk - Positief */
     "THOUGHT-ACTIVITY-POS-1": 
-        {level4: "THOUGHT-ACTIVITY-POS-1", level3: "ACTIVITY-WORK", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["beetje", "werken"], translation: {
+        {level4: "THOUGHT-ACTIVITY-POS-1", level3: "ACTIVITY-WORK", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["beetje", "meer", "werken"], translation: {
             "nl-BE": "Als ik geleidelijk wat meer zou bewegen of deze activiteit zou opbouwen, dan zou mijn lichaam sterker en gezonder worden",
             "nl-FR": "",
             "en-EN": ""}},
@@ -143,7 +143,7 @@ export const thoughts = {
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-ACTIVITY-POS-4": 
-        {level4: "THOUGHT-ACTIVITY-POS-4", level3: "ACTIVITY-WORK", level2: "POSITIVE", level1: "THOUGHT", codes: ["ANXIOUS"], synonyms: ["relaxed", "minder"], translation: {
+        {level4: "THOUGHT-ACTIVITY-POS-4", level3: "ACTIVITY-WORK", level2: "POSITIVE", level1: "THOUGHT", codes: ["ANXIOUS"], synonyms: ["relaxed", "minder", "rustiger"], translation: {
             "nl-BE": "Als ik wat meer ontspannen was, dan zou ik waarschijnlijk nu niet zoveel pijn hebben",
             "nl-FR": "",
             "en-EN": ""}},
@@ -155,7 +155,7 @@ export const thoughts = {
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-CONSEQUENCE-NEG-2": 
-        {level4: "THOUGHT-CONSEQUENCE-NEG-2", level3: "CONSEQUENCE", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "DEPRESSED"], synonyms: ["langdurig", "aanhouden"], translation: {
+        {level4: "THOUGHT-CONSEQUENCE-NEG-2", level3: "CONSEQUENCE", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "DEPRESSED"], synonyms: ["langdurig", "aanhouden", "niet weggaan", "blijven"], translation: {
             "nl-BE": "Mijn pijn zal chronisch worden",
             "nl-FR": "",
             "en-EN": ""}},
@@ -188,7 +188,7 @@ export const thoughts = {
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-CONTROL-NEG-2": 
-        {level4: "THOUGHT-CONTROL-NEG-2", level3: "CONTROL", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "DEPRESSED"], synonyms: ["give", "up", "stop"], translation: {
+        {level4: "THOUGHT-CONTROL-NEG-2", level3: "CONTROL", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "DEPRESSED"], synonyms: ["give up", "stoppen"], translation: {
             "nl-BE": "Ik geef het op",
             "nl-FR": "",
             "en-EN": ""}},
@@ -198,7 +198,7 @@ export const thoughts = {
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-CONTROL-NEG-4": 
-        {level4: "THOUGHT-CONTROL-NEG-4", level3: "CONTROL", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "DEPRESSED"], synonyms: ["geen"], translation: {
+        {level4: "THOUGHT-CONTROL-NEG-4", level3: "CONTROL", level2: "NEGATIVE", level1: "THOUGHT", codes: ["TIT", "DEPRESSED"], synonyms: ["geen", "niet in handen"], translation: {
             "nl-BE": "Ik heb weinig controle over mijn pijn",
             "nl-FR": "",
             "en-EN": ""}},
@@ -214,7 +214,7 @@ export const thoughts = {
             "en-EN": ""}},
     /* Controle - Positief */
     "THOUGHT-CONTROL-POS-1": 
-        {level4: "THOUGHT-CONTROL-POS-1", level3: "CONTROL", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["komt", "goed"], translation: {
+        {level4: "THOUGHT-CONTROL-POS-1", level3: "CONTROL", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["komt goed"], translation: {
             "nl-BE": "Ik heb vertrouwen in mijn lichaam",
             "nl-FR": "",
             "en-EN": ""}},
@@ -224,7 +224,7 @@ export const thoughts = {
             "nl-FR": "",
             "en-EN": ""}},
     "THOUGHT-CONTROL-POS-3": 
-        {level4: "THOUGHT-CONTROL-POS-3", level3: "CONTROL", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["oke", "okay", "oké", "draagbaar"], translation: {
+        {level4: "THOUGHT-CONTROL-POS-3", level3: "CONTROL", level2: "POSITIVE", level1: "THOUGHT", codes: ["HT"], synonyms: ["oke", "okay", "oké", "draagbaar", "verdragen"], translation: {
             "nl-BE": "Ik kan met mijn pijn leven",
             "nl-FR": "",
             "en-EN": ""}},
@@ -321,17 +321,17 @@ export const reactions = {
             "nl-FR": "",
             "en-EN": ""}},
     "REACTION-NEG-4": 
-        {level4: "REACTION-NEG-4", level3: "", level2: "NEGATIVE", level1: "REACTION", codes: ["TIR", "ANXIOUS"], synonyms: ["stop", "alles"], translation: {
+        {level4: "REACTION-NEG-4", level3: "", level2: "NEGATIVE", level1: "REACTION", codes: ["TIR", "ANXIOUS"], synonyms: ["stoppen", "alles", "neerleggen"], translation: {
             "nl-BE": "Ik vermijd al de bewegingen en activiteiten die de pijn kunnen verergeren",
             "nl-FR": "",
             "en-EN": ""}},
     "REACTION-NEG-5": 
-        {level4: "REACTION-NEG-5", level3: "", level2: "NEGATIVE", level1: "REACTION", codes: ["TIR", "ANXIOUS"], synonyms: [], translation: {
+        {level4: "REACTION-NEG-5", level3: "", level2: "NEGATIVE", level1: "REACTION", codes: ["TIR"], synonyms: [], translation: {
             "nl-BE": "Ik neem de correcte houding aan en doe verder waar ik mee bezig ben",
             "nl-FR": "",
             "en-EN": ""}},
     "REACTION-NEG-6": 
-        {level4: "REACTION-NEG-6", level3: "", level2: "NEGATIVE", level1: "REACTION", codes: ["TIR"], synonyms: [], translation: {
+        {level4: "REACTION-NEG-6", level3: "", level2: "NEGATIVE", level1: "REACTION", codes: ["TIR", "ANXIOUS"], synonyms: [], translation: {
             "nl-BE": "Ik span mijn lichaam op en doe verder waar ik mee bezig ben",
             "nl-FR": "",
             "en-EN": ""}},
@@ -341,7 +341,7 @@ export const reactions = {
             "nl-FR": "",
             "en-EN": ""}},
     "REACTION-NEG-8": 
-        {level4: "REACTION-NEG-8", level3: "", level2: "NEGATIVE", level1: "REACTION", codes: ["TIR", "ANGER"], synonyms: ["why", "waarom", "ik", "typisch"], translation: {
+        {level4: "REACTION-NEG-8", level3: "", level2: "NEGATIVE", level1: "REACTION", codes: ["TIR", "ANGER"], synonyms: ["why", "waarom", "ik", "typisch", "weeral"], translation: {
             "nl-BE": "Ik word gefrustreerd omdat dit mij overkomen is",
             "nl-FR": "",
             "en-EN": ""}},
@@ -351,7 +351,7 @@ export const reactions = {
             "nl-FR": "",
             "en-EN": ""}},
     /* Positief */
-    "REACTION-POS-1": {level4: "REACTION-POS-1", level3: "", level2: "POSITIVE", level1: "REACTION", codes: ["HR"], synonyms: ["aanpassen", "verander", "werken"], translation: {
+    "REACTION-POS-1": {level4: "REACTION-POS-1", level3: "", level2: "POSITIVE", level1: "REACTION", codes: ["HR"], synonyms: ["aanpassen", "veranderen", "werken"], translation: {
             "nl-BE": "Ik pas de activiteit aan waar ik mee bezig ben of ga verder met een andere activiteit",
             "nl-FR": "",
             "en-EN": ""}},
@@ -359,7 +359,7 @@ export const reactions = {
             "nl-BE": "Ik probeer te ontspannen",
             "nl-FR": "",
             "en-EN": ""}},
-    "REACTION-POS-3": {level4: "REACTION-POS-3", level3: "", level2: "POSITIVE", level1: "REACTION", codes: ["HR"], synonyms: ["ok", "oke", "okay", "rustig", "schrik", "geen"], translation: {
+    "REACTION-POS-3": {level4: "REACTION-POS-3", level3: "", level2: "POSITIVE", level1: "REACTION", codes: ["HR"], synonyms: ["oke", "okay", "rustig", "schrik", "geen"], translation: {
             "nl-BE": "Ik zeg tegen mezelf: Het is oké! Wees niet bang van de pijn, je veroorzaakt niet meer schade in je lichaam",
             "nl-FR": "",
             "en-EN": ""}},
@@ -371,7 +371,7 @@ export const reactions = {
             "nl-BE": "Ik word me bewust van mijn gedachten en gevoelens",
             "nl-FR": "",
             "en-EN": ""}},
-    "REACTION-POS-6": {level4: "REACTION-POS-6", level3: "", level2: "POSITIVE", level1: "REACTION", codes: ["HR"], synonyms: ["stop", "pauzeer"], translation: {
+    "REACTION-POS-6": {level4: "REACTION-POS-6", level3: "", level2: "POSITIVE", level1: "REACTION", codes: ["HR"], synonyms: ["stoppen", "pauzeren", "rusten", "even"], translation: {
             "nl-BE": "Ik neem een korte pauze",
             "nl-FR": "",
             "en-EN": ""}},
@@ -379,7 +379,7 @@ export const reactions = {
             "nl-BE": "Ik probeer bewust op een gepaste manier te reageren op de situatie",
             "nl-FR": "",
             "en-EN": ""}},
-    "REACTION-POS-8": {level4: "REACTION-POS-8", level3: "", level2: "POSITIVE", level1: "REACTION", codes: ["HR", "RELAXED"], synonyms: ["inademen", "sluit", "ogen"], translation: {
+    "REACTION-POS-8": {level4: "REACTION-POS-8", level3: "", level2: "POSITIVE", level1: "REACTION", codes: ["HR", "RELAXED"], synonyms: ["inademen", "relaxen"], translation: {
             "nl-BE": "Ik haal een paar keer diep adem",
             "nl-FR": "",
             "en-EN": ""}},
@@ -823,7 +823,7 @@ export const rules = [
         conditions: {level4: ["THOUGHT-CONSEQUENCE-NEG-1", "THOUGHT-CONSEQUENCE-NEG-2", "THOUGHT-CONSEQUENCE-NEG-3", "THOUGHT-CONTROL-NEG-3", "THOUGHT-CONTROL-NEG-4", "THOUGHT-CONTROL-NEG-5", "THOUGHT-CONTROL-NEG-6"]},
         codeMarkings: ["DEPRESSED"],
         priority: "3",
-        recommendation: "Aan veel factoren die pijn beïnvloeden kan je werken. Probeer eerst te achterhalen welke factoren bij jou een rol spelen",
+        recommendation: "Aan veel factoren die pijn beïnvloeden kan je werken. Probeer eerst te achterhalen welke factoren bij jou een rol spelen.",
         explanation: explanations["Thoughts - Negative"],
         module: "PAINEDUCATION",
         submodule: "PE_MOD_5",
@@ -873,9 +873,9 @@ export const rules = [
         submodule: "ACT_MOD_4",
     },
     {
-        code: "REC-14",
+        code: "REC-15",
         description: "Negative 'panicky' reaction",
-        conditions: {level3: ["REACTION-NEG-2"]},
+        conditions: {level4: ["REACTION-NEG-2"]},
         codeMarkings: ["ANXIOUS", "TIT"],
         priority: "3",
         recommendation: "Blijf kalm, word je bewust van je gedachten en emoties en kies een gepaste reactie.",
@@ -884,7 +884,7 @@ export const rules = [
         submodule: "TE_MOD_4",
     },
     {
-        code: "REC-15",
+        code: "REC-16",
         description: "Positive reactions",
         conditions: {level1: ["REACTION"], level2: ["POSITIVE"]},
         codeMarkings: ["HR"],

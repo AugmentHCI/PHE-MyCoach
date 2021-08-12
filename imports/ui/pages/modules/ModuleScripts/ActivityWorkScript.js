@@ -1211,7 +1211,7 @@ const ACTMOD7FOOD = {
     titleMarkup: ["Belastbaarheid-", "Gezonde voeding"],
     shortTitle: "Gezonde voeding",
     part: 7,
-    description: "Hoe kan je gezond bewegen inbouwen in jouw dagelijks leven? Dit leer in je deze module.",
+    description: "Eet jij al gezond, of kan je hier nog meer aandacht aan besteden? Ontdek het in je deze module.",
     duration: "10 minuten",
     type: "Informatief",
     image: "act-mod-food",

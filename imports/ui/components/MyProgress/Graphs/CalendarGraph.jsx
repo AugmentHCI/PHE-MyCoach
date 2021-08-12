@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getParameterData } from '../../../../api/dataparser';
+import { getParameterData, parameters } from '../../../../api/dataparser';
 import { getFitBitDataMonthly } from '../../../../api/steps_dataparser';
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
@@ -20,8 +20,8 @@ class Cell extends Component {
       max = this.props.data.max;
       color = this.props.data.color;
     } else {
-      max = this.props.comparisonData.max;
-      color = this.props.comparisonData.color;
+      max = this.props.comparisonData?.max;
+      color = this.props.comparisonData?.color;
     }
 
     if(value == null || value == 0){
@@ -57,9 +57,9 @@ class Cell extends Component {
   getHeight = (value, comparison) => {
     let max;
     if(!comparison){
-      max = this.props.data.max;
+      max = this.props.data?.max;
     } else {
-      max = this.props.comparisonData.max;
+      max = this.props.comparisonData?.max;
     }
 
     if(value == null){
@@ -134,7 +134,7 @@ class ColorLegend extends Component {
   render() {
     return(
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10px'}}>
-        <div className='small-text'>{<T>{`myProgress.parameters.${this.props.parameter}`}</T>}</div>
+        <div className='small-text'>{parameters.filter((parameter) => parameter.id === this.props.parameter)[0].measure}</div>
         <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
           {this.getAmountOfCategories().map((d) => {
             return <div key={d} style={{backgroundColor: getComputedStyle(document.documentElement).getPropertyValue(this.props.color + "-tint" + (d+1).toString()), height: "8px", width: "40px"}}></div>;
@@ -154,10 +154,10 @@ export default class CalendarGraph extends Component {
     super(props);
 
     this.state = {
-      parameter: "painIntensity",
-      comparisonParameter: "satisfaction",
-      data: this.getData("painIntensity"),
-      comparisonData: this.getData("satisfaction"),
+      parameter: "t",
+      comparisonParameter: "t",
+      data: this.getData("t"),
+      comparisonData: this.getData("t"),
       month: 1,
       year: 2020
     };
@@ -188,6 +188,7 @@ export default class CalendarGraph extends Component {
   }
 
   updateData = (parameter, comparison) => {
+    console.log("Updating")
     if(!comparison){
       this.setState({parameter: parameter, data: this.getData(parameter)});
     } else {
