@@ -6,6 +6,7 @@ import '../imports/db/PainLogbookMethods.jsx';
 import '../imports/db/GoalSettingMethods.jsx';
 import '../imports/db/ActivityLogbookMethods.jsx';
 import '../imports/db/UserStudyMethods.jsx';
+import { shortcuts } from '../imports/ui/pages/modules/ModuleScripts/Shortcuts.js';
 import moment from 'moment';
 
 
@@ -65,3 +66,51 @@ Meteor.methods({
     return HTTP.call("GET", url, { headers: { "X-KEY": Meteor.settings.XKEY, "Authorization": `Bearer ${analistToken}` } });
   }
 });
+
+WebApp.connectHandlers
+	.use('/api/userexport/shortcuts', (req, res, next) => {
+		if (req.method === 'GET') {
+      /* Check if userID parameter is present */
+      if (!Object.keys(req.query).includes('userID')) {
+        res.writeHead(400, { 'Content-Type': 'text/plain' });
+        res.end(`Error: Provide a 'userID' (deelnemerID) parameter.`);
+        return;
+      }
+      /* Check if language parameter is present */
+      if (!Object.keys(req.query).includes('language') || !['nl-BE', 'en-EN', 'nl-FR'].includes(req.query.language)) {
+        res.writeHead(400, { 'Content-Type': 'text/plain' });
+        res.end(`Error: Provide a 'language' parameter with a value of either NL, EN, or FR.`);
+        return;
+      }
+      /* Check if correct authorization is present */
+      if (req.headers["x-key"] !== Meteor.settings.XKEY) {
+        res.writeHead(401, { 'Content-Type': 'text/plain' });
+        res.end(`Error: Unauthorized, invalid X-KEY.`);
+        return;
+      }
+      const userID = parseInt(req.query.userID);
+      const language = req.query.language;
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      
+      const result = Meteor.call('mycoachshortcut.getShortcuts', {userID: userID, screen: "MAIN", status: "ANY"});
+      res.end(JSON.stringify({userID: userID, data: parseShortcuts(result, language)}));
+    }
+    else {
+			next();
+		}
+});
+
+function parseShortcuts(userShortcuts, language) {
+  const result = [];
+  for (const shortcut of userShortcuts) {
+    if (shortcut.status === "DEFAULT") {
+      result.push({
+        shortcutID: shortcut.shortcut, 
+        title: shortcuts[shortcut.shortcut].title[language],
+        description: shortcuts[shortcut.shortcut].translation[language],
+        link: shortcut.shortcut.toLowerCase(),
+      })
+    }
+  }
+  return result;
+}

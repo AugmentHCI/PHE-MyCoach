@@ -2,6 +2,11 @@ export const shortcuts = {
     "DAILY-COACHING": {
         icon: "idea",
         modal: "DAILY-COACHING",
+        title: {
+            "nl-BE": "Dagelijkse Coaching",
+            "nl-FR": "Coaching du Jour",
+            "en-EN": "Daily Coaching"
+        },
         translation: {
             "nl-BE": "Bekijk je dagelijkse coaching",
             "nl-FR": "Commencez le coaching du jour",
@@ -11,6 +16,11 @@ export const shortcuts = {
     "ACTIVITYLOGBOOK": {
         icon: "calendar",
         link: "activitylogbook",
+        title: {
+            "nl-BE": "Activiteitenlogboek",
+            "nl-FR": "Journal d'activité",
+            "en-EN": "Activitylogbook"
+        },
         translation: {
             "nl-BE": "Bekijk je activiteitenlogboek",
             "nl-FR": "Ouvrez le journal d'activité",
@@ -20,6 +30,11 @@ export const shortcuts = {
     "PAINLOGBOOK": {
         icon: "writing",
         link: "painlogbook",
+        title: {
+            "nl-BE": "Pijnlogboek",
+            "nl-FR": "Journal de la douleur",
+            "en-EN": "Painlogbook"
+        },
         translation: {
             "nl-BE": "Bekijk je pijnlogboek",
             "nl-FR": "Ouvrez le journal de la douleur",
@@ -29,6 +44,11 @@ export const shortcuts = {
     "VALUES": {
         icon: "star",
         link: "values",
+        title: {
+            "nl-BE": "Waarden en doelen",
+            "nl-FR": "Valeurs et objectifs",
+            "en-EN": "Values ​​and goals"
+        },
         translation: {
             "nl-BE": "Mijn waarden en doelen",
             "nl-FR": "Mes valeurs et objectifs",
