@@ -27,11 +27,12 @@ export default function createSwipeContent(props) {
       counterRef.current = counterRef.current + 1;
     }
   
+    /*
     function outOfFrame(id) {
       console.log(id + ' left the screen!')
       cardsState = cardsState.filter(character => character.id !== id);
       setCards(cardsState);
-    }
+    }*/
   
     function swipe(direction) {
       const cardsLeft = cards.filter(card => !alreadyRemoved.has(card.id));
@@ -72,7 +73,7 @@ export default function createSwipeContent(props) {
         {alreadyRemoved.size < props.data.options.length && <React.Fragment>
         <div className='cardContainer'>
           {props.data.options.sort(() => {return (props.data.randomize ? Math.random() - 0.5 : 1)}).map((card, index) =>
-            <TinderCard className='swipe' ref={childRefs[index]} key={card.text} onSwipe={(dir) => swiped(dir, card.id)} onCardLeftScreen={() => outOfFrame(card.id)}>
+            <TinderCard className='swipe' ref={childRefs[index]} key={card.text} onSwipe={(dir) => swiped(dir, card.id)} /*onCardLeftScreen={() => outOfFrame(card.id)}*/>
               <div style={{ backgroundImage: card.image ? 'url(' + card.image + ')' : ""}} className={"swipecard" + (card.image ? "" : "-noimage")}>
                 {card.image && <h3>{card.text}</h3>}
                 {!card.image && <h2>{card.text}</h2>}

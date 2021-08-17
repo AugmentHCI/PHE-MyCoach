@@ -4,6 +4,7 @@ import moment from "moment";
 
 
 export default class ProfileManager {
+
     constructor(userID, userToken) {
         this.userID = userID;
         this.userToken = userToken;

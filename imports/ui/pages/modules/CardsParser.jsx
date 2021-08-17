@@ -51,6 +51,7 @@ function CardsParser(props) {
                     style={{marginBottom: "30px"}}
                     color="blue" 
                     center
+                    width="100%"
                     onClick={() => props.finishCallback(props.moduleStatus !== "COMPLETED", card.action)}>
                         {props.moduleStatus === "COMPLETED" ? card.textOnCompleted : card.text}
                 </Button>);

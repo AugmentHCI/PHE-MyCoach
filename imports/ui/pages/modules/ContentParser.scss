@@ -141,10 +141,15 @@
 }
 
 /* Content - IMAGE */
+
+.content-image-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 .content-image {
     border-radius: 15px;
-    margin-left: 10%;
-    margin-right: 10%;
     margin-top: 20px;
     margin-bottom: 20px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);

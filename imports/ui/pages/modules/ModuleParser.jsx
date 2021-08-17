@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
 import ActivityWorkScript from './ModuleScripts/ActivityWorkScript';
+import StressResilienceScript from './ModuleScripts/StressResilienceScript';
 import ProgressManager from "../../../api/ProgressManager.jsx";
 import ShortcutManager from "../../../api/ShortcutManager.jsx";
 
@@ -59,6 +60,9 @@ export default function ModuleParser(props) {
                 break;
             case "activitywork":
                 updateModuleData(ActivityWorkScript);
+                break;
+            case "stressresilience":
+                updateModuleData(StressResilienceScript);
                 break;
             default:
                 updateModuleData(undefined);

@@ -12,6 +12,7 @@ import jwt_decode from "jwt-decode";
 import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
 import ActivityWorkScript from './ModuleScripts/ActivityWorkScript.js';
+import StressResilienceScript from './ModuleScripts/StressResilienceScript.js';
 import CardsParser from './CardsParser.jsx';
 
 import './SubmoduleParser.scss';
@@ -52,6 +53,11 @@ export default function SubmoduleParser(props) {
             break;
         case 'ACTIVITYWORK':
             ActivityWorkScript.submodules.forEach(submoduleScript => {
+                if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
+            });
+            break;
+        case 'STRESSRESILIENCE':
+            StressResilienceScript.submodules.forEach(submoduleScript => {
                 if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
             });
             break;
@@ -133,8 +139,12 @@ export default function SubmoduleParser(props) {
     useEffect(() => {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
+            /*
             const latestUserProfile = (await profileManager.getLatestQuestionnaire())?.data;
             const profile = latestUserProfile ? latestUserProfile.profile : 1;
+            */
+            const latestUserProfile = {profile: 1};
+            const profile = 1;
             progressManager.setProfile(profile);
             const progress = await progressManager.getModuleProgress(module);
             const modalStatus = await interactionManager.getInteractionStatuses("MODULE_COMPLETION_MODAL");
@@ -147,7 +157,7 @@ export default function SubmoduleParser(props) {
 
     return (
         <React.Fragment>
-            <NavigationBar title={data.title}></NavigationBar>
+            <NavigationBar title={data.navBarTitle ? data.navBarTitle : data.title}></NavigationBar>
             {renderCompletionModal()}
             <div className="container" style={{paddingTop: "85px"}}>
                 {userProgress && userProfile && <FadeIn>
@@ -162,7 +172,7 @@ export default function SubmoduleParser(props) {
                                 hideButton>
                     </ModuleCard>
                     <hr className="module-hr-line"/>
-                    <CardsParser cards={data.cards} module={module} submodule={data.id} moduleStatus={userProgress[module][submodule]} userID={userID} userProfile={userProfile} finishCallback={finishSubmodule}></CardsParser>
+                    <CardsParser cards={data.cards} module={module} submodule={data.id} moduleStatus={userProgress?.module?.submodule} userID={userID} userProfile={userProfile} finishCallback={finishSubmodule}></CardsParser>
                 </FadeIn>}
             </div>
         </React.Fragment>
