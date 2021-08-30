@@ -20,7 +20,6 @@ export default class ActivityLogbookManager {
     }
 
     async updateActivity({activityID, title, startTime, endTime, intensity, goalID=null}) {
-        console.log(activityID);
         return Meteor.callPromise('activitylogbook.updateActivity', 
             {userID: this.userID, activityID: activityID, title: title, startTime: startTime, endTime: endTime, intensity: intensity, goalID: goalID});
     }

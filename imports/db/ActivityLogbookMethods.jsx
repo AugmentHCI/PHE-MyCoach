@@ -4,7 +4,6 @@ import { ActivityLogbookCollection } from './ActivityLogbookCollection.jsx';
 
 Meteor.methods({
     'activitylogbook.insert'({userID, date, startTime, endTime, title, intensity, goal}) {
-        console.log(intensity)
         check(userID, Number);
         check(intensity, String);
         check(startTime, String);
@@ -54,7 +53,7 @@ Meteor.methods({
         check(startTime, String);
         check(endTime, String);
         check(intensity, String);
-        console.log(activityID);
+        console.log(goalID);
 
         ActivityLogbookCollection.upsert({
             // Selector

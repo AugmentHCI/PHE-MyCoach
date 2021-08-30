@@ -44,7 +44,7 @@ export default function PainLogbook() {
     const selectedGoal = getGoal(selectedGoalId);
     const filteredActivities = activities.filter(activity => moment(activity.date).isSame(selectedDay, "day"));
 
-    console.log(editingId);
+    console.log(selectedGoalId);
 
     function generateDays() {
         let day = selectedDay.clone().startOf("isoWeek");
@@ -103,12 +103,12 @@ export default function PainLogbook() {
     }
 
     function getGoal(id) {
-        console.log(id)
-        console.log(goals)
         const filteredGoals = goals.filter(goal => goal._id === id);
         if (filteredGoals.length > 0) return filteredGoals[0];
         else return undefined;
     }
+
+    console.log(selectedGoalId);
 
     async function addActivity() {
         const startTime = startTimeHour + ":" + startTimeMins;
@@ -126,7 +126,7 @@ export default function PainLogbook() {
     async function updateActivity() {
         const startTime = startTimeHour + ":" + startTimeMins;
         const endTime = endTimeHour + ":" + endTimeMins;
-        console.log(editingId)
+        console.log(selectedGoalId)
         await activityLogbookManager.updateActivity({
             activityID: editingId, 
             title: activityTitle, 
@@ -151,7 +151,7 @@ export default function PainLogbook() {
         updateIntensity("LIGHT");
         updateActivityTitle("");
         updateEditingId("");
-        updateSelectedGoalId();
+        updateSelectedGoalId(undefined);
     }
 
     function checkActivityInputValidity() {
@@ -186,7 +186,7 @@ export default function PainLogbook() {
         updateStartTimeHour(""); updateStartTimeMins(""); updateEndTimeHour(""); updateEndTimeMins("");
         updateIntensity("LIGHT");
         updateActivityTitle("");
-        updateSelectedGoalId();
+        updateSelectedGoalId(undefined);
         updateEditingId("");
     }
 
@@ -287,6 +287,13 @@ export default function PainLogbook() {
         </div>)
     }
 
+    function handleDropdownGoalSelection(selectedGoals) {
+        console.log(selectedGoalId)
+        if (!selectedGoals || selectedGoals.length === 0) { updateSelectedGoalId(undefined) }
+        else if (!selectedGoals[0]._id ) { updateSelectedGoalId(undefined) }
+        else { updateSelectedGoalId(selectedGoals[0]._id) }
+    }
+
     function renderAddActivityModal() {
         if (!showModal) return <React.Fragment/>
         return (<AppModal 
@@ -319,10 +326,7 @@ export default function PainLogbook() {
             </div>
             <div className="activity-input-row">
                 <Icon image="goal" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>
-                <Dropdown defaultText={"Kies een doel (optioneel)"} defaultItems={selectedGoal ? [selectedGoal] :  []} items={goals} style={{flex: 2}} idKey="_id" valueKey="title" onChange={(goal) => {
-                    if (!goal[0].id ) updateSelectedGoalId(undefined)
-                    else { updateSelectedGoalId(goal.id) }
-                }}/>
+                <Dropdown defaultText={"Kies een doel (optioneel)"} defaultItems={selectedGoal ? [selectedGoal] :  []} items={goals} style={{flex: 2}} idKey="_id" valueKey="title" onChange={(selectedGoals) => handleDropdownGoalSelection(selectedGoals) }/>
             </div>
         </AppModal>)
     }
@@ -364,8 +368,6 @@ export default function PainLogbook() {
 
 function Activity(props) {
     const buildupScheme = props.goal?.buildupScheme ? new BuildupScheme({schemeString: props.goal.buildupScheme}) : undefined;
-    console.log(buildupScheme);
-    console.log(props.goal)
     let unit = buildupScheme?.unit;
     if (unit && unit.length > 0) unit = unit[0].short;
     const quantity = buildupScheme ? buildupScheme.getGoal(props.week) : undefined;
