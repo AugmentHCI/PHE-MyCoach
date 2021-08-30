@@ -44,8 +44,6 @@ export default function PainLogbook() {
     const selectedGoal = getGoal(selectedGoalId);
     const filteredActivities = activities.filter(activity => moment(activity.date).isSame(selectedDay, "day"));
 
-    console.log(selectedGoalId);
-
     function generateDays() {
         let day = selectedDay.clone().startOf("isoWeek");
         let week = [];
@@ -108,8 +106,6 @@ export default function PainLogbook() {
         else return undefined;
     }
 
-    console.log(selectedGoalId);
-
     async function addActivity() {
         const startTime = startTimeHour + ":" + startTimeMins;
         const endTime = endTimeHour + ":" + endTimeMins;
@@ -126,7 +122,6 @@ export default function PainLogbook() {
     async function updateActivity() {
         const startTime = startTimeHour + ":" + startTimeMins;
         const endTime = endTimeHour + ":" + endTimeMins;
-        console.log(selectedGoalId)
         await activityLogbookManager.updateActivity({
             activityID: editingId, 
             title: activityTitle, 
@@ -288,7 +283,6 @@ export default function PainLogbook() {
     }
 
     function handleDropdownGoalSelection(selectedGoals) {
-        console.log(selectedGoalId)
         if (!selectedGoals || selectedGoals.length === 0) { updateSelectedGoalId(undefined) }
         else if (!selectedGoals[0]._id ) { updateSelectedGoalId(undefined) }
         else { updateSelectedGoalId(selectedGoals[0]._id) }

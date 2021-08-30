@@ -53,7 +53,6 @@ Meteor.methods({
         check(startTime, String);
         check(endTime, String);
         check(intensity, String);
-        console.log(goalID);
 
         ActivityLogbookCollection.upsert({
             // Selector

@@ -2,7 +2,6 @@ import "../db/ActivityLogbookMethods.jsx";
 
 export default class ActivityLogbookManager {
     constructor(userID) {
-        console.log(userID)
         this.userID = parseInt(userID);
     }
 
