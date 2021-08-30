@@ -28,6 +28,8 @@ export default function AdminSettings(props) {
     const [copiedDeelnemerID, setCopiedDeelnemerID] = useState(false);
     const [copiedJWT, setCopiedJWT] = useState(false);
 
+    const [unlockedShortcuts, setUnlockedShortcuts] = useState(false);
+
     async function deletePainlogs() {
         await painLogbookManager.deleteUserLogs();
         setDeletedPainlogs(true);
@@ -51,6 +53,23 @@ export default function AdminSettings(props) {
         await painLogbookManager.addPainLog("Verplaatsing", "Fietsen", "Zwaar", "THOUGHT-CAUSE-POS-1|THOUGHT-CAUSE-NEG-3", "EMOTION-WORNOUT|EMOTION-EXHAUSTED", "REACTION-NEG-3|REACTION-NEG-5", "2021-05-07T10:34:07.705Z");
         await painLogbookManager.addPainLog("Sporten", "Op de loopband", "Zwaar", "THOUGHT-CAUSE-POS-1|THOUGHT-CAUSE-NEG-3", "EMOTION-WORNOUT|EMOTION-DISCOURAGED", "REACTION-NEG-3|REACTION-NEG-5", "2021-04-27T10:34:07.705Z");
         setAddedPainlogs(true);
+    }
+
+    async function unlockStijnShortcut() {
+        const stijnShortcutManager = new ShortcutManager(4799179);
+        stijnShortcutManager.upsertShortcut("PAINLOGBOOK", "MAIN", "DEFAULT");
+        stijnShortcutManager.upsertShortcut("PAINLOGBOOK", "PAINEDUCATION", "DEFAULT");
+        stijnShortcutManager.upsertShortcut("ACTIVITYLOGBOOK", "MAIN", "DEFAULT");
+        stijnShortcutManager.upsertShortcut("ACTIVITYLOGBOOK", "ACTIVITYWORK", "DEFAULT");
+
+        const maxwellShortcutManager = new ShortcutManager(4557583);
+        maxwellShortcutManager.resetUserShortcuts()
+        maxwellShortcutManager.upsertShortcut("ACTIVITYLOGBOOK", "MAIN", "DEFAULT");
+        maxwellShortcutManager.upsertShortcut("ACTIVITYLOGBOOK", "ACTIVITYWORK", "DEFAULT");
+        maxwellShortcutManager.upsertShortcut("VALUES", "MAIN", "DEFAULT");
+        maxwellShortcutManager.upsertShortcut("PAINLOGBOOK", "MAIN", "DEFAULT");
+        maxwellShortcutManager.upsertShortcut("PAINLOGBOOK", "PAINEDUCATION", "DEFAULT");
+        setUnlockedShortcuts(true);
     }
 
     return (<div>
@@ -77,6 +96,8 @@ export default function AdminSettings(props) {
             <h3>Reset-acties</h3>
             <Button color="red" disabled={deletedProgress} onClick={() => deleteProgress()}>{deletedProgress ? "Progressie gewist" : "Wis mijn progressie"}</Button>
             <Button color="red" disabled={deletedPainlogs} onClick={() => deletePainlogs()}>{deletedPainlogs ? "Pijnlogs gewist" : "Wis mijn pijnlogs"}</Button>
+            <h3>Admin-Specifiek</h3>
+            <Button color="blue" onClick={() => unlockStijnShortcut()}>{unlockedShortcuts ? "Ontgrendeld" : "Ontgrendel Shortcuts"}</Button>
         </div>
     </div>)
 }

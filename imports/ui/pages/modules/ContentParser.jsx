@@ -12,6 +12,7 @@ import PillButton from '../../components/PillButton.jsx';
 import Slider from '../../components/Slider.jsx';
 import Input from '../../components/Input.jsx';
 import Icon from '../../components/Illustrations/Icon.jsx';
+import CardWrapper from './ContentStory';
 
 function ContentParser(props) {
 
@@ -436,6 +437,8 @@ function ContentParser(props) {
                 return createMultipleChoiceContent(props);
             case 'Shortcut':
                 return createShortcutContent(props);
+            case 'Story':
+                return createStoryContent(props);
             case 'Break':
                 return <hr/>;
             default:
@@ -537,4 +540,13 @@ function createShortcutContent(props) {
         {showModal && <AppModal title="Snelkoppeling" defaultOption={"Sluit"} notifyParent={() => setShowModal(false)} show={showModal}>{props.data.modalText}</AppModal>}
         <PillButton contentColor={"white"} fillColor={"blue"} icon="information" onClick={() => setShowModal(true)}>{props.data.buttonText}</PillButton>
     </div>)
+}
+
+
+
+function createStoryContent(props) {
+
+    const [showModal, setShowModal] = useState(false);
+
+    return (<CardWrapper/>)
 }

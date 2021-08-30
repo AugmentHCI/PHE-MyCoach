@@ -85,8 +85,8 @@ export default function Question(props) {
 
     /* Other Questionnaires */
     return (<QuestionContainer value={value}>
-        <QuestionContent isCompleted={props.isCompleted}>{props.number.toUpperCase() + ": " + props.en}</QuestionContent>
-        <QuestionTranslation>{props.nl}</QuestionTranslation>
+        <QuestionContent isCompleted={props.isCompleted}>{props.number.toUpperCase() + ": " + props.nl}</QuestionContent>
+        <QuestionTranslation>{props.en}</QuestionTranslation>
         <Radio.Group onChange={onChange} value={value} style={{marginTop:"0", fontFamily:"var(--main-font)", display: "inline-block", flexDirection: "row", gap: "1em"}}>
             { renderOptions(props.optionType) }
         </Radio.Group>

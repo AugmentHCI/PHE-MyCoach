@@ -19,8 +19,9 @@ export default function Input(props) {
         <input 
             type={props.type} 
             id={props.id}
-            className={(props.noOutline ? "no-outline" : "") + (!isBetween ? " red-outline" : "")} 
+            className={(props.noOutline ? "no-outline" : "") + (!isBetween ? " red-outline" : "") + (props.disabled ? " disabled-input" : "")} 
             style={props.style} 
+            disabled={props.disabled}
             value={props.value} 
             checked={props.type === "checkbox" ? props.value : undefined}
             onChange={(event) => { usesCheck ?  updateValue(event.target.checked) : updateValue(event.target.value) }} 

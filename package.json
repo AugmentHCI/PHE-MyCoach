@@ -40,6 +40,7 @@
         "react-mounter": "^1.2.0",
         "react-scripts": "^4.0.0",
         "react-semantic-ui-range": "^0.7.1",
+        "react-swipe-card": "^0.1.4",
         "react-tinder-card": "^1.4.0",
         "semantic-ui-react": "^2.0.3",
         "styled-components": "^5.3.0",

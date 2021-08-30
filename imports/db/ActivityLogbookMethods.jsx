@@ -3,7 +3,7 @@ import moment from 'moment';
 import { ActivityLogbookCollection } from './ActivityLogbookCollection.jsx';
 
 Meteor.methods({
-    'activitylogbook.insert'({userID, date, startTime, endTime, title, intensity, goal}) {
+    'activitylogbook.insert'(userID, date, startTime, endTime, title, intensity, goal, quantity) {
         check(userID, Number);
         check(intensity, String);
         check(startTime, String);
@@ -19,6 +19,7 @@ Meteor.methods({
             intensity: intensity,
             date: date,
             goal: goal,
+            quantity: quantity,
             done: false
         });
     },
@@ -49,7 +50,7 @@ Meteor.methods({
             }
         });
     },
-    'activitylogbook.updateActivity'({userID, activityID, activityTitle, startTime, endTime, intensity, goal}) {
+    'activitylogbook.updateActivity'({userID, activityID, activityTitle, startTime, endTime, intensity, goal, quantity}) {
         check(userID, Number);
         check(startTime, String);
         check(endTime, String);
@@ -69,7 +70,8 @@ Meteor.methods({
                 startTime: startTime,
                 endTime: endTime,
                 intensity: intensity,
-                goal: goal
+                goal: goal,
+                quantity: quantity
             }
         });
     }

@@ -8,7 +8,7 @@ export default class GoalSettingManager {
     /**
      * Inserts a new goal into the database.
      */
-    async insertGoal(title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward) {
+    async insertGoal({title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward, buildupScheme}) {
         await Meteor.callPromise('goalsetting.insertGoal', {
             userID: this.userID,
             title: title, 
@@ -21,6 +21,7 @@ export default class GoalSettingManager {
             threshold: threshold, 
             thresholdDescription: thresholdDescription, 
             reward: reward,
+            buildupScheme: buildupScheme,
             timestamp: new Date()
         });
     }
@@ -28,7 +29,7 @@ export default class GoalSettingManager {
     /**
      * Updates an existing goal with the given goalID into the database.
      */
-         async updateGoal(goalID, title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward) {
+         async updateGoal({goalID, title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward, buildupScheme}) {
             await Meteor.callPromise('goalsetting.updateGoal', {
                 userID: this.userID,
                 goalID: goalID,
@@ -42,6 +43,7 @@ export default class GoalSettingManager {
                 threshold: threshold, 
                 thresholdDescription: thresholdDescription, 
                 reward: reward,
+                buildupScheme: buildupScheme,
                 timestamp: new Date()
             });
         }

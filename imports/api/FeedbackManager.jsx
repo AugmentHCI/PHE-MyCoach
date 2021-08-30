@@ -15,7 +15,7 @@ export default class FeedbackManager {
     /**
      * Fetches all user feedback from database.
      */
-         async getAllFeedback() {
-            return await Meteor.callPromise('mycoachfeedback.getAllFeedback', {});
-        }
+    async getAllFeedback() {
+        return await Meteor.callPromise('mycoachfeedback.getAllFeedback', {});
+    }
 }

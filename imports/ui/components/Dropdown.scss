@@ -97,6 +97,12 @@
     }
 }
 
+.disabled-dropdown {
+    background-color: var(--idewe-gray-verylight) !important;
+    color: var(--idewe-gray-light) !important;
+    cursor: default !important;
+}
+
 /* ANIMATION
 ============================================ */
 

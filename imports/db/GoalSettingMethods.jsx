@@ -2,7 +2,7 @@ import { check } from 'meteor/check';
 import { GoalSettingCollection } from './GoalSettingCollection.jsx';
 
 Meteor.methods({
-    'goalsetting.insertGoal'({userID, title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward}) {
+    'goalsetting.insertGoal'({userID, title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward, buildupScheme}) {
         check(userID, Number);
         check(title, String);
         check(description, String);
@@ -27,10 +27,11 @@ Meteor.methods({
             threshold: threshold, 
             thresholdDescription: thresholdDescription, 
             reward: reward,
+            buildupScheme: buildupScheme,
             timestamp: new Date,
         });
     },
-    'goalsetting.updateGoal'({userID, goalID, title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward}) {
+    'goalsetting.updateGoal'({userID, goalID, title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward, buildupScheme}) {
         check(userID, Number);
         check(title, String);
         check(description, String);
@@ -60,6 +61,7 @@ Meteor.methods({
                 threshold: threshold, 
                 thresholdDescription: thresholdDescription, 
                 reward: reward,
+                buildupScheme: buildupScheme,
                 timestamp: new Date,
             }});
     },

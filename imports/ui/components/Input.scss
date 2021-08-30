@@ -40,6 +40,12 @@ input[type='tel'] {
   border: 2px solid var(--idewe-red) !important;
 }
 
+.disabled-input {
+  background-color: var(--idewe-gray-verylight) !important;
+  color: var(--idewe-gray-light) !important;
+  cursor:default !important;
+}
+
 
 /* Checkbox */
 input[type='checkbox'],
