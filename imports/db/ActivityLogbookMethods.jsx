@@ -3,13 +3,13 @@ import moment from 'moment';
 import { ActivityLogbookCollection } from './ActivityLogbookCollection.jsx';
 
 Meteor.methods({
-    'activitylogbook.insert'(userID, date, startTime, endTime, title, intensity, goal, quantity) {
+    'activitylogbook.insert'({userID, date, startTime, endTime, title, intensity, goal}) {
+        console.log(intensity)
         check(userID, Number);
         check(intensity, String);
         check(startTime, String);
         check(endTime,   String);
         check(title,     String);
-        check(goal,      String);
    
         ActivityLogbookCollection.insert({
             userID: userID,
@@ -19,7 +19,6 @@ Meteor.methods({
             intensity: intensity,
             date: date,
             goal: goal,
-            quantity: quantity,
             done: false
         });
     },
@@ -50,12 +49,12 @@ Meteor.methods({
             }
         });
     },
-    'activitylogbook.updateActivity'({userID, activityID, activityTitle, startTime, endTime, intensity, goal, quantity}) {
+    'activitylogbook.updateActivity'({userID, activityID, title, startTime, endTime, intensity, goalID}) {
         check(userID, Number);
         check(startTime, String);
         check(endTime, String);
         check(intensity, String);
-        check(goal, String);
+        console.log(activityID);
 
         ActivityLogbookCollection.upsert({
             // Selector
@@ -66,12 +65,11 @@ Meteor.methods({
             $set: {
                 userID: userID,
                 _id: activityID,
-                title: activityTitle,
+                title: title,
                 startTime: startTime,
                 endTime: endTime,
                 intensity: intensity,
-                goal: goal,
-                quantity: quantity
+                goal: goalID
             }
         });
     }

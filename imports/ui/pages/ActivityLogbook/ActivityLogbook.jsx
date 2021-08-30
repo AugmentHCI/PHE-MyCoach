@@ -18,14 +18,13 @@ import BuildupScheme from '../../../api/BuildupScheme';
 export default function PainLogbook() {
 
     const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
-    const userId    = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
-    const userToken = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : "demo";
+    const userId   = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     const activityLogbookManager = new ActivityLogbookManager(userId);
-    const goalSettingManager = new GoalSettingManager(userId);
+    const goalSettingManager     = new GoalSettingManager(userId);
 
     const [selectedDay, setSelectedDay] = useState(moment(new Date()));
     const [weekOffset, updateWeekOffset] = useState(0);
-    const [days, setDays] = useState(generateDays(weekOffset));
+    const [days, setDays] = useState(generateDays());
     const [loading, setLoading] = useState(false);
     const [showModal, toggleShowModal] = useState(false);
 
@@ -37,7 +36,6 @@ export default function PainLogbook() {
     const [endTimeHour,   updateEndTimeHour]   = useState("");
     const [endTimeMins,   updateEndTimeMins]   = useState("");
     const [intensity, updateIntensity]         = useState("LIGHT");
-    const [quantity, updateQuantity]           = useState("");
     const [editingId, updateEditingId]         = useState("");
 
     const [activities, setActivities] = useState([]);
@@ -45,6 +43,8 @@ export default function PainLogbook() {
     const [selectedGoalId, updateSelectedGoalId]   = useState(undefined);
     const selectedGoal = getGoal(selectedGoalId);
     const filteredActivities = activities.filter(activity => moment(activity.date).isSame(selectedDay, "day"));
+
+    console.log(editingId);
 
     function generateDays() {
         let day = selectedDay.clone().startOf("isoWeek");
@@ -103,38 +103,43 @@ export default function PainLogbook() {
     }
 
     function getGoal(id) {
+        console.log(id)
+        console.log(goals)
         const filteredGoals = goals.filter(goal => goal._id === id);
         if (filteredGoals.length > 0) return filteredGoals[0];
         else return undefined;
     }
 
-    function closeActivityModal() {
-        toggleShowModal(false);
-        updateStartTimeHour(""); updateStartTimeMins(""); updateEndTimeHour(""); updateEndTimeMins("");
-        updateIntensity("LIGHT");
-        updateQuantity("")
-        updateActivityTitle("");
-        updateSelectedGoalId();
-        updateEditingId("");
-    }
-
     async function addActivity() {
         const startTime = startTimeHour + ":" + startTimeMins;
         const endTime = endTimeHour + ":" + endTimeMins;
-        await activityLogbookManager.insertActivity(selectedDay.toDate(), startTime, endTime, activityTitle, intensity, selectedGoalId, quantity);
+        await activityLogbookManager.insertActivity({
+            date: selectedDay.toDate(), 
+            startTime: startTime, 
+            endTime: endTime, 
+            title: activityTitle, 
+            intensity: intensity, 
+            goalId: selectedGoalId ? selectedGoalId : null});
         fetchActivities();
     }
 
     async function updateActivity() {
         const startTime = startTimeHour + ":" + startTimeMins;
         const endTime = endTimeHour + ":" + endTimeMins;
-        await activityLogbookManager.updateActivity(editingId, activityTitle, startTime, endTime, intensity, selectedGoalId, quantity);
+        console.log(editingId)
+        await activityLogbookManager.updateActivity({
+            activityID: editingId, 
+            title: activityTitle, 
+            startTime: startTime, 
+            endTime: endTime, 
+            intensity: intensity, 
+            goalID: selectedGoalId});
         toggleShowModal(false);
         updateStartTimeHour(""); updateStartTimeMins(""); updateEndTimeHour(""); updateEndTimeMins("");
         updateIntensity("LIGHT");
         updateActivityTitle("");
         updateEditingId("");
-        updateSelectedGoalId();
+        updateSelectedGoalId(undefined);
         fetchActivities();
     }
 
@@ -144,7 +149,6 @@ export default function PainLogbook() {
         toggleShowModal(false);
         updateStartTimeHour(""); updateStartTimeMins(""); updateEndTimeHour(""); updateEndTimeMins("");
         updateIntensity("LIGHT");
-        updateQuantity("");
         updateActivityTitle("");
         updateEditingId("");
         updateSelectedGoalId();
@@ -160,7 +164,7 @@ export default function PainLogbook() {
         if (isGoal) {
             updateSelectedGoalId(goal._id);
             updateActivityTitle(goal.title);
-            updateQuantity(goal.quantity)
+            updateIntensity("LIGHT")
             toggleShowModal(true);
             return;
         }
@@ -175,6 +179,15 @@ export default function PainLogbook() {
         else updateSelectedGoalId(undefined);
         updateEditingId(activityId);
         toggleShowModal(true);
+    }
+
+    function closeActivityEditor() {
+        toggleShowModal(false);
+        updateStartTimeHour(""); updateStartTimeMins(""); updateEndTimeHour(""); updateEndTimeMins("");
+        updateIntensity("LIGHT");
+        updateActivityTitle("");
+        updateSelectedGoalId();
+        updateEditingId("");
     }
 
     function renderInformationCard() {
@@ -238,7 +251,7 @@ export default function PainLogbook() {
                 intensity={activity.intensity}
                 startTime={activity.startTime}
                 toggleDone={toggleDone}
-                goal={getGoal(activity._id)}
+                goal={getGoal(activity.goal)}
                 week={moment().subtract(weekOffset, "week").format("W-YYYY")}
                 openActivityEditor={openActivityEditor}
                 endTime={activity.endTime}/>)}
@@ -253,8 +266,7 @@ export default function PainLogbook() {
                 const selectedDays = Object.keys(JSON.parse(goal.days)).filter(function(d){return JSON.parse(goal.days)[d]});
                 if (!selectedDays.includes(day)) return false;
                 for (const act of filteredActivities) {
-                    const activityGoal = act.goal;
-                    if (activityGoal && activityGoal?.id === goal._id) { return false; }
+                    if (act.goal && act.goal === goal._id) { return false; }
                 }
                 return true;
             }
@@ -284,7 +296,7 @@ export default function PainLogbook() {
                 disabledDefault={!checkActivityInputValidity()}
                 notifyParent={() => saveActivity()}
                 backOption="Annuleer"
-                notifyBack={() => closeActivityModal()}>
+                notifyBack={() => closeActivityEditor()}>
             <Input type="text" value={activityTitle} onChange={updateActivityTitle} placeholder="Naam activiteit" style={{width:"100%"}}/>
             <div className="activity-input-row">
                 <Icon image="time" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>
@@ -352,6 +364,8 @@ export default function PainLogbook() {
 
 function Activity(props) {
     const buildupScheme = props.goal?.buildupScheme ? new BuildupScheme({schemeString: props.goal.buildupScheme}) : undefined;
+    console.log(buildupScheme);
+    console.log(props.goal)
     let unit = buildupScheme?.unit;
     if (unit && unit.length > 0) unit = unit[0].short;
     const quantity = buildupScheme ? buildupScheme.getGoal(props.week) : undefined;
@@ -359,7 +373,7 @@ function Activity(props) {
         <div className="activity-content" onClick={() => props.openActivityEditor(props.id, props.isGoal, props.goal)}>
             <div className="activity-header">
                 { props.isGoal && <Icon image={"goal"} style={{margin:"0 10px 0 0"}} color="blue" width={"16px"} /> }
-                <div className="activity-title">{props.isGoal ? props.goal.title : props.title } {!props.isGoal && quantity && <p style={{display:"inline", fontSize:"14px", color:"var(--idewe-gray)", marginLeft: "2px"}}>{quantity}</p>}</div>
+                <div className="activity-title">{props.isGoal ? props.goal.title : props.title } {!props.isGoal && quantity && <p style={{display:"inline", fontSize:"14px", color:"var(--idewe-gray)", marginLeft: "2px"}}>{quantity + " " + unit}</p>}</div>
             </div>
             <div style={{display:"flex"}}>
                 {props.intensity && <div className={"activity-intensity-" + props.intensity.toLowerCase()}>
