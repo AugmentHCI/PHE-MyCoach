@@ -408,32 +408,32 @@ export const codeFrequencies = () => {
 export const conversation = {
     /* Inleiding */
     "MESSAGE-INTRO": {
-        content: "Goeiedag! Heb je recentelijk last gehad van een pijnscheut of een sterke toename van pijn?",
+        content: {"en-EN": "Hello! Did you recently experience a pain flare-up or an increase in pain?", "nl-BE": "Goeiedag! Heb je recentelijk last gehad van een pijnscheut of een sterke toename van pijn?"},
         sentBy: "coach",
         response: ["RESPONSE-YES-MESSAGE-INTRO", "RESPONSE-YES2-MESSAGE-INTRO"]
     },
     "RESPONSE-YES-MESSAGE-INTRO": {
-        content: "Ja, inderdaad",
+        content: {"en-EN": "Yes, indeed", "nl-BE":"Ja, inderdaad"},
         sentBy: "user",
         choice: true,
         response: ["MESSAGE-1"]
     },
     "RESPONSE-YES2-MESSAGE-INTRO": {
-        content: "Klopt",
+        content: {"en-EN": "Correct", "nl-BE":"Klopt"},
         sentBy: "user",
         choice: true,
         response: ["MESSAGE-1"]
     },
     /* Vraag 1 */
     "MESSAGE-1": {
-        content: "En waar was je / wat was je aan het doen toen je pijn kreeg of (in sterke mate) toenam?",
+        content: {"en-EN": "Where were you/what were you doing when your pain became (much) worse?", "nl-BE":"En waar was je / wat was je aan het doen toen je pijn of (in sterke mate) toenam?"},
         sentBy: "coach", 
         response: ["RESPONSE-1-MESSAGE-1", "RESPONSE-2-MESSAGE-1", "RESPONSE-3-MESSAGE-1", "RESPONSE-4-MESSAGE-1", "RESPONSE-5-MESSAGE-1", "RESPONSE-6-MESSAGE-1", "RESPONSE-7-MESSAGE-1", "RESPONSE-8-MESSAGE-1"]
     },
     "RESPONSE-1-MESSAGE-1": {
         id: "Sporten",
         category: "CONTEXT",
-        content: "Sport / beweging 🏃🏽",
+        content: {"en-EN": "Sport / movement 🏃🏽", "nl-BE":"Sport / beweging 🏃🏽"},
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
@@ -441,7 +441,7 @@ export const conversation = {
     "RESPONSE-2-MESSAGE-1": {
         id: "Werken",
         category: "CONTEXT",
-        content: "Werk 💼 (betaald, vrijwillig, studeren, ...)",
+        content: {"en-EN": "Work 💼 (paid employment, volunteering, education, etc.)", "nl-BE": "Werk 💼 (betaald, vrijwillig, studeren, ...)"},
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
@@ -449,7 +449,7 @@ export const conversation = {
     "RESPONSE-3-MESSAGE-1": {
         id: "Huishouden",
         category: "CONTEXT",
-        content: "Huishouden 🏠 (tuinieren, koken, boodschappen doen, ...)",
+        content: {"en-EN": "Housework 🏠 (household chores, gardening, caregiving, shopping, etc.)", "nl-BE": "Huishouden 🏠 (tuinieren, koken, boodschappen doen, ...)"},
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
@@ -457,7 +457,7 @@ export const conversation = {
     "RESPONSE-4-MESSAGE-1": {
         id: "Sociale activiteit",
         category: "CONTEXT",
-        content: "Sociale activiteit 😄 (activiteiten met vrienden, familie, collega's, ...)",
+        content: {"en-EN": "Social pastimes 😄 (activities with friends, family, colleagues, etc.)", "nl-BE":"Sociale activiteit 😄 (activiteiten met vrienden, familie, collega's, ...)"},
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
@@ -465,7 +465,7 @@ export const conversation = {
     "RESPONSE-5-MESSAGE-1": {
         id: "Vrije tijd",
         category: "CONTEXT",
-        content: "Vrije tijd 📚 (hobbies, TV kijken, relaxatie, iets wat je leuk vindt, )",
+        content: {"en-EN": "Leisure 📚 (hobbies, watching TV, relaxation, activities you enjoy, etc.)", "nl-BE":"Vrije tijd 📚 (hobbies, TV kijken, relaxatie, iets wat je leuk vindt, )"},
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
@@ -473,7 +473,7 @@ export const conversation = {
     "RESPONSE-6-MESSAGE-1": {
         id: "Verplaatsing",
         category: "CONTEXT",
-        content: "Verplaatsing 🚘",
+        content: {"en-EN": "Travel 🚘 (driving, cycling, walking, public transport, etc.)", "nl-BE":"Verplaatsing 🚘 (auto, fiets, te voet, openbaar vervoer, ...)"},
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
@@ -481,7 +481,7 @@ export const conversation = {
     "RESPONSE-7-MESSAGE-1": {
         id: "Rusten",
         category: "CONTEXT",
-        content: "Rusten 😴",
+        content: {"en-EN": "Resting 😴", "nl-BE":"Rusten 😴"},
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
@@ -489,13 +489,13 @@ export const conversation = {
     "RESPONSE-8-MESSAGE-1": {
         id: "Overig",
         category: "CONTEXT",
-        content: "Overig 💬",
+        content: {"en-EN": "Other / miscellaneous 💬", "nl-BE":"Overig 💬"},
         sentBy: "user",
         choice: true, 
         response: ["MESSAGE-1-INPUT"]
     },
     "MESSAGE-1-INPUT": {
-        content: "Specifieer kort wat je aan het doen was.",
+        content: {"en-EN": "Briefly specify what you were doing.", "nl-BE":"Specifieer kort wat je aan het doen was."},
         sentBy: "coach", 
         response: ["MESSAGE-1-INPUT-RESPONSE"]
     },
@@ -506,34 +506,34 @@ export const conversation = {
         response: ["MESSAGE-1-INTENSITY"]
     },
     "MESSAGE-1-INTENSITY": {
-        content: "Hoe intensief was de activiteit?",
+        content: {"en-EN": "How intense was the activity?", "nl-BE":"Hoe intensief was de activiteit?"},
         sentBy: "coach", 
         response: ["MESSAGE-1-INTENSITY-RESPONSE-1", "MESSAGE-1-INTENSITY-RESPONSE-2", "MESSAGE-1-INTENSITY-RESPONSE-3"]
     },
     "MESSAGE-1-INTENSITY-RESPONSE-1": {
         id: "Licht",
         category: "INTENSITY",
-        content: "Licht",
+        content: {"en-EN": "Light", "nl-BE":"Licht"},
         sentBy: "user",
         response: ["MESSAGE-2"]
     },
     "MESSAGE-1-INTENSITY-RESPONSE-2": {
         id: "Matig",
         category: "INTENSITY",
-        content: "Matig",
+        content: {"en-EN": "Moderate", "nl-BE":"Matig"},
         sentBy: "user",
         response: ["MESSAGE-2"]
     },
     "MESSAGE-1-INTENSITY-RESPONSE-3": {
         id: "Zwaar",
         category: "INTENSITY",
-        content: "Zwaar",
+        content: {"en-EN": "Heavy", "nl-BE":"Zwaar"},
         sentBy: "user",
         response: ["MESSAGE-2"]
     },
     /* Vraag 2 - Emoties */
     "MESSAGE-2": {
-        content: "Kan je aanduiden welke van onderstaande gevoelens aanwezig waren toen je pijn kreeg of (in sterke mate) toenam? (Je kan er meerdere aanduiden)",
+        content: {"en-EN": "Could you please indicate which of the following feelings you experienced when your pain became (much) worse? (You can indicate multiple)", "nl-BE":"Kan je aanduiden welke van onderstaande gevoelens aanwezig waren toen je pijn kreeg of (in sterke mate) toenam? (Je kan er meerdere aanduiden)"},
         sentBy: "coach", 
         response: ["RESPONSE-MESSAGE-2"]
     },
@@ -545,7 +545,7 @@ export const conversation = {
     },
     /* Vraag 3 - Gedachten */
     "MESSAGE-3": {
-        content: "Kan je aanduiden welke van onderstaande gedachten aanwezig waren toen je pijn kreeg of (in sterke mate) toenam?",
+        content: {"en-EN": "Can you indicate which of the following thoughts you experienced when your pain became (much) worse?", "nl-BE":"Kan je aanduiden welke van onderstaande gedachten aanwezig waren toen je pijn kreeg of (in sterke mate) toenam?"},
         sentBy: "coach", 
         response: ["RESPONSE-MESSAGE-3"]
     },
@@ -556,7 +556,7 @@ export const conversation = {
     },
     /* Vraag 4 - Reacties */
     "MESSAGE-4": {
-        content: "En kan je nu aanduiden welke reactie je had op je pijn?",
+        content: {"en-EN": "Can you now indicate how you responded to your pain?", "nl-BE":"En kan je nu aanduiden welke reactie je had op je pijn?"},
         sentBy: "coach", 
         response: ["RESPONSE-MESSAGE-4"]
     },
@@ -567,43 +567,43 @@ export const conversation = {
     },
     /* Vraag 5 - Reflectie */
     "MESSAGE-5": {
-        content: "Had je iets anders/beter kunnen doen?",
+        content: {"en-EN": "Could you have done something different or better?", "nl-BE":"Had je iets anders/beter kunnen doen?"},
         sentBy: "coach", 
         response: ["RESPONSE-YES-MESSAGE-5", "RESPONSE-MAYBE-MESSAGE-5", "RESPONSE-NO-MESSAGE-5"]
     },
     "RESPONSE-YES-MESSAGE-5": {
-        content: "Ja",
+        content: {"en-EN": "Yes", "nl-BE":"Ja"},
         sentBy: "user", 
         response: ["MESSAGE-6"]
     },
     "RESPONSE-MAYBE-MESSAGE-5": {
-        content: "Niet zeker",
+        content: {"en-EN": "Not sure", "nl-BE":"Niet zeker"},
         sentBy: "user", 
         response: ["MESSAGE-6"]
     },
     "RESPONSE-NO-MESSAGE-5": {
-        content: "Nee",
+        content: {"en-EN": "No", "nl-BE":"Nee"},
         sentBy: "user", 
         response: ["MESSAGE-6"]
     },
     /* Vraag 5 - Reflectie */
     "MESSAGE-6": {
-        content: "Weet je hoe je in de toekomst hier aan kan werken?",
+        content: {"en-EN": "Do you know how you can work on this in future? ", "nl-BE":"Weet je hoe je in de toekomst hier aan kan werken?"},
         sentBy: "coach", 
         response: ["RESPONSE-YES-MESSAGE-6", "RESPONSE-MAYBE-MESSAGE-6", "RESPONSE-NO-MESSAGE-6"]
     },
     "RESPONSE-YES-MESSAGE-6": {
-        content: "Ja ",
+        content: {"en-EN": "Yes ", "nl-BE":"Ja "},
         sentBy: "user", 
         response: ["RECOMMENDATION"]
     },
     "RESPONSE-MAYBE-MESSAGE-6": {
-        content: "Niet echt",
+        content: {"en-EN": "Not really", "nl-BE":"Niet echt"},
         sentBy: "user", 
         response: ["RECOMMENDATION"]
     },
     "RESPONSE-NO-MESSAGE-6": {
-        content: "Nee ",
+        content: {"en-EN": "No ", "nl-BE":"Nee "},
         sentBy: "user", 
         response: ["RECOMMENDATION"]
     },
@@ -615,34 +615,33 @@ export const conversation = {
     }, 
     "OPEN-RECOMMENDATION": {
         content: "recommendation-answer",
-        text: "Ja, deze aanbeveling spreekt aan",
+        text: {"nl-BE": "Ja, deze aanbeveling spreekt aan", "en-EN": "Yes, this recommendation is interesting"},
         sentBy: "user",
-        action: "openRecommendation",
+        action: "saveAndClose",
         response: ["RECOMMENDATION"]
     },
     "NONERELEVANT": {
         content: "recommendation-answer",
-        text: "Geen enkele aanbeveling relevant",
+        text: {"nl-BE": "Geen enkele aanbeveling relevant", "en-EN": "None of the recommendations are relevant"},
         sentBy: "user", 
         action: "noneRelevant",
         response: ["RECOMMENDATION"]
     },
 }
-
 export const explanations = {
     /* Emotions */
-    "Negative Feelings": "Je hebt een aantal onprettige gevoelens aangeduid. Onprettige gevoelens zoals angst, spanning, verdriet, boosheid en vermoeidheid kunnen bijdragen aan de pijn die je nu ervaart. Je pijndempende mechanismen gaan minder goed werken en er worden sneller pijn-gerelateerde prikkels naar de hersenen gestuurd. Zo kan je pijn ervaren bij normale bewegingen en aanrakingen of soms zelfs spontane pijn.",
-    "Positive Feelings": "Je hebt enkel prettige gevoelens aangeduid, dat is mooi. Angst, spanning, verdriet, boosheid en vermoeidheid kunnen bijdragen aan pijn. Pijndempende mechanismen gaan minder goed werken en er worden sneller pijn-gerelateerde prikkels naar de hersenen gestuurd. Zo kan je pijn ervaren bij normale bewegingen en aanrakingen of soms zelfs spontane pijn.",
+    "Negative Feelings": {"en-EN": "You indicated some unpleasant feelings. Feeling like this must be quite a burden. Uncomfortable feelings such as anxiety, tension, sadness, anger and fatigue can cause your pain-relieving mechanisms to have less of an effect and make your brain more sensitive to painful stimuli. For example, normal movements or physical contact can cause you pain. You may even suffer pain spontaneously. Do you feel comfortable in your own skin? Your brain filters out some of the pain, making it less taxing to deal with.", "nl-BE": "Je hebt een aantal onprettige gevoelens aangeduid. Onprettige gevoelens zoals angst, spanning, verdriet, boosheid en vermoeidheid kunnen bijdragen aan de pijn die je nu ervaart. Je pijndempende mechanismen gaan minder goed werken en er worden sneller pijn-gerelateerde prikkels naar de hersenen gestuurd. Zo kan je pijn ervaren bij normale bewegingen en aanrakingen of soms zelfs spontane pijn."},
+    "Positive Feelings": {"en-EN": "You indicated some pleasant feelings. That’s healthy. Do you feel comfortable in your own skin? Your brain filters out some of the pain, making it less taxing to deal with.", "nl-BE": "Je hebt enkele prettige gevoelens aangeduid, dat is mooi. Angst, spanning, verdriet, boosheid en vermoeidheid kunnen bijdragen aan pijn. Pijndempende mechanismen gaan minder goed werken en er worden sneller pijn-gerelateerde prikkels naar de hersenen gestuurd. Zo kan je pijn ervaren bij normale bewegingen en aanrakingen of soms zelfs spontane pijn."},
     /* Thoughts */
-    "Physical damage - Negative": "Volgens jou speelt lichamelijke schade een grote rol bij de pijn die je nu ervaart. Maar dit is slechts één van vele factoren die kunnen bijdragen aan pijn. Veel pijnklachten ontstaan zelfs zonder lichamelijke schade. Bovendien is ons lichaam zeer goed in staat om schade te herstellen. Zeker bij langdurige pijn speelt lichamelijke schade nog maar een kleine rol. Ook tijdens een pijnopstoot is de kans op schade beperkt. Dit wordt meestal veroorzaakt door een overgevoelig zenuwstelsel als reactie op factoren zoals stress, spanning, zorgen, onvoldoende beweging of het uitvoeren van activiteiten die je niet gewoon bent. Uit onderzoek blijkt ook dat lichamelijke schade zoals slijtage van de gewrichten vaak voorkomt bij mensen zonder pijnklachten.",
-    "Physical damage - Positive": "Volgens jou speelt lichamelijke schade geen grote rol bij de pijn die je nu ervaart. Super! Lichamelijke schade is slechts één van vele factoren die kunnen bijdragen aan pijn. Veel pijnklachten ontstaan zelfs zonder lichamelijke schade. Bovendien is ons lichaam zeer goed in staat om schade te herstellen. Ook tijdens een pijnopstoot is de kans op schade beperkt. Dit wordt meestal veroorzaakt door een overgevoelig zenuwstelsel als reactie op factoren zoals stress, spanning, zorgen, onvoldoende beweging of het uitvoeren van activiteiten die je niet gewoon bent. Uit onderzoek blijkt ook dat lichamelijke schade zoals slijtage van de gewrichten vaak voorkomt bij mensen zonder pijnklachten.",
-    "Activities - Negative": "Je geeft aan dat je houding en activiteiten een belangrijke rol spelen bij de pijn die je nu ervaart. Het is oké om pijn te ervaren tijdens bewegen of het uitvoeren van activiteiten. Dit heeft zelden te maken met lichamelijke schade, maar eerder met een overgevoelige reactie van het zenuwstelsel. Misschien heb je te veel gedaan (overbelasting) of heb je activiteiten gedaan die je niet gewoon bent. Ook een gespannen houding leidt tot meer pijn-gerelateerde prikkels en een overgevoelig zenuwstelsel. Een overgevoelig zenuwstelsel zorgt er dan weer voor dat je sneller pijn gaat ervaren, ook tijdens normale activiteiten of bewegingen.",
-    "Activities - Positive": "Je geeft aan dat het oké is om pijn te ervaren tijdens bewegen en het uitvoeren van je activiteiten. Heel goed. Deze pijn heeft zelden te maken met lichamelijke schade, maar eerder met een overgevoelige reactie van het zenuwstelsel. Misschien heb je te veel gedaan (overbelasting) of heb je activiteiten gedaan die je niet gewoon bent. Ook een gespannen houding leidt tot meer pijn-gerelateerde prikkels en een overgevoelig zenuwstelsel. Een overgevoelig zenuwstelsel zorgt er dan weer voor dat je sneller pijn gaat ervaren, ook tijdens normale activiteiten of bewegingen.",
-    "Thoughts - Negative": "Je hebt een aantal gedachten aangeduid die mogelijks een ongunstig effect hebben op je situatie. Negatieve gedachten en emoties beïnvloeden ons gedrag, zorgen voor stress en verhogen de kans op een overgevoelig zenuwstelsel. Door veel aandacht te schenken aan je pijn, gaan je hersenen ook meer op deze prikkels letten en ze uitvergroten.",
-    "Thoughts - Positive": "Je hebt een aantal positieve en helpende gedachten aangeduid. Heel goed! Negatieve gedachten en emoties beïnvloeden ons gedrag, zorgen voor stress en verhogen de kans op een overgevoelig zenuwstelsel. Door veel aandacht te schenken aan je pijn, gaan je hersenen ook meer op deze prikkels letten en ze uitvergroten.",
+    "Physical damage - Negative": {"en-EN": "You believe that bodily injury is a major factor in the pain you are currently experiencing. However, this is just one of many factors that can contribute to pain. Many pain complaints are unrelated to physical injury. What’s more, our bodies are very good at repairing themselves. In cases of prolonged pain in particular, bodily injuries play only a minor role. Even when pain flares up, the risk of injury is limited. This tends to be a hypersensitive response by your nervous system to factors such as stress, tension, worry, a lack of exercise or activities you don't perform on a regular basis. Studies show that physical injury such as joint wear is also common among people who do not experience pain.", "nl-BE": "Volgens jou speelt lichamelijke schade een grote rol bij de pijn die je nu ervaart. Maar dit is slechts één van vele factoren die kunnen bijdragen aan pijn. Veel pijnklachten ontstaan zelfs zonder lichamelijke schade. Bovendien is ons lichaam zeer goed in staat om schade te herstellen. Zeker bij langdurige pijn speelt lichamelijke schade nog maar een kleine rol. Ook tijdens een pijnopstoot is de kans op schade beperkt. Dit wordt meestal veroorzaakt door een overgevoelig zenuwstelsel als reactie op factoren zoals stress, spanning, zorgen, onvoldoende beweging of het uitvoeren van activiteiten die je niet gewoon bent. Uit onderzoek blijkt ook dat lichamelijke schade zoals slijtage van de gewrichten vaak voorkomt bij mensen zonder pijnklachten."},
+    "Physical damage - Positive": {"en-EN": "You believe bodily injury is not a major factor in the pain you are currently experiencing. Great! Bodily injury is just one of many factors that can contribute to pain. Many pain complaints are unrelated to physical injury. What’s more, our bodies are very good at repairing themselves. Even when pain flares up, the risk of injury is limited.", "nl-BE": "Volgens jou speelt lichamelijke schade geen grote rol bij de pijn die je nu ervaart. Super! Lichamelijke schade is slechts één van vele factoren die kunnen bijdragen aan pijn. Veel pijnklachten ontstaan zelfs zonder lichamelijke schade. Bovendien is ons lichaam zeer goed in staat om schade te herstellen. Ook tijdens een pijnopstoot is de kans op schade beperkt. Dit wordt meestal veroorzaakt door een overgevoelig zenuwstelsel als reactie op factoren zoals stress, spanning, zorgen, onvoldoende beweging of het uitvoeren van activiteiten die je niet gewoon bent. Uit onderzoek blijkt ook dat lichamelijke schade zoals slijtage van de gewrichten vaak voorkomt bij mensen zonder pijnklachten."},
+    "Activities - Negative": {"en-EN": "You have indicated that your attitude and activities are significant contributing factors to your current level of pain. It is OK to experience pain while moving or performing activities. This is rarely due to physical damage and is more likely to be a hypersensitive response by your nervous system. Perhaps you overexerted yourself or did something different to your usual activities. A tense posture can trigger more pain-related stimuli and make your nervous system hypersensitive. A hypersensitive nervous system means you will feel pain more easily, even during normal activities or movement. Fortunately, you can reduce this sensitivity by working on the factors that contribute to it. Keep in mind that the effects will not be instantaneous.", "nl-BE": "Je geeft aan dat je houding en activiteiten een belangrijke rol spelen bij de pijn die je nu ervaart. Het is oké om pijn te ervaren tijdens bewegen of het uitvoeren van activiteiten. Dit heeft zelden te maken met lichamelijke schade, maar eerder met een overgevoelige reactie van het zenuwstelsel. Misschien heb je te veel gedaan (overbelasting) of heb je activiteiten gedaan die je niet gewoon bent. Ook een gespannen houding leidt tot meer pijn-gerelateerde prikkels en een overgevoelig zenuwstelsel. Een overgevoelig zenuwstelsel zorgt er dan weer voor dat je sneller pijn gaat ervaren, ook tijdens normale activiteiten of bewegingen."},
+    "Activities - Positive": {"en-EN": "You have indicated that your attitude and activities are significant contributing factors to your current level of pain. It is OK to experience pain while moving or performing activities. This is rarely due to physical damage and is more likely to be a hypersensitive response by your nervous system. Fortunately, you can reduce this sensitivity by working on the factors that contribute to it. Keep in mind that the effects will not be instantaneous.", "nl-BE": "Je geeft aan dat het oké is om pijn te ervaren tijdens bewegen en het uitvoeren van je activiteiten. Heel goed. Deze pijn heeft zelden te maken met lichamelijke schade, maar eerder met een overgevoelige reactie van het zenuwstelsel. Misschien heb je te veel gedaan (overbelasting) of heb je activiteiten gedaan die je niet gewoon bent. Ook een gespannen houding leidt tot meer pijn-gerelateerde prikkels en een overgevoelig zenuwstelsel. Een overgevoelig zenuwstelsel zorgt er dan weer voor dat je sneller pijn gaat ervaren, ook tijdens normale activiteiten of bewegingen."},
+    "Thoughts - Negative": {"en-EN": "You have indicated several thoughts that can have an adverse effect on your situation. It is totally fine to feel this way. You cannot switch on or off (troublesome) thoughts and feelings just like that. However, negative thoughts and emotions influence your behaviour, cause stress and increase the risk of making your nervous system hypersensitive. By paying close attention to your pain, your brain will be more aware of these stimuli and amplify them.", "nl-BE": "Je hebt een aantal gedachten aangeduid die mogelijks een ongunstig effect hebben op je situatie. Negatieve gedachten en emoties beïnvloeden ons gedrag, zorgen voor stress en verhogen de kans op een overgevoelig zenuwstelsel. Door veel aandacht te schenken aan je pijn, gaan je hersenen ook meer op deze prikkels letten en ze uitvergroten."},
+    "Thoughts - Positive": {"en-EN": "You have indicated that you have some helping thoughts. Very good! Do you feel comfortable in your own skin? Your brain filters out some of the pain, making it less taxing to deal with.", "nl-BE": "Je hebt een aantal positieve en helpende gedachten aangeduid. Heel goed! Negatieve gedachten en emoties beïnvloeden ons gedrag, zorgen voor stress en verhogen de kans op een overgevoelig zenuwstelsel. Door veel aandacht te schenken aan je pijn, gaan je hersenen ook meer op deze prikkels letten en ze uitvergroten."},
     /* Reactions */
-    "Reaction - Negative": "Aan je reactie kan nog gewerkt worden. Hevige emoties en gedachten zoals angst of frustratie versterken pijnprikkels en vormen een risico op een overgevoelig zenuwstelsel. Ze leiden tot een impulsieve, maar misschien niet de beste, reactie. Het heeft geen zin om je te laten leiden door je pijn en op dagen dat het goed gaat veel te doen en de dagen nadien niets meer te kunnen doen. Door overbelasting werk je een overgevoelig zenuwstelsel in de hand. Lang rusten en veel activiteiten vermijden vertraagt het herstelproces en zorgt er zelfs voor dat je belastbaarheid afneemt. Dit brengt je op termijn nergens.",
-    "Reaction - Positive": "Uit jouw reactie blijkt dat je goed hebt gereageerd op de pijn. Super! Hevige emoties en gedachten zoals angst of frustratie versterken pijnprikkels en vormen een risico op een overgevoelig zenuwstelsel. Ze leiden tot een impulsieve, maar misschien niet de beste, reactie. Het heeft geen zin om je te laten leiden door je pijn en op dagen dat het goed gaat veel te doen en de dagen nadien niets meer te kunnen doen. Door overbelasting werk je een overgevoelig zenuwstelsel in de hand. Lang rusten en veel activiteiten vermijden vertraagt het herstelproces en zorgt er zelfs voor dat je belastbaarheid afneemt. Dit brengt je op termijn nergens."
+    "Reaction - Negative": {"en-EN": "Your reaction can be improved. Intense emotions and thoughts such as anxiety or frustration amplify pain stimuli and increase the risk of making your nervous system hypersensitive. They lead to impulsive responses that aren't necessarily the most appropriate. There is no use in letting your pain control you, taking on too much on good days and then being unable to do much at all in the days that follow. Overexertion results in a hypersensitive nervous system, while prolonged rest or avoidance of many activities will prolong your recovery process. Striking a balance between activity and relaxation is the most beneficial approach. You are less likely to exceed your limits and will not need to recover as much, making subsequent days much more pleasant. We can help you to optimise how you respond to pain.", "nl-BE": "Aan je reactie kan nog gewerkt worden. Hevige emoties en gedachten zoals angst of frustratie versterken pijnprikkels en vormen een risico op een overgevoelig zenuwstelsel. Ze leiden tot een impulsieve, maar misschien niet de beste, reactie. Het heeft geen zin om je te laten leiden door je pijn en op dagen dat het goed gaat veel te doen en de dagen nadien niets meer te kunnen doen. Door overbelasting werk je een overgevoelig zenuwstelsel in de hand. Lang rusten en veel activiteiten vermijden vertraagt het herstelproces en zorgt er zelfs voor dat je belastbaarheid afneemt. Dit brengt je op termijn nergens."},
+    "Reaction - Positive": {"en-EN": "You demonstrated a good response to your pain. Great! A good response reduces the risk of making your nervous system hypersensitive and will gradually lessen the impact of your pain. This does take time. Having a bad day? Don't panic – just keep on keeping on. We can help you to further optimise how you respond to pain.", "nl-BE": "Uit jouw reactie blijkt dat je goed hebt gereageerd op de pijn. Super! Hevige emoties en gedachten zoals angst of frustratie versterken pijnprikkels en vormen een risico op een overgevoelig zenuwstelsel. Ze leiden tot een impulsieve, maar misschien niet de beste, reactie. Het heeft geen zin om je te laten leiden door je pijn en op dagen dat het goed gaat veel te doen en de dagen nadien niets meer te kunnen doen. Door overbelasting werk je een overgevoelig zenuwstelsel in de hand. Lang rusten en veel activiteiten vermijden vertraagt het herstelproces en zorgt er zelfs voor dat je belastbaarheid afneemt. Dit brengt je op termijn nergens."}
 }
 
 export const moduleTranslation = {
@@ -660,7 +659,7 @@ export const rules = [
         conditions: {level1: ["EMOTION"], level2: ["NEGATIVE"]},
         codeMarkings: ["TIT", "ANXIOUS", "ANGER", "FATIGUE", "DEPRESSED"],
         priority: "2",
-        recommendation: "Leer onprettige gevoelens herkennen en hier mee om te gaan, zo beperk je de impact ervan op jouw leven en jouw pijn.",
+        recommendation: {"en-EN": "Learn to recognise unpleasant feelings and how to cope with them, so you can limit its impact on your life.", "nl-BE": "Leer onprettige gevoelens herkennen en hier mee om te gaan, zo beperk je de impact ervan op jouw leven en jouw pijn."},
         explanation: explanations["Negative Feelings"],
         module: "PAINEDUCATION",
         submodule: "PE_MOD_5",
@@ -671,7 +670,7 @@ export const rules = [
         conditions: {level4: ["EMOTION-UNEASY", "EMOTION-ONEDGE", "EMOTION-ANXIOUS"]},
         codeMarkings: ["ANXIOUS"],
         priority: "3",
-        recommendation: "Probeer overmatige stress te beperken door het stellen van prioriteiten, het afbakenen van je grenzen en het vrijmaken van tijd voor jezelf. Je kan ook proberen te ontspannen door een paar keer diep te ademen of een relaxatie oefening te doen.",
+        recommendation: {"en-EN": "Do your best to reduce excessive stress by prioritising, setting limits and making time for yourself. You can also try to calm down by taking a few deep breaths or doing relaxation exercises.", "nl-BE": "Probeer overmatige stress te beperken door het stellen van prioriteiten, het afbakenen van je grenzen en het vrijmaken van tijd voor jezelf. Je kan ook proberen te ontspannen door een paar keer diep te ademen of een relaxatie oefening te doen."},
         explanation: explanations["Negative Feelings"],
         module: "ACTIVITYWORK", /* Normally STRESS */
         submodule: "ACT_MOD_4",
@@ -682,7 +681,7 @@ export const rules = [
         conditions: {level1: ["EMOTION"], level3: ["FATIGUE"]},
         codeMarkings: ["FATIGUE"],
         priority: "3",
-        recommendation: "Zoek een goed evenwicht tussen activiteit en rust om zo binnen je eigen grenzen terug actiever te worden. Activiteitenmanagement heeft als doel (beter) te leren omgaan met je energie.",
+        recommendation: {"en-EN": "By striking a good balance between activity and relaxation, you can become more active again without overstepping your own boundaries. Activity management is aimed at learning to (improve how you) deal with your energy reserves.", "nl-BE": "Zoek een goed evenwicht tussen activiteit en rust om zo binnen je eigen grenzen terug actiever te worden. Activiteitenmanagement heeft als doel (beter) te leren omgaan met je energie."},
         explanation: explanations["Negative Feelings"],
         module: "ACTIVITYWORK",
         submodule: "ACT_MOD_4",
@@ -693,7 +692,7 @@ export const rules = [
         conditions: {level1: ["EMOTION"], level3: ["FATIGUE"]},
         codeMarkings: ["FATIGUE"],
         priority: "3",
-        recommendation: "Probeer vermoeidheid tegen te gaan door je fysieke fitheid op te bouwen, zo zal je ook meer energie krijgen.",
+        recommendation: {"en-EN": "Try to overcome exhaustion or tiredness. Building up your physical fitness will give you more energy.", "nl-BE": "Probeer vermoeidheid tegen te gaan door je fysieke fitheid op te bouwen, zo zal je ook meer energie krijgen."},
         explanation: explanations["Negative Feelings"],
         module: "ACTIVITYWORK",
         submodule: "ACT_MOD_4",
@@ -704,7 +703,7 @@ export const rules = [
         conditions: {level1: ["THOUGHT"], level2: ["NEGATIVE"], level3: ["CAUSE"]},
         codeMarkings: ["TIT"],
         priority: "2",
-        recommendation: "Als je meer inzicht krijgt in hoe pijn ontstaat, ga je kunnen achterhalen welke factoren een rol spelen bij jouw pijn. Nadien kan je aan de slag met de module om deze factoren te verbeteren.",
+        recommendation: {"en-EN": "By gaining a better understanding of how pain occurs, you will be able to identify the factors that contribute to your own pain.", "nl-BE": "Als je meer inzicht krijgt in hoe pijn ontstaat, ga je kunnen achterhalen welke factoren een rol spelen bij jouw pijn. Nadien kan je aan de slag met de module om deze factoren te verbeteren."},
         explanation: explanations["Physical damage - Negative"],
         module: "PAINEDUCATION",
         submodule: "PE_MOD_1",
@@ -715,7 +714,7 @@ export const rules = [
         conditions: {level1: ["THOUGHT"], level2: ["POSITIVE"], level3: ["CAUSE"]},
         codeMarkings: ["HT"],
         priority: "1",
-        recommendation: "Als je meer inzicht krijgt in hoe pijn ontstaat, ga je kunnen achterhalen welke factoren een rol spelen bij jouw pijn. Nadien kan je aan de slag met de gepaste module om deze factoren te verbeteren.",
+        recommendation: {"en-EN": "By gaining a better understanding of how pain occurs, you will be able to identify the factors that contribute to your own pain.", "nl-BE": "Als je meer inzicht krijgt in hoe pijn ontstaat, ga je kunnen achterhalen welke factoren een rol spelen bij jouw pijn."},
         explanation: explanations["Physical damage - Positive"],
         module: "PAINEDUCATION",
         submodule: "PE_MOD_1",
@@ -726,7 +725,7 @@ export const rules = [
         conditions: {level1: ["THOUGHT"], level2: ["NEGATIVE"], level3: ["ACTIVITY-WORK"]},
         codeMarkings: ["TIT"],
         priority: "2",
-        recommendation: "Probeer op een ontspannen manier te bewegen en regelmatig van houding te wisselen. Zorg ervoor dat je je taken slim aanpakt en indien nodig denkt aan je ergonomie.",
+        recommendation: {"en-EN": "Try to stay relaxed as you move and change your position regularly. Approach your tasks intelligently and take ergonomics into account as required.", "nl-BE": "Probeer op een ontspannen manier te bewegen en regelmatig van houding te wisselen. Zorg ervoor dat je je taken slim aanpakt en indien nodig denkt aan je ergonomie."},
         explanation: explanations["Activities - Negative"],
         module: "ACTIVITYWORK",
         submodule: "ACT_MOD_4",
@@ -737,7 +736,7 @@ export const rules = [
         conditions: {level1: ["THOUGHT"], level2: ["NEGATIVE"], level3: ["ACTIVITY-WORK"]},
         codeMarkings: ["TIT"],
         priority: "2",
-        recommendation: "Verhoog je belastbaarheid door geleidelijk meer te bewegen en je activiteiten op te bouwen.",
+        recommendation: {"en-EN": "Build up the amount of the activity you do to increase your capacity.", "nl-BE": "Verhoog je belastbaarheid door geleidelijk meer te bewegen en je activiteiten op te bouwen."},
         explanation: explanations["Activities - Negative"],
         module: "ACTIVITYWORK",
         submodule: "ACT_MOD_4",
@@ -748,7 +747,7 @@ export const rules = [
         conditions: {level1: ["THOUGHT"], level2: ["NEGATIVE"], level3: ["ACTIVITY-WORK"]},
         codeMarkings: ["TIT"],
         priority: "2",
-        recommendation: "Bij overmatige spanning kan het helpen om een relaxatie oefening te doen.",
+        recommendation: {"en-EN": "If you are feeling too tense, it can help to do a relaxation exercise.", "nl-BE": "Bij overmatige spanning kan het helpen om een relaxatie oefening te doen."},
         explanation: explanations["Activities - Negative"],
         module: "THOUGHTSEMOTIONS",
         submodule: "TE_MOD_3",
@@ -759,7 +758,7 @@ export const rules = [
         conditions: {level4: ["THOUGHT-ACTIVITY-NEG-7", "THOUGHT-ACTIVITY-NEG-8"]},
         codeMarkings: ["ANXIOUS", "TIT"],
         priority: "3",
-        recommendation: "Rusten en activiteiten vermijden zijn niet aangewezen bij pijn, beweging en zoveel mogelijk je normale activiteiten verderzetten zijn essentieel voor het herstelproces.",
+        recommendation: {"en-EN": "If you are in pain, resting and avoiding doing any activity is generally inadvisable. A long period of rest weakens your body, making it harder to cope in your daily life. Movement increases blood flow to your muscles and joints, keeping them supple and making them stronger. This is an essential part of your recovery process.", "nl-BE": "Rusten en activiteiten vermijden zijn niet aangewezen bij pijn, beweging en zoveel mogelijk je normale activiteiten verderzetten zijn essentieel voor het herstelproces."},
         explanation: explanations["Activities - Negative"],
         module: "ACTIVITYWORK",
         submodule: "ACT_MOD_4",
@@ -770,7 +769,7 @@ export const rules = [
         conditions: {level1: ["THOUGHT"], level2: ["POSITIVE"], level3: ["ACTIVITY-WORK"]},
         codeMarkings: ["HT"],
         priority: "1",
-        recommendation: "Probeer op een ontspannen manier te bewegen en regelmatig van houding te wisselen. Zorg ervoor dat je je taken slim aanpakt en indien nodig denkt aan je ergonomie.",
+        recommendation: {"en-EN": "Try to stay relaxed as you move and change your position regularly. Approach your tasks intelligently and take ergonomics into account as required.", "nl-BE": "Probeer op een ontspannen manier te bewegen en regelmatig van houding te wisselen. Zorg ervoor dat je je taken slim aanpakt en indien nodig denkt aan je ergonomie."},
         explanation: explanations["Activities - Positive"],
         module: "ACTIVITYWORK",
         submodule: "ACT_MOD_3",
@@ -781,7 +780,7 @@ export const rules = [
         conditions: {level1: ["THOUGHT"], level2: ["POSITIVE"], level3: ["ACTIVITY-WORK"]},
         codeMarkings: ["HT"],
         priority: "1",
-        recommendation: "Verhoog je belastbaarheid door geleidelijk meer te bewegen en je activiteiten op te bouwen.",
+        recommendation: {"en-EN": "Build up the amount of the activity you do to increase your capacity.", "nl-BE": "Verhoog je belastbaarheid door geleidelijk meer te bewegen en je activiteiten op te bouwen."},
         explanation: explanations["Activities - Positive"],
         module: "ACTIVITYWORK",
         submodule: "ACT_MOD_4",
@@ -792,7 +791,7 @@ export const rules = [
         conditions: {level1: ["THOUGHT"], level2: ["POSITIVE"], level3: ["ACTIVITY-WORK"]},
         codeMarkings: ["HT"],
         priority: "1",
-        recommendation: "Bij overmatige spanning kan het helpen om een relaxatie oefening te doen.",
+        recommendation: {"en-EN": "If you are feeling too tense, it can help to do a relaxation exercise.", "nl-BE": "Bij overmatige spanning kan het helpen om een relaxatie oefening te doen."},
         explanation: explanations["Activities - Positive"],
         module: "THOUGHTSEMOTIONS", /* Normaal stress */
         submodule: "TE_MOD_3",
@@ -803,7 +802,7 @@ export const rules = [
         conditions: {level4: ["THOUGHT-CONSEQUENCE-NEG-1", "THOUGHT-CONSEQUENCE-NEG-2", "THOUGHT-CONSEQUENCE-NEG-3", "THOUGHT-CONTROL-NEG-3", "THOUGHT-CONTROL-NEG-4", "THOUGHT-CONTROL-NEG-5", "THOUGHT-CONTROL-NEG-6"]},
         codeMarkings: ["DEPRESSED"],
         priority: "3",
-        recommendation: "Aan veel factoren die pijn beïnvloeden kan je werken. Probeer eerst te achterhalen welke factoren bij jou een rol spelen",
+        recommendation: {"en-EN": "You can influence many of the factors that contribute to pain. First, try to determine which factors are relevant specifically to you.", "nl-BE": "Aan veel factoren die pijn beïnvloeden kan je werken. Probeer eerst te achterhalen welke factoren bij jou een rol spelen"},
         explanation: explanations["Thoughts - Negative"],
         module: "PAINEDUCATION",
         submodule: "PE_MOD_5",
@@ -814,7 +813,7 @@ export const rules = [
         conditions: {level4: ["THOUGHT-CONTROL-NEG-1", "THOUGHT-CONSEQUENCE-NEG-4", "THOUGHT-CONSEQUENCE-NEG-5"]},
         codeMarkings: ["DEPRESSED"],
         priority: "3",
-        recommendation: "Door je activiteiten slim aan te pakken kan je ook met pijnklachten nog heel veel doen. En met een goede opbouw, die rekening houdt met jouw capaciteit, kan je geleidelijk terug actiever worden.",
+        recommendation: {"en-EN": "By approaching activities intelligently, you can still do a lot even with pain complaints.", "nl-BE": "Door je activiteiten slim aan te pakken kan je ook met pijnklachten nog heel veel doen. En met een goede opbouw, die rekening houdt met jouw capaciteit, kan je geleidelijk terug actiever worden."},
         explanation: explanations["Thoughts - Negative"],
         module: "ACTIVITYWORK",
         submodule: "ACT_MOD_4",
@@ -825,7 +824,7 @@ export const rules = [
         conditions: {level1: ["THOUGHT"], level2: ["NEGATIVE"], level3: ["PSYCHOSOCIAL", "CONTROL"]},
         codeMarkings: ["TIT"],
         priority: "2",
-        recommendation: "Probeer negative gedachten te beperken en je energie te stoppen in waardevolle activiteiten. Ben je iets aan het doen wat je leuk vindt? Dan filteren je hersen vanzelf al een deel van de pijn weg!",
+        recommendation: {"en-EN": "Try to direct your energy towards worthwhile activities. Are you working on something you enjoy? If so, your brain will automatically filter out some of the pain. ", "nl-BE": "Probeer negative gedachten te beperken en je energie te stoppen in waardevolle activiteiten. Ben je iets aan het doen wat je leuk vindt? Dan filteren je hersen vanzelf al een deel van de pijn weg!"},
         explanation: explanations["Thoughts - Negative"],
         module: "THOUGHTSEMOTIONS",
         submodule: "TE_MOD_4", /* TODO */
@@ -836,7 +835,7 @@ export const rules = [
         conditions: {level1: ["THOUGHT"], level2: ["POSITIVE"], level3: ["PSYCHOSOCIAL", "CONTROL", "CONSEQUENCE"]},
         codeMarkings: ["HT"],
         priority: "1",
-        recommendation: "Probeer negative gedachten te beperken en je energie te stoppen in waardevolle activiteiten. Ben je iets aan het doen wat je leuk vindt? Dan filteren je hersen vanzelf al een deel van de pijn weg!",
+        recommendation: {"en-EN": "Try to direct your energy towards worthwhile activities. Are you working on something you enjoy? If so, your brain will automatically filter out some of the pain. ", "nl-BE": "Probeer negative gedachten te beperken en je energie te stoppen in waardevolle activiteiten. Ben je iets aan het doen wat je leuk vindt? Dan filteren je hersen vanzelf al een deel van de pijn weg!"},
         explanation: explanations["Thoughts - Positive"],
         module: "THOUGHTSEMOTIONS",
         submodule: "TE_MOD_4", /* TODO */
@@ -847,7 +846,7 @@ export const rules = [
         conditions: {level1: ["REACTION"], level2: ["NEGATIVE"]},
         codeMarkings: ["TIR"],
         priority: "2",
-        recommendation: "Probeer zoveel mogelijk je normale activiteiten verder te zetten na een korte pauze. Pak je taken slim aan zodat je een goed evenwicht vindt tussen activiteit en rust. Beweeg op een ontspannen manier, wissel regelmatig van houding en denk aan je ergonomie indien nodig.",
+        recommendation: {"en-EN": "After a short break, try to resume your normal activities as much as possible. Approach your tasks intelligently and establish a good balance between activity and rest. Try to stay relaxed as you move, change position regularly and take ergonomics into account as needed.", "nl-BE": "Probeer zoveel mogelijk je normale activiteiten verder te zetten na een korte pauze. Pak je taken slim aan zodat je een goed evenwicht vindt tussen activiteit en rust. Beweeg op een ontspannen manier, wissel regelmatig van houding en denk aan je ergonomie indien nodig."},
         explanation: explanations["Reaction - Negative"],
         module: "ACTIVITYWORK",
         submodule: "ACT_MOD_4",
@@ -858,7 +857,7 @@ export const rules = [
         conditions: {level3: ["REACTION-NEG-2"]},
         codeMarkings: ["ANXIOUS", "TIT"],
         priority: "3",
-        recommendation: "Blijf kalm, word je bewust van je gedachten en emoties en kies een gepaste reactie.",
+        recommendation: {"en-EN": "Remain calm, be conscious of your thoughts and emotions, and choose an appropriate response.", "nl-BE": "Blijf kalm, word je bewust van je gedachten en emoties en kies een gepaste reactie."},
         explanation: explanations["Reaction - Negative"],
         module: "THOUGHTSEMOTIONS",
         submodule: "TE_MOD_4",
@@ -869,7 +868,7 @@ export const rules = [
         conditions: {level1: ["REACTION"], level2: ["POSITIVE"]},
         codeMarkings: ["HR"],
         priority: "1",
-        recommendation: "Herhaal af en toe welke reacties positief zijn in een pijnopstoot.",
+        recommendation: {"en-EN": "Try to remind yourself which reactions are helpful when experiencing pain.", "nl-BE": "Herhaal af en toe welke reacties positief zijn in een pijnopstoot."},
         explanation: explanations["Reaction - Positive"],
         module: "THOUGHTSEMOTIONS",
         submodule: "TE_MOD_4",

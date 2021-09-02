@@ -56,6 +56,8 @@ const QuestionContainer = styled.div`
     `};
 `
 
+const language = localStorage.getItem('language') ? localStorage.getItem('language') : "nl-BE";
+
 export default function Question(props) {
     
     const [value, setValue] = useState(0);
@@ -85,8 +87,8 @@ export default function Question(props) {
 
     /* Other Questionnaires */
     return (<QuestionContainer value={value}>
-        <QuestionContent isCompleted={props.isCompleted}>{props.number.toUpperCase() + ": " + props.nl}</QuestionContent>
-        <QuestionTranslation>{props.en}</QuestionTranslation>
+        <QuestionContent isCompleted={props.isCompleted}>{props.number.toUpperCase() + ": " + language === "nl-BE" ? props.nl : props.en}</QuestionContent>
+        {language === "nl-BE" && <QuestionTranslation>{props.en}</QuestionTranslation>}
         <Radio.Group onChange={onChange} value={value} style={{marginTop:"0", fontFamily:"var(--main-font)", display: "inline-block", flexDirection: "row", gap: "1em"}}>
             { renderOptions(props.optionType) }
         </Radio.Group>
@@ -95,11 +97,18 @@ export default function Question(props) {
 
 
 function renderOptions(option) {
-    return (<React.Fragment>
+    if (language === "nl-BE") return (<React.Fragment>
         <Radio value={1}>Sterk mee oneens</Radio>
         <Radio value={2}>Oneens</Radio>
         <Radio value={3}>Neutraal</Radio>
         <Radio value={4}>Eens</Radio>
         <Radio value={5}>Sterk mee eens</Radio>
+    </React.Fragment>);
+    return (<React.Fragment>
+        <Radio value={1}>Strongly disagree</Radio>
+        <Radio value={2}>Disagree</Radio>
+        <Radio value={3}>Neutral</Radio>
+        <Radio value={4}>Agree</Radio>
+        <Radio value={5}>Strongle agree</Radio>
     </React.Fragment>);
 }

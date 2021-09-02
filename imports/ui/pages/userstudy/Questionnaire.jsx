@@ -41,6 +41,7 @@ const QuestionnaireTip = styled.div`
     color: var(--idewe-gray-dark);
 `
 
+const language = localStorage.getItem('language') ? localStorage.getItem('language') : "nl-BE";
 
 export default function Questionnaire({id, title, questions, changeCallback}) {
 
@@ -67,7 +68,7 @@ export default function Questionnaire({id, title, questions, changeCallback}) {
     }, []);
 
     return (<QuestionnaireContent>
-        <QuestionnaireTitle isCompleted={isCompleted()}>{title}</QuestionnaireTitle>
+        <QuestionnaireTitle isCompleted={isCompleted()}>{language === "nl-BE" ? title : title.split("/")[0]}</QuestionnaireTitle>
         <FadeIn>
             { Object.keys(questions).map(question => { return <Question 
                 key={question}
@@ -88,9 +89,9 @@ export function AcceptanceQuestionnaire({id, changeCallback}) {
     const type = FlowRouter.getParam('type');
 
     const text = {
-        "visual": "balkjes",
-        "textual": "bovenste tekstje",
-        "hybrid": "balkjes + bovenste tekstje"
+        "visual": {"nl-BE": "balkjes", "en-EN": "bars"},
+        "textual": {"nl-BE": "bovenste tekstje", "en-EN": "upper text"},
+        "hybrid": {"nl-BE": "balkjes + bovenste tekstje", "en-EN": "bars + upper text"}
     }
 
     function isCompleted() {
@@ -114,8 +115,9 @@ export function AcceptanceQuestionnaire({id, changeCallback}) {
     }, []);
 
     return (<QuestionnaireContent>
-        <QuestionnaireTitle isCompleted={isCompleted()}>{questionnaires.acceptance.title}</QuestionnaireTitle>
-        <QuestionnaireText>Ik vond de <b>uitleg</b> <i>({text[type]})</i> eerder ... <QuestionnaireTip>(Ga met je muis over de woorden om de vertaling te zien.)</QuestionnaireTip></QuestionnaireText>
+        <QuestionnaireTitle isCompleted={isCompleted()}>{language === "nl-BE" ? questionnaires.acceptance.title : questionnaires.acceptance.title.split("/")[0]}</QuestionnaireTitle>
+        {language === "nl-BE" && <QuestionnaireText>Ik vond de <b>uitleg</b> <i>({text[type]["nl-BE"]})</i> eerder ... <QuestionnaireTip>(Ga met je muis over de woorden om de vertaling te zien.)</QuestionnaireTip></QuestionnaireText>}
+        {language !== "nl-BE" && <QuestionnaireText>I found the <b>explanation</b> <i>({text[type]["en-EN"]})</i> rather ... </QuestionnaireText>}
         <FadeIn>
             { Object.keys(questionnaires.acceptance.questions).map(question => { return <Question 
                 acceptance

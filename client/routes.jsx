@@ -28,11 +28,28 @@ import Explanation from '../imports/ui/pages/userstudy/Explanation.jsx';
 import StudyFlow from '../imports/ui/pages/userstudy/StudyFlow.jsx';
 import Conclusion from '../imports/ui/pages/userstudy/Conclusion.jsx';
 import ThankYou from '../imports/ui/pages/userstudy/ThankYou.jsx';
+import ProlificIntroduction from '../imports/ui/pages/userstudy/ProlificIntroduction.jsx';
+import ProlificInformation from '../imports/ui/pages/userstudy/ProlificInformation.jsx';
+import GoalEntryScreen from '../imports/ui/pages/ValueLogbook/ViewGoalEntry.jsx';
 
 
 FlowRouter.route('/', {
   name: 'Admin',
   action(){ mount( App, { content: <AdminScreen/> })}
+});
+
+/*
+  PROLIFIC
+*/
+
+FlowRouter.route('/mycoach/prolific/userstudy/information', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <ProlificInformation /> })}
+});
+
+FlowRouter.route('/mycoach/prolific/userstudy/introduction', {
+  name: 'Userstudy',
+  action(){ mount( App, { content: <ProlificIntroduction /> })}
 });
 
 /*
@@ -43,6 +60,7 @@ FlowRouter.route('/mycoach/userstudy/introduction', {
   name: 'Userstudy',
   action(){ mount( App, { content: <Introduction /> })}
 });
+
 
 FlowRouter.route('/mycoach/userstudy/information', {
   name: 'Userstudy',
@@ -141,6 +159,11 @@ FlowRouter.route('/:language/mycoach/:token/values/newgoal', {
 });
 
 FlowRouter.route('/:language/mycoach/:token/values/:id', {
+  name: 'ValueLogbook',
+  action(){ mount( App, { content: <GoalEntryScreen /> })}
+});
+
+FlowRouter.route('/:language/mycoach/:token/values/edit/:id', {
   name: 'ValueLogbook',
   action(){ mount( App, { content: <NewGoalScreen /> })}
 });

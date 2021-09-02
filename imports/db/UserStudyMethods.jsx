@@ -1,5 +1,5 @@
 import { check } from 'meteor/check';
-import { UserStudyCollection } from './UserStudyCollection.jsx';
+import { ProlificStudyCollection, UserStudyCollection } from './UserStudyCollection.jsx';
 
 Meteor.methods({
     'userstudy.insert'({mail, settings, type, content}) {
@@ -10,6 +10,22 @@ Meteor.methods({
    
         UserStudyCollection.insert({
             mail: mail,
+            settings: settings,
+            type: type,
+            content: content,
+            timestamp: new Date,
+        });
+    }
+});
+
+Meteor.methods({
+    'prolificstudy.insert'({id, settings, type, content}) {
+        check(settings, String);
+        check(type, String);
+        check(content, String);
+   
+        ProlificStudyCollection.insert({
+            id: id,
             settings: settings,
             type: type,
             content: content,

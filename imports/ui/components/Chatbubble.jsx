@@ -9,7 +9,6 @@ import Button from './Button.jsx';
 import "./Chatbubble.scss";
 import Icon from "./Illustrations/Icon.jsx";
 
-const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
 
 export function Chatbubble(props) {
 
@@ -68,6 +67,10 @@ function Option(props) {
  */
 export function ChatbubbleThoughtsReactions(props) {
 
+    const localStorageLanguage = localStorage.getItem('language') ? localStorage.getItem('language') : "nl-BE";
+    const language = props.language ? props.language : localStorageLanguage;
+
+
     /* State */
     const [selectedOptions, updateSelectedOptions] = useState({});
     const [unselectedOptions, updateUnselectedOptions] = useState({});
@@ -75,10 +78,17 @@ export function ChatbubbleThoughtsReactions(props) {
 
     const [hidden, setHidden] = useState(true);
 
-    const title = props.message.content === "thoughts" ? "Mijn gedachten" : "Mijn reactie(s)";
-    const text = props.message.content === "thoughts" ? 
-        "Hier komen je geselecteerde gedachten te staan. Scroll door de lijst hieronder of typ trefwoorden om een specifieke gedachte te zoeken." : 
-        "Hier komen je geselecteerde reacties te staan. Scroll door de lijst hieronder of typ trefwoorden om een specifieke reactie te zoeken." ;
+    const localization = {
+        thoughts: {"nl-BE": "Mijn gedachte(n)", "en-EN": "My thought(s)"}, 
+        reactions: {"nl-BE": "Mijn reactie(s)", "en-EN": "My reaction(s)"},
+        thoughtsExplanation: {
+            "nl-BE": "Hier komen je geselecteerde gedachten te staan. Scroll door de lijst hieronder of typ trefwoorden om een specifieke gedachte te zoeken.", 
+            "en-EN": "Here you'll see your selected thoughts. Scroll through the list below or type keywords to search for specific thoughts."},
+        reactionsExplanation: {
+            "nl-BE": "Hier komen je geselecteerde reactions te staan. Scroll door de lijst hieronder of typ trefwoorden om een specifieke gedachte te zoeken.", 
+            "en-EN": "Here you'll see your selected reactions. Scroll through the list below or type keywords to search for specific thoughts."}}
+    const title = localization[props.message.content][language];
+    const text = localization[props.message.content + "Explanation"][language];
 
     /**
      * Remove all filler and common words from the current search therm
@@ -163,7 +173,7 @@ export function ChatbubbleThoughtsReactions(props) {
                     <Option key={"unselected-"+option} onChange={() => toggleOption(option, "select")}>{highlighted}</Option>);
             }
         }
-        if (optionsHTML.length === 0) return "Geen resultaten gevonden..."
+        if (optionsHTML.length === 0) return (language === "nl-BE" ? "Geen resultaten gevonden..." : "No results found...")
         return optionsHTML;
     }
 
@@ -174,10 +184,10 @@ export function ChatbubbleThoughtsReactions(props) {
                 <div style={{maxHeight:"110px", overflow:"scroll", overflowX:"hidden"}}>
                     { renderSelectedOptions() }
                 </div>
-                { Object.keys(selectedOptions).length > 0 && <Button color="blue" onClick={() => props.onSubmit(selectedOptions, props.message)}>Verstuur</Button>}
+                { Object.keys(selectedOptions).length > 0 && <Button color="blue" onClick={() => props.onSubmit(selectedOptions, props.message)}>{language === "nl-BE" ? "Verstuur" : "Confirm"}</Button>}
             </div>}
             {!hidden && <div className={"chatbubble-ownchoice-textinput"}>
-                <Input type="text" value={searchTerm} placeholder={"Typ om te filteren"} width={"300px"} onChange={updateSearchterm} noOutline></Input>
+                <Input type="text" value={searchTerm} placeholder={language === "nl-BE" ? "Typ om te filteren" : "Type to filter"} width={"300px"} onChange={updateSearchterm} noOutline></Input>
                 <div style={{overflow:"scroll", overflowX:"hidden", height:"220px"}}>
                     {Object.keys(unselectedOptions).length > 0 && renderUnselectedOptions()}
                 </div>
@@ -195,6 +205,11 @@ export function ChatbubbleText(props) {
     const [hidden, setHidden] = useState(true);
     const [input, updateInput] = useState("");
 
+    const localStorageLanguage = localStorage.getItem('language') ? localStorage.getItem('language') : "nl-BE";
+    const language = props.language ? props.language : localStorageLanguage;
+
+
+
     /* Initialize Chatbubble once */
     useEffect(() => { 
         setTimeout(function() { setHidden(false) }, 1000);
@@ -202,12 +217,12 @@ export function ChatbubbleText(props) {
 
     return (<div className="chatbubble-container">
         {!hidden && <div className={"chatbubble-ownchoice-textinput"}>
-            <Input type="text" value={input} placeholder={"Typ je antwoord"} style={{width:"100% !important"}} onChange={updateInput} noOutline></Input>
+            <Input type="text" value={input} placeholder={language === "nl-BE" ? "Typ je antwoord" : "Type your answer"} style={{width:"100% !important"}} onChange={updateInput} noOutline></Input>
         </div>}
         {(!hidden && input.length > 0) && 
             <div className={"chatbubble-ownchoice"} 
                  onClick={() => props.onSubmit({content: input, category: props.message.category, response: props.message.response, sentBy: "user"})}>
-                Verstuur
+                {language === "nl-BE" ? "Verstuur" : "Confirm"}
             </div>}
         </div>)
 
@@ -218,6 +233,11 @@ export function ChatbubbleEmotions(props) {
     /* State */
     const [selectedEmotions, updateSelectedEmotions] = useState({});
     const [hidden, setHidden] = useState(true);
+
+    const localStorageLanguage = localStorage.getItem('language') ? localStorage.getItem('language') : "nl-BE";
+    const language = props.language ? props.language : localStorageLanguage;
+
+
 
     /* Initialize Chatbubble once */
     useEffect(() => { 
@@ -248,12 +268,16 @@ export function ChatbubbleEmotions(props) {
         return emotionButtonsHTML;
     }
 
+    /* Language */
+    const noneApplicable = language === "nl-BE" ? "Geen van toepassing" : "None applicable";
+    const sendSelection = language === "nl-BE" ? "Verstuur selectie" : "Confirm selection";
+
     return (<div className="chatbubble-container">
         {!hidden && <div>
             {renderEmotions()}
         </div>}
         {!hidden && <div className={"chatbubble-ownchoice"} onClick={() => props.onSubmit(selectedEmotions, props.message)}>
-           {Object.keys(selectedEmotions).length === 0 ? "Geen van toepassing" : "Verstuur selectie"}
+           {Object.keys(selectedEmotions).length === 0 ? noneApplicable : sendSelection}
         </div>}
     </div>)
 }
@@ -261,6 +285,11 @@ export function ChatbubbleEmotions(props) {
 export function ChatbubbleInputSummary(props) {
 
     const [renderLoading, setRenderLoading] = useState(true);
+
+    const localStorageLanguage = localStorage.getItem('language') ? localStorage.getItem('language') : "nl-BE";
+    const language = props.language ? props.language : localStorageLanguage;
+
+
 
     /* Initialize Chatbubble once */
     useEffect(() => { 
@@ -270,18 +299,24 @@ export function ChatbubbleInputSummary(props) {
     function renderInputBars() {
         let inputsHTML = [];
         props.inputs.forEach((input, index) => {
+            //const codeTranslation = translations[language].inputCodes[input[0]];
+            const codeTranslation = props.codes[input[0]].translation[language];
             inputsHTML.push(<React.Fragment key={index + input}>
                 <div key={index + input} className="chatbubble-inputs-row">
-                    {!props.highlights.includes(input[0]) && <div className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput-disabled">{translations[language].inputCodes[input[0]]}</div></div>}
-                    {props.highlights.includes(input[0]) && <div className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput">{translations[language].inputCodes[input[0]]}</div></div>}
+                    {!props.highlights.includes(input[0]) && <div className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput-disabled">{codeTranslation}</div></div>}
+                    {props.highlights.includes(input[0]) && <div className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput">{codeTranslation}</div></div>}
                     <div className="chatbubble-inputs-barcontainer"><div className="chatbubble-inputs-bar" style={{width:(Math.round(input[1] * 100)) + "%"}}/></div>
                 </div>
                 {index < props.inputs.length-1 && <hr key={"bar" + index + input} className="chatbubble-inputs-divider"/>}
             </React.Fragment>)
         })
+
+        /* Language */
+        const header = language === "nl-BE" ? "Jouw inputs" : "Your inputs";
+        const body = language === "nl-BE" ? "Hier is een overzicht van je inputs. Er wordt ook een aanbeveling getoond rond je gemarkeerde input(s)." : "Here you are presented with an overview of your inputs. There is also a recommendation shown below related to the highlighted input(s).";
         return (<div className="chatbubble-inputs-container">
-            <div className="chatbubble-inputs-title">Jouw inputs</div>
-            <div className="chatbubble-inputs-text">Hier is een overzicht van je inputs. Er wordt ook een aanbeveling getoond rond je gemarkeerde input(s).</div>
+            <div className="chatbubble-inputs-title">{header}</div>
+            <div className="chatbubble-inputs-text">{body}</div>
             <hr className="chatbubble-inputs-divider"/>
             {inputsHTML}
             </div>);
@@ -301,16 +336,21 @@ export function ChatbubbleTextualExplanation(props) {
     const [renderLoading, setRenderLoading] = useState(true);
     const [delayedDisplay, setDelayedDisplay] = useState(true);
 
+    const localStorageLanguage = localStorage.getItem('language') ? localStorage.getItem('language') : "nl-BE";
+    const language = props.language ? props.language : localStorageLanguage;
+
+
+
     /* Initialize Chatbubble once */
     useEffect(() => { 
-        setTimeout(function() { setDelayedDisplay(false) }, (2000));
-        setTimeout(function() { setRenderLoading(false) }, (4000));
+        setTimeout(function() { setDelayedDisplay(false) }, (1000));
+        setTimeout(function() { setRenderLoading(false) }, (2000));
     }, [] );
 
     function renderTopBar() {
         return (<div>
             <div style={{display:"flex"}}>
-                <div  style={{flexGrow:2, textAlign:"center", fontSize:"20px"}}>Uitleg {props.recommendationIndex + 1}</div>
+                <div  style={{flexGrow:2, textAlign:"center", fontSize:"20px"}}>{language === "nl-BE" ? "Uitleg" : "Explanation"} {props.recommendationIndex + 1}</div>
             </div>
             <hr style={{margin: "5px", borderTop:"1px solid rgba(255,255,255,.3)"}}/>
         </div>);
@@ -333,6 +373,11 @@ export function ChatbubbleRecommendation(props) {
     const [renderLoading, setRenderLoading] = useState(true);
     const [delayedDisplay, setDelayedDisplay] = useState(true);
 
+    const localStorageLanguage = localStorage.getItem('language') ? localStorage.getItem('language') : "nl-BE";
+    const language = props.language ? props.language : localStorageLanguage;
+
+
+
     /* Initialize Chatbubble once */
     useEffect(() => { 
         setTimeout(function() { setDelayedDisplay(false) }, (2000));
@@ -349,7 +394,7 @@ export function ChatbubbleRecommendation(props) {
             <div style={{display:"flex"}}>
                 <Icon onClick={() => updateRecommendationIndex("prev")} 
                     image={"next-logbook" + (props.recommendationIndex === 0 ? "-disabled" : "")} style={{flexGrow:1, transform:"rotate(180deg)", maxWidth:"26px", maxHeight:"26px", marginTop: "4px", marginLeft:"10px"}} width="15px" noFilter/>
-                <div  style={{flexGrow:2, textAlign:"center", fontSize:"20px"}}>Aanbeveling {props.recommendationIndex + 1}</div>
+                <div  style={{flexGrow:2, textAlign:"center", fontSize:"20px"}}>{language === "nl-BE" ? "Aanbeveling" : "Recommendation"}  {props.recommendationIndex + 1}</div>
                 <Icon onClick={() => updateRecommendationIndex("next")} image={"next-logbook" + (props.recommendationIndex === props.recommendationLength ? "-disabled" : "")} style={{flexGrow:1, maxWidth:"26px", maxHeight:"26px", marginTop: "4px", marginRight:"10px"}} width="15px" noFilter/>
             </div>
             <hr style={{margin: "5px", borderTop:"1px solid rgba(255,255,255,.3)"}}/>
@@ -366,21 +411,4 @@ export function ChatbubbleRecommendation(props) {
             </div>}
         </div>
     </div>}</React.Fragment>)
-}
-
-const translations = {
-    "nl-BE": {
-        inputCodes: {
-            "TIR": "Te verbeteren reacties",
-            "TIT": "Te verbeteren gedachten",
-            "ANXIOUS": "Gespannen / angstig",
-            "DEPRESSED": "Ontmoedigd / hulpeloos",
-            "FATIGUE": "Vermoeid / uitgeput",
-            "ANGER": "Geergerd / kwaad",
-            "HT": "Helpende gedachten",
-            "HR": "Helpende reacties",
-            "VIGOR": "Vrolijk / energiek",
-            "RELAXED": "Rustig / ontspannen"
-        }
-    }
 }

@@ -27,7 +27,7 @@ export default function PainLogbookTextual() {
 
     /* States and Constants */
     const ruleEngine = new RuleEngine(rules);
-    const language  = "nl-BE";
+    const language  = localStorage.getItem("language") ? localStorage.getItem("language") : "nl-BE";
     /* Recommendations */
     const [matchedRecommendations, updateMatchedRecommendations] = useState([]);
     const [currentRecommendation, updateCurrentRecommendation] = useState(0);
@@ -47,35 +47,58 @@ export default function PainLogbookTextual() {
             case "leave":
                 history.back();
                 break;
-            case "openRecommendation":
-                setShowModuleModal(true);
-                break;
             case "explainRecommendation":
                 setShowExplanationModal(true);
                 break;
             case "noneRelevant":
             case "saveAndClose":
-                Meteor.callPromise('userstudy.insert', {
-                    mail: localStorage.getItem('mail'), 
-                    settings: localStorage.getItem('studysettings'), 
-                    type: 'action-textual', 
-                    content: actionType});
-                Meteor.callPromise('userstudy.insert', {
-                    mail: localStorage.getItem('mail'), 
-                    settings: localStorage.getItem('studysettings'), 
-                    type: 'recommendations-textual', 
-                    content: JSON.stringify(matchedRecommendations)});
-                Meteor.callPromise('userstudy.insert', {
-                    mail: localStorage.getItem('mail'), 
-                    settings: localStorage.getItem('studysettings'), 
-                    type: 'inputs-textual', 
-                    content: JSON.stringify(userInput)});
-                if (actionType === "saveAndClose") {
+                if (localStorage.getItem('prolificID')) {
+                    Meteor.callPromise('prolificstudy.insert', {
+                        id: localStorage.getItem('prolificID'), 
+                        settings: localStorage.getItem('studysettings'), 
+                        type: 'action-textual', 
+                        content: actionType});
+                    Meteor.callPromise('prolificstudy.insert', {
+                        id: localStorage.getItem('prolificID'), 
+                        settings: localStorage.getItem('studysettings'), 
+                        type: 'recommendations-textual', 
+                        content: JSON.stringify(matchedRecommendations)});
+                    Meteor.callPromise('prolificstudy.insert', {
+                        id: localStorage.getItem('prolificID'), 
+                        settings: localStorage.getItem('studysettings'), 
+                        type: 'inputs-textual', 
+                        content: JSON.stringify(userInput)});
+                    if (actionType === "saveAndClose") {
+                        Meteor.callPromise('prolificstudy.insert', {
+                            id: localStorage.getItem('prolificID'), 
+                            settings: localStorage.getItem('studysettings'), 
+                            type: 'selected-textual', 
+                            content: currentRecommendation + "-" + JSON.stringify(matchedRecommendations[currentRecommendation])});
+                    }
+                }
+                else {
                     Meteor.callPromise('userstudy.insert', {
                         mail: localStorage.getItem('mail'), 
                         settings: localStorage.getItem('studysettings'), 
-                        type: 'selected-textual', 
-                        content: currentRecommendation + "-" + JSON.stringify(matchedRecommendations[currentRecommendation])});
+                        type: 'action-textual', 
+                        content: actionType});
+                    Meteor.callPromise('userstudy.insert', {
+                        mail: localStorage.getItem('mail'), 
+                        settings: localStorage.getItem('studysettings'), 
+                        type: 'recommendations-textual', 
+                        content: JSON.stringify(matchedRecommendations)});
+                    Meteor.callPromise('userstudy.insert', {
+                        mail: localStorage.getItem('mail'), 
+                        settings: localStorage.getItem('studysettings'), 
+                        type: 'inputs-textual', 
+                        content: JSON.stringify(userInput)});
+                    if (actionType === "saveAndClose") {
+                        Meteor.callPromise('userstudy.insert', {
+                            mail: localStorage.getItem('mail'), 
+                            settings: localStorage.getItem('studysettings'), 
+                            type: 'selected-textual', 
+                            content: currentRecommendation + "-" + JSON.stringify(matchedRecommendations[currentRecommendation])});
+                    }
                 }
                 FlowRouter.go(`/mycoach/userstudy/questionnaire/textual`);
                 break;
@@ -143,8 +166,8 @@ export default function PainLogbookTextual() {
                 messages.push(<ChatbubbleTextualExplanation 
                     key={"message-recommendation-1"}
                     recommendationIndex={recommendationIndex}
-                    explanation={recommendations[currentRecommendation].explanation}/>);
-                const recommendationText = " Ga je akkoord met de aanbeveling?";
+                    explanation={recommendations[currentRecommendation].explanation[language]}/>);
+                    const recommendationText = language === "nl-BE" ? " Ga je akkoord met de aanbeveling?" : "Do you agree with the recommendation?";
                 /*messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-1"} typeLength={2000} own={false}>{recommendations[recommendationIndex].explanation}</Chatbubble>) */
                 /*
                 messages.push(<Chatbubble key={"message-recommendation-2"} delayedDisplay delayBy={recommendationIndex > 0 ? 0 : 2000} typeLength={recommendationIndex > 0 ? 0 : 2000} own={false}>{recommendations[recommendationIndex].recommendation + recommendationText}</Chatbubble>) */
@@ -154,13 +177,14 @@ export default function PainLogbookTextual() {
                     recommendationLength={recommendations.length-1}
                     nextRecommendation={() => updateCurrentRecommendation(currentRecommendation+1)}
                     prevRecommendation={() => updateCurrentRecommendation(currentRecommendation-1)}>
-                        {recommendations[recommendationIndex].recommendation + recommendationText}
+                        {recommendations[recommendationIndex].recommendation[language] + recommendationText}
                     </ChatbubbleRecommendation>) ;
 
             }
             /* Normal messages */
             else {
-                messages.push(<Chatbubble key={"message-"+index} own={message.sentBy === "user" ? true : false}>{message.content}</Chatbubble>) 
+                const content = typeof message.content === "string" ? message.content : message.content?.[language];
+                messages.push(<Chatbubble key={"message-"+index} own={message.sentBy === "user" ? true : false}>{content}</Chatbubble>) 
             }
         });
         /* Step 2: Render own message input options */
@@ -194,21 +218,23 @@ export default function PainLogbookTextual() {
                     break;
                 case "recommendation-answer":
                     let newMessage = {...message};
-                    newMessage.content = newMessage.text;
+                    newMessage.content = typeof newMessage.text === "string" ? newMessage.text : newMessage.text[language];
+                    const messageText = typeof message.text === "string" ? message.text : message.text[language];
                     messages.push(<Chatbubble 
-                        key={"recommendation-response-"+message.text+"-"+currentRecommendation}
+                        key={"recommendation-response-"+messageText+"-"+currentRecommendation}
                         own={true}
                         delayedDisplay
                         delayBy={disabledAutoScroll > 0 ? 0 : 4000}
                         choice 
                         type={message.type}
                         onClick={() => action(message.action, {...newMessage})}>
-                            {message.text}
+                            {messageText}
                         </Chatbubble>);
                     break;
                 default:
+                    const content = typeof message.content === "string" ? message.content : message.content?.[language];
                     messages.push(<Chatbubble 
-                        key={"response-"+index+"-"+message.content}
+                        key={"response-"+index+"-"+content}
                         own={message.sentBy === "user" ? true : false}
                         delayedDisplay
                         choice 
@@ -216,7 +242,7 @@ export default function PainLogbookTextual() {
                         onClick={message.action ? 
                             () => action(message.action) : 
                             () => addResponseToMessageQueue({...message})}>
-                            {message.content}
+                            {content}
                         </Chatbubble>);
                     break;
             }
@@ -235,46 +261,6 @@ export default function PainLogbookTextual() {
         </AppModal>)
     }
 
-    function renderModuleModal() {
-        let submodule = [], recModule = matchedRecommendations[currentRecommendation].module.toLowerCase(), recSubmodule = matchedRecommendations[currentRecommendation].submodule;
-        switch (recSubmodule.split("_")[0]) {
-            case "PE":
-                submodule = PainEducationScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
-                break;
-            case "TE":
-                submodule = ThoughtsEmotionsScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
-                break;
-            case "ACT":
-                submodule = ActivityWorkScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
-                break;
-        }
-
-        return (<AppModal
-            backOption="Terug" 
-            notifyBack={() => setShowModuleModal(false)} 
-            notifyParent={() => {action("saveAndClose");}}
-            defaultOption="Akkoord" 
-            defaultColor="blue"
-            noPadding
-            show={showModuleModal}>
-            <div className="modalpopup-top">
-                <Illustration image={submodule.image} width={submodule.imageWidth ? submodule.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
-                <div className={"module-card-number"}>Onderdeel {submodule.part}</div>
-                <div className={"modalpopup-card-title"}>{submodule.titleMarkup[0]}</div>
-                {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title"}>{submodule.titleMarkup[1]}</div>}
-            </div>
-            <div className={"modalpopup-body"}>
-                <div>
-                    <PillButton contentColor="white" fillColor={"blue"} icon="time">{submodule.duration}</PillButton>
-                    <PillButton contentColor="white" fillColor={"blue"} icon="information">{submodule.type}</PillButton>
-                </div>
-                {submodule.description}
-                <hr/>
-                Klik op 'Akkoord' indien je akkoord gaat met de aanbeveling. Hiermee rond jij je pijnlogboek af.
-            </div>
-        </AppModal>)
-    }
-    
     /* Initialize first message once */
     useEffect(() => { initializeMessages() }, []);
 
@@ -299,12 +285,12 @@ export default function PainLogbookTextual() {
     return (
         <div className="userstudy">
             <div className="infopanel">
-                <h2>Pijnlogboek - Deel 1 (van 2)</h2>
-                <PillButton contentColor="blue" fillColor="white" icon="time">5 minuten</PillButton>
-                <PillButton contentColor="blue" fillColor="white" icon="information">Interactief</PillButton><br/>
-                Rechts zie je nu het pijnlogboek. Hierin ga jij een conversatie aan met een virtuele health coach die je gaat bevragen naar een recente situatie wanneer je pijn hebt ervaren. Probeer je even zo een situatie voor te stellen (stoot tegen de tafel, last van rug- of kniepijn, chronische pijn-opstoot, etc.), en vul dan het pijnlogboek in voor die pijnsituatie door te klikken de antwoord-opties (chatbubbels) die rechts in het gesprek staan.
+                <h2>{localization.title[language]}</h2>
+                <PillButton contentColor="blue" fillColor="white" icon="time">{localization.time[language]}</PillButton>
+                <PillButton contentColor="blue" fillColor="white" icon="information">{localization.interactive[language]}</PillButton><br/>
+                {localization.information[language]}
                 {matchedRecommendations.length > 0 && <hr/>}
-                {matchedRecommendations.length > 0 && <p>Je krijgt nu enkele aanbevelingen rond jouw inputs, alsook een <b>tekstuele uitleg</b> van waarom je de aanbeveling te zien krijgt. Ga door de aanbevelingen met behulp van de pijlen (<i>zie foto</i>) en indien je een aanbeveling ziet dat je aanspreekt, open je deze en klik je op <i>"Akkoord"</i>. Als geen aanbeveling je aanspreekt, kies je de optie <i>"Geen aanbeveling relevant"</i>.</p>}
+                {matchedRecommendations.length > 0 && localization.informationRecommendation[language]}
                 {matchedRecommendations.length > 0 && <Photo>
                     <img src={`/images/userstudy/textual-explanation.jpg`} width="490px"/>
                 </Photo>}
@@ -320,4 +306,26 @@ export default function PainLogbookTextual() {
     )
 }
 
+const localization = {
+    title: {
+        "nl-BE": "Pijnlogboek - Deel 1 (van 2)",
+        "en-EN": "Pain Logbook - Part 1 (of 2)"
+    },
+    time: {
+        "nl-BE": "5 minuten",
+        "en-EN": "5 minutes"
+    },
+    interactive: {
+        "nl-BE": "Interactief",
+        "en-EN": "Interactive"
+    },
+    information: {
+        "nl-BE": "Rechts zie je nu het pijnlogboek. Hierin ga jij een conversatie aan met een virtuele health coach die je gaat bevragen naar een recente situatie wanneer je pijn hebt ervaren. Probeer je even zo een situatie voor te stellen (stoot tegen de tafel, last van rug- of kniepijn, chronische pijn-opstoot, etc.), en vul dan het pijnlogboek in voor die pijnsituatie door te klikken de antwoord-opties (chatbubbels) die rechts in het gesprek staan.",
+        "en-EN": "On your right you see the pain logbook. This is where you have a conversation with a virtual health coach that will ask you about a recent situation in which you experienced pain. Try to imagine such a situation (bump against table, back or knee pain, chronic pain flare-up, ...), and fill in the painlogbook by clicking on the possible answers (chatbubbles) that are here on the right of the conversation."
+    },
+    informationRecommendation: {
+        "nl-BE": <p>Je krijgt nu enkele aanbevelingen rond jouw inputs, alsook een <b>tekstuele uitleg</b> van waarom je de aanbeveling te zien krijgt. Ga door de aanbevelingen met behulp van de pijlen (<i>zie foto</i>) en indien je een aanbeveling ziet dat je aanspreekt, open je deze en klik je op <i>"Akkoord"</i>. Als geen aanbeveling je aanspreekt, kies je de optie <i>"Geen aanbeveling relevant"</i>.</p>,
+        "en-EN": <p>You now see some recommendations around your inputs, as well as a <b>textual explanation</b> of why the recommendation is shown to you. Go through the recommendations using the arrows (<i>see photo</i>) and when you see a recommendation relevant to you, press <i>"Agree"</i>. If none of the recommendations are relevant, press <i>"None of recommendations relevant"</i>.</p>
+    },
+}
 //  <ChatbubbleInputSummary key={"message-recommendation-inputs"} typeLength={1000} inputs={computeBars(testInputs)}/>
