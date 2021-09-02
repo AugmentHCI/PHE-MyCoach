@@ -24,7 +24,7 @@ export default function PainLogbookDetail() {
     const userID   = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     const painlogID = FlowRouter.getParam('id');
     const painLogbookManager = new PainLogbookManager(userID);
-    const title = painLog ? " - " + weekdays[language][moment(painLog.timestamp).isoWeekday()] + " " + moment(painLog.timestamp).format("D MMMM") : "";
+    const title = painLog ? " - " + moment(painLog.timestamp).format("D MMMM") : "";
 
     useEffect(() => { 
         async function fetchPainLogs() {
@@ -79,10 +79,4 @@ export default function PainLogbookDetail() {
             </FadeIn>
         </div>
     </React.Fragment>);
-}
-
-const weekdays = {
-    "nl-BE": {1: "Maandag", 2: "Dinsdag", 3: "Woensdag", 4: "Donderdag", 5: "Vrijdag", 6: "Zaterdag", 7: "Zondag"},
-    "nl-FR": {1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: ""},
-    "en-EN": {1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday", 6: "Saturday", 7: "Sunday"}
 }

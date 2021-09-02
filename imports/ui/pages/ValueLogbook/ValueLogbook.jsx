@@ -5,6 +5,7 @@ import "./ValueLogbook.scss";
 import { values as valueCodes } from "../modules/ModuleScripts/ThoughtsEmotionsScript.js";
 import FadeIn from "react-fade-in";
 import jwt_decode from "jwt-decode";
+import moment from 'moment';
 
 import NavigationBar from '../../components/NavigationBar';
 import Button from '../../components/Button';
@@ -13,6 +14,7 @@ import Icon from '../../components/Illustrations/Icon';
 import Illustration from '../../components/Illustrations/Illustration';
 import Input from '../../components/Input';
 import GoalSettingManager from '../../../api/GoalSettingManager';
+import BuildupScheme from '../../../api/BuildupScheme';
 
 
 
@@ -106,11 +108,15 @@ export default function ValueLogbook() {
     function renderGoalCard(goal) {
         const days = JSON.parse(goal.days);
         const values = JSON.parse(goal.values);
+        console.log(goal)
+        const buildupScheme = goal.buildupScheme ? new BuildupScheme({schemeString: goal.buildupScheme}) : undefined;
+        const thisWeeksGoal = buildupScheme && buildupScheme.measuresComplete() ? buildupScheme.getGoal(moment().format("W-YYYY")) : undefined;
         return (<div className="valuelogbook-entry" key={goal._id}>
-            <div className="valuelogbook-entry-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/values/${goal._id}`)}><Icon image="pen" color="white"/></div>
+            <div className="valuelogbook-entry-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/values/${goal._id}`)}><Icon image="view" color="white" width="18px" style={{marginLeft:"-2px"}}/></div>
             <div className="valuelogbook-entry-title">{goal.title}</div>
             <div className="valuelogbook-entry-description" style={{maxWidth: "80%", display: "flex"}}>{goal.description}</div>
             Doel: <div className="valuelogbook-entry-description">{goal.quantity + " " + quantityT[goal.quantifier]}</div>
+            {thisWeeksGoal && <React.Fragment>Deze week: <div className="valuelogbook-entry-description">{thisWeeksGoal + " " + quantityT[goal.quantifier]}</div></React.Fragment>}
             <div style={{display:"flex", "flexDirection": "row", marginTop:".5em"}}>
                 {values.map(value => { return (<div key={value.id} className="valuelogbook-entry-value">{value.value}</div>)})}
             </div>
@@ -120,10 +126,6 @@ export default function ValueLogbook() {
                     const color = days[day] ? "var(--idewe-blue)" : "var(--idewe-gray-light)";
                     return (<div key={day} style={{color: color, flex: 1, textAlign: "center"}}>{daysT[day]}</div>)})}
             </div>
-            <hr style={{marginTop:".5em", marginBottom: "1em"}}/>
-            Mijn belemmering: <div className="valuelogbook-entry-description">{goal.threshold}</div><br/>
-            Mijn oplossing: <div className="valuelogbook-entry-description">{goal.thresholdDescription}</div><br/>
-            Mijn beloning: <div className="valuelogbook-entry-description">{goal.reward}</div>
         </div>)
     }
 

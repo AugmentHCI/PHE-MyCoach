@@ -7,6 +7,7 @@
 
 .activity-days {
     display: flex;
+    height: fit-content;
     margin-bottom: 20px;
     padding: 0 .75em;
     grid-row-gap: .75em;
@@ -15,7 +16,8 @@
 
 .activity-day {
     display: flex;
-    flex: 1;
+    width: 13vw;
+    height: 7vw;
     height: 40px;
     border-radius: 50%;
     background-color: var(--idewe-white);

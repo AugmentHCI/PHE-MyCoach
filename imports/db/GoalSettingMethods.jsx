@@ -75,4 +75,8 @@ Meteor.methods({
         newMongoObjectId._str = goalID;
         return GoalSettingCollection.findOne({ _id: newMongoObjectId._str });
     },
+    'goalsetting.removeGoal'({userID, goalID}) {
+        check(userID, Number);
+        return GoalSettingCollection.remove({ userID: userID, _id: goalID });
+    },
 });

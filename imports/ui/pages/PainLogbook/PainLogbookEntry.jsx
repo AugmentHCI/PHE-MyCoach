@@ -239,13 +239,20 @@ export default function PainLogbookEntry() {
                 /* Update state, but use local variable as state update happens asynchronously */
                 let recommendations = matchedRecommendations.length === 0 ? ruleEngine.matchRules(userInput) : matchedRecommendations ;
                 if (matchedRecommendations.length === 0) updateMatchedRecommendations(recommendations);
-                messages.push(<ChatbubbleInputSummary key={"message-recommendation-inputs"} typeLength={recommendationIndex > 0 ? 0 : 2000} inputs={computeBars(userInput)} highlights={recommendations[recommendationIndex].codeMarkings}/>);
+                messages.push(<ChatbubbleInputSummary 
+                    key={"message-recommendation-inputs"} 
+                    typeLength={recommendationIndex > 0 ? 0 : 2000} 
+                    inputs={computeBars(userInput)} 
+                    codes={codes} 
+                    language={language}
+                    highlights={recommendations[recommendationIndex].codeMarkings}/>);
                 const recommendationText = " Wil je hiervoor wat tips bekijken in de module '" + moduleTranslation[recommendations[recommendationIndex].module]+ "'?";
                 /*messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-1"} typeLength={2000} own={false}>{recommendations[recommendationIndex].explanation}</Chatbubble>) */
                 /*
                 messages.push(<Chatbubble key={"message-recommendation-2"} delayedDisplay delayBy={recommendationIndex > 0 ? 0 : 2000} typeLength={recommendationIndex > 0 ? 0 : 2000} own={false}>{recommendations[recommendationIndex].recommendation + recommendationText}</Chatbubble>) */
                 messages.push(<ChatbubbleRecommendation 
                     key={"message-recommendation-2"} 
+                    language={language}
                     recommendationIndex={recommendationIndex}
                     recommendationLength={recommendations.length-1}
                     nextRecommendation={() => updateCurrentRecommendation(currentRecommendation+1)}
@@ -266,6 +273,7 @@ export default function PainLogbookEntry() {
                     messages.push(<ChatbubbleText
                         key={"chatbubble-text-" + index + "-" + message}
                         message={message}
+                        language={language}
                         onSubmit={addResponseToMessageQueue}
                         />)
                     break;

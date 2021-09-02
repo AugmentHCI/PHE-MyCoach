@@ -104,6 +104,7 @@ export default function NewGoalScreen() {
         fetchValues();
         fetchGoal();
     }, []);
+    
 
     /* Saving component */
     async function saveGoal() {
@@ -141,12 +142,26 @@ export default function NewGoalScreen() {
         history.back();
     }
 
+    function removeGoal() {
+        goalSettingManager.removeGoal(goalID);
+        history.back();
+    }
+
+    const getColor = (bar) => {
+        if (bar.data.date === moment().format("W-YYYY")) return 'var(--idewe-blue-dark)'
+        return 'var(--idewe-blue)'
+    }
+
     function renderChart() {
+        if (buildupScheme?.scheme && buildupScheme.scheme.length > 100) return <React.Fragment/>
+        if (buildupScheme?.scheme && buildupScheme.scheme.length === 0) return <b>
+            Jouw metingen liggen al boven je doel! Je mag je doel iets hoger stellen.
+        </b>
         return <div style={{height: "200px", width: "100%"}}><ResponsiveBar
         data={buildupScheme.scheme}
         indexBy="week"
         keys={["goal"]}
-        colors={{ scheme: 'category10' }}
+        colors={getColor}
         margin={{ top: 10, right: 10, bottom: 50, left: 50 }}
         padding={0.35}
         minValue={0}
@@ -168,7 +183,7 @@ export default function NewGoalScreen() {
             tickSize: 0,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Doel',
+            legend: `Doel (${goalQuantifier[0].value})`,
             legendPosition: 'middle',
             legendOffset: -40
         }}>
@@ -221,8 +236,8 @@ export default function NewGoalScreen() {
                         <div style={{display:"flex", width: "100%", flexDirection:"column", marginBottom: ".5em"}}>
                             <div style={{display:"flex", width: "100%", flexDirection:"row"}}>
                                 <Input type="number" style={{flex:1}} placeholder="0" value={measurements[0]} onChange={(value) => updateBuildschemeData({type: "measurement", value: value, id: 0})}/>
-                                <Input type="number" style={{flex:1}} placeholder="0" value={measurements[1]} onChange={(value) => updateBuildschemeData({type: "measurement", value: value, id: 1})}/>
-                                <Input type="number" style={{flex:1}} placeholder="0" value={measurements[2]} onChange={(value) => updateBuildschemeData({type: "measurement", value: value, id: 2})}/>
+                                <Input type="number" style={{flex:1}} disabled={!measurements[0]} placeholder="0" value={measurements[1]} onChange={(value) => updateBuildschemeData({type: "measurement", value: value, id: 1})}/>
+                                <Input type="number" style={{flex:1}} disabled={!measurements[1]} placeholder="0" value={measurements[2]} onChange={(value) => updateBuildschemeData({type: "measurement", value: value, id: 2})}/>
                             </div>
                             <div style={{display:"flex", width: "100%", flexDirection:"row", textAlign: "center"}}>
                                 <b style={{flex:1}}>Meting 1</b>
@@ -230,8 +245,9 @@ export default function NewGoalScreen() {
                                 <b style={{flex:1}}>Meting 3</b>
                             </div>
                         </div>
-                        { buildupScheme?.isTooMuch() && <b style={{color:"var(--idewe-red)"}}>Je doel ligt iets te hoog! Probeer een doel in te stellen dat je binnen de 12 weken zou kunnen behalen.</b>}
-                        { buildupScheme?.scheme && !buildupScheme?.isTooMuch() && <p>Je kan je doel in <b>{buildupScheme.scheme.length} weken</b> behalen. De eerste week begin je met <b>{Math.round(buildupScheme.startValue*10)/10} {goalQuantifier[0].value}</b>.</p>}
+                        { buildupScheme?.isTooMuch() && buildupScheme?.scheme?.length <= 100 && <b style={{color:"var(--idewe-red)"}}>Je doel ligt iets te hoog! Probeer een doel in te stellen dat je binnen de 12 weken zou kunnen behalen.</b>}
+                        { buildupScheme?.scheme?.length > 100 && <b style={{color:"var(--idewe-red)"}}> Het niveau van jouw metingen ligt iets te laag, of jouw doel ligt veel te hoog! </b>}
+                        { buildupScheme?.scheme && !buildupScheme?.isTooMuch() && buildupScheme?.scheme?.length > 0 && <p>Je kan je doel in <b>{buildupScheme.scheme.length} weken</b> behalen. De eerste week begin je met <b>{Math.round(buildupScheme.startValue*10)/10} {goalQuantifier[0].value}</b>.</p>}
                         { buildupGoal && buildupScheme && buildupScheme.scheme && renderChart() }
                         </React.Fragment>
                     }
@@ -248,6 +264,7 @@ export default function NewGoalScreen() {
                 <Input type="text" placeholder="Typ hier je beloning" style={{width:"100%"}} value={goalReward} onChange={updateGoalReward}/>
                 <hr/>
                 <Button width="100%" disabled={!finishedCompleting()} center color="blue" onClick={() => saveGoal()}>{goalID ? "Update je doel" : "Doel opslaan"}</Button>
+                {goalID && <Button width="100%" center color="red" onClick={() => removeGoal()}>Verwijder doel</Button>}
             </FadeIn>
         </div>)
     }

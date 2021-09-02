@@ -27,10 +27,10 @@ const emotionToString = {
 
 function Circle({tint, isEmpty}) {
     const circleStyle = {
-      backgroundColor: isEmpty ? "transparant" : `var(--idewe-blue-dark-tint${tint})`,
+      backgroundColor: isEmpty ? "transparant" : `var(--idewe-blue-dark-tint${tint+1})`,
       borderStyle: "solid", 
       borderWidth: "1.5px",
-      borderColor: isEmpty ? "var(--idewe-blue-tint3)" : `var(--idewe-blue-dark-tint${tint})`,
+      borderColor: isEmpty ? "var(--idewe-blue-tint3)" : `var(--idewe-blue-dark-tint${tint+1})`,
       borderRadius: "50%",
       width: "20px",
       height: "20px",
@@ -95,7 +95,7 @@ export default function ActivityGraph({data, locale}) {
     {Object.keys(pomsData).map((variable) => {
       return <div key={variable + "-row"} style={{display: "flex", flexDirection: "row"}}>
         { Object.keys(pomsData[variable]).map((day) => {
-            if (pomsData[variable][day]) return  <Circle key={variable + day} tint={pomsData[variable][day]}/>
+            if ( typeof pomsData[variable][day] !== "string") return  <Circle key={variable + day} tint={pomsData[variable][day]}/>
             return <Circle key={variable + day}  isEmpty/>
         })}
       </div>
