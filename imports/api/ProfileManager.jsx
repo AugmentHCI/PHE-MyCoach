@@ -13,11 +13,12 @@ export default class ProfileManager {
     /* MongoDB Calls */
 
     async getLatestProfile() {
-        return await Meteor.callPromise('mycoachinteraction.getLatestProfile', {userID: this.userID});
+        return 1;
+        //return await Meteor.callPromise('mycoachinteraction.getLatestProfile', {userID: this.userID});
     }
 
     setProfile() {
-
+        
     }
 
     /* External Calls */

@@ -276,7 +276,8 @@ export default function MyCoach(props) {
             setUserDailyCoaching(dailyCoaching);
         }
         async function fetchUserData() {
-            const latestUserData = await profileManager.getLatestQuestionnaire();
+            // TODO: const latestUserData = await profileManager.getLatestQuestionnaire();
+            const latestUserData = undefined;
             latestUserData?.data ? setUserData(latestUserData.data) : setUserData({profile: 1});
             latestUserData?.data?.profile ? progressManager.setProfile(latestUserData.data.profile) : progressManager.setProfile(1);
         }
