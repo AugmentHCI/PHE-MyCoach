@@ -339,7 +339,7 @@ export default function MyCoach(props) {
     )
 }
 
-const coachRRNRs = [1111111, 4862876, 3381097, 4018425, 4799179, 3237616, 4013945, 3475505, 4557583, 2988321, 3604510, 3731886];
+const coachRRNRs = [1111111, 4862876, 3381097, 4018425, 4799179, 3237616, 4013945, 3475505, 4557583, 2988321, 3604510, 3731886, 4173393, 2360438];
 /* The module priorities per profile */
 const modulePriorities = {
     1: []
