@@ -552,10 +552,10 @@ function createShortcutContent(props) {
 function createStoryContent({content, dynamicHeight=false}) {
 
     return (
-        <Carousel showThumbs={false} showStatus={false} autoPlay={false} dynamicHeight={dynamicHeight}>
+        <Carousel showThumbs={false} showStatus={false} autoPlay={false} interval={100000} dynamicHeight={dynamicHeight}>
             {content.map(card => {return (<div className="content-story-card">
-                {card.image && <img className={"content-story-image" + (card.title ? "" : "-rounded")} src={card.image}/>}
-                {(card.title || card.text) && <div className="content-story-textcontainer">
+                {card.image && <img className={"content-story-image" + (card.title || card.text ? "" : "-rounded")} src={card.image}/>}
+                {(card.title || card.text) && <div className={"content-story-textcontainer" + (card.image ? "" : "-rounded")}>
                     {card.title && <p className="content-story-title">{card.title}</p>}
                     {card.text && <p className="content-story-text">{card.text}</p>}
                 </div>}

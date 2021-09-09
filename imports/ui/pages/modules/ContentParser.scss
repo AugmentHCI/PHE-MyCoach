@@ -215,6 +215,16 @@
 
 /* Content - MULTITEXTINPUT */
 
+.content-story-image {
+    border-radius: 10px 10px 0 0;
+    box-shadow: var(--card-shadow);
+
+    &-rounded {
+        @extend .content-story-image;
+        border-radius: 10px;
+    }
+}
+
 .content-story-textcontainer {
     display: flex;
     flex-direction: column;
@@ -223,6 +233,12 @@
     background-color: var(--idewe-blue);
     height: 100%;
     justify-content: center;
+
+    &-rounded {
+        @extend .content-story-textcontainer;
+        border-radius: 10px;
+        border: 5px solid var(--idewe-white);
+    }
 }
 
 .content-story-title {
@@ -240,16 +256,6 @@
     display: flex;
     flex-direction: column;
     line-height: 1.4em;
-}
-
-.content-story-image {
-    border-radius: 10px 10px 0 0;
-    box-shadow: var(--card-shadow);
-
-    &-rounded {
-        @extend .content-story-image;
-        border-radius: 10px;
-    }
 }
 
 // Overrides

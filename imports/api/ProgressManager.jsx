@@ -147,6 +147,7 @@ export default class ProgressManager {
 }
 
 function getModuleStatus(submodules) {
+    if (!submodules) return "NOT_STARTED";
     let completed = true, notStarted = true;
     for (const [, status] of Object.entries(submodules)) {
         if (status !== "COMPLETED")   completed  = false;
@@ -154,16 +155,16 @@ function getModuleStatus(submodules) {
     }
     if (completed) return "COMPLETED";
     if (notStarted) return "NOT_STARTED";
-    return "IN_PROGRESS"
+    return "IN_PROGRESS";
 }
 
 function parseProgress(userData) {
     let progress = JSON.parse(JSON.stringify(template));
     userData.forEach(data => {
         /* Only (re)assign with higher priorities (e.g. do not override "COMPLETED" with "IN_PROGRESS" */
-        switch (progress[data.moduleID][data.submoduleID]) {
+        switch (progress?.[data.moduleID]?.[data.submoduleID]) {
             case undefined:
-                progress[data.moduleID][data.submoduleID] = data.status;
+                if (progress?.[data.moduleID]?.[data.submoduleID]) progress[data.moduleID][data.submoduleID] = data.status;
                 break;
             case "NOT_STARTED":
                 if (["TO_START", "IN_PROGRESS", "COMPLETED"].includes(data.status)) progress[data.moduleID][data.submoduleID] = data.status;
