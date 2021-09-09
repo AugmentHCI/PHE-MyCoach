@@ -45,6 +45,7 @@ export default class ProgressManager {
     async getModuleDailyCoaching(module) {
         const moduleUserData = await Meteor.callPromise('mycoachprogress.getModuleProgress', {userID: this.userID, moduleID: module});
         const parsedModuleData = parseProgress(moduleUserData)[module];
+        if (!parsedModuleData) return undefined;
         /* Return first IN_PROGRESS module if available */
         for (const submodule of Object.keys(parsedModuleData)) { if (parsedModuleData[submodule] === "IN_PROGRESS") return submodule; }
         /* Return first NOT_STARTED module if available */
