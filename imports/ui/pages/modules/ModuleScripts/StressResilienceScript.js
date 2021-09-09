@@ -1207,9 +1207,9 @@ const STRMOD6 = {
         },
         {
             generateFinishSubmoduleButton: true,
-            lastModule: false,
-            text: "Voltooi dit onderdeel",
-            textOnCompleted: "Keer terug"
+            lastModule: true,
+            text: "Voltooi module Stress",
+            textOnCompleted: "Naar startscherm"
         }
     ]
 }

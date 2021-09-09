@@ -713,8 +713,8 @@ const MOVMOD4 = {
         },
         {
             generateFinishSubmoduleButton: true,
-            lastModule: false,
-            text: "Voltooi dit onderdeel",
+            lastModule: true,
+            text: "Voltooi module Bewegen",
             textOnCompleted: "Keer terug"
         }
     ]
