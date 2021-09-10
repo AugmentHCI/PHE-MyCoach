@@ -442,7 +442,7 @@ export default class MyProgress extends Component {
       margin:"0 30px 5px 30px",
       fontWeight:"500"};
       
-    if (steps === 0) infostyle["textAlign"] = "center";
+    if (!steps) infostyle["textAlign"] = "center";
 
     return <FadeIn delay="50"><Card title="Mijn Stappen" bodyStyle={{padding: '10px 5px'}} underline>
       <div style={{width: "100%", display: "flex", paddingLeft: "10px", paddingRight: "10px", marginBottom:"20px"}}>
@@ -466,8 +466,8 @@ export default class MyProgress extends Component {
           <T>{`myProgress.mysteps.distance`}</T>: <div style={{display:"inline", color:"var(--idewe-blue)"}}>{distance.split(".")[0] >= 10 ? distance.split(".")[0] + " km": distance}</div>
           </div>
         </div>}
-        {(steps === 0) && <div style={infostyle}><T>{`myProgress.mysteps.noSteps`}</T></div>}
-      <StepsGraph data={this.state.stepsData}></StepsGraph>
+        {!steps && <div style={infostyle}><T>{`myProgress.mysteps.noSteps`}</T></div>}
+      <StepsGraph data={this.state.stepsData}/>
     </Card></FadeIn>
   }
 
