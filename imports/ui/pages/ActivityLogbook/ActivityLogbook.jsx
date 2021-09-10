@@ -384,7 +384,7 @@ function Activity(props) {
             <Input type="checkbox" value={props.done} style={{marginTop:"3px"}} onChange={() => props.toggleDone(props.id, !props.done)}/>
         </div>}
         {props.isGoal && quantity && <div className="activity-intensity-moderate">{quantity + " " + unit}</div>}
-        {props.isGoal && <div className="activity-toggle" onClick={() => props.openActivityEditor(props.id, props.isGoal, props.goal?._id)}> <Icon image="next" color="blue" style={{marginTop:"3px"}}/> </div>}
+        {props.isGoal && <div className="activity-toggle" onClick={() => props.openActivityEditor(props.id, props.isGoal, props.goal)}> <Icon image="next" color="blue" style={{marginTop:"3px"}}/> </div>}
     </div>)
 }
 
