@@ -61,4 +61,12 @@ export default class GoalSettingManager {
     async getUserGoal(goalID) {
         return await Meteor.callPromise('goalsetting.getGoal', { userID: this.userID, goalID: goalID });
     }
+
+    /**
+     * Removes a specific goal with the given goalID.
+     */
+    async removeGoal(goalID) {
+        console.log("Removing with id - "  + goalID)
+        return Meteor.callPromise('goalsetting.removeGoal', { userID: this.userID, goalID: goalID });
+    }
 }
