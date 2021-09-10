@@ -134,8 +134,8 @@ export default class ProgressManager {
                     case "MOVEMENT": 
                         await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "MOVEMENT", submoduleID: "MOV_MOD_1", status: "IN_PROGRESS"}); 
                         break;
-                    case "STRESS": 
-                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "STRESS", submoduleID: "STR_MOD_1", status: "IN_PROGRESS"}); 
+                    case "STRESSRESILIENCE": 
+                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "STRESSRESILIENCE", submoduleID: "STR_MOD_1", status: "IN_PROGRESS"}); 
                         break;
                     case "SOCIAL": 
                         await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "SOCIAL", submoduleID: "SOC_MOD_1", status: "IN_PROGRESS"}); 
@@ -189,7 +189,7 @@ const template = {
         "THOUGHTSEMOTIONS": {"TE_MOD_1": "NOT_STARTED", "TE_MOD_2": "NOT_STARTED", "TE_MOD_3": "NOT_STARTED", "TE_MOD_4": "NOT_STARTED", "TE_MOD_5": "NOT_STARTED", "TE_MOD_6": "NOT_STARTED"},
         "ACTIVITYWORK":     {"ACT_MOD_1": "NOT_STARTED", "ACT_MOD_2": "NOT_STARTED", "ACT_MOD_3": "NOT_STARTED", "ACT_MOD_4": "NOT_STARTED", "ACT_MOD_5": "NOT_STARTED", "ACT_MOD_6": "NOT_STARTED", "ACT_MOD_7": "NOT_STARTED", "ACT_MOD_8": "NOT_STARTED", "ACT_MOD_9": "NOT_STARTED"},
         "MOVEMENT": {},
-        "STRESS": {},
+        "STRESSRESILIENCE": {},
         "SOCIAL": {}
 }
 

@@ -100,8 +100,8 @@ export default function MyCoach(props) {
     }
 
     function calculateLineColor(module) {
-        if (!userProgress) return "3px solid var(--idewe-gray-dark)";
-        if (Object.keys(userProgress[module]).length === 0) return "3px solid var(--idewe-gray-dark)";
+        if (!userProgress || !userProgress[module]) return "3px solid var(--idewe-gray-dark)";
+        if (Object.keys(userProgress?.[module]).length === 0) return "3px solid var(--idewe-gray-dark)";
         let completed = true, notStarted = true;
         for (const [, status] of Object.entries(userProgress[module])) {
             if (status !== "COMPLETED")   completed  = false;
@@ -187,8 +187,8 @@ export default function MyCoach(props) {
                     <div className="line-social" style={{borderLeft:calculateLineColor("SOCIAL")}}/>
                 </div>
                 <div className="module-topandbottom-row">
-                    <ModuleButton rrnr={userID} code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/stressresilience/`)} data={userProgress?.STRESS}/>
-                    <div className="line-stress" style={{borderLeft:calculateLineColor("STRESS")}}/>
+                    <ModuleButton rrnr={userID} code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/stressresilience/`)} data={userProgress?.STRESSRESILIENCE}/>
+                    <div className="line-stress" style={{borderLeft:calculateLineColor("STRESSRESILIENCE")}}/>
                 </div>    
             </div> 
         </React.Fragment>)
@@ -268,7 +268,7 @@ export default function MyCoach(props) {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
             let progress = await progressManager.getUserProgress();
-            if (progress["PAINEDUCATION"]["PE_MOD_1"] === "NOT_STARTED") {
+            if (progress && progress.PAINEDUCATION && progress["PAINEDUCATION"]["PE_MOD_1"] === "NOT_STARTED") {
                 progress["PAINEDUCATION"]["PE_MOD_1"] = "IN_PROGRESS";
                 await progressManager.setSubmoduleStatus("PAINEDUCATION", "PE_MOD_1", "IN_PROGRESS");
             }
