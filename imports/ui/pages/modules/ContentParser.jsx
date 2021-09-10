@@ -194,7 +194,20 @@ function ContentParser(props) {
      */
     function createVideoContent(link, language) {
         if (link === false) {return <div className="content-video-todo">Video</div>}
-        return <iframe key={props.childrenKey} src={link} width="100%" style={{marginTop:"20px", borderRadius: "10px"}} frameBorder="0" allow="autoplay; fullscreen" mozallowfullscreen={true} webkitallowfullscreen={true} allowFullScreen></iframe>
+        return <iframe 
+            key={props.childrenKey} 
+            src={link} 
+            width="100%" 
+            style={{marginTop:"20px", borderRadius: "10px"}} 
+            frameBorder="0" 
+            allow="autoplay; fullscreen" 
+            mozallowfullscreen={true} 
+            webkitallowfullscreen={true} 
+            allowFullScreen={true} 
+            mozallowfullscreen="mozallowfullscreen" 
+            msallowfullscreen="msallowfullscreen" 
+            oallowfullscreen="oallowfullscreen" 
+            webkitallowfullscreen="webkitallowfullscreen"/>
     }
 
     /**
