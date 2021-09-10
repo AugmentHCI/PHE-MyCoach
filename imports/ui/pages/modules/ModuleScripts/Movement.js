@@ -461,9 +461,9 @@ const MOVMOD3 = {
                     content: "Beluister hier de podcast over wisselwerken van Tineke, onze preventieadviseur ergonomie:"
                 },
                 {
-                    type: "Podcast"
-                }
-            ]
+                    type: "Audiofile",
+                    source: "/audio/Podcast.mp3"
+                }            ]
         },
         {
             title: "Oefeningen voor op het werk",
