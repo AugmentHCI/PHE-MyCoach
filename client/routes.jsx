@@ -16,6 +16,7 @@ import PainLogbookDetail from '../imports/ui/pages/PainLogbook/PainLogbookDetail
 import ActivityLogbook  from '../imports/ui/pages/ActivityLogbook/ActivityLogbook.jsx';
 import ValueLogbook from '../imports/ui/pages/ValueLogbook/ValueLogbook.jsx';
 import NewGoalScreen from '../imports/ui/pages/ValueLogbook/NewGoalScreen';
+import ViewGoalEntry from '../imports/ui/pages/ValueLogbook/ViewGoalEntry';
 import FeedbackScreen from '../imports/ui/pages/FeedbackScreen.jsx';
 /* User study */
 import PainLogbookHybrid from '../imports/ui/pages/userstudy/PainLogbookHybrid.jsx';
@@ -141,6 +142,11 @@ FlowRouter.route('/:language/mycoach/:token/values/newgoal', {
 });
 
 FlowRouter.route('/:language/mycoach/:token/values/:id', {
+  name: 'ValueLogbook',
+  action(){ mount( App, { content: <ViewGoalEntry /> })}
+});
+
+FlowRouter.route('/:language/mycoach/:token/values/edit/:id', {
   name: 'ValueLogbook',
   action(){ mount( App, { content: <NewGoalScreen /> })}
 });
