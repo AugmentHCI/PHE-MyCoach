@@ -38,6 +38,7 @@
         "react-fade-in": "^2.0.1",
         "react-highlight-words": "^0.17.0",
         "react-mounter": "^1.2.0",
+        "react-responsive-carousel": "^3.2.21",
         "react-scripts": "^4.0.0",
         "react-semantic-ui-range": "^0.7.1",
         "react-swipe-card": "^0.1.4",

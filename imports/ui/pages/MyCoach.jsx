@@ -100,7 +100,8 @@ export default function MyCoach(props) {
     }
 
     function calculateLineColor(module) {
-        if (Object.keys(userProgress[module]).length === 0) return "3px solid var(--idewe-gray-dark)";
+        if (!userProgress || !userProgress[module]) return "3px solid var(--idewe-gray-dark)";
+        if (Object.keys(userProgress?.[module]).length === 0) return "3px solid var(--idewe-gray-dark)";
         let completed = true, notStarted = true;
         for (const [, status] of Object.entries(userProgress[module])) {
             if (status !== "COMPLETED")   completed  = false;
@@ -168,26 +169,26 @@ export default function MyCoach(props) {
                     placement="top"
                     trigger="click"
                     visible={!showTutorial2 && showTutorial3}>
-                        <ModuleButton code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/paineducation/`)} data={userProgress.PAINEDUCATION}/>
+                        <ModuleButton rrnr={userID} code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/paineducation/`)} data={userProgress?.PAINEDUCATION}/>
                     </Popover>
                     <div className="line-paineducation" style={{borderLeft:calculateLineColor("PAINEDUCATION")}}/>
                 </div>
                 <div className="module-middle-row">
-                    <ModuleButton code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/thoughtsemotions/`)} data={userProgress.THOUGHTSEMOTIONS}/>
+                    <ModuleButton rrnr={userID} code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/thoughtsemotions/`)} data={userProgress?.THOUGHTSEMOTIONS}/>
                     <div className="coaching-circle">Mijn <br/>coaching</div>
-                    <ModuleButton code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/activitywork/`)} data={userProgress.ACTIVITYWORK}/>
+                    <ModuleButton rrnr={userID} code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/activitywork/`)} data={userProgress?.ACTIVITYWORK}/>
                 </div>     
                 <div className="module-middle-row">
-                    <ModuleButton code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/movement/`)} data={userProgress.MOVEMENT}/>
-                    <ModuleButton code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/${language}/mycoach/module/social/`)} data={userProgress.SOCIAL}/>
+                    <ModuleButton rrnr={userID} code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/movement/`)} data={userProgress?.MOVEMENT}/>
+                    <ModuleButton rrnr={userID} code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/${language}/mycoach/`)} data={userProgress?.SOCIAL}/>
                     <div className="line-emotions" style={{borderLeft:calculateLineColor("THOUGHTSEMOTIONS")}}/>
                     <div className="line-activity" style={{borderLeft:calculateLineColor("ACTIVITYWORK")}}/>
                     <div className="line-movement" style={{borderLeft:calculateLineColor("MOVEMENT")}}/>
                     <div className="line-social" style={{borderLeft:calculateLineColor("SOCIAL")}}/>
                 </div>
                 <div className="module-topandbottom-row">
-                    <ModuleButton code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/stress/`)} data={userProgress.STRESS}/>
-                    <div className="line-stress" style={{borderLeft:calculateLineColor("STRESS")}}/>
+                    <ModuleButton rrnr={userID} code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/stressresilience/`)} data={userProgress?.STRESSRESILIENCE}/>
+                    <div className="line-stress" style={{borderLeft:calculateLineColor("STRESSRESILIENCE")}}/>
                 </div>    
             </div> 
         </React.Fragment>)
@@ -249,7 +250,7 @@ export default function MyCoach(props) {
         defaultOption="Begrepen" 
         defaultColor="blue"
         title="Proficiat!"
-        show={userProgress["PAINEDUCATION"]["PE_MOD_5"] === "COMPLETED" && showFinishPainEducationModal}>
+        show={userProgress?.["PAINEDUCATION"]?.["PE_MOD_5"] === "COMPLETED" && showFinishPainEducationModal}>
             Je hebt de module pijneducatie doorlopen, super! Je kan nu de module rond gedachten en emoties bekijken, oftewel de module rond activiteit en werk. Wij hebben ook een snelkoppeling naar je pijnlogboek toegevoegd, neem daar zeker ook eens een kijkje!
     </AppModal>
     }
@@ -267,7 +268,7 @@ export default function MyCoach(props) {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
             let progress = await progressManager.getUserProgress();
-            if (progress["PAINEDUCATION"]["PE_MOD_1"] === "NOT_STARTED") {
+            if (progress && progress.PAINEDUCATION && progress["PAINEDUCATION"]["PE_MOD_1"] === "NOT_STARTED") {
                 progress["PAINEDUCATION"]["PE_MOD_1"] = "IN_PROGRESS";
                 await progressManager.setSubmoduleStatus("PAINEDUCATION", "PE_MOD_1", "IN_PROGRESS");
             }
@@ -311,7 +312,7 @@ export default function MyCoach(props) {
             {(tapCount >= 5 || props.noSplash || language === "nl-BE") && <React.Fragment>
             {handleIntroduction()}
             {showCoachingModal && renderDailyCoachingModal()}
-            {userProgress && showFinishPainEducationModal && userProgress["PAINEDUCATION"]["PE_MOD_5"] === "COMPLETED" && renderFinishPainEducationModal()}
+            {userProgress && showFinishPainEducationModal && userProgress?.["PAINEDUCATION"]?.["PE_MOD_5"] === "COMPLETED" && renderFinishPainEducationModal()}
             {userProgress && <FadeIn>
                 <div style={{display: "flex", position: "relative"}}>
                 <Popover
@@ -340,7 +341,7 @@ export default function MyCoach(props) {
     )
 }
 
-const coachRRNRs = [1111111, 4862876, 3381097, 4018425, 4799179, 3237616, 4013945, 3475505, 4557583, 2988321, 3604510, 3731886, 2360438, 4173393];
+export const coachRRNRs = [1111111, 4862876, 3381097, 4018425, 4799179, 3237616, 4013945, 3475505, 4557583, 2988321, 3604510, 3731886, 4173393, 2360438];
 /* The module priorities per profile */
 const modulePriorities = {
     1: []

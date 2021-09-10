@@ -121,6 +121,7 @@ export default class BuildupScheme {
 
     getGoal(isoWeekYear) {
         if (!isoWeekYear) return undefined;
+        if (!this.scheme) return this.goal;
         let weekPos = -1;
         for (const week of this.scheme) {
             if (moment(week.date, "W-YYYY").isSame(moment(isoWeekYear, "W-YYYY"), "week")) return week.goal;

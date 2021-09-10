@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ModuleButton.scss";
 
 import Icon from "../Illustrations/Icon.jsx";
+import { coachRRNRs } from "../../pages/MyCoach";
 
 export default function ModuleButton(props) {
 
@@ -21,12 +22,14 @@ export default function ModuleButton(props) {
     function handleOnClick() {
         press(false);
         if (props.onClick && calculateProgress() !== 0) props.onClick();
+        else if (props.onClick && coachRRNRs.includes(props.rrnr)) props.onClick();
     }
 
     /**
      * Calculate the percentage of completed submodules
      */
     function calculateProgress() {
+        if (!props.data) return 0;
         let completed = 0;
         if (Object.keys(props.data).length === 0) return 0;
         for (const [, status] of Object.entries(props.data)) {

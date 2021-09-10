@@ -25,6 +25,7 @@ import AppModal from '../../components/AppModal';
 import { shortcuts as shortcutData } from "./ModuleScripts/Shortcuts";
 
 import './ModuleParser.scss';
+import MovementScript from './ModuleScripts/Movement.js';
 
 export default function ModuleParser(props) {
 
@@ -64,6 +65,9 @@ export default function ModuleParser(props) {
             case "stressresilience":
                 updateModuleData(StressResilienceScript);
                 break;
+            case "movement":
+                updateModuleData(MovementScript);
+                break;
             default:
                 updateModuleData(undefined);
         }
@@ -75,7 +79,7 @@ export default function ModuleParser(props) {
     function renderSubmodulesList() {
         const moduleCardsHTML = [];
         moduleData.submodules.forEach(submodule => {
-            const status = userProgress[module][submodule.id];
+            const status = userProgress?.[module]?.[submodule.id];
             const isClosed = status === "COMPLETED" || status === "NOT_STARTED" ? true : false;
             const isLocked = status === "NOT_STARTED" || status === "TO_START" ? true : false;
             if (!isClosed && openSubmodule !== submodule.id && openSubmodule === "") { updateOpenSubmodule(submodule.id) }

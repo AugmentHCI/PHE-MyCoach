@@ -12,7 +12,9 @@ import PillButton from '../../components/PillButton.jsx';
 import Slider from '../../components/Slider.jsx';
 import Input from '../../components/Input.jsx';
 import Icon from '../../components/Illustrations/Icon.jsx';
-import CardWrapper from './ContentStory';
+
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // Requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 function ContentParser(props) {
 
@@ -407,6 +409,8 @@ function ContentParser(props) {
         switch (props.data.type) {
             case 'Text':
                 return createTextContent(props.data.content, props.data.overview);
+            case 'Subtitle':
+                return createSubtitleContent({content: props.data.content, underline: props.data.underline});
             case 'List':
                 return createListContent(props.data.content, props.data.numbered, props.data.overview);
             case 'Question':
@@ -438,7 +442,7 @@ function ContentParser(props) {
             case 'Shortcut':
                 return createShortcutContent(props);
             case 'Story':
-                return createStoryContent(props);
+                return createStoryContent({content: props.data.content, dynamicHeight: props.data.dynamicHeight});
             case 'Break':
                 return <hr/>;
             default:
@@ -531,6 +535,9 @@ function createMultipleChoiceContent(props) {
     </div>)
 }
 
+function createSubtitleContent({content, underline=undefined}) {
+    return <h3 style={{fontWeight:600, marginTop: '1em', marginBottom: '.5em', fontSize: '16px', textDecoration: underline ? "underline" : ""}}>{content}</h3>
+}
 
 function createShortcutContent(props) {
 
@@ -542,11 +549,17 @@ function createShortcutContent(props) {
     </div>)
 }
 
+function createStoryContent({content, dynamicHeight=false}) {
 
-
-function createStoryContent(props) {
-
-    const [showModal, setShowModal] = useState(false);
-
-    return (<CardWrapper/>)
+    return (
+        <Carousel showThumbs={false} showStatus={false} autoPlay={false} interval={100000} dynamicHeight={dynamicHeight}>
+            {content.map(card => {return (<div className="content-story-card">
+                {card.image && <img className={"content-story-image" + (card.title || card.text ? "" : "-rounded")} src={card.image}/>}
+                {(card.title || card.text) && <div className={"content-story-textcontainer" + (card.image ? "" : "-rounded")}>
+                    {card.title && <p className="content-story-title">{card.title}</p>}
+                    {card.text && <p className="content-story-text">{card.text}</p>}
+                </div>}
+            </div>)})}
+        </Carousel>
+    );
 }
