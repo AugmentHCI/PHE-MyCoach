@@ -947,6 +947,11 @@ const STRMOD6 = {
                     content: "Eerder in dit onderdeel werd uitgelegd dat stress een reactie is op een psychologisch proces. Of je een bepaalde situatie al dan niet als bedreigend of uitdagend ervaart, is mede afhankelijk van jouw beleving."
                 },
                 {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/stress/stressor.png"
+                },
+                {
                     type: "Text",
                     content: "Het kan dus zeker helpend zijn om aan de slag te gaan met jouw gedachten en emoties! Neem hiervoor een kijkje in de volgende module."
                 },
