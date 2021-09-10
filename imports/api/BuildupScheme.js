@@ -66,15 +66,17 @@ export default class BuildupScheme {
     updateScheme() {
         if (this.measuresComplete()) this.startValue = this.calculateStartValue(this.measurements);
         else {this.startValue = undefined; return undefined;}
+        if (this.startValue > this.goal) return [];
         let value = this.startValue;
         let week = 1;
         let newScheme = [];
         do {
-            newScheme.push({week: week, date: moment().add(week-1, "week").format("W-YYYY"), goal: value})
+            newScheme.push({week: week.toString(), date: moment().add(week-1, "week").format("W-YYYY"), goal: value})
             value = Math.round(this.startValue * (1 + week / 10)*10)/10;
             week++;
         } while (value <= this.goal);
-        newScheme.push({week: week, date: moment().add(week-1, "week").format("W-YYYY"), goal: this.goal})
+        if (newScheme.length > 0 && newScheme[newScheme.length-1].goal !== this.goal) 
+             newScheme.push({week: week.toString(), date: moment().add(week-1, "week").format("W-YYYY"), goal: this.goal})
         return newScheme;
     }
 
