@@ -53,6 +53,7 @@ const MOVMOD1 = {
             ]
         },
         {
+            title: "Acute pijn",
             cardContents: [
                 {
                     type: "Text",
@@ -70,6 +71,7 @@ const MOVMOD1 = {
             ]
         },
         {
+            title: "Chronische pijn",
             cardContents: [
                 {
                     type: "Image",
@@ -106,7 +108,7 @@ const MOVMOD1 = {
                     content: ["Traint het hart en beperkt het risico op hart- en vaatzieken.",
                     "Geeft je immuunsysteem een boost.",
                     "Zet hormonen vrij die zorgen voor een goed gevoel en pijndemping.",
-                    "Traint de spieren, houdt de gewichten soepen en versterkt de botten.",
+                    "Traint de spieren, houdt de gewichten soepel en versterkt de botten.",
                     "Houdt je gewicht onder controle en beperkt het risico op diabetes type 2.",
                     "Zorgt voor een betere concentratie en een beter geheugen.",
                     "Werkt ontspannend en leidt tot een betere slaap."]
@@ -186,7 +188,7 @@ const MOVMOD2 = {
                 },
                 {
                     type: "Text",
-                    content: "Beweeg iedere week 150 tot 300 minuten aan matige intensiteit óf 75 tot 150 minuten aan hoge intensiteit óf een combinatie van beide. Dat kan door 5 dagen per week gedurende 30 minuten te bewegen aan matige intensiteit. Je kan dit ook opsplitsen in kleinere blokken van bijvoorbeeld 10 minuten. Tijdens inspanningen aan matige intensiteit gaat je hartslag omhoog, adem je sneller maar je raakt niet uitgeput (stevig doorstappen, rustig fietsen of zwaar werk in de tuin). Bij activiteiten aan een hoge intensiteit raak je wel uitgeput (hardlopen of andere sporten). Beweeg je nog meer? Dan geeft dit nog extra voordelen voor de gezondheid!"
+                    content: "Beweeg iedere week 150 tot 300 minuten aan matige intensiteit óf 75 tot 150 minuten aan hoge intensiteit óf een combinatie van beiden. Dat kan door 5 dagen per week gedurende 30 minuten te bewegen aan matige intensiteit. Je kan dit ook opsplitsen in kleinere blokken van bijvoorbeeld 10 minuten. Tijdens inspanningen aan matige intensiteit gaat je hartslag omhoog, adem je sneller maar je raakt niet uitgeput (stevig doorstappen, rustig fietsen of zwaar werk in de tuin). Bij activiteiten aan een hoge intensiteit raak je wel uitgeput (hardlopen of andere sporten). Beweeg je nog meer? Dan geeft dit nog extra voordelen voor de gezondheid!"
                 },
                 {
                     type: "Image",
@@ -635,7 +637,7 @@ const MOVMOD4 = {
                 },
                 {
                     type: "Text",
-                    content: "Hier kan je een overzicht zien van alle workouts die aan bod komen in het filmpje."
+                    content: "Hier kan je een overzicht zien van alle oefeningen die aan bod komen in het filmpje."
                 },
                 {
                     type: "Story",
@@ -708,7 +710,7 @@ const MOVMOD4 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Ook tijdens de werkuren is het belangrijk om regelmatig te bewegen. Evalueer eens of je vaak in dezelfde houding moet werken of gedurende lange tijd dezelfde bewegingen moet uitvoeren. Probeer een aantal strategieën te bedenken om regelmatig af te wisselen in je houding en bewegingen en langdurig zitten te onderbreken. Ook voor actieve jobs kan het nuttig zijn om hier eens bij stil te staan. Met wat creativiteit en voldoende doorzettingsvermogen kan je voor elke job wel een aantal strategieën bedenken. Alle beetjes helpen!"
+                    content: "De doorsnee persoon beweegt veel te weinig, ook thuis. Nochtans is voor of na de werkuren het ideale moment om wat meer beweging in je dag te krijgen. Ook mensen met een actieve job kunnen hun gezondheid een extra boost geven door ook buiten het werk voldoende te bewegen. Probeer een aantal strategieën te bedenken om meer te bewegen die bij jouw passen. Met wat creativiteit en doorzettingsvermogen kom je er wel! Alle beetjes helpen!"
                 }]
         },
         {

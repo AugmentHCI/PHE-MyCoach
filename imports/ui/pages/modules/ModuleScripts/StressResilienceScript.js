@@ -102,7 +102,7 @@ const STRMOD1 = {
                             text: "Jouw collega verstijft helemaal wanneer hij/zij een klant moet opbellen, terwijl jij dit met alle plezier en zonder problemen doet."
                         },
                         {
-                            image: "/images/stress/road.png", 
+                            image: "/images/stress/spider.png", 
                             text: "Of jij kan niet snel genoeg de kamer uit zijn wanneer je een spin ziet, terwijl je vriend deze zonder verpinken oppakt en buiten zet."
                         },
                     ]
@@ -571,7 +571,7 @@ const STRMOD4 = {
             cardContents: [
             {
                 type: "Text",
-                content: "Wanneer je veel stressklachten ervaart, is dat dus een teken dat jouw balans verstoord is. Dat betekent dat je dagelijkse activiteiten meer energie kosten dan dat ze energie opleveren. Hoe je weer en evenwicht komt? Door rust te nemen en de balans tussen energievreters en energiegevers te herstellen."
+                content: "Wanneer je veel stressklachten ervaart, is dat dus een teken dat jouw balans verstoord is. Dat betekent dat je dagelijkse activiteiten meer energie kosten dan dat ze energie opleveren. Hoe je weer in evenwicht komt? Door rust te nemen en de balans tussen energievreters en energiegevers te herstellen."
             },
             {
                 type: "Image",
@@ -637,7 +637,7 @@ const STRMOD4 = {
                         },
                         {
                             image: "/images/stress/trash.png",
-                            title: "Voeg energiegevers aan jouw dag toe",
+                            title: "Of schrap energievreters indien mogelijk helemaal",
                             text: "Zijn er bijvoorbeeld taken op het werk die jou veel energie kosten terwijl ze jouw collega net energie geven? Dan zou je kunnen bekijken of het mogelijk is om het werk te herverdelen. Kost het doen van het huishouden je heel erg veel tijd en heb je de financiële ruimte om dit voor een stuk uit te besteden? Dan zou je de mogelijkheden op dit vlak kunnen verkennen."
                         }
                     ]
@@ -839,15 +839,11 @@ const STRMOD6 = {
         {
             cardContents: [{
                 type: "Text",
-                content: "Het begint allemaal bij het jezelf bewust zijn van je eigen alarmbellen!"
+                content: "In een vorig hoofdstuk zag je welke signalen kunnen duiden op aanhoudende of chronische stress. Jezelf bewust zijn van deze signalen is de eerste stap om aan stressmanagement te doen."
             },
             {
                 type: "Image",
                 link: "/images/stress/alarm.png"
-            },
-            {
-                type: "Text",
-                content: "Eerder in deze module gaven we enkele signalen die kunnen wijzen op aanhoudende stress. Welke signalen herken je bij jezelf wanneer?"
             }]
         },
         {
