@@ -20,7 +20,7 @@ const MOVMOD1 = {
                     id: "MOV-MOD-1-Q2",
                     width: "fit",
                     question: "Welk gevoel illustreert het best hoe jij je bij fysieke activiteit voelt?",
-                    options: [{id: "😄", text: "😄 blij"}, {id: "😟", text: "😟 bang"}, {id: "😡", text: "😡 boos"},{id: "😩", text: "😩 gestresst"}, {id: "😒", text: "😒 geërgerd"},{id: "😔", text: "😔 droevig"}, {id: "🥴", text: "🥴 misselijk"}, {id: "😰", text: "😰 hopeloos"}, {id: "😴", text: "😴 moe"}]
+                    options: [{id: "😄", text: "😄 blij"}, {id: "😟", text: "😟 bang"}, {id: "😡", text: "😡 boos"},{id: "😩", text: "😩 gestresst"}, {id: "😒", text: "😒 geërgerd"},{id: "😔", text: "😔 droevig"}, {id: "🥴", text: "🥴 misselijk"}, {id: "😰", text: "😰 hopeloos"}, {id: "😴", text: "😴 moe"}, {id: "😆", text: "😆 energiek"}]
                 }]
         },
         {
