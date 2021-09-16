@@ -180,7 +180,7 @@ export default function MyCoach(props) {
                 </div>     
                 <div className="module-middle-row">
                     <ModuleButton rrnr={userID} code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/movement/`)} data={userProgress?.MOVEMENT}/>
-                    <ModuleButton rrnr={userID} code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/${language}/mycoach/`)} data={userProgress?.SOCIAL}/>
+                    <ModuleButton rrnr={userID} code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/social/`)} data={userProgress?.SOCIAL}/>
                     <div className="line-emotions" style={{borderLeft:calculateLineColor("THOUGHTSEMOTIONS")}}/>
                     <div className="line-activity" style={{borderLeft:calculateLineColor("ACTIVITYWORK")}}/>
                     <div className="line-movement" style={{borderLeft:calculateLineColor("MOVEMENT")}}/>

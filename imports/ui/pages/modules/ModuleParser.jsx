@@ -9,6 +9,8 @@ import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
 import ActivityWorkScript from './ModuleScripts/ActivityWorkScript';
 import StressResilienceScript from './ModuleScripts/StressResilienceScript';
 import MovementScript from './ModuleScripts/MovementScript.js';
+import SocialScript from './ModuleScripts/SocialScript.js';
+
 import ProgressManager from "../../../api/ProgressManager.jsx";
 import ShortcutManager from "../../../api/ShortcutManager.jsx";
 
@@ -67,6 +69,9 @@ export default function ModuleParser(props) {
                 break;
             case "movement":
                 updateModuleData(MovementScript);
+                break;
+            case "social":
+                updateModuleData(SocialScript);
                 break;
             default:
                 updateModuleData(undefined);

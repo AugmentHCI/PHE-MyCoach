@@ -14,6 +14,7 @@ import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
 import ActivityWorkScript from './ModuleScripts/ActivityWorkScript.js';
 import StressResilienceScript from './ModuleScripts/StressResilienceScript.js';
 import MovementScript from './ModuleScripts/MovementScript.js';
+import SocialScript from './ModuleScripts/SocialScript.js';
 import CardsParser from './CardsParser.jsx';
 
 import './SubmoduleParser.scss';
@@ -64,6 +65,11 @@ export default function SubmoduleParser(props) {
             break;
         case 'MOVEMENT':
             MovementScript.submodules.forEach(submoduleScript => {
+                if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
+            });
+            break;
+        case 'SOCIAL':
+            SocialScript.submodules.forEach(submoduleScript => {
                 if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
             });
             break;
