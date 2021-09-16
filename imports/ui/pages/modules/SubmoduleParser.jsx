@@ -13,7 +13,7 @@ import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
 import ActivityWorkScript from './ModuleScripts/ActivityWorkScript.js';
 import StressResilienceScript from './ModuleScripts/StressResilienceScript.js';
-import MovementScript from './ModuleScripts/Movement.js';
+import MovementScript from './ModuleScripts/MovementScript.js';
 import CardsParser from './CardsParser.jsx';
 
 import './SubmoduleParser.scss';

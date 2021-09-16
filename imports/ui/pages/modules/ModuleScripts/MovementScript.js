@@ -244,7 +244,7 @@ const MOVMOD2 = {
                 {
                     id: "MOV-MOD-2-Q1",
                     type: "Question",
-                    question: "Heeft Alain gezonde beweeggewoontes?.",
+                    question: "Heeft Alain gezonde beweeggewoontes?",
                     options: ["Ja", "Nee"],
                     correct: "Nee",
                     explanation: "Alain zit veel te veel stil en beweegt onvoldoende. Het grootste deel van de tijd op zijn werk en thuis brengt hij al zittend door. Hij haalt de normen voor bewegen aan matige of intensieve intensiteit niet.",
@@ -282,7 +282,7 @@ const MOVMOD2 = {
                 {
                     id: "MOV-MOD-2-Q2",
                     type: "Question",
-                    question: "Heeft Lydia gezonde beweeggewoontes?.",
+                    question: "Heeft Lydia gezonde beweeggewoontes?",
                     options: ["Ja", "Nee"],
                     correct: "Nee",
                     explanation: "Lydia zit niet lang stil, zowel op haar werk als thuis doet ze veel activiteiten met een lichte intensiteit. Maar ze haalt de normen voor bewegen aan matige of intensieve intensiteit niet.",
@@ -320,7 +320,7 @@ const MOVMOD2 = {
                 {
                     id: "MOV-MOD-2-Q3",
                     type: "Question",
-                    question: "Heeft Guido gezonde beweeggewoontes?.",
+                    question: "Heeft Guido gezonde beweeggewoontes?",
                     options: ["Ja", "Nee"],
                     correct: "Nee",
                     explanation: "Door met de fiets te gaan werken haalt Guido de norm van bewegen aan matige of intensieve intensiteit. Maar zowel op het werk als thuis zit hij te lang stil.",
@@ -355,7 +355,7 @@ const MOVMOD2 = {
                 {
                     id: "MOV-MOD-2-Q4",
                     type: "Question",
-                    question: "En ten slotte, heeft Michel gezonde beweeggewoontes?.",
+                    question: "En ten slotte, heeft Michel gezonde beweeggewoontes?",
                     options: ["Ja", "Nee"],
                     correct: "Ja",
                     explanation: "Michel wisselt voldoende af tussen staand en zittend werk. Ook buiten het werk beweegt hij voldoende. Door met de fiets te gaan werken haalt hij de normen voor bewegen aan matige of intensieve intensiteit.",

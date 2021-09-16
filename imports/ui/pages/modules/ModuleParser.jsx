@@ -8,6 +8,7 @@ import PainEducationScript from './ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
 import ActivityWorkScript from './ModuleScripts/ActivityWorkScript';
 import StressResilienceScript from './ModuleScripts/StressResilienceScript';
+import MovementScript from './ModuleScripts/MovementScript.js';
 import ProgressManager from "../../../api/ProgressManager.jsx";
 import ShortcutManager from "../../../api/ShortcutManager.jsx";
 
@@ -25,7 +26,6 @@ import AppModal from '../../components/AppModal';
 import { shortcuts as shortcutData } from "./ModuleScripts/Shortcuts";
 
 import './ModuleParser.scss';
-import MovementScript from './ModuleScripts/Movement.js';
 
 export default function ModuleParser(props) {
 
