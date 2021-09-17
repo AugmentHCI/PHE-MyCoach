@@ -4,7 +4,7 @@ const SOCMOD1 = {
     titleMarkup: ["Het belang van", "sociale steun"],
     part: 1,
     description: "We hebben allemaal nood aan sociale steun. Maar wat is sociale steun juist en waarom is dit zo belangrijk? Dit hoofdstuk geeft een kort overzicht.",
-    duration: "10 minuten",
+    duration: "5 minuten",
     type: "Informatief",
     image: "learning",
     imageWidth: "180px",
@@ -24,15 +24,24 @@ const SOCMOD1 = {
                     explanation: "Hoe je omgeving omgaat met je klachten en erop reageert kan de evolutie ervan mee bepalen! Je familie, vrienden en collega’s kunnen op verschillende manieren reageren. Sommige reacties zal je als helpend ervaren, terwijl anderen dat helemaal niet zijn. En nog andere reacties zijn misschien wel goed bedoeld, maar kunnen op termijn jouw situatie misschien net negatief beïnvloeden.",
                     onCorrect: "De stelling is waar!",
                     onIncorrect: "De stelling is waar!"
+                },
+                {
+                    type: "Image",
+                    link: "/images/social/people.jpg"
                 },]
         },
         {
             title: "Sociale interacties zijn dynamisch",
+            showIfAnswered: ["SOC-MOD-1-Q1"],
             cardContents: [
                 {
                     type: "Text",
                     content: "Mensen zijn sociale wezens en beïnvloeden elkaar voortdurend. Wanneer je chronische pijn ervaart, heeft dit niet enkel een grote impact op jezelf, maar ook op je naaste omgeving. De reactie van de omgeving kan beïnvloeden hoe jij met je klachten omgaat. Maar hoe jij met jouw klachten omgaat kan ook de reactie van de omgeving beïnvloeden. Bovendien kan de reactie van de omgeving veranderen doorheen de tijd. Mensen ervaren over het algemeen veel steun van hun omgeving wanneer ze onverwachts iets ernstig voorhebben, zoals acute pijn. Maar velen merken ook dat deze steun heel snel afneemt naarmate de klachten langer blijven duren. Kortom, sociale interacties zijn een complex gegeven."
-                }
+                },
+                {
+                    type: "Image",
+                    link: "/images/social/network2.jpg"
+                },
             ]
         },
         {
@@ -49,8 +58,8 @@ const SOCMOD1 = {
                 {
                     type: "Story",
                     content: [
-                        {title: "Praktische steun", text: "Zoals bijvoorbeeld iets concreet doen om te helpen zoals bijvoorbeeld taken in het huishouden overnemen."},
-                        {title: "Emotionele steun", text: "Dit zijn bijvoorbeeld mensen waarbij je terecht kan om je verhaal te doen, die begrip tonen en die laten zien dat ze in je geloven."},
+                        {image: "/images/social/cleaning.jpg", title: "Praktische steun", text: "Zoals bijvoorbeeld iets concreet doen om te helpen zoals bijvoorbeeld taken in het huishouden overnemen."},
+                        {image: "/images/social/worried.jpg", title: "Emotionele steun", text: "Dit zijn bijvoorbeeld mensen waarbij je terecht kan om je verhaal te doen, die begrip tonen en die laten zien dat ze in je geloven."},
                         {title: "Informatieve steun", text: "Dit omvat het geven van informatie, tips en adviezen om je vooruit te helpen."},
                     ]
                 }
@@ -90,7 +99,7 @@ const SOCMOD2 = {
     part: 2,
     description: "Hoe kan sociale steun van je omgeving verhogen? Dit onderdeel staat boordevol tips & tricks.",
     duration: "10 minuten",
-    type: "Informatief",
+    type: "Interactief",
     image: "learning",
     imageWidth: "180px",
     cards: [{
@@ -119,10 +128,10 @@ const SOCMOD2 = {
                 {
                     type: "Story",
                     content: [
-                        {title: "Stap 1 - Waarneming", text: "Start met de waarneming. Beschrijf hierbij de feiten (wat zie je, wat hoor je...). Beperk je hier tot de objectieve feiten en verbind hier geen interpretaties of oordelen aan."},
-                        {title: "Stap 2 - Gevoel", text: "Beschrijf hoe je je hierbij voelt (ik voel me: blij, bang, verdrietig, boos, verbaasd, ...)"},
+                        {image: "/images/social/facts.jpg", title: "Stap 1 - Waarneming", text: "Start met de waarneming. Beschrijf hierbij de feiten (wat zie je, wat hoor je...). Beperk je hier tot de objectieve feiten en verbind hier geen interpretaties of oordelen aan."},
+                        {image: "/images/social/emojis.jpg", title: "Stap 2 - Gevoel", text: "Beschrijf hoe je je hierbij voelt (ik voel me: blij, bang, verdrietig, boos, verbaasd, ...)"},
                         {title: "Stap 3 - Behoefte", text: "Geef aan wat jouw behoeftes of waarden zijn, wat jij belangrijk vindt. Wanneer je een bepaalde emotie voelt, zoals bijvoorbeeld verdriet of boosheid, zegt dit namelijk iets over een onderliggende behoefte die op dat moment niet vervuld is (bijvoorbeeld de behoefte aan steun of aanmoediging)."},
-                        {title: "Stap 4 - Verzoek", text: "Eindig met een verzoek: wat wil je vragen of verwacht je van de andere? Zorg ervoor dat je verzoek: zo contreet mogelijk is, positief geformuleerd is (dus bijvoorbeeld niet: wil je stoppen met schreeuwen aub? Maar wel: wil je stiller praten aub?), realistisch is, en beleefd geformuleerd is (Gebruik AUB en dankjewel)"},
+                        {image: "/images/social/explaining.jpg", title: "Stap 4 - Verzoek", text: "Eindig met een verzoek: wat wil je vragen of verwacht je van de andere? Zorg ervoor dat je verzoek: zo contreet mogelijk is, positief geformuleerd is (dus bijvoorbeeld niet: wil je stoppen met schreeuwen aub? Maar wel: wil je stiller praten aub?), realistisch is, en beleefd geformuleerd is (Gebruik AUB en dankjewel)"},
                     ]
                 }
             ]
@@ -135,12 +144,27 @@ const SOCMOD2 = {
                     content: "Klinkt dit allemaal nogal theoretisch? We proberen het te verduidelijken met een voorbeeld!"
                 },
                 {
+                    type: "Break"
+                },
+                {
+                    type: "Image",
+                    link: "/images/social/backpain.jpg"
+                },
+                {
                     type: "Text",
                     content: "Stel: Je hebt last van chronische rugpijn. Je doet je best om hier zo goed mogelijk mee om te gaan door een gezonde levensstijl aan te houden, in beweging te blijven, afleiding en ontspanning te voorzien én aan het werk te blijven, ondanks het feit dat je pijn hebt. Blijven werken is erg belangrijk voor jou, het geeft een nuttige invulling van je dag en het gevoel iets te kunnen betekenen. Het helpt je wanneer de mensen rondom jou je hierin steunen en aanmoedigen. Je naaste collega is erg bezorgd om jou. Elke dag opnieuw vraagt ze, vanaf het moment dat je toekomt op het werk, of het echt wel gaat met je rug. Ze zegt tegen je dat ze van mening is dat toch beter thuis zou blijven van het werk met jouw klachten, zodat je je zeker niet gaat forceren."
                 },
                 {
+                    type: "Image",
+                    link: "/images/social/tired.jpg"
+                },
+                {
                     type: "Text",
                     content: "Je vindt het best vervelend dat je collega hier elke dag opnieuw over begint. Je snapt dat ze dit met de beste bedoelingen doet, maar je wordt er verdrietig van en zou eigenlijk willen dat ze ermee stopt en jou in de plaats hiervan steunt en aanmoedigt in je beslissing om aan het werk te blijven. Haar opmerkingen en feedback beginnen echter zwaar op je te wegen en je merkt dat het je meer en meer moeite kost om gemotiveerd aan het werk te blijven. Je weet echter niet hoe je dit aan haar duidelijk kan maken, zonder haar te kwetsen of boos te maken."
+                },
+                {
+                    type: "Image",
+                    link: "/images/social/blocks.jpg"
                 },
                 {
                     type: "Text",
@@ -149,10 +173,10 @@ const SOCMOD2 = {
                 {
                     type: "Story",
                     content: [
-                        {title: "Stap 1 - Waarneming", text: "Beperk je hier tot de objectieve feiten en verbind hier geen interpretaties of oordelen aan. Bijvoorbeeld zeg niet: Ik merk dat je je erg moeit met mijn situatie en vind dat onbeleefd! Maar zeg wel: Ik merk op dat je dagelijks vraagt of ik toch niet beter thuis zou blijven van het werk."},
-                        {title: "Stap 2 - Gevoel", text: "Beschrijf hoe je je hierbij voelt. Bijvoorbeeld: Ik weet dat dit goed bedoeld is, maar ik voel me hier verdrietig bij."},
+                        {image: "/images/social/facts.jpg", title: "Stap 1 - Waarneming", text: "Beperk je hier tot de objectieve feiten en verbind hier geen interpretaties of oordelen aan. Bijvoorbeeld zeg niet: Ik merk dat je je erg moeit met mijn situatie en vind dat onbeleefd! Maar zeg wel: Ik merk op dat je dagelijks vraagt of ik toch niet beter thuis zou blijven van het werk."},
+                        {image: "/images/social/emojis.jpg", title: "Stap 2 - Gevoel", text: "Beschrijf hoe je je hierbij voelt. Bijvoorbeeld: Ik weet dat dit goed bedoeld is, maar ik voel me hier verdrietig bij."},
                         {title: "Stap 3 - Behoefte", text: "Geef aan wat jouw behoefte of waarde is, wat jij belangrijk vindt. Bijvoorbeeld: Omdat ik behoefte heb aan steun in mijn keuze om aan het werk te blijven."},
-                        {title: "Stap 4 - Verzoek", text: "Geef aan wat jouw behoefte of waarde is, wat jij belangrijk vindt. Bijvoorbeeld: Omdat ik behoefte heb aan steun in mijn keuze om aan het werk te blijven."},
+                        {image: "/images/social/explaining.jpg", title: "Stap 4 - Verzoek", text: "Geef aan wat jouw behoefte of waarde is, wat jij belangrijk vindt. Bijvoorbeeld: Omdat ik behoefte heb aan steun in mijn keuze om aan het werk te blijven."},
                     ]
                 }
             ]
@@ -173,6 +197,10 @@ const SOCMOD2 = {
                         "Omdat ik net behoefte heb aan steun in mijn keuze om aan het werk te blijven",
                         "Zou je mij daarom aub willen steunen en aanmoedigen in mijn keuze om aan het werk te zijn?"
                     ]
+                },
+                {
+                    type: "Image",
+                    link: "/images/social/coffee.jpg"
                 },
                 {
                     type: "Text",
@@ -207,6 +235,10 @@ const SOCMOD2 = {
                 {
                     type: "Text",
                     content: "Wanneer je niet duidelijk aangeeft waar je behoefte aan hebt, is de kans groot dat de ander jou niet gaat geven wat je nodig hebt. Dit kan er dan weer voor zorgen dat jij teleurgesteld bent, terwijl je partner misschien gefrustreerd is omdat hij of zij het gevoel heeft jou niet te kunnen helpen. Je kan je voorstellen dat dit de pijn geen goed gaat doen."
+                },
+                {
+                    type: "Image",
+                    link: "/images/social/diverge.jpg"
                 },
             ]
         },
@@ -244,12 +276,24 @@ const SOCMOD2 = {
                     content: "Alleen door je situatie kort en helder toe te lichten aan je omgeving, weten zij wat er speelt en kunnen ze hier rekening mee houden. Zorg ervoor dat je al uitleg klaar hebt in de vorm van een elevator pitch en oefen deze goed in, dat maakt de drempel om erover te praten wat kleiner!"
                 },
                 {
+                    type: "Image",
+                    link: "/images/social/elevator.jpg"
+                },
+                {
                     type: "Text",
                     content: "Wat is een elevator pitch? Dit is een beschrijving van ongeveer zestig seconden over een bepaald onderwerp. De naam ‘elevator pitch’ slaat op de korte tijd die je hebt om je verhaal te doen. Stel je voor dat je op het gelijkvloers in de lift stapt, samen met iemand die je meer uitleg wilt geven over jouw situatie. Je hebt hiervoor de tijd tot jullie samen uitstappen op de 20e of 30e verdieping, dus pakweg één minuut. Om hier een duidelijk en volledig verhaal van te maken, is het belangrijk om dit goed voor te bereiden en te oefenen zodat je het vlot kan vertellen. Als je iets verwacht van de andere, zorg er dan ook voor dat je duidelijk jouw noden formuleert."
                 },
                 {
                     type: "Text",
                     content: "Hieronder heb je een voorbeeldje van een elevator pitch. Er is ook een invulveld waar jezelf jouw elevator pitch kan noteren indien je dit zou willen."
+                },
+                {
+                    type: "Voorbeeld",
+                    text: "Volgt nog (Comaco)"
+                },
+                {
+                    type: "Groot invulveld",
+                    text: "Nieuw tekst-inputveld maken dat meerdere regels kan tonen."
                 }
             ]
         },
@@ -286,7 +330,7 @@ const SOCMOD3 = {
     navBarTitle: "Omgaan met reacties",
     part: 3,
     description: "In dit hoofdstuk leer je welke reacties van jouw omgeving mogelijks een negatief effect hebben op jouw situatie en hoe je hiermee kan omgaan.",
-    duration: "10 minuten",
+    duration: "7 minuten",
     type: "Informatief",
     image: "learning",
     imageWidth: "180px",
@@ -305,6 +349,10 @@ const SOCMOD3 = {
         },
         {
             cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/social/oh-no.jpg"
+                },
                 {
                     type: "TextBubble",
                     content: "“Stel je niet aan”",
@@ -387,12 +435,12 @@ const SOCMOD3 = {
                 {
                     type: "Story",
                     content: [
-                        {title: "Doen: Licht je situatie kort en helder toe", text: "De andere weet vaak het fijne niet over jouw situatie. Door je situatie kort en duidelijk toe te lichten zal de persoon jouw situatie misschien beter begrijpen en zijn of haar reactie aanpassen. Dit kan je bijvoorbeeld doen met een elevator pitch."},
-                        {title: "Doen: Reageer op een respectvolle maar assertieve manier", text: "Gebruik de bouwstenen van de verbindende communicatie om duidelijk te maken hoe jij je voelt bij dergelijke reacties en wat je in de toekomst zou willen."},
-                        {title: "Doen: Rond het gesprek af", text: "Ervaar je nog steeds onbegrip na het hanteren van verbindende communicatie? Rond dan het gesprek af en probeer het contact met deze persoon te beperken."},
-                        {title: "Niet doen: In een hoekje kruipen en niet reageren", text: "Je mag op een assertieve manier reageren op onbegrip door bijvoorbeeld jouw situatie te verduidelijken en aan te geven dat je dit soort van opmerkingen niet helpend vindt. Misschien gaat degene die de opmerkingen maakt wel anders reageren als hij of zij jouw situatie beter begrijpt of denkt hij of zij in de toekomst twee keer na alvorens bepaalde opmerkingen te maken."},
-                        {title: "Niet doen: Je klachten verbijten", text: "Door je klachten te verbijten loop je het risico dat je over je grenzen gaat. Dit is uiteraard niet helpend voor jouw situatie. Let wel op, vanuit de module pijneducatie weet je dat pijn niet altijd betekent dat er schade is of dat je iets fout doet. Maak dus een goede afweging tussen jouw belasting en jouw belastbaarheid."},
-                        {title: "Niet doen: Je klachten uitvergroten", text: "Je klachten uitvergroten en extra in de verf zetten om zo toch begrip proberen te krijgen is geen goed idee. Dit zal vaak een omgekeerd effect hebben en leiden tot nog meer onbegrip. Probeer daarom op een verbindende manier over jouw klachten te communiceren."}
+                        {image: "/images/social/elevator-pitch.jpg", title: "Doen: Licht je situatie kort en helder toe", text: "De andere weet vaak het fijne niet over jouw situatie. Door je situatie kort en duidelijk toe te lichten zal de persoon jouw situatie misschien beter begrijpen en zijn of haar reactie aanpassen. Dit kan je bijvoorbeeld doen met een elevator pitch."},
+                        {image: "/images/social/listen.jpg", title: "Doen: Reageer op een respectvolle maar assertieve manier", text: "Gebruik de bouwstenen van de verbindende communicatie om duidelijk te maken hoe jij je voelt bij dergelijke reacties en wat je in de toekomst zou willen."},
+                        {image: "/images/social/business.jpg", title: "Doen: Rond het gesprek af", text: "Ervaar je nog steeds onbegrip na het hanteren van verbindende communicatie? Rond dan het gesprek af en probeer het contact met deze persoon te beperken."},
+                        {image: "/images/social/wall.jpg", title: "Niet doen: In een hoekje kruipen en niet reageren", text: "Je mag op een assertieve manier reageren op onbegrip door bijvoorbeeld jouw situatie te verduidelijken en aan te geven dat je dit soort van opmerkingen niet helpend vindt. Misschien gaat degene die de opmerkingen maakt wel anders reageren als hij of zij jouw situatie beter begrijpt of denkt hij of zij in de toekomst twee keer na alvorens bepaalde opmerkingen te maken."},
+                        {image: "/images/social/pain.jpg", title: "Niet doen: Je klachten verbijten", text: "Door je klachten te verbijten loop je het risico dat je over je grenzen gaat. Dit is uiteraard niet helpend voor jouw situatie. Let wel op, vanuit de module pijneducatie weet je dat pijn niet altijd betekent dat er schade is of dat je iets fout doet. Maak dus een goede afweging tussen jouw belasting en jouw belastbaarheid."},
+                        {image: "/images/social/puzzle.jpg", title: "Niet doen: Je klachten uitvergroten", text: "Je klachten uitvergroten en extra in de verf zetten om zo toch begrip proberen te krijgen is geen goed idee. Dit zal vaak een omgekeerd effect hebben en leiden tot nog meer onbegrip. Probeer daarom op een verbindende manier over jouw klachten te communiceren."}
                     ]
                 }
             ]
@@ -403,6 +451,10 @@ const SOCMOD3 = {
         },
         {
             cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/social/nurse.jpg"
+                },
                 {
                     type: "TextBubble",
                     content: "“Ga maar zitten, ik doe dat wel”",
@@ -489,13 +541,13 @@ const SOCMOD3 = {
                 {
                     type: "Story",
                     content: [
-                        {title: "Doen: Licht je situatie kort en helder toe", text: "Overdreven bezorgdheid kan ervoor zorgen dat je meer gaat focussen op de klachten wat het herstelproces kan vertragen of waardoor je meer pijn gaat ervaren. Bovendien kan dit knagen aan jouw motivatie om voornemens verder te zetten. Bedank daarom de persoon voor de interesse en licht je situatie kort en helder toe. Dit kan je doen door middel van de elevator pitch."},
+                        {image: "/images/social/explaining.jpg", title: "Doen: Licht je situatie kort en helder toe", text: "Overdreven bezorgdheid kan ervoor zorgen dat je meer gaat focussen op de klachten wat het herstelproces kan vertragen of waardoor je meer pijn gaat ervaren. Bovendien kan dit knagen aan jouw motivatie om voornemens verder te zetten. Bedank daarom de persoon voor de interesse en licht je situatie kort en helder toe. Dit kan je doen door middel van de elevator pitch."},
                         {title: "Doen: Benadruk het belang van niet te focussen op je klachten.", text: "Te zeer focussen op jouw klachten kan niet alleen zorgen voor een onprettig gevoel, het kan ook bijdragen aan de overgevoeligheid van het zenuwstelsel waardoor je klachten verergeren. Benadruk daarom dat het belangrijk is dat je jouw normale taken geleidelijk aan terug opneemt en opbouwt."},
-                        {title: "Doen: Geef zelf aan waar je behoefte aan hebt", text: "Personen die dit soort van opmerkingen maken bedoelen het goed. Bedank hen daarom en geef zeker aan dat je zelf zal aangeven wanneer je over jouw klachten wilt praten of hulp nodig hebt."},
-                        {title: "Doen: Reageer op een assertieve en respectvolle manier", text: "Gebruik de bouwstenen van verbindende communicatie om een reactie te formuleren."},
-                        {title: "Niet doen: Ingaan op de bezorgdheid", text: "Door in te gaan op de bezorgdheid leg je meer de nadruk op je klachten en val je in een vermijdingspatroon. Dit zal je op termijn niet vooruithelpen. Diegene die de opmerking maakte zal in de toekomst ook terug zijn bezorgdheid uiten."},
-                        {title: "Niet doen: Uitgebreid praten over je klachten", text: "Door uitgebreid over je klachten te praten leg je er te veel nadruk op. Hierdoor kan je meer onaangename gevoelens of pijn ervaren. Een korte en duidelijke uitleg volstaat."},
-                        {title: "Niet doen: De ernst van de situatie benadrukken", text: "Wanneer je de situatie heel ernstig voorstelt zal dit niet alleen zorgen voor een slecht gevoel, het zal er ook voor zorgen dat de persoon nog meer bezorgd zal zijn in de toekomst."},
+                        {image: "/images/social/saved.jpg", title: "Doen: Geef zelf aan waar je behoefte aan hebt", text: "Personen die dit soort van opmerkingen maken bedoelen het goed. Bedank hen daarom en geef zeker aan dat je zelf zal aangeven wanneer je over jouw klachten wilt praten of hulp nodig hebt."},
+                        {image: "/images/social/minds.jpg", title: "Doen: Reageer op een assertieve en respectvolle manier", text: "Gebruik de bouwstenen van verbindende communicatie om een reactie te formuleren."},
+                        {image: "/images/social/window.jpg", title: "Niet doen: Ingaan op de bezorgdheid", text: "Door in te gaan op de bezorgdheid leg je meer de nadruk op je klachten en val je in een vermijdingspatroon. Dit zal je op termijn niet vooruithelpen. Diegene die de opmerking maakte zal in de toekomst ook terug zijn bezorgdheid uiten."},
+                        {image: "/images/social/messages.jpg", title: "Niet doen: Uitgebreid praten over je klachten", text: "Door uitgebreid over je klachten te praten leg je er te veel nadruk op. Hierdoor kan je meer onaangename gevoelens of pijn ervaren. Een korte en duidelijke uitleg volstaat."},
+                        {image: "/images/social/nervous.jpg", title: "Niet doen: De ernst van de situatie benadrukken", text: "Wanneer je de situatie heel ernstig voorstelt zal dit niet alleen zorgen voor een slecht gevoel, het zal er ook voor zorgen dat de persoon nog meer bezorgd zal zijn in de toekomst."},
                     ]
                 }
             ]
@@ -506,6 +558,10 @@ const SOCMOD3 = {
         },
         {
             cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/social/pointing.jpg"
+                },
                 {
                     type: "TextBubble",
                     content: "“Zou je dit niet eens proberen?”",
@@ -579,12 +635,12 @@ const SOCMOD3 = {
                 {
                     type: "Story",
                     content: [
-                        {title: "Doen: Benadruk dat je je gaat houden aan je huidige behandelplan", text: "Veel adviezen zijn niet wetenschappelijk onderbouwd. Vertrouw daarom op het behandelplan dat je samen met jouw gezondheidsexperts hebt opgesteld. Bedank de persoon, maar benadruk dat je je gaat houden aan je huidige behandelplan."},
-                        {title: "Doen: Licht je situatie kort en helder toe", text: "Ieder zijn situatie is uniek en wat voor iemand anders helpt, helpt daarom niet voor jou. Licht daarom je situatie kort en helder toe en vertel waarom je hebt gekozen voor je huidige behandelplan. Dit kan je doen door middel van de elevator pitch."},
-                        {title: "Doen: Geef zelf aan waar je behoefte aan hebt", text: "Deze personen bedoelen het goed. Bedank hen daarom, maar geef zeker aan dat je zelf zal aangeven wanneer je over jouw klachten wilt praten of hulp nodig hebt."},
-                        {title: "Doen: Reageer op een assertieve en respectvolle manier", text: "Gebruik de bouwstenen van verbindende communicatie om een reactie te formuleren."},
-                        {title: "Niet doen: Je huidige behandelplan volledig omgooien", text: "Door de adviezen ter harte te nemen kan je onzeker worden over jouw huidige behandelplan. Doordat je verwachtingen wijzigen kan de behandeling ook daadwerkelijk minder effectief worden. Heb je toch twijfels over jouw huidige behandelplan, dan neem je best contact op met een gezondheidsexpert."},
-                        {title: "Niet doen: De ernst van de situatie benadrukken", text: "Wanneer je de situatie heel ernstig voorstelt zal dit niet alleen zorgen voor een slecht gevoel en je pijn beïnvloeden, het zal er ook voor zorgen dat de persoon meer bezorgd zal zijn in de toekomst en nog meer advies zal geven."},
+                        {image: "/images/social/paper.jpg", title: "Doen: Benadruk dat je je gaat houden aan je huidige behandelplan", text: "Veel adviezen zijn niet wetenschappelijk onderbouwd. Vertrouw daarom op het behandelplan dat je samen met jouw gezondheidsexperts hebt opgesteld. Bedank de persoon, maar benadruk dat je je gaat houden aan je huidige behandelplan."},
+                        {image: "/images/social/elevator-pitch.jpg", title: "Doen: Licht je situatie kort en helder toe", text: "Ieder zijn situatie is uniek en wat voor iemand anders helpt, helpt daarom niet voor jou. Licht daarom je situatie kort en helder toe en vertel waarom je hebt gekozen voor je huidige behandelplan. Dit kan je doen door middel van de elevator pitch."},
+                        {image: "/images/social/saved.jpg", title: "Doen: Geef zelf aan waar je behoefte aan hebt", text: "Deze personen bedoelen het goed. Bedank hen daarom, maar geef zeker aan dat je zelf zal aangeven wanneer je over jouw klachten wilt praten of hulp nodig hebt."},
+                        {image: "/images/social/blocks.jpg", title: "Doen: Reageer op een assertieve en respectvolle manier", text: "Gebruik de bouwstenen van verbindende communicatie om een reactie te formuleren."},
+                        {image: "/images/social/stepping-stones.jpg", title: "Niet doen: Je huidige behandelplan volledig omgooien", text: "Door de adviezen ter harte te nemen kan je onzeker worden over jouw huidige behandelplan. Doordat je verwachtingen wijzigen kan de behandeling ook daadwerkelijk minder effectief worden. Heb je toch twijfels over jouw huidige behandelplan, dan neem je best contact op met een gezondheidsexpert."},
+                        {image: "/images/social/nervous.jpg", title: "Niet doen: De ernst van de situatie benadrukken", text: "Wanneer je de situatie heel ernstig voorstelt zal dit niet alleen zorgen voor een slecht gevoel en je pijn beïnvloeden, het zal er ook voor zorgen dat de persoon meer bezorgd zal zijn in de toekomst en nog meer advies zal geven."},
                     ]
                 }
             ]
@@ -641,10 +697,15 @@ const SOCMOD4 = {
         /* KLACHTEN VERBERGEN */
         {
             title: "Klachten verbergen",
-            titleCard: true
+            titleCard: true,
+            showIfAnswered: ["SOC-MOD-4-Q1"]
         },
         {
             cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/social/smile.jpg"
+                },
                 {
                     type: "TextBubble",
                     content: "“Hoe gaan ze reageren, ik zal maar niks vertellen.”",
@@ -686,9 +747,9 @@ const SOCMOD4 = {
                 {
                     type: "Story",
                     content: [
-                        {title: "Het is oké om klachten te hebben!", text: "Dit is helemaal niets om je over te schamen. Wel is het belangrijk dat je communiceert over jouw klachten indien nodig, zodat anderen weten wat er speelt en hier rekening mee kunnen houden."},
-                        {title: "Licht je situatie kort en helder toe", text: "Ieder zijn situatie is uniek. Licht daarom je situatie kort en duidelijk toe, bijvoorbeeld door middel van een elevator pitch. Zo is je omgeving niet langer onwetend en kunnen jullie samen naar oplossingen zoeken."},
-                        {title: "Geef aan waar je behoefte aan hebt", text: "Geef mee wat je van je omgeving verwacht of hoe zij kunnen helpen. Hiervoor kan je de bouwstenen van de verbindende communicatie gebruiken."},
+                        {image: "/images/social/stress.jpg", title: "Het is oké om klachten te hebben!", text: "Dit is helemaal niets om je over te schamen. Wel is het belangrijk dat je communiceert over jouw klachten indien nodig, zodat anderen weten wat er speelt en hier rekening mee kunnen houden."},
+                        {image: "/images/social/explain.jpg", title: "Licht je situatie kort en helder toe", text: "Ieder zijn situatie is uniek. Licht daarom je situatie kort en duidelijk toe, bijvoorbeeld door middel van een elevator pitch. Zo is je omgeving niet langer onwetend en kunnen jullie samen naar oplossingen zoeken."},
+                        {image: "/images/social/blocks.jpg", title: "Geef aan waar je behoefte aan hebt", text: "Geef mee wat je van je omgeving verwacht of hoe zij kunnen helpen. Hiervoor kan je de bouwstenen van de verbindende communicatie gebruiken."},
                     ]
                 }
             ]
@@ -741,9 +802,9 @@ const SOCMOD4 = {
                 {
                     type: "Story",
                     content: [
-                        {title: "Ventileer met mate over je klachten", text: "Het is oké om over je klachten te praten, dit is zelfs aan te raden! Soms kan het deugd doen om over je situatie te ventileren. Erkenning en begrip krijgen kan ook een positief effect hebben op het ervaren van pijn, maar doe dit met mate!"},
-                        {title: "Focus ook op wat wel goed gaat", text: "Focus ook op zaken die nog wel goed gaan in je leven en praat ook over andere dingen: je bent meer dan je pijn! Dit kan er zelfs voor zorgen dat je je beter voelt en minder last hebt van je pijn!"},
-                        {title: "Geef aan waar je behoefte aan hebt", text: "Geef mee wat je van je omgeving verwacht of hoe zij kunnen helpen. Hiervoor kan je de bouwstenen van de verbindende communicatie gebruiken."},
+                        {image: "/images/social/ventilator.jpg", title: "Ventileer met mate over je klachten", text: "Het is oké om over je klachten te praten, dit is zelfs aan te raden! Soms kan het deugd doen om over je situatie te ventileren. Erkenning en begrip krijgen kan ook een positief effect hebben op het ervaren van pijn, maar doe dit met mate!"},
+                        {image: "/images/social/focus.jpg", title: "Focus ook op wat wel goed gaat", text: "Focus ook op zaken die nog wel goed gaan in je leven en praat ook over andere dingen: je bent meer dan je pijn! Dit kan er zelfs voor zorgen dat je je beter voelt en minder last hebt van je pijn!"},
+                        {image: "/images/social/family.jpg", title: "Geef aan waar je behoefte aan hebt", text: "Geef mee wat je van je omgeving verwacht of hoe zij kunnen helpen. Hiervoor kan je de bouwstenen van de verbindende communicatie gebruiken."},
                     ]
                 }
             ]
@@ -755,6 +816,10 @@ const SOCMOD4 = {
         },
         {
             cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/social/scared.jpg"
+                },
                 {
                     type: "TextBubble",
                     content: "“Ik kom niet, want ik heb last”",
@@ -796,10 +861,10 @@ const SOCMOD4 = {
                 {
                     type: "Story",
                     content: [
-                        {title: "Ken je grenzen", text: "Afleiding en ontspanning kunnen het ervaren van pijn verminderen. Blijf dus in de mate van het mogelijke en zonder je grenzen te overschrijden, dingen ondernemen en deelnemen aan activiteiten!"},
-                        {title: "Licht je situatie kort en helder toe", text: "Ieder zijn situatie is uniek. Licht daarom je situatie kort en duidelijk toe, bijvoorbeeld door middel van een elevator pitch. Zo is je omgeving niet langer onwetend en kunnen jullie samen naar oplossingen zoeken."},
-                        {title: "Stel alternatieven voor", text: "Zie je bepaalde activiteiten niet zitten? Stel dan alternatieven voor."},
-                        {title: "Geef aan waar je behoefte aan hebt", text: "Geef mee wat je van je omgeving verwacht of hoe zij kunnen helpen. Hiervoor kan je de bouwstenen van de verbindende communicatie gebruiken."},
+                        {image: "/images/social/stops.jpg", title: "Ken je grenzen", text: "Afleiding en ontspanning kunnen het ervaren van pijn verminderen. Blijf dus in de mate van het mogelijke en zonder je grenzen te overschrijden, dingen ondernemen en deelnemen aan activiteiten!"},
+                        {image: "/images/social/spotlight.jpg", title: "Licht je situatie kort en helder toe", text: "Ieder zijn situatie is uniek. Licht daarom je situatie kort en duidelijk toe, bijvoorbeeld door middel van een elevator pitch. Zo is je omgeving niet langer onwetend en kunnen jullie samen naar oplossingen zoeken."},
+                        {image: "/images/social/different.jpg", title: "Stel alternatieven voor", text: "Zie je bepaalde activiteiten niet zitten? Stel dan alternatieven voor."},
+                        {image: "/images/social/paper-ripped.jpg", title: "Geef aan waar je behoefte aan hebt", text: "Geef mee wat je van je omgeving verwacht of hoe zij kunnen helpen. Hiervoor kan je de bouwstenen van de verbindende communicatie gebruiken."},
                     ]
                 }
             ]
@@ -840,6 +905,10 @@ const SOCMOD5 = {
                     type: "Text",
                     content: "Tegenwoordig gebruikt iedereen sociale media. Om te connecteren met vrienden en familie, foto’s te delen, deel uit te maken van groepen of gewoon pagina’s te volgen die je leuk vindt. Sociale media maakt ons leven makkelijker. Maar pas op want deze medaille heeft ook een keerzijde. Naast het verslavend effect zijn er ook nog andere valkuilen waarmee je rekening moet houden. Hieronder krijg je een overzichtje van de voordelen en valkuilen."
                 },
+                {
+                    type: "Image",
+                    link: "/images/social/socials.jpg"
+                },
             ]
         },
         {
@@ -852,10 +921,10 @@ const SOCMOD5 = {
                 {
                     type: "Story",
                     content: [
-                        {title: "Je kan connecteren met mensen die je belangrijk vindt", text: "Sociale media laten toe om op een makkelijke manier te connecteren met mensen die jij belangrijk vindt (zoals vrienden en familie, maar ook collega’s). Je kan levensgebeurtenissen en ervaringen delen, maar ook sociale steun zoeken."},
-                        {title: "Je kan lid worden van zelfhulpgroepen", text: "Via sociale media kan je lotgenoten zoeken door bijvoorbeeld lid te worden van een zelfhulpgroep. Kijken hoe andere mensen met hun klachten omgaan kan motiverend werken en je nieuwe ideeën geven. Let er wel op dat de zelfhulpgroep goed begeleid wordt. Anders loop je het risico dat er tips en adviezen worden gedeeld die misschien helemaal niet onderbouwd zijn. Of misschien kom je dan wel terecht in groep met mensen die enkel focussen op de negatieve kanten. Dit helpt je natuurlijk ook niet verder. Enkele goede voorbeelden van zelfhulpgroepen voor mensen met chronische pijnklachten zijn: Het Lichtpuntje, De Maretak en de Vlaamse Pijnliga."},
-                        {title: "Je kan je laten inspireren", text: "Je kan mensen of pagina’s volgen die jou motiveren en inspireren. Zo krijg je nieuwe moed om verder te zetten."},
-                        {title: "Je kan nieuwe informatie of tips verwerven", text: "Er zijn tal van kwalitatieve pagina’s waar je nieuwe inzichten kan verwerven en waar je goede tips en adviezen kan terugvinden. Ben je op zoek naar nieuwe oefeningen om wat meer variatie te krijgen in je oefenschema? Online vind je zeker een aantal leuke voorbeelden terug."},
+                        {image: "/images/social/network1.jpg", title: "Je kan connecteren met mensen die je belangrijk vindt", text: "Sociale media laten toe om op een makkelijke manier te connecteren met mensen die jij belangrijk vindt (zoals vrienden en familie, maar ook collega’s). Je kan levensgebeurtenissen en ervaringen delen, maar ook sociale steun zoeken."},
+                        {image: "/images/social/circle.jpg", title: "Je kan lid worden van zelfhulpgroepen", text: "Via sociale media kan je lotgenoten zoeken door bijvoorbeeld lid te worden van een zelfhulpgroep. Kijken hoe andere mensen met hun klachten omgaan kan motiverend werken en je nieuwe ideeën geven. Let er wel op dat de zelfhulpgroep goed begeleid wordt. Anders loop je het risico dat er tips en adviezen worden gedeeld die misschien helemaal niet onderbouwd zijn. Of misschien kom je dan wel terecht in groep met mensen die enkel focussen op de negatieve kanten. Dit helpt je natuurlijk ook niet verder. Enkele goede voorbeelden van zelfhulpgroepen voor mensen met chronische pijnklachten zijn: Het Lichtpuntje, De Maretak en de Vlaamse Pijnliga."},
+                        {image: "/images/social/strong.jpg", title: "Je kan je laten inspireren", text: "Je kan mensen of pagina’s volgen die jou motiveren en inspireren. Zo krijg je nieuwe moed om verder te zetten."},
+                        {image: "/images/social/data.jpg", title: "Je kan nieuwe informatie of tips verwerven", text: "Er zijn tal van kwalitatieve pagina’s waar je nieuwe inzichten kan verwerven en waar je goede tips en adviezen kan terugvinden. Ben je op zoek naar nieuwe oefeningen om wat meer variatie te krijgen in je oefenschema? Online vind je zeker een aantal leuke voorbeelden terug."},
                     ]
                 }
             ]
@@ -870,10 +939,10 @@ const SOCMOD5 = {
                 {
                     type: "Story",
                     content: [
-                        {title: "Sociale media zijn verslavend", text: "Voordat je het weet kan je jouw smartphone niet meer aan de kant leggen en blijf je maar scrollen door de nieuwsoverzichten. Vergeet ook niet om in de echte wereld te leven en regelmatig te de-connecteren."},
-                        {title: "Niet alles is wat het lijkt", text: "Op sociale media lijkt iedereen altijd happy en nooit ergens last van te hebben. Dit kan heel demotiverend zijn wanneer jij wel een moeilijke periode hebt. Maar wees je ervan bewust dat veel dingen die op sociale media staan geen weerspiegeling zijn van de realiteit. Iedereen heeft wel eens mindere dagen."},
+                        {image: "/images/social/addicted.jpg", title: "Sociale media zijn verslavend", text: "Voordat je het weet kan je jouw smartphone niet meer aan de kant leggen en blijf je maar scrollen door de nieuwsoverzichten. Vergeet ook niet om in de echte wereld te leven en regelmatig te de-connecteren."},
+                        {image: "/images/social/losing-mind.jpg", title: "Niet alles is wat het lijkt", text: "Op sociale media lijkt iedereen altijd happy en nooit ergens last van te hebben. Dit kan heel demotiverend zijn wanneer jij wel een moeilijke periode hebt. Maar wees je ervan bewust dat veel dingen die op sociale media staan geen weerspiegeling zijn van de realiteit. Iedereen heeft wel eens mindere dagen."},
                         {title: "Je bent meer waard dan enkel jouw likes", text: "Hoeveel likes krijg jij op jouw posts? Mensen maken er tegenwoordig een wedstrijd van. Ook dit is verslavend. En wanneer je dan eens minder likes krijgt, bestaat de kans dat je je slecht gaat voelen. Je bent meer waard dan enkel jouw likes en mensen die om je geven weten dat."},
-                        {title: "Pas op met quick fixes", text: "Veel personen of online pagina’s beweren dat ze het wondermiddel hebben voor jouw klachten. Neem deze medicatie in, doe die oefening… Dit is zelden goed advies. Vaak helpen deze “oplossingen” niet, zijn het maar één van de zoveel mogelijke oplossingen of kunnen ze zelfs een negatief effect op je gezondheid hebben. Bespreek daarom goed jouw behandelplan met een gezondheidsexpert en ga op zoek naar kwaliteitsvolle pagina’s."},
+                        {image: "/images/social/rocket.jpg", title: "Pas op met quick fixes", text: "Veel personen of online pagina’s beweren dat ze het wondermiddel hebben voor jouw klachten. Neem deze medicatie in, doe die oefening… Dit is zelden goed advies. Vaak helpen deze “oplossingen” niet, zijn het maar één van de zoveel mogelijke oplossingen of kunnen ze zelfs een negatief effect op je gezondheid hebben. Bespreek daarom goed jouw behandelplan met een gezondheidsexpert en ga op zoek naar kwaliteitsvolle pagina’s."},
                     ]
                 }
             ]
@@ -897,6 +966,10 @@ const SOCMOD5 = {
                     content: "Eens je iets deelt op het internet blijft het er altijd opstaan. Zelfs wanneer je het verwijderd, is er nog ergens een spoor van terug te vinden. Berichten verspreiden ook razendsnel, je weet nooit wie er allemaal meekijkt. Stel je bent thuis van het werk omwille van ziekte, een burn-out of lichamelijke klachten. Mensen hebben dan vaak de opvatting dat je geen plezier meer mag maken. Als jij dan een foto post van een leuke activiteit (al is het maar een wandeling en is dit belangrijk voor je herstel), dan zullen veel mensen met onbegrip reageren. Denk daarom goed na over wat je op sociale media zet en stel je privacy instellingen zorgvuldig in."
                 },
                 {
+                    type: "Image",
+                    link: "/images/social/thinking-laptop.jpg"
+                },
+                {
                     type: "Break"
                 },
                 {
@@ -906,6 +979,10 @@ const SOCMOD5 = {
                 {
                     type: "Text",
                     content: "Niet alles wat op sociale media staat is waar. Dit kan gaan van complottheorieën tot opinies over politieke en sociale thema’s. Er wordt ook heel wat foutieve informatie verspreid over pijn en andere gezondheidsproblemen. Heb je een filmpje met opinie al bekeken dat zullen de algoritmes steeds vaker gelijkaardige filmpjes aanbevelen. Hierdoor wordt het heel makkelijk om onze manier van denken en ons gedrag te beïnvloeden. Wees daarom kritisch en probeer steeds de bron of beide kanten van het verhaal te achterhalen."
+                },
+                {
+                    type: "Image",
+                    link: "/images/social/hmm.jpg"
                 },
             ]
         },
@@ -947,6 +1024,10 @@ const SOCMOD6 = {
                     content: "Onderzoek toont aan dat het ervaren van een gebrek aan sociale steun op het werk een belangrijke voorspeller is van uitval. Het is dus erg belangrijk om een helpend netwerk rondom je te bouwen, dat je kan helpen met het voorkomen van uitval t.g.v. je pijnklachten of dat je kan ondersteunen in het voorbereiden van je werkhervatting na een periode van afwezigheid."
                 },
                 {
+                    type: "Image",
+                    link: "/images/social/network2.jpg"
+                },
+                {
                     type: "Text",
                     content: "In dit hoofdstuk overlopen we belangrijke partners die je hierin kan betrekken."
                 },
@@ -959,6 +1040,10 @@ const SOCMOD6 = {
                     type: "Text",
                     content: "Zoals eerder in deze module werd aangehaald, is het belangrijk om jouw situatie toe te lichten aan je omgeving. Zo weten zij wat er speelt en kunnen zij hier rekening mee houden. Ook kan je op die manier onbegrip van collega’s vermijden bv. over het feit dat jij aangepast werk krijgt in het kader van je chronische pijnklachten. Wanneer je het niet ziet zitten om dit alleen te doen, kan je hiervoor zeker hulp inroepen, bijvoorbeeld van je rechtstreekse leidinggevende."
                 },
+                {
+                    type: "Image",
+                    link: "/images/social/team.jpg"
+                },
             ]
         },
         {
@@ -967,6 +1052,10 @@ const SOCMOD6 = {
                 {
                     type: "Text",
                     content: "Jouw rechtstreeks leidinggevende kan een belangrijke rol spelen in het zorgen voor aanpassingen die het werk kunnen vergemakkelijken voor jou. Ook kan je leidinggevende je collega’s (mee) op de hoogte brengen van je situatie."
+                },
+                {
+                    type: "Image",
+                    link: "/images/social/letters.jpg"
                 },
             ]
         },
@@ -1027,6 +1116,10 @@ const SOCMOD6 = {
           {
             title: "Een kinesist of psycholoog",
             cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/social/fitness.jpg"
+                },
                 {
                     type: "Text",
                     content: "Kinesisten zijn gespecialiseerd in het behandelen van lichamelijke klachten. Zij kunnen helpen bij het opbouwen of aanpassen van je activiteiten, het opmaken oefenschema om je lichaam te versterken en het aanpassen van je levensstijl. Aanvullend kunnen zij ook manuele therapie aanbieden om beperkingen in de mobiliteit van gewrichten op te lossen of om gespannen spieren terug helpen te ontspannen. Onderzoek wijst ook uit dat personen met chronische pijn die het psychologisch moeilijk hebben, meer last hebben van de pijn, minder actief zijn en meer medicatie nodig hebben. Merkt je zelf dat je het mentaal moeilijk hebt en nood hebt naar bijkomende ondersteuning, dan kan ondersteuning door een psycholoog met achtergrond in chronische pijn zeker helpend zijn."
