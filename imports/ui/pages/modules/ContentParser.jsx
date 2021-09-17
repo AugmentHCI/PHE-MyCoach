@@ -220,7 +220,7 @@ function ContentParser(props) {
      * @param {Boolean} save Whether the value needs to be saved (render button)
      */
     function createSliderContent(id, text, from, to, valueText, show, save) {
-        return <Slider key={props.childrenKey} id={id} text={text} from={from} to={to} valueText={valueText} showValue={show} mapping={props.data.mapping} save={save} questionManager={props.questionManager} callback={props.callback} module={props.module}/>
+        return <div className="content-backdrop"><Slider key={props.childrenKey} id={id} text={text} from={from} to={to} valueText={valueText} showValue={show} mapping={props.data.mapping} save={save} questionManager={props.questionManager} callback={props.callback} module={props.module}/></div>
     }
 
     /**

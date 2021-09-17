@@ -69,4 +69,5 @@ const mappings = {
   "6-WEEK": {2: "2 Weken", 3: "3 Weken", 4: "4 Weken", 5: "5 Weken", 6: "6 Weken"},
   "5-AMOUNT": {1: "Helemaal geen", 2: "Niet veel", 3: "Een beetje", 4: "Vrij veel", 5: "Zeer veel"},
   "10-IMPACT": {1: "Heel negatieve impact", 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "Geen negatieve impact"},
+  "10-AGREE": {1: "Helemaal niet", 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "Helemaal wel"},
 }
