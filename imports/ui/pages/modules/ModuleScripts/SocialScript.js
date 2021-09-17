@@ -394,6 +394,7 @@ const SOCMOD3 = {
                 {
                     id: "SOC-MOD-3-SWIPE-ACTION",
                     type: "Swipe",
+                    small: true,
                     buttons: {disagree: "Niet doen", agree: "Doen"},
                     options: [
                         {
@@ -496,6 +497,7 @@ const SOCMOD3 = {
                 {
                     id: "SOC-MOD-3-SWIPE2-ACTION",
                     type: "Swipe",
+                    small: true,
                     buttons: {disagree: "Niet doen", agree: "Doen"},
                     options: [
                         {
@@ -594,6 +596,7 @@ const SOCMOD3 = {
                 {
                     id: "SOC-MOD-3-SWIPE3-ACTION",
                     type: "Swipe",
+                    small: true,
                     buttons: {disagree: "Niet doen", agree: "Doen"},
                     options: [
                         {

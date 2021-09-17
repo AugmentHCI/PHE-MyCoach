@@ -74,7 +74,7 @@ export default function createSwipeContent(props) {
         <div className='cardContainer'>
           {props.data.options.sort(() => {return (props.data.randomize ? Math.random() - 0.5 : 1)}).map((card, index) =>
             <TinderCard className='swipe' ref={childRefs[index]} key={card.text} onSwipe={(dir) => swiped(dir, card.id)} /*onCardLeftScreen={() => outOfFrame(card.id)}*/>
-              <div style={{ backgroundImage: card.image ? 'url(' + card.image + ')' : ""}} className={"swipecard" + (card.image ? "" : "-noimage")}>
+              <div style={{ backgroundImage: card.image ? 'url(' + card.image + ')' : ""}} className={"swipecard" + (card.image ? "" : "-noimage")  + (props.data.small ? " small-swipe-text" : "")}>
                 {card.image && <h3>{card.text}</h3>}
                 {!card.image && <h2>{card.text}</h2>}
               </div>
@@ -85,11 +85,13 @@ export default function createSwipeContent(props) {
           <Button style={{marginTop: "10px"}} width={"48%"} color={"blue"} onClick={() => swipe('left')}>{props.data.buttons.disagree}</Button>
           <Button style={{marginTop: "10px", float: "right"}} width={"48%"} color={"blue"} onClick={() => swipe('right')}>{props.data.buttons.agree}</Button>
         </div>
-        Nog {props.data.options.length - counterRef.current} te gaan.
+        {props.data.options?.length && <div className="content-swipe-indicator">Nog {props.data.options.length - counterRef.current} te gaan.</div>} 
         </React.Fragment>}
         {alreadyRemoved.size === props.data.options.length && <div className="finishedSwiping">
           <h4>Je bent er door!</h4>
-          <Button center color={"blue"} style={{marginTop:"20px"}} onClick={()=>saveResults()} disabled={saved}>{saved ? "Opgeslagen!" : "Sla op"}</Button>
+          <div style={{display: "flex", justifyContent: "center"}}>
+            <Button center color={"blue"} style={{marginTop:"20px"}} onClick={()=>saveResults()} disabled={saved}>{saved ? "Opgeslagen!" : "Sla op"}</Button>
+          </div>
         </div>
           }
       </div>

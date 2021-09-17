@@ -53,9 +53,27 @@
         background-color: var(--idewe-blue);
         display: flex;
         justify-content: center;
+        align-items: center;
+        padding: 10px;
         box-shadow: none;
         border: 5px solid var(--idewe-white);
     }
+}
+
+.content-swipe-indicator {
+    display: flex;
+    justify-content: center;
+    font-family: var(--main-font);
+    color: var(--idewe-blue);
+    font-weight: 500;
+}
+
+.small-swipe-text {
+    text-align: center;
+}
+
+.small-swipe-text > h2 {
+    font-size: 18px;
 }
   
 .cardContent {
@@ -72,8 +90,6 @@
 }
 
 .swipecard h2 {
-    position: absolute;
-    top: 40%;
     font-family: var(--main-font);
     color: var(--idewe-white);
 }
