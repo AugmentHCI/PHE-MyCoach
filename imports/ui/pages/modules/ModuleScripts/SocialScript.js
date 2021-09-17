@@ -221,6 +221,10 @@ const SOCMOD2 = {
         {
             cardContents: [
                 {
+                    type: "Image",
+                    link: "/images/social/three-emotions.jpg"
+                },
+                {
                     type: "Text",
                     content: "Stel je de volgende situatie voor: Je hebt veel last van pijn vandaag, dit maakt je boos en ook verdrietig. Je hebt nood aan troost van je partner in de vorm van een knuffel. Daarom zeg je tegen je partner: ‘Ik heb veel last van pijn vandaag.’ Je vertelt er echter niet bij wat je op dit moment juist verwacht en waar je nood aan hebt, dat is nu toch wel duidelijk of niet soms...?"
                 },
