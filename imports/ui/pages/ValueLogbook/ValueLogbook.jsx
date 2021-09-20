@@ -15,6 +15,7 @@ import Illustration from '../../components/Illustrations/Illustration';
 import Input from '../../components/Input';
 import GoalSettingManager from '../../../api/GoalSettingManager';
 import BuildupScheme from '../../../api/BuildupScheme';
+import LoadingScreen from '../LoadingScreen';
 
 
 
@@ -31,6 +32,8 @@ export default function ValueLogbook() {
     const [addingMode, setAddingMode] = useState(false);
     const [selectedTab, setSelectedTab] = useState("GOALS");
     const [addingValue, updateAddingValue] = useState("");
+    const [goalsLoading, setGoalsLoading] = useState(true);
+    const [valuesLoading, setValuesLoading] = useState(true);
 
     function removeItem(value) {
         let valuesCopy = JSON.parse(JSON.stringify(values));
@@ -48,6 +51,7 @@ export default function ValueLogbook() {
     
     function renderValues() {
         let valueHTML = [];
+        if (!values || Object.keys(values).length === 0) return <div style={{display:'flex', justifyContent: 'center', marginTop: '2em', marginBottom: '2em', color:'var(--idewe-blue)', fontWeight: 500, fontSize: '18px'}}>Nog geen waarden toegevoe</div>
         Object.keys(values).forEach((value, index) => {
             if (values[value]) {
                 valueHTML.push(<div className="value-row" key={index + value}>
@@ -63,7 +67,7 @@ export default function ValueLogbook() {
 
     function saveButton() {
         if (addingValue.length > 0) {
-            let valuesCopy = JSON.parse(JSON.stringify(values));
+            let valuesCopy = values ? JSON.parse(JSON.stringify(values)) : {};
             valuesCopy[addingValue] = true;
             setValues(valuesCopy);
             updateAddingValue("");
@@ -75,18 +79,22 @@ export default function ValueLogbook() {
     useEffect(() => { 
         async function fetchValues() {
             const fetchedValues = await questionManager.getLatestAnswerOnQuestion("TE-MOD-5-SELECT-5");
-            setValues(JSON.parse(fetchedValues));
+            console.log(fetchedValues)
+            setValues(fetchedValues ? JSON.parse(fetchedValues) : undefined);
+            setValuesLoading(false);
         }
         async function fetchGoals() {
             const fetchedGoals = await goalSettingManager.getUserGoals();
             console.log(fetchedGoals)
             setGoals(fetchedGoals);
+            setGoalsLoading(false);
         }
         fetchValues();
         fetchGoals();
     }, []);
 
     function renderValuesTab() {
+        if (valuesLoading) return <LoadingScreen height='70%'/>
         return (<div>
             <FadeIn>
             Hier zie je een overzicht van jouw waarden. Je kan waarden toevoegen of verwijderen, om ze dan te gebruiken in het tabblad 'Doelen'.
@@ -96,7 +104,7 @@ export default function ValueLogbook() {
                 style={{width: "100%", fontSize: "16px", fontWeight: 500, flexGrow: 1}} 
                 placeholder="Typ hier"/> }
             <div style={{display: "flex"}}>
-            {!addingMode && <Button center color="blue" onClick={() => setEditMode(!editMode)} style={{marginTop: "20px", flex: 1, marginRight: editMode ? 0 : "10px"}}>{editMode ? "Opslaan" : "Wijzig"}</Button>}
+            {!addingMode && values && <Button center color="blue" onClick={() => setEditMode(!editMode)} style={{marginTop: "20px", flex: 1, marginRight: editMode ? 0 : "10px"}}>{editMode ? "Opslaan" : "Wijzig"}</Button>}
             {!editMode && <Button center color="blue" onClick={() => saveButton()} style={{marginTop: "20px", flex: 1}}>{addingMode ? (addingValue.length > 0 ? "Voeg toe" : "Annuleer") : "Voeg waarde toe"}</Button>}
             </div>
             </FadeIn>
@@ -129,6 +137,7 @@ export default function ValueLogbook() {
     }
 
     function renderGoalsTab() {
+        if (goalsLoading) return <LoadingScreen height='70%'/>
         return (<div className="goals-tab">
             <FadeIn>
                 {goals.length === 0 && <div style={{display: "flex", justifyContent:"center", flexDirection:"column"}}>
