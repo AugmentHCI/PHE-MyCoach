@@ -1358,8 +1358,8 @@ const TEMOD6 = {
         },
         {
             generateFinishSubmoduleButton: true,
-            lastModule: false,
-            text: "Voltooi dit onderdeel",
+            lastModule: true,
+            text: "Voltooi Gedachten & Emoties",
             textOnCompleted: "Keer terug"
         }
     ]
