@@ -1,4 +1,6 @@
 .pill-button {
+    display: flex;
+    flex-direction: row;
     border: none;
     border-radius: 50px;
     height: 22px;
@@ -25,9 +27,12 @@
 }
 
 .pill-button-text {
-    float: left;
+    display: flex;
+    align-items: center;
     margin-left: 5px;
-    margin-top: -1px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .pill-button-icon {
@@ -37,7 +42,6 @@
     margin-right: -5px;
     border-radius: 15px;
     padding-top: -10px;
-    float: left;
     
     &-blue {
         @extend .pill-button-icon;

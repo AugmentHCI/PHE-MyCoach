@@ -268,7 +268,7 @@ export default function MyCoach(props) {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
             let progress = await progressManager.getUserProgress();
-            if (progress && progress.PAINEDUCATION && progress["PAINEDUCATION"]["PE_MOD_1"] === "NOT_STARTED") {
+            if (progress?.PAINEDUCATION && progress["PAINEDUCATION"]["PE_MOD_1"] === "NOT_STARTED") {
                 progress["PAINEDUCATION"]["PE_MOD_1"] = "IN_PROGRESS";
                 await progressManager.setSubmoduleStatus("PAINEDUCATION", "PE_MOD_1", "IN_PROGRESS");
             }

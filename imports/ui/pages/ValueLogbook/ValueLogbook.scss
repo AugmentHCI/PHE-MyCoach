@@ -189,6 +189,9 @@
 }
 
 .valuelogbook-entry-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--idewe-blue);
     width: 36px;
     height: 36px;
@@ -196,7 +199,5 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    padding-top: 9px;
-    padding-left: 11px;
     box-shadow: var(--card-shadow);
 }

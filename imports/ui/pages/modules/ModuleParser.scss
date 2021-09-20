@@ -5,16 +5,6 @@
     color: var(--idewe-blue-dark);
 }
 
-.module-loading-message {
-    display: flex;
-    justify-content: center;
-    font-size: 40px;
-    top: 50%;
-    font-family: var(--main-font);
-    font-weight: 500;
-    color: var(--idewe-blue-dark);
-}
-
 .container h3 {
     font-family: var(--main-font);
     font-size: 20px;
@@ -91,6 +81,11 @@
         @extend .modalpopup-body;
         color: var(--idewe-gray-dark);
     }
+}
+
+.modalpopup-pillrow {
+    display: flex;
+    margin-bottom: 5px;
 }
 
 .modalpopup-card-title {

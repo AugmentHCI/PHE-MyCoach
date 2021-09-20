@@ -211,7 +211,7 @@ export default function ModuleParser(props) {
                 {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title" + (locked ? "-locked" : "")}>{submodule.titleMarkup[1]}</div>}
             </div>
             <div className={"modalpopup-body" + (locked ? "-locked" : "")}>
-                <div>
+                <div className="modalpopup-pillrow">
                     <PillButton contentColor="white" fillColor={locked ? "gray-light" : "blue"} icon="time">{submodule.duration}</PillButton>
                     <PillButton contentColor="white" fillColor={locked ? "gray-light" : "blue"} icon="information">{submodule.type}</PillButton>
                 </div>
