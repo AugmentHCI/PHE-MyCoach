@@ -131,7 +131,7 @@ const SOCMOD2 = {
                     content: [
                         {image: "/images/social/facts.jpg", title: "Stap 1 - Waarneming", text: "Start met de waarneming. Beschrijf hierbij de feiten (wat zie je, wat hoor je...). Beperk je hier tot de objectieve feiten en verbind hier geen interpretaties of oordelen aan."},
                         {image: "/images/social/emojis.jpg", title: "Stap 2 - Gevoel", text: "Beschrijf hoe je je hierbij voelt (ik voel me: blij, bang, verdrietig, boos, verbaasd, ...)"},
-                        {title: "Stap 3 - Behoefte", text: "Geef aan wat jouw behoeftes of waarden zijn, wat jij belangrijk vindt. Wanneer je een bepaalde emotie voelt, zoals bijvoorbeeld verdriet of boosheid, zegt dit namelijk iets over een onderliggende behoefte die op dat moment niet vervuld is (bijvoorbeeld de behoefte aan steun of aanmoediging)."},
+                        {image: "/images/social/sadhappy.jpg", title: "Stap 3 - Behoefte", text: "Geef aan wat jouw behoeftes of waarden zijn, wat jij belangrijk vindt. Wanneer je een bepaalde emotie voelt, zoals bijvoorbeeld verdriet of boosheid, zegt dit namelijk iets over een onderliggende behoefte die op dat moment niet vervuld is (bijvoorbeeld de behoefte aan steun of aanmoediging)."},
                         {image: "/images/social/explaining.jpg", title: "Stap 4 - Verzoek", text: "Eindig met een verzoek: wat wil je vragen of verwacht je van de andere? Zorg ervoor dat je verzoek: zo contreet mogelijk is, positief geformuleerd is (dus bijvoorbeeld niet: wil je stoppen met schreeuwen aub? Maar wel: wil je stiller praten aub?), realistisch is, en beleefd geformuleerd is (Gebruik AUB en dankjewel)"},
                     ]
                 }
@@ -176,7 +176,7 @@ const SOCMOD2 = {
                     content: [
                         {image: "/images/social/facts.jpg", title: "Stap 1 - Waarneming", text: "Beperk je hier tot de objectieve feiten en verbind hier geen interpretaties of oordelen aan. Bijvoorbeeld zeg niet: Ik merk dat je je erg moeit met mijn situatie en vind dat onbeleefd! Maar zeg wel: Ik merk op dat je dagelijks vraagt of ik toch niet beter thuis zou blijven van het werk."},
                         {image: "/images/social/emojis.jpg", title: "Stap 2 - Gevoel", text: "Beschrijf hoe je je hierbij voelt. Bijvoorbeeld: Ik weet dat dit goed bedoeld is, maar ik voel me hier verdrietig bij."},
-                        {title: "Stap 3 - Behoefte", text: "Geef aan wat jouw behoefte of waarde is, wat jij belangrijk vindt. Bijvoorbeeld: Omdat ik behoefte heb aan steun in mijn keuze om aan het werk te blijven."},
+                        {image: "/images/social/sadhappy.jpg", title: "Stap 3 - Behoefte", text: "Geef aan wat jouw behoefte of waarde is, wat jij belangrijk vindt. Bijvoorbeeld: Omdat ik behoefte heb aan steun in mijn keuze om aan het werk te blijven."},
                         {image: "/images/social/explaining.jpg", title: "Stap 4 - Verzoek", text: "Geef aan wat jouw behoefte of waarde is, wat jij belangrijk vindt. Bijvoorbeeld: Omdat ik behoefte heb aan steun in mijn keuze om aan het werk te blijven."},
                     ]
                 }
@@ -674,8 +674,8 @@ const SOCMOD3 = {
 
 const SOCMOD4 = {
     id: "SOC_MOD_4",
-    title: "Mijn eigen houding t.a.v. mijn omgeving",
-    titleMarkup: ["Mijn eigen houding", "t.a.v. mijn omgeving"],
+    title: "Mijn houding t.a.v. mijn omgeving",
+    titleMarkup: ["Mijn houding t.a.v.", "de omgeving"],
     navBarTitle: "Mijn eigen houding",
     part: 4,
     description: "In dit hoofdstuk leer je welke reacties van jouw omgeving mogelijks een negatief effect hebben op jouw situatie en hoe je hiermee kan omgaan.",
@@ -769,6 +769,10 @@ const SOCMOD4 = {
         },
         {
             cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/social/complaining.jpg"
+                },
                 {
                     type: "TextBubble",
                     content: "“Ik heb echt een heel zwaar leven”",
@@ -1073,6 +1077,10 @@ const SOCMOD6 = {
                 {
                     type: "Text",
                     content: "De personeelsdienst kan je o.a. verder helpen wanneer je met vragen zit rond progressieve werkhervatting, aanpassingen aan je uurrooster en dergelijke."
+                },
+                {
+                    type: "Image",
+                    link: "/images/social/network3.jpg"
                 },
             ]
         },
