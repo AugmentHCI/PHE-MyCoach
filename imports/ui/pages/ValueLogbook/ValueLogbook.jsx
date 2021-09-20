@@ -104,7 +104,7 @@ export default function ValueLogbook() {
                 style={{width: "100%", fontSize: "16px", fontWeight: 500, flexGrow: 1}} 
                 placeholder="Typ hier"/> }
             <div style={{display: "flex"}}>
-            {!addingMode && values && <Button center color="blue" onClick={() => setEditMode(!editMode)} style={{marginTop: "20px", flex: 1, marginRight: editMode ? 0 : "10px"}}>{editMode ? "Opslaan" : "Wijzig"}</Button>}
+            {!addingMode && values && Object.keys(values) > 0 && <Button center color="blue" onClick={() => setEditMode(!editMode)} style={{marginTop: "20px", flex: 1, marginRight: editMode ? 0 : "10px"}}>{editMode ? "Opslaan" : "Wijzig"}</Button>}
             {!editMode && <Button center color="blue" onClick={() => saveButton()} style={{marginTop: "20px", flex: 1}}>{addingMode ? (addingValue.length > 0 ? "Voeg toe" : "Annuleer") : "Voeg waarde toe"}</Button>}
             </div>
             </FadeIn>
