@@ -2,6 +2,7 @@ const SOCMOD1 = {
     id: "SOC_MOD_1",
     title: "Het belang van sociale steun",
     titleMarkup: ["Het belang van", "sociale steun"],
+    navBarTitle: "Belang sociale steun",
     part: 1,
     description: "We hebben allemaal nood aan sociale steun. Maar wat is sociale steun juist en waarom is dit zo belangrijk? Dit hoofdstuk geeft een kort overzicht.",
     duration: "5 minuten",
@@ -58,7 +59,7 @@ const SOCMOD1 = {
                 {
                     type: "Story",
                     content: [
-                        {image: "/images/social/cleaning.jpg", title: "Praktische steun", text: "Zoals bijvoorbeeld iets concreet doen om te helpen zoals bijvoorbeeld taken in het huishouden overnemen."},
+                        {image: "/images/social/cleaning.jpg", title: "Praktische steun", text: "Iets concreet doen om te helpen zoals bijvoorbeeld taken in het huishouden overnemen."},
                         {image: "/images/social/worried.jpg", title: "Emotionele steun", text: "Dit zijn bijvoorbeeld mensen waarbij je terecht kan om je verhaal te doen, die begrip tonen en die laten zien dat ze in je geloven."},
                         {title: "Informatieve steun", text: "Dit omvat het geven van informatie, tips en adviezen om je vooruit te helpen."},
                     ]
@@ -152,7 +153,7 @@ const SOCMOD2 = {
                 },
                 {
                     type: "Text",
-                    content: "Stel: Je hebt last van chronische rugpijn. Je doet je best om hier zo goed mogelijk mee om te gaan door een gezonde levensstijl aan te houden, in beweging te blijven, afleiding en ontspanning te voorzien én aan het werk te blijven, ondanks het feit dat je pijn hebt. Blijven werken is erg belangrijk voor jou, het geeft een nuttige invulling van je dag en het gevoel iets te kunnen betekenen. Het helpt je wanneer de mensen rondom jou je hierin steunen en aanmoedigen. Je naaste collega is erg bezorgd om jou. Elke dag opnieuw vraagt ze, vanaf het moment dat je toekomt op het werk, of het echt wel gaat met je rug. Ze zegt tegen je dat ze van mening is dat toch beter thuis zou blijven van het werk met jouw klachten, zodat je je zeker niet gaat forceren."
+                    content: "Stel: Je hebt last van chronische rugpijn. Je doet je best om hier zo goed mogelijk mee om te gaan door een gezonde levensstijl aan te houden, in beweging te blijven, afleiding en ontspanning te voorzien én aan het werk te blijven, ondanks het feit dat je pijn hebt. Blijven werken is erg belangrijk voor jou, het geeft een nuttige invulling van je dag en het gevoel iets te kunnen betekenen. Het helpt je wanneer de mensen rondom jou je hierin steunen en aanmoedigen. Je naaste collega is erg bezorgd om jou. Elke dag opnieuw vraagt ze, vanaf het moment dat je toekomt op het werk, of het echt wel gaat met je rug. Ze vraagt of het toch niet beter is als je thuis zou blijven, zodat jij je zeker niet gaat forceren."
                 },
                 {
                     type: "Image",
@@ -277,7 +278,7 @@ const SOCMOD2 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Alleen door je situatie kort en helder toe te lichten aan je omgeving, weten zij wat er speelt en kunnen ze hier rekening mee houden. Zorg ervoor dat je al uitleg klaar hebt in de vorm van een elevator pitch en oefen deze goed in, dat maakt de drempel om erover te praten wat kleiner!"
+                    content: "Alleen door je situatie kort en helder toe te lichten aan je omgeving, weten zij wat er speelt en kunnen ze hier rekening mee houden. Zorg ervoor dat je al een uitleg klaar hebt in de vorm van een elevator pitch en oefen deze goed in, dat maakt de drempel om erover te praten wat kleiner!"
                 },
                 {
                     type: "Image",
@@ -466,7 +467,7 @@ const SOCMOD3 = {
                 },
                 {
                     type: "TextBubble",
-                    content: "“Oei, dat is niet goed! Laat dat toch maar nakijken”",
+                    content: "“Is dat niet te zwaar voor jou?”",
                     float: "right"
                 },
                 {
@@ -1079,6 +1080,10 @@ const SOCMOD6 = {
             title: "De interne vertrouwenspersoon",
             cardContents: [
                 {
+                    type: "Image",
+                    link: "/images/social/trustperson.jpg"
+                },
+                {
                     type: "Text",
                     content: "Sommige organisaties hebben een interne vertrouwenspersoon aangesteld. Deze heeft een opleiding gevolgd om deze rol te mogen uitoefenen. Je kan bij de vertrouwenspersoon terecht voor een vertrouwelijk gesprek. Dit kan nuttig zijn wanneer psychosociale factoren, zoals bijvoorbeeld een hoge werkdruk, het ervaren van veel stress of het hebben van een conflict op het werk, het moeilijk maken om aan het werk te blijven of drempels zijn om het werk opnieuw te hervatten. Tijdens het gesprek kan je je verhaal doen en krijg je advies en tips. Indien dit aangewezen is, kan je de vertrouwenspersoon je doorverwijzen, bijvoorbeeld naar je huisarts, de preventieadviseur psychosociale aspecten of een psycholoog. Ook wordt er bekeken of je verdere ondersteuning wenst, zoals bijvoorbeeld een aantal individuele gesprekken, een contact met jouw leidinggevende of het organiseren van een bemiddelingsgesprek. De vertrouwenspersoon heeft beroepsgeheim en gaat enkel en alleen met jouw toestemming contact opnemen met het werk en bepaalde informatie doorgeven! Je kan de contactgegevens van de preventieadviseur psychosociale aspecten terugvinden in jouw arbeidsreglement."
                 },
@@ -1087,6 +1092,10 @@ const SOCMOD6 = {
           {
             title: "De arbeidsgeneesheer van IDEWE",
             cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/social/idewe.png"
+                },
                 {
                     type: "Text",
                     content: "De arbeidsgeneesheer is een arts die gespecialiseerd is in de relatie tussen gezondheid en werk. In het kader van chronische pijn kan hij onder andere aanbevelingen doen om de werkpost aan te passen zodat rekening gehouden wordt met jouw gezondheidsbeperkingen als werknemer. Ook kan de arbeidsgeneesheer advies geven over progressieve werkhervatting. De arbeidsgeneesheer werkt nauw samen met de preventieadviseur ergonomie en de preventieadviseur psychosociale aspecten en kan jou, indien hij inschat dat dit aangewezen is, hiernaar doorverwijzen."
@@ -1097,14 +1106,22 @@ const SOCMOD6 = {
             title: "De preventieadviseur ergonomie van IDEWE",
             cardContents: [
                 {
+                    type: "Image",
+                    link: "/images/social/ergo.jpg"
+                },
+                {
                     type: "Text",
-                    content: "De preventieadviseur ergonomie kan samen met jou als werknemer het individuele functioneren bij het uitvoeren van de verschillende taken in je functie evalueren. Hierbij wordt o.a. naar de volgende aspecten gekeken: Welke taken verlopen vlot en kunnen zonder pijn of last uitgevoerd worden? Bij welke taken ervaar je hinder en pijn? Welke taken vermijd je? De ergonoom analyseert de risico’s en zal op basis van de deze analyse gericht advies geven. Deze adviezen kunnen gaan over de ergonomische inrichting en opstelling van je werkpost, je werkmiddelen, de werkorganisatie en je werkmethode. Wil je een afspraak maken bij de preventieadviseur ergonomie, dan neem best contact op met het regionaal kantoor van IDEWE."
+                    content: "De preventieadviseur ergonomie kan samen met jou als werknemer het individuele functioneren bij het uitvoeren van de verschillende taken in je functie evalueren. Hierbij wordt o.a. naar de volgende aspecten gekeken: Welke taken verlopen vlot en kunnen zonder pijn of last uitgevoerd worden? Bij welke taken ervaar je hinder en pijn? Welke taken vermijd je? De ergonoom analyseert de risico’s en zal op basis van de deze analyse gericht advies geven. Deze adviezen kunnen gaan over de ergonomische inrichting en opstelling van je werkpost, je werkmiddelen, de werkorganisatie en je werkmethode. Wil je een afspraak maken bij de preventieadviseur ergonomie, dan neem je best contact op met het regionaal kantoor van IDEWE."
                 },
             ]
         },
           {
             title: "De preventieadviseur psychosociale aspecten van IDEWE",
             cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/social/paps.jpg"
+                },
                 {
                     type: "Text",
                     content: "Heeft jouw organisatie geen interne vertrouwenspersoon of wil je liever je verhaal doen aan iemand buiten jouw organisatie, dan kan je bij de preventieadviseur psychosociale aspecten (PAPS) terecht voor een vertrouwelijk gesprek. Dit kan nuttig zijn wanneer psychosociale factoren, zoals bijvoorbeeld een hoge werkdruk, het ervaren van veel stress of het hebben van een conflict op het werk, het moeilijk maken om aan het werk te blijven of voor jou een drempel zijn om het werk opnieuw te hervatten. Tijdens het gesprek kan je je verhaal doen en krijg je advies en tips. Indien dit aangewezen is, kan je de PAPS je doorverwijzen naar hulpverlening, zoals bijvoorbeeld je huisarts of een psycholoog. Ook wordt er bekeken of je verdere ondersteuning wenst, zoals bijvoorbeeld een aantal individuele gesprekken, een contactname met jouw leidinggevende of het organiseren van een bemiddelingsgesprek. De PAPS heeft beroepsgeheim en gaat enkel en alleen met jouw toestemming contact opnemen met het werk en bepaalde informatie doorgeven! Je kan de contactgegevens van de preventieadviseur psychosociale aspecten terugvinden in jouw arbeidsreglement."
@@ -1114,6 +1131,10 @@ const SOCMOD6 = {
           {
             title: "De huisarts",
             cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/social/huisarts.jpg"
+                },
                 {
                     type: "Text",
                     content: "De huisarts is voor veel mensen, die te kampen hebben met gezondheidsproblemen van fysieke en/of mentale aard, een eerste en laagdrempelig aanspreekpunt. Vaak fungeert de huisarts als een soort van vertrouwenspersoon, die aandacht heeft voor jouw medische en mentale toestand en jouw sociale situatie. De huisarts kan o.a. ook beslissingen nemen over ziekteverlof en progressieve werkhervatting. Ook kan de huisarts je indien nodig doorverwijzen naar gespecialiseerde hulp, bijvoorbeeld naar een psycholoog of kinesist."
@@ -1129,7 +1150,7 @@ const SOCMOD6 = {
                 },
                 {
                     type: "Text",
-                    content: "Kinesisten zijn gespecialiseerd in het behandelen van lichamelijke klachten. Zij kunnen helpen bij het opbouwen of aanpassen van je activiteiten, het opmaken oefenschema om je lichaam te versterken en het aanpassen van je levensstijl. Aanvullend kunnen zij ook manuele therapie aanbieden om beperkingen in de mobiliteit van gewrichten op te lossen of om gespannen spieren terug helpen te ontspannen. Onderzoek wijst ook uit dat personen met chronische pijn die het psychologisch moeilijk hebben, meer last hebben van de pijn, minder actief zijn en meer medicatie nodig hebben. Merkt je zelf dat je het mentaal moeilijk hebt en nood hebt naar bijkomende ondersteuning, dan kan ondersteuning door een psycholoog met achtergrond in chronische pijn zeker helpend zijn."
+                    content: "Kinesisten zijn gespecialiseerd in het behandelen van lichamelijke klachten. Zij kunnen helpen bij het opbouwen of aanpassen van je activiteiten, het opmaken van een oefenschema om je lichaam te versterken en het aanpassen van je levensstijl. Aanvullend kunnen zij ook manuele therapie aanbieden om beperkingen in de mobiliteit van gewrichten op te lossen of om gespannen spieren terug helpen te ontspannen. Onderzoek wijst ook uit dat personen met chronische pijn die het psychologisch moeilijk hebben, meer last hebben van de pijn, minder actief zijn en meer medicatie nodig hebben. Merkt je zelf dat je het mentaal moeilijk hebt en nood hebt naar bijkomende ondersteuning, dan kan ondersteuning door een psycholoog met achtergrond in chronische pijn zeker helpend zijn."
                 },
             ]
         },
