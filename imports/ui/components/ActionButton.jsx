@@ -24,7 +24,7 @@ export default function ActionButton(props) {
                 onTouchEnd={() => press(false)}
                 style={style}>
             {props.icon && <div className="actionbutton-icon">
-                <Icon width="22px" image={props.icon} color={props.color ? props.color : "blue"} style={{marginTop: "6px"}}/>
+                <Icon width="22px" image={props.icon} color={props.color ? props.color : "blue"}/>
             </div>}
             <div className={props.size === "small" ? "actionbutton-text-small" : "actionbutton-text"}>
                 {props.children}

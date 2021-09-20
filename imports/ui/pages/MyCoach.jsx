@@ -54,8 +54,6 @@ export default function MyCoach(props) {
     const shortcutManager    = new ShortcutManager(userID, userToken);
 
     /* STATES */
-    const [tapCount, updateTapCount] = useState(0);
-
     const [userProgress, setUserProgress] = useState(undefined);
     const [userShortcuts, setUserShortcuts] = useState(undefined);
     const [userDailyCoaching, setUserDailyCoaching] = useState(undefined);
@@ -235,10 +233,11 @@ export default function MyCoach(props) {
                 {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title"}>{submodule.titleMarkup[1]}</div>}
             </div>
             <div className={"modalpopup-body"}>
-                <div>
+                <div style={{display:'flex', marginBottom:'5px'}}>
                     <PillButton contentColor="white" fillColor={"blue"} icon="time">{submodule.duration}</PillButton>
                     <PillButton contentColor="white" fillColor={"blue"} icon="information">{submodule.type}</PillButton>
                 </div>
+                <div className={"modalpopup-card-module"}>{moduleMapping[module]}</div>
                 {submodule.description}
             </div>
         </AppModal>)
@@ -257,7 +256,7 @@ export default function MyCoach(props) {
 
     function renderSplashScreen() {
         return (<div className="container" style={{justifyContent: "center", textAlign: "center", margin: "0 auto"}}>
-            <h2 style={{marginTop: "60px", color:"var(--idewe-blue", fontSize:"20px", fontWeight:"600"}} onClick={() => updateTapCount(tapCount+1)}>Still in the works</h2>
+            <h2 style={{marginTop: "60px", color:"var(--idewe-blue", fontSize:"20px", fontWeight:"600"}}>Still in the works</h2>
             <p style={{fontFamily:"var(--main-font)", color:"var(--idewe-blue-dark)"}}>We are still working on translating some parts of MyCoach. Come back in two weeks!</p>
             <img src="/illustrations/working.svg" width={"70%"} style={{marginTop:"80px"}}></img>
         </div>)
@@ -307,8 +306,8 @@ export default function MyCoach(props) {
 
     return (
         <div className="container">
-            {(tapCount < 5 && !props.noSplash && language !== "nl-BE") && renderSplashScreen()}
-            {(tapCount >= 5 || props.noSplash || language === "nl-BE") && <React.Fragment>
+            {(!props.noSplash && language !== "nl-BE") && renderSplashScreen()}
+            {(props.noSplash || language === "nl-BE") && <React.Fragment>
             {handleIntroduction()}
             {showCoachingModal && renderDailyCoachingModal()}
             {userProgress && showFinishPainEducationModal && userProgress?.["PAINEDUCATION"]?.["PE_MOD_5"] === "COMPLETED" && renderFinishPainEducationModal()}
@@ -330,7 +329,7 @@ export default function MyCoach(props) {
                         <Icon color="white" image="add-text" width="26px"/>
                     </div>
                     </Popover>
-                    <h1>My Coach</h1>
+                    <h1 style={{marginBottom:0}}>My Coach</h1>
                     {coachRRNRs.includes(userID) && <button className="settings-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/adminsettings`)}> <Icon width="24px" image={"settings"} color={"blue-dark"}/></button>}
                 </div>
                 { renderTodos() }
@@ -344,4 +343,13 @@ export const coachRRNRs = [1111111, 4862876, 3381097, 4018425, 4799179, 3237616,
 /* The module priorities per profile */
 const modulePriorities = {
     1: []
+}
+
+const moduleMapping = {
+    "paineducation": "Pijneducatie",
+    "thoughtsemotions": "Gedachten & Emoties",
+    "activitywork": "Activiteit & Werk",
+    "stress": "Stress & Veerkracht",
+    "social": "Sociale omgeving",
+    "movement": "Bewegen"
 }
