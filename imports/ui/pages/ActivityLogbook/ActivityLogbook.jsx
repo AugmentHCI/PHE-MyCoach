@@ -13,6 +13,7 @@ import moment from 'moment';
 import ActivityLogbookManager from '../../../api/ActivityLogbookManager';
 import GoalSettingManager from '../../../api/GoalSettingManager';
 import BuildupScheme from '../../../api/BuildupScheme';
+import LoadingScreen from '../LoadingScreen'
 
 
 export default function PainLogbook() {
@@ -25,7 +26,7 @@ export default function PainLogbook() {
     const [selectedDay, setSelectedDay] = useState(moment(new Date()));
     const [weekOffset, updateWeekOffset] = useState(0);
     const [days, setDays] = useState(generateDays());
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [showModal, toggleShowModal] = useState(false);
 
     /* New Activity */
@@ -76,7 +77,7 @@ export default function PainLogbook() {
     useEffect(() => {
         setDays(generateDays());
         fetchActivities();
-    }, [selectedDay]);
+    }, [weekOffset]);
 
     useEffect(() => {
         fetchGoals();
@@ -231,7 +232,7 @@ export default function PainLogbook() {
     }
 
     function renderActivities() {
-        //if (loading) return (<div><img src="/illustrations/loading.gif" width="50px" style={{}}/></div>);
+        if (loading) return <LoadingScreen/>
         if (filteredActivities.length === 0) return <React.Fragment/>
         return (<FadeIn>
             <div className="planned-activities">
