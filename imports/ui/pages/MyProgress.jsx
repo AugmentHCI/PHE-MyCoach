@@ -195,7 +195,7 @@ export default class MyProgress extends Component {
             userToken: token
           }, (errorDev, resultDev) => {
             // OPTION 1.1.1: DEVELOPMENT environment failed as well -> No data was fetched (Possibly an incorrect token)
-            if (error) {
+            if (errorDev) {
               this.setState({callError: errorDev.message})
               console.log(`${dataType} - Development environment failed as well: ${errorDev.message}.`)
             } 
