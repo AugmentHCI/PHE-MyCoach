@@ -151,7 +151,7 @@ import React, { useState, useEffect } from 'react';
             <li><B>Drempel: </B><P>{goal.threshold}</P></li>
             <li><B>Oplossing: </B><P>{goal.thresholdDescription}</P></li>
             <li><B>Beloning: </B><P>{goal.reward}</P></li>
-            <li><B>Vertrouwen: </B><P>{goal.trust} / 100</P></li>
+            <li><B>Vertrouwen: </B><P>{trustScore[goal.trust]}</P></li>
         </Ul>
     }
 
@@ -264,3 +264,12 @@ const daysT = {
     sa: "za",
     su: "zo"
 } 
+
+const trustScore = {
+    0: "Helemaal geen",
+    1: "Helemaal geen",
+    2: "Niet veel",
+    3: "Een beetje",
+    4: "Vrij veel",
+    5: "Zeer veel"
+}
