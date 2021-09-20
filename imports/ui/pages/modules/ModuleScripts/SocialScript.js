@@ -549,7 +549,7 @@ const SOCMOD3 = {
                     type: "Story",
                     content: [
                         {image: "/images/social/explaining.jpg", title: "Doen: Licht je situatie kort en helder toe", text: "Overdreven bezorgdheid kan ervoor zorgen dat je meer gaat focussen op de klachten wat het herstelproces kan vertragen of waardoor je meer pijn gaat ervaren. Bovendien kan dit knagen aan jouw motivatie om voornemens verder te zetten. Bedank daarom de persoon voor de interesse en licht je situatie kort en helder toe. Dit kan je doen door middel van de elevator pitch."},
-                        {title: "Doen: Benadruk het belang van niet te focussen op je klachten.", text: "Te zeer focussen op jouw klachten kan niet alleen zorgen voor een onprettig gevoel, het kan ook bijdragen aan de overgevoeligheid van het zenuwstelsel waardoor je klachten verergeren. Benadruk daarom dat het belangrijk is dat je jouw normale taken geleidelijk aan terug opneemt en opbouwt."},
+                        {image: "/images/social/focus.jpg", title: "Doen: Benadruk het belang van niet te focussen op je klachten.", text: "Te zeer focussen op jouw klachten kan niet alleen zorgen voor een onprettig gevoel, het kan ook bijdragen aan de overgevoeligheid van het zenuwstelsel waardoor je klachten verergeren. Benadruk daarom dat het belangrijk is dat je jouw normale taken geleidelijk aan terug opneemt en opbouwt."},
                         {image: "/images/social/saved.jpg", title: "Doen: Geef zelf aan waar je behoefte aan hebt", text: "Personen die dit soort van opmerkingen maken bedoelen het goed. Bedank hen daarom en geef zeker aan dat je zelf zal aangeven wanneer je over jouw klachten wilt praten of hulp nodig hebt."},
                         {image: "/images/social/minds.jpg", title: "Doen: Reageer op een assertieve en respectvolle manier", text: "Gebruik de bouwstenen van verbindende communicatie om een reactie te formuleren."},
                         {image: "/images/social/window.jpg", title: "Niet doen: Ingaan op de bezorgdheid", text: "Door in te gaan op de bezorgdheid leg je meer de nadruk op je klachten en val je in een vermijdingspatroon. Dit zal je op termijn niet vooruithelpen. Diegene die de opmerking maakte zal in de toekomst ook terug zijn bezorgdheid uiten."},
@@ -575,7 +575,7 @@ const SOCMOD3 = {
                 },
                 {
                     type: "TextBubble",
-                    content: "“Zou je dit niet eens proberen?”",
+                    content: "“Een vriend van mij heeft net hetzelfde, met dat middeltje gaat het beter”",
                     float: "right"
                 },
                 {
