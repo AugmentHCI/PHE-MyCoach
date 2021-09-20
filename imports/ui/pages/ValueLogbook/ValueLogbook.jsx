@@ -51,7 +51,7 @@ export default function ValueLogbook() {
     
     function renderValues() {
         let valueHTML = [];
-        if (!values || Object.keys(values).length === 0) return <div style={{display:'flex', justifyContent: 'center', marginTop: '2em', marginBottom: '2em', color:'var(--idewe-blue)', fontWeight: 500, fontSize: '18px'}}>Nog geen waarden toegevoe</div>
+        if (!values || Object.keys(values).length === 0) return <div style={{display:'flex', justifyContent: 'center', marginTop: '2em', marginBottom: '2em', color:'var(--idewe-blue)', fontWeight: 500, fontSize: '18px'}}>Nog geen waarden toegevoegd</div>
         Object.keys(values).forEach((value, index) => {
             if (values[value]) {
                 valueHTML.push(<div className="value-row" key={index + value}>

@@ -44,7 +44,7 @@ const T = i18n.createComponent("Common");
 export default function MyCoach(props) {
 
     const language  = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
-    const userID    = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
+    const userID    = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token'))?.rrnr) : 1111111;
     const userToken = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : "demo";
 
     /* Instantiate managers for progress and interaction retrieval/handling */
