@@ -13,6 +13,7 @@ import Icon from '../../components/Illustrations/Icon';
 
 import NavigationBar from '../../components/NavigationBar';
 import ActionButton from '../../components/ActionButton';
+import LoadingScreen from '../LoadingScreen';
 
 export default function PainLogbook() {
 
@@ -22,21 +23,23 @@ export default function PainLogbook() {
     const painLogbookManager = new PainLogbookManager(userID);
 
     const [painLogs, setPainLogs] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => { 
         async function fetchPainLogs() {
             const fetchedPainLogs = await painLogbookManager.getPainLogs();
             setPainLogs(fetchedPainLogs);
+            setLoading(false);
         }
         fetchPainLogs();
     }, []);
 
     function renderPainLogs() {
-        if (painLogs.length === 0) {
-            return (<div className="painlogbook-emptylogs">
-                Nog geen pijnlogs
-            </div>)
-        }
+        /* Still fetching data */
+        if (loading) return <LoadingScreen height='45%'/>
+        /* Data fetched but no painlogs available */
+        if (painLogs.length === 0) return (<div className="painlogbook-emptylogs"> Nog geen pijnlogs </div>)
+        /* Data fetched, render painlogs */
         let painLogsHTML = [];
         let month = undefined;
         painLogs.forEach(painLog => {

@@ -16,6 +16,7 @@ import StressResilienceScript from './ModuleScripts/StressResilienceScript.js';
 import MovementScript from './ModuleScripts/MovementScript.js';
 import SocialScript from './ModuleScripts/SocialScript.js';
 import CardsParser from './CardsParser.jsx';
+import LoadingScreen from '../LoadingScreen';
 
 import './SubmoduleParser.scss';
 import ProgressManager from '../../../api/ProgressManager.jsx';
@@ -39,6 +40,7 @@ export default function SubmoduleParser(props) {
     const [showCompletionModal, setShowCompletionModal] = useState(false);
     const [userProfile, setUserProfile] = useState(undefined);
     const [userProgress, setUserProgress] = useState(undefined);
+    const [loading, setLoading] = useState(true);
 
     let data = [];
     
@@ -163,6 +165,7 @@ export default function SubmoduleParser(props) {
             setUserProfile(latestUserProfile);
             setUserProgress(progress);
             setDidSeeCompletionModal(modalStatus.includes("CONFIRM"));
+            setLoading(false);
         }
         fetchUserProgress();
     }, []);
@@ -184,7 +187,8 @@ export default function SubmoduleParser(props) {
                                 hideButton>
                     </ModuleCard>
                     <hr className="module-hr-line"/>
-                    <CardsParser cards={data.cards} module={module} submodule={data.id} moduleStatus={userProgress?.module?.submodule} userID={userID} userProfile={userProfile} finishCallback={finishSubmodule}></CardsParser>
+                    {loading && <LoadingScreen/>}
+                    {!loading && <CardsParser cards={data.cards} module={module} submodule={data.id} moduleStatus={userProgress?.module?.submodule} userID={userID} userProfile={userProfile} finishCallback={finishSubmodule}/>}
                 </FadeIn>}
             </div>
         </React.Fragment>

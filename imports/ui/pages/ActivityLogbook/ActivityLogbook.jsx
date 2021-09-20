@@ -232,7 +232,7 @@ export default function PainLogbook() {
     }
 
     function renderActivities() {
-        if (loading) return <LoadingScreen/>
+        if (loading) return <LoadingScreen text=" "/>
         if (filteredActivities.length === 0) return <React.Fragment/>
         return (<FadeIn>
             <div className="planned-activities">

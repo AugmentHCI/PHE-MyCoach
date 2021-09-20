@@ -28,6 +28,7 @@ import AppModal from '../../components/AppModal';
 import { shortcuts as shortcutData } from "./ModuleScripts/Shortcuts";
 
 import './ModuleParser.scss';
+import LoadingScreen from '../LoadingScreen.jsx';
 
 export default function ModuleParser(props) {
 
@@ -40,6 +41,8 @@ export default function ModuleParser(props) {
 
     const [shortcuts, setShortcuts] = useState([]);
     const [dailyCoaching, setDailyCoaching] = useState(undefined);
+    const [loadingShortcuts, setLoadingShortcuts] = useState(true);
+    const [loadingUserData, setLoadingUserData] = useState(true);
 
     /* Get states from URL parameters */
     const module = FlowRouter.getParam('module').toUpperCase();
@@ -224,6 +227,7 @@ export default function ModuleParser(props) {
         async function fetchUserProgress() {
             const progress = await progressManager.getModuleProgress(module);
             updateUserProgress(progress);
+            setLoadingUserData(false);
         }
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchShortcuts() {
@@ -231,27 +235,22 @@ export default function ModuleParser(props) {
             const fetchedDailyCoaching = await progressManager.getModuleDailyCoaching(module);
             setShortcuts(fetchedShortcuts);
             setDailyCoaching(fetchedDailyCoaching);
+            setLoadingShortcuts(false);
         }
         fetchUserProgress();
         fetchShortcuts();
     }, []);
 
     if (!moduleData) {return <div className="container">Module "{FlowRouter.getParam('module')}" does not exist.</div>}
-    if (Object.keys(moduleData).length === 0 || !userProgress) {
-        return (<React.Fragment> 
-            <NavigationBar title={moduleData.title}></NavigationBar>
-            <div className="container" style={{paddingTop: "85px"}}>
-                <div className="module-loading-message">Loading</div>
-            </div>
-        </React.Fragment>)}
-
+    
     return (
         <React.Fragment>
             <NavigationBar title={moduleData.title}></NavigationBar>
             { showModal && renderModal() }
             <div className="container" style={{paddingTop: "85px"}}>
-                { renderShortcuts() }
-                { renderSubmodules() }
+                { (Object.keys(moduleData).length === 0 || loadingShortcuts || loadingUserData) && <LoadingScreen/> }
+                { !(Object.keys(moduleData).length === 0 || loadingShortcuts || loadingUserData) && renderShortcuts() }
+                { !(Object.keys(moduleData).length === 0 || loadingShortcuts || loadingUserData) && renderSubmodules() }
             </div>
         </React.Fragment>
     )
