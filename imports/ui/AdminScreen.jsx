@@ -5,7 +5,6 @@ import FadeIn from "react-fade-in";
 
 /* Internal API */
 import { CSVProcessor } from "../api/CSVProcessor";
-import { progressParser } from "../api/mycoachprogress";
 import { UserQuestions } from "../api/QuestionnaireProcessor";
 
 /* UI Components */

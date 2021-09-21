@@ -1,5 +1,5 @@
 import moment from "moment";
-import { questionnaireCodes, fillerQuestionCodes } from "./questionnaireCodes";
+import { questionnaireCodes, fillerQuestionCodes } from "./questionnaireCodes/questionnaireCodes";
 
 export class UserQuestions {
 

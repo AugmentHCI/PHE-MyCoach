@@ -13,8 +13,8 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 /* Internal API */
 import { setDataParserLocale } from '../../api/dataparser';
-import { getWeeklyDummyData, getMonthlyDummyData } from '../../api/dummydata.jsx';
-import fitData from '../../api/dummydata.jsx';
+import { getWeeklyDummyData, getMonthlyDummyData } from '../../api/questionnaireCodes/dummydata.jsx';
+import fitData from '../../api/questionnaireCodes/dummydata.jsx';
 
 /* Managers */
 import '../../db/LogMethods.jsx';

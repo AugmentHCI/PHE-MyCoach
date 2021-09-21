@@ -15,11 +15,10 @@ import PainLogbookManager from '../../../api/managers/PainLogbookManager';
 
 /* UI Components */
 import NavigationBar from '../../components/NavigationBar';
-import Illustration from '../../components/Illustrations/Illustration';
-import ActionButton from '../../components/ActionButton';
 
 /* Styles */
 import "./PainLogbook.scss";
+import LoadingScreen from '../../components/LoadingScreen.jsx';
 
 
 export default function PainLogbookDetail() {
@@ -27,17 +26,19 @@ export default function PainLogbookDetail() {
     moment.locale('nl');
 
     const [painLog, setPainLog] = useState(undefined);
+    const [loading, setLoading] = useState(true);
 
     const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
     const userID   = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     const painlogID = FlowRouter.getParam('id');
     const painLogbookManager = new PainLogbookManager(userID);
-    const title = painLog ? " - " + weekdays[language][moment(painLog.timestamp).isoWeekday()] + " " + moment(painLog.timestamp).format("D MMMM") : "";
+    const title = painLog ? weekdays[language][moment(painLog.timestamp).isoWeekday()] + " " + moment(painLog.timestamp).format("D MMMM") : "";
 
     useEffect(() => { 
         async function fetchPainLogs() {
             const fetchedPainLog = await painLogbookManager.getPainLog(painlogID);
             setPainLog(fetchedPainLog);
+            setLoading(false);
         }
         fetchPainLogs();
     }, []);
@@ -46,7 +47,7 @@ export default function PainLogbookDetail() {
         let activityHTML = [];
         activityHTML.push(<h3>Mijn activiteit</h3>);
         activityHTML.push(<div className="chatbubble-overview-rounded">{painLog.activity}</div>);
-        activityHTML.push(<div className="chatbubble-overview-rounded">{painLog.intensity}</div>);
+        activityHTML.push(<div className="chatbubble-overview-rounded">{"Inteinsiteit: " + painLog.intensity}</div>);
         return activityHTML;
     }
 
@@ -77,14 +78,15 @@ export default function PainLogbookDetail() {
     }
 
     return (<React.Fragment>
-        <NavigationBar title={"Pijnlog" + title}/>
+        <NavigationBar title={title}/>
         <div className="painlogbook-body" style={{paddingTop: "90px"}}>
-        <FadeIn>
-            { painLog && renderPainlogActivity() }
-            { painLog && renderPainlogEmotions() }
-            { painLog && renderPainlogThoughts() }
-            { painLog && renderPainlogReactions() }
-            </FadeIn>
+            {loading && <LoadingScreen height="90%"/>}
+            {!loading && <FadeIn>
+                { painLog && renderPainlogActivity() }
+                { painLog && renderPainlogEmotions() }
+                { painLog && renderPainlogThoughts() }
+                { painLog && renderPainlogReactions() }
+            </FadeIn>}
         </div>
     </React.Fragment>);
 }

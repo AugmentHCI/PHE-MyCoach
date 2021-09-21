@@ -12,7 +12,7 @@ import "../../../i18n/en.i18n.json";
 
 /* Internal API */
 import "../../db/MyCoachMethods.jsx"; // TODO
-import { UserData } from "../../api/dummydata.jsx";
+import { UserData } from "../../api/questionnaireCodes/dummydata.jsx";
 import { shortcuts } from "./modules/ModuleScripts/Shortcuts"
 import PainEducationScript from './modules/ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './modules/ModuleScripts/ThoughtsEmotionsScript.js';
