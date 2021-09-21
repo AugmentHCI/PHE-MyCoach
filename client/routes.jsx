@@ -9,26 +9,26 @@ import ModuleParser     from '../imports/ui/pages/modules/ModuleParser.jsx';
 import SubmoduleParser  from '../imports/ui/pages/modules/SubmoduleParser.jsx';
 import AdminScreen      from '../imports/ui/pages/AdminScreen.jsx';
 import AdminSettings    from '../imports/ui/pages/AdminSettings.jsx';
+import FeedbackScreen   from '../imports/ui/pages/FeedbackScreen.jsx';
 /* Logbooks */
-import PainLogbook      from '../imports/ui/pages/painLogbook/PainLogbook.jsx';
-import PainLogbookEntry from '../imports/ui/pages/painLogbook/PainLogbookEntry.jsx';
+import PainLogbook       from '../imports/ui/pages/painLogbook/PainLogbook.jsx';
+import PainLogbookEntry  from '../imports/ui/pages/painLogbook/PainLogbookEntry.jsx';
 import PainLogbookDetail from '../imports/ui/pages/painLogbook/PainLogbookDetail.jsx';
-import ActivityLogbook  from '../imports/ui/pages/activityLogbook/ActivityLogbook.jsx';
-import ValueLogbook from '../imports/ui/pages/valueLogbook/ValueLogbook.jsx';
-import NewGoalScreen from '../imports/ui/pages/valueLogbook/NewGoalScreen';
-import ViewGoalEntry from '../imports/ui/pages/valueLogbook/ViewGoalEntry';
-import FeedbackScreen from '../imports/ui/pages/FeedbackScreen.jsx';
+import ActivityLogbook   from '../imports/ui/pages/activityLogbook/ActivityLogbook.jsx';
+import ValueLogbook      from '../imports/ui/pages/valueLogbook/ValueLogbook.jsx';
+import NewGoalScreen     from '../imports/ui/pages/valueLogbook/NewGoalScreen';
+import ViewGoalEntry     from '../imports/ui/pages/valueLogbook/ViewGoalEntry';
 /* User study */
-import PainLogbookHybrid from '../imports/ui/pages/userstudy/PainLogbookHybrid.jsx';
-import QuestionnairePage from '../imports/ui/pages/userstudy/QuestionnairePage';
+import Introduction       from '../imports/ui/pages/userstudy/Introduction.jsx';
+import Information        from '../imports/ui/pages/userstudy/Information.jsx';
+import Explanation        from '../imports/ui/pages/userstudy/Explanation.jsx';
+import StudyFlow          from '../imports/ui/pages/userstudy/StudyFlow.jsx';
 import PainLogbookTextual from '../imports/ui/pages/userstudy/PainLogbookTextual.jsx';
-import PainLogbookVisual from '../imports/ui/pages/userstudy/PainLogbookVisual.jsx';
-import Introduction from '../imports/ui/pages/userstudy/Introduction.jsx';
-import Information from '../imports/ui/pages/userstudy/Information.jsx';
-import Explanation from '../imports/ui/pages/userstudy/Explanation.jsx';
-import StudyFlow from '../imports/ui/pages/userstudy/StudyFlow.jsx';
-import Conclusion from '../imports/ui/pages/userstudy/Conclusion.jsx';
-import ThankYou from '../imports/ui/pages/userstudy/ThankYou.jsx';
+import PainLogbookVisual  from '../imports/ui/pages/userstudy/PainLogbookVisual.jsx';
+import PainLogbookHybrid  from '../imports/ui/pages/userstudy/PainLogbookHybrid.jsx';
+import QuestionnairePage  from '../imports/ui/pages/userstudy/QuestionnairePage';
+import Conclusion         from '../imports/ui/pages/userstudy/Conclusion.jsx';
+import ThankYou           from '../imports/ui/pages/userstudy/ThankYou.jsx';
 
 
 FlowRouter.route('/', {
