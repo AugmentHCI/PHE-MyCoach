@@ -5,7 +5,7 @@ import "../../../../../i18n/fr.i18n.json";
 import "../../../../../i18n/nl.i18n.json";
 
 import { ResponsiveBar } from '@nivo/bar';
-import { aggregateStepsByHour, convertToChartData } from '../../../../api/steps_dataparser.jsx';
+import { aggregateStepsByHour, convertToChartData } from '../../../../api/processors/MyProgressFitBitProcessor.jsx';
 
 const T = i18n.createComponent("Common");
 

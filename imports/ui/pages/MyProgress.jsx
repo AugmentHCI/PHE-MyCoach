@@ -12,7 +12,7 @@ import "../../../i18n/en.i18n.json"
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 /* Internal API */
-import { setDataParserLocale } from '../../api/dataparser';
+import { setDataParserLocale } from '../../api/processors/MyProgressProcessor';
 import { getWeeklyDummyData, getMonthlyDummyData } from '../../api/questionnaireCodes/dummydata.jsx';
 import fitData from '../../api/questionnaireCodes/dummydata.jsx';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-import { getMonthlyActivityData } from '../../../../api/dataparser';
+import { getMonthlyActivityData } from '../../../../api/processors/MyProgressProcessor';
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";

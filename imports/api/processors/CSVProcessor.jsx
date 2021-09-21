@@ -119,7 +119,6 @@ export class CSVProcessor {
         this.userQuestionnaires.forEach(user => { 
             if (user.info?.period > maxPeriod && !coachRRNRs.includes(user.info.rrnr)) maxPeriod = user.info.period
         });
-        console.log(maxPeriod)
         return maxPeriod;
     }
 

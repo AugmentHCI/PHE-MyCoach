@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import { getParameterData } from '../../../../api/dataparser';
-import { getFitBitDataWeekly } from '../../../../api/steps_dataparser';
+import { getParameterData } from '../../../../api/processors/MyProgressProcessor';
+import { getFitBitDataWeekly } from '../../../../api/processors/MyProgressFitBitProcessor';
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { parameters } from "../../../../api/dataparser"
+import { parameters } from "../../../../api/processors/MyProgressProcessor"
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";

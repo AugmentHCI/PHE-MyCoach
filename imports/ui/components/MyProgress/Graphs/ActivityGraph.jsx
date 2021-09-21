@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getActivityData } from '../../../../api/dataparser';
+import { getActivityData } from '../../../../api/processors/MyProgressProcessor';
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";
@@ -26,7 +26,6 @@ const emotionToString = {
 }
 
 function Circle({tint, isEmpty}) {
-  console.log(tint)
     const circleStyle = {
       backgroundColor: isEmpty ? "transparant" : `var(--idewe-blue-dark-tint${tint})`,
       borderStyle: "solid", 
@@ -97,7 +96,6 @@ export default function ActivityGraph({data, locale}) {
     {Object.keys(pomsData).map((variable) => {
       return <div key={variable + "-row"} style={{display: "flex", flexDirection: "row"}}>
         { Object.keys(pomsData[variable]).map((day) => {
-          console.log(pomsData[variable][day])
             if (pomsData[variable][day] !== "") return  <Circle key={variable + day} tint={pomsData[variable][day]+1}/>
             return <Circle key={variable + day}  isEmpty/>
         })}

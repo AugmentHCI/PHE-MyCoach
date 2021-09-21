@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { getParameterData, parameters } from '../../../../api/dataparser';
-import { getFitBitDataMonthly } from '../../../../api/steps_dataparser';
+import { getParameterData, parameters } from '../../../../api/processors/MyProgressProcessor';
+import { getFitBitDataMonthly } from '../../../../api/processors/MyProgressFitBitProcessor';
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";
