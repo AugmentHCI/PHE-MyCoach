@@ -7,7 +7,7 @@ import MyProgress       from '../imports/ui/pages/MyProgress.jsx';
 import MyCoach          from '../imports/ui/pages/MyCoach.jsx';
 import ModuleParser     from '../imports/ui/pages/modules/ModuleParser.jsx';
 import SubmoduleParser  from '../imports/ui/pages/modules/SubmoduleParser.jsx';
-import AdminScreen      from '../imports/ui/AdminScreen.jsx';
+import AdminScreen      from '../imports/ui/pages/AdminScreen.jsx';
 import AdminSettings    from '../imports/ui/pages/AdminSettings.jsx';
 /* Logbooks */
 import PainLogbook      from '../imports/ui/pages/PainLogbook/PainLogbook.jsx';

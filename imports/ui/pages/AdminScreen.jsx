@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import FadeIn from "react-fade-in";
 
 /* Internal API */
-import { CSVProcessor } from "../api/CSVProcessor";
-import { UserQuestions } from "../api/QuestionnaireProcessor";
+import { CSVProcessor } from "../../api/CSVProcessor";
+import { UserQuestions } from "../../api/QuestionnaireProcessor";
 
 /* UI Components */
-import Button from "./components/Button.jsx";
-import Input from "./components/Input"
+import Button from "../components/Button.jsx";
+import Input from "../components/Input"
 
 /* Styles */
 import './AdminScreen.scss';
