@@ -24,6 +24,7 @@ import Icon from '../../components/Illustrations/Icon';
 
 /* Styles */
 import "./ValueLogbook.scss";
+import LoadingScreen from '../../components/LoadingScreen';
 
 const B = styled.b`
     font-family: var(--main-font);
@@ -113,6 +114,8 @@ const Day = styled.div`
      const [buildupScheme, updateBuildupScheme] = useState(undefined);
      const [goalQuantifier, updateGoalQuantifier] = useState(undefined);
      const [measurements, updateMeasurements] = useState({0: 0, 1: 0, 2: 0});
+     const [loadingGoals, setLoadingGoals] = useState(true);
+     const [loadingValues, setLoadingValues] = useState(true);
 
       /* Initialising component - Fetching and initialising data */
       useEffect(() => { 
@@ -128,6 +131,7 @@ const Day = styled.div`
                 }
             });
             setValues(valueList);
+            setLoadingValues(false);
         }
         async function fetchGoal() {
             if (goalID) {
@@ -137,6 +141,7 @@ const Day = styled.div`
                 updateGoalQuantifier(quantities.filter(item => item.id === goal.quantifier));
                 updateBuildupScheme(newBuildupScheme);
                 updateMeasurements(newBuildupScheme ? newBuildupScheme.measurements : {0: 0, 1: 0, 2: 0})
+                setLoadingGoals(false);
             }
         }
         fetchValues();
@@ -224,7 +229,8 @@ const Day = styled.div`
     return (<React.Fragment>
         <NavigationBar title="Details doel"/>
         <div className="valuelogbook">
-            <FadeIn>
+            { (loadingGoals || loadingValues) && <LoadingScreen/>}
+            {!(loadingGoals || loadingValues) && <FadeIn>
                 <TitleCard>
                     <Title>{goal ? goal.title : "Doel" }</Title>
                     <Description>{goal?.description}</Description>
@@ -239,7 +245,7 @@ const Day = styled.div`
                     {renderGoal()}
                 </Card>
                 {<Button width="100%" color="blue" center onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/values/edit/${goal._id}`)}>Wijzig doel</Button>}
-            </FadeIn>
+            </FadeIn>}
         </div>
     </React.Fragment>);
 }
