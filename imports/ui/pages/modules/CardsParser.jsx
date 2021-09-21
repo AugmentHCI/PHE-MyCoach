@@ -10,6 +10,7 @@ import ShortcutManager from '../../../api/managers/ShortcutManager.jsx';
 /* UI Components */
 import Button from '../../components/Button.jsx';
 import Card from '../../components/Card.jsx';
+import LoadingScreen from '../../components/LoadingScreen.jsx';
 import ContentParser from './ContentParser.jsx';
 
 function CardsParser(props) {
@@ -19,6 +20,7 @@ function CardsParser(props) {
     const shortcutManager = new ShortcutManager(props.userID);
     const [userQuestions, setUserQuestions] = useState(undefined);
     const [userShortcuts, setUserShortcuts] = useState(undefined);
+    const [loading, setLoading] = useState(true);
 
     /**
      * Creates all the Cards HTML in a given array.
@@ -117,6 +119,7 @@ function CardsParser(props) {
             const shortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
             setUserQuestions(questions);
             setUserShortcuts(shortcuts);
+            setLoading(false);
         }
         fetchQuestionsAndShortcuts();
     }, []);
@@ -128,6 +131,7 @@ function CardsParser(props) {
      */
     function createCardContent(key, contents, isOverview) {
         let contentArray = [];
+        if (loading) return <LoadingScreen/>
         contents.forEach((content, index) => {
             if (isOverview) content["overview"] = true;
             contentArray.push(

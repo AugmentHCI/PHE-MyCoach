@@ -7,7 +7,7 @@ import moment from 'moment';
 import { ResponsiveBar } from '@nivo/bar';
 
 /* Internal API */
-import { values as valueCodes } from "../modules/ModuleScripts/ThoughtsEmotionsScript.js";
+import { values as valueCodes } from "../../../api/scripts/ThoughtsEmotionsScript";
 import BuildupScheme from '../../../api/BuildupScheme';
 
 /* Managers */

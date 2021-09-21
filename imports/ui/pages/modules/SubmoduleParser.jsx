@@ -6,12 +6,7 @@ import FadeIn from 'react-fade-in';
 import jwt_decode from "jwt-decode";
 
 /* Internal API */
-import PainEducationScript    from './ModuleScripts/PainEducationScript.js';
-import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
-import ActivityWorkScript     from './ModuleScripts/ActivityWorkScript.js';
-import StressResilienceScript from './ModuleScripts/StressResilienceScript.js';
-import MovementScript         from './ModuleScripts/MovementScript.js';
-import SocialScript           from './ModuleScripts/SocialScript.js';
+import ScriptDispatcher, { getSubmodule } from '../../../api/scripts/ScriptDispatcher.jsx';
 
 /* Managers */
 import ProgressManager    from '../../../api/managers/ProgressManager.jsx';
@@ -32,7 +27,7 @@ import './SubmoduleParser.scss';
 
 export default function SubmoduleParser(props) {
 
-    const module = FlowRouter.getParam('module').toUpperCase();
+    const module = FlowRouter.getParam('module');
     const submodule =  FlowRouter.getParam('submodule');
     const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
     const userToken = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : "demo";
@@ -47,43 +42,8 @@ export default function SubmoduleParser(props) {
     const [userProfile, setUserProfile] = useState(undefined);
     const [userProgress, setUserProgress] = useState(undefined);
     const [loading, setLoading] = useState(true);
-
-    let data = [];
-    
-    switch (module) {
-        case 'PAINEDUCATION':
-            PainEducationScript.submodules.forEach(submoduleScript => {
-                if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
-            });
-            break;
-        case 'THOUGHTSEMOTIONS':
-            ThoughtsEmotionsScript.submodules.forEach(submoduleScript => {
-                if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
-            });
-            break;
-        case 'ACTIVITYWORK':
-            ActivityWorkScript.submodules.forEach(submoduleScript => {
-                if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
-            });
-            break;
-        case 'STRESSRESILIENCE':
-            StressResilienceScript.submodules.forEach(submoduleScript => {
-                if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
-            });
-            break;
-        case 'MOVEMENT':
-            MovementScript.submodules.forEach(submoduleScript => {
-                if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
-            });
-            break;
-        case 'SOCIAL':
-            SocialScript.submodules.forEach(submoduleScript => {
-                if (submoduleScript.id === submodule)  {data = submoduleScript; return;}
-            });
-            break;
-        default:
-            return <div>Module '{module}' not developed</div>
-    }
+    const [loadingModule, setLoadingModule] = useState(true);
+    const [data, setData] = useState([]);
 
     /*
     useEffect(() => {
@@ -157,6 +117,14 @@ export default function SubmoduleParser(props) {
 
     /* Fetch user progress only once, avoids infinite re-rendering due to state-changes */
     useEffect(() => {
+        async function fetchModuleData() {
+            getSubmodule({module: module, submoduleID: submodule})
+                .then(res => {
+                    console.log(res);
+                    setData(res);
+                    setLoadingModule(false);
+                });
+        }
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
             /*
@@ -173,8 +141,16 @@ export default function SubmoduleParser(props) {
             setDidSeeCompletionModal(modalStatus.includes("CONFIRM"));
             setLoading(false);
         }
+        fetchModuleData();
         fetchUserProgress();
     }, []);
+
+    if (loadingModule || !data) {
+        return  <React.Fragment>
+            <NavigationBar title="Coaching"/>
+            <LoadingScreen height="100vh"/>
+        </React.Fragment>
+    }
 
     return (
         <React.Fragment>

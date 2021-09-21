@@ -7,9 +7,7 @@ import {thoughts, emotions, reactions, fillerWords, conversation, rules, codes, 
 
 import RuleEngine from "../../../api/RuleEngine.jsx";
 
-import PainEducationScript from '../modules/ModuleScripts/PainEducationScript.js';
-import ThoughtsEmotionsScript from '../modules/ModuleScripts/ThoughtsEmotionsScript.js';
-import ActivityWorkScript from '../modules/ModuleScripts/ActivityWorkScript.js';
+import { getSubmodule } from '../../../api/scripts/ScriptDispatcher.jsx';
 import AppModal from '../../components/AppModal.jsx';
 import Illustration from '../../components/Illustrations/Illustration.jsx';
 import PillButton from '../../components/PillButton.jsx';
@@ -31,6 +29,8 @@ export default function PainLogbookVisual() {
     /* Recommendations */
     const [matchedRecommendations, updateMatchedRecommendations] = useState([]);
     const [currentRecommendation, updateCurrentRecommendation] = useState(0);
+    const [currentModule, updateCurrentModule] = useState({});
+    const [loadingModule, setLoadingModule] = useState(false);
     const [showModuleModal, setShowModuleModal] = useState(false);
     const [showExplanationModal, setShowExplanationModal] = useState(false);
     const [disabledAutoScroll, setDisabledAutoScroll] = useState(false);
@@ -77,6 +77,18 @@ export default function PainLogbookVisual() {
         }
         return codesArray;
     }
+
+    useEffect(() => {
+        async function fetchSubmodule() {
+            if (!matchedRecommendations || matchedRecommendations.length === 0) return;
+            setLoadingModule(true);
+            let recModule = matchedRecommendations[currentRecommendation].module.toLowerCase(), recSubmodule = matchedRecommendations[currentRecommendation].submodule, module = recSubmodule.split("_")[0]; 
+            const submodule = await getSubmodule({module: recModule, submoduleID: recSubmodule});
+            updateCurrentModule(submodule);
+            setLoadingModule(false);
+        }
+        fetchSubmodule();
+    }, [currentRecommendation, matchedRecommendations]);
 
     /* Conversation Logic */
 
@@ -271,19 +283,8 @@ export default function PainLogbookVisual() {
     }
 
     function renderModuleModal() {
-        let submodule = [], recModule = matchedRecommendations[currentRecommendation].module.toLowerCase(), recSubmodule = matchedRecommendations[currentRecommendation].submodule;
-        switch (recSubmodule.split("_")[0]) {
-            case "PE":
-                submodule = PainEducationScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
-                break;
-            case "TE":
-                submodule = ThoughtsEmotionsScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
-                break;
-            case "ACT":
-                submodule = ActivityWorkScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
-                break;
-        }
-
+        if (loadingModule) return <React.Fragment/>
+        const submodule = currentModule;
         return (<AppModal
             backOption="Terug" 
             notifyBack={() => setShowModuleModal(false)} 
@@ -299,7 +300,7 @@ export default function PainLogbookVisual() {
                 {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title"}>{submodule.titleMarkup[1]}</div>}
             </div>
             <div className={"modalpopup-body"}>
-                <div>
+                <div style={{display:'flex', marginBottom:'5px'}}>
                     <PillButton contentColor="white" fillColor={"blue"} icon="time">{submodule.duration}</PillButton>
                     <PillButton contentColor="white" fillColor={"blue"} icon="information">{submodule.type}</PillButton>
                 </div>

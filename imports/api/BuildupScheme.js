@@ -42,7 +42,6 @@ export default class BuildupScheme {
         return this.scheme?.length > 12;
     }
 
-
     updateMeasurement(id, measure) {
         if (measure === "0") this.measurements[id] = undefined;
         else this.measurements[id] = parseInt(measure);

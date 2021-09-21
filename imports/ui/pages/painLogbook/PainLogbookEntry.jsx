@@ -4,12 +4,10 @@ import React, { useState, useEffect } from 'react';
 import jwt_decode from "jwt-decode";
 
 /* Internal API */
-import PainEducationScript    from '../modules/ModuleScripts/PainEducationScript.js';
-import ThoughtsEmotionsScript from '../modules/ModuleScripts/ThoughtsEmotionsScript.js';
-import ActivityWorkScript     from '../modules/ModuleScripts/ActivityWorkScript.js';
 import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText, ChatbubbleInputSummary, ChatbubbleRecommendation } from '../../components/Chatbubble.jsx';
 import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies, options} from "./PainLogbookData.js";
 import RuleEngine from "../../../api/RuleEngine.jsx";
+import { getSubmodule } from '../../../api/scripts/ScriptDispatcher.jsx';
 
 /* Managers */
 import PainLogbookManager from '../../../api/managers/PainLogbookManager.jsx';
@@ -21,6 +19,7 @@ import Illustration  from '../../components/Illustrations/Illustration.jsx';
 import PillButton    from '../../components/PillButton.jsx';
 
 
+
 export default function PainLogbookEntry() {
 
     /* States and Constants */
@@ -30,6 +29,8 @@ export default function PainLogbookEntry() {
     /* Recommendations */
     const [matchedRecommendations, updateMatchedRecommendations] = useState([]);
     const [currentRecommendation, updateCurrentRecommendation] = useState(0);
+    const [currentModule, updateCurrentModule] = useState({});
+    const [loadingModule, setLoadingModule] = useState(false);
     const [showModuleModal, setShowModuleModal] = useState(false);
     const [showExplanationModal, setShowExplanationModal] = useState(false);
     const [disabledAutoScroll, setDisabledAutoScroll] = useState(false);
@@ -76,6 +77,18 @@ export default function PainLogbookEntry() {
         }
         return codesArray;
     }
+
+    useEffect(() => {
+        async function fetchSubmodule() {
+            if (!matchedRecommendations || matchedRecommendations.length === 0) return;
+            setLoadingModule(true);
+            let recModule = matchedRecommendations[currentRecommendation].module.toLowerCase(), recSubmodule = matchedRecommendations[currentRecommendation].submodule, module = recSubmodule.split("_")[0]; 
+            const submodule = await getSubmodule({module: recModule, submoduleID: recSubmodule});
+            updateCurrentModule(submodule);
+            setLoadingModule(false);
+        }
+        fetchSubmodule();
+    }, [currentRecommendation, matchedRecommendations]);
 
     /* Conversation Logic */
 
@@ -260,19 +273,8 @@ export default function PainLogbookEntry() {
     }
 
     function renderModuleModal() {
-        let submodule = [], recModule = matchedRecommendations[currentRecommendation].module.toLowerCase(), recSubmodule = matchedRecommendations[currentRecommendation].submodule;
-        switch (recSubmodule.split("_")[0]) {
-            case "PE":
-                submodule = PainEducationScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
-                break;
-            case "TE":
-                submodule = ThoughtsEmotionsScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
-                break;
-            case "ACT":
-                submodule = ActivityWorkScript.submodules.filter(submoduleData => submoduleData.id === recSubmodule)[0];
-                break;
-        }
-
+        if (loadingModule) return <React.Fragment/>
+        const submodule = currentModule;
         return (<AppModal
             backOption="Sluit" 
             notifyBack={() => setShowModuleModal(false)} 
@@ -288,7 +290,7 @@ export default function PainLogbookEntry() {
                 {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title"}>{submodule.titleMarkup[1]}</div>}
             </div>
             <div className={"modalpopup-body"}>
-                <div>
+                <div style={{display:'flex', marginBottom:'5px'}}>
                     <PillButton contentColor="white" fillColor={"blue"} icon="time">{submodule.duration}</PillButton>
                     <PillButton contentColor="white" fillColor={"blue"} icon="information">{submodule.type}</PillButton>
                 </div>

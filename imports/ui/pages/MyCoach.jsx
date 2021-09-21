@@ -14,9 +14,9 @@ import "../../../i18n/en.i18n.json";
 import "../../db/MyCoachMethods.jsx"; // TODO
 import { UserData } from "../../api/questionnaireCodes/dummydata.jsx";
 import { shortcuts } from "./modules/ModuleScripts/Shortcuts"
-import PainEducationScript from './modules/ModuleScripts/PainEducationScript.js';
-import ThoughtsEmotionsScript from './modules/ModuleScripts/ThoughtsEmotionsScript.js';
-import ActivityWorkScript from './modules/ModuleScripts/ActivityWorkScript.js';
+import PainEducationScript from '../../api/scripts/PainEducationScript'
+import ThoughtsEmotionsScript from '../../api/scripts/ThoughtsEmotionsScript';
+import ActivityWorkScript from '../../api/scripts/ActivityWorkScript';
 
 /* Managers */
 import ProgressManager from "../../api/managers/ProgressManager.jsx";

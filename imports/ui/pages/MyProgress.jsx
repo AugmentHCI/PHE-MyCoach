@@ -202,6 +202,7 @@ export default class MyProgress extends Component {
             // OPTION 1.1.2: DEVELOPMENT environment successful -> Data is fetched (means that token was a DEV token)
             else {
               console.log(`${dataType} -  Successful fallback to development environment.`)
+              console.log(resultDev.data)
               dataType === "FitBit" ? this.setState({fitData: resultDev.data}) : this.setState({data: resultDev.data, devEnvironment: true}); 
             }
           }); 

@@ -10,7 +10,7 @@ import moment from 'moment';
 
 /* Internal API */
 import BuildupScheme from '../../../api/BuildupScheme';
-import { values as valueCodes } from "../modules/ModuleScripts/ThoughtsEmotionsScript.js";
+import { values as valueCodes } from "../../../api/scripts/ThoughtsEmotionsScript";
 
 /* Managers */
 import GoalSettingManager from '../../../api/managers/GoalSettingManager.jsx';

@@ -6,12 +6,7 @@ import FadeIn from 'react-fade-in';
 import jwt_decode from "jwt-decode";
 
 /* Internal API */
-import PainEducationScript    from './ModuleScripts/PainEducationScript.js';
-import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
-import ActivityWorkScript     from './ModuleScripts/ActivityWorkScript';
-import StressResilienceScript from './ModuleScripts/StressResilienceScript';
-import MovementScript         from './ModuleScripts/MovementScript.js';
-import SocialScript           from './ModuleScripts/SocialScript.js';
+import { getModule, getSubmodule} from '../../../api/scripts/ScriptDispatcher';
 import { shortcuts as shortcutData } from "./ModuleScripts/Shortcuts";
 
 /* Managers */
@@ -47,6 +42,7 @@ export default function ModuleParser(props) {
     const [dailyCoaching, setDailyCoaching] = useState(undefined);
     const [loadingShortcuts, setLoadingShortcuts] = useState(true);
     const [loadingUserData, setLoadingUserData] = useState(true);
+    const [loadingModule, setLoadingModule] = useState(true);
 
     /* Get states from URL parameters */
     const module = FlowRouter.getParam('module').toUpperCase();
@@ -58,37 +54,10 @@ export default function ModuleParser(props) {
     const shortcutManager = new ShortcutManager(userID);
 
     /**
-     * Fetches and sets the correct module data, depending on the 
-     */
-    function fetchModuleData() {
-        switch (FlowRouter.getParam('module')) {
-            case "paineducation":
-                updateModuleData(PainEducationScript);
-                break;
-            case "thoughtsemotions":
-                updateModuleData(ThoughtsEmotionsScript);
-                break;
-            case "activitywork":
-                updateModuleData(ActivityWorkScript);
-                break;
-            case "stressresilience":
-                updateModuleData(StressResilienceScript);
-                break;
-            case "movement":
-                updateModuleData(MovementScript);
-                break;
-            case "social":
-                updateModuleData(SocialScript);
-                break;
-            default:
-                updateModuleData(undefined);
-        }
-    }
-
-    /**
      * Generate all submodule cards of the given module.
      */
     function renderSubmodulesList() {
+        if (loadingModule) return;
         const moduleCardsHTML = [];
         moduleData.submodules.forEach(submodule => {
             const status = userProgress?.[module]?.[submodule.id];
@@ -150,6 +119,7 @@ export default function ModuleParser(props) {
     }
 
     function renderShortcuts() {
+        if (loadingShortcuts) return;
         let shortcutButtonsHTML = [];
         shortcuts.forEach(shortcut => {
             if (["DEFAULT", "PINNED"].includes(shortcut.status)) shortcutButtonsHTML.push(<ActionButton size="small" icon={shortcutData[shortcut.shortcut].icon} onClick={() =>  {FlowRouter.go(`/${language}/mycoach/${userToken}/${shortcutData[shortcut.shortcut].link}`) }}>
@@ -168,6 +138,7 @@ export default function ModuleParser(props) {
     }
 
     function renderSubmodules() {
+        if (loadingModule) return;
         if (module === "ACTIVITYWORK") return (<div>
             <hr style={{borderTop:"var(--idewe-blue) 1px solid", width:"85%"}}/>
             <h3>MIJN TRAJECT</h3>
@@ -184,6 +155,7 @@ export default function ModuleParser(props) {
     }
 
     function renderModal() {
+        if (loadingModule) return;
         if (!selectedSubmodule) {
             return (<AppModal 
                 notifyParent={() => {setShowModal(false)}}
@@ -226,7 +198,12 @@ export default function ModuleParser(props) {
 
     /* Fetch module data and user progress only once, avoids infinite re-rendering due to state-changes */
     useEffect(() => {
-        fetchModuleData();
+        async function fetchModuleData() {
+            const moduleID = FlowRouter.getParam('module');
+            const fetchedModuleData = await getModule({module: moduleID});
+            updateModuleData(fetchedModuleData?.default);
+            setLoadingModule(false);
+        }
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
             const progress = await progressManager.getModuleProgress(module);
@@ -241,6 +218,7 @@ export default function ModuleParser(props) {
             setDailyCoaching(fetchedDailyCoaching);
             setLoadingShortcuts(false);
         }
+        fetchModuleData();
         fetchUserProgress();
         fetchShortcuts();
     }, []);
@@ -252,9 +230,9 @@ export default function ModuleParser(props) {
             <NavigationBar title={moduleData.title}></NavigationBar>
             { showModal && renderModal() }
             <div className="container" style={{paddingTop: "85px"}}>
-                { (Object.keys(moduleData).length === 0 || loadingShortcuts || loadingUserData) && <LoadingScreen/> }
-                { !(Object.keys(moduleData).length === 0 || loadingShortcuts || loadingUserData) && renderShortcuts() }
-                { !(Object.keys(moduleData).length === 0 || loadingShortcuts || loadingUserData) && renderSubmodules() }
+                { (loadingModule || loadingShortcuts || loadingUserData) && <LoadingScreen/> }
+                { !(loadingModule || loadingShortcuts || loadingUserData) && renderShortcuts() }
+                { !(loadingModule || loadingShortcuts || loadingUserData) && renderSubmodules() }
             </div>
         </React.Fragment>
     )
