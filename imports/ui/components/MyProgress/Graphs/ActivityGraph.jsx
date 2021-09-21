@@ -26,6 +26,7 @@ const emotionToString = {
 }
 
 function Circle({tint, isEmpty}) {
+  console.log(tint)
     const circleStyle = {
       backgroundColor: isEmpty ? "transparant" : `var(--idewe-blue-dark-tint${tint})`,
       borderStyle: "solid", 
@@ -67,7 +68,8 @@ export default function ActivityGraph({data, locale}) {
     questionnaireData.forEach(question => {
       if (Object.keys(poms).includes(question.vraag)) {
         const answer = answerToValue[question.antwoord.replace("\n", "")];
-        poms[question.vraag][moment(question.datum).isoWeekday()] = question.vraag === "stress" ? answer + 1 : answer;
+        // poms[question.vraag][moment(question.datum).isoWeekday()] = question.vraag === "stress" ? answer : answer;
+        poms[question.vraag][moment(question.datum).isoWeekday()] = answer;
       }
     });
     return poms;
@@ -95,7 +97,8 @@ export default function ActivityGraph({data, locale}) {
     {Object.keys(pomsData).map((variable) => {
       return <div key={variable + "-row"} style={{display: "flex", flexDirection: "row"}}>
         { Object.keys(pomsData[variable]).map((day) => {
-            if (pomsData[variable][day]) return  <Circle key={variable + day} tint={pomsData[variable][day]}/>
+          console.log(pomsData[variable][day])
+            if (pomsData[variable][day] !== "") return  <Circle key={variable + day} tint={pomsData[variable][day]+1}/>
             return <Circle key={variable + day}  isEmpty/>
         })}
       </div>
