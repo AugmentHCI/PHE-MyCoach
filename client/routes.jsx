@@ -10,13 +10,13 @@ import SubmoduleParser  from '../imports/ui/pages/modules/SubmoduleParser.jsx';
 import AdminScreen      from '../imports/ui/pages/AdminScreen.jsx';
 import AdminSettings    from '../imports/ui/pages/AdminSettings.jsx';
 /* Logbooks */
-import PainLogbook      from '../imports/ui/pages/PainLogbook/PainLogbook.jsx';
-import PainLogbookEntry from '../imports/ui/pages/PainLogbook/PainLogbookEntry.jsx';
-import PainLogbookDetail from '../imports/ui/pages/PainLogbook/PainLogbookDetail.jsx';
-import ActivityLogbook  from '../imports/ui/pages/ActivityLogbook/ActivityLogbook.jsx';
-import ValueLogbook from '../imports/ui/pages/ValueLogbook/ValueLogbook.jsx';
-import NewGoalScreen from '../imports/ui/pages/ValueLogbook/NewGoalScreen';
-import ViewGoalEntry from '../imports/ui/pages/ValueLogbook/ViewGoalEntry';
+import PainLogbook      from '../imports/ui/pages/painLogbook/PainLogbook.jsx';
+import PainLogbookEntry from '../imports/ui/pages/painLogbook/PainLogbookEntry.jsx';
+import PainLogbookDetail from '../imports/ui/pages/painLogbook/PainLogbookDetail.jsx';
+import ActivityLogbook  from '../imports/ui/pages/activityLogbook/ActivityLogbook.jsx';
+import ValueLogbook from '../imports/ui/pages/valueLogbook/ValueLogbook.jsx';
+import NewGoalScreen from '../imports/ui/pages/valueLogbook/NewGoalScreen';
+import ViewGoalEntry from '../imports/ui/pages/valueLogbook/ViewGoalEntry';
 import FeedbackScreen from '../imports/ui/pages/FeedbackScreen.jsx';
 /* User study */
 import PainLogbookHybrid from '../imports/ui/pages/userstudy/PainLogbookHybrid.jsx';
