@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import './ContentParser.scss';
 
+/* External API */
 import ReactAudioPlayer from 'react-audio-player';
+import { Carousel } from 'react-responsive-carousel';
 
-import createSortingContent from './ContentSorting.jsx';
+/* Internal API */
+import createSortingContent from './ContentSorting';
 import createSwipeContent from './ContentSwiping';
 
+/* UI Components */
 import AppModal from '../../components/AppModal.jsx';
 import Button from '../../components/Button.jsx';
 import PillButton from '../../components/PillButton.jsx';
@@ -13,8 +16,10 @@ import Slider from '../../components/Slider.jsx';
 import Input from '../../components/Input.jsx';
 import Icon from '../../components/Illustrations/Icon.jsx';
 
+/* Styles */
+import './ContentParser.scss';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Requires a loader
-import { Carousel } from 'react-responsive-carousel';
+
 
 function ContentParser(props) {
 

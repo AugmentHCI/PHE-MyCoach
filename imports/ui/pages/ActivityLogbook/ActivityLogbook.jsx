@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from 'react';
+
+/* External API */
 import FadeIn from 'react-fade-in';
-import "./ActivityLogbook.scss";
-
 import jwt_decode from "jwt-decode";
+import moment from 'moment';
 
+/* Internal API */
+import BuildupScheme from '../../../api/BuildupScheme';
+
+/* Managers */
+import ActivityLogbookManager from '../../../api/managers/ActivityLogbookManager';
+import GoalSettingManager from '../../../api/managers/GoalSettingManager';
+
+/* UI Components */
 import Icon from '../../components/Illustrations/Icon';
 import NavigationBar from '../../components/NavigationBar';
 import Input from '../../components/Input';
 import Dropdown from '../../components/Dropdown';
 import AppModal from '../../components/AppModal';
-import moment from 'moment';
-import ActivityLogbookManager from '../../../api/ActivityLogbookManager';
-import GoalSettingManager from '../../../api/GoalSettingManager';
-import BuildupScheme from '../../../api/BuildupScheme';
-import LoadingScreen from '../LoadingScreen'
+import LoadingScreen from '../../components/LoadingScreen';
+
+/* Styles */
+import "./ActivityLogbook.scss";
 
 
 export default function PainLogbook() {

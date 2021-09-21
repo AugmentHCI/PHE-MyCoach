@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
+/* External API */
+import jwt_decode from "jwt-decode";
+import FadeIn from 'react-fade-in';
+
+/* Managers */
+import FeedbackManager from '../../api/managers/FeedbackManager';
+
+/* UI Components */
 import NavigationBar from "../components/NavigationBar";
 import Button from '../components/Button';
-
-import jwt_decode from "jwt-decode";
-import "./AdminSettings.scss";
-import FeedbackManager from '../../api/FeedbackManager';
 import Input from '../components/Input';
-import FadeIn from 'react-fade-in';
+
+/* Styles */
+import "./AdminSettings.scss";
 
 export default function FeedbackScreen(props) {
 

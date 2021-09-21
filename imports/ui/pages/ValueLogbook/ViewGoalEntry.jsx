@@ -1,104 +1,102 @@
 import React, { useState, useEffect } from 'react';
 
- import FadeIn from "react-fade-in";
- import jwt_decode from "jwt-decode";
 
- import { ResponsiveBar } from '@nivo/bar';
+/* External API */
+import styled, { css } from 'styled-components';
+import FadeIn from "react-fade-in";
+import jwt_decode from "jwt-decode";
+import { ResponsiveBar } from '@nivo/bar';
+import moment from 'moment';
 
- import NavigationBar from '../../components/NavigationBar';
+/* Internal API */
+import BuildupScheme from '../../../api/BuildupScheme';
+import { values as valueCodes } from "../modules/ModuleScripts/ThoughtsEmotionsScript.js";
 
- import GoalSettingManager from '../../../api/GoalSettingManager.jsx';
- import QuestionManager from '../../../api/QuestionManager';
+/* Managers */
+import GoalSettingManager from '../../../api/managers/GoalSettingManager.jsx';
+import QuestionManager from '../../../api/managers/QuestionManager';
 
- import { values as valueCodes } from "../modules/ModuleScripts/ThoughtsEmotionsScript.js";
+/* UI Components */
+import NavigationBar from '../../components/NavigationBar';
+import Card from '../../components/Card';
+import Button from '../../components/Button';
+import Icon from '../../components/Illustrations/Icon';
 
- import "./ValueLogbook.scss";
- import BuildupScheme from '../../../api/BuildupScheme';
- import styled, { css } from 'styled-components';
- import moment from 'moment';
- import Card from '../../components/Card';
- import Button from '../../components/Button';
- import Icon from '../../components/Illustrations/Icon';
+/* Styles */
+import "./ValueLogbook.scss";
 
- const B = styled.b`
-     font-family: var(--main-font);
-     font-size: 16px;
-     font-weight: 500;
-     color: var(--idewe-blue-dark);
- `
+const B = styled.b`
+    font-family: var(--main-font);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--idewe-blue-dark);
+`
+const TitleCard = styled.div`
+    margin: 20px 0;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+    box-shadow: var(--card-shadow);
+    padding: 10px;
+    border-radius: 10px;
 
- const TitleCard = styled.div`
-     margin: 20px 0;
-     width: 100%;
-     justify-content: center;
-     text-align: center;
-     background-color: white;
-     box-shadow: var(--card-shadow);
-     padding: 10px;
-     border-radius: 10px;
+`
+const Title = styled.h1`
+    font-size: 26px;
+    color: var(--idewe-blue);
+    text-decoration: underline;
+    margin-bottom: 0;
+`
+const Description = styled.p`
+    font-size: 16px;
+    color: var(--idewe-blue);
+    font-weight: 400;
+    text-decoration: none !important;
+    margin-bottom: 0;
+    margin-top: 3px;
+`
+const Subtitle = styled.h3`
+    font-family: var(--main-font);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--idewe-blue-dark);
+    text-transform: uppercase;
+`
+const P = styled.p`
+    font-family: var(--main-font);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--idewe-blue);
+    display: inline;
+`
+const Ul = styled.ul`
+    padding-left: 1em;
+    margin-bottom: 0;
+`
+const Measure = styled.ul`
+    padding: 3px 10px;
+    background-color: var(--idewe-blue);
+    color: var(--idewe-white);
+    font-weight: 500;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline;
+    margin-right: .5em;
+`
+const Day = styled.div`
+    color: var(--idewe-gray-dark);
+    padding: 0 4px;
+    height: 25px;
+    text-align: center;
+    font-weight: 600;
 
- `
- const Title = styled.h1`
-     font-size: 26px;
-     color: var(--idewe-blue);
-     text-decoration: underline;
-     margin-bottom: 0;
- `
-
- const Description = styled.p`
-     font-size: 16px;
-     color: var(--idewe-blue);
-     font-weight: 400;
-     text-decoration: none !important;
-     margin-bottom: 0;
-     margin-top: 3px;
- `
-
- const Subtitle = styled.h3`
-     font-family: var(--main-font);
-     font-size: 18px;
-     font-weight: 500;
-     color: var(--idewe-blue-dark);
-     text-transform: uppercase;
- `
-
- const P = styled.p`
-     font-family: var(--main-font);
-     font-size: 16px;
-     font-weight: 400;
-     color: var(--idewe-blue);
-     display: inline;
- `
-
- const Ul = styled.ul`
-     padding-left: 1em;
-     margin-bottom: 0;
- `
-
- const Measure = styled.ul`
-     padding: 3px 10px;
-     background-color: var(--idewe-blue);
-     color: var(--idewe-white);
-     font-weight: 500;
-     border-radius: 20px;
-     font-size: 12px;
-     display: inline;
-     margin-right: .5em;
- `
-
- const Day = styled.div`
-     color: var(--idewe-gray-dark);
-     padding: 0 4px;
-     height: 25px;
-     text-align: center;
-     font-weight: 600;
-
-     ${props => props.selected && css`
-         background-color: var(--idewe-blue);
-         color: var(--idewe-white);
-         border-radius: 50%;
-     `};
- `
+    ${props => props.selected && css`
+        background-color: var(--idewe-blue);
+        color: var(--idewe-white);
+        border-radius: 50%;
+    `};
+`
 
  export default function GoalEntryScreen() {
 

@@ -1,28 +1,34 @@
 import React, { useEffect, useState } from 'react';
+
+/* External API */
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import FadeIn from 'react-fade-in';
-
-/* Import components */
-import NavigationBar from '../../components/NavigationBar.jsx';
-import AppModal from '../../components/AppModal.jsx';
-import ModuleCard from '../../components/MyCoach/ModuleCard.jsx';
-
 import jwt_decode from "jwt-decode";
 
-import PainEducationScript from './ModuleScripts/PainEducationScript.js';
+/* Internal API */
+import PainEducationScript    from './ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
-import ActivityWorkScript from './ModuleScripts/ActivityWorkScript.js';
+import ActivityWorkScript     from './ModuleScripts/ActivityWorkScript.js';
 import StressResilienceScript from './ModuleScripts/StressResilienceScript.js';
-import MovementScript from './ModuleScripts/MovementScript.js';
-import SocialScript from './ModuleScripts/SocialScript.js';
-import CardsParser from './CardsParser.jsx';
-import LoadingScreen from '../LoadingScreen';
+import MovementScript         from './ModuleScripts/MovementScript.js';
+import SocialScript           from './ModuleScripts/SocialScript.js';
 
+/* Managers */
+import ProgressManager    from '../../../api/managers/ProgressManager.jsx';
+import InteractionManager from '../../../api/managers/InteractionManager.jsx';
+import ProfileManager     from '../../../api/managers/ProfileManager.jsx';
+import ShortcutManager    from '../../../api/managers/ShortcutManager.jsx';
+
+/* UI Components */
+import NavigationBar from '../../components/NavigationBar.jsx';
+import AppModal      from '../../components/AppModal.jsx';
+import ModuleCard    from '../../components/MyCoach/ModuleCard.jsx';
+import CardsParser   from './CardsParser.jsx';
+import LoadingScreen from '../../components/LoadingScreen.jsx';
+
+/* Styles */
 import './SubmoduleParser.scss';
-import ProgressManager from '../../../api/ProgressManager.jsx';
-import InteractionManager from '../../../api/InteractionManager.jsx';
-import ProfileManager from '../../../api/ProfileManager.jsx';
-import ShortcutManager from '../../../api/ShortcutManager.jsx';
+
 
 export default function SubmoduleParser(props) {
 

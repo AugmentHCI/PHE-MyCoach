@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import PainLogbookManager from '../../../api/PainLogbookManager';
-import "./PainLogbook.scss";
+
+/* External API */
+import FadeIn from "react-fade-in";
+import jwt_decode from "jwt-decode";
 import moment from "moment";
 import 'moment/locale/nl';
 import 'moment/locale/fr';
+
+/* Internal API */
 import { emotions } from "./PainLogbookData.js";
-import FadeIn from "react-fade-in";
 
-import jwt_decode from "jwt-decode";
+/* Managers */
+import PainLogbookManager from '../../../api/managers/PainLogbookManager';
 
+/* UI Components */
 import Icon from '../../components/Illustrations/Icon';
-
 import NavigationBar from '../../components/NavigationBar';
 import ActionButton from '../../components/ActionButton';
-import LoadingScreen from '../LoadingScreen';
+import LoadingScreen from '../../components/LoadingScreen.jsx';
+
+/* Styles */
+import "./PainLogbook.scss";
+
 
 export default function PainLogbook() {
 

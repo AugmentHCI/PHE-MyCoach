@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react';
 
+/* External API */
 import FadeIn from "react-fade-in";
 import jwt_decode from "jwt-decode";
-
+import moment from 'moment';
 import { ResponsiveBar } from '@nivo/bar';
 
+/* Internal API */
+import { values as valueCodes } from "../modules/ModuleScripts/ThoughtsEmotionsScript.js";
+import BuildupScheme from '../../../api/BuildupScheme';
+
+/* Managers */
+import GoalSettingManager from '../../../api/managers/GoalSettingManager.jsx';
+import QuestionManager from '../../../api/managers/QuestionManager';
+
+/* UI Components */
 import NavigationBar from '../../components/NavigationBar';
 import Button from '../../components/Button';
 import Dropdown from '../../components/Dropdown';
 import Input from '../../components/Input';
 import Slider from '../../components/Slider';
 
-import GoalSettingManager from '../../../api/GoalSettingManager.jsx';
-import QuestionManager from '../../../api/QuestionManager';
-
-import { values as valueCodes } from "../modules/ModuleScripts/ThoughtsEmotionsScript.js";
-
+/* Styles */
 import "./ValueLogbook.scss";
-import BuildupScheme from '../../../api/BuildupScheme';
-import moment from 'moment';
 
 export default function NewGoalScreen() {
 

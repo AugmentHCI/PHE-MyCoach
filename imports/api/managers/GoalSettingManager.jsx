@@ -1,4 +1,4 @@
-import "../db/GoalSettingMethods";
+import "../../db/GoalSettingMethods";
 
 export default class GoalSettingManager {
     constructor(userID) {

@@ -1,6 +1,12 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
+
+/* External API */
 import TinderCard from 'react-tinder-card';
+
+/* Internal API */
 import Button from "../../components/Button.jsx";
+
+/* Styles */
 import "./ContentSwiping.scss";
 
 let cardsState = undefined;

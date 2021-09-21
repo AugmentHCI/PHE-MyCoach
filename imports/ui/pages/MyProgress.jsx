@@ -1,45 +1,45 @@
 import React, { Component } from 'react';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
-import moment from "moment";
+
+/* External API */
+import jwt_decode from "jwt-decode";
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import FadeIn from 'react-fade-in';
-
-// Import internationalization files
+import moment from "moment";
 import i18n from 'meteor/universe:i18n';
 import "../../../i18n/nl.i18n.json"
 import "../../../i18n/fr.i18n.json"
 import "../../../i18n/en.i18n.json"
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 
-// Import data processing functions
+/* Internal API */
 import { setDataParserLocale } from '../../api/dataparser';
 import { getWeeklyDummyData, getMonthlyDummyData } from '../../api/dummydata.jsx';
 import fitData from '../../api/dummydata.jsx';
 
-import jwt_decode from "jwt-decode";
+/* Managers */
+import '../../db/LogMethods.jsx';
 
-// Import components
-import './MyProgress.css';
-import '../components/MyProgress/Input/Dropdown.css';
-
+/* UI Components */
 import DayPicker from '../components/MyProgress/Input/DayPicker';
 import WeekPicker from '../components/MyProgress/Input/WeekPicker';
 import MonthPicker from '../components/MyProgress/Input/MonthPicker';
 import ParameterPicker from '../components/MyProgress/Input/ParameterPicker.jsx';
-
 import LineGraph from '../components/MyProgress/Graphs/LineGraph.jsx';
 import ActivityGraph from '../components/MyProgress/Graphs/ActivityGraph.jsx';
 import MonthlyActivityGraph from '../components/MyProgress/Graphs/MonthlyActivityGraph.jsx';
 import CalendarGraph from '../components/MyProgress/Graphs/CalendarGraph.jsx';
 import { StepsGraph } from '../components/MyProgress/Graphs/StepsGraph.jsx';
-
-import '../../db/LogMethods.jsx';
-
 import AppModal from '../components/AppModal.jsx';
 import NotificationAlert from '../components/Notification.jsx';
 import Card from '../components/Card.jsx';
 import Button from '../components/Button.jsx';
 import Icon from '../components/Illustrations/Icon.jsx';
 import Illustration from '../components/Illustrations/Illustration.jsx';
+
+/* Styles */
+import './MyProgress.scss';
+import '../components/MyProgress/Input/Dropdown.css';
+
 
 // Instance of React translate component, "Common" refers to the namespace of the i18n files
 const T = i18n.createComponent("Common");

@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
+
+/* External API */
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import FadeIn from 'react-fade-in';
-
 import jwt_decode from "jwt-decode";
 
-import PainEducationScript from './ModuleScripts/PainEducationScript.js';
+/* Internal API */
+import PainEducationScript    from './ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from './ModuleScripts/ThoughtsEmotionsScript.js';
-import ActivityWorkScript from './ModuleScripts/ActivityWorkScript';
+import ActivityWorkScript     from './ModuleScripts/ActivityWorkScript';
 import StressResilienceScript from './ModuleScripts/StressResilienceScript';
-import MovementScript from './ModuleScripts/MovementScript.js';
-import SocialScript from './ModuleScripts/SocialScript.js';
+import MovementScript         from './ModuleScripts/MovementScript.js';
+import SocialScript           from './ModuleScripts/SocialScript.js';
+import { shortcuts as shortcutData } from "./ModuleScripts/Shortcuts";
 
-import ProgressManager from "../../../api/ProgressManager.jsx";
-import ShortcutManager from "../../../api/ShortcutManager.jsx";
+/* Managers */
+import ProgressManager from "../../../api/managers/ProgressManager.jsx";
+import ShortcutManager from "../../../api/managers/ShortcutManager.jsx";
 
-/* Import components */
+/* UI Components */
 import ActionButton from '../../components/ActionButton.jsx';
 import Card from '../../components/Card.jsx';
 import PillButton from '../../components/PillButton.jsx';
@@ -24,11 +28,11 @@ import NavigationBar from '../../components/NavigationBar.jsx';
 import ModuleCard from '../../components/MyCoach/ModuleCard.jsx';
 import ModuleTile from '../../components/MyCoach/ModuleTile.jsx';
 import AppModal from '../../components/AppModal';
+import LoadingScreen from '../../components/LoadingScreen.jsx';
 
-import { shortcuts as shortcutData } from "./ModuleScripts/Shortcuts";
-
+/* Styles */
 import './ModuleParser.scss';
-import LoadingScreen from '../LoadingScreen.jsx';
+
 
 export default function ModuleParser(props) {
 

@@ -1,7 +1,13 @@
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import React, { useState } from 'react';
-import './ContentParser.scss';
+
+/* External API */
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+
+/* UI Components */
 import Button from "../../components/Button.jsx";
+
+/* Styles */
+import './ContentParser.scss';
 
 const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;

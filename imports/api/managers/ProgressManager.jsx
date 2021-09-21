@@ -1,4 +1,4 @@
-import "../db/MyCoachMethods.jsx";
+import "../../db/MyCoachMethods.jsx";
 
 export default class ProgressManager {
     constructor(userID, profile=1) {

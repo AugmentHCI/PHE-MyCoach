@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 
+/* External API */
+import jwt_decode from "jwt-decode";
+
+/* Managers */
+import ProgressManager    from '../../api/managers/ProgressManager';
+import QuestionManager    from '../../api/managers/QuestionManager';
+import PainLogbookManager from '../../api/managers/PainLogbookManager';
+import ShortcutManager    from '../../api/managers/ShortcutManager';
+import InteractionManager from '../../api/managers/InteractionManager';
+
+/* UI Components */
 import NavigationBar from "../components/NavigationBar";
 import Button from '../components/Button';
 
-import ProgressManager from '../../api/ProgressManager';
-import QuestionManager from '../../api/QuestionManager';
-
-import jwt_decode from "jwt-decode";
+/* Styles */
 import "./AdminSettings.scss";
-import PainLogbookManager from '../../api/PainLogbookManager';
-import ShortcutManager from '../../api/ShortcutManager';
-import InteractionManager from '../../api/InteractionManager';
 
 export default function AdminSettings(props) {
 

@@ -1,4 +1,4 @@
-import "../db/MyCoachMethods.jsx";
+import "../../db/MyCoachMethods.jsx";
 
 export default class ShortcutManager {
     constructor(userID) {

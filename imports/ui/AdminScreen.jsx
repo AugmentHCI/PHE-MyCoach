@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import Button from "./components/Button.jsx";
+/* External API */
+import FadeIn from "react-fade-in";
 
-import './AdminScreen.scss';
-
+/* Internal API */
 import { CSVProcessor } from "../api/CSVProcessor";
 import { progressParser } from "../api/mycoachprogress";
 import { UserQuestions } from "../api/QuestionnaireProcessor";
+
+/* UI Components */
+import Button from "./components/Button.jsx";
 import Input from "./components/Input"
-import FadeIn from "react-fade-in";
+
+/* Styles */
+import './AdminScreen.scss';
+
 
 export default function AdminScreen(props) {
 

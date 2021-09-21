@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from 'react';
 
-import "./ValueLogbook.scss";
-
-import { values as valueCodes } from "../modules/ModuleScripts/ThoughtsEmotionsScript.js";
+/* External API */
 import FadeIn from "react-fade-in";
 import jwt_decode from "jwt-decode";
 import moment from 'moment';
 
+/* Internal API */
+import BuildupScheme from '../../../api/BuildupScheme';
+import { values as valueCodes } from "../modules/ModuleScripts/ThoughtsEmotionsScript.js";
+
+/* Managers */
+import QuestionManager from '../../../api/managers/QuestionManager';
+import GoalSettingManager from '../../../api/managers/GoalSettingManager';
+
+/* UI Components */
 import NavigationBar from '../../components/NavigationBar';
 import Button from '../../components/Button';
-import QuestionManager from '../../../api/QuestionManager';
 import Icon from '../../components/Illustrations/Icon';
 import Illustration from '../../components/Illustrations/Illustration';
 import Input from '../../components/Input';
-import GoalSettingManager from '../../../api/GoalSettingManager';
-import BuildupScheme from '../../../api/BuildupScheme';
-import LoadingScreen from '../LoadingScreen';
+import LoadingScreen from '../../components/LoadingScreen';
 
-
+/* Styles */
+import "./ValueLogbook.scss";
 
 export default function ValueLogbook() {
 

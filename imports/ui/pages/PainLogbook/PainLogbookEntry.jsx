@@ -1,97 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
-import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText, ChatbubbleInputSummary, ChatbubbleRecommendation } from '../../components/Chatbubble.jsx';
-import NavigationBar from '../../components/NavigationBar';
-
-import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies, options} from "./PainLogbookData.js";
-
+/* External API */
 import jwt_decode from "jwt-decode";
 
-import RuleEngine from "../../../api/RuleEngine.jsx";
-import PainLogbookManager from '../../../api/PainLogbookManager.jsx';
-
-import PainEducationScript from '../modules/ModuleScripts/PainEducationScript.js';
+/* Internal API */
+import PainEducationScript    from '../modules/ModuleScripts/PainEducationScript.js';
 import ThoughtsEmotionsScript from '../modules/ModuleScripts/ThoughtsEmotionsScript.js';
-import ActivityWorkScript from '../modules/ModuleScripts/ActivityWorkScript.js';
-import AppModal from '../../components/AppModal.jsx';
-import Illustration from '../../components/Illustrations/Illustration.jsx';
-import PillButton from '../../components/PillButton.jsx';
+import ActivityWorkScript     from '../modules/ModuleScripts/ActivityWorkScript.js';
+import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText, ChatbubbleInputSummary, ChatbubbleRecommendation } from '../../components/Chatbubble.jsx';
+import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies, options} from "./PainLogbookData.js";
+import RuleEngine from "../../../api/RuleEngine.jsx";
 
+/* Managers */
+import PainLogbookManager from '../../../api/managers/PainLogbookManager.jsx';
 
-const testInputs = [
-    {
-      "level4": "EMOTION-EXHAUSTED",
-      "level3": "FATIGUE",
-      "level2": "NEGATIVE",
-      "level1": "EMOTION"
-    },
-    {
-      "level4": "EMOTION-ANNOYED",
-      "level3": "ANGER",
-      "level2": "NEGATIVE",
-      "level1": "EMOTION"
-    },
-    {
-      "level4": "EMOTION-ANGRY",
-      "level3": "ANGER",
-      "level2": "NEGATIVE",
-      "level1": "EMOTION"
-    },
-    {
-      "level4": "THOUGHT-CAUSE-NEG-1",
-      "level3": "CAUSE",
-      "level2": "NEGATIVE",
-      "level1": "THOUGHT",
-      "codes": [
-        "TIT"
-      ],
-      "synonyms": [
-        "kapot",
-        "versleten"
-      ]
-    },
-    {
-      "level4": "THOUGHT-CAUSE-NEG-3",
-      "level3": "CAUSE",
-      "level2": "NEGATIVE",
-      "level1": "THOUGHT",
-      "codes": [
-        "TIT"
-      ],
-      "synonyms": [
-        "versleten",
-        "slijt"
-      ]
-    },
-    {
-      "level4": "REACTION-NEG-2",
-      "level3": "",
-      "level2": "NEGATIVE",
-      "level1": "REACTION",
-      "codes": [
-        "TIR",
-        "ANXIOUS",
-        "DEPRESSED"
-      ],
-      "synonyms": [
-        "paniek"
-      ]
-    },
-    {
-      "level4": "REACTION-NEG-4",
-      "level3": "",
-      "level2": "NEGATIVE",
-      "level1": "REACTION",
-      "codes": [
-        "TIR",
-        "ANXIOUS"
-      ],
-      "synonyms": [
-        "stop",
-        "alles"
-      ]
-    }
-]
+/* UI Components */
+import NavigationBar from '../../components/NavigationBar';
+import AppModal      from '../../components/AppModal.jsx';
+import Illustration  from '../../components/Illustrations/Illustration.jsx';
+import PillButton    from '../../components/PillButton.jsx';
+
 
 export default function PainLogbookEntry() {
 

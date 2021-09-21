@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
+
+/* External API */
 import { FlowRouter } from "meteor/kadira:flow-router";
 import FadeIn from "react-fade-in";
-
-/* Ant-Design Popover */
-import Popover from 'antd/lib/popover';
-import 'antd/dist/antd.css';
-
-import ProgressManager from "../../api/ProgressManager.jsx";
-import ProfileManager from "../../api/ProfileManager.jsx";
-import InteractionManager from "../../api/InteractionManager.jsx";
-import ShortcutManager from "../../api/ShortcutManager.jsx";
-import { UserData } from "../../api/dummydata.jsx";
-import "../../db/MyCoachMethods.jsx";
-import "./MyCoach.scss";
-
 import jwt_decode from "jwt-decode";
-
-/* Import internationalization files */
+import Popover from 'antd/lib/popover';
 import i18n from 'meteor/universe:i18n';
 import "../../../i18n/nl.i18n.json";
 import "../../../i18n/fr.i18n.json";
 import "../../../i18n/en.i18n.json";
 
-/* Import components */
+/* Internal API */
+import "../../db/MyCoachMethods.jsx"; // TODO
+import { UserData } from "../../api/dummydata.jsx";
+import { shortcuts } from "./modules/ModuleScripts/Shortcuts"
+import PainEducationScript from './modules/ModuleScripts/PainEducationScript.js';
+import ThoughtsEmotionsScript from './modules/ModuleScripts/ThoughtsEmotionsScript.js';
+import ActivityWorkScript from './modules/ModuleScripts/ActivityWorkScript.js';
+
+/* Managers */
+import ProgressManager from "../../api/managers/ProgressManager.jsx";
+import ProfileManager from "../../api/managers/ProfileManager.jsx";
+import InteractionManager from "../../api/managers/InteractionManager.jsx";
+import ShortcutManager from "../../api/managers/ShortcutManager.jsx";
+
+/* UI Components */
 import ActionButton from "../components/ActionButton.jsx";
 import AppModal from "../components/AppModal.jsx";
 import ModuleButton from "../components/MyCoach/ModuleButton.jsx";
@@ -31,12 +33,9 @@ import Illustration from "../components/Illustrations/Illustration.jsx";
 import Icon from "../components/Illustrations/Icon.jsx";
 import PillButton from "../components/PillButton.jsx";
 
-/* Import coaching modules */
-import PainEducationScript from './modules/ModuleScripts/PainEducationScript.js';
-import ThoughtsEmotionsScript from './modules/ModuleScripts/ThoughtsEmotionsScript.js';
-import ActivityWorkScript from './modules/ModuleScripts/ActivityWorkScript.js';
-
-import { shortcuts } from "./modules/ModuleScripts/Shortcuts"
+/* Styles */
+import 'antd/dist/antd.css';
+import "./MyCoach.scss";
 
 /* Instance of React translate component, "Common" refers to the namespace of the i18n files */
 const T = i18n.createComponent("Common");

@@ -1,4 +1,4 @@
-import "../db/ActivityLogbookMethods.jsx";
+import "../../db/ActivityLogbookMethods.jsx";
 
 export default class ActivityLogbookManager {
     constructor(userID) {

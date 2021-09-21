@@ -1,4 +1,4 @@
-import "../db/PainLogbookMethods.jsx";
+import "../../db/PainLogbookMethods.jsx";
 
 export default class PainLogbookManager {
     constructor(userID) {

@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import FadeIn from 'react-fade-in';
-import QuestionManager from '../../../api/QuestionManager.jsx';
-import ShortcutManager from '../../../api/ShortcutManager.jsx';
 
+/* External API */
+import FadeIn from 'react-fade-in';
+
+/* Managers */
+import QuestionManager from '../../../api/managers/QuestionManager.jsx';
+import ShortcutManager from '../../../api/managers/ShortcutManager.jsx';
+
+/* UI Components */
 import Button from '../../components/Button.jsx';
 import Card from '../../components/Card.jsx';
 import ContentParser from './ContentParser.jsx';
-
 
 function CardsParser(props) {
 
