@@ -29,22 +29,33 @@ export default class GoalSettingManager {
     /**
      * Updates an existing goal with the given goalID into the database.
      */
-         async updateGoal({goalID, title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward, buildupScheme}) {
-            await Meteor.callPromise('goalsetting.updateGoal', {
+    async updateGoal({goalID, title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward, buildupScheme}) {
+        await Meteor.callPromise('goalsetting.updateGoal', {
+            userID: this.userID,
+            goalID: goalID,
+            title: title, 
+            description: description, 
+            values: values,
+            quantifier: quantifier, 
+            quantity: quantity, 
+            days: days, 
+            trust: trust, 
+            threshold: threshold, 
+            thresholdDescription: thresholdDescription, 
+            reward: reward,
+            buildupScheme: buildupScheme,
+            timestamp: new Date()
+        });
+    }
+
+    /**
+     * Updates an existing goal's buildupScheme with the given goalID into the database.
+     */
+         async updateGoalScheme({goalID, buildupScheme}) {
+            await Meteor.callPromise('goalsetting.updateGoalScheme', {
                 userID: this.userID,
                 goalID: goalID,
-                title: title, 
-                description: description, 
-                values: values,
-                quantifier: quantifier, 
-                quantity: quantity, 
-                days: days, 
-                trust: trust, 
-                threshold: threshold, 
-                thresholdDescription: thresholdDescription, 
-                reward: reward,
                 buildupScheme: buildupScheme,
-                timestamp: new Date()
             });
         }
 
@@ -66,7 +77,6 @@ export default class GoalSettingManager {
      * Removes a specific goal with the given goalID.
      */
     async removeGoal(goalID) {
-        console.log("Removing with id - "  + goalID)
         return Meteor.callPromise('goalsetting.removeGoal', { userID: this.userID, goalID: goalID });
     }
 }

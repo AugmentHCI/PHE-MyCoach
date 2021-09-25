@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /* External API */
 import FadeIn from 'react-fade-in';
@@ -46,6 +48,12 @@ export default function PainLogbook() {
     const [endTimeMins,   updateEndTimeMins]   = useState("");
     const [intensity, updateIntensity]         = useState("LIGHT");
     const [editingId, updateEditingId]         = useState("");
+    const [measuringGoal, updateMeasuringGoal] = useState("");
+    const [measurement, updateMeasurement] = useState("");
+
+    const [showMeasureModal, updateShowMeasureModal] = useState(false);
+    const [showMeasuresCompleteModal, updateShowMeasuresCompleteModal] = useState(false);
+    const [showGoalModal, updateShowGoalModal] = useState(false);
 
     const [activities, setActivities] = useState([]);
     const [goals, setGoals] = useState([]);
@@ -105,8 +113,54 @@ export default function PainLogbook() {
     function toggleDone(id, newStatus) {
         activityLogbookManager.toggleActivityDone(id, newStatus);
         const newActivities = [...activities];
-        newActivities.find(activity => activity._id === id).done = newStatus;
+        let updatedActivity = newActivities.find(activity => activity._id === id);
+        updatedActivity.done = newStatus;
+        if (updatedActivity.goal && newStatus) goalSettingManager.getUserGoal(updatedActivity.goal).then(goal => {
+            if (goal.buildupScheme) {
+                const buildupScheme = new BuildupScheme({schemeString: goal.buildupScheme});
+                if (buildupScheme.needsMeasurement()) {
+                    updateMeasuringGoal(goal);
+                    updateShowMeasureModal(true);
+                }
+                else if (!buildupScheme.needsMeasurement()) {
+                    updateMeasuringGoal(goal);
+                    updateShowGoalModal(true);
+                }
+            }
+        })
         setActivities(newActivities);
+    }
+
+
+    async function addGoalValue() {
+        const newGoals = goals.filter(goal => goal._id !== measuringGoal._id);
+        const buildupScheme = new BuildupScheme({schemeString: measuringGoal.buildupScheme});
+        buildupScheme.addValue({date: selectedDay.format("DD-MM-YYYY"), value: measurement});
+        goalSettingManager.updateGoalScheme({goalID: measuringGoal._id, buildupScheme: buildupScheme.toString()});
+        measuringGoal.buildupScheme = buildupScheme.toString();
+        newGoals.push(measuringGoal);
+        setGoals(newGoals);
+        updateMeasurement("");
+        updateShowGoalModal(false);
+        const setGoal = buildupScheme.getGoal(selectedDay.format("WW-YYYY"));
+        if (measurement >= setGoal) toast.success('Proficiat, je hebt je doel behaald!', {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: 0,
+            });
+        else toast.error('Je hebt jouw wekelijks doel net niet behaald', {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: 0,
+            });
     }
 
     function getGoal(id) {
@@ -158,6 +212,16 @@ export default function PainLogbook() {
         updateSelectedGoalId(undefined);
     }
 
+    function addMeasurement() {
+        const buildupScheme = new BuildupScheme({schemeString: measuringGoal.buildupScheme});
+        buildupScheme.updateMeasurement(buildupScheme.getNextMeasurementIdNeeded(), parseInt(measurement));
+        goalSettingManager.updateGoalScheme({goalID: measuringGoal._id, buildupScheme: buildupScheme.toString()});
+        updateMeasurement("");
+        updateShowMeasureModal(false);
+        if (!buildupScheme.needsMeasurement()) updateShowMeasuresCompleteModal(true);
+        else updateMeasuringGoal(undefined);
+    }
+
     function checkActivityInputValidity() {
         if (!activityTitle || !intensity || !startTimeHour || !startTimeMins || !endTimeHour || !endTimeMins) return false;
         if (startTimeHour * 60 + startTimeMins >= endTimeHour * 60 + endTimeMins) return false;
@@ -192,6 +256,163 @@ export default function PainLogbook() {
         updateActivityTitle("");
         updateSelectedGoalId(undefined);
         updateEditingId("");
+    }
+
+    function calculateIntensityPercentage(forIntensity) {
+        const aggregate = filteredActivities.reduce((data, activity) => {
+            data.total += (toMinutes(activity.endTime) - toMinutes(activity.startTime)); 
+            if (activity.intensity === forIntensity) data.sum += (toMinutes(activity.endTime) - toMinutes(activity.startTime));
+            return data;
+        }, {sum: 0, total: 0});
+        return Math.round(aggregate.sum / aggregate.total * 100, 2);
+    }
+
+    function handleDropdownGoalSelection(selectedGoals) {
+        if (!selectedGoals || selectedGoals.length === 0) { updateSelectedGoalId(undefined) }
+        else if (!selectedGoals[0]._id ) { updateSelectedGoalId(undefined) }
+        else { updateSelectedGoalId(selectedGoals[0]._id) }
+    }
+
+    /* Modals */
+
+    function renderGoalModal() {
+        if (!showGoalModal || !measuringGoal) return <React.Fragment/>;
+        return (<AppModal
+            show={showGoalModal} 
+            title={"Meting: " + measuringGoal.title}
+            backOption="Geen meting"
+            defaultOption="Opslaan"
+            disabledDefault={!measurement || measurement === 0 || isNaN(measurement)}
+            notifyBack={() => {updateMeasuringGoal(undefined); updateShowGoalModal(false)}}
+            notifyParent={() => addGoalValue()}>
+                Je hebt een doel voltooid!
+                <Input type="tel" placeholder="00" onChange={updateMeasurement} value={measurement}/>
+                <h3 style={{display:"inline", color:"var(--idewe-blue)", fontFamily:"var(--main-font)"}}>{quantityT[measuringGoal.quantifier]}</h3>
+        </AppModal>)
+    }
+
+    function renderMeasureCompleteModal() {
+        if (!showMeasuresCompleteModal || ! measuringGoal) return <React.Fragment/>;
+        const buildupScheme = new BuildupScheme({schemeString: measuringGoal.buildupScheme});
+        return (<AppModal
+            show={showMeasuresCompleteModal} 
+            title={"Opbouwschema opgesteld"}
+            backOption="Sluit"
+            defaultOption="Bekijk schema"
+            notifyBack={() => {updateMeasuringGoal(undefined); updateShowMeasuresCompleteModal(false)}}
+            notifyParent={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/values/${measuringGoal._id}`)}>
+            Je hebt 3 metingen ingegeven voor jou doel. We hebben hiermee een opbouwschema gemaakt zodat je <b>binnen de {buildupScheme.scheme.length} {buildupScheme.scheme.length === 1 ? "week" : "weken"} jouw doel van {buildupScheme.goal} {buildupScheme.unit[0]?.short} kan behalen</b>. De eerste week <b>begin je met {buildupScheme.scheme[0].goal} {buildupScheme.unit[0]?.short}, succes!</b>
+        </AppModal>)
+    }
+
+    function renderMeasureModal() {
+        if (!showMeasureModal || !measuringGoal) return <React.Fragment/>
+        return (<AppModal
+            show={showMeasureModal} 
+            title={"Meetmoment: " + measuringGoal.title}
+            backOption="Geen meting"
+            defaultOption="Sla op"
+            disabledDefault={!measurement || measurement === 0 || isNaN(measurement)}
+            notifyBack={() => {updateMeasuringGoal(undefined); updateMeasurement(""); updateShowMeasureModal(false)}}
+            notifyParent={() => addMeasurement()}>
+                Je hebt je activiteit "{measuringGoal.title.toLowerCase()}" afgevinkt dat gelinkt is aan een doel dat jij momenteel aan het opbouwen bent. Als je hiervoor een meting hebt, kan je dat invullen.
+                <br/>
+                <Input type="tel" placeholder="00" onChange={updateMeasurement} value={measurement}/>
+                <h3 style={{display:"inline", color:"var(--idewe-blue)", fontFamily:"var(--main-font)"}}>{quantityT[measuringGoal.quantifier]}</h3>
+            </AppModal>)
+    }
+
+    function renderAddActivityModal() {
+        if (!showModal) return <React.Fragment/>
+        return (<AppModal 
+                show={showModal} 
+                title="Nieuwe activiteit"
+                defaultOption={editingId ? "Pas aan" : "Voeg toe"}
+                disabledDefault={!checkActivityInputValidity()}
+                notifyParent={() => saveActivity()}
+                backOption="Annuleer"
+                notifyBack={() => closeActivityEditor()}>
+            <Input type="text" value={activityTitle} onChange={updateActivityTitle} placeholder="Naam activiteit" style={{width:"100%"}}/>
+            <div className="activity-input-row">
+                <Icon image="time" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>
+                <Input type="tel" value={startTimeHour} onChange={updateStartTimeHour} id="startHour" placeholder="08" style={{width:"52px"}} between={[0, 23]} maxLength={2}/>
+                <div style={{marginRight:"5px"}}>:</div>
+                <Input type="tel" value={startTimeMins} onChange={updateStartTimeMins} id="startMinutes" placeholder="30" style={{width:"52px"}} between={[0, 59]} maxLength={2}/> 
+                <div style={{marginRight:"10px"}}>-</div>
+                <Input type="tel" value={endTimeHour} onChange={updateEndTimeHour} id="endHour" placeholder="10" style={{width:"52px"}} between={[0, 23]} maxLength={2}/>
+                <div style={{marginRight:"5px"}}>:</div>
+                <Input type="tel" value={endTimeMins} onChange={updateEndTimeMins} id="endMins" placeholder="00" style={{width:"52px"}} between={[0, 59]} maxLength={2}/> 
+            </div>
+            <div className="activity-input-row">
+                <Icon image="lifting" width="20px" color="blue-dark" style={{marginRight: "10px"}}/>
+                <button className={"intensity-btn-light" + (intensity==="LIGHT" ? "-selected" : "")} onClick={() => updateIntensity("LIGHT")}>
+                    <Icon image="sweat-light" width="10px" color={intensity==="LIGHT" ? "white" : "blue-dark"} style={{marginBottom:0}}/> Licht</button>
+                <button className={"intensity-btn-moderate" + (intensity==="MODERATE" ? "-selected" : "")} onClick={() => updateIntensity("MODERATE")}>
+                    <Icon image="sweat-moderate" width="18px" color={intensity==="MODERATE" ? "white" : "blue-dark"} style={{marginBottom:0}}/> Matig</button>
+                <button className={"intensity-btn-heavy" + (intensity==="HEAVY" ? "-selected" : "")} onClick={() => updateIntensity("HEAVY")}>
+                    <Icon image="sweat-heavy" width="18px" color={intensity==="HEAVY" ? "white" : "blue-dark"} style={{marginBottom:0}}/> Zwaar</button>
+            </div>
+            <div className="activity-input-row">
+                <Icon image="goal" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>
+                <Dropdown defaultText={"Kies een doel (optioneel)"} defaultItems={selectedGoal ? [selectedGoal] :  []} items={goals} style={{flex: 2}} idKey="_id" valueKey="title" onChange={(selectedGoals) => handleDropdownGoalSelection(selectedGoals) }/>
+            </div>
+        </AppModal>)
+    }
+
+    /* Render functions */
+
+    function renderActivities() {
+        if (loading) return <LoadingScreen text=" "/>
+        if (filteredActivities.length === 0) return <React.Fragment/>
+        return (<FadeIn>
+            <div className="planned-activities">
+            <h2>Je planning</h2>
+            {activities.sort((act1, act2) => toMinutes(act1.startTime) > toMinutes(act2.startTime)).map(activity => {
+            if (moment(activity.date).isSame(selectedDay, "day")) { return (<Activity 
+                key={activity._id} 
+                id={activity._id}
+                done={activity.done}
+                manager={activityLogbookManager}
+                title={activity.title} 
+                intensity={activity.intensity}
+                startTime={activity.startTime}
+                toggleDone={toggleDone}
+                goal={getGoal(activity.goal)}
+                selectedDay={selectedDay}
+                week={moment().subtract(weekOffset, "week").format("W-YYYY")}
+                openActivityEditor={openActivityEditor}
+                endTime={activity.endTime}/>)}
+        })}
+        </div></FadeIn>)
+    }
+
+    function renderPlanActivities() {
+        const day = moment(selectedDay).locale('en').format('dddd').slice(0, 2).toLowerCase();
+        const selectedDayGoals = [...goals].filter(goal => {
+            if (goal._id) { /* Skip the 'None' goal */
+                const selectedDays = Object.keys(JSON.parse(goal.days)).filter(function(d){return JSON.parse(goal.days)[d]});
+                if (!selectedDays.includes(day)) return false;
+                for (const act of filteredActivities) {
+                    if (act.goal && act.goal === goal._id) { return false; }
+                }
+                return true;
+            }
+        });
+        if (selectedDayGoals.length === 0) return <React.Fragment/>
+        return (<div className="planned-activities">
+            <h2>Plan deze activiteiten in</h2>
+            {selectedDayGoals.map(goal => {return (<Activity 
+                key={goal._id} 
+                done={false}
+                goal={getGoal(goal._id)}
+                selectedDay={selectedDay}
+                manager={activityLogbookManager}
+                toggleDone={toggleDone}
+                week={moment().subtract(weekOffset, "week").format("W-YYYY")}
+                isGoal
+                openActivityEditor={openActivityEditor}/>)})}
+            <hr className="break"/>
+        </div>)
     }
 
     function renderInformationCard() {
@@ -230,114 +451,25 @@ export default function PainLogbook() {
         </React.Fragment>)
     }
 
-    function calculateIntensityPercentage(forIntensity) {
-        const aggregate = filteredActivities.reduce((data, activity) => {
-            data.total += (toMinutes(activity.endTime) - toMinutes(activity.startTime)); 
-            if (activity.intensity === forIntensity) data.sum += (toMinutes(activity.endTime) - toMinutes(activity.startTime));
-            return data;
-        }, {sum: 0, total: 0});
-        return Math.round(aggregate.sum / aggregate.total * 100, 2);
-    }
-
-    function renderActivities() {
-        if (loading) return <LoadingScreen text=" "/>
-        if (filteredActivities.length === 0) return <React.Fragment/>
-        return (<FadeIn>
-            <div className="planned-activities">
-            <h2>Je planning</h2>
-            {activities.sort((act1, act2) => toMinutes(act1.startTime) > toMinutes(act2.startTime)).map(activity => {
-            if (moment(activity.date).isSame(selectedDay, "day")) { return (<Activity 
-                key={activity._id} 
-                id={activity._id}
-                done={activity.done}
-                manager={activityLogbookManager}
-                title={activity.title} 
-                intensity={activity.intensity}
-                startTime={activity.startTime}
-                toggleDone={toggleDone}
-                goal={getGoal(activity.goal)}
-                week={moment().subtract(weekOffset, "week").format("W-YYYY")}
-                openActivityEditor={openActivityEditor}
-                endTime={activity.endTime}/>)}
-        })}
-        </div></FadeIn>)
-    }
-
-    function renderPlanActivities() {
-        const day = moment(selectedDay).locale('en').format('dddd').slice(0, 2).toLowerCase();
-        const selectedDayGoals = [...goals].filter(goal => {
-            if (goal._id) { /* Skip the 'None' goal */
-                const selectedDays = Object.keys(JSON.parse(goal.days)).filter(function(d){return JSON.parse(goal.days)[d]});
-                if (!selectedDays.includes(day)) return false;
-                for (const act of filteredActivities) {
-                    if (act.goal && act.goal === goal._id) { return false; }
-                }
-                return true;
-            }
-        });
-        if (selectedDayGoals.length === 0) return <React.Fragment/>
-        return (<div className="planned-activities">
-            <h2>Plan deze activiteiten in</h2>
-            {selectedDayGoals.map(goal => {return (<Activity 
-                key={goal._id} 
-                done={false}
-                goal={getGoal(goal._id)}
-                manager={activityLogbookManager}
-                toggleDone={toggleDone}
-                week={moment().subtract(weekOffset, "week").format("W-YYYY")}
-                isGoal
-                openActivityEditor={openActivityEditor}/>)})}
-            <hr className="break"/>
-        </div>)
-    }
-
-    function handleDropdownGoalSelection(selectedGoals) {
-        if (!selectedGoals || selectedGoals.length === 0) { updateSelectedGoalId(undefined) }
-        else if (!selectedGoals[0]._id ) { updateSelectedGoalId(undefined) }
-        else { updateSelectedGoalId(selectedGoals[0]._id) }
-    }
-
-    function renderAddActivityModal() {
-        if (!showModal) return <React.Fragment/>
-        return (<AppModal 
-                show={showModal} 
-                title="Nieuwe activiteit"
-                defaultOption={editingId ? "Pas aan" : "Voeg toe"}
-                disabledDefault={!checkActivityInputValidity()}
-                notifyParent={() => saveActivity()}
-                backOption="Annuleer"
-                notifyBack={() => closeActivityEditor()}>
-            <Input type="text" value={activityTitle} onChange={updateActivityTitle} placeholder="Naam activiteit" style={{width:"100%"}}/>
-            <div className="activity-input-row">
-                <Icon image="time" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>
-                <Input type="tel" value={startTimeHour} onChange={updateStartTimeHour} id="startHour" placeholder="08" style={{width:"55px"}} between={[0, 23]} maxLength={2}/>
-                <div style={{marginRight:"5px"}}>:</div>
-                <Input type="tel" value={startTimeMins} onChange={updateStartTimeMins} id="startMinutes" placeholder="30" style={{width:"55px"}} between={[0, 59]} maxLength={2}/> 
-                <div style={{marginRight:"10px"}}>-</div>
-                <Input type="tel" value={endTimeHour} onChange={updateEndTimeHour} id="endHour" placeholder="10" style={{width:"55px"}} between={[0, 23]} maxLength={2}/>
-                <div style={{marginRight:"5px"}}>:</div>
-                <Input type="tel" value={endTimeMins} onChange={updateEndTimeMins} id="endMins" placeholder="00" style={{width:"55px"}} between={[0, 59]} maxLength={2}/> 
-            </div>
-            <div className="activity-input-row">
-                <Icon image="lifting" width="20px" color="blue-dark" style={{marginRight: "10px"}}/>
-                <button className={"intensity-btn-light" + (intensity==="LIGHT" ? "-selected" : "")} onClick={() => updateIntensity("LIGHT")}>
-                    <Icon image="sweat-light" width="10px" color={intensity==="LIGHT" ? "white" : "blue-dark"} style={{marginBottom:0}}/> Licht</button>
-                <button className={"intensity-btn-moderate" + (intensity==="MODERATE" ? "-selected" : "")} onClick={() => updateIntensity("MODERATE")}>
-                    <Icon image="sweat-moderate" width="18px" color={intensity==="MODERATE" ? "white" : "blue-dark"} style={{marginBottom:0}}/> Matig</button>
-                <button className={"intensity-btn-heavy" + (intensity==="HEAVY" ? "-selected" : "")} onClick={() => updateIntensity("HEAVY")}>
-                    <Icon image="sweat-heavy" width="18px" color={intensity==="HEAVY" ? "white" : "blue-dark"} style={{marginBottom:0}}/> Zwaar</button>
-            </div>
-            <div className="activity-input-row">
-                <Icon image="goal" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>
-                <Dropdown defaultText={"Kies een doel (optioneel)"} defaultItems={selectedGoal ? [selectedGoal] :  []} items={goals} style={{flex: 2}} idKey="_id" valueKey="title" onChange={(selectedGoals) => handleDropdownGoalSelection(selectedGoals) }/>
-            </div>
-        </AppModal>)
-    }
-
+    /* Return */
 
     return (<React.Fragment>
         <NavigationBar title="Activiteitenlogboek" back={`/${language}/mycoach/${FlowRouter.getParam('token')}`}/>
+        <ToastContainer
+            position="top-center"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
         {renderAddActivityModal()}
+        {renderMeasureModal()}
+        {renderMeasureCompleteModal()}
+        {renderGoalModal()}
         <div className="activitylogbook">
             <div className="week-header">
             <Icon image="next" color="blue" style={{transform:'rotate(180deg)', marginRight:"20px", marginTop: "7px"}} onClick={() => switchWeek("previous")}/>
@@ -370,15 +502,17 @@ export default function PainLogbook() {
 }
 
 function Activity(props) {
-    const buildupScheme = props.goal?.buildupScheme ? new BuildupScheme({schemeString: props.goal.buildupScheme}) : undefined;
+    const buildupScheme = props.goal?.buildupScheme ? new BuildupScheme({schemeString:props.goal.buildupScheme}) : undefined;
     let unit = buildupScheme?.unit;
     if (unit && unit.length > 0) unit = unit[0].short;
     const quantity = buildupScheme ? buildupScheme.getGoal(props.week) : undefined;
+    const goalValue = buildupScheme ? buildupScheme.getValue({day: props.selectedDay.format("DD-MM-YYYY")}) : undefined;
+    const goalColor = goalValue?.achieved ? "var(--idewe-green)" : (!goalValue ? "var(--idewe-gray)" : "var(--idewe-red)");
     return (<div className={"activity" + (props.done ? "-done" : "")}>
         <div className="activity-content" onClick={() => props.openActivityEditor(props.id, props.isGoal, props.goal)}>
             <div className="activity-header">
                 { props.isGoal && <Icon image={"goal"} style={{margin:"0 10px 0 0"}} color="blue" width={"16px"} /> }
-                <div className="activity-title">{props.isGoal ? props.goal.title : props.title } {!props.isGoal && quantity && <p style={{display:"inline", fontSize:"14px", color:"var(--idewe-gray)", marginLeft: "2px"}}>{quantity + " " + unit}</p>}</div>
+                <div className="activity-title">{props.isGoal ? props.goal.title : props.title } {!props.isGoal && quantity && <p style={{display:"inline", fontSize:"14px", color:goalColor, marginLeft: "2px"}}>{(goalValue?.value ? goalValue.value : quantity) + " " + unit}</p>}</div>
             </div>
             <div style={{display:"flex"}}>
                 {props.intensity && <div className={"activity-intensity-" + props.intensity.toLowerCase()}>

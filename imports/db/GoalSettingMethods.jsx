@@ -65,6 +65,20 @@ Meteor.methods({
                 timestamp: new Date,
             }});
     },
+    'goalsetting.updateGoalScheme'({userID, goalID, buildupScheme}) {
+        check(userID, Number);
+   
+        GoalSettingCollection.update(
+            /* Selector*/
+            { 
+            userID: userID, 
+            _id: goalID},
+            /* Update query*/ 
+            {$set: {
+                buildupScheme: buildupScheme,
+                timestamp: new Date,
+            }});
+    },
     'goalsetting.getGoals'({userID}) {
         check(userID, Number);
         return GoalSettingCollection.find({ userID: userID }, {sort: ({timestamp: -1})}).fetch();
@@ -73,7 +87,8 @@ Meteor.methods({
         check(userID, Number);
         let newMongoObjectId = new Mongo.Collection.ObjectID();
         newMongoObjectId._str = goalID;
-        return GoalSettingCollection.findOne({ _id: newMongoObjectId._str });
+        const goal = GoalSettingCollection.findOne({ _id: newMongoObjectId._str });
+        return goal
     },
     'goalsetting.removeGoal'({userID, goalID}) {
         check(userID, Number);
