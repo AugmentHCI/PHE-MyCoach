@@ -17,6 +17,7 @@ export default class ProgressManager {
      */
     async getUserProgress() {
         const moduleUserData = await Meteor.callPromise('mycoachprogress.getUserProgress', {userID: this.userID});
+        console.log(parseProgress(moduleUserData));
         return parseProgress(moduleUserData);
     }
 
@@ -27,6 +28,8 @@ export default class ProgressManager {
      */
     async getModuleProgress(module) {
         const moduleUserData = await Meteor.callPromise('mycoachprogress.getModuleProgress', {userID: this.userID, moduleID: module});
+        console.log(moduleUserData);
+        console.log(parseProgress(moduleUserData));
         return parseProgress(moduleUserData);
     }
 

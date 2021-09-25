@@ -72,7 +72,7 @@ export default function SubmoduleParser(props) {
 
     async function notifyModal() {
         const didCompleteModule = data.isLast ? true : false;
-        await progressManager.finishSubmodule(module, submodule, "COMPLETED", didCompleteModule);
+        await progressManager.finishSubmodule(module.toUpperCase(), submodule, "COMPLETED", didCompleteModule);
         if (!didSeeCompletionModal) interactionManager.setInteractionStatus("MODULE_COMPLETION_MODAL", "CONFIRM");
         setShowCompletionModal(false);
         if (!didCompleteModule) { history.back() }
