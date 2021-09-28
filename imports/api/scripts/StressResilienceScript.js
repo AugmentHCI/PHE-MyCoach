@@ -782,8 +782,8 @@ const STRMOD5 = {
                     content: "Hoe kan je je cirkel van invloed een beetje vergroten? Op welk gedeelte heb je wel een invloed? Welke concrete acties kan je uitwerken om dit te bekomen?"
                 },
                 {
-                    type: "Oefening",
-                    text: "Kan misschien nog eens nadenken om hier een in-app oefening van te maken, al is het maar een inputlijstje dat ze kunnen invullen."
+                    type: "CircleExercise", 
+                    id: "STR_MOD_5_CIRCLE"                  
                 }
             ]
         },

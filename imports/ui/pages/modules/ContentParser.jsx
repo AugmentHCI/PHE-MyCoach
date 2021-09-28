@@ -461,6 +461,8 @@ function ContentParser(props) {
                 return createShortcutContent(props);
             case 'Story':
                 return createStoryContent({content: props.data.content, dynamicHeight: props.data.dynamicHeight});
+            case 'CircleExercise':
+                return createCircleExerciseContent({id: props.data.id, module: props.module, callback: props.callback, questionManager: props.questionManager});
             case 'Break':
                 return <hr/>;
             default:
@@ -579,5 +581,65 @@ function createStoryContent({content, dynamicHeight=false}) {
                 </div>}
             </div>)})}
         </Carousel>
+    );
+}
+
+function createCircleExerciseContent({id, questionManager, module, callback}) {
+
+    const [editingKnelpunt, updateEditingKnelpunt] = useState("");
+    const [editingBetrokkenheid, updateEditingBetrokkenheid] = useState("");
+    const [editingInvloed, updateEditingInvloed] = useState("");
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        async function fetchAnswer() {
+            const fetchedAnswer = await questionManager.getLatestAnswerOnQuestion(id);
+            console.log(fetchedAnswer);
+            if (fetchedAnswer) setData(JSON.parse(fetchedAnswer));
+        }
+        fetchAnswer();
+    }, [])
+
+    function setForEditing(entry) {
+        updateEditingKnelpunt(entry.knelpunt);
+        updateEditingBetrokkenheid(entry.betrokkenheid);
+        updateEditingInvloed(entry.invloed);
+        const newData = data.filter(dataEntry => dataEntry.knelpunt !== entry.knelpunt && dataEntry.betrokkenheid !== entry.betrokkenheid && dataEntry.invloed !== entry.invloed);
+        const entryIndex = data.indexOf(entry);
+        setData(newData);
+        const container = document.getElementsByClassName("container")[0];
+        container.scrollBy(0 , -180 - (66 * entryIndex));
+    }
+
+    async function addEntry() {
+        const newData = [{knelpunt: editingKnelpunt, betrokkenheid: editingBetrokkenheid, invloed: editingInvloed}, ...data];
+        setData(newData);
+        await questionManager.setModuleQuestion(module, id, JSON.stringify(newData), false); 
+        callback();
+        updateEditingKnelpunt(""); updateEditingBetrokkenheid(""); updateEditingInvloed("");
+    }
+
+    return (
+        <React.Fragment>
+            <div className="content-backdrop">
+                <b>Jouw knelpunt</b>
+                <Input type="text" style={{width:"100%"}} value={editingKnelpunt} onChange={updateEditingKnelpunt} placeholder="Knelpunt"/>
+                <b>Cirkel van betrokkenheid</b>
+                <Input type="text" style={{width:"100%"}} value={editingBetrokkenheid} onChange={updateEditingBetrokkenheid} placeholder="Wat kan je niet veranderen?"/>
+                <b>Cirkel van invloed</b>
+                <Input type="text" style={{width:"100%"}} value={editingInvloed} onChange={updateEditingInvloed} placeholder="Wat kan je wel veranderen?"/>
+                <Button onClick={addEntry}>Voeg toe</Button>
+            </div>
+            {data.length > 0 && <div className="content-backdrop">
+                <h2><b>Jouw knelpunten</b></h2>
+                {data.map((entry, index) => <div style={{position: "relative"}}>
+                    <b>Knelpunt:</b> {entry.knelpunt}<br/>
+                    <b>Betrokkenheid:</b> {entry.betrokkenheid}<br/>
+                    <b>Invloed:</b> {entry.invloed}<br/>
+                    <div className="content-circleexercise-edit" onClick={() => setForEditing(entry)}><Icon image="pen" color="white"/></div>
+                    {index !== data.length-1 && <hr/>}
+                </div>)}    
+            </div>}
+        </React.Fragment>
     );
 }
