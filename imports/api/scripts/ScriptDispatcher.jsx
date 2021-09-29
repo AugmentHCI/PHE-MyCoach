@@ -6,9 +6,9 @@ export async function getModule({module}) {
         case "ACT":
         case "activitywork":
             return import('./ActivityWorkScript');
-        case "ACT":
+        case "TE":
         case "thoughtsemotions":
-            return import('./SocialScript');
+            return import('./ThoughtsEmotionsScript');
         case "STR":
         case "stressresilience":
             return import('./StressResilienceScript');
