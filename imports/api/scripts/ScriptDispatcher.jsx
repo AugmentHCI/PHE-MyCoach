@@ -1,32 +1,39 @@
-export async function getModule({module}) {
+import PainEducationScript from './PainEducationScript';
+import ActivityWorkScript from './ActivityWorkScript';
+import ThoughtsEmotionsScript from './ThoughtsEmotionsScript';
+import StressResilienceScript from './StressResilienceScript';
+import MovementScript from './MovementScript';
+import SocialScript from './SocialScript';
+
+export function getModule({module}) {
     switch (module) {
         case "PE":
         case "paineducation":
-            return import('./PainEducationScript');
+            return PainEducationScript
         case "ACT":
         case "activitywork":
-            return import('./ActivityWorkScript');
+            return ActivityWorkScript
         case "TE":
         case "thoughtsemotions":
-            return import('./ThoughtsEmotionsScript');
+            return ThoughtsEmotionsScript
         case "STR":
         case "stressresilience":
-            return import('./StressResilienceScript');
+            return StressResilienceScript
         case "MOV":
         case "movement":
-            return import('./MovementScript');
+            return MovementScript
         case "SOC":
         case "social":
-            return import('./SocialScript');
+            return SocialScript
         default:
             return {};
     }
 }
 
-export async function getSubmodule({module, submoduleID}) {
-    const fetchedModule = await getModule({module: module});
-    if (!fetchedModule?.default?.submodules) return [];
-    for (const submodule of fetchedModule.default.submodules) {
+export function getSubmodule({module, submoduleID}) {
+    const fetchedModule = getModule({module: module});
+    if (!fetchedModule?.submodules) return [];
+    for (const submodule of fetchedModule.submodules) {
         if (submodule.id === submoduleID) return submodule;
     }
     return [];

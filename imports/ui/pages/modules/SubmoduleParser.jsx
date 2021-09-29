@@ -118,12 +118,9 @@ export default function SubmoduleParser(props) {
     /* Fetch user progress only once, avoids infinite re-rendering due to state-changes */
     useEffect(() => {
         async function fetchModuleData() {
-            getSubmodule({module: module, submoduleID: submodule})
-                .then(res => {
-                    console.log(res);
-                    setData(res);
-                    setLoadingModule(false);
-                });
+            const submoduleData = getSubmodule({module: module, submoduleID: submodule})
+            setData(submoduleData);
+            setLoadingModule(false);
         }
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {

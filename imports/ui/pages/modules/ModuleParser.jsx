@@ -200,8 +200,8 @@ export default function ModuleParser(props) {
     useEffect(() => {
         async function fetchModuleData() {
             const moduleID = FlowRouter.getParam('module');
-            const fetchedModuleData = await getModule({module: moduleID});
-            updateModuleData(fetchedModuleData?.default);
+            const fetchedModuleData = getModule({module: moduleID});
+            updateModuleData(fetchedModuleData);
             setLoadingModule(false);
         }
         /* Wrap in async function, as getModuleProgress is async */
