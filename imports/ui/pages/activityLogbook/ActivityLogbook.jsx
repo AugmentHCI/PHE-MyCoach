@@ -285,7 +285,7 @@ export default function PainLogbook() {
             disabledDefault={!measurement || measurement === 0 || isNaN(measurement)}
             notifyBack={() => {updateMeasuringGoal(undefined); updateShowGoalModal(false)}}
             notifyParent={() => addGoalValue()}>
-                Je hebt een doel voltooid!
+                Je hebt een doel voltooid! Wat is je meting?<br/>
                 <Input type="tel" placeholder="00" onChange={updateMeasurement} value={measurement}/>
                 <h3 style={{display:"inline", color:"var(--idewe-blue)", fontFamily:"var(--main-font)"}}>{quantityT[measuringGoal.quantifier]}</h3>
         </AppModal>)
@@ -294,6 +294,16 @@ export default function PainLogbook() {
     function renderMeasureCompleteModal() {
         if (!showMeasuresCompleteModal || ! measuringGoal) return <React.Fragment/>;
         const buildupScheme = new BuildupScheme({schemeString: measuringGoal.buildupScheme});
+        console.log(buildupScheme)
+        if (!buildupScheme?.scheme) return (<AppModal
+            show={showMeasuresCompleteModal} 
+            title={"Opbouwschema niet opgesteld"}
+            backOption="Sluit"
+            defaultOption="Bekijk doel"
+            notifyBack={() => {updateMeasuringGoal(undefined); updateShowMeasuresCompleteModal(false)}}
+            notifyParent={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/values/${measuringGoal._id}`)}>
+            Je hebt 3 metingen ingegeven voor jou doel. We kunnen met deze metingen echter geen opbouwschema opmaken om jouw doel in een redelijke tijd te behalen. Bekijk je metingen, en stel jouw doel desnoods bij.
+        </AppModal>)
         return (<AppModal
             show={showMeasuresCompleteModal} 
             title={"Opbouwschema opgesteld"}

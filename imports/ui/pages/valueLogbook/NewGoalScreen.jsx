@@ -65,7 +65,7 @@ export default function NewGoalScreen() {
     }
 
     function finishedCompleting() {
-        return (goalTitle && goalDescription && goalQuantity !== "0" && goalThreshold && goalThresholdDescription && goalReward && goalValues.length > 0)
+        return (goalTitle && goalDescription && goalQuantity !== "0" && goalThreshold && goalThresholdDescription && goalReward)
     }
 
     /* Initialising component - Fetching and initialising data */
@@ -102,7 +102,6 @@ export default function NewGoalScreen() {
                 updateGoalTrust(goal.trust);
                 updateGoalReward(goal.reward);
                 setLoaded(true);
-                console.log(goal.buildupScheme)
             }
         }
         fetchValues();
@@ -230,7 +229,7 @@ export default function NewGoalScreen() {
                 { quantifyGoal && <React.Fragment>
                     <div style={{display:'flex', width: '100%'}}>
                         <h3 style={{flex:2}}>Bouw je doel op</h3>
-                        <Input style={{marginRight:"1em"}} type="checkbox" value={buildupGoal} onChange={() => updateBuildupGoal(oldValue => !oldValue)}/>
+                        <Input style={{marginRight:"1em"}} type="checkbox" value={buildupGoal} onChange={() => {updateBuildupGoal(oldValue => !oldValue); updateBuildupScheme(new BuildupScheme({goal: goalQuantity, unit: goalQuantifier, measurements: measurements}))} }/>
                     </div>
                     Bouw je doel geleidelijk op met een opbouwschema.
                     { buildupGoal && <React.Fragment>
@@ -271,6 +270,8 @@ export default function NewGoalScreen() {
             </FadeIn>
         </div>)
     }
+
+    console.log(buildupScheme)
 
     function updateBuildschemeData({type, value, id=undefined}) {
         /* Create buildupScheme if none present */
