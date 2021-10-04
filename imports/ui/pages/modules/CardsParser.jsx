@@ -30,7 +30,7 @@ function CardsParser(props) {
         let contentsHTML = [];
         if (props.moduleStatus === "COMPLETED") {
             generateCards(cards, contentsHTML, "OVERVIEW");
-            contentsHTML.push(<hr key={"CARD-DIVIDER"} className="module-hr-line"/>);
+            !props.noDivider && contentsHTML.push(<hr key={"CARD-DIVIDER"} className="module-hr-line"/>);
             generateCards(cards, contentsHTML, "NONOVERVIEW");
         }
         else {

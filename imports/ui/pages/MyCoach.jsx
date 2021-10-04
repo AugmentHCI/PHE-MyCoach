@@ -264,7 +264,7 @@ export default function MyCoach(props) {
     /* Fetch user progress only once, avoids infinite re-rendering due to state-changes */
     useEffect(() => {
         /* Wrap in async function, as getModuleProgress is async */
-        async function fetchUserProgress() {
+        async function fetchUserProgressAndShortcuts() {
             let progress = await progressManager.getUserProgress();
             if (progress?.PAINEDUCATION && progress["PAINEDUCATION"]["PE_MOD_1"] === "NOT_STARTED") {
                 progress["PAINEDUCATION"]["PE_MOD_1"] = "IN_PROGRESS";
@@ -273,15 +273,18 @@ export default function MyCoach(props) {
             const dailyCoaching = await progressManager.getDailyCoaching();
             setUserProgress(progress);
             setUserDailyCoaching(dailyCoaching);
+            const fetchedShortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
+            if (progress?.THOUGHTSEMOTIONS && progress["THOUGHTSEMOTIONS"]["TE_MOD_2"] === "COMPLETED" && fetchedShortcuts.filter(shortcut => shortcut.shortcut === "THOUGHTEXERCISES").length === 0) {
+                shortcutManager.upsertShortcut("THOUGHTEXERCISES", "MAIN", "DEFAULT");
+                shortcutManager.upsertShortcut("THOUGHTEXERCISES", "THOUGHTSEMOTIONS", "DEFAULT");
+                fetchedShortcuts.push({screen: "MAIN", shortcut: "THOUGHTEXERCISES"});
+            }
+            setUserShortcuts(fetchedShortcuts);
         }
         async function fetchUserData() {
             const latestUserData = await profileManager.getLatestQuestionnaire();
             latestUserData?.data ? setUserData(latestUserData.data) : setUserData({profile: 1});
             latestUserData?.data?.profile ? progressManager.setProfile(latestUserData.data.profile) : progressManager.setProfile(1);
-        }
-        async function fetchUserShortcuts() {
-            const fetchedShortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
-            setUserShortcuts(fetchedShortcuts);
         }
         async function fetchUserInteractionStatus() {
             const result = await interactionManager.getMultipleInteractionStatuses(["GENERAL_INTRODUCTIONPOPUPS", "GENERAL_INTRODUCTIONMODAL", "GENERAL_PAINEDUCATIONFINISHEDMODAL"]);
@@ -297,9 +300,8 @@ export default function MyCoach(props) {
             setShowIntroductionVideo(!result.GENERAL_INTRODUCTIONMODAL.includes("CONFIRM"));
             setShowFinishPainEducationModal(!result.GENERAL_PAINEDUCATIONFINISHEDMODAL.includes("CONFIRM"));
         }
-        fetchUserProgress();
+        fetchUserProgressAndShortcuts();
         fetchUserData();
-        fetchUserShortcuts();
         fetchUserInteractionStatus();
     }, []);
 

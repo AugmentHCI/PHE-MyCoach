@@ -398,14 +398,6 @@ const TEMOD2 = {
         ]
     },
     {
-        id: "TE-MOD2-PAUZE-1",
-        cardContents: [
-            {
-                type: "Text",
-                content: [{type: "bold", content: "Hier komt een pauzemoment van 2 dagen ..."}],
-            }]
-    },
-    {
         id: "TE-MOD2-CARD2",
         title: "Eens reflecteren",
         cardContents: [
@@ -446,14 +438,6 @@ const TEMOD2 = {
         ]
     },
     {
-        id: "TE-MOD2-PAUZE-2",
-        cardContents: [
-            {
-                type: "Text",
-                content: [{type: "bold", content: "Hier komt een pauzemoment van 1 dag ..."}],
-            }]
-    },
-    {
         id: "TE-MOD2-CARD3",
         title: "Afstand nemen van gedachten",
         cardContents: [
@@ -488,20 +472,12 @@ const TEMOD2 = {
         ]
     },
     {
-        id: "TE-MOD2-PAUZE-3",
-        cardContents: [
-            {
-                type: "Text",
-                content: [{type: "bold", content: "Hier komt een pauzemoment van 1 dag ..."}],
-            }]
-    },
-    {
         id: "TE-MOD2-CARD4",
         title: "Invloed beperken",
         cardContents: [
             {
                 type: "Text",
-                content: "Welkom terug! Tijd voor het verkennen van een volgende manier om om te gaan met moeilijke gedachten en gevoelens op zo’n manier dat ze je gedrag en je leven minder gaan bepalen.",
+                content: "Tijd voor het verkennen van een volgende manier om om te gaan met moeilijke gedachten en gevoelens op zo’n manier dat ze je gedrag en je leven minder gaan bepalen.",
             },
             {
                 type: "Text",
@@ -513,17 +489,9 @@ const TEMOD2 = {
             },
             {
                 type: "Text",
-                content: "Herinner je dat als je sterk focust op je pijngedachten dat er makkelijker prikkels doorkomen (TODO: Insert verwijzing naar module in kwestie). Ook deze kan je vergelijken met deze vervelende buurman. Zijn er wederkerende gedachten die je doen denken aan deze vervelende buurman? Probeer de komende dag verder in te zetten op bewust worden van je gedachten."
+                content: "Herinner je dat als je sterk focust op je pijngedachten dat er makkelijker prikkels doorkomen. Ook deze kan je vergelijken met deze vervelende buurman. Zijn er wederkerende gedachten die je doen denken aan deze vervelende buurman? Probeer de komende dag verder in te zetten op bewust worden van je gedachten."
             }
         ]
-    },
-    {
-        id: "TE-MOD2-PAUZE-4",
-        cardContents: [
-            {
-                type: "Text",
-                content: [{type: "bold", content: "Hier komt een pauzemoment van 1 dag ..."}],
-            }]
     },
     {
         id: "TE-MOD2-SLIDER",
@@ -652,7 +620,6 @@ const TEMOD3 = {
     {
         id: "TE-MOD3-CARD4",
         title: "Uitbreidingsoefening",
-        wrapup: true,
         cardContents: [
             {
                 type: "Text",

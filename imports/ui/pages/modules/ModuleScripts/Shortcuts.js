@@ -55,4 +55,18 @@ export const shortcuts = {
             "en-EN": "My values ​​and goals"
         }
     },
+    "THOUGHTEXERCISES": {
+        icon: "idea",
+        link: "thoughtexercises",
+        title: {
+            "nl-BE": "Gedachte-oefeningen",
+            "nl-FR": "Thought exercises",
+            "en-EN": "Thought exercises"
+        },
+        translation: {
+            "nl-BE": "Begin met gedachten-oefeningen",
+            "nl-FR": "Start some thought-exercises",
+            "en-EN": "Start some thought-exercises"
+        }
+    },
 }

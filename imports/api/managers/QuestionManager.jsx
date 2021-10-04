@@ -6,7 +6,7 @@ export default class QuestionManager {
     }
 
     async getModuleQuestions(module) {
-        const questions = await Meteor.callPromise('mycoachquestion.getModuleQuestions', {userID: this.userID, module: module});
+        const questions = await Meteor.callPromise('mycoachquestion.getModuleQuestions', {userID: this.userID, module: module.toUpperCase()});
         let questionDict = {};
         questions.forEach(question => {
             questionDict[question.questionID] = question.answer;
@@ -26,7 +26,7 @@ export default class QuestionManager {
     }
 
     async setModuleQuestion(module, questionID, answer, allowMultiple=true) {
-        if (!allowMultiple) { await Meteor.callPromise('mycoachquestion.upsertQuestion', {userID: this.userID, module: module, questionID: questionID, answer: answer}) }
-        else { await Meteor.callPromise('mycoachquestion.setQuestion', {userID: this.userID, module: module, questionID: questionID, answer: answer}) }
+        if (!allowMultiple) { await Meteor.callPromise('mycoachquestion.upsertQuestion', {userID: this.userID, module: module.toUpperCase(), questionID: questionID, answer: answer}) }
+        else { await Meteor.callPromise('mycoachquestion.setQuestion', {userID: this.userID, module: module.toUpperCase(), questionID: questionID, answer: answer}) }
     }
 }

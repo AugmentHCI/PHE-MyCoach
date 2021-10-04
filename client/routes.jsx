@@ -18,6 +18,8 @@ import ActivityLogbook   from '../imports/ui/pages/activityLogbook/ActivityLogbo
 import ValueLogbook      from '../imports/ui/pages/valueLogbook/ValueLogbook.jsx';
 import NewGoalScreen     from '../imports/ui/pages/valueLogbook/NewGoalScreen';
 import ViewGoalEntry     from '../imports/ui/pages/valueLogbook/ViewGoalEntry';
+import ThoughtExercisePage from '../imports/ui/pages/thoughtExercises/ThoughtExercisePage.jsx';
+import ExerciseParser      from '../imports/ui/pages/modules/ExerciseParser';
 /* User study */
 import Introduction       from '../imports/ui/pages/userstudy/Introduction.jsx';
 import Information        from '../imports/ui/pages/userstudy/Information.jsx';
@@ -108,6 +110,16 @@ FlowRouter.route('/:language/mycoach/:token/adminsettings', {
 FlowRouter.route('/:language/mycoach/:token/feedback', {
   name: 'Feedback',
   action(){ mount( App, { content: <FeedbackScreen /> })}
+});
+
+FlowRouter.route('/:language/mycoach/:token/thoughtexercises', {
+  name: 'ThoughtExercises',
+  action(){ mount( App, { content: <ThoughtExercisePage /> })}
+});
+
+FlowRouter.route('/:language/mycoach/:token/exercise/:module/:submodule/:cardID', {
+  name: 'ExerciseCardPage',
+  action(){ mount( App, { content: <ExerciseParser /> })}
 });
 
 FlowRouter.route('/:language/mycoach/:token/painlogbook', {
