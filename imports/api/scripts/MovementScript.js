@@ -722,13 +722,409 @@ const MOVMOD4 = {
     ]
 }
 
+const MOVMOD5 = {
+    id: "MOV_MOD_5",
+    title: "Beweegplan",
+    titleMarkup: ["Beweegplan"],
+    part: 5,
+    description: "Ga aan de slag en maak een concreet actieplan om voldoende te bewegen.",
+    duration: "10 minuten",
+    type: "Informatief",
+    image: "learning",
+    imageWidth: "180px",
+    cards: [{
+            title: "Inleiding",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Goed bezig! Ondertussen ken je de voordelen van bewegen en weet je wat gezonde beweeggewoontes zijn. Je weet ook dat het bij pijnklachten belangrijk is om voldoende te bewegen, maar dat dit geleidelijk moet worden opgebouwd. Nu is het tijd om al onze tips en tricks om te zetten naar een beweegplan!"
+                }]
+        },
+        {
+            title: "Beweegscore",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Probeer even te antwoorden op de volgende vragen door een inschatting te maken van je hoeveelheid beweging."
+                },
+                {
+                    id: "MOV-MOD-5-FYS",
+                    type: "Slider",
+                    text: "Hoe zit het volgens jou met met jouw hoeveelheid fysieke activiteit?",
+                    from: 1,
+                    to: 3,
+                    showValue: true,
+                    save: true,
+                    mapping: "3-LEVELS"
+                }
+            ]
+        },
+        {
+            showIfAnswered: ["MOV-MOD-5-FYS"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Het fysieke activiteit level wordt berekend op basis van hoeveel jij wandelt en het aantal minuten dat je activiteiten doet aan een hoge en middelmatige intensiteit. Een gemiddelde score is voldoende om voordelen te ondervinden voor je gezondheid. Hogere scores leveren extra voordelen op. Maar let op dat je ook voldoende rust inplant, anders loop je het risico op overbelasting. Scoor je eerder aan de lage kant? Dan kan je best proberen om meer te bewegen en ook iets intensiever te bewegen. Een veilige opbouw is wel cruciaal!"
+                }
+            ]
+        },
+        {
+            title: "Aantal stappen per dag",
+            cardContents: [
+                {
+                    id: "MOV-MOD-5-STEPS",
+                    type: "Slider",
+                    text: "Hoe zit het volgens jou met met jouw gemiddeld aantal stappen per dag?",
+                    from: 1,
+                    to: 3,
+                    showValue: true,
+                    save: true,
+                    mapping: "3-STEPS"
+                }
+            ]
+        },
+        {
+            showIfAnswered: ["MOV-MOD-5-STEPS"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Naast regelmatig activiteiten aan een hoge en middelmatige intensiteit te doen, is het ook belangrijk dat je voldoende stappen zet op een dag. Opnieuw geldt dat gemiddelde scores reeds een positief effect hebben op je gezondheid. Maar een veilige opbouw en voldoende rust zijn ook hier super belangrijk om het risico op overbelasting te beperken."
+                }
+            ]
+        },
+        {
+            title: "Aantal stappen per dag",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Inactieve uren zijn uren waarin je minder dan 250 stappen hebt gezet. Als je voldoende slaapt, zit je al aan 8 inactieve uren per dag. Daarom is het belangrijk om je inactieve uren doorheen de dag te beperken. Verhoogd risico heb je bij meer dan 8 inactieve uren per dag (een totaal van 16 uur dus)."
+                },
+                {
+                    id: "MOV-MOD-5-INACTIVE",
+                    type: "Slider",
+                    text: "Hoe zit het volgens jou met met jouw inactieve uren?",
+                    from: 1,
+                    to: 3,
+                    showValue: true,
+                    save: true,
+                    mapping: "3-AMOUNT"
+                }
+            ]
+        },
+        {
+            showIfAnswered: ["MOV-MOD-5-INACTIVE"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Wanneer je minder dan 250 stappen op een uur hebt gezet, wordt dit gezien als een inactief uur. Hoe minder inactieve uren doorheen de dag hoe beter. Vanaf 8 inactieve uren op een dag (uren slaap niet meegerekend) heb je een verhoogd risico op gezondheidsproblemen."
+                }
+            ]
+        },
+        {
+            titleCard: "true",
+            title: "Redenen om meer te bewegen"
+        },
+        {
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "We gaan je enkele redenen meegeven die mensen aanzetten om meer te bewegen, alsook enkele drempels die de stap tot meer bewegen kunnen verhinderen. Maar we gaan je eerst een vraag stellen."
+                },
+                {
+                    id: "MOV-MOD-5-MOTIVATED",
+                    type: "Slider",
+                    text: "Hoe gemotiveerd ben jij om voldoende te bewegen in de toekomst?",
+                    from: 1,
+                    to: 10,
+                    showValue: true,
+                    save: true,
+                    mapping: "10-AGREE"
+                }
+            ]
+        },
+        {
+            title: "Ik vind bewegen fijn",
+            showIfAnswered: ["MOV-MOD-5-MOTIVATED"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "De sterkste motivatie om iets te doen is intrinsieke motivatie. Dit wilt zeggen dat je iets doet omdat je het fijn vindt. Je moet natuurlijk niet alle vormen van sport of beweging fijn vinden. Er zijn talloze opties om uit te kiezen, dus er zal voor iedereen wel iets zijn dat bij hem of haar past!"
+                },
+                {
+                    type: "Image",
+                    link: "/images/movement/grandpa.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "Trouwens, wist je dat er tijdens bewegen endorfine (gelukshormoon) wordt vrijgezet? Dit is natuurlijk een extra reden waarom je na sport of beweging zo’n heerlijk voldaan gevoel krijgt. Bewegen is ook een ideale uitlaatklep om je even af te reageren tijdens een moeilijke of stresserende periode."
+                },
+            ]
+        },
+        {
+            title: "Bewegen verhoogt mijn zelfvertrouwen",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Progressie maken in je beweegdoelen geeft je zelfvertrouwen een boost. Na verloop van tijd zal door meer te bewegen je lichaam ook enkele veranderingen ondergaan, je krijgt meer energie en je gaat meer kunnen. Maar, in het begin zal je misschien geconfronteerd kunnen worden met een aantal zaken die je zelfvertrouwen een deuk kunnen geven: een toename van je pijnklachten, je capaciteit of kunnen ligt lager dan je had verwacht, bij anderen lijkt het veel beter te gaan… Iedereen moet ergens beginnen, volhouden is de boodschap!"
+                },
+                {
+                    type: "Image",
+                    link: "/images/movement/finishline.jpg"
+                },
+            ]
+        },
+        {
+            title: "Ik wil werken aan mijn gezondheid",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Voldoende bewegen is een ideale manier om je fysieke en mentale gezondheid een boost te geven! Bewegen beschermt tegen en bevordert het herstel van lichamelijke klachten, hart- en vaatziekten… Door voldoende te bewegen krijg je meer energie en je concentratie neemt toe. Ook je belastbaarheid gaat toenemen, waardoor je meer gaat kunnen. Maar bewegen doseren en op een veilige manier opbouwen is belangrijk, anders leidt dit tot negatieve gevolgen voor je gezondheid."
+                },
+                {
+                    type: "Image",
+                    link: "/images/movement/workout.jpg"
+                },
+            ]
+        },
+        {
+            title: "Ik wil tijd doorbrengen met vrienden of familie",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Samen actief bezig zijn is een geweldig idee. Het is niet alleen gezond, je leert elkaar ook op een andere manier kennen en dat versterkt jullie band. Door samen te bewegen is het makkelijker om je beweegdoelen te halen, want je kan elkaar motiveren. Zorg er wel voor dat iedereen op zijn eigen niveau kan meedoen."
+                },
+                {
+                    type: "Image",
+                    link: "/images/movement/family.jpg"
+                },
+            ]
+        },
+        {
+            titleCard: "true",
+            title: "Drempels"
+        },
+        {
+            cardContents: [
+                {
+                    id: "MOV-MOD-5-TRUST",
+                    type: "Slider",
+                    text: "Heb je veel vertrouwen dat je voldoende kan bewegen in de toekomst?",
+                    from: 1,
+                    to: 10,
+                    showValue: true,
+                    save: true,
+                    mapping: "10-AGREE"
+                }, 
+                {
+                    type: "Text",
+                    content: "Hier zijn een aantal veel voorkomende drempels om meer te bewegen."
+                }
+            ]
+        },
+        {
+            title: "Ik heb geen tijd om meer te bewegen",
+            showIfAnswered: ["MOV-MOD-5-TRUST"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Je hoeft helemaal niet veel te bewegen om al een positief effect te hebben op je gezondheid. In de vorige onderdelen kreeg je reeds tal van tips om mee aan de slag te gaan. Je kan bijvoorbeeld een aantal taken actiever maken. Of je kan bewegen combineren met andere waardevolle aspecten in je leven, zoals tijd doorbrengen met het gezin. Vraag jezelf eens af of je echt geen tijd hebt, of dat bewegen voor jou geen prioriteit heeft? Probeer bewegen eens te bekijken zoals huishoudelijke taken of afspraakjes. Deze moet je ook inplannen. Vind je geen ruimte voor langere beweegmomenten? Splits dit dan op in kortere blokken. Kijk vooral naar wat voor hou haalbaar is!"
+                },
+                {
+                    type: "Image",
+                    link: "/images/movement/no.jpg"
+                },
+            ]
+        },
+        {
+            title: "Het is duur",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Sport en bewegen hoeft helemaal niet duur te zijn. Met een sportieve outfit en een goed paar schoenen kom je al heel ver. Is een duur abonnement bij de fitness echt nodig? Gebruik je al die toestellen of is een setje halters voor thuis al voldoende? Heb je echt de meest gesofisticeerde koersfiets nodig? Of ben je niet beter met gewoon een degelijke fiets die je nog voor andere zaken kan gebruiken? Als je gaat wandelen of joggen heb je naast schoenen zelfs geen extra materiaal nodig. Sport en bewegen kan met ieder budget!"
+                },
+                {
+                    type: "Image",
+                    link: "/images/movement/equipment.jpg"
+                },
+            ]
+        },
+        {
+            title: "Ik vind bewegen niet leuk",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Niet iedereen vindt sport en bewegen van nature even fijn, dat is normaal. Toch is het voor iedereen belangrijk om voldoende te bewegen. Er zijn talloze vormen van sport of beweging om uit te kiezen. De ene vorm zal je al wat meer liggen dan de andere, maar voor iedereen is er wel iets dat bij hem of haar past!"
+                },
+                {
+                    type: "Image",
+                    link: "/images/movement/stuff.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "In het vorige onderdeel vind je een lijst terug met allemaal suggesties. Denk ook eens terug aan de hobby’s die je als kind had, hier kan je ook inspiratie uit halen."
+                },
+            ]
+        },
+        {
+            title: "Ik heb lichamelijke klachten",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Pijn hebben is helemaal niet prettig. En pijn die toeneemt tijdens bewegen kan inderdaad een grote drempel zijn om meer te bewegen. Als je activiteit goed is afgesteld op jouw capaciteit, dan is deze veilig. De pijn is dan een overgevoelige reactie van je zenuwstelsel en betekent niet dat je schade veroorzaakt. Ook voor mensen met pijnklachten is het belangrijk om voldoende te bewegen. Bewegen bevordert het herstelproces en de overgevoeligheid zal na verloop van tijd afnemen. Met een goede opbouw maak je jouw lichaam weerbaarder en zal je terug meer kunnen."
+                },
+                {
+                    type: "Image",
+                    link: "/images/movement/dogwalking.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "Bij gebrek aan beweging neemt de belastbaarheid van je lichaam verder af en de overgevoeligheid van het zenuwstelsel toe. Je zal dus steeds meer last ondervinden. Je kan dit een beetje vergelijken met tandenpoetsen. Stel je poetst je tanden 10 keer op een jaar gedurende een uur. Na het poetsen zullen je tanden bloeden en op termijn worden ze rot. Zo helpt af en toe bewegen ook niet. Enkel als je hier frequent mee bezig bent en dit rustig opbouwt, dan pas zal dit een positief effect hebben op jouw gezondheid."
+                },
+            ]
+        },
+        {
+            title: "Jouw drempels",
+            cardContents: [
+                {
+                    type: "Multitext-Input",
+                    id: "MOV-MOD-5-LIMITS",
+                    text: "Wat zijn voor jouw drempels om meer te bewegen?",
+                    placeholder: "Schrijf ze hier neer:"
+                }
+            ]
+        },
+        {
+            title: "Doelen en opbouwschema",
+            titleCard: true
+        },
+        {
+            title: "Doelen stellen",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Om voldoende te bewegen is het belangrijk om rekening te houden met waar jij waarde aan hecht en wat jij als mogelijke drempel ziet. Het stellen van doelen maakt heel duidelijk wat je wilt bereiken en hoe je dit wilt doen (of je nu last hebt van pijn of niet). Stel dat jij bijvoorbeeld veel belang hecht aan gezondheid en zelfzorg. Dan kan je dit in je leven incorporeren door een marathon te lopen, maar evenzeer door dagelijks een wandeling rond de blok te doen… Stel dat jij belang hecht aan quality time met familie en vrienden, dan zou je dat kunnen doen door samen een fietstocht te maken. Kan jij niet goed volgen? Dan kan je bijvoorbeeld een elektrische fiets gebruiken of samen met de tandem rijden."
+                },
+                {
+                    type: "Image",
+                    link: "/images/movement/thoughts.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "Hier zijn alvast enkele tips bij het stellen van doelen:"
+                },
+                {
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/path.jpg", title: "Tip 1 - Laat je leiden door je visie, waarden en principes", text: "Doelen kies je in functie van wat voor jou als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen."},
+                        {image: "/images/movement/goals.jpg", title: "Tip 2 - Maak concrete doelen", text: "Je kan een doel pas bereiken als je weet wat je hiervoor moet doen. Werken aan je gezondheid is bijvoorbeeld geen doel, maar een waarde (je hecht belang aan jouw gezondheid). Een concreet doel om deze waarde te bereiken kan zijn dat je dagelijks een wandeling van 30 minuten maakt, of dat je maar 1 keer per week een dessertje eet."},
+                        {image: "/images/movement/rock.jpg", title: "Tip 3 - Stel realistische doelen", text: "Een goed gekozen doen kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te neme. Je kan beter starten met een doel van 5km, dan 10km, enz."},
+                        {image: "/images/movement/pins.jpg", title: "Tip 4 - Houd rekening met de termijn", text: "Hoe verder weg in de toekomst een bepaald doel ligt, hoe moeilijker het wordt om dit te bereiken. Splits daarom ambitieuze doelen op in tussentijdse doelen, zo bewaar je het overzicht. Let op dat je je ook niet laat leiden door strakke tijdschema's, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."},
+                    ]
+                }
+            ]
+        },
+        {
+            title: "Goede doelen",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Hier volgen 2 voorbeelden van hoe je goede doelen kan stellen."
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Voorbeeld 1 - Els"
+                },
+                {
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/neckpain.jpg", text: "Els is 35 jaar, getrouwd, heeft een dochter van 5 jaar en werkt op een kantoor. Ze heeft tijdens het werken geregeld last van haar nek, zeker op dagen dat ze vaak met klanten moet bellen."},
+                        {image: "/images/movement/clock.jpg", text: "Omdat gezondheid een belangrijke rol heeft in haar leven, wilt ze hieraan werken. Ze weet dat het belangrijk is om te bewegen en regelmatig van houding te wisselen. Daarom neemt ze haar voor om 2 minuten recht te staan en te bewegen na ieder uur te werken."}
+                    ]
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Voorbeeld 2 - Paul"
+                },
+                {
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/paul.jpg", text: "Paul is 52 jaar, gescheiden, zijn kinderen zijn al uit huis en werkt als schrijnwerker. Zijn vrienden gaan iedere zaterdag 100 km samen fietsen."},
+                        {image: "/images/movement/graph.jpg", text: "Omdat hij veel belang hecht aan vriendschap, zou hij graag meegaan. Conditioneel is hij nog niet zo sterk en hij heeft ook wat last van zijn knie. Daarom besluit hij om zijn fietsen op te bouwen. Hij wilt 1 keer per week trainen en op zaterdag rijdt hij een stukje mee met zijn vrienden."}
+                    ]
+                },
+            ]
+        },
+        {
+            title: "Opbouwschema",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Sommige doelen zal je niet zomaar kunnen bereiken. Hiervoor heb je een goed opbouwschema nodig. Ook om je belastbaarheid te verhogen en actiever te worden is een veilig opbouwschema essentieel."
+                },
+                {
+                    type: "Text",
+                    content: "Hier heb je een overzicht van hoe je een opbouwschema kan maken:"
+                },
+                {
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/start.jpg", title: "Stap 1", text: "Om je activiteitenniveau langzaam op te bouwen moeten we eerst je basisniveau vaststellen. Je basisniveau bepaal je door de tijd te meten dat je met een activiteit bezig kunt zijn totdat je moe wordt of de pijn toeneemt. Je bepaalt je basisniveau liefst meerdere keren, zodat je een betrouwbaar gemiddelde krijgt. Je hebt namelijk goede en slechte dagen. Van deze basis haal je 20% af om je startniveau te bepalen."},
+                        {image: "/images/movement/stairs.jpg", title: "Stap 2", text: "Houd dit één tot twee weken vol, afhankelijk van je hersteltijd. Daarna breiden we uit met ± 10%. Wanneer je gaat opbouwen mag de hersteltijd niet toenemen. Het kan zijn dat pijn en vermoeidheid erger worden, maar dat is niet erg, zolang de hersteltijd maar niet langer wordt. Het is super belangrijk dat je je aan het schema houdt. Hoe verleidelijk misschien ook, maar het is niet goed dat je al je activiteiten tegelijk gaat opbouwen."},
+                        {image: "/images/movement/stairs.jpg", title: "Voorbeeld 1", text: "Na 10 minuten fietsen neemt jouw pijn toe. Dan is je startniveau 8 minuten. Na één tot twee weken verhoog je dit naar 9 minuten."},
+                        {image: "/images/movement/walking.jpg", title: "Voorbeeld 2", text: "Na 500 meter stappen neemt jouw pijn toe. Dan is je startniveau 400 meter. Na één tot twee weken verhoog je dit naar 440 meter."},
+                    ]
+                },
+            ]
+        },
+        {
+            title: "Activiteitenlogboek",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Nu is het aan jou! Je kan gebruik maken van het activiteitenlogboek dat op het startscherm staat, waarmee je zelf persoonlijke doelen kan stellen. De app kan ook automatisch een opbouwschema maken voor doelen waar dit nodig is (bijvoorbeeld als je wilt opbouwen naar 10 000 stappen per dag). Deze doelen kan je toevoegen in je waarden en doelen."
+                },
+            ]
+        },
+        {
+            title: "Key take-away",
+            overview: true,
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Bewegen is één van de beste dingen die je kan doen voor je gezondheid. Bewegen..."
+                },
+                {
+                    type: "List",
+                    content: ["Traint het hart en beperkt het risico op hart- en vaatzieken.",
+                    "Geeft je immuunsysteem een boost.",
+                    "Zet hormonen vrij die zorgen voor een goed gevoel en pijndemping.",
+                    "Traint de spieren, houdt de gewichten soepel en versterkt de botten.",
+                    "Houdt je gewicht onder controle en beperkt het risico op diabetes type 2.",
+                    "Zorgt voor een betere concentratie en een beter geheugen.",
+                    "Werkt ontspannend en leidt tot een betere slaap."]
+                }]
+        },
+        {
+            generateFinishSubmoduleButton: true,
+            lastModule: false,
+            text: "Voltooi module Bewegen",
+            textOnCompleted: "Keer terug"
+        }
+    ]
+}
 
 
 
 const MovementScript = {
     id: "MOV",
     title: "Bewegen",
-    submodules: [MOVMOD1, MOVMOD2, MOVMOD3, MOVMOD4]
+    submodules: [MOVMOD1, MOVMOD2, MOVMOD3, MOVMOD4, MOVMOD5]
 }
 
 export default MovementScript;
