@@ -143,7 +143,7 @@ export default function PainLogbook() {
         updateMeasurement("");
         updateShowGoalModal(false);
         const setGoal = buildupScheme.getGoal(selectedDay.format("WW-YYYY"));
-        if (measurement >= setGoal) toast.success('Proficiat, je hebt je doel behaald!', {
+        if (measurement >= setGoal * 1.1) toast.warning('Je hebt meer gedaan dan het huidige doel. Jouw enthousiasme is super! Maar probeer je aan het opbouwschema te houden, anders loop je het risico op overbelasting.', {
             position: "top-center",
             autoClose: 4000,
             hideProgressBar: true,
@@ -152,7 +152,7 @@ export default function PainLogbook() {
             draggable: true,
             progress: 0,
             });
-        else toast.error('Je hebt jouw wekelijks doel net niet behaald', {
+        else if (measurement <= setGoal * 0.9) toast.error('Jammer, je hebt je huidige doel niet bereikt. Probeer je te houden aan het opbouwschema. Niet opgeven, volgende keer beter!', {
             position: "top-center",
             autoClose: 4000,
             hideProgressBar: true,
@@ -161,6 +161,15 @@ export default function PainLogbook() {
             draggable: true,
             progress: 0,
             });
+        else toast.success('Proficiat, je hebt je doel behaald! Doe zo verder!', {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: 0,
+        });
     }
 
     function getGoal(id) {
