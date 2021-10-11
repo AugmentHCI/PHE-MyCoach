@@ -46,10 +46,11 @@ export default function PainLogbook() {
     const [startTimeMins, updateStartTimeMins] = useState("");
     const [endTimeHour,   updateEndTimeHour]   = useState("");
     const [endTimeMins,   updateEndTimeMins]   = useState("");
-    const [intensity, updateIntensity]         = useState("LIGHT");
-    const [editingId, updateEditingId]         = useState("");
+    const [wholeDay,      setWholeDay]         = useState(false);
+    const [intensity,     updateIntensity]     = useState("LIGHT");
+    const [editingId,     updateEditingId]     = useState("");
     const [measuringGoal, updateMeasuringGoal] = useState("");
-    const [measurement, updateMeasurement] = useState("");
+    const [measurement,   updateMeasurement]   = useState("");
 
     const [showMeasureModal, updateShowMeasureModal] = useState(false);
     const [showMeasuresCompleteModal, updateShowMeasuresCompleteModal] = useState(false);
@@ -187,6 +188,7 @@ export default function PainLogbook() {
             endTime: endTime, 
             title: activityTitle, 
             intensity: intensity, 
+            wholeDay: wholeDay,
             goalId: selectedGoalId ? selectedGoalId : null});
         fetchActivities();
     }
@@ -200,10 +202,12 @@ export default function PainLogbook() {
             startTime: startTime, 
             endTime: endTime, 
             intensity: intensity, 
+            wholeDay: wholeDay,
             goalID: selectedGoalId});
         toggleShowModal(false);
         updateStartTimeHour(""); updateStartTimeMins(""); updateEndTimeHour(""); updateEndTimeMins("");
         updateIntensity("LIGHT");
+        setWholeDay(false);
         updateActivityTitle("");
         updateEditingId("");
         updateSelectedGoalId(undefined);
@@ -217,6 +221,7 @@ export default function PainLogbook() {
         updateStartTimeHour(""); updateStartTimeMins(""); updateEndTimeHour(""); updateEndTimeMins("");
         updateIntensity("LIGHT");
         updateActivityTitle("");
+        setWholeDay(false);
         updateEditingId("");
         updateSelectedGoalId(undefined);
     }
@@ -232,8 +237,8 @@ export default function PainLogbook() {
     }
 
     function checkActivityInputValidity() {
-        if (!activityTitle || !intensity || !startTimeHour || !startTimeMins || !endTimeHour || !endTimeMins) return false;
-        if (startTimeHour * 60 + startTimeMins >= endTimeHour * 60 + endTimeMins) return false;
+        //if (!activityTitle || !intensity && (wholeDay && (!startTimeHour || !startTimeMins || !endTimeHour || !endTimeMins))) return false;
+        //if (startTimeHour * 60 + startTimeMins >= endTimeHour * 60 + endTimeMins) return false;
         return true;
     }
 
@@ -241,7 +246,8 @@ export default function PainLogbook() {
         if (isGoal) {
             updateSelectedGoalId(goal._id);
             updateActivityTitle(goal.title);
-            updateIntensity("LIGHT")
+            updateIntensity("LIGHT");
+            setWholeDay(goal.wholeDay);
             toggleShowModal(true);
             return;
         }
@@ -352,7 +358,8 @@ export default function PainLogbook() {
                 backOption="Annuleer"
                 notifyBack={() => closeActivityEditor()}>
             <Input type="text" value={activityTitle} onChange={updateActivityTitle} placeholder="Naam activiteit" style={{width:"100%"}}/>
-            <div className="activity-input-row">
+            {wholeDay && <div className="activity-input-row"><Icon image="time" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>Gedurende de hele dag</div>}
+            {!wholeDay && <div className="activity-input-row">
                 <Icon image="time" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>
                 <Input type="tel" value={startTimeHour} onChange={updateStartTimeHour} id="startHour" placeholder="08" style={{width:"52px"}} between={[0, 23]} maxLength={2}/>
                 <div style={{marginRight:"5px"}}>:</div>
@@ -361,7 +368,7 @@ export default function PainLogbook() {
                 <Input type="tel" value={endTimeHour} onChange={updateEndTimeHour} id="endHour" placeholder="10" style={{width:"52px"}} between={[0, 23]} maxLength={2}/>
                 <div style={{marginRight:"5px"}}>:</div>
                 <Input type="tel" value={endTimeMins} onChange={updateEndTimeMins} id="endMins" placeholder="00" style={{width:"52px"}} between={[0, 59]} maxLength={2}/> 
-            </div>
+            </div>}
             <div className="activity-input-row">
                 <Icon image="lifting" width="20px" color="blue-dark" style={{marginRight: "10px"}}/>
                 <button className={"intensity-btn-light" + (intensity==="LIGHT" ? "-selected" : "")} onClick={() => updateIntensity("LIGHT")}>
@@ -382,12 +389,38 @@ export default function PainLogbook() {
 
     function renderActivities() {
         if (loading) return <LoadingScreen text=" "/>
-        if (filteredActivities.length === 0) return <React.Fragment/>
+        const planActivities = [...filteredActivities].filter(activity => !activity.wholeDay)
+        if (planActivities.length === 0) return <React.Fragment/>
         return (<FadeIn>
             <div className="planned-activities">
             <h2>Je planning</h2>
-            {activities.sort((act1, act2) => toMinutes(act1.startTime) > toMinutes(act2.startTime)).map(activity => {
-            if (moment(activity.date).isSame(selectedDay, "day")) { return (<Activity 
+            {planActivities.sort((act1, act2) => toMinutes(act1.startTime) > toMinutes(act2.startTime)).map(activity => {
+             return (<Activity 
+                key={activity._id} 
+                id={activity._id}
+                done={activity.done}
+                manager={activityLogbookManager}
+                title={activity.title} 
+                intensity={activity.intensity}
+                startTime={activity.startTime}
+                toggleDone={toggleDone}
+                goal={getGoal(activity.goal)}
+                selectedDay={selectedDay}
+                week={moment().subtract(weekOffset, "week").format("W-YYYY")}
+                openActivityEditor={openActivityEditor}
+                endTime={activity.endTime}/>)}
+        )}
+        </div></FadeIn>)
+    }
+
+    function renderWholeDayActivities() {
+        const planActivities = [...filteredActivities].filter(activity => activity.wholeDay)
+        if (planActivities.length === 0) return <React.Fragment/>
+        return (<FadeIn>
+            <div className="planned-activities">
+            <h2>Gedurende de hele dag</h2>
+            {planActivities.sort((act1, act2) => toMinutes(act1.startTime) > toMinutes(act2.startTime)).map(activity => {
+            if (moment(activity.date).isSame(selectedDay, "day") && activity.wholeDay) { return (<Activity 
                 key={activity._id} 
                 id={activity._id}
                 done={activity.done}
@@ -511,6 +544,7 @@ export default function PainLogbook() {
             <div>
                 {renderInformationCard()}
                 {renderPlanActivities()}
+                {renderWholeDayActivities()}
                 {renderActivities()}
             </div>
             <div className="activity-add" onClick={() => toggleShowModal(prevState => !prevState)}>
@@ -539,7 +573,7 @@ function Activity(props) {
                 </div>}
                 { props.goal && !props.isGoal && <div className="activity-goal"> <Icon image={"goal"} style={{margin:"0 10px 0 0"}} color="white" width={"12px"} /> {props.goal.title} </div>}
             </div>
-            { props.startTime && props.endTime && <div className="activity-time">{props.startTime} - {props.endTime}</div> }
+            { props.startTime && props.endTime && !props.goal.wholeDay && <div className="activity-time">{props.startTime} - {props.endTime}</div> }
         </div>
         {!props.isGoal && <div className="activity-toggle">
             Klaar

@@ -5,9 +5,9 @@ export default class ActivityLogbookManager {
         this.userID = parseInt(userID);
     }
 
-    async insertActivity({date, startTime, endTime, title, intensity, goalId=null}) {
+    async insertActivity({date, startTime, endTime, title, intensity, wholeDay, goalId=null}) {
         await Meteor.callPromise('activitylogbook.insert', 
-            {userID: this.userID, date: date, startTime: startTime, endTime: endTime, title: title, intensity: intensity, goal: goalId});
+            {userID: this.userID, date: date, startTime: startTime, endTime: endTime, title: title, intensity: intensity, wholeDay: wholeDay, goal: goalId});
     }
 
     async fetchWeekActivity(offset) {
@@ -18,8 +18,8 @@ export default class ActivityLogbookManager {
         return Meteor.callPromise('activitylogbook.toggleDone', {userID: this.userID, activityID: activityID, newStatus: newStatus});
     }
 
-    async updateActivity({activityID, title, startTime, endTime, intensity, goalID=null}) {
+    async updateActivity({activityID, title, startTime, endTime, intensity, wholeDay, goalID=null}) {
         return Meteor.callPromise('activitylogbook.updateActivity', 
-            {userID: this.userID, activityID: activityID, title: title, startTime: startTime, endTime: endTime, intensity: intensity, goalID: goalID});
+            {userID: this.userID, activityID: activityID, title: title, startTime: startTime, endTime: endTime, intensity: intensity, wholeDay: wholeDay, goalID: goalID});
     }
 }

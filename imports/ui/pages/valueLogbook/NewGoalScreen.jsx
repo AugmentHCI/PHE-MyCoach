@@ -44,6 +44,7 @@ export default function NewGoalScreen() {
     const [buildupScheme, updateBuildupScheme] = useState(undefined);
     const [goalQuantifier, updateGoalQuantifier] = useState([quantities[0]]);
     const [goalQuantity, updateGoalQuantity] = useState("0");
+    const [wholeDay, updateWholeDay] = useState(false);
     const [goalTrust, updateGoalTrust] = useState(0);
     const [goalThreshold, updateGoalThreshold] = useState("");
     const [goalThresholdDescription, updateGoalThresholdDescription] = useState("");
@@ -92,7 +93,8 @@ export default function NewGoalScreen() {
                 setQuantifyGoal(goal.quantity ? true : false);
                 updateBuildupScheme(newBuildupScheme);
                 updateBuildupGoal(newBuildupScheme);
-                updateMeasurements(newBuildupScheme ? newBuildupScheme.measurements : {0: 0, 1: 0, 2: 0})
+                updateMeasurements(newBuildupScheme ? newBuildupScheme.measurements : {0: 0, 1: 0, 2: 0});
+                updateWholeDay(goal.wholeDay ? goal.wholeDay : false);
                 updateGoalDescription(goal.description);
                 updateGoalTitle(goal.title);
                 updateGoalThreshold(goal.threshold);
@@ -119,6 +121,7 @@ export default function NewGoalScreen() {
                 values: JSON.stringify(goalValues), 
                 quantifier: goalQuantifier[0].id, 
                 quantity: parseInt(goalQuantity), 
+                wholeDay: wholeDay,
                 days: JSON.stringify(selectedDays), 
                 trust: goalTrust, 
                 threshold: goalThreshold, 
@@ -134,6 +137,7 @@ export default function NewGoalScreen() {
                 values: JSON.stringify(goalValues), 
                 quantifier: goalQuantifier[0].id, 
                 quantity: parseInt(goalQuantity), 
+                wholeDay: wholeDay,
                 days: JSON.stringify(selectedDays), 
                 trust: goalTrust, 
                 threshold: goalThreshold, 
@@ -222,6 +226,10 @@ export default function NewGoalScreen() {
                             const buttonClass = selectedDays[day] ? "day-button-selected" : "day-button";
                             return <div key={day} className={buttonClass} onClick={() => toggleDaySelection(day)}>{day}</div>
                         })}
+                    </div>
+                    <div style={{display:'flex', width: '100%', marginTop: '.85em'}}>
+                        <p style={{flex:2}}>Gedurende de hele dag?</p>
+                        <Input style={{marginRight:"1em"}} value={wholeDay} onChange={() => updateWholeDay(oldValue => !oldValue)} type="checkbox"/>
                     </div>
                 </React.Fragment>}
                 <hr/>

@@ -2,13 +2,14 @@ import { check } from 'meteor/check';
 import { GoalSettingCollection } from './GoalSettingCollection.jsx';
 
 Meteor.methods({
-    'goalsetting.insertGoal'({userID, title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward, buildupScheme}) {
+    'goalsetting.insertGoal'({userID, title, description, values, quantifier, quantity, wholeDay, days, trust, threshold, thresholdDescription, reward, buildupScheme}) {
         check(userID, Number);
         check(title, String);
         check(description, String);
         check(values, String);
         check(quantifier, String);
         check(quantity, Number);
+        check(wholeDay, Boolean);
         check(days, String);
         check(trust, Number);
         check(threshold, String);
@@ -22,6 +23,7 @@ Meteor.methods({
             values: values,
             quantifier: quantifier, 
             quantity: quantity, 
+            wholeDay: wholeDay,
             days: days, 
             trust: trust, 
             threshold: threshold, 
@@ -31,13 +33,14 @@ Meteor.methods({
             timestamp: new Date,
         });
     },
-    'goalsetting.updateGoal'({userID, goalID, title, description, values, quantifier, quantity, days, trust, threshold, thresholdDescription, reward, buildupScheme}) {
+    'goalsetting.updateGoal'({userID, goalID, title, description, values, quantifier, quantity, wholeDay, days, trust, threshold, thresholdDescription, reward, buildupScheme}) {
         check(userID, Number);
         check(title, String);
         check(description, String);
         check(values, String);
         check(quantifier, String);
         check(quantity, Number);
+        check(wholeDay, Boolean);
         check(days, String);
         check(trust, Number);
         check(threshold, String);
@@ -56,6 +59,7 @@ Meteor.methods({
                 values: values,
                 quantifier: quantifier, 
                 quantity: quantity, 
+                wholeDay: wholeDay,
                 days: days, 
                 trust: trust, 
                 threshold: threshold, 
