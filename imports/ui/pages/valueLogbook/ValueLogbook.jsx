@@ -16,6 +16,7 @@ import GoalSettingManager from '../../../api/managers/GoalSettingManager';
 /* UI Components */
 import NavigationBar from '../../components/NavigationBar';
 import Button from '../../components/Button';
+import ActionButton from '../../components/ActionButton';
 import Icon from '../../components/Illustrations/Icon';
 import Illustration from '../../components/Illustrations/Illustration';
 import Input from '../../components/Input';
@@ -46,7 +47,6 @@ export default function ValueLogbook() {
         setValues(valuesCopy);
         questionManager.setModuleQuestion("THOUGHTSEMOTIONS", "TE-MOD-5-SELECT-5", JSON.stringify(valuesCopy), false);
     }
-
 
     function findValueText(value) {
         const foundValues = valueCodes.filter(valueCode => valueCode.id === value)
@@ -116,8 +116,6 @@ export default function ValueLogbook() {
         </div>)
     }
 
-
-
     function renderGoalCard(goal) {
         const days = JSON.parse(goal.days);
         const values = JSON.parse(goal.values);
@@ -160,12 +158,13 @@ export default function ValueLogbook() {
     return (<React.Fragment>
         <NavigationBar title="Waarden en doelen" back={`/${language}/mycoach/${FlowRouter.getParam('token')}`}/>
         <div className="valuelogbook">
-        <div className="valuelogbook-tabbar">
-            <div className={"valuelogbook-tabitem" + (selectedTab === "GOALS" ? "-selected" : "")} onClick={() => setSelectedTab("GOALS")}>Doelen</div>
-            <div className={"valuelogbook-tabitem" + (selectedTab === "VALUES" ? "-selected" : "")} onClick={() => setSelectedTab("VALUES")}>Waarden</div>
-        </div>
-            {selectedTab === "VALUES" && renderValuesTab()}
-            {selectedTab === "GOALS" && renderGoalsTab()}
+            <ActionButton icon="information" onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/module/thoughtsemotions/TE_MOD_5`)} width="100%" color="blue">Bekijk onderdeel 'Waarden'</ActionButton>
+            <div className="valuelogbook-tabbar">
+                <div className={"valuelogbook-tabitem" + (selectedTab === "GOALS" ? "-selected" : "")} onClick={() => setSelectedTab("GOALS")}>Doelen</div>
+                <div className={"valuelogbook-tabitem" + (selectedTab === "VALUES" ? "-selected" : "")} onClick={() => setSelectedTab("VALUES")}>Waarden</div>
+            </div>
+                {selectedTab === "VALUES" && renderValuesTab()}
+                {selectedTab === "GOALS" && renderGoalsTab()}
         </div>
     </React.Fragment>);
 }
