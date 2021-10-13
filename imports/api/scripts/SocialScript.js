@@ -7,7 +7,7 @@ const SOCMOD1 = {
     description: "We hebben allemaal nood aan sociale steun. Maar wat is sociale steun juist en waarom is dit zo belangrijk? Dit hoofdstuk geeft een kort overzicht.",
     duration: "5 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "soc-mod-social",
     imageWidth: "180px",
     cards: [{
             title: "Een stelling",
@@ -101,7 +101,7 @@ const SOCMOD2 = {
     description: "Hoe kan sociale steun van je omgeving verhogen? Dit onderdeel staat boordevol tips & tricks.",
     duration: "10 minuten",
     type: "Interactief",
-    image: "learning",
+    image: "soc-mod-support",
     imageWidth: "180px",
     cards: [{
             title: "Inleiding",
@@ -337,7 +337,7 @@ const SOCMOD3 = {
     description: "In dit hoofdstuk leer je welke reacties van jouw omgeving mogelijks een negatief effect hebben op jouw situatie en hoe je hiermee kan omgaan.",
     duration: "7 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "soc-mod-reactions",
     imageWidth: "180px",
     cards: [{
             title: "Vormen van reacties",
@@ -681,8 +681,8 @@ const SOCMOD4 = {
     description: "In dit hoofdstuk leer je welke reacties van jouw omgeving mogelijks een negatief effect hebben op jouw situatie en hoe je hiermee kan omgaan.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
-    imageWidth: "180px",
+    image: "soc-mod-context",
+    imageWidth: "160px",
     cards: [{
             title: "Inleiding",
             cardContents: [
@@ -908,7 +908,7 @@ const SOCMOD5 = {
     description: "In welk opzicht kan sociale media helpen maar waar moet je ook echt mee oppassen?",
     duration: "5 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "soc-mod-socialmedia",
     imageWidth: "180px",
     cards: [{
             title: "Inleiding",
@@ -1020,14 +1020,14 @@ const SOCMOD5 = {
 
 const SOCMOD6 = {
     id: "SOC_MOD_6",
-    title: "Jouw netwerk",
-    titleMarkup: ["Jouw", "Netwerk"],
+    title: "Mijn netwerk",
+    titleMarkup: ["Mijn", "Netwerk"],
     part: 6,
     description: "Wie kan echt een verschil maken en betrek je dus best in je netwerk?",
     duration: "5 minuten",
     type: "Informatief",
-    image: "learning",
-    imageWidth: "180px",
+    image: "soc-mod-network",
+    imageWidth: "210px",
     cards: [{
             title: "Inleiding",
             cardContents: [
