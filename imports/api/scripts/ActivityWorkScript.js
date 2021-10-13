@@ -37,7 +37,11 @@ const ACTMOD1 = {
                 {
                     type: "Text",
                     content: ["Welzijn, je lichamelijk en mentaal goed voelen, bereik je wanneer de ", {type: "bold", content: "belasting"},  " (draaglast) die je te verwerken krijgt op het werk en tijdens je vrije tijd (bv. strijken, stofzuigen, …) en je ", {type: "bold", content: "belastbaarheid"},  " (draagkracht), datgene wat je fysiek en mentaal aankan, in balans zijn. Zijn beide gedurende langere tijd uit balans, dan vermindert je welzijn en kunnen er gezondheidsklachten ontstaan."]
-                }
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/belastingbelastbaarheid.png"
+                },
             ]
         },
         {
@@ -64,6 +68,10 @@ const ACTMOD1 = {
                     type: "Text",
                     content: "Belastbaarheid of draagkracht is datgene wat je fysiek en mentaal aan kan. Dat wordt bepaald door meerdere factoren waaronder: je algemene gezondheidstoestand, je lichamelijke conditie en spierkracht, je kennis en ervaring, je attitude (hoe je tegenover bepaalde zaken staat) en motivatie,  de manier waarop je met stress en druk omgaat, je familiale en sociale omstandigheden. Belastbaarheid is individueel verschillend."
                 },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/life.jpg"
+                },
             ]
         },
         {
@@ -71,7 +79,104 @@ const ACTMOD1 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Hoe ziet jouw weegschaal eruit? Is deze in balans of helt je weegschaal regelmatig over?"
+                    content: "Hoe ziet jouw weegschaal eruit? Is deze in balans of helt je weegschaal regelmatig over? We gaan eerst kijken naar je belasting."
+                },
+                {
+                    type: "Subtitle",
+                    content: "Belasting"
+                },
+                {
+                    type: "Text",
+                    content: ["Een ", {type: "italic", content: "hoge belasting"}, " houdt in dat je een hoge werkdruk of een groot takenpakket hebt op je werk en een druk privé leven met veel huishoudelijke taken, ... Een ", {type: "italic", content: "lage belasting"}, " houdt in dat je geen uitdagende job, weinig om handen in je privé leven, ..."]
+                },
+                {
+                    id: "ACT-MOD-1-BELASTING",
+                    type: "Slider",
+                    text: "Hoe zit het met jouw belasting? Geef het een score op 100 (met 1 een lage belasting, en 100 een zeer hoge belasting)",
+                    from: 1,
+                    to: 100,
+                    showValue: true,
+                    save: true,
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Belastbaarheid"
+                },
+                {
+                    type: "Text",
+                    content: ["Een ", {type: "italic", content: "hoge belastbaarheid"}, " wilt zeggen dat je een gezonde levensstijl hebt, een goede nachtrust ervaart, doorgaans een positieve attitude aanneemt, ...  Een ", {type: "italic", content: "lage belastbaarheid"}, " daarentegen wilt zeggen dat je een slechte nachtrust hebt, geen tijd hebt om gezond te bewegen, een lagere mentale veerkracht hebt, een ziekte, ..."]
+                },
+                {
+                    id: "ACT-MOD-1-BELASTBAARHEID",
+                    type: "Slider",
+                    text: "Hoe zit het met jouw belastbaarheid? Geef het een score op 100 (met 1 een lage belastbaarheid, en 100 een zeer hoge belastbaarheid)",
+                    from: 1,
+                    to: 100,
+                    showValue: true,
+                    save: true,
+                },
+            ]
+        },
+        {
+            title: "Overbelasting",
+            showIf: [{rule: "ActScale", pattern: 1}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Je bent wat overbelast. Overbelasting treedt op wanneer de belasting en je belastbaarheid gedurende langere tijd uit balans zijn. Door goed voor jezelf te zorgen verhoog je je belastbaarheid en kan je de belasting beter opvangen. De volgende factoren kunnen bijdragen tot een goede balans: "
+                },
+                {
+                    type: "List",
+                    content: ["Afwisseling tussen inspanning en ontspanning.",
+                        "Een gezond eetpatroon.",
+                        "Goede kwaliteit en hoeveelheid slaap.",
+                        "Voldoende beweging.",
+                        "Regelmatige afwisseling van houdingen en bewegingen.",
+                        "Goed omgaan met stressperioden."
+                    ]
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/meerbelasting.png"
+                },
+            ]
+        },
+        {
+            title: "Onderbelasting",
+            showIf: [{rule: "ActScale", pattern: 2}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Je bent wat onderbelast. Onderbelasting treedt op wanneer de belasting en je belastbaarheid gedurende langere tijd uit balans zijn. Bij onderbelasting beweeg je te weinig of zit je te lang en dit kan leiden tot gezondheidsklachten (zowel fysieke als mentale klachten). "
+                },
+                {
+                    type: "Text",
+                    content: "Bij chronische pijn is een gezond evenwicht tussen belasting en belastbaarheid extra belangrijk. In deze module krijg je tips en trucs aangereikt voor een gezonde balans. Zoals afwisseling tussen rust en activiteit, bewust kiezen tussen energiegevers en energievreters."
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/meerbelastbaarheid.png"
+                },
+            ]
+        },
+        {
+            title: "In balans",
+            showIf: [{rule: "ActScale", pattern: 3}],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Jouw belasting en belastbaarheid zijn redelijk in balans. Blijf goed voor jezelf zorgen zodoende je dit evenwicht kan bewaren. Hé, het is oké om even kort uit evenwicht te zijn als je nadien terug in balans geraakt."
+                },
+                {
+                    type: "Text",
+                    content: "Bij chronische pijn is een gezond evenwicht tussen belasting en belastbaarheid extra belangrijk. Vaak zien we patronen van overbelasting of juist te weinig belasting. In deze module krijg je tips en trucs aangereikt voor een gezonde balans. Zoals afwisseling tussen rust en activiteit, bewust kiezen tussen energiegevers en energievreters."
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/belastingbelastbaarheid.png"
                 },
             ]
         },

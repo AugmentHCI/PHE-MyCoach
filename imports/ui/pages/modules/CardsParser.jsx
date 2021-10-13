@@ -98,6 +98,13 @@ function CardsParser(props) {
                     let swipeAnswersSelection = userQuestions[rule.questionID];
                     if (!swipeAnswersSelection || !JSON.parse(swipeAnswersSelection)[rule.answerID]) return false;
                     break;
+                case "ActScale":
+                    const answerBST = userQuestions["ACT-MOD-1-BELASTING"];
+                    const answerBBH = userQuestions["ACT-MOD-1-BELASTBAARHEID"];
+                    if (answerBST >= 65 && answerBBH <= 35 && rule.pattern === 1) return true;
+                    else if (answerBST <= 35 && answerBBH >= 65 && rule.pattern === 2) return true;
+                    else if (rule.pattern === 3 && !(answerBST >= 65 && answerBBH <= 35) && !(answerBST <= 35 && answerBBH >= 65)) return true;
+                    return false;
                 case "HasUnlockedShortcut":
                     if (userShortcuts && userShortcuts.every(shortcut => shortcut.shortcut !== rule.shortcut)) return false;
                     break;
