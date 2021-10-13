@@ -7,6 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 /* Internal API */
 import createSortingContent from './ContentSorting';
 import createSwipeContent from './ContentSwiping';
+import LifeChartContent from './ContentLifechart';
 
 import contentStoryTest from './ContentStory';
 
@@ -21,7 +22,6 @@ import Icon from '../../components/Illustrations/Icon.jsx';
 /* Styles */
 import './ContentParser.scss';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Requires a loader
-import createLifeChartContent from './ContentLifechart';
 
 
 function ContentParser(props) {
@@ -463,7 +463,7 @@ function ContentParser(props) {
             case 'Shortcut':
                 return createShortcutContent(props);
             case 'LifedomainChart':
-                return createLifeChartContent({questionManager: props.questionManager});
+                return <LifeChartContent questionManager={props.questionManager}/>;
             case 'Story':
                 return createStoryContent({content: props.data.content, dynamicHeight: props.data.dynamicHeight});
             case 'StoryTesting':

@@ -4,7 +4,7 @@ import { Radar } from '@ant-design/charts';
 import QuestionManager from '../../../api/managers/QuestionManager';
 import LoadingScreen from '../../components/LoadingScreen';
 
-export default function createLifeChartContent({questionManager}) {
+export default function LifeChartContent({questionManager}) {
 
     const [data, setData] = useState(undefined);
 

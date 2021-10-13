@@ -24,6 +24,7 @@ import LoadingScreen from '../../components/LoadingScreen';
 
 /* Styles */
 import "./ValueLogbook.scss";
+import LifeChartContent from '../modules/ContentLifechart';
 
 export default function ValueLogbook() {
 
@@ -111,6 +112,13 @@ export default function ValueLogbook() {
             <div style={{display: "flex"}}>
             {!addingMode && values && Object.keys(values) > 0 && <Button center color="blue" onClick={() => setEditMode(!editMode)} style={{marginTop: "20px", flex: 1, marginRight: editMode ? 0 : "10px"}}>{editMode ? "Opslaan" : "Wijzig"}</Button>}
             {!editMode && <Button center color="blue" onClick={() => saveButton()} style={{marginTop: "20px", flex: 1}}>{addingMode ? (addingValue.length > 0 ? "Voeg toe" : "Annuleer") : "Voeg waarde toe"}</Button>}
+            </div>
+            <div style={{height:"260px", width:"100%"}}>
+                <hr/>
+                <h3 style={{fontSize:"18px", color:"var(--idewe-blue)"}}>Levensdomeinen</h3>
+                <p>Hier zie je nog een overzicht van je levensdomeinen. Zijn er domeinen die jij belangrijk vindt maar nog niet genoeg in investeert? Probeer dan enkele waarden te bedenken die je er voor zouden zorgen dat het meer overeenkomt!</p> 
+                <LifeChartContent questionManager={questionManager}/>
+                <div style={{height: "20px", width: "100%"}}/>
             </div>
             </FadeIn>
         </div>)
