@@ -31,8 +31,8 @@ const MOVMOD1 = {
                     content: "In het volgende filmpje krijg je een overzicht van alle voordelen van bewegen."
                 },
                 {
-                    type: "Video - Embed opvragen",
-                    link: "https://vimeo.com/556073021/cd280e2b93"
+                    type: "Video",
+                    link: "https://player.vimeo.com/video/556073021"
                 },
                 {
                     type: "Text",
@@ -700,7 +700,8 @@ const MOVMOD4 = {
             title: "Workout video",
             cardContents: [
                 {
-                    type: "Workout-video",
+                    type: "Video",
+                    link: "https://player.vimeo.com/video/577948106"
                 }
             ]
         },
