@@ -533,7 +533,7 @@ const ACTMOD3ERGO = {
                 },
                 {
                     type: "Image",
-                    link: "/images/activitywork/cleaning.jpg"
+                    link: "/images/activitywork/gehurkt.jpg"
                 },
                 {
                     id: "ACT-MOD-3-FYS-Q1",
@@ -577,6 +577,14 @@ const ACTMOD3ERGO = {
                     type: "List",
                     content: [[{type: "bold", content: "Wervelkolom"}, ": behoud zo veel mogelijk de neutrale krommingen"], [{type: "bold", content: "Knieën "}, {type: "italic", content: "(tijdens het tillen)"}, ": buig niet dieper dan 90°"], [{type: "bold", content: "Knieën "}, {type: "italic", content: "(tijdens het stilstaan)"}, ": buig knieën lichtjes en overstrek ze niet"], [{type: "bold", content: "Schouders"}, ": houd bovenarmen zo dicht mogelijk bij je romp, je schouder ontspannen (niet optrekken en lichtjes naar achteren)"], [{type: "bold", content: "Pols"}, ": behoud zo veel mogelijk de verticale stand van de pols (zoals een hand geven)"]]
                 },
+                {
+                    type: "Text",
+                    content: "Bekijk even de onderstaande twee filmpjes"
+                },
+                {
+                    type: "Video",
+                    link: "https://vimeo.com/511472364/04e7ea2da3"
+                }
             ]
         },
         {
@@ -602,6 +610,10 @@ const ACTMOD3ERGO = {
                     content: "Je beenspieren zijn de sterkste spieren in je lichaam. Gebruik deze zoveel mogelijk. Wanneer je iets moet tillen van de grond, buig dan goed door je knieën (buig niet dieper dan een hoek van 90° in de knieën) en breng je rug niet te ver naar voren. Je lichaamsgewicht kun je effectief inzetten tijdens het trekken en duwen."
                 },
                 {
+                    type: "Image",
+                    link: "/images/activitywork/pushing.jpg"
+                },
+                {
                     type: "Text",
                     content: [{type:"bold", content:"Trekken of duwen?"}]
                 },
@@ -625,6 +637,10 @@ const ACTMOD3ERGO = {
                 {
                     type: "List",
                     content: ["Sta in evenwicht", "Gebruik steeds twee (gestrekte) armen zodat schouders en rug symmetrisch worden belast", "Zet de beweging rustig in. Gebruik de 3 seconden-regel: neem altijd drie tellen de tijd om een kar rustig in  beweging te krijgen"]
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/trash.jpg"
                 },
             ]
         },
@@ -970,6 +986,7 @@ const ACTMOD3ERGO = {
                 },
                 {
                     type: "Image",
+                    width: "100",
                     link: "/images/activitywork/fys_principes.png",
                 }
             ]
