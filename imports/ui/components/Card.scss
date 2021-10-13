@@ -26,6 +26,12 @@
 
 .card-header-div {
   display: flex;
+
+  &-titlecard {
+    @extend .card-header-div;
+    justify-content: center;
+    padding-bottom: .5em;
+  }
 }
 
 .card-scroll {

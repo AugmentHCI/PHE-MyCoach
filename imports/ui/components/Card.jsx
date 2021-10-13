@@ -8,7 +8,7 @@ export default function Card(props) {
     const cardBodyClass = props.overview ? "card-body-overview" : "card-body";
 
     if (props.titleCard) return (<div className="card-overview">
-        <div className="card-header-div">
+        <div className="card-header-div-titlecard">
             <div className="card-header-title">
                 {props.title}
             </div>
