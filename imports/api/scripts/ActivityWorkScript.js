@@ -908,29 +908,65 @@ const ACTMOD4MGMT = {
                 },
                 {
                     type: "List",
-                    content: [[{type: "bold", content: "Laag activiteitenniveau"}, ": Deze personen voeren over het algemeen weinig activiteiten uit. Of, in geval van pijn, hebben de neiging om activiteiten te vermijden. Voldoende bewegen en het uitvoeren van waardevolle activiteiten is echter super belangrijk. Beweging verhoogt de doorbloeding naar je spieren en gewrichten, waardoor ze soepel blijven en sterker worden. Door een laag activiteitenniveau wordt je lichaam zwakker waardoor het de belasting in je dagelijks leven minder goed aan kan. Naast de lichamelijke voordelen dragen waardevolle activiteiten ook bij aan je mentale welzijn. Ook bij pijn zijn beweging en zoveel mogelijk je normale activiteiten verderzetten essentieel voor het herstelproces. Krijg je bijvoorbeeld veel last tijdens een specifieke activiteit, dan kan je nog altijd verder gaan met iets anders in plaats van lang te rusten of in de zetel te hangen."], [{type: "bold", content: "Fluctuerend activiteitenpatroon"}, ": Bij mensen met een fluctuerend patroon varieert de hoeveelheid activiteiten sterk van dag tot dag. Hoewel een evenwichtig activiteitenpatroon beter is, is dit niet noodzakelijk een probleem. Tenzij jij je laat leiden door je klachten. Dit wil zeggen dat je op goede dagen heel veel doet en de dagen nadien maar heel weinig kan doen door een sterke toename van je klachten. Deze sterk afwisselende over- en onderbelasting brengt je op termijn nergens. Ook al vind je het niet altijd gemakkelijk om te stoppen wanneer je een activiteit wilt afwerken, toch is het belangrijk om een pauze in te lassen of een andere activiteit te doen wanneer je een sterke toename van je klachten krijgt. Lukt dat je, dan boek je winst. Je gaat minder in het rood en hoeft minder te herstellen, waardoor de daaropvolgende dagen een stuk comfortabeler zijn."], [{type: "bold", content: "Belastend activiteitenpatroon"}, ": Deze mensen hebben constant een hoog activiteitenniveau of voeren veel activiteiten uit die ze als belastend ervaren. Steeds activiteiten uitvoeren die belastend zijn of elke dag in het rood gaan, is uitputtend voor je lichaam. Op een moment zal dit zich wreken. Daarom is het belangrijk om af te wisselen met activiteiten die minder belastend zijn en rustmomenten in te lassen."], [{type: "bold", content: "Evenwichtig activiteitenpatroon"}, ": mensen met een evenwichtig activiteitenpatroon hebben een goede balans gevonden tussen rust en activiteit. Ze wisselen zwaardere taken af met minder zware taken. Ze bewegen voldoende, maar plannen ook voldoende rust in."]]
-                }
+                    content: [[{type: "bold", content: "Laag activiteitenniveau"}, ": Deze personen voeren over het algemeen weinig activiteiten uit. Of, in geval van pijn, hebben de neiging om activiteiten te vermijden. Voldoende bewegen en het uitvoeren van waardevolle activiteiten is echter super belangrijk. Beweging verhoogt de doorbloeding naar je spieren en gewrichten, waardoor ze soepel blijven en sterker worden. Door een laag activiteitenniveau wordt je lichaam zwakker waardoor het de belasting in je dagelijks leven minder goed aan kan. Naast de lichamelijke voordelen dragen waardevolle activiteiten ook bij aan je mentale welzijn. Ook bij pijn zijn beweging en zoveel mogelijk je normale activiteiten verderzetten essentieel voor het herstelproces. Krijg je bijvoorbeeld veel last tijdens een specifieke activiteit, dan kan je nog altijd verder gaan met iets anders in plaats van lang te rusten of in de zetel te hangen."]]
+                },
+                {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/pattern1.png"
+                },
+                {
+                    type: "List",
+                    content: [[{type: "bold", content: "Fluctuerend activiteitenpatroon"}, ": Bij mensen met een fluctuerend patroon varieert de hoeveelheid activiteiten sterk van dag tot dag. Hoewel een evenwichtig activiteitenpatroon beter is, is dit niet noodzakelijk een probleem. Tenzij jij je laat leiden door je klachten. Dit wil zeggen dat je op goede dagen heel veel doet en de dagen nadien maar heel weinig kan doen door een sterke toename van je klachten. Deze sterk afwisselende over- en onderbelasting brengt je op termijn nergens. Ook al vind je het niet altijd gemakkelijk om te stoppen wanneer je een activiteit wilt afwerken, toch is het belangrijk om een pauze in te lassen of een andere activiteit te doen wanneer je een sterke toename van je klachten krijgt. Lukt dat je, dan boek je winst. Je gaat minder in het rood en hoeft minder te herstellen, waardoor de daaropvolgende dagen een stuk comfortabeler zijn."]]
+                },
+                {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/pattern2.png"
+                },
+                {
+                    type: "List",
+                    content: [[{type: "bold", content: "Belastend activiteitenpatroon"}, ": Deze mensen hebben constant een hoog activiteitenniveau of voeren veel activiteiten uit die ze als belastend ervaren. Steeds activiteiten uitvoeren die belastend zijn of elke dag in het rood gaan, is uitputtend voor je lichaam. Op een moment zal dit zich wreken. Daarom is het belangrijk om af te wisselen met activiteiten die minder belastend zijn en rustmomenten in te lassen."]]
+                },
+                {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/pattern3.png"
+                },
+                {
+                    type: "List",
+                    content: [[{type: "bold", content: "Evenwichtig activiteitenpatroon"}, ": mensen met een evenwichtig activiteitenpatroon hebben een goede balans gevonden tussen rust en activiteit. Ze wisselen zwaardere taken af met minder zware taken. Ze bewegen voldoende, maar plannen ook voldoende rust in."]]
+                },
+                {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/pattern4.png"
+                },
             ]
         },
         {
             title: "Doelen en opbouwschema",
-            showIf: [{rule:"HasNotUnlockedShortcut", shortcut: "GOALSETTING"}],
             cardContents: [
                 {
                     type: "Text",
                     content: "Om te beginnen is het belangrijk om stil te staan bij welke activiteiten voor jou belangrijk zijn. Het stellen van doelen maakt heel duidelijk wat belangrijk voor je is en wat je wilt bereiken (of je nu last hebt van pijn of niet). Stel dat jij bijvoorbeeld veel belang hecht aan gezondheid en zelfzorg. Dan kan je dit in je leven incorporeren door een marathon te lopen, maar evenzeer door dagelijks een wandeling rond de blok te doen of ook door voldoende rustmomenten in te bouwen of door op je voeding te letten,... Stel dat jij belang hecht aan het leveren van een zinvolle bijdrage, dan zou je dat kunnen doen door te gaan werken, door vrijwilligerswerk te doen, door boodschappen te doen voor je zieke buurvrouw,... Of stel dat je graag meer quality time wilt met je familie. Bijvoorbeeld door wekelijks met je ouders te bellen of door de kinderen met de fiets naar school te brengen."
                 },
                 {
-                    type: "Break"
+                    type: "Image",
+                    link: "/images/movement/thoughts.jpg"
                 },
                 {
                     type: "Text",
                     content: "Hier zijn alvast enkele tips bij het stellen van doelen:"
                 },
                 {
-                    type: "List",
-                    numbered: true, 
-                    content: ["Laat je leiden door je visie, waarden en principes: Doelen kies je in functie van wat voor jou als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen.", "Maak concrete doelen: Je kan een doel pas bereiken als je weet wat je hiervoor moet doen. Werken aan je gezondheid is bijvoorbeeld geen doel, maar een waarde (je hecht belang aan jouw gezondheid). Een concreet doel om deze waarde te bereiken kan zijn dat je dagelijks een wandeling van 30 minuten maakt, of dat je maar 1 keer per week een dessertje eet.", "Stel realistische doelen: Een goed gekozen doen kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te neme. Je kan beter starten met een doel van 5km, dan 10km, enz.", "Houd rekening met de termijn: Hoe verder weg in de toekomst een bepaald doel ligt, hoe moeilijker het wordt om dit te bereiken. Splits daarom ambitieuze doelen op in tussentijdse doelen, zo bewaar je het overzicht. Let op dat je je ook niet laat leiden door strakke tijdschema's, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."]
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/path.jpg", title: "Tip 1 - Laat je leiden door je visie, waarden en principes", text: "Doelen kies je in functie van wat voor jou als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen."},
+                        {image: "/images/movement/goals.jpg", title: "Tip 2 - Maak concrete doelen", text: "Je kan een doel pas bereiken als je weet wat je hiervoor moet doen. Werken aan je gezondheid is bijvoorbeeld geen doel, maar een waarde (je hecht belang aan jouw gezondheid). Een concreet doel om deze waarde te bereiken kan zijn dat je dagelijks een wandeling van 30 minuten maakt, of dat je maar 1 keer per week een dessertje eet."},
+                        {image: "/images/movement/rock.jpg", title: "Tip 3 - Stel realistische doelen", text: "Een goed gekozen doen kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te neme. Je kan beter starten met een doel van 5km, dan 10km, enz."},
+                        {image: "/images/movement/pins.jpg", title: "Tip 4 - Houd rekening met de termijn", text: "Hoe verder weg in de toekomst een bepaald doel ligt, hoe moeilijker het wordt om dit te bereiken. Splits daarom ambitieuze doelen op in tussentijdse doelen, zo bewaar je het overzicht. Let op dat je je ook niet laat leiden door strakke tijdschema's, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."},
+                    ]
                 }
             ]
         },
@@ -943,43 +979,55 @@ const ACTMOD4MGMT = {
                     content: "Hier volgen 2 voorbeelden van hoe je goede doelen kan stellen."
                 },
                 {
-                    type: "List",
-                    numbered: true, 
-                    content: ["Els is 35 jaar, getrouwd, heeft een dochter van 5 jaar en werkt op een kantoor. Ze heeft tijdens het werken geregeld last van haar nek, zeker op dagen dat ze vaak met klanten moet bellen. Omdat gezondheid een belangrijke rol heeft in haar leven, wilt ze hieraan werken. Ze weet dat het belangrijk is om te bewegen en regelmatig van houding te wisselen. Daarom neemt ze haar voor om 2 minuten recht te staan en te bewegen na ieder uur te werken.", "Paul is 52 jaar, gescheiden, zijn kinderen zijn al uit huis en werkt als schrijnwerker. Zijn vrienden gaan iedere zaterdag 100 km samen fietsen. Omdat hij veel belang hecht aan vriendschap, zou hij graag meegaan. Conditioneel is hij nog niet zo sterk en hij heeft ook wat last van zijn knie. Daarom besluit hij om zijn fietsen op te bouwen. Hij wilt 1 keer per week trainen en op zaterdag rijdt hij een stukje mee met zijn vrienden."]
+                    type: "Break"
                 },
                 {
-                    type: "Text",
-                    content: "Sommige doelen zal je niet zomaar kunnen bereiken. Hiervoor heb je een goed opbouwschema nodig. Ook om je belastbaarheid te verhogen en actiever te worden is een veilig opbouwschema essentieel."
-                }
-            ]
-        },
-        {
-            title: "Opbouwschema",
-            showIf: [{rule:"HasNotUnlockedShortcut", shortcut: "GOALSETTING"}],
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Hier heb je een overzicht van hoe je een opbouwschema kan maken:"
+                    type: "Subtitle",
+                    content: "Voorbeeld 1 - Els"
                 },
                 {
-                    type: "Text",
-                    content: "Om je activiteitenniveau langzaam op te gaan bouwen moeten we eerst je basisniveau vaststellen. Je basisniveau bepaal je door de tijd te meten dat je met een activiteit bezig kunt zijn totdat je moe wordt of de pijn toeneemt. Je bepaalt je basisniveau liefst meerdere keren, zodat je een betrouwbaar gemiddelde krijgt. Je hebt namelijk goede en slechte dagen. Van deze basis haal je 20% af om je startniveau te bepalen. Houd dit één tot twee weken vol, afhankelijk van je hersteltijd. Daarna breiden we uit met ± 10%. Wanneer je gaat opbouwen mag de hersteltijd niet toenemen. Het kan zijn dat pijn en vermoeidheid erger worden, maar dat is niet erg, zolang de hersteltijd maar niet langer wordt. Het is super belangrijk dat je je aan het schema houdt. Hoe verleidelijk misschien ook, maar het is niet goed dat je al je activiteiten tegelijk gaat opbouwen."
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/neckpain.jpg", text: "Els is 35 jaar, getrouwd, heeft een dochter van 5 jaar en werkt op een kantoor. Ze heeft tijdens het werken geregeld last van haar nek, zeker op dagen dat ze vaak met klanten moet bellen."},
+                        {image: "/images/movement/clock.jpg", text: "Omdat gezondheid een belangrijke rol heeft in haar leven, wilt ze hieraan werken. Ze weet dat het belangrijk is om te bewegen en regelmatig van houding te wisselen. Daarom neemt ze haar voor om 2 minuten recht te staan en te bewegen na ieder uur te werken."}
+                    ]
                 },
                 {
                     type: "Break"
                 },
                 {
-                    type: "Text",
-                    content: "Hier volgen 2 voorbeelden:"
+                    type: "Subtitle",
+                    content: "Voorbeeld 2 - Paul"
                 },
                 {
-                    type: "List",
-                    content: ["Na 10 minuten fietsen neemt mijn pijn toe. Dan is je startniveau 8 minuten. Na één tot twee weken verhoog je dit naar 9 minuten.", "Na 500 meter stappen neemt mijn pijn toe. Dan is je startniveau 400 meter. Na één tot twee weken verhoog je dit naar 440 meter."]
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/paul.jpg", text: "Paul is 52 jaar, gescheiden, zijn kinderen zijn al uit huis en werkt als schrijnwerker. Zijn vrienden gaan iedere zaterdag 100 km samen fietsen."},
+                        {image: "/images/movement/graph.jpg", text: "Omdat hij veel belang hecht aan vriendschap, zou hij graag meegaan. Conditioneel is hij nog niet zo sterk en hij heeft ook wat last van zijn knie. Daarom besluit hij om zijn fietsen op te bouwen. Hij wilt 1 keer per week trainen en op zaterdag rijdt hij een stukje mee met zijn vrienden."}
+                    ]
+                },
+            ]
+        },
+        {
+            title: "Opbouwschema",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Sommige doelen zal je niet zomaar kunnen bereiken. Hiervoor heb je een goed opbouwschema nodig. Ook om je belastbaarheid te verhogen en actiever te worden is een veilig opbouwschema essentieel."
                 },
                 {
                     type: "Text",
-                    content: "Nu is het aan jou! We hebben een handige tool toegevoegd aan de shortcuts, waarmee je zelf persoonlijke doelen kan stellen. De app kan ook automatisch een opbouwschema maken voor doelen waar dit nodig is (bijvoorbeeld als je wilt opbouwen naar 10 000 stappen per dag)."
-                }
+                    content: "Hier heb je een overzicht van hoe je een opbouwschema kan maken:"
+                },
+                {
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/start.jpg", title: "Stap 1", text: "Om je activiteitenniveau langzaam op te bouwen moeten we eerst je basisniveau vaststellen. Je basisniveau bepaal je door de tijd te meten dat je met een activiteit bezig kunt zijn totdat je moe wordt of de pijn toeneemt. Je bepaalt je basisniveau liefst meerdere keren, zodat je een betrouwbaar gemiddelde krijgt. Je hebt namelijk goede en slechte dagen. Van deze basis haal je 20% af om je startniveau te bepalen."},
+                        {image: "/images/movement/stairs.jpg", title: "Stap 2", text: "Houd dit één tot twee weken vol, afhankelijk van je hersteltijd. Daarna breiden we uit met ± 10%. Wanneer je gaat opbouwen mag de hersteltijd niet toenemen. Het kan zijn dat pijn en vermoeidheid erger worden, maar dat is niet erg, zolang de hersteltijd maar niet langer wordt. Het is super belangrijk dat je je aan het schema houdt. Hoe verleidelijk misschien ook, maar het is niet goed dat je al je activiteiten tegelijk gaat opbouwen."},
+                        {image: "/images/movement/stairs.jpg", title: "Voorbeeld 1", text: "Na 10 minuten fietsen neemt jouw pijn toe. Dan is je startniveau 8 minuten. Na één tot twee weken verhoog je dit naar 9 minuten."},
+                        {image: "/images/movement/walking.jpg", title: "Voorbeeld 2", text: "Na 500 meter stappen neemt jouw pijn toe. Dan is je startniveau 400 meter. Na één tot twee weken verhoog je dit naar 440 meter."},
+                    ]
+                },
             ]
         },
         {
@@ -994,24 +1042,41 @@ const ACTMOD4MGMT = {
                     content: "Hier heb je alvast enkele tips die je kunnen helpen bij het maken van een evenwichtige agenda:"
                 },
                 {
-                    type: "Text",
-                    content: [{type:"bold", content: "Afwisseling"}]
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Afwisseling"
                 },
                 {
                     type: "List",
                     content: ["Wissel af tussen zwaardere en lichtere taken.", "Wissel af tussen taken met een verschillende lichamelijke belasting.", "Wissel staande en zittende taken af. Beweeg en wandel af en toe.", "Wissel af tussen inspanning en ontspanning.", "Wissel af tussen taken die je leuk vindt en taken die je minder leuk vindt."]
                 },
                 {
-                    type: "Text",
-                    content: [{type:"bold", content: "Maak zware taken lichter"}]
+                    type: "Image",
+                    link: "/images/activitywork/batteries.png"
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Maak zware taken lichter"
                 },
                 {
                     type: "List",
                     content: ["Splits op in deeltaken (minder lange duur)", "Beperk de taak in tijd (bv. wasmand in 2x strijken)", "Onderbreek met een rustpauze", "Voer de taak op een ergonomische manier uit"]
                 },
                 {
-                    type: "Text",
-                    content: [{type:"bold", content: "Rust"}]
+                    type: "Image",
+                    link: "/images/activitywork/lifting2.jpg"
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Rust"
                 },
                 {
                     type: "Text",
@@ -1022,8 +1087,15 @@ const ACTMOD4MGMT = {
                     content: ["Neem veel korte rustpauzes op een dag in plaats van één lange rustpauze.", "Probeer zoveel mogelijk te rusten vooraleer de vermoeidheid of pijn de kop opsteekt", "Wissel taken (activiteiten) af met rust", "Rust op vaste tijdstippen doorheen de dag", "Plan je rustmomenten in!"]
                 },
                 {
-                    type: "Text",
-                    content: [{type:"bold", content: "Leren weigeren"}]
+                    type: "Image",
+                    link: "/images/activitywork/rustmoment.jpg"
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Leren weigeren"
                 },
                 {
                     type: "Text",
@@ -1033,6 +1105,10 @@ const ACTMOD4MGMT = {
                     type: "List",
                     content: ["Je weigering moet een duidelijke neen omvatten", "Maak duidelijk waarom je neen zegt", "Aanvaard de ontgoocheling van de ander en laat dit ook merken"]
                 },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/no.jpg"
+                },
             ]
         },
         {
@@ -1040,7 +1116,7 @@ const ACTMOD4MGMT = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "We hebben een agenda met activiteiten management toegevoegd aan de shortcuts. Dit kan je helpen bij het plannen van je activiteiten. Zo kan je nog meer evenwicht in je activiteiten bekomen of proberen actiever te worden. Je bent vrij om hier gebruik van te maken. Heb je op 7 verschillende dagen je agenda ingevuld, dan krijg je ook feedback."
+                    content: "We hebben een agenda met activiteiten management toegevoegd aan de shortcuts. Dit kan je helpen bij het plannen van je activiteiten. Zo kan je nog meer evenwicht in je activiteiten bekomen of proberen actiever te worden. Je bent vrij om hier gebruik van te maken."
                 }
             ]
         },
