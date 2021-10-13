@@ -577,14 +577,6 @@ const ACTMOD3ERGO = {
                     type: "List",
                     content: [[{type: "bold", content: "Wervelkolom"}, ": behoud zo veel mogelijk de neutrale krommingen"], [{type: "bold", content: "Knieën "}, {type: "italic", content: "(tijdens het tillen)"}, ": buig niet dieper dan 90°"], [{type: "bold", content: "Knieën "}, {type: "italic", content: "(tijdens het stilstaan)"}, ": buig knieën lichtjes en overstrek ze niet"], [{type: "bold", content: "Schouders"}, ": houd bovenarmen zo dicht mogelijk bij je romp, je schouder ontspannen (niet optrekken en lichtjes naar achteren)"], [{type: "bold", content: "Pols"}, ": behoud zo veel mogelijk de verticale stand van de pols (zoals een hand geven)"]]
                 },
-                {
-                    type: "Text",
-                    content: "Bekijk even de onderstaande twee filmpjes"
-                },
-                {
-                    type: "Video",
-                    link: "https://vimeo.com/511472364/04e7ea2da3"
-                }
             ]
         },
         {
