@@ -14,7 +14,7 @@
   border-radius: 10px;
   margin-bottom: 30px;
   border: none;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--card-shadow);
   transition: 200ms;
 
   &-overview {
