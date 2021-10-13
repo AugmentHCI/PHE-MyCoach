@@ -8,6 +8,8 @@ import { Carousel } from 'react-responsive-carousel';
 import createSortingContent from './ContentSorting';
 import createSwipeContent from './ContentSwiping';
 
+import contentStoryTest from './ContentStory';
+
 /* UI Components */
 import AppModal from '../../components/AppModal.jsx';
 import Button from '../../components/Button.jsx';
@@ -19,6 +21,7 @@ import Icon from '../../components/Illustrations/Icon.jsx';
 /* Styles */
 import './ContentParser.scss';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Requires a loader
+import createLifeChartContent from './ContentLifechart';
 
 
 function ContentParser(props) {
@@ -459,8 +462,12 @@ function ContentParser(props) {
                 return createMultipleChoiceContent(props);
             case 'Shortcut':
                 return createShortcutContent(props);
+            case 'LifedomainChart':
+                return createLifeChartContent({questionManager: props.questionManager});
             case 'Story':
                 return createStoryContent({content: props.data.content, dynamicHeight: props.data.dynamicHeight});
+            case 'StoryTesting':
+                return contentStoryTest({db: props.data.data});
             case 'CircleExercise':
                 return createCircleExerciseContent({id: props.data.id, module: props.module, callback: props.callback, questionManager: props.questionManager});
             case 'Break':

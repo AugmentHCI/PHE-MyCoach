@@ -8,6 +8,7 @@
         "visualize": "meteor --production --extra-packages bundle-visualizer"
     },
     "dependencies": {
+        "@ant-design/charts": "^1.2.14",
         "@babel/core": "^7.12.16",
         "@babel/preset-react": "^7.12.13",
         "@babel/runtime": "^7.12.13",
@@ -17,6 +18,7 @@
         "@material-ui/pickers": "^3.2.10",
         "@molejs/highlight-words-core": "^0.1.1",
         "@nivo/bar": "^0.61.1",
+        "@nivo/core": "^0.74.0",
         "@nivo/line": "^0.61.1",
         "antd": "^4.12.3",
         "babel-plugin-import": "^1.13.3",

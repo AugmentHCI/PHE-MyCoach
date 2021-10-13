@@ -870,15 +870,201 @@ const TEMOD5 = {
     title: "Waarden",
     titleMarkup: ["Waarden"],
     part: 5,
-    description: "Leven naar je waarden helpt je om doelen te stellen en activiteiten te plannen, ondanks de pijn.",
+    description: "Leven volgens je waarden is belangrijk om gelukkig te zijn. Maar hoe doe je dat juist?",
     duration: "10 minuten",
     type: "Oefeningen",
     image: "te-mod-5",
     imageWidth: "170px",
     cards: [
         {
-            id: "TE-MOD5-CARD1",
             title: "Inleiding",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Iedereen zou graag gelukkig zijn. Maar dit is niet altijd even vanzelfsprekend. Soms zorgt het leven voor tegenslagen die het geluk in de weg kunnen staan, zoals pijnklachten. Deze zaken heb je niet altijd onder controle en dat is lastig. Ze kunnen ons leven zo domineren dat we geen aandacht meer hebben voor wat we echt belangrijk vinden. Toch kan je bekijken hoe je, ondanks deze tegenslagen, een stapje kan zetten naar het leven dat je wilt leiden. En heb je geen pijn of tegenslagen? Ook dan kan het leven ervoor zorgen dat je te weinig aandacht of energie steekt in de zaken die je echt belangrijk vindt.",
+                },
+            ]
+        },
+        {
+            titleCard: true,
+            title: "Levensdomeinen"
+        },
+        {
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Om erachter te komen wat jij belangrijk vindt, kan het helpen om al eens even stil te staan bij volgende vraag:",
+                },
+                {
+                    type: "Multitext-Input",
+                    id: "TE-MOD-5-NOLIMIT",
+                    text: "Wat zou je anders of meer doen wanneer je nergens door gehinderd zou worden?",
+                    placeholder: "Schrijf het hier neer"
+                },
+            ]
+        },
+        {
+            title: "Belang van domeinen",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Nu is het tijd om concreter aan de slag te gaan. Hieronder staan een aantal levensdomeinen die energie en aandacht kunnen opeisen. Het belang van de domeinen kan sterk verschillen afhankelijk van de fase in je leven.",
+                },
+                {
+                    type: "Text",
+                    content: "Duid eerst op de sliders aan hoe belangrijk jij ieder domein nu vindt in je leven.",
+                },
+                {
+                    id: "TE-MOD-5-IMPORTANCE-WORK",
+                    type: "Slider",
+                    text: "Hoe belangrijk vind jij je werk?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-IMPORTANCE",
+                    showValue: true,
+                    save: true,
+                },
+                {
+                    id: "TE-MOD-5-IMPORTANCE-RELAX",
+                    type: "Slider",
+                    text: "Hoe belangrijk vind jij ontspanning?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-IMPORTANCE",
+                    showValue: true,
+                    save: true,
+                },
+                {
+                    id: "TE-MOD-5-IMPORTANCE-HEALTH",
+                    type: "Slider",
+                    text: "Hoe belangrijk vind jij je gezondheid?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-IMPORTANCE",
+                    showValue: true,
+                    save: true,
+                },
+                {
+                    id: "TE-MOD-5-IMPORTANCE-DEVELOPMENT",
+                    type: "Slider",
+                    text: "Hoe belangrijk vind jij je persoonlijke ontwikkeling?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-IMPORTANCE",
+                    showValue: true,
+                    save: true,
+                },
+                {
+                    id: "TE-MOD-5-IMPORTANCE-SOCIAL",
+                    type: "Slider",
+                    text: "Hoe belangrijk vind jij je sociaal leven?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-IMPORTANCE",
+                    showValue: true,
+                    save: true,
+                },
+                {
+                    id: "TE-MOD-5-IMPORTANCE-FAMILY",
+                    type: "Slider",
+                    text: "Hoe belangrijk vind jij je familie?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-IMPORTANCE",
+                    showValue: true,
+                    save: true,
+                }
+            ]
+        },
+        {
+            title: "Investeren in domeinen",
+            showIfAnswered: ["TE-MOD-5-IMPORTANCE-WORK", "TE-MOD-5-IMPORTANCE-RELAX", "TE-MOD-5-IMPORTANCE-HEALTH", "TE-MOD-5-IMPORTANCE-DEVELOPMENT", "TE-MOD-5-IMPORTANCE-SOCIAL", "TE-MOD-5-IMPORTANCE-FAMILY"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Duid nu voor iedere domein aan hoeveel je in dat levensdomein investeert.",
+                },
+                {
+                    id: "TE-MOD-5-INVEST-WORK",
+                    type: "Slider",
+                    text: "Hoeveel investeer jij in je werk?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-AMOUNT",
+                    showValue: true,
+                    save: true,
+                },
+                {
+                    id: "TE-MOD-5-INVEST-RELAX",
+                    type: "Slider",
+                    text: "Hoeveel investeer jij in ontspanning?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-AMOUNT",
+                    showValue: true,
+                    save: true,
+                },
+                {
+                    id: "TE-MOD-5-INVEST-HEALTH",
+                    type: "Slider",
+                    text: "Hoeveel investeer jij in je gezondheid?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-AMOUNT",
+                    showValue: true,
+                    save: true,
+                },
+                {
+                    id: "TE-MOD-5-INVEST-DEVELOPMENT",
+                    type: "Slider",
+                    text: "Hoeveel investeer jij in je persoonlijke ontwikkeling?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-AMOUNT",
+                    showValue: true,
+                    save: true,
+                },
+                {
+                    id: "TE-MOD-5-INVEST-SOCIAL",
+                    type: "Slider",
+                    text: "Hoeveel investeer jij in je sociaal leven?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-AMOUNT",
+                    showValue: true,
+                    save: true,
+                },
+                {
+                    id: "TE-MOD-5-INVEST-FAMILY",
+                    type: "Slider",
+                    text: "Hoeveel investeer jij in je familie?",
+                    from: 1,
+                    to: 5,
+                    mapping: "5-AMOUNT",
+                    showValue: true,
+                    save: true,
+                }
+            ]
+        },
+        {
+            title: "Investeren in domeinen",
+            showIfAnswered: ["TE-MOD-5-INVEST-WORK", "TE-MOD-5-INVEST-RELAX", "TE-MOD-5-INVEST-HEALTH", "TE-MOD-5-INVEST-DEVELOPMENT", "TE-MOD-5-INVEST-SOCIAL", "TE-MOD-5-INVEST-FAMILY"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Hier zie je een overzicht van je levensdomeinen.",
+                },
+                {
+                    type: "LifedomainChart"
+                }
+            ]
+        },
+        {
+            titleCard: true,
+            title: "Waarden"
+        },
+        {
+            id: "TE-MOD5-CARD1",
             showIf: [{rule: "Profile", profiles: [1]}],
             cardContents: [
                 {
@@ -927,10 +1113,11 @@ const TEMOD5 = {
         },
         {
             id: "TE-MOD5-CARD2",
+            title: "Waarden",
             cardContents: [
                 {
                     type: "Text",
-                    content: "Je kan een waarde vergelijken met een vuurtoren in de verte, die je door slecht weer gidst en de richting aanwijst."
+                    content: "Vervolgens is het belangrijk om stil te staan bij jouw waarden. Je kan een waarde vergelijken met een vuurtoren in de verte, die je door slecht weer gidst en de richting aanwijst. Door te weten wat je belangrijkste waarden zijn in je leven, zal het ook makkelijker worden om lastige situaties te begrijpen én om keuzes te maken."
                 },
                 {
                     type: "Image",
@@ -1049,13 +1236,17 @@ const TEMOD5 = {
             ]
         },
         {
+            titleCard: true,
+            title: "Doelen"
+        },
+        {
             id: "TE-MOD5-CARD6",
             title: "En nu je doelen",
             showIfAnswered: ["TE-MOD-5-SELECT-5"],
             cardContents: [
                 {
                     type: "Text",
-                    content: "Proficiat! Je hebt je waarden benoemd: goed gedaan! Je waarden benoemen is dan ook geen gemakkelijke opdracht. En nu?"
+                    content: "Proficiat! Je hebt je levensdomeinen eens overlopen en ja waarden benoemd: goed gedaan! Dat is dan ook geen gemakkelijke opdracht. En nu?"
                 },
                 {
                     type: "Text",
@@ -1076,15 +1267,21 @@ const TEMOD5 = {
                     content: "Er zijn verschillende manieren om naar je waarden te leven. Stel dat jij bijvoorbeeld veel belang hecht aan gezondheid en zelfzorg. Dan kan je dit in je leven incorporeren door een marathon te lopen, maar evenzeer door dagelijks een wandeling rond de blok te doen of ook door voldoende rustmomenten in te bouwen of door op je voeding te letten, ... Stel dat jij belang hecht aan het leveren van een zinvolle bijdrage, dan zou je dat kunnen doen door te gaan werken, door vrijwilligerswerk te doen, door boodschappen te doen voor je zieke buurvrouw, ... Of stel dat je graag meer quality time wilt met je familie. Bijvoorbeeld door wekelijks met je ouders te bellen of door de kinderen met de fiets naar school te brengen."
                 },
                 {
-                    type: "Break"
+                    type: "Image",
+                    link: "/images/movement/thoughts.jpg"
                 },
                 {
                     type: "Text",
                     content: "Het stellen van doelen maakt heel duidelijk wat belangrijk voor je is en wat je wilt bereiken (of je nu last hebt van pijn of niet). Hier zijn alvast enkele tips bij het stellen van doelen:"
                 },
                 {
-                    type: "List",
-                    content: ["Laat je leiden door je visie, waarden en principes: Doelen kies je in functie van wat voor jou als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen.", "Maak concrete doelen: Je kan een doel pas bereiken als je weet wat je hiervoor moet doen. Werken aan je gezondheid is bijvoorbeeld geen doel, maar een waarde (je hecht belang aan jouw gezondheid). Een concreet doel om deze waarde te bereiken kan zijn dat je dagelijks een wandeling van 30 minuten maakt, of dat je maar 1 keer per week een dessertje eet.", "Stel realistische doelen: Een goed gekozen doen kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te neme. Je kan beter starten met een doel van 5km, dan 10km, enz.", "Houd rekening met de termijn: Hoe verder weg in de toekomst een bepaald doel ligt, hoe moeilijker het wordt om dit te bereiken. Splits daarom ambitieuze doelen op in tussentijdse doelen, zo bewaar je het overzicht. Let op dat je je ook niet laat leiden door strakke tijdschema's, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."]
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/path.jpg", title: "Tip 1 - Laat je leiden door je visie, waarden en principes", text: "Doelen kies je in functie van wat voor jou als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen."},
+                        {image: "/images/movement/goals.jpg", title: "Tip 2 - Maak concrete doelen", text: "Je kan een doel pas bereiken als je weet wat je hiervoor moet doen. Werken aan je gezondheid is bijvoorbeeld geen doel, maar een waarde (je hecht belang aan jouw gezondheid). Een concreet doel om deze waarde te bereiken kan zijn dat je dagelijks een wandeling van 30 minuten maakt, of dat je maar 1 keer per week een dessertje eet."},
+                        {image: "/images/movement/rock.jpg", title: "Tip 3 - Stel realistische doelen", text: "Een goed gekozen doen kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te neme. Je kan beter starten met een doel van 5km, dan 10km, enz."},
+                        {image: "/images/movement/pins.jpg", title: "Tip 4 - Houd rekening met de termijn", text: "Hoe verder weg in de toekomst een bepaald doel ligt, hoe moeilijker het wordt om dit te bereiken. Splits daarom ambitieuze doelen op in tussentijdse doelen, zo bewaar je het overzicht. Let op dat je je ook niet laat leiden door strakke tijdschema's, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."},
+                    ]
                 }
             ]
         },
@@ -1098,8 +1295,32 @@ const TEMOD5 = {
                     content: "Hier volgen 2 voorbeelden van hoe je goede doelen kan stellen."
                 },
                 {
-                    type: "List",
-                    content: ["Els is 35 jaar, getrouwd, heeft een dochter van 5 jaar en werkt op een kantoor. Ze heeft tijdens het werken geregeld last van haar nek, zeker op dagen dat ze vaak met klanten moet bellen. Omdat gezondheid een belangrijke rol heeft in haar leven, wilt ze hieraan werken. Ze weet dat het belangrijk is om te bewegen en regelmatig van houding te wisselen. Daarom neemt ze haar voor om 2 minuten recht te staan en te bewegen na ieder uur te werken.", "Paul is 52 jaar, gescheiden, zijn kinderen zijn al uit huis en werkt als schrijnwerker. Zijn vrienden gaan iedere zaterdag 100 km samen fietsen. Omdat hij veel belang hecht aan vriendschap, zou hij graag meegaan. Conditioneel is hij nog niet zo sterk en hij heeft ook wat last van zijn knie. Daarom besluit hij om zijn fietsen op te bouwen. Hij wilt 1 keer per week trainen en op zaterdag rijdt hij een stukje mee met zijn vrienden."]
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Voorbeeld 1 - Els"
+                },
+                {
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/neckpain.jpg", text: "Els is 35 jaar, getrouwd, heeft een dochter van 5 jaar en werkt op een kantoor. Ze heeft tijdens het werken geregeld last van haar nek, zeker op dagen dat ze vaak met klanten moet bellen."},
+                        {image: "/images/movement/clock.jpg", text: "Omdat gezondheid een belangrijke rol heeft in haar leven, wilt ze hieraan werken. Ze weet dat het belangrijk is om te bewegen en regelmatig van houding te wisselen. Daarom neemt ze haar voor om 2 minuten recht te staan en te bewegen na ieder uur te werken."}
+                    ]
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Voorbeeld 2 - Paul"
+                },
+                {
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/paul.jpg", text: "Paul is 52 jaar, gescheiden, zijn kinderen zijn al uit huis en werkt als schrijnwerker. Zijn vrienden gaan iedere zaterdag 100 km samen fietsen."},
+                        {image: "/images/movement/graph.jpg", text: "Omdat hij veel belang hecht aan vriendschap, zou hij graag meegaan. Conditioneel is hij nog niet zo sterk en hij heeft ook wat last van zijn knie. Daarom besluit hij om zijn fietsen op te bouwen. Hij wilt 1 keer per week trainen en op zaterdag rijdt hij een stukje mee met zijn vrienden."}
+                    ]
                 },
                 {
                     type: "Text",
@@ -1124,15 +1345,21 @@ const TEMOD5 = {
                     content: "Bij het stellen van doelen kan je nu ook jouw doelen koppelen aan de waarden die jij belangrijk vindt. Werken aan waardevolle doelen is motiverend en je hebt een grotere kans om deze doelen te realiseren. Probeer dit eens te doen voor de doelen die jij reeds hebt aangemaakt. Heb je nog geen persoonlijke doelen aangemaakt? Dan is dit het ideale moment om daar mee te beginnen! Succes!"
                 },
                 {
-                    type: "Break"
+                    type: "Image",
+                    link: "/images/movement/thoughts.jpg"
                 },
                 {
                     type: "Text",
                     content: "Hier zijn alvast enkele tips bij het stellen van doelen:"
                 },
                 {
-                    type: "List",
-                    content: ["Laat je leiden door je visie, waarden en principes: Doelen kies je in functie van wat voor jou als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen.", "Maak concrete doelen: Je kan een doel pas bereiken als je weet wat je hiervoor moet doen. Werken aan je gezondheid is bijvoorbeeld geen doel, maar een waarde (je hecht belang aan jouw gezondheid). Een concreet doel om deze waarde te bereiken kan zijn dat je dagelijks een wandeling van 30 minuten maakt, of dat je maar 1 keer per week een dessertje eet.", "Stel realistische doelen: Een goed gekozen doen kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te neme. Je kan beter starten met een doel van 5km, dan 10km, enz.", "Houd rekening met de termijn: Hoe verder weg in de toekomst een bepaald doel ligt, hoe moeilijker het wordt om dit te bereiken. Splits daarom ambitieuze doelen op in tussentijdse doelen, zo bewaar je het overzicht. Let op dat je je ook niet laat leiden door strakke tijdschema's, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."]
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/path.jpg", title: "Tip 1 - Laat je leiden door je visie, waarden en principes", text: "Doelen kies je in functie van wat voor jou als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen."},
+                        {image: "/images/movement/goals.jpg", title: "Tip 2 - Maak concrete doelen", text: "Je kan een doel pas bereiken als je weet wat je hiervoor moet doen. Werken aan je gezondheid is bijvoorbeeld geen doel, maar een waarde (je hecht belang aan jouw gezondheid). Een concreet doel om deze waarde te bereiken kan zijn dat je dagelijks een wandeling van 30 minuten maakt, of dat je maar 1 keer per week een dessertje eet."},
+                        {image: "/images/movement/rock.jpg", title: "Tip 3 - Stel realistische doelen", text: "Een goed gekozen doen kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te neme. Je kan beter starten met een doel van 5km, dan 10km, enz."},
+                        {image: "/images/movement/pins.jpg", title: "Tip 4 - Houd rekening met de termijn", text: "Hoe verder weg in de toekomst een bepaald doel ligt, hoe moeilijker het wordt om dit te bereiken. Splits daarom ambitieuze doelen op in tussentijdse doelen, zo bewaar je het overzicht. Let op dat je je ook niet laat leiden door strakke tijdschema's, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."},
+                    ]
                 }
             ]
         },
@@ -1146,12 +1373,36 @@ const TEMOD5 = {
                     content: "Hier volgen 2 voorbeelden van hoe je goede doelen kan stellen."
                 },
                 {
-                    type: "List",
-                    content: ["Els is 35 jaar, getrouwd, heeft een dochter van 5 jaar en werkt op een kantoor. Ze heeft tijdens het werken geregeld last van haar nek, zeker op dagen dat ze vaak met klanten moet bellen. Omdat gezondheid een belangrijke rol heeft in haar leven, wilt ze hieraan werken. Ze weet dat het belangrijk is om te bewegen en regelmatig van houding te wisselen. Daarom neemt ze haar voor om 2 minuten recht te staan en te bewegen na ieder uur te werken.", "Paul is 52 jaar, gescheiden, zijn kinderen zijn al uit huis en werkt als schrijnwerker. Zijn vrienden gaan iedere zaterdag 100 km samen fietsen. Omdat hij veel belang hecht aan vriendschap, zou hij graag meegaan. Conditioneel is hij nog niet zo sterk en hij heeft ook wat last van zijn knie. Daarom besluit hij om zijn fietsen op te bouwen. Hij wilt 1 keer per week trainen en op zaterdag rijdt hij een stukje mee met zijn vrienden."]
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Voorbeeld 1 - Els"
+                },
+                {
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/neckpain.jpg", text: "Els is 35 jaar, getrouwd, heeft een dochter van 5 jaar en werkt op een kantoor. Ze heeft tijdens het werken geregeld last van haar nek, zeker op dagen dat ze vaak met klanten moet bellen."},
+                        {image: "/images/movement/clock.jpg", text: "Omdat gezondheid een belangrijke rol heeft in haar leven, wilt ze hieraan werken. Ze weet dat het belangrijk is om te bewegen en regelmatig van houding te wisselen. Daarom neemt ze haar voor om 2 minuten recht te staan en te bewegen na ieder uur te werken."}
+                    ]
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Voorbeeld 2 - Paul"
+                },
+                {
+                    type: "Story",
+                    content: [
+                        {image: "/images/movement/paul.jpg", text: "Paul is 52 jaar, gescheiden, zijn kinderen zijn al uit huis en werkt als schrijnwerker. Zijn vrienden gaan iedere zaterdag 100 km samen fietsen."},
+                        {image: "/images/movement/graph.jpg", text: "Omdat hij veel belang hecht aan vriendschap, zou hij graag meegaan. Conditioneel is hij nog niet zo sterk en hij heeft ook wat last van zijn knie. Daarom besluit hij om zijn fietsen op te bouwen. Hij wilt 1 keer per week trainen en op zaterdag rijdt hij een stukje mee met zijn vrienden."}
+                    ]
                 },
                 {
                     type: "Text",
-                    content: "Nu is het aan jou! We hebben de shortcut waarden op het startscherm toegevoegd, en ook uitgebreid met doelen. Hier kan je zelf jouw persoonlijke doelen stellen. De tool helpt om jouw doelen concreet te maken en te realiseren. Neem dus zeker een kijkje, en succes!"
+                    content: "Nu is het aan jou! We hebben de shortcut waarden op het startscherm nu ook uitgebreid met doelen. Hier kan je zelf jouw persoonlijke doelen stellen. De tool helpt om jouw doelen concreet te maken en te realiseren. Neem dus zeker een kijkje, en succes!"
                 }
             ]
         },
