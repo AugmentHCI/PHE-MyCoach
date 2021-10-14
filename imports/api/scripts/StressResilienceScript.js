@@ -6,7 +6,7 @@ const STRMOD1 = {
     description: "In dit hoofdstuk kom je te weten wat stress is, hoe het ontstaat en wanneer stress ongezond wordt.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "stress-mod-1",
     imageWidth: "180px",
     cards: [{
             title: "Wat is stress?",
@@ -226,8 +226,8 @@ const STRMOD2 = {
     description: "Stress en pijn hangen nauw samen. In dit hoofdstuk lees je hoe dit komt.",
     duration: "10 minuten",
     type: "Interactief",
-    image: "learning",
-    imageWidth: "180px",
+    image: "stress-mod-2",
+    imageWidth: "250px",
     cards: [
         {
             title: "Rode draad",
@@ -438,8 +438,8 @@ const STRMOD3 = {
     description: "In dit hoofdstuk kom je te aan welke signalen je chronische stress bij jezelf kan herkennen.",
     duration: "10 minuten",
     type: "Interactief",
-    image: "learning",
-    imageWidth: "180px",
+    image: "stress-mod-3",
+    imageWidth: "150px",
     cards: [
         {
             title: "Inleiding",
@@ -552,7 +552,7 @@ const STRMOD4 = {
     description: "Een disbalans tussen energievreters en energiegevers kan leiden tot chronische stress. Leer hoe jij ze meer in balans kan brengen in dit onderdeel.",
     duration: "10 minuten",
     type: "Interactief",
-    image: "learning",
+    image: "stress-mod-4",
     imageWidth: "180px",
     cards: [
         {
@@ -691,7 +691,7 @@ const STRMOD5 = {
     description: "Door jouw cirkel van invloed te verhogen kan je jouw energievreters beter de baas.",
     duration: "10 minuten",
     type: "Interactief",
-    image: "learning",
+    image: "stress-mod-5",
     imageWidth: "180px",
     cards: [
         {
@@ -815,8 +815,8 @@ const STRMOD6 = {
     description: "In deze module verkennen we een heel aantal tips en tricks die jou kunnen helpen om je balans in evenwicht te houden en op een veerkrachtige manier om te gaan met stresssituaties. Neem vooral die tips mee die je nuttig vindt voor jezelf!",
     duration: "10 minuten",
     type: "Interactief",
-    image: "learning",
-    imageWidth: "180px",
+    image: "stress-mod-6",
+    imageWidth: "210px",
     cards: [
         {
             title: "Wat is veerkracht?",

@@ -6,7 +6,7 @@ const MOVMOD1 = {
     description: "Bewegen is één van de beste dingen die je kan doen voor je gezondheid. In dit onderdeel kom je alle voordelen van bewegen en lichamelijke activiteit te weten.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
+    image: "mov-mod-1",
     imageWidth: "180px",
     cards: [{
             title: "Introductie",
@@ -131,8 +131,8 @@ const MOVMOD2 = {
     description: "Hoeveel moet je nu bewegen voor je gezondheid en welke vormen van bewegen zijn het best? In dit onderdeel kom je hier alles over te weten.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
-    imageWidth: "180px",
+    image: "mov-mod-2",
+    imageWidth: "220px",
     cards: [{
             title: "Bewegingsdriehoek",
             cardContents: [
@@ -407,7 +407,7 @@ const MOVMOD3 = {
     description: "Hoe kan je beweging en houdingsveranderingen toepassen als je aan het werk bent? In dit onderdeel kom je hier alles over te weten.",
     duration: "10 minuten",
     type: "Interactief",
-    image: "learning",
+    image: "mov-mod-3",
     imageWidth: "180px",
     cards: [
         {
@@ -567,7 +567,7 @@ const MOVMOD4 = {
     description: "Ook als je thuis bent kan je aan je belastbaarheid en conditie werken in dit onderdeel kom je hier alles over te weten.",
     duration: "10 minuten",
     type: "Interactief",
-    image: "learning",
+    image: "mov-mod-4",
     imageWidth: "180px",
     cards: [{
             title: "Tips op een rijtje",
@@ -731,8 +731,8 @@ const MOVMOD5 = {
     description: "Ga aan de slag en maak een concreet actieplan om voldoende te bewegen.",
     duration: "10 minuten",
     type: "Informatief",
-    image: "learning",
-    imageWidth: "180px",
+    image: "mov-mod-5",
+    imageWidth: "170px",
     cards: [{
             title: "Inleiding",
             cardContents: [
