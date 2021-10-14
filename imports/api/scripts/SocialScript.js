@@ -330,8 +330,8 @@ const SOCMOD2 = {
 
 const SOCMOD3 = {
     id: "SOC_MOD_3",
-    title: "Omgaan met reacties van mijn omgeving",
-    titleMarkup: ["Omgaan met reacties", "van mijn omgeving"],
+    title: "Reacties van mijn omgeving",
+    titleMarkup: ["Reacties van", "mijn omgeving"],
     navBarTitle: "Omgaan met reacties",
     part: 3,
     description: "In dit hoofdstuk leer je welke reacties van jouw omgeving mogelijks een negatief effect hebben op jouw situatie en hoe je hiermee kan omgaan.",
