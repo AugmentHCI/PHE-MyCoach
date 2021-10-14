@@ -816,7 +816,7 @@ const STRMOD6 = {
     duration: "10 minuten",
     type: "Interactief",
     image: "stress-mod-6",
-    imageWidth: "210px",
+    imageWidth: "200px",
     cards: [
         {
             title: "Wat is veerkracht?",

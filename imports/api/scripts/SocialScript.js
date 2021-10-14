@@ -102,7 +102,7 @@ const SOCMOD2 = {
     duration: "10 minuten",
     type: "Interactief",
     image: "soc-mod-support",
-    imageWidth: "180px",
+    imageWidth: "210px",
     cards: [{
             title: "Inleiding",
             cardContents: [
