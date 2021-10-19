@@ -6,9 +6,9 @@ import '../imports/db/PainLogbookMethods.jsx';
 import '../imports/db/GoalSettingMethods.jsx';
 import '../imports/db/ActivityLogbookMethods.jsx';
 import '../imports/db/UserStudyMethods.jsx';
-import { shortcuts } from '../imports/ui/pages/modules/ModuleScripts/Shortcuts.js';
 import moment from 'moment';
-
+import { SHORTCUTS } from '../imports/api/data/Shortcuts.js';
+import { NOTIFICATIONS } from '../imports/api/data/Notifications.js';
 
 // API methode definiëren op server side, parameters = URL en user token
 Meteor.methods({
@@ -106,8 +106,8 @@ function parseShortcuts(userShortcuts, language) {
     if (shortcut.status === "DEFAULT") {
       result.push({
         shortcutID: shortcut.shortcut, 
-        title: shortcuts[shortcut.shortcut].title[language],
-        description: shortcuts[shortcut.shortcut].translation[language],
+        title: SHORTCUTS[shortcut.shortcut].title[language],
+        description: SHORTCUTS[shortcut.shortcut].translation[language],
         link: shortcut.shortcut.toLowerCase(),
       })
     }

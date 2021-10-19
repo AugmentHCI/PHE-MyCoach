@@ -13,7 +13,7 @@ import "../../../i18n/en.i18n.json";
 /* Internal API */
 import "../../db/MyCoachMethods.jsx"; // TODO
 import { UserData } from "../../api/questionnaireCodes/dummydata.jsx";
-import { shortcuts } from "./modules/ModuleScripts/Shortcuts"
+import { SHORTCUTS } from "../../api/data/Shortcuts.js"
 import PainEducationScript from '../../api/scripts/PainEducationScript'
 import ThoughtsEmotionsScript from '../../api/scripts/ThoughtsEmotionsScript';
 import ActivityWorkScript from '../../api/scripts/ActivityWorkScript';
@@ -123,13 +123,13 @@ export default function MyCoach(props) {
             placement="bottom"
             trigger="click"
             visible={showTutorial1}>
-                <ActionButton icon={shortcuts["DAILY-COACHING"].icon} onClick={() => setShowCoachingModal(true)}>{shortcuts["DAILY-COACHING"].translation[language]}</ActionButton>
+                <ActionButton icon={SHORTCUTS["DAILY-COACHING"].icon} onClick={() => setShowCoachingModal(true)}>{SHORTCUTS["DAILY-COACHING"].translation[language]}</ActionButton>
                 {userShortcuts && userShortcuts.map(shortcut => {
-                    return <ActionButton icon={shortcuts[shortcut.shortcut].icon} 
+                    return <ActionButton icon={SHORTCUTS[shortcut.shortcut].icon} 
                                             onClick={() => {
-                                                if (shortcuts[shortcut.shortcut].link) { FlowRouter.go(`/${language}/mycoach/${userToken}/${shortcuts[shortcut.shortcut].link}`) } 
+                                                if (SHORTCUTS[shortcut.shortcut].link) { FlowRouter.go(`/${language}/mycoach/${userToken}/${SHORTCUTS[shortcut.shortcut].link}`) } 
                                                 else { setShowCoachingModal(true) } }}>
-                                {shortcuts[shortcut.shortcut].translation[language]}
+                                {SHORTCUTS[shortcut.shortcut].translation[language]}
                             </ActionButton>})}
             </Popover>
         </React.Fragment>)

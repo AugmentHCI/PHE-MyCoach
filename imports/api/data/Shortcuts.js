@@ -1,4 +1,4 @@
-export const shortcuts = {
+export const SHORTCUTS = {
     "DAILY-COACHING": {
         icon: "idea",
         modal: "DAILY-COACHING",

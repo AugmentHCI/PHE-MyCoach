@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
 
 /* Internal API */
 import { getModule, getSubmodule} from '../../../api/scripts/ScriptDispatcher';
-import { shortcuts as shortcutData } from "./ModuleScripts/Shortcuts";
+import { SHORTCUTS } from "../../../api/data/Shortcuts.js";
 
 /* Managers */
 import ProgressManager from "../../../api/managers/ProgressManager.jsx";
@@ -122,11 +122,11 @@ export default function ModuleParser(props) {
         if (loadingShortcuts) return;
         let shortcutButtonsHTML = [];
         shortcuts.forEach(shortcut => {
-            if (["DEFAULT", "PINNED"].includes(shortcut.status)) shortcutButtonsHTML.push(<ActionButton size="small" icon={shortcutData[shortcut.shortcut].icon} onClick={() =>  {FlowRouter.go(`/${language}/mycoach/${userToken}/${shortcutData[shortcut.shortcut].link}`) }}>
-                {shortcutData[shortcut.shortcut].translation[language]}
+            if (["DEFAULT", "PINNED"].includes(shortcut.status)) shortcutButtonsHTML.push(<ActionButton size="small" icon={SHORTCUTS[shortcut.shortcut].icon} onClick={() =>  {FlowRouter.go(`/${language}/mycoach/${userToken}/${SHORTCUTS[shortcut.shortcut].link}`) }}>
+                {SHORTCUTS[shortcut.shortcut].translation[language]}
             </ActionButton>);
             if (["LOCKED"].includes(shortcut.status)) shortcutButtonsHTML.push(<ActionButton size="small" icon="locked" color="gray-dark">
-                {shortcutData[shortcut.shortcut].translation[language]}
+                {SHORTCUTS[shortcut.shortcut].translation[language]}
             </ActionButton>);
         })
         return (<Card title="MIJN SHORTCUTS" noTranslate>
