@@ -21,6 +21,7 @@ import LoadingScreen from '../../components/LoadingScreen.jsx';
 
 /* Styles */
 import "./PainLogbook.scss";
+import { daysBetween } from '../../../api/Moment.jsx';
 
 
 export default function PainLogbook() {
@@ -36,11 +37,31 @@ export default function PainLogbook() {
     useEffect(() => { 
         async function fetchPainLogs() {
             const fetchedPainLogs = await painLogbookManager.getPainLogs();
-            setPainLogs(fetchedPainLogs);
+            const newLogs = cleanLogDuplicates({logs: fetchedPainLogs});
+            setPainLogs(newLogs);
             setLoading(false);
         }
         fetchPainLogs();
     }, []);
+
+    // Temporary error caused some users to have duplicate logs with distinct IDs. Run cleaner.
+    function cleanLogDuplicates({logs}) {
+        if (!logs || logs.length === 0) return [];
+        const duplicates = [];
+        for (let i = 0; i < logs.length; i++) {
+            for (let j = i + 1; j < logs.length; j++) {
+                if (logs[i].activity === logs[j].activity && 
+                    logs[i].context === logs[j].context &&
+                    logs[i].emotions === logs[j].emotions && 
+                    logs[i].thoughts === logs[j].thoughts && 
+                    logs[i].intensity === logs[j].intensity &&
+                    logs[i].reactions === logs[j].reactions &&
+                    daysBetween(logs[i].timestamp, logs[j].timestamp) === 0) duplicates.push(logs[j]);
+            }
+        }
+        duplicates.forEach(log => painLogbookManager.removePainLog(log._id));
+        return logs.filter(log => !duplicates.includes(log));
+    }
 
     function renderPainLogs() {
         /* Still fetching data */

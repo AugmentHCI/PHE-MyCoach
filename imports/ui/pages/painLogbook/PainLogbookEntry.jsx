@@ -34,6 +34,7 @@ export default function PainLogbookEntry() {
     const [showModuleModal, setShowModuleModal] = useState(false);
     const [showExplanationModal, setShowExplanationModal] = useState(false);
     const [disabledAutoScroll, setDisabledAutoScroll] = useState(false);
+    const [saved, setSaved] = useState(false);
     /* Message Queues */
     const [messageQueue, updateMessageQueue] = useState(["MESSAGE-INTRO"]);
     const [tempMessageQueue, updateTempMessageQueue] = useState([]);
@@ -113,6 +114,7 @@ export default function PainLogbookEntry() {
     }
 
     function saveLog() {
+        if (saved) return;
         let userLog = {THOUGHT: [], REACTION: [], EMOTION: [], CONTEXT: undefined, INTENSITY: undefined, ACTIVITY: undefined}
         userInput.forEach(input => {
             if (input.level1) userLog[input.level1].push(input.level4);
@@ -122,6 +124,7 @@ export default function PainLogbookEntry() {
             if (["THOUGHT", "REACTION", "EMOTION"].includes(key)) { userLog[key] = userLog[key].join("|") }
         })
         painLogbookManager.addPainLog(userLog.CONTEXT, userLog.ACTIVITY, userLog.INTENSITY, userLog.THOUGHT, userLog.EMOTION, userLog.REACTION);
+        setSaved(true);
     }
 
     function initializeMessages() {

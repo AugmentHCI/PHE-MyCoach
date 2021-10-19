@@ -15,10 +15,11 @@ import PainLogbookManager from '../../../api/managers/PainLogbookManager';
 
 /* UI Components */
 import NavigationBar from '../../components/NavigationBar';
+import LoadingScreen from '../../components/LoadingScreen.jsx';
+import Button from '../../components/Button.jsx';
 
 /* Styles */
 import "./PainLogbook.scss";
-import LoadingScreen from '../../components/LoadingScreen.jsx';
 
 
 export default function PainLogbookDetail() {
@@ -68,6 +69,7 @@ export default function PainLogbookDetail() {
         });
         return thoughtsHTML;
     }
+
     function renderPainlogReactions() {
         let reactionsHTML = [];
         reactionsHTML.push(<h3>Mijn reacties</h3>);
@@ -75,6 +77,11 @@ export default function PainLogbookDetail() {
             reactionsHTML.push(<div className="chatbubble-overview">{reactions[reaction].translation[language]}</div>);
         });
         return reactionsHTML;
+    }
+
+    function removePainLog() {
+        painLogbookManager.removePainLog({logID: painlogID});
+        history.back();
     }
 
     return (<React.Fragment>
@@ -86,6 +93,7 @@ export default function PainLogbookDetail() {
                 { painLog && renderPainlogEmotions() }
                 { painLog && renderPainlogThoughts() }
                 { painLog && renderPainlogReactions() }
+                { painLog && <Button width="100%" center color="red" onClick={() => removePainLog()}>Verwijder deze pijnlog</Button>}
             </FadeIn>}
         </div>
     </React.Fragment>);

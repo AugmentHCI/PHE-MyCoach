@@ -32,6 +32,10 @@ Meteor.methods({
         newMongoObjectId._str = logID;
         return PainLogbookCollection.findOne({ _id: newMongoObjectId._str });
     },
+    'painlogbook.removeLog'({userID, logID}) {
+        check(userID, Number);
+        return PainLogbookCollection.remove({ userID: userID, _id: logID });
+    },
     'painlogbook.deleteUserLogs'({userID}) {
         check(userID, Number);
         PainLogbookCollection.find({userID: userID}).map(function(item){
