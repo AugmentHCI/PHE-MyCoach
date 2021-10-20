@@ -538,7 +538,8 @@ export default function PainLogbook() {
                         key={day} 
                         className={buttonClass + (dayActivities.length > 0 ? (isSelected ? " bordered-selected" : " bordered") : "")}
                         onClick={() => setSelectedDay(days[index])}>
-                        {daysT[day][0].toUpperCase() + daysT[day][1]}<br/>{days[index].format("D")}
+                            <div>{daysT[day][0].toUpperCase() + daysT[day][1]}</div>
+                            <div>{days[index].format("D")}</div>
                     </div>)})}
             </div>
             <div>
@@ -555,7 +556,7 @@ export default function PainLogbook() {
 }
 
 function Activity(props) {
-    const buildupScheme = props.goal?.buildupScheme ? new BuildupScheme({schemeString:props.goal.buildupScheme}) : undefined;
+    const buildupScheme = props?.goal?.buildupScheme ? new BuildupScheme({schemeString:props.goal.buildupScheme}) : undefined;
     let unit = buildupScheme?.unit;
     if (unit && unit.length > 0) unit = unit[0].short;
     const quantity = buildupScheme ? buildupScheme.getGoal(props.week) : undefined;
@@ -573,7 +574,7 @@ function Activity(props) {
                 </div>}
                 { props.goal && !props.isGoal && <div className="activity-goal"> <Icon image={"goal"} style={{margin:"0 10px 0 0"}} color="white" width={"12px"} /> {props.goal.title} </div>}
             </div>
-            { props.startTime && props.endTime && !props.goal.wholeDay && <div className="activity-time">{props.startTime} - {props.endTime}</div> }
+            { props.startTime && props.endTime && !props.goal?.wholeDay && <div className="activity-time">{props.startTime} - {props.endTime}</div> }
         </div>
         {!props.isGoal && <div className="activity-toggle">
             Klaar
