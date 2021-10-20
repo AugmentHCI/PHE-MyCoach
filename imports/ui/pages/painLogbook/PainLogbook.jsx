@@ -81,7 +81,7 @@ export default function PainLogbook() {
                 emotionsHTML += emotions[emotion].translation[language];
             });
             painLogsHTML.push(<div key={painLog._id} className="painlogbook-entry">
-                <div className="painlogbook-entry-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/painlogbook/${painLog._id}`)}><Icon image="next" color="white"/></div>
+                <div className="painlogbook-entry-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/painlogbook/${painLog._id}`)}><Icon image="view" color="white"/></div>
                 <h3>{weekdays[language][moment(painLog.timestamp).isoWeekday()] + " " + moment(painLog.timestamp).format("D MMMM")}</h3>
                 <p><b>Activiteit:</b> {painLog.context} - {painLog.activity}</p>
                 <p><b>Intensiteit:</b> {painLog.intensity}</p>

@@ -55,21 +55,19 @@
     border-radius: 15px;
     box-shadow: var(--card-shadow);
     position: relative;
-    border: 3px solid var(--idewe-blue-dark-tint1);
 }
 
 .painlogbook-entry-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--idewe-blue-dark-tint3);
+    background-color: var(--idewe-blue);
     width: 36px;
     height: 36px;
     border-radius: 20px;
     position: absolute;
     top: 12px;
     right: 12px;
-    padding-left: 2px;
     box-shadow: var(--card-shadow);
 }
 
