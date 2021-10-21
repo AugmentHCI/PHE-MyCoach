@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import FadeIn from "react-fade-in";
 import jwt_decode from "jwt-decode";
-import { ResponsiveBar } from '@nivo/bar';
+import { Column } from '@ant-design/charts';
 import moment from 'moment';
 
 /* Internal API */
@@ -25,6 +25,7 @@ import Icon from '../../components/Illustrations/Icon';
 /* Styles */
 import "./ValueLogbook.scss";
 import LoadingScreen from '../../components/LoadingScreen';
+import { DAYS, QUANTITIES_ARRAY, TRUSTSCORE } from '../../../api/data/GoalsActivities';
 
 const B = styled.b`
     font-family: var(--main-font);
@@ -138,7 +139,7 @@ const Day = styled.div`
                 const goal = await goalSettingManager.getUserGoal(goalID);
                 const newBuildupScheme = goal.buildupScheme ? new BuildupScheme({schemeString:goal.buildupScheme}) : undefined;
                 setGoal(goal);
-                updateGoalQuantifier(quantities.filter(item => item.id === goal.quantifier));
+                updateGoalQuantifier(QUANTITIES_ARRAY.filter(item => item.id === goal.quantifier));
                 updateBuildupScheme(newBuildupScheme);
                 updateMeasurements(newBuildupScheme ? newBuildupScheme.measurements : {0: 0, 1: 0, 2: 0})
                 setLoadingGoals(false);
@@ -154,7 +155,7 @@ const Day = styled.div`
             <li><B>Drempel: </B><P>{goal.threshold}</P></li>
             <li><B>Oplossing: </B><P>{goal.thresholdDescription}</P></li>
             <li><B>Beloning: </B><P>{goal.reward}</P></li>
-            <li><B>Vertrouwen: </B><P>{trustScore[goal.trust]}</P></li>
+            <li><B>Vertrouwen: </B><P>{TRUSTSCORE[goal.trust]}</P></li>
         </Ul>
     }
 
@@ -166,7 +167,7 @@ const Day = styled.div`
                 {buildupScheme &&  <li><B>Deze week: </B><P>{buildupScheme.getGoal(moment().format("W-YYYY")) + " " + goalQuantifier[0].value}</P></li>}
                 <div style={{display:"flex", flexDirection: "row", justifyContent:"space-between", marginTop: "1em"}}>
                     {Object.keys(JSON.parse(goal.days)).map(day => {
-                        return (<Day key={day} selected={JSON.parse(goal.days)[day]}>{daysT[day]}</Day>)})}
+                        return (<Day key={day} selected={JSON.parse(goal.days)[day]}>{DAYS[day]}</Day>)})}
                 </div>
             </Ul>
             {buildupScheme && <React.Fragment>
@@ -192,38 +193,39 @@ const Day = styled.div`
 
     function renderChart() {
         if (!buildupScheme || !buildupScheme?.scheme) return <React.Fragment/>
-        return <div style={{height: "200px", width: "100%"}}><ResponsiveBar
-        data={buildupScheme.scheme}
-        indexBy="week"
-        keys={["goal"]}
-        /*colors={{ scheme: 'category10' }}*/
-        colors={getColor}
-        margin={{ top: 10, right: 10, bottom: 50, left: 50 }}
-        padding={0.35}
-        minValue={0}
-        borderRadius={2}
-        tooltip={function (props) {return (Math.round(props.value*100)/100 + " " + goalQuantifier[0].value)}}
-        axisTop={null}
-        axisRight={null}
-        enableLabel={false}
-        theme={{ axis: { legend: { text: { fill: "var(--idewe-blue)" } } } }}
-        axisBottom={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'Week',
-            legendPosition: 'middle',
-            legendOffset: 32,
-        }}
-        axisLeft={{
-            tickSize: 0,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: `Doel (${goalQuantifier[0].value})`,
-            legendPosition: 'middle',
-            legendOffset: -40
-        }}>
-    </ResponsiveBar></div>
+        console.log(moment(new Date()).format("WW-YYYY").toString())
+        var config = {
+            data: buildupScheme.scheme,
+            xField: 'week',
+            yField: 'goal',
+            legend: false,
+            seriesField: 'date',
+            color: ({ date }) => {
+              if(moment(new Date()).format("WW-YYYY").toString() === date){
+                return '#01426A';
+              }
+              return '#0086BF';
+            },
+            columnStyle: { radius: [5, 5, 0, 0] },
+            label: {
+              position: 'middle',
+              style: { fill: '#FFFFFF' },
+            },
+            tooltip: {
+                showTitle: false,
+                formatter: (week) => {
+                  return { name: "Week " + week.week, value: week.goal + " " + goalQuantifier[0].short };
+                },
+            },
+            xAxis: {
+              label: {
+                autoRotate: false,
+              },
+            },
+          };
+        return <div style={{height: "200px", width: "100%", marginTop:"1.5em"}}>  
+            <Column {...config} />
+        </div>
     }
 
     return (<React.Fragment>
@@ -248,32 +250,4 @@ const Day = styled.div`
             </FadeIn>}
         </div>
     </React.Fragment>);
-}
-
-
-const quantities = [
-    {id: "steps",    description: "Aantal stappen", value: "stappen",      short: "stp"},
-    {id: "distance", description: "Afstand",        value: "kilometer",    short: "km"},
-    {id: "time",     description: "Tijd",           value: "minuten",      short: "min"},
-    {id: "amount",   description: "Keer per dag",   value: "keer per dag", short: "x"}
-]
-
-
-const daysT = {
-    mo: "ma",
-    tu: "di",
-    we: "wo",
-    th: "do",
-    fr: "vr",
-    sa: "za",
-    su: "zo"
-} 
-
-const trustScore = {
-    0: "Helemaal geen",
-    1: "Helemaal geen",
-    2: "Niet veel",
-    3: "Een beetje",
-    4: "Vrij veel",
-    5: "Zeer veel"
 }

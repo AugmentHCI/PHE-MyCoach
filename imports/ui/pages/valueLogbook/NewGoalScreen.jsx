@@ -4,11 +4,12 @@ import React, { useState, useEffect } from 'react';
 import FadeIn from "react-fade-in";
 import jwt_decode from "jwt-decode";
 import moment from 'moment';
-import { ResponsiveBar } from '@nivo/bar';
+import { Column } from '@ant-design/charts';
 
 /* Internal API */
 import { values as valueCodes } from "../../../api/scripts/ThoughtsEmotionsScript";
 import BuildupScheme from '../../../api/BuildupScheme';
+import { QUANTITIES_ARRAY } from '../../../api/data/GoalsActivities';
 
 /* Managers */
 import GoalSettingManager from '../../../api/managers/GoalSettingManager.jsx';
@@ -42,7 +43,7 @@ export default function NewGoalScreen() {
     const [buildupGoal, updateBuildupGoal] = useState(false);
     const [measurements, updateMeasurements] = useState({0: 0, 1: 0, 2: 0});
     const [buildupScheme, updateBuildupScheme] = useState(undefined);
-    const [goalQuantifier, updateGoalQuantifier] = useState([quantities[0]]);
+    const [goalQuantifier, updateGoalQuantifier] = useState([QUANTITIES_ARRAY[0]]);
     const [goalQuantity, updateGoalQuantity] = useState("0");
     const [wholeDay, updateWholeDay] = useState(false);
     const [goalTrust, updateGoalTrust] = useState(0);
@@ -89,7 +90,7 @@ export default function NewGoalScreen() {
                 const goal = await goalSettingManager.getUserGoal(goalID);
                 const newBuildupScheme = goal.buildupScheme ? new BuildupScheme({schemeString:goal.buildupScheme}) : undefined;
                 updateGoalQuantity(goal.quantity);
-                updateGoalQuantifier(quantities.filter(item => item.id === goal.quantifier));
+                updateGoalQuantifier(QUANTITIES_ARRAY.filter(item => item.id === goal.quantifier));
                 setQuantifyGoal(goal.quantity ? true : false);
                 updateBuildupScheme(newBuildupScheme);
                 updateBuildupGoal(newBuildupScheme);
@@ -163,43 +164,44 @@ export default function NewGoalScreen() {
         if (buildupScheme?.scheme && buildupScheme.scheme.length === 0) return <b>
              Jouw metingen liggen al boven je doel! Je mag je doel iets hoger stellen.
          </b>
-        return <div style={{height: "200px", width: "100%"}}><ResponsiveBar
-        data={buildupScheme.scheme}
-        indexBy="week"
-        keys={["goal"]}
-        colors={getColor}
-        margin={{ top: 10, right: 10, bottom: 50, left: 50 }}
-        padding={0.35}
-        minValue={0}
-        borderRadius={2}
-        tooltip={function (props) {return (Math.round(props.value*100)/100 + " " + goalQuantifier[0].value)}}
-        axisTop={null}
-        axisRight={null}
-        enableLabel={false}
-        theme={{ axis: { legend: { text: { fill: "var(--idewe-blue)" } } } }}
-        axisBottom={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'Week',
-            legendPosition: 'middle',
-            legendOffset: 32,
-        }}
-        axisLeft={{
-            tickSize: 0,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: `Doel (${goalQuantifier[0].value})`,
-            legendPosition: 'middle',
-            legendOffset: -40
-        }}>
-    </ResponsiveBar></div>
+         var config = {
+            data: buildupScheme.scheme,
+            xField: 'week',
+            yField: 'goal',
+            color:'#0086BF',
+            legend: false,
+            seriesField: 'date',
+            color: ({ date }) => {
+              if(moment(new Date()).format("WW-YYYY").toString() === date){
+                return '#01426A';
+              }
+              return '#0086BF';
+            },
+            tooltip: {
+                showTitle: false,
+                formatter: (week) => {
+                  return { name: "Week " + week.week, value: week.goal + " " + goalQuantifier[0].short };
+                },
+            },
+            columnStyle: {radius: [5, 5, 0, 0],},
+            label: {
+              position: 'middle',
+              style: { fill: '#FFFFFF' },
+            },
+            xAxis: {
+              label: {
+                autoRotate: false,
+              },
+            },
+          };
+        return <div style={{height: "200px", width: "100%", marginTop:"1.5em"}}>  
+            <Column {...config} />
+        </div>
     }
 
     function renderGoalsTab() {
         if (goalID && !loaded) return <React.Fragment/>
         return (<div className="goals-tab">
-            <FadeIn>
                 {/* General Information */}
                 <h2 style={{marginTop:"20px"}}>Jouw doel</h2>
                 <p>Geef je doel een naam:</p>
@@ -218,7 +220,7 @@ export default function NewGoalScreen() {
                 {quantifyGoal && <React.Fragment>
                     <div style={{display:"flex", flexDirection:"row"}}>
                         <Input disabled={!quantifyGoal} type="number" style={{width:"100px"}} placeholder="0" value={goalQuantity} onChange={(value) => updateBuildschemeData({type: "goal", value: value})}/>
-                        <Dropdown disabled={!quantifyGoal} defaultItems={goalQuantifier} items={quantities} style={{flex: 2}} onChange={updateGoalQuantifier}></Dropdown>
+                        <Dropdown disabled={!quantifyGoal} defaultItems={goalQuantifier} items={QUANTITIES_ARRAY} style={{flex: 2}} onChange={updateGoalQuantifier}></Dropdown>
                     </div>
                     En welke dagen wil je aan je doel werken?
                     <div style={{display:"flex", gap: "1em", marginTop:"1em"}}>
@@ -275,7 +277,6 @@ export default function NewGoalScreen() {
                 <hr/>
                 <Button width="100%" disabled={!finishedCompleting()} center color="blue" onClick={() => saveGoal()}>{goalID ? "Update je doel" : "Doel opslaan"}</Button>
                 {goalID && <Button width="100%" center color="red" onClick={() => removeGoal()}>Verwijder doel</Button>}
-            </FadeIn>
         </div>)
     }
 
@@ -314,10 +315,3 @@ export default function NewGoalScreen() {
         </div>
     </React.Fragment>);
 }
-
-const quantities = [
-    {id: "steps",    description: "Aantal stappen", value: "stappen",      short: "stp"},
-    {id: "distance", description: "Afstand",        value: "kilometer",    short: "km"},
-    {id: "time",     description: "Tijd",           value: "minuten",      short: "min"},
-    {id: "amount",   description: "Keer per dag",   value: "keer per dag", short: "x"}
-]

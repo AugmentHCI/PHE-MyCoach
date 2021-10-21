@@ -28,7 +28,6 @@ export default function Dropdown( { items, multiselect, style, defaultItems, onC
         }
     }
       
-
     function isItemInSelection(item) {
         if (selection.some(current => current[idKey] === item[idKey])) { return true; }
         return false;
@@ -42,6 +41,7 @@ export default function Dropdown( { items, multiselect, style, defaultItems, onC
     }
 
     useEffect(() => { 
+        console.log(items)
         if (defaultItems) setSelection(defaultItems);
     }, []);
 
