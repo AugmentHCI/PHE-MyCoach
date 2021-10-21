@@ -230,7 +230,16 @@ export default function ActivityLogbook() {
     function addMeasurement() {
         const buildupScheme = new BuildupScheme({schemeString: measuringGoal.buildupScheme});
         buildupScheme.updateMeasurement(buildupScheme.getNextMeasurementIdNeeded(), parseInt(measurement));
-        goalSettingManager.updateGoalScheme({goalID: measuringGoal._id, buildupScheme: buildupScheme.toString()});
+
+        /* Update goal in database */
+        goalSettingManager.updateGoalScheme({goalID: measuringGoal._id, buildupScheme: buildupScheme.toString()}); 
+        /* Update local copy of goal as well */
+        let newGoals = [...goals];
+        const goalIndex = newGoals.findIndex(goal => measuringGoal?._id === goal._id);
+        newGoals[goalIndex].buildupScheme = buildupScheme.toString();
+        setGoals(newGoals);
+        updateMeasuringGoal(newGoals[goalIndex]);
+
         updateMeasurement("");
         updateShowMeasureModal(false);
         if (!buildupScheme.needsMeasurement()) updateShowMeasuresCompleteModal(true);
@@ -326,8 +335,7 @@ export default function ActivityLogbook() {
     function renderMeasureCompleteModal() {
         if (!showMeasuresCompleteModal || ! measuringGoal) return <React.Fragment/>;
         const buildupScheme = new BuildupScheme({schemeString: measuringGoal.buildupScheme});
-        console.log(buildupScheme)
-        if (!buildupScheme?.scheme) return (<AppModal
+        if (!buildupScheme?.scheme || buildupScheme?.scheme?.length === 0) return (<AppModal
             show={showMeasuresCompleteModal} 
             title={"Opbouwschema niet opgesteld"}
             backOption="Sluit"
@@ -343,7 +351,7 @@ export default function ActivityLogbook() {
             defaultOption="Bekijk schema"
             notifyBack={() => {updateMeasuringGoal(undefined); updateShowMeasuresCompleteModal(false)}}
             notifyParent={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/values/${measuringGoal._id}`)}>
-            Je hebt 3 metingen ingegeven voor jou doel. We hebben hiermee een opbouwschema gemaakt zodat je <b>binnen de {buildupScheme.scheme.length} {buildupScheme.scheme.length === 1 ? "week" : "weken"} jouw doel van {buildupScheme.goal} {buildupScheme.unit[0]?.short} kan behalen</b>. De eerste week <b>begin je met {buildupScheme.scheme[0].goal} {buildupScheme.unit[0]?.short}, succes!</b>
+            Je hebt 3 metingen ingegeven voor jou doel. We hebben hiermee een opbouwschema gemaakt zodat je <b>binnen de {buildupScheme.scheme.length} {buildupScheme.scheme.length === 1 ? "week" : "weken"} jouw doel van {buildupScheme.goal} {buildupScheme.unit[0]?.short} kan behalen</b>. De eerste week <b>begin je met {buildupScheme.scheme[0].goal} {buildupScheme.unit[0]?.value}, succes!</b>
         </AppModal>)
     }
 
@@ -478,12 +486,19 @@ export default function ActivityLogbook() {
               heavyWidth    = calculateIntensityPercentage("HEAVY");
 
         const time = filteredActivities.length > 0 ? 
-            filteredActivities.reduce((total, activity) => {return total + duration(activity.startTime, activity.endTime)}, 0) : 
+            filteredActivities.reduce((total, activity) => {if (activity.startTime && activity.startTime && activity.startTime !== ":" && activity.endTime !== ":") 
+                                                                {return total + duration(activity.startTime, activity.endTime)} 
+                                                            else {return total}}, 0) : 
             0;
 
         const timeDone = filteredActivities.length > 0 ? 
-            filteredActivities.filter(activity => activity.done === true).reduce((total, activity) => {return total + duration(activity.startTime, activity.endTime)}, 0) : 
+            filteredActivities.filter(activity => activity.done === true).reduce((total, activity) => {if (activity.startTime && activity.startTime && activity.startTime !== ":" && activity.endTime !== ":") 
+                {return total + duration(activity.startTime, activity.endTime)} 
+            else {return total}}, 0) : 
             0;
+        
+        const finishedCount = filteredActivities.length > 0 ? filteredActivities.filter(activity => activity.done === true).length : 0;
+        const activityCount = filteredActivities.length;
 
         return (<React.Fragment>
             <div className="day-information">
@@ -496,11 +511,12 @@ export default function ActivityLogbook() {
                         {heavyWidth > 0 && <div className="intensitybar-heavy"    style={{width:heavyWidth+"%"}}>    <Icon image="sweat-heavy" color="white" width="18px" style={{marginBottom: 0, marginTop: "1px"}}/> </div>}
                     </div>
                     <div style={{marginTop:"4px"}}>
-                        Je hebt op deze dag <span className="description">{filteredActivities.length} activiteiten </span> gepland, voor een totaal van 
-                            <span className="description"> {Math.floor(time/60) > 0 && Math.floor(time/60) + " uur en "}{time % 60} minuten</span>. 
-                            {time !== timeDone && <React.Fragment> Je hebt reeds 
-                            <span className="description"> {Math.floor(timeDone/60) > 0 && Math.floor(timeDone/60) + " uur en "}{timeDone % 60} minuten</span> aan activiteiten gedaan.</React.Fragment>}
-                            {time === timeDone && <React.Fragment> Je hebt ook alle activiteiten voltooid!</React.Fragment>}
+                        Je hebt op deze dag <span className="description">{filteredActivities.length === 1 ? "1 activiteit" : filteredActivities.length + " activiteiten"} </span> gepland{time > 0 && <React.Fragment>, voor een totaal van 
+                            <span className="description"> {Math.floor(time/60) > 0 && Math.floor(time/60) + " uur"}{time % 60 > 0 &&  " en " + (time % 60) + " minuten"}</span></React.Fragment>}. 
+                            {time !== timeDone && timeDone !== 0 && <React.Fragment> Je hebt reeds 
+                            <span className="description"> {Math.floor(timeDone/60) > 0 && Math.floor(timeDone/60) + " uur "}{timeDone % 60 > 0 && " en " + timeDone % 60 + " minuten"}</span> aan activiteiten gedaan.</React.Fragment>}
+                            {timeDone === 0 && time > 0 && <React.Fragment> Voltooi je activiteiten!</React.Fragment>}
+                            {activityCount === finishedCount && <React.Fragment> Je hebt ook alle activiteiten voltooid!</React.Fragment>}
                     </div>
                 </React.Fragment>}
             </div>

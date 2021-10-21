@@ -108,7 +108,7 @@ export default class BuildupScheme {
             week++;
         } while (value <= this.goal);
         if (newScheme.length > 0 && newScheme[newScheme.length-1].goal !== this.goal) 
-             newScheme.push({week: week.toString(), date: moment().add(week-1, "week").format("W-YYYY"), goal: this.goal})
+             newScheme.push({week: week.toString(), date: moment().add(week-1, "week").format("W-YYYY"), goal: this.goal});
         return newScheme;
     }
 
