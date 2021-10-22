@@ -12,6 +12,7 @@ export default function Dropdown( { items, multiselect, style, defaultItems, onC
 
     function handleOnClick(item) {
         if (!selection.some(current => current[idKey] === item[idKey])) {
+            console.log("adding");
             if (!multiselect) {
                 setSelection([item]);
                 if (onChange) onChange([item]);
@@ -21,11 +22,13 @@ export default function Dropdown( { items, multiselect, style, defaultItems, onC
                 if (onChange) onChange([...selection, item]);
             }
         } else {
-            let selectionAfterRemoval = selection;
-            selectionAfterRemoval = selectionAfterRemoval.filter(current => current[idKey] === item[idKey]);
+            console.log("removing");
+            let selectionAfterRemoval = [...selection];
+            selectionAfterRemoval = selectionAfterRemoval.filter(current => current[idKey] !== item[idKey]);
             setSelection([...selectionAfterRemoval]);
             if (onChange) onChange([...selectionAfterRemoval]);
         }
+        console.log(selection)
     }
       
     function isItemInSelection(item) {
@@ -41,7 +44,6 @@ export default function Dropdown( { items, multiselect, style, defaultItems, onC
     }
 
     useEffect(() => { 
-        console.log(items)
         if (defaultItems) setSelection(defaultItems);
     }, []);
 

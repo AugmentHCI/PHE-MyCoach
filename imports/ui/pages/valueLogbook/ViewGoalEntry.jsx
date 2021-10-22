@@ -87,16 +87,16 @@ const Measure = styled.ul`
     margin-right: .5em;
 `
 const Day = styled.div`
-    color: var(--idewe-gray-dark);
+    color: var(--idewe-gray);
     padding: 0 4px;
     height: 25px;
     text-align: center;
-    font-weight: 600;
+    font-weight: 500;
 
     ${props => props.selected && css`
-        background-color: var(--idewe-blue);
-        color: var(--idewe-white);
-        border-radius: 50%;
+        color: var(--idewe-blue);
+        text-decoration: underline;
+        font-weight: 600;
     `};
 `
 
@@ -159,11 +159,17 @@ const Day = styled.div`
         </Ul>
     }
 
+    function removeGoal() {
+        goalSettingManager.removeGoal(goalID);
+        history.back();
+    }
+
     function renderGoal() {
         if (!goal) return <React.Fragment/>;
         return <React.Fragment>
             <Ul>
                 {goalQuantifier && <li><B>Doel: </B><P>{goal.quantity + " " + goalQuantifier[0].value}</P></li>}
+                {goal.wholeDay && <li><B>Gedurende heel de dag</B></li>}
                 {buildupScheme &&  <li><B>Deze week: </B><P>{buildupScheme.getGoal(moment().format("W-YYYY")) + " " + goalQuantifier[0].value}</P></li>}
                 <div style={{display:"flex", flexDirection: "row", justifyContent:"space-between", marginTop: "1em"}}>
                     {Object.keys(JSON.parse(goal.days)).map(day => {
@@ -247,6 +253,7 @@ const Day = styled.div`
                     {renderGoal()}
                 </Card>
                 {<Button width="100%" color="blue" center onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/values/edit/${goal._id}`)}>Wijzig doel</Button>}
+                {goalID && <Button width="100%" center color="red" onClick={() => removeGoal()}>Verwijder doel</Button>}
             </FadeIn>}
         </div>
     </React.Fragment>);

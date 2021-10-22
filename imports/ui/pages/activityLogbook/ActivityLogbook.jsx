@@ -342,7 +342,7 @@ export default function ActivityLogbook() {
             defaultOption="Bekijk doel"
             notifyBack={() => {updateMeasuringGoal(undefined); updateShowMeasuresCompleteModal(false)}}
             notifyParent={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/values/${measuringGoal._id}`)}>
-            Je hebt 3 metingen ingegeven voor jou doel. We kunnen met deze metingen echter geen opbouwschema opmaken om jouw doel in een redelijke tijd te behalen. Bekijk je metingen, en stel jouw doel desnoods bij.
+            Je hebt 3 metingen ingegeven voor jouw doel. We kunnen met deze metingen echter geen opbouwschema opmaken om je doel in een redelijke tijd te behalen. Bekijk je metingen, en stel je doel desnoods bij.
         </AppModal>)
         return (<AppModal
             show={showMeasuresCompleteModal} 
@@ -351,7 +351,7 @@ export default function ActivityLogbook() {
             defaultOption="Bekijk schema"
             notifyBack={() => {updateMeasuringGoal(undefined); updateShowMeasuresCompleteModal(false)}}
             notifyParent={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/values/${measuringGoal._id}`)}>
-            Je hebt 3 metingen ingegeven voor jou doel. We hebben hiermee een opbouwschema gemaakt zodat je <b>binnen de {buildupScheme.scheme.length} {buildupScheme.scheme.length === 1 ? "week" : "weken"} jouw doel van {buildupScheme.goal} {buildupScheme.unit[0]?.short} kan behalen</b>. De eerste week <b>begin je met {buildupScheme.scheme[0].goal} {buildupScheme.unit[0]?.value}, succes!</b>
+            Je hebt 3 metingen ingegeven voor jouw doel. We hebben hiermee een opbouwschema gemaakt zodat je <b>binnen de {buildupScheme.scheme.length} {buildupScheme.scheme.length === 1 ? "week" : "weken"} jouw doel van {buildupScheme.goal} {buildupScheme.unit[0]?.short} kan behalen</b>. De eerste week <b>begin je met {buildupScheme.scheme[0].goal} {buildupScheme.unit[0]?.value}, succes!</b>
         </AppModal>)
     }
 

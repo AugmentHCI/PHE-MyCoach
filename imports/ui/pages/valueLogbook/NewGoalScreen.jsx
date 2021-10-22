@@ -151,7 +151,7 @@ export default function NewGoalScreen() {
 
     function removeGoal() {
         goalSettingManager.removeGoal(goalID);
-        history.back();
+        history.go(-2);
     }
 
     const getColor = (bar) => {

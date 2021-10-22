@@ -1,15 +1,17 @@
 export const QUANTITIES = {
-    "steps":    {description: "Aantal stappen", value: "stappen",      short: "stp"},
-    "distance": {description: "Afstand",        value: "kilometer",    short: "km"},
-    "time":     {description: "Tijd",           value: "minuten",      short: "min"},
-    "amount":   {description: "Keer per dag",   value: "keer per dag", short: "x"}
+    "steps":       {description: "Aantal stappen", value: "stappen",      short: "stp"},
+    "distance":    {description: "Afstand",        value: "kilometer",    short: "km"},
+    "time":        {description: "Tijd",           value: "minuten",      short: "min"},
+    "repetitions": {description: "Herhalingen",    value: "keer",         short: "x"},
+    "amount":      {description: "Keer per dag",   value: "keer per dag", short: "x"},
 }
 
 export const QUANTITIES_ARRAY = [
-    {id: "steps",    description: "Aantal stappen", value: "stappen",      short: "stp"},
-    {id: "distance", description: "Afstand",        value: "kilometer",    short: "km"},
-    {id: "time",     description: "Tijd",           value: "minuten",      short: "min"},
-    {id: "amount",   description: "Keer per dag",   value: "keer per dag", short: "x"}
+    {id: "steps",       description: "Aantal stappen", value: "stappen",      short: "stp"},
+    {id: "distance",    description: "Afstand",        value: "kilometer",    short: "km"},
+    {id: "time",        description: "Tijd",           value: "minuten",      short: "min"},
+    {id: "repetitions", description: "Herhalingen",    value: "keer",         short: "x"},
+    {id: "amount",      description: "Keer per dag",   value: "keer per dag", short: "x"},
 ]
 
 
