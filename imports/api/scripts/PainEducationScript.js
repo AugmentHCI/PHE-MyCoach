@@ -104,10 +104,10 @@ const PEMOD1 = {
 
 const PEMOD2 = {
     id: "PE_MOD_2",
-    title: "Rol van het brein",
-    titleMarkup: ["Rol van", "het brein"],
+    title: "Rol van de hersenen",
+    titleMarkup: ["Rol van de", "hersenen"],
     part: 2,
-    description: "In dit onderdeel bespreken we welke rol ons brein heeft in het verwerken van onze prikkels, en onze pijnervaring.",
+    description: "In dit onderdeel bespreken we welke rol onze hersenen hebben in het verwerken van onze prikkels, en onze pijnervaring.",
     duration: "10 minuten",
     type: "Informatief",
     image: "new_ideas",
@@ -266,24 +266,21 @@ const PEMOD3 = {
         cardContents: [
             {
                 type: "Text",
-                content: "Bekijk de twee onderstaande situaties:"
+                content: "Bekijk de twee onderstaande situaties (je kan horizontaal scrollen):"
             },
             {
-                type: "Image",
-                link: "/images/paineducation/rugby.jpg"
+                type: "Story",
+                content: [
+                    {image: "/images/paineducation/rugby.jpg", title: "Rugby", text: "Het is de laatste minuut in een spannende bekerfinale. Een rugbyspeler maakt het winnende doelpunt vlak voor het eindsignaal. Het publiek gaat uit zijn dak en zijn ploegmaats springen op hem om de overwinning te vieren."},
+                    {image: "/images/paineducation/robbery.jpg", title: "Overval", text: "Een man wandelt alleen door een verlaten steegje. Het is een buurt die hij liever vermijdt. Ineens stopt er een auto naast hem. Drie mannen springen uit de auto en duwen hem omver. Ze roepen en houden een mes tegen zijn keel. Ze pakken zijn portefeuille en GSM en rijden weg."}
+                ]
             },
-            {
-                type: "Text",
-                content: "Het is de laatste minuut in een spannende bekerfinale. Een rugbyspeler maakt het winnende doelpunt vlak voor het eindsignaal. Het publiek gaat uit zijn dak en zijn ploegmaats springen op hem om de overwinning te vieren."
-            },
-            {
-                type: "Image",
-                link: "/images/paineducation/robbery.jpg"
-            },
-            {
-                type: "Text",
-                content: "Een man wandelt alleen door een verlaten steegje. Het is een buurt die hij liever vermijdt. Ineens stopt er een auto naast hem. Drie mannen springen uit de auto en duwen hem omver. Ze roepen en houden een mes tegen zijn keel. Ze pakken zijn portefeuille en GSM en rijden weg."
-            },
+        ]
+    }, 
+    {
+        title: "Oefeningen",
+        wrapup: true,
+        cardContents: [
             {
                 type: "Sort-Exercise",
                 content: "Geef voor elke contextuele factor aan in welke situatie deze het meest aanwezig zal zijn. Bij het rugbyspel, of bij de overval? Sleep ze naar de juiste situatie.",
@@ -307,12 +304,22 @@ const PEMOD3 = {
                 question: "In welke situatie zal er het meeste pijn worden ervaren? Bij het rugbyspel, de overval of ongeveer gelijk in beide situaties?",
                 options: ["Rugby", "Overval", "Beide"],
                 correct: "Overval",
-                explanation: "Ondanks dat de hoeveelheid schade in beide situaties ongeveer gelijk is, is de kans groter dat de man die wordt overvallen meer pijn gaat ervaren. De rugbyspeler zal waarschijnlijk niet eens pijn voelen. Misschien merkt hij de dag nadien pas op dat hij een paar blauwe plekken en schrammen heeft.",
+                explanation: "Bekijk het antwoord hier onder.",
                 onCorrect: "Inderdaad!",
                 onIncorrect: "Niet juist."
             }
         ]
-    }, 
+    },
+    {
+        title: "Factoren die bijdragen tot pijn",
+        showIfAnswered: ["PE-MOD-3-Q1"],
+        cardContents: [
+            {
+                type: "Text",
+                content: "Ondanks dat de hoeveelheid schade in beide situaties ongeveer gelijk is, is de kans groter dat de man die wordt overvallen meer pijn gaat ervaren. De rugbyspeler zal waarschijnlijk niet eens pijn voelen. Misschien merkt hij de dag nadien pas op dat hij een paar blauwe plekken en schrammen heeft."
+            }
+        ]
+    },
     {
         id: "PE-MOD-3-OVERVIEW",
         title: "Overzicht",
@@ -328,7 +335,7 @@ const PEMOD3 = {
                 type: "List",
                 numbered: true,
                 overview: true,
-                content: ["Er is geen mooi verband tussen pijn en de hoeveelheid schade. Er kan pijn zijn zonder veel schade maar er kan ook veel schade zijn zonder pijn. De hersenen bepalen of we pijn ervaren.", "Negatieve emoties zoals angst of boosheid, frustratie omwille van de pijn en negatieve gedachten omtrent je pijn fungeren als versterker waardoor je meer pijn zal ervaren. Ze onderdrukken ook de pijn dempende mechanismen en verhogen het risico op een overgevoelig zenuwstelsel.", "Na een acuut letsel wordt het zenuwstelsel gevoeliger waardoor meer prikkels naar de hersenen worden gestuurd. Prikkels die voordien niet pijnlijk waren, zoals lichte rek of druk, zullen nu wel pijnlijk zijn. Je hersenen willen dat je het aangedane lichaamsdeel ontziet zodat het kan herstellen.", "Fysieke inspanning zet pijn-dempende stoffen vrij. Deze stoffen zorgen ervoor dat er minder prikkels naar de hersenen worden gestuurd."]
+                content: ["Er is geen mooi verband tussen pijn en de hoeveelheid schade. Er kan pijn zijn zonder veel schade maar er kan ook veel schade zijn zonder pijn. De hersenen bepalen of we pijn ervaren.", "Negatieve emoties zoals angst of boosheid, frustratie omwille van de pijn en negatieve gedachten omtrent je pijn fungeren als een versterker waardoor je meer pijn zal ervaren. Ze onderdrukken ook de pijn dempende mechanismen en verhogen het risico op een overgevoelig zenuwstelsel.", "Na een acuut letsel wordt het zenuwstelsel gevoeliger waardoor meer prikkels naar de hersenen worden gestuurd. Prikkels die voordien niet pijnlijk waren, zoals lichte rek of druk, zullen nu wel pijnlijk zijn. Je hersenen willen dat je het aangedane lichaamsdeel ontziet zodat het kan herstellen.", "Fysieke inspanning zet pijn-dempende stoffen vrij. Deze stoffen zorgen ervoor dat er minder prikkels naar de hersenen worden gestuurd."]
             }
         ]
     },
@@ -376,21 +383,23 @@ const PEMOD4 = {
                 id: "PE-MOD-4-Q1",
                 type: "Question",
                 question: "Chronische pijn of pijn zonder duidelijke oorzaak is ingebeeld.",
+                retake: true,
                 number: 1,
                 options: ["Juist", "Fout"],
                 correct: "Fout",
                 explanation: "Bij chronische pijn is er geen duidelijk verband tussen lichamelijke schade en de pijn die men ervaart. Het oorspronkelijke letsel is meestal hersteld maar de veranderingen in het zenuwstelsel zijn nog steeds aanwezig. Hierdoor kunnen normale prikkels (tijdens bewegen of lichte aanraking) pijn blijven doen. Die veranderingen zijn echt en de pijn is zeker niet ingebeeld.",
                 onCorrect: "Deze stelling is inderdaad fout!",
-                onIncorrect: "Jammer, maar deze stelling is fout."
+                onIncorrect: "Jammer, maar deze stelling is fout.",
             },
             {
                 id: "PE-MOD-4-Q2",
                 type: "Question",
                 question: "Wanneer je pijn hebt is er altijd sprake van lichamelijke schade.",
+                retake: true,
                 number: 2,
                 options: ["Juist", "Fout"],
                 correct: "Fout",
-                explanation: "Onze hersenen interpreteren prikkels die toekomen uit de omgeving en bepalen dan of pijn de beste reactie is. Er zijn genoeg voorbeelden van lichamelijke schade zonder pijn, zoals jezelf verwonden tijdens het vluchten voor je leven.",
+                explanation: "Onze hersenen interpreteren prikkels die toekomen uit de omgeving en bepalen dan of pijn de beste reactie is. Er zijn genoeg voorbeelden van pijn zonder lichamelijke schade, zoals een kindje dat weent nog voor het een prikje heeft gekregen.",
                 onCorrect: "Fout inderdaad!",
                 onIncorrect: "Deze stelling is fout."
             },
@@ -398,6 +407,7 @@ const PEMOD4 = {
                 id: "PE-MOD-4-Q3",
                 type: "Question",
                 question: "Pijn kan alleen worden behandeld met medicatie of een operatie.",
+                retake: true,
                 number: 3,
                 options: ["Juist", "Fout"],
                 correct: "Fout",
@@ -409,10 +419,11 @@ const PEMOD4 = {
                 id: "PE-MOD-4-Q4",
                 type: "Question",
                 question: "Je kan zelf een aantal zaken doen om pijnklachten te vermijden of beperken.",
+                retake: true,
                 number: 4,
                 options: ["Juist", "Fout"],
                 correct: "Juist",
-                explanation: "Welke factoren bijdragen aan iemand zijn pijnervaring is heel persoonlijk. Gelukkig zijn er veel factoren waar je een invloed op hebt. Je kan de belasting op je lichaam beperken door ergonomisch te werken of je activiteiten goed aan te pakken. Je kan je belastbaarheid verhogen met een gezonde levensstijl en door voldoende te bewegen. Je kan ook leren om beter om te gaan met stress en negatieve gedachten en gevoelens te beperken. Probeer ook je aandacht en energie te steken in activiteiten die waardevol voor je zijn.",
+                explanation: "Welke factoren bijdragen aan iemand zijn pijnervaring zijn heel persoonlijk. Gelukkig zijn er veel factoren waar je een invloed op hebt. Je kan de belasting op je lichaam beperken door ergonomisch te werken of je activiteiten goed aan te pakken. Je kan je belastbaarheid verhogen met een gezonde levensstijl en door voldoende te bewegen. Je kan ook leren om beter om te gaan met stress en negatieve gedachten en gevoelens te beperken. Probeer ook je aandacht en energie te steken in activiteiten die waardevol voor je zijn.",
                 onCorrect: "Goed zo!",
                 onIncorrect: "Deze stelling is wel juist."
             },
@@ -420,6 +431,7 @@ const PEMOD4 = {
                 id: "PE-MOD-4-Q5",
                 type: "Question",
                 question: "Als je pijn hebt kan je best rusten en zo min mogelijk doen.",
+                retake: true,
                 number: 5,
                 options: ["Juist", "Fout"],
                 correct: "Fout",
@@ -431,10 +443,11 @@ const PEMOD4 = {
                 id: "PE-MOD-4-Q6",
                 type: "Question",
                 question: "Negatieve gedachten, emoties en langdurige stress kunnen pijn verergeren.",
+                retake: true,
                 number: 6,
                 options: ["Juist", "Fout"],
                 correct: "Juist",
-                explanation: "Negatieve gedachten, emoties en langdurige stress kunnen leiden tot een overgevoelig zenuwstelsel. Pijndempingsmechanismen worden onderdrukt, pijn gerelateerde prikkels worden makkelijker naar de hersenen gestuurd en de hersenen zullen meer aandacht besteden aan deze prikkels en ze uitvergroten.",
+                explanation: "Negatieve gedachten, emoties en langdurige stress kunnen leiden tot een overgevoelig zenuwstelsel. Pijnversterkende banen worden gestimuleerd, pijn gerelateerde prikkels worden makkelijker naar de hersenen gestuurd en de hersenen zullen meer aandacht besteden aan deze prikkels en ze uitvergroten.",
                 onCorrect: "Correct!",
                 onIncorrect: "Dat is juist wel het geval."
             },
@@ -442,6 +455,7 @@ const PEMOD4 = {
                 id: "PE-MOD-4-Q7",
                 type: "Question",
                 question: "De intensiteit van de pijn stemt altijd overeen met de hoeveelheid prikkels die receptoren op de zenuwen waarnemen.",
+                retake: true,
                 number: 7,
                 options: ["Juist", "Fout"],
                 correct: "Fout",
@@ -453,6 +467,7 @@ const PEMOD4 = {
                 id: "PE-MOD-4-Q8",
                 type: "Question",
                 question: "De hersenen beslissen wanneer je pijn zal ervaren.",
+                retake: true,
                 number: 8,
                 options: ["Juist", "Fout"],
                 correct: "Juist",
@@ -464,6 +479,7 @@ const PEMOD4 = {
                 id: "PE-MOD-4-Q9",
                 type: "Question",
                 question: "Er kunnen veranderingen in de zenuwen en het ruggenmerg optreden waardoor pijnprikkels makkelijker worden doorgestuurd.",
+                retake: true,
                 number: 9,
                 options: ["Juist", "Fout"],
                 correct: "Juist",
@@ -475,6 +491,7 @@ const PEMOD4 = {
                 id: "PE-MOD-4-Q10",
                 type: "Question",
                 question: "Wanneer je een letsel oploopt zal de situatie waarin je je bevindt geen invloed hebben op de hoeveelheid pijn die je ervaart.",
+                retake: true,
                 number: 10,
                 options: ["Juist", "Fout"],
                 correct: "Fout",
@@ -499,7 +516,7 @@ const PEMOD4 = {
                 type: "List",
                 numbered: true,
                 overview: true,
-                content: ["Men spreekt van chronische pijn wanneer de pijn langdurig (meer dan 3 maanden) aanwezig is. De pijn kan sterk wisselen van dag tot dag en verspreiden in het lichaam. Ook lichtere prikkels, die normaal geen pijn doen, kunnen pijnlijk zijn.", "Bij chronische pijn speelt het oorspronkelijke letsel nog maar een kleine rol. Vooral de overgevoeligheid van het zenuwstelsel is de oorzaak van de klachten.", "Verscheidene factoren verhogen het risico op een overgevoelig zenuwstelsel en chronische pijn zoals; jezelf vaak overbelasten, langdurige stress, focussen op je pijn en negatieve gedachten en gevoelens ten aanzien van je pijn.", "Een gezonde levensstijl, voldoende beweging en je aandacht en energie richten op waardevolle activiteiten in plaats van op de pijn kunnen de overgevoeligheid van het zenuwstelsel terug verlagen en de impact van de chronische pijn beperken."]
+                content: ["Men spreekt van chronische pijn wanneer de pijn langdurig (meer dan 3 maanden) aanwezig is. De pijn kan sterk wisselen van dag tot dag en verspreiden in het lichaam. Ook lichtere prikkels, die normaal geen pijn doen, kunnen pijnlijk zijn.", "Bij chronische pijn speelt het oorspronkelijke letsel nog maar een kleine rol. Vooral de overgevoeligheid van het zenuwstelsel is de oorzaak van de klachten.", "Verschillende factoren verhogen het risico op een overgevoelig zenuwstelsel en chronische pijn zoals; jezelf vaak overbelasten, langdurige stress, focussen op je pijn en negatieve gedachten en gevoelens ten aanzien van je pijn.", "Een gezonde levensstijl, voldoende beweging en je aandacht en energie richten op waardevolle activiteiten in plaats van op de pijn kunnen de overgevoeligheid van het zenuwstelsel terug verlagen en de impact van de chronische pijn beperken."]
             }
         ]
     },
@@ -525,6 +542,7 @@ const PEMOD5 = {
     cards: [{
         id: "PE-MOD-5-CARD-1",
         title: "Inleiding",
+        wrapup: true,
         cardContents: [
             {
                 type: "Text",
@@ -560,7 +578,7 @@ const PEMOD5 = {
             {
                 type: "Text",
                 overview: true,
-                content: "Jezelf vaak overbelasten leidt tot toegenomen spierspanning en een verminderde doorbloeding van je weefsels. Dit verhoogt het aantal pijn gerelateerde prikkels die naar de hersenen worden gestuurd, wat het zenuwstel overgevoelig kan maken. Overbelasten kan je beperken door je taken slim aan te pakken en ergonomisch te werken. Let op, ook onderbelasten leiden tot meer pijnklachten. Door onderbelasten wordt je lichaam minder fit waaroor je jezelf sneller kan overbelasten. Dit zien we vaak bij mensen met chronische pijn. Daarom is het belangrijk om je belastbaarheid geleidelijk te verhogen."
+                content: "Jezelf vaak overbelasten leidt tot toegenomen spierspanning en een verminderde doorbloeding van je weefsels. Dit verhoogt het aantal pijn gerelateerde prikkels die naar de hersenen worden gestuurd, wat het zenuwstel overgevoelig kan maken. Overbelasten kan je beperken door je taken slim aan te pakken en ergonomisch te werken. Let op, ook onderbelasten kan leiden tot meer pijnklachten. Door onderbelasten wordt je lichaam minder fit waaroor je jezelf sneller kan overbelasten. Dit zien we vaak bij mensen met chronische pijn. Daarom is het belangrijk om je belastbaarheid geleidelijk te verhogen."
             }]
     },
     {
@@ -572,7 +590,7 @@ const PEMOD5 = {
             {
                 type: "Text",
                 overview: true,
-                content: "In tegenstelling tot acute stress (wat zorgt voor pijndemping, verhoogde alertheid, ..) heeft langdurige stress een hoop negatieve gevolgen voor onze gezondheid. Naast het verhoogde risico op hart- en vaatziekten zorgt langdurige stress voor een toegenomen spierspanning en verminderde werking van de pijn dempende mechanismen. Probeer stress te beperken met een goede planning, door je grenzen af te bakenen en tijd vrij te maken voor zaken die je energie geven."
+                content: "In tegenstelling tot acute stress (wat zorgt voor pijndemping, verhoogde alertheid, ..) heeft langdurige stress een hoop negatieve gevolgen voor onze gezondheid. Naast het verhoogde risico op hart- en vaatziekten zorgt langdurige stress voor een toegenomen spierspanning en worden de pijnversterkende banen gestimuleerd. Probeer stress te beperken met een goede planning, door je grenzen af te bakenen en tijd vrij te maken voor zaken die je energie geven."
             }]
     },
     {
@@ -584,7 +602,7 @@ const PEMOD5 = {
             {
                 type: "Text",
                 overview: true,
-                content: "Een evenwichtige voeding en voldoende slaap zijn belangrijk om je lichaam fit en gezond te houden. Slaap is het beste moment voor je lichaam om te herstellen. Een gezonde voeding zorgt ervoor dat je lichaam de nodige voedingsstoffen krijgt om te herstellen. Bovendien is er steeds meer bewijs voor een relatie tussen ongezonde voeding en lichamelijke pijn, mede door een toegenome inflammatoire reactie van ons lichaam."
+                content: "Evenwichtige voeding en voldoende slaap zijn belangrijk om je lichaam fit en gezond te houden. Slaap is het beste moment voor je lichaam om te herstellen. Een gezonde voeding zorgt ervoor dat je lichaam de nodige voedingsstoffen krijgt om te herstellen. Bovendien is er steeds meer bewijs voor een relatie tussen ongezonde voeding en lichamelijke pijn, mede door een toegenomen inflammatoire reactie van ons lichaam."
             }]
     },
     {
@@ -613,7 +631,7 @@ const PEMOD5 = {
             {
                 type: "Text",
                 overview: true,
-                content: "Negatieve gedachten en emoties beïnvloeden ons gedrag, zorgen voor stress en verhogen de kans op een overgevoelig zenuwstelsel. Door veel aandacht te schenken aan je pijn, gaan je hersenen meer op deze prikkels letten en ze uitvergroten. Als je ook nog eens veel activiteiten gaat vermijden uit angst voor pijn of schade, dan zal je lichaam na verloop van tijd minder sterk worden. Dit verhoogt dan weer het risico op overbelasting en dus meer pijn. Beperk daarom foutieve of niet helpende gedachten en focus op waardevolle activiteiten. Ben je iets aan het doen wat je heel leuk vindt of je concentreert je op je activiteit? Dan filteren je hersen vanzelf al een deel van de pijn weg!"
+                content: "Negatieve gedachten en emoties beïnvloeden ons gedrag, zorgen voor stress en verhogen de kans op een overgevoelig zenuwstelsel. Door veel aandacht te schenken aan je pijn, gaan je hersenen meer op deze prikkels letten en ze uitvergroten. Als je ook nog eens veel activiteiten gaat vermijden uit angst voor pijn of schade, dan zal je lichaam na verloop van tijd minder sterk worden. Dit verhoogt dan weer het risico op overbelasting en dus meer pijn. Beperk daarom foutieve of niet helpende gedachten en focus op waardevolle activiteiten. Ben je iets aan het doen wat je heel leuk vindt of je concentreert je op je activiteit? Dan filteren je hersenen vanzelf al een deel van de pijn weg!"
             }]
     },
     {

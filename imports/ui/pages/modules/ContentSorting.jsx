@@ -58,6 +58,12 @@ export default function createSortingContent(content, columnData, options) {
     flexDirection: "column",
   }
   const [columns, setColumns] = useState(columnData);
+  const [saved, setSaved] = useState(false);
+
+  function save() {
+    setSaved(true);
+  }
+
   return (
     <div className="content-backdrop">
       <div className="content-question-title">Sorteeroefening</div>
@@ -140,7 +146,8 @@ export default function createSortingContent(content, columnData, options) {
           );
         })}
       </DragDropContext>
-      {columns.default.items.length === 0 && <Button center color="blue">Versturen</Button>}
+      {columns.default.items.length === 0 && !saved && <Button center color="blue" onClick={()=> save()}>Versturen</Button>}
+      {columns.default.items.length === 0 && saved && <Button center color="gray-dark">Verstuurd</Button>}
       </div>
     </div>
   );
