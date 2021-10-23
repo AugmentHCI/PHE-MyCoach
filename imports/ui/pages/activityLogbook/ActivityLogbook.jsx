@@ -246,6 +246,21 @@ export default function ActivityLogbook() {
         else updateMeasuringGoal(undefined);
     }
 
+    function removeActivity() {
+        /* Delete in DB */
+        activityLogbookManager.removeActivity({activityID: editingId});
+        /* Delete local instance in state */
+        const newActivities = activities.filter(activity => activity._id !== editingId);
+        setActivities(newActivities);
+        /* Reset editing activity states and close modal */
+        toggleShowModal(false);
+        updateStartTimeHour(""); updateStartTimeMins(""); updateEndTimeHour(""); updateEndTimeMins("");
+        updateIntensity("LIGHT");
+        updateActivityTitle("");
+        updateSelectedGoalId(undefined);
+        updateEditingId("");
+    }
+
     function checkActivityInputValidity() {
         /* Needs activity title and intensity */
         if (!activityTitle || !intensity) return false;
@@ -384,7 +399,7 @@ export default function ActivityLogbook() {
                 backOption="Annuleer"
                 notifyBack={() => closeActivityEditor()}>
             <Input type="text" value={activityTitle} onChange={updateActivityTitle} placeholder="Naam activiteit" style={{width:"100%"}}/>
-            {wholeDay && <div className="activity-input-row"><Icon image="time" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>Gedurende de hele dag</div>}
+            {wholeDay && <div className="activity-input-row" style={{marginTop: ".5em", marginBottom: ".75em"}}><Icon image="time" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0, marginRight: "1em"}}/>Gedurende de hele dag</div>}
             {!wholeDay && <div className="activity-input-row">
                 <Icon image="time" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>
                 <Input type="tel" value={startTimeHour} onChange={updateStartTimeHour} id="startHour" placeholder="08" style={{width:"52px"}} between={[0, 23]} maxLength={2}/>
@@ -407,6 +422,9 @@ export default function ActivityLogbook() {
             <div className="activity-input-row">
                 <Icon image="goal" width="20px" color="blue-dark" style={{marginRight: "10px", marginBottom: 0}}/>
                 <Dropdown defaultText={"Kies een doel (optioneel)"} defaultItems={selectedGoal ? [selectedGoal] :  []} items={goals} style={{flex: 2}} idKey="_id" valueKey="title" onChange={(selectedGoals) => handleDropdownGoalSelection(selectedGoals) }/>
+            </div>
+            <div className="activity-input-row-delete">
+                <div onClick={() => removeActivity()}>Verwijder activiteit</div>
             </div>
         </AppModal>)
     }

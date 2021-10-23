@@ -188,6 +188,14 @@
     font-weight: 500;
     font-size: 18px;
     align-items: center;
+
+    &-delete {
+        @extend .activity-input-row;
+        color: var(--idewe-red);
+        text-decoration: underline;
+        font-weight: 600;
+        justify-content: center;
+    }
 }
 
 .intensity-btn {

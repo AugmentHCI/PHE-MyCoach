@@ -50,6 +50,10 @@ Meteor.methods({
             }
         });
     },
+    'activitylogbook.removeActivity'({userID, activityID}) {
+        check(userID, Number);
+        return ActivityLogbookCollection.remove({ userID: userID, _id: activityID });
+    },
     'activitylogbook.updateActivity'({userID, activityID, title, startTime, endTime, intensity, wholeDay, goalID}) {
         check(userID, Number);
         check(startTime, String);

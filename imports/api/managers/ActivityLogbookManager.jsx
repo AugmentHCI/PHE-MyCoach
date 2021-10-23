@@ -18,6 +18,10 @@ export default class ActivityLogbookManager {
         return Meteor.callPromise('activitylogbook.toggleDone', {userID: this.userID, activityID: activityID, newStatus: newStatus});
     }
 
+    async removeActivity({activityID}) {
+        return Meteor.callPromise('activitylogbook.removeActivity', {userID: this.userID, activityID: activityID});
+    }
+
     async updateActivity({activityID, title, startTime, endTime, intensity, wholeDay, goalID=null}) {
         return Meteor.callPromise('activitylogbook.updateActivity', 
             {userID: this.userID, activityID: activityID, title: title, startTime: startTime, endTime: endTime, intensity: intensity, wholeDay: wholeDay, goalID: goalID});
