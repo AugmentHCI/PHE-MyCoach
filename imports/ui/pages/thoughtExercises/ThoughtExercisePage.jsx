@@ -90,9 +90,9 @@ export default function ThoughtExercisePage() {
     }
 
     return (<React.Fragment>
-        <NavigationBar title="Gedachte-oefeningen"/>
+        <NavigationBar title="Gedachten-oefeningen"/>
         <div className="container" style={{paddingTop: "85px"}}>
-            <h2>Jouw gedachte-oefeningen</h2>
+            <h2>Jouw gedachten-oefeningen</h2>
             <FadeIn>
             <ExerciseContainer>
                 { exercises.map(exercise => {return (<Exercise 
