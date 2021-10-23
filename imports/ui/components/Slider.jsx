@@ -6,7 +6,13 @@ import "./Slider.scss";
 export default function Slider(props) {
 
   const [value, updateValue] = useState(props.value ? props.value : 1);
+  const [oldValue, updateOldValue] = useState(undefined);
   const [saved, updateSaved] = useState(false);
+  const [editing, updateEditing] = useState();
+
+  useEffect(() => {
+    if (oldValue && value !== oldValue) updateEditing(true);
+  }, [value]);
 
   async function save() {
     if (!props.questionManager) return;
@@ -32,7 +38,7 @@ export default function Slider(props) {
     async function fetchStatus() {
       if (!props.questionManager) return;
       const answer = await props.questionManager.getLatestAnswerOnQuestion(props.id);
-      if (answer) { updateValue(answer); updateSaved(true); }
+      if (answer) { updateValue(answer); updateOldValue(answer); if (props.oneTime) updateSaved(true); }
     }
     fetchStatus();
   }, []);
@@ -52,9 +58,10 @@ export default function Slider(props) {
           </div>
         {props.endValue && <div style={{flexShrink:1}}>{props.endValue}</div>}
       </div>
-      {props.showValue && !props.mapping && <div className={"slider-value" + (saved ? "-saved" : "")}>{props.valueText ? props.valueText + ": " : ""}{value}</div>}
-      {props.showValue && props.mapping && <div className={"slider-value" + (saved ? "-saved" : "")}>{mappings[props.mapping][value]}</div>}
-      {props.save && !saved && 
+      {props.showValue && !props.mapping && <div className={"slider-value" + (saved && props.oneTime ? "-saved" : "")}>{props.valueText ? props.valueText + ": " : ""}{value}</div>}
+      {props.showValue && props.mapping && <div className={"slider-value" + (saved && props.oneTime ? "-saved" : "")}>{mappings[props.mapping][value]}</div>}
+      {oldValue && !props.oneTime && !saved && editing && <div className={"slider-value-old" + (saved && props.oneTime ? "-saved" : "")}>Vorige waarde: {mappings[props.mapping][oldValue]}</div>}
+      {props.save && !saved &&
         <div className="selection-button-container">
           <Button width="fit" color="blue" onClick={() => save()} style={{}}>
             Bevestig

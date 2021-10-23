@@ -21,7 +21,7 @@ export default class QuestionManager {
     /* TODO: Fix */
     async getLatestAnswerOnQuestion(questionID) {
         let answers = await Meteor.callPromise('mycoachquestion.getQuestion', {userID: this.userID, questionID: questionID});
-        if (answers.length > 0) return answers[0].answer;
+        if (answers.length > 0) return answers[answers.length-1].answer;
         return undefined;
     }
 

@@ -117,7 +117,7 @@ export default function ValueLogbook() {
             <div style={{height:"260px", width:"100%"}}>
                 <hr/>
                 <h3 style={{fontSize:"18px", color:"var(--idewe-blue)"}}>Levensdomeinen</h3>
-                <p>Hier zie je nog een overzicht van je levensdomeinen. Zijn er domeinen die jij belangrijk vindt maar nog niet genoeg in investeert? Probeer dan enkele concrete acties te ondernemen of doelen te stellen om tijd vrij te maken voor de zaken die jij belangrijk vindt.</p> 
+                <p>Hier zie je nog een overzicht van je levensdomeinen. Zijn er domeinen die jij belangrijk vindt maar nog niet genoeg in investeert? Probeer dan enkele concrete acties te ondernemen of doelen te stellen om tijd vrij te maken voor de zaken die jij belangrijk vindt. Je kan je levensdomeinen opnieuw scoren in het onderdeel 'Waarden' via de snelkoppeling bovenaan.</p> 
                 <LifeChartContent questionManager={questionManager}/>
                 <div style={{height: "20px", width: "100%"}}/>
             </div>

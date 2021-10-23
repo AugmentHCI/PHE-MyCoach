@@ -37,7 +37,6 @@ export default function LifeChartContent({questionManager}) {
                 { domain: 'Familie', type: "Investering", value: familyInvest},
                 { domain: 'Familie', type: "Belang", value: familyImportance},
             ];
-            console.log(data)
             setData(data);
         }
         fetchAnswers();
@@ -74,5 +73,5 @@ export default function LifeChartContent({questionManager}) {
     };
 
     if (!data) return <LoadingScreen/>
-    return <Radar {...config} />;
+    return <Radar {...config}/>;
 }

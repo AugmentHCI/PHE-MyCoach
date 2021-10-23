@@ -227,8 +227,8 @@ function ContentParser(props) {
      * @param {Boolean} show Whether the current value also needs to be displayed or not
      * @param {Boolean} save Whether the value needs to be saved (render button)
      */
-    function createSliderContent(id, text, from, to, valueText, show, save) {
-        return <div className="content-backdrop"><Slider key={props.childrenKey} id={id} text={text} from={from} to={to} valueText={valueText} showValue={show} mapping={props.data.mapping} save={save} questionManager={props.questionManager} callback={props.callback} module={props.module}/></div>
+    function createSliderContent(id, text, from, to, valueText, show, save, oneTime=true) {
+        return <div className="content-backdrop"><Slider key={props.childrenKey} id={id} text={text} from={from} to={to} valueText={valueText} showValue={show} mapping={props.data.mapping} save={save} questionManager={props.questionManager} callback={props.callback} module={props.module} oneTime={oneTime}/></div>
     }
 
     /**
@@ -445,7 +445,7 @@ function ContentParser(props) {
             case 'Image':
                 return createImageContent(props.data.link, props.data.width);
             case 'Slider':
-                return createSliderContent(props.data.id, props.data.text, props.data.from, props.data.to, props.data.valueText, props.data.showValue, props.data.save);
+                return createSliderContent(props.data.id, props.data.text, props.data.from, props.data.to, props.data.valueText, props.data.showValue, props.data.save, props.data.oneTime);
             case 'Text-Input':
                 return createTextInputContent(props.data.text, props.data.placeholder);
             case 'Multitext-Input':

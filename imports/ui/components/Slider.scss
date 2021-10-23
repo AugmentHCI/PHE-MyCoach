@@ -25,6 +25,12 @@
         @extend .slider-value;
         color: var(--idewe-gray-dark);
     }
+
+    &-old {
+        @extend .slider-value;
+        font-size: 14px;
+        color: var(--idewe-gray-dark);
+    }
 }
 
 .slider-text {
