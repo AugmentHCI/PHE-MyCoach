@@ -37,7 +37,8 @@ const PEMOD1 = {
                     correct: "Juist",
                     explanation: "Wanneer je je voet omslaat wordt dit geregistreerd door receptoren in de voet. Die receptoren werken als poorten en zorgen ervoor dat er ladingen de zenuwcel instromen. Bij voldoende ladingen wordt er een gevaarboodschap aangemaakt in de vorm van een elektrisch signaal.",
                     onCorrect: "Goed zo!",
-                    onIncorrect: "Deze stelling is juist."
+                    onIncorrect: "Deze stelling is juist.",
+                    retake: true
                 },
                 {
                     id: "PE-MOD-1-Q2",
@@ -47,7 +48,8 @@ const PEMOD1 = {
                     correct: "Fout",
                     explanation: "De receptoren in je enkel zullen de  druk of rek op je enkel door de val waarnemen. Een gevaarboodschap zal gestuurd worden naar de hersenen langs het ruggenmerg. De hersenen beslissen of de boodschap zal worden doorgestuurd in het ruggenmerg. Je aandacht, gedachten, emoties en eerdere ervaringen spelen een belangrijke rol in deze beslissing.",
                     onCorrect: "Deze stelling is inderdaad fout!",
-                    onIncorrect: "Jammer, maar deze stelling is fout."
+                    onIncorrect: "Jammer, maar deze stelling is fout.",
+                    retake: true
                 },
                 {
                     id: "PE-MOD-1-Q3",
@@ -57,7 +59,8 @@ const PEMOD1 = {
                     correct: "Juist",
                     explanation: "Komt de gevaarboodschap in de hersenen toe, dan zullen de hersenen deze boodschap verwerken. Je emoties, gedachten, aandacht en eerdere pijnervaringen zullen hierin een belangrijke rol spelen en dat verwerkingsproces sturen. Pas dan zullen de hersenen beslissen of je pijn zal ervaren.",
                     onCorrect: "Inderdaad!",
-                    onIncorrect: "Dit is fout..."
+                    onIncorrect: "Dit is fout...",
+                    retake: true
                 }
             ]
         },

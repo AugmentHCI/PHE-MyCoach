@@ -72,7 +72,7 @@ function ContentParser(props) {
      * @param {String} onCorrect   The text that needs to be displayed (or added to the explanation) when the user answers correctly
      * @param {String} onIncorrect The text that needs to be displayed (or added to the explanation) when the user answers incorrectly
      */
-    function createQuestionContent(questionID, question, number, options, correct, explanation, onCorrect, onIncorrect) {
+    function createQuestionContent(questionID, question, number, options, correct, explanation, onCorrect, onIncorrect, retake=false) {
         let buttonsHTML = [];
         let [status, changeStatus] =  useState("default");
 
@@ -81,7 +81,7 @@ function ContentParser(props) {
                 const answer = await props.questionManager.getLatestAnswerOnQuestion(questionID);
                 if (answer) changeStatus(answer);
             }
-            fetchStatus();
+            if (!retake) fetchStatus();
         }, []);
 
         async function selectButton(option) {
@@ -435,7 +435,7 @@ function ContentParser(props) {
             case 'List':
                 return createListContent(props.data.content, props.data.numbered, props.data.overview);
             case 'Question':
-                return createQuestionContent(props.data.id, props.data.question, props.data.number, props.data.options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect);
+                return createQuestionContent(props.data.id, props.data.question, props.data.number, props.data.options, props.data.correct, props.data.explanation, props.data.onCorrect, props.data.onIncorrect, props.data.retake);
             case 'Video':
                 return createVideoContent(props.data.link, props.userProfile.language);
             case 'Selection':
