@@ -131,7 +131,7 @@ export default function SubmoduleParser(props) {
             const latestUserProfile = {profile: 1};
             const profile = 1;
             progressManager.setProfile(profile);
-            const progress = await progressManager.getModuleProgress(module);
+            const progress = await progressManager.getModuleProgress(module.toUpperCase());
             const modalStatus = await interactionManager.getInteractionStatuses("MODULE_COMPLETION_MODAL");
             setUserProfile(latestUserProfile);
             setUserProgress(progress);
@@ -167,7 +167,7 @@ export default function SubmoduleParser(props) {
                     </ModuleCard>
                     <hr className="module-hr-line"/>
                     {loading && <LoadingScreen/>}
-                    {!loading && <CardsParser cards={data.cards} module={module} submodule={data.id} moduleStatus={userProgress?.module?.submodule} userID={userID} userProfile={userProfile} finishCallback={finishSubmodule}/>}
+                    {!loading && <CardsParser cards={data.cards} module={module} submodule={data.id} moduleStatus={userProgress?.[module.toUpperCase()]?.[submodule]} userID={userID} userProfile={userProfile} finishCallback={finishSubmodule}/>}
                 </FadeIn>}
             </div>
         </React.Fragment>
