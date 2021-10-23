@@ -33,8 +33,9 @@ export default class BuildupScheme {
     }
 
     calculateStartValue(measurements) {
-        const value = Object.values(measurements).reduce((a, b) => a + b) / Object.values(measurements).length * 8 
-        if (value < 50) return Math.round(value) / 10;
+        console.log(measurements);
+        const value = Object.values(measurements).reduce((a, b) => a + b) / Object.values(measurements).length * 8 ;
+        if (value < 500) return Math.round(value) / 10;
         return Math.round(value / 100) * 10;
     }
 
@@ -96,15 +97,14 @@ export default class BuildupScheme {
     updateScheme() {
         if (this.measuresComplete()) this.startValue = this.calculateStartValue(this.measurements);
         else {this.startValue = undefined; return undefined;}
+        console.log(this.startValue)
         if (this.startValue > this.goal) return [];
         let value = this.startValue;
         let week = 1;
         let newScheme = [];
         do {
             newScheme.push({week: week.toString(), date: moment().add(week-1, "week").format("W-YYYY"), goal: value})
-            console.log(value);
-            value = value > 50 ? Math.round(this.startValue * (1 + week / 10)/10)*10 : Math.round(this.startValue * (1 + week / 10)*10)/10;
-            console.log(value);
+            value = value > 500 ? Math.round(this.startValue * (1 + week / 10)/10)*10 : Math.round(this.startValue * (1 + week / 10)*10)/10;
             week++;
         } while (value <= this.goal);
         if (newScheme.length > 0 && newScheme[newScheme.length-1].goal !== this.goal) 
