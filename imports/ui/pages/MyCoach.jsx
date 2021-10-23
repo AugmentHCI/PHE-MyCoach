@@ -69,7 +69,7 @@ export default function MyCoach(props) {
 
     function handleIntroduction() {
         if (!userData) return;
-        const introText = userData.K ? "Welkom bij de HealthEmpower coaching. Heb je momenteel pijn? Dan ben je niet alleen. Eén op vier werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe  je op een goede manier kan omgaan met je pijn. Dit heeft een positieve impact op je functioneren. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Bekijk hier alvast het introductiefilmpje." : "Welkom bij de Health Empower coaching. Heb jij momenteel geen pijn? Gelukkig! 1 op de 4 werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe je het risico op pijn in de toekomst kan beperken. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Bekijk hier alvast het introductiefilmpje."
+        const introText = userData?.K ? "Welkom bij de HealthEmpower coaching. Heb je momenteel pijn? Dan ben je niet alleen. Eén op vier werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe  je op een goede manier kan omgaan met je pijn. Dit heeft een positieve impact op je functioneren. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Bekijk hier alvast het introductiefilmpje." : "Welkom bij de Health Empower coaching. Heb jij momenteel geen pijn? Gelukkig! 1 op de 4 werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe je het risico op pijn in de toekomst kan beperken. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Bekijk hier alvast het introductiefilmpje."
         if (showIntroductionModal) {
             return (
                 <AppModal show={true} title={"Welkom!"} defaultOption={"Naar het filmpje"} notifyParent={handleIntroductionSeen}>
@@ -78,7 +78,7 @@ export default function MyCoach(props) {
         if (showIntroductionVideo) {
         return (
             <AppModal show={true} title={"Introduciefilmpje"} defaultOption={"Klaar"} notifyParent={handleIntroductionVideoSeen}>
-                Bekijk het introductiefilmpje over de HealthEmpower coaching.
+                Bekijk het introductiefilmpje over de HealthEmpower coaching. Hierin kom je meer te weten over de verschillende domeinen die belangrijk zijn bij pijn. Rond ieder domein hebben we coaching uitgewerkt, zo weet je waaraan je je mag verwachten.
                 <iframe src={"https://player.vimeo.com/video/485835694"} width="100%" style={{marginTop:"20px", borderRadius: "10px"}} frameBorder="0" allow="autoplay; fullscreen"></iframe>
             </AppModal>)}
         return (<React.Fragment/>);
@@ -122,7 +122,7 @@ export default function MyCoach(props) {
             </div>}
             placement="bottom"
             trigger="click"
-            visible={showTutorial1}>
+            visible={showTutorial1 && !showIntroductionVideo && !showIntroductionModal && !showFinishPainEducationModal}>
                 <ActionButton icon={SHORTCUTS["DAILY-COACHING"].icon} onClick={() => setShowCoachingModal(true)}>{SHORTCUTS["DAILY-COACHING"].translation[language]}</ActionButton>
                 {userShortcuts && userShortcuts.map(shortcut => {
                     return <ActionButton icon={SHORTCUTS[shortcut.shortcut].icon} 
