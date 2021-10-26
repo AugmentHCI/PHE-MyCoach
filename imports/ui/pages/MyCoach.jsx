@@ -173,7 +173,7 @@ export default function MyCoach(props) {
                 <div className="module-middle-row">
                     <ModuleButton rrnr={userID} code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/thoughtsemotions/`)} data={userProgress?.THOUGHTSEMOTIONS}/>
                     <div className="coaching-circle">Mijn <br/>coaching</div>
-                    <ModuleButton rrnr={userID} code={"ACT"} title={"Activiteit en werk"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/activitywork/`)} data={userProgress?.ACTIVITYWORK}/>
+                    <ModuleButton rrnr={userID} code={"ACT"} title={"Belasting & belastbaarheid"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/activitywork/`)} data={userProgress?.ACTIVITYWORK}/>
                 </div>     
                 <div className="module-middle-row">
                     <ModuleButton rrnr={userID} code={"MOV"} title={"Beweging"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/movement/`)} data={userProgress?.MOVEMENT}/>

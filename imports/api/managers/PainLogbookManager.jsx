@@ -17,8 +17,9 @@ export default class PainLogbookManager {
         return await Meteor.callPromise('painlogbook.removeLog', {userID: this.userID, logID: logID});
     }
 
-    async addPainLog(context, activity, intensity, thoughts, emotions, reactions, time=undefined) {
-        await Meteor.callPromise('painlogbook.insert', {userID: this.userID, context: context, activity: activity, intensity: intensity, thoughts: thoughts, emotions: emotions, reactions: reactions, time:time});
+    async addPainLog(context, activity, intensity, thoughts, emotions, reactions, logs, time=undefined) {
+        console.log(logs);
+        await Meteor.callPromise('painlogbook.insert', {userID: this.userID, context: context, activity: activity, intensity: intensity, thoughts: thoughts, emotions: emotions, reactions: reactions, logs: logs, time:time,});
     }
 
     async deleteUserLogs() {

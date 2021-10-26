@@ -39,6 +39,7 @@ import Illustration from '../components/Illustrations/Illustration.jsx';
 /* Styles */
 import './MyProgress.scss';
 import '../components/MyProgress/Input/Dropdown.css';
+import { UserDataProcessor } from '../../api/processors/UserDataProcessor';
 
 
 // Instance of React translate component, "Common" refers to the namespace of the i18n files
@@ -210,7 +211,7 @@ export default class MyProgress extends Component {
           if (!result.data) {console.log(`${dataType} - Successfully retreived data (Statuscode ${result.statusCode}). Data empty however.`); this.setState({fitData: []}); }
           else {
             console.log(`${dataType} - Successfully retreived data (Statuscode ${result.statusCode}).`);
-            console.log(result.data) 
+            console.log(result.data);
             dataType === "FitBit" ? this.setState({fitData: result.data}) : this.setState({data: result.data});
           }
         }

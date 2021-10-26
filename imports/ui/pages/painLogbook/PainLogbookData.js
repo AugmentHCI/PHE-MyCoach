@@ -389,23 +389,6 @@ export const reactions = {
             "en-EN": ""}}
 }
 
-export const options = Object.assign({}, thoughts, emotions, reactions);
-
-export const codeFrequencies = () => {
-    let codesFreqs = {};
-    Object.keys(codes).forEach(code => codesFreqs[code] = 0);
-    Object.keys(options).forEach(key => {
-        if (options[key].level1 === "EMOTION" && Object.keys(codesFreqs).includes(options[key].level3))
-            { codesFreqs[[options[key].level3]] = codesFreqs[[options[key].level3]] ? codesFreqs[[options[key].level3]] + 2 : 2 }
-        else if (["THOUGHT", "REACTION"].includes(options[key].level1)) {
-            options[key].codes.forEach(code => {
-                codesFreqs[[code]] = codesFreqs[[code]] ? codesFreqs[[code]] + 1 : 1
-            })
-        }
-    });
-    return codesFreqs;
-}
-
 export const conversation = {
     /* Inleiding */
     "MESSAGE-INTRO": {

@@ -87,7 +87,7 @@ const ACTMOD1 = {
                 },
                 {
                     type: "Text",
-                    content: ["Een ", {type: "italic", content: "hoge belasting"}, " houdt in dat je een hoge werkdruk of een groot takenpakket hebt op je werk en een druk privé leven met veel huishoudelijke taken, ... Een ", {type: "italic", content: "lage belasting"}, " houdt in dat je geen uitdagende job, weinig om handen in je privé leven, ..."]
+                    content: ["Een ", {type: "italic", content: "hoge belasting"}, " houdt in dat je een hoge werkdruk of een groot takenpakket hebt op je werk en een druk privé leven met veel huishoudelijke taken, ... Een ", {type: "italic", content: "lage belasting"}, " houdt in dat je geen uitdagende job hebt, weinig om handen hebt in je privé leven, ..."]
                 },
                 {
                     id: "ACT-MOD-1-BELASTING",
@@ -154,7 +154,7 @@ const ACTMOD1 = {
                 },
                 {
                     type: "Text",
-                    content: "Bij chronische pijn is een gezond evenwicht tussen belasting en belastbaarheid extra belangrijk. In deze module krijg je tips en trucs aangereikt voor een gezonde balans. Zoals afwisseling tussen rust en activiteit, bewust kiezen tussen energiegevers en energievreters."
+                    content: "Bij chronische pijn is een gezond evenwicht tussen belasting en belastbaarheid extra belangrijk. In deze module krijg je tips en tricks aangereikt voor een gezonde balans. Zoals afwisseling tussen rust en activiteit, bewust kiezen tussen energiegevers en energievreters."
                 },
                 {
                     type: "Image",
@@ -265,7 +265,7 @@ const ACTMOD2WORK = {
             ]
         },
         {
-            title: "Nog meer voordelen",
+            title: "Voordelen werk",
             showIfAnswered: ["ACT-MOD-2-SLIDER-2"],
             cardContents: [
                 {
@@ -291,7 +291,7 @@ const ACTMOD2WORK = {
             ]
         },
         {
-            title: "Voordelen werk",
+            title: "Nog meer voordelen",
             showIfAnswered: ["ACT-MOD-2-Q1"],
             cardContents: [
                 {
@@ -1994,7 +1994,7 @@ const ACTMOD9SLP = {
 
 const ActivityWorkScript = {
     id: "ACT",
-    title: "Activiteit en Werk",
+    title: "Belasting & Belastbaarheid",
     submodules: [ACTMOD1, ACTMOD2WORK, ACTMOD3ERGO, ACTMOD4MGMT, ACTMOD5, ACTMOD6MOV, ACTMOD7FOOD, ACTMOD8RES, ACTMOD9SLP]
 }
 

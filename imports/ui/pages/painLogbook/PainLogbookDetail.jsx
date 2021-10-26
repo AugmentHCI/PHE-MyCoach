@@ -8,7 +8,7 @@ import 'moment/locale/nl';
 import 'moment/locale/fr';
 
 /* Internal API */
-import { emotions, thoughts, reactions } from "./PainLogbookData.js";
+import { EMOTIONS, THOUGHTS, REACTIONS } from '../../../api/data/PainLogbook.js';
 
 /* Managers */
 import PainLogbookManager from '../../../api/managers/PainLogbookManager';
@@ -47,6 +47,7 @@ export default function PainLogbookDetail() {
     function renderPainlogActivity() {
         let activityHTML = [];
         activityHTML.push(<h3>Mijn activiteit</h3>);
+        activityHTML.push(<div className="chatbubble-overview-rounded">{painLog.context}</div>);
         activityHTML.push(<div className="chatbubble-overview-rounded">{painLog.activity}</div>);
         activityHTML.push(<div className="chatbubble-overview-rounded">{"Inteinsiteit: " + painLog.intensity}</div>);
         return activityHTML;
@@ -56,7 +57,7 @@ export default function PainLogbookDetail() {
         let emotionsHTML = [];
         emotionsHTML.push(<h3>Mijn emoties</h3>);
         painLog.emotions.split("|").forEach(emotion => {
-            emotionsHTML.push(<div className="chatbubble-overview-rounded">{emotions[emotion].translation[language]}</div>);
+            emotionsHTML.push(<div key={emotion} className="chatbubble-overview-rounded">{EMOTIONS[emotion].translation[language]}</div>);
         });
         return emotionsHTML;
     }
@@ -65,7 +66,7 @@ export default function PainLogbookDetail() {
         let thoughtsHTML = [];
         thoughtsHTML.push(<h3>Mijn gedachten</h3>);
         painLog.thoughts.split("|").forEach(thought => {
-            thoughtsHTML.push(<div className="chatbubble-overview">{thoughts[thought].translation[language]}</div>);
+            thoughtsHTML.push(<div key={thought} className="chatbubble-overview">{THOUGHTS[thought].translation[language]}</div>);
         });
         return thoughtsHTML;
     }
@@ -74,7 +75,7 @@ export default function PainLogbookDetail() {
         let reactionsHTML = [];
         reactionsHTML.push(<h3>Mijn reacties</h3>);
         painLog.reactions.split("|").forEach(reaction => {
-            reactionsHTML.push(<div className="chatbubble-overview">{reactions[reaction].translation[language]}</div>);
+            reactionsHTML.push(<div key={reaction} className="chatbubble-overview">{REACTIONS[reaction].translation[language]}</div>);
         });
         return reactionsHTML;
     }

@@ -8,6 +8,7 @@ const PEMOD1 = {
     type: "Informatief",
     image: "learning",
     imageWidth: "180px",
+    icon: "information",
     cards: [{
             id: "PE-MOD-1-CARD-1",
             title: "Inleiding",
@@ -111,6 +112,7 @@ const PEMOD2 = {
     duration: "10 minuten",
     type: "Informatief",
     image: "new_ideas",
+    icon: "brain",
     cards: [{
         id: "PE-MOD-2-CARD-1",
         title: "Inleiding",
@@ -236,6 +238,7 @@ const PEMOD3 = {
     type: "Informatief",
     image: "sensitivity",
     imageWidth: "170px",
+    icon: "pain-in-joints",
     cards: [{
         id: "PE-MOD-3-CARD-1",
         title: "Inleiding",
@@ -357,6 +360,7 @@ const PEMOD4 = {
     type: "Interactief",
     image: "chronic",
     imageWidth: "200px",
+    icon: "back-pain",
     cards: [{
         id: "PE-MOD-4-CARD-1",
         title: "Inleiding",
@@ -539,6 +543,7 @@ const PEMOD5 = {
     type: "Informatief",
     image: "paininfluence",
     imageWidth: "215px",
+    icon: "lifting",
     cards: [{
         id: "PE-MOD-5-CARD-1",
         title: "Inleiding",

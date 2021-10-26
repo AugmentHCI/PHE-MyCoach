@@ -6,23 +6,24 @@ import MovementScript from './MovementScript';
 import SocialScript from './SocialScript';
 
 export function getModule({module}) {
-    switch (module) {
-        case "PE":
+    switch (module.toLowerCase()) {
+        case "pe":
         case "paineducation":
             return PainEducationScript
-        case "ACT":
+        case "act":
         case "activitywork":
             return ActivityWorkScript
-        case "TE":
+        case "te":
         case "thoughtsemotions":
             return ThoughtsEmotionsScript
-        case "STR":
+        case "str":
+        case "stress":
         case "stressresilience":
             return StressResilienceScript
-        case "MOV":
+        case "mov":
         case "movement":
             return MovementScript
-        case "SOC":
+        case "soc":
         case "social":
             return SocialScript
         default:
@@ -36,5 +37,18 @@ export function getSubmodule({module, submoduleID}) {
     for (const submodule of fetchedModule.submodules) {
         if (submodule.id === submoduleID) return submodule;
     }
-    return [];
+    return undefined;
+}
+
+export function getSubmoduleMetadata({module, submoduleID}) {
+    const fetchedModule = getModule({module: module});
+    if (!fetchedModule?.submodules) return [];
+    for (const submodule of fetchedModule.submodules) {
+        if (submodule.id === submoduleID) {
+            const fetchedSubmodule = JSON.parse(JSON.stringify(submodule));
+            delete fetchedSubmodule.cards;
+            return fetchedSubmodule;
+        }
+    }
+    return undefined;
 }

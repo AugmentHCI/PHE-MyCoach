@@ -8,6 +8,7 @@ const MOVMOD1 = {
     type: "Informatief",
     image: "mov-mod-1",
     imageWidth: "180px",
+    icon: "thumbs-up",
     cards: [{
             title: "Introductie",
             cardContents: [
@@ -133,6 +134,7 @@ const MOVMOD2 = {
     type: "Informatief",
     image: "mov-mod-2",
     imageWidth: "220px",
+    icon: "lifting",
     cards: [{
             title: "Bewegingsdriehoek",
             cardContents: [
@@ -409,6 +411,7 @@ const MOVMOD3 = {
     type: "Interactief",
     image: "mov-mod-3",
     imageWidth: "180px",
+    icon: "work",
     cards: [
         {
             title: "Tips op een rijtje",
@@ -569,6 +572,7 @@ const MOVMOD4 = {
     type: "Interactief",
     image: "mov-mod-4",
     imageWidth: "180px",
+    icon: "running",
     cards: [{
             title: "Tips op een rijtje",
             cardContents: [
@@ -733,6 +737,7 @@ const MOVMOD5 = {
     type: "Informatief",
     image: "mov-mod-5",
     imageWidth: "170px",
+    icon: "calendar",
     cards: [{
             title: "Inleiding",
             cardContents: [

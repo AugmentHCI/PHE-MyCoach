@@ -42,6 +42,7 @@ const TEMOD1 = {
     type: "Informatief",
     image: "te-part-1",
     imageWidth: "180px",
+    icon: "information",
     cards: [{
             id: "TE-MOD1-CARD1",
             title: "Inleiding",
@@ -244,7 +245,7 @@ const TEMOD1 = {
                 },
                 {
                     type: "Text",
-                    content: "Zo zou je je bijvoorbeeld verdrietig kunnen voelen omdat je de gedachte hebt dat door je pijn niet meer kan wat je vroeger wel nog kon. Of wanhopig, wanneer je eraan denkt dat er naar jouw gevoel geen verbetering optreedt. Of misschien ook kwaad, wanneer je erover nadenkt dat je het niet eerlijk vindt dat dit net jou moet overkomen. Of schuldig, wanneer je de gedachte hebt dat je te weinig bewogen hebt vandaag, of bang, wanneer de gedachte in je opkomt dat een bepaalde beweging pijn gaat veroorzaken, of ..."
+                    content: "Zo zou je je bijvoorbeeld verdrietig kunnen voelen omdat je de gedachte hebt dat je door je pijn niet meer kan wat je vroeger wel nog kon. Of wanhopig, wanneer je eraan denkt dat er naar jouw gevoel geen verbetering optreedt. Of misschien ook kwaad, wanneer je erover nadenkt dat je het niet eerlijk vindt dat dit net jou moet overkomen. Of schuldig, wanneer je de gedachte hebt dat je te weinig bewogen hebt vandaag, of bang, wanneer de gedachte in je opkomt dat een bepaalde beweging pijn gaat veroorzaken, of ..."
                 },
                 {
                     type: "Text",
@@ -302,12 +303,12 @@ const TEMOD1 = {
                 },
                 {
                     type: "Text",
-                    content: "Je geeft aan dat je pogingen soms helpen om je gedachten te doen verdwijnen. We hebben allemaal wel eens de neiging hebben om allerlei pogingen te ondernemen om moeilijke gedachten en gevoelens uit de weg te gaan of te onderdrukken. Je gaat waarschijnlijk merken dat ze vaak geen of slechts tijdelijk een effect hebben. Hoe hard we ook ons best doen, diep vanbinnen zijn ze er nog steeds en steken ze vroeg of laat opnieuw de kop op.",
+                    content: "Je geeft aan dat je pogingen soms helpen om je gedachten te doen verdwijnen. We hebben allemaal wel eens de neiging om allerlei pogingen te ondernemen om moeilijke gedachten en gevoelens uit de weg te gaan of te onderdrukken. Je gaat waarschijnlijk merken dat ze vaak geen of slechts tijdelijk een effect hebben. Hoe hard we ook ons best doen, diep vanbinnen zijn ze er nog steeds en steken ze vroeg of laat opnieuw de kop op.",
                     showIf: [{rule: "HasAnswered", questionID: "TE-MOD-1-Q4", answerID: "SOMETIMES"}]
                 },
                 {
                     type: "Text",
-                    content: "Je geeft aan dat je pogingen eigenlijk niet helpen om je gedachten te doen verdwijnen. We hebben allemaal wel eens de neiging hebben om allerlei pogingen te ondernemen om moeilijke gedachten en gevoelens uit de weg te gaan of te onderdrukken. Je gaat waarschijnlijk merken dat ze vaak geen of slechts tijdelijk een effect hebben. Hoe hard we ook ons best doen, diep vanbinnen zijn ze er nog steeds en steken ze vroeg of laat opnieuw de kop op.",
+                    content: "Je geeft aan dat je pogingen eigenlijk niet helpen om je gedachten te doen verdwijnen. We hebben allemaal wel eens de neiging om allerlei pogingen te ondernemen om moeilijke gedachten en gevoelens uit de weg te gaan of te onderdrukken. Je gaat waarschijnlijk merken dat ze vaak geen of slechts tijdelijk een effect hebben. Hoe hard we ook ons best doen, diep vanbinnen zijn ze er nog steeds en steken ze vroeg of laat opnieuw de kop op.",
                     showIf: [{rule: "HasAnswered", questionID: "TE-MOD-1-Q4", answerID: "NEVER"}]
                 },
                 {
@@ -321,6 +322,7 @@ const TEMOD1 = {
             ]
         },
         {
+            title: "Leren omgaan met gedachten",
             cardContents: [
                 {
                     type: "Text",
@@ -342,7 +344,7 @@ const TEMOD1 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Vaak hebben we de neiging om allerlei pogingen te ondernemen om van onze moeilijke gedachten en gevoelens af te raken. Deze hebben echter geen of slechts een tijdelijk effect. We kunnen onze gedachten en gevoelens niet zomaar aan- en uitzetten… Wél kunnen we leren om zo’n manier mee om te gaan dat we er minder last van ondervinden of zodat ze ons gedrag minder bepalen! Dit gaan we bekijken in het volgende onderdeel: 'Aan de slag met gedachten en emoties'"
+                    content: "Vaak hebben we de neiging om allerlei pogingen te ondernemen om van onze moeilijke gedachten en gevoelens af te raken. Deze hebben echter geen of slechts een tijdelijk effect. We kunnen onze gedachten en gevoelens niet zomaar aan- en uitzetten… Wél kunnen we leren om er op zo’n manier mee om te gaan dat we er minder last van ondervinden of zodat ze ons gedrag minder bepalen! Dit gaan we bekijken in het volgende onderdeel: 'Aan de slag met gedachten en emoties'"
                 }
             ]
         },
@@ -357,14 +359,15 @@ const TEMOD1 = {
 
 const TEMOD2 = {
     id: "TE_MOD_2",
-    title: "Aan de slag met G&E",
-    titleMarkup: ["Aan de slag", "met G&E"],
+    title: "Mijn wederkerende gedachten",
+    titleMarkup: ["Mijn wederkerende", "gedachten"],
     part: 2,
     description: "Nu is het tijd om enkele dagen stil te staan bij jouw gedachten.",
     duration: "Dagen",
     type: "Oefeningen",
     image: "te-mod-2",
     imageWidth: "130px",
+    icon: "thought",
     cards: [{
         id: "TE-MOD2-CARD1",
         title: "Gedachte-oefening",
@@ -539,11 +542,12 @@ const TEMOD3 = {
     title: "Mindfulness",
     titleMarkup: ["Mindfulness"],
     part: 3,
-    description: "In dit onderdeel gaan we een techniek bekijken dat je kan helpen omgaan met verschillende gedachten.",
+    description: "In dit onderdeel gaan we een techniek bekijken die je kan helpen omgaan met verschillende gedachten.",
     duration: "10 minuten",
     type: "Oefeningen",
     image: "te-mod-3",
     imageWidth: "210px",
+    icon: "mindfulness",
     cards: [{
         id: "TE-MOD3-CARD1",
         title: "Inleiding",
@@ -560,7 +564,7 @@ const TEMOD3 = {
         cardContents: [
             {
                 type: "Text",
-                content: "Het uitoefenen van mindfulness zal er niet voor zorgen dat je pijn verdwijnt, maar kan wel je manier van omgaan met de pijn veranderen en je helpen om deze pijn een plaats te geven in je leven. Met mindfulness leer je om aandacht te geven aan het huidige moment, zonder oordeel. Vaak leven we vaker in ons hoofd en onze gedachten, mindfulness leert je je aandacht richten op het hier en nu.",
+                content: "Het uitoefenen van mindfulness zal er niet voor zorgen dat je pijn verdwijnt, maar kan wel je manier van omgaan met de pijn veranderen en je helpen om deze pijn een plaats te geven in je leven. Met mindfulness leer je om aandacht te geven aan het huidige moment, zonder oordeel. Vaak leven we in ons hoofd en onze gedachten, mindfulness leert je je aandacht richten op het hier en nu.",
             },
             {
                 type: "Break"
@@ -686,6 +690,7 @@ const TEMOD4 = {
     type: "Oefeningen",
     image: "te-mod-4",
     imageWidth: "150px",
+    icon: "stop",
     cards: [
         {
             id: "TE-MOD4-CARD1",
@@ -743,7 +748,7 @@ const TEMOD4 = {
                 },
                 {
                     type: "Text",
-                    content: "Je hebt nog wat juiste antwoorden laten liggen – kan je ze verder aanvullen?",
+                    content: "Je hebt nog wat juiste antwoorden laten liggen. Alle antwoorden waren namelijk juist.",
                     showIf: [{rule: "SelectionCount", questionID: "TE-MOD-4-NEGAVTIVE-CONSEQUENCES", count: [0, 1, 2]}]
                 },
                 {
@@ -875,6 +880,7 @@ const TEMOD5 = {
     type: "Oefeningen",
     image: "te-mod-5",
     imageWidth: "170px",
+    icon: "star",
     cards: [
         {
             title: "Inleiding",
@@ -1071,7 +1077,7 @@ const TEMOD5 = {
                 },
                 {
                     type: "Text",
-                    content: "Komt het belang van iedere domein ongeveer overeen met de tijd die je er aan besteedt? Als dat niet zo is, probeer dan je activiteiten anders in te delen en tijd vrij te maken voor de zaken die jij belangrijk vindt. Zo bouw je aan je eigen geluk! Je kan altijd terugkeren naar deze module om de domeinen opnieuw te scoren."
+                    content: "Komt het belang van ieder domein ongeveer overeen met de tijd die je er aan besteedt? Als dat niet zo is, probeer dan je activiteiten anders in te delen en tijd vrij te maken voor de zaken die jij belangrijk vindt. Zo bouw je aan je eigen geluk! Je kan altijd terugkeren naar deze module om de domeinen opnieuw te scoren."
                 }
             ]
         },
@@ -1133,7 +1139,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Vervolgens is het belangrijk om stil te staan bij jouw waarden. Je kan een waarde vergelijken met een vuurtoren in de verte, die je door slecht weer gidst en de richting aanwijst. Door te weten wat je belangrijkste waarden zijn in je leven, zal het ook makkelijker worden om lastige situaties te begrijpen én om keuzes te maken."
+                    content: "Vervolgens is het belangrijk om stil te staan bij jouw waarden. Je kan een waarde vergelijken met een vuurtoren in de verte, die je door slecht weer gidst en de richting aanwijst."
                 },
                 {
                     type: "Image",
@@ -1155,7 +1161,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: ["Je krijgt nu ongeveer 50 waarden te zien. Als je een waarde ziet dat bij je past, tik je op ", {type: "bold", content:"'akkoord'"}, " of veeg je de kaart naar rechts. Indien de waarde niet bij je past, tik je op ", {type: "bold", content:"'niet akkoord'"}, " of je veegt naar links. Succes er mee!"]
+                    content: ["Je krijgt nu ongeveer 50 waarden te zien. Als je een waarde ziet die bij je past, tik je op ", {type: "bold", content:"'akkoord'"}, " of veeg je de kaart naar rechts. Indien de waarde niet bij je past, tik je op ", {type: "bold", content:"'niet akkoord'"}, " of je veegt naar links. Succes er mee!"]
                 },
                 {
                     id: "TE-MOD-5-SWIPE-50",
@@ -1262,7 +1268,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Proficiat! Je hebt je levensdomeinen eens overlopen en ja waarden benoemd: goed gedaan! Dat is dan ook geen gemakkelijke opdracht. En nu?"
+                    content: "Proficiat! Je hebt je levensdomeinen eens overlopen en je waarden benoemd: goed gedaan! Dat is dan ook geen gemakkelijke opdracht. En nu?"
                 },
                 {
                     type: "Text",
@@ -1291,7 +1297,7 @@ const TEMOD5 = {
                     content: [
                         {image: "/images/movement/path.jpg", title: "Tip 1 - Laat je leiden door je visie, waarden en principes", text: "Doelen kies je in functie van wat voor jou als belangrijk aanvoelt, hoe je je leven wilt leiden. Omgekeerd kan het stellen van een doel dat indruist tegen een belangrijke waarde, ongewenste effecten met zich meebrengen."},
                         {image: "/images/movement/goals.jpg", title: "Tip 2 - Maak concrete doelen", text: "Je kan een doel pas bereiken als je weet wat je hiervoor moet doen. Werken aan je gezondheid is bijvoorbeeld geen doel, maar een waarde (je hecht belang aan jouw gezondheid). Een concreet doel om deze waarde te bereiken kan zijn dat je dagelijks een wandeling van 30 minuten maakt, of dat je maar 1 keer per week een dessertje eet."},
-                        {image: "/images/movement/rock.jpg", title: "Tip 3 - Stel realistische doelen", text: "Een goed gekozen doen kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te neme. Je kan beter starten met een doel van 5km, dan 10km, enz."},
+                        {image: "/images/movement/rock.jpg", title: "Tip 3 - Stel realistische doelen", text: "Een goed gekozen doel kan je bereiken. Onrealistische doelen werken heel demotiverend en de kans is groot dat je vroegtijdig afhaakt. Stel je doet zelden iets van sport, dan is het niet het beste plan om onmiddellijk een marathon als doel te nemen. Je kan beter starten met een doel van 5km, dan 10km, enz."},
                         {image: "/images/movement/pins.jpg", title: "Tip 4 - Houd rekening met de termijn", text: "Hoe verder weg in de toekomst een bepaald doel ligt, hoe moeilijker het wordt om dit te bereiken. Splits daarom ambitieuze doelen op in tussentijdse doelen, zo bewaar je het overzicht. Let op dat je je ook niet laat leiden door strakke tijdschema's, ook al kan door sociale of andere druk de tijd een belangrijke factor worden. Strakke tijdschema’s werken meestal stress verhogend en dreigen ons uit evenwicht te brengen. Bovendien werken ze demotiverend, doordat we ons teleurgesteld voelen als we bepaalde doelen niet bereiken binnen de gestelde termijn."},
                     ]
                 }
@@ -1342,7 +1348,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Nu is het aan jou! We hebben de shortcut waarden op het startscherm toegevoegd. Hier kan je zelf jouw persoonlijke doelen stellen. De tool helpt om jouw doelen concreet te maken en te realiseren. Neem dus zeker een kijkje, en succes!"
+                    content: "Nu is het aan jou! We hebben de shortcut 'Waarden en Doelen' op het startscherm toegevoegd. Hier kan je zelf jouw persoonlijke doelen stellen. De tool helpt om jouw doelen concreet te maken en te realiseren. Neem dus zeker een kijkje, en succes!"
                 }
             ]
         },
@@ -1353,7 +1359,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Nu is het aan jou! We hebben de shortcut waarden op het startscherm toegevoegd, en ook uitgebreid met doelen. Hier kan je zelf jouw persoonlijke doelen stellen. De tool helpt om jouw doelen concreet te maken en te realiseren. Neem dus zeker een kijkje, en succes!"
+                    content: "Nu is het aan jou! We hebben de shortcut 'Waarden en Doelen' op het startscherm toegevoegd, en ook uitgebreid met doelen. Hier kan je zelf jouw persoonlijke doelen stellen. De tool helpt om jouw doelen concreet te maken en te realiseren. Neem dus zeker een kijkje, en succes!"
                 }
             ]
         },
@@ -1384,11 +1390,12 @@ const TEMOD6 = {
     title: "Afronding",
     titleMarkup: ["Afronding"],
     part: 6,
-    description: "In het laatste onderdeel gaan wij nog een keer over alles wat wij gezien hebben.",
+    description: "In het laatste onderdeel gaan wij nog eens alles overlopen wat wij gezien hebben.",
     duration: "10 minuten",
     type: "Informatief",
     image: "te-mod-6",
     imageWidth: "200px",
+    icon: "pen",
     cards: [
         {
             id: "TE-MOD6-CARD1",
@@ -1422,10 +1429,6 @@ const TEMOD6 = {
             id: "TE-MOD6-CARD3",
             title: "Wat betekent dat nu?",
             cardContents: [
-                {
-                    type: "Text",
-                    content: "Wanneer jij het dus bijvoorbeeld belangrijk vindt om voldoende te blijven bewegen of aan het werk te blijven, kan je proberen om dit toch te doen, ondanks gedachten aan pijn of angst voor pijn die je hoofd onderweg misschien zal opwerpen!",
-                },
                 {
                     type: "Text",
                     content: "Wanneer jij het dus bijvoorbeeld belangrijk vindt om voldoende te blijven bewegen of aan het werk te blijven, kan je proberen om dit toch te doen, ondanks gedachten aan pijn of angst voor pijn die je hoofd onderweg misschien zal opwerpen!",

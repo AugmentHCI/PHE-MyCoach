@@ -14,7 +14,7 @@ export default function ActionButton(props) {
 
     function handleOnClick() {
         press(false); 
-        if (props.onClick) {props.onClick()};
+        if (props.onClick && !props.disabled) {props.onClick()};
     }
 
     return (
@@ -26,9 +26,13 @@ export default function ActionButton(props) {
             {props.icon && <div className="actionbutton-icon">
                 <Icon width="22px" image={props.icon} color={props.color ? props.color : "blue"}/>
             </div>}
-            <div className={props.size === "small" ? "actionbutton-text-small" : "actionbutton-text"}>
+            {!props.subtitle && <div className={props.size === "small" ? "actionbutton-text-small" : "actionbutton-text"}>
                 {props.children}
-            </div>
+            </div>}
+            {props.subtitle && <div className="actionbutton-content">
+                <div className="actionbutton-subtitle">{props.subtitle}</div>
+                <div className="actionbutton-title">{props.children}</div>
+            </div>}
             <div className="actionbutton-arrow">
                 <Icon image="next" width={"16px"} color="white"/>
             </div>

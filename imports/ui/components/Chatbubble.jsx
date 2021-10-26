@@ -8,6 +8,7 @@ import Input from './Input.jsx';
 import Button from './Button.jsx';
 import "./Chatbubble.scss";
 import Icon from "./Illustrations/Icon.jsx";
+import { RECOMMENDATIONS } from "../../api/data/PainLogbook.js";
 
 const language = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
 
@@ -45,16 +46,16 @@ export function Chatbubble(props) {
 }
 
 
-function Option(props) {
-    const classSuffix = props.checked ? "-selected" : "";
+function Option({checked, onChange, children}) {
+    const classSuffix = checked ? "-selected" : "";
     return (<React.Fragment>
         <hr size="1px" className="option-breakline"/>     
         <div style={{width:"100%", display: "table"}}>
             <div style={{display: "table-cell", width: "27px", verticalAlign: "middle"}}>
-                <input style={{marginRight: "7px"}} type="checkbox" checked={props.checked ? true : false} onChange={props.onChange}/>
+                <input style={{marginRight: "7px"}} type="checkbox" checked={checked ? true : false} onChange={onChange}/>
             </div>
-            <div className={"chat-text-option" + classSuffix} style={{display: "table-cell", width:"calc(100% - 27px)"}}>
-                {props.children}
+            <div className={"chat-text-option" + classSuffix} style={{display: "table-cell", width:"calc(100% - 27px)"}} onClick={onChange}>
+                {children}
             </div>
         </div>
         </React.Fragment>
@@ -258,30 +259,36 @@ export function ChatbubbleEmotions(props) {
     </div>)
 }
 
-export function ChatbubbleInputSummary(props) {
+export function ChatbubbleInputSummary({typeLength=undefined, recommendations, selectedRecommendation, showAllRecommendations, updateShowAllRecommendations, logger}) {
 
     const [renderLoading, setRenderLoading] = useState(true);
 
     /* Initialize Chatbubble once */
     useEffect(() => { 
-        setTimeout(function() { setRenderLoading(false) }, (props.typeLength ? props.typeLength : 1000));
+        setTimeout(function() { setRenderLoading(false) }, (typeLength ? typeLength : 1000));
     }, [] );
 
     function renderInputBars() {
         let inputsHTML = [];
-        props.inputs.forEach((input, index) => {
-            inputsHTML.push(<React.Fragment key={index + input}>
-                <div key={index + input} className="chatbubble-inputs-row">
-                    {!props.highlights.includes(input[0]) && <div className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput-disabled">{translations[language].inputCodes[input[0]]}</div></div>}
-                    {props.highlights.includes(input[0]) && <div className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput">{translations[language].inputCodes[input[0]]}</div></div>}
-                    <div className="chatbubble-inputs-barcontainer"><div className="chatbubble-inputs-bar" style={{width:(Math.round(input[1] * 100)) + "%"}}/></div>
+        recommendations.forEach((input, index) => {
+            if (index <= 2 || (index > 2 && showAllRecommendations)) inputsHTML.push(<React.Fragment key={"fragment-"+index}>
+                <div key={"input-row-" + index} className="chatbubble-inputs-row">
+                    {index !== selectedRecommendation && <div key={"input-notselected-"+index} className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput-disabled">{RECOMMENDATIONS[input[0]].title["nl-BE"]}</div></div>}
+                    {index === selectedRecommendation && <div key={"input-selected-"+index} className="chatbubble-inputs-inputtext"><div className="chatbubble-inputs-highlightinput">{RECOMMENDATIONS[input[0]].title["nl-BE"]}</div></div>}
+                    <div className="chatbubble-inputs-barcontainer"><div className="chatbubble-inputs-bar" style={{width:(Math.round(input[2] * 100)) + "%"}}/></div>
                 </div>
-                {index < props.inputs.length-1 && <hr key={"bar" + index + input} className="chatbubble-inputs-divider"/>}
+                {index < recommendations.length-1 && <hr key={"bar-" + index} className="chatbubble-inputs-divider"/>}
             </React.Fragment>)
+            if (index === 2 && !showAllRecommendations) inputsHTML.push(<div key={"button-show-more"} style={{display:"flex", justifyContent: "center"}}>
+                <Button size="small" onClick={() =>{ updateShowAllRecommendations(!showAllRecommendations); logger({action:"SHOWMORE"}) }}>Toon meer</Button>
+            </div>)
+            if (index === recommendations.length-1 && showAllRecommendations) inputsHTML.push(<div key={"button-show-less"} style={{display:"flex", justifyContent: "center"}}>
+                <Button size="small" onClick={() =>{ updateShowAllRecommendations(!showAllRecommendations); logger({action:"SHOWLESS"} )}}>Toon minder</Button>
+            </div>)
         })
         return (<div className="chatbubble-inputs-container">
-            <div className="chatbubble-inputs-title">Jouw inputs</div>
-            <div className="chatbubble-inputs-text">Hier is een overzicht van je inputs. Er wordt ook een aanbeveling getoond rond je gemarkeerde input(s).</div>
+            <div className="chatbubble-inputs-title">Jouw pijnlog</div>
+            <div className="chatbubble-inputs-text">Hier is een overzicht de thema's die aanwezig zijn in je pijnlog. Er wordt ook een aanbeveling gegeven rond je gemarkeerde input(s).</div>
             <hr className="chatbubble-inputs-divider"/>
             {inputsHTML}
             </div>);
@@ -340,7 +347,9 @@ export function ChatbubbleRecommendation(props) {
     }, [] );
 
     function updateRecommendationIndex(update) {
-        if (update === "next" && props.recommendationIndex < props.recommendationLength) props.nextRecommendation();
+        if (update === "next" && (
+            (props.showAllRecommendations && props.recommendationIndex < props.recommendationLength) || 
+            (!props.showAllRecommendations && props.recommendationIndex < props.recommendationLength && props.recommendationIndex < 2))) props.nextRecommendation();
         if (update === "prev" && props.recommendationIndex > 0) props.prevRecommendation();
     }
 
@@ -350,7 +359,7 @@ export function ChatbubbleRecommendation(props) {
                 <Icon onClick={() => updateRecommendationIndex("prev")} 
                     image={"next-logbook" + (props.recommendationIndex === 0 ? "-disabled" : "")} style={{flexGrow:1, transform:"rotate(180deg)", maxWidth:"26px", maxHeight:"26px", marginTop: "4px", marginLeft:"10px"}} width="15px" noFilter/>
                 <div  style={{flexGrow:2, textAlign:"center", fontSize:"20px"}}>Aanbeveling {props.recommendationIndex + 1}</div>
-                <Icon onClick={() => updateRecommendationIndex("next")} image={"next-logbook" + (props.recommendationIndex === props.recommendationLength ? "-disabled" : "")} style={{flexGrow:1, maxWidth:"26px", maxHeight:"26px", marginTop: "4px", marginRight:"10px"}} width="15px" noFilter/>
+                <Icon onClick={() => updateRecommendationIndex("next")} image={"next-logbook" + ((props.recommendationIndex === props.recommendationLength) || (props.recommendationIndex === 2 && !props.showAllRecommendations)? "-disabled" : "")} style={{flexGrow:1, maxWidth:"26px", maxHeight:"26px", marginTop: "4px", marginRight:"10px"}} width="15px" noFilter/>
             </div>
             <hr style={{margin: "5px", borderTop:"1px solid rgba(255,255,255,.3)"}}/>
         </div>);
@@ -366,21 +375,4 @@ export function ChatbubbleRecommendation(props) {
             </div>}
         </div>
     </div>}</React.Fragment>)
-}
-
-const translations = {
-    "nl-BE": {
-        inputCodes: {
-            "TIR": "Te verbeteren reacties",
-            "TIT": "Te verbeteren gedachten",
-            "ANXIOUS": "Gespannen / angstig",
-            "DEPRESSED": "Ontmoedigd / hulpeloos",
-            "FATIGUE": "Vermoeid / uitgeput",
-            "ANGER": "Geergerd / kwaad",
-            "HT": "Helpende gedachten",
-            "HR": "Helpende reacties",
-            "VIGOR": "Vrolijk / energiek",
-            "RELAXED": "Rustig / ontspannen"
-        }
-    }
 }

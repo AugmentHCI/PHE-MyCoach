@@ -8,6 +8,7 @@ const STRMOD1 = {
     type: "Informatief",
     image: "stress-mod-1",
     imageWidth: "180px",
+    icon: "information",
     cards: [{
             title: "Wat is stress?",
             cardContents: [
@@ -228,6 +229,7 @@ const STRMOD2 = {
     type: "Interactief",
     image: "stress-mod-2",
     imageWidth: "250px",
+    icon: "link",
     cards: [
         {
             title: "Rode draad",
@@ -440,6 +442,7 @@ const STRMOD3 = {
     type: "Interactief",
     image: "stress-mod-3",
     imageWidth: "150px",
+    icon: "magnifier",
     cards: [
         {
             title: "Inleiding",
@@ -554,6 +557,7 @@ const STRMOD4 = {
     type: "Interactief",
     image: "stress-mod-4",
     imageWidth: "180px",
+    icon: "stress",
     cards: [
         {
             title: "Inleiding",
@@ -693,6 +697,7 @@ const STRMOD5 = {
     type: "Interactief",
     image: "stress-mod-5",
     imageWidth: "180px",
+    icon: "circle",
     cards: [
         {
             title: "Inleiding",
@@ -817,6 +822,7 @@ const STRMOD6 = {
     type: "Interactief",
     image: "stress-mod-6",
     imageWidth: "200px",
+    icon: "feather",
     cards: [
         {
             title: "Wat is veerkracht?",

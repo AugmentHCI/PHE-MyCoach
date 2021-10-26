@@ -2,7 +2,7 @@ import { check } from 'meteor/check';
 import { PainLogbookCollection } from './PainLogbookCollection.jsx';
 
 Meteor.methods({
-    'painlogbook.insert'({userID, context, activity, intensity, thoughts, emotions, reactions, time}) {
+    'painlogbook.insert'({userID, context, activity, intensity, thoughts, emotions, reactions, logs, time}) {
         check(userID, Number);
         check(context, String);
         check(activity, String);
@@ -10,6 +10,7 @@ Meteor.methods({
         check(thoughts, String);
         check(emotions, String);
         check(reactions, String);
+        check(logs, String);
    
         PainLogbookCollection.insert({
             userID: userID,
@@ -20,6 +21,7 @@ Meteor.methods({
             emotions: emotions,
             reactions: reactions,
             timestamp: time ? new Date(time) : new Date,
+            logs: logs,
         });
     },
     'painlogbook.getLogs'({userID}) {

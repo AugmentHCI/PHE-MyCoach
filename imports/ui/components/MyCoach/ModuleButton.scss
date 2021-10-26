@@ -1,5 +1,8 @@
 .modulebutton {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 1;
     width: 120px;
     height: 120px;
@@ -8,19 +11,17 @@
     background-color: var(--idewe-blue);
     text-align: center;
     transition: .2s ease-in-out;
-
+    padding-top: 8px;    
     font-size: 16px;
     font-family: var(--main-font);
     font-weight: 600;
     
     &-PE {
         @extend .modulebutton;
-        padding-top: 50px;
     }
 
     &-ACT {
-        @extend .modulebutton;
-        padding-top: 38px;       
+        @extend .modulebutton;   
         position: absolute;
         right: 0;
         top: -80px;
@@ -28,7 +29,6 @@
 
     &-EM {
         @extend .modulebutton;
-        padding-top: 38px;
         position: absolute;
         left: 0;
         top: -80px;
@@ -36,8 +36,7 @@
     }
 
     &-MOV {
-        @extend .modulebutton;
-        padding-top: 48px;       
+        @extend .modulebutton;  
         position: absolute;
         right: 0;
         top: -60px;
@@ -45,7 +44,6 @@
 
     &-SOC {
         @extend .modulebutton;
-        padding-top: 36px;
         position: absolute;
         left: 0;
         top: -60px;
@@ -53,7 +51,6 @@
 
     &-STR {
         @extend .modulebutton;
-        padding-top: 38px;
         position: absolute;
         top: -85px;
     }

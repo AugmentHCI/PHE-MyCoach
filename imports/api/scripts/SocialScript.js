@@ -9,6 +9,7 @@ const SOCMOD1 = {
     type: "Informatief",
     image: "soc-mod-social",
     imageWidth: "180px",
+    icon: "hug",
     cards: [{
             title: "Een stelling",
             cardContents: [
@@ -103,6 +104,7 @@ const SOCMOD2 = {
     type: "Interactief",
     image: "soc-mod-support",
     imageWidth: "210px",
+    icon: "chat-up",
     cards: [{
             title: "Inleiding",
             cardContents: [
@@ -339,6 +341,7 @@ const SOCMOD3 = {
     type: "Informatief",
     image: "soc-mod-reactions",
     imageWidth: "180px",
+    icon: "chat",
     cards: [{
             title: "Vormen van reacties",
             cardContents: [
@@ -683,6 +686,7 @@ const SOCMOD4 = {
     type: "Informatief",
     image: "soc-mod-context",
     imageWidth: "160px",
+    icon: "people",
     cards: [{
             title: "Inleiding",
             cardContents: [
@@ -910,6 +914,7 @@ const SOCMOD5 = {
     type: "Informatief",
     image: "soc-mod-socialmedia",
     imageWidth: "180px",
+    icon: "phone",
     cards: [{
             title: "Inleiding",
             cardContents: [
@@ -1028,6 +1033,7 @@ const SOCMOD6 = {
     type: "Informatief",
     image: "soc-mod-network",
     imageWidth: "210px",
+    icon: "network",
     cards: [{
             title: "Inleiding",
             cardContents: [

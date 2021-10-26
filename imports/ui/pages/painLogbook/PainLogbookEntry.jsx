@@ -5,91 +5,99 @@ import jwt_decode from "jwt-decode";
 
 /* Internal API */
 import { Chatbubble, ChatbubbleEmotions, ChatbubbleThoughtsReactions, ChatbubbleText, ChatbubbleInputSummary, ChatbubbleRecommendation } from '../../components/Chatbubble.jsx';
-import {thoughts, emotions, reactions, fillerWords, conversation, moduleTranslation, rules, codes, codeFrequencies, options} from "./PainLogbookData.js";
-import RuleEngine from "../../../api/RuleEngine.jsx";
-import { getSubmodule } from '../../../api/scripts/ScriptDispatcher.jsx';
+import { THOUGHTS, EMOTIONS, REACTIONS, RECOMMENDATIONTITLES, RECOMMENDATIONS, CONVERSATION, FILLERWORDS } from "../../../api/data/PainLogbook";
+import PainRecommenderSystem from "../../../api/RuleEngine.jsx";
+import { getSubmoduleMetadata } from '../../../api/scripts/ScriptDispatcher.jsx';
 
 /* Managers */
-import PainLogbookManager from '../../../api/managers/PainLogbookManager.jsx';
+import PainLogbookManager from '../../../api/managers/PainLogbookManager';
+import ProgressManager from '../../../api/managers/ProgressManager';
 
 /* UI Components */
 import NavigationBar from '../../components/NavigationBar';
 import AppModal      from '../../components/AppModal.jsx';
 import Illustration  from '../../components/Illustrations/Illustration.jsx';
 import PillButton    from '../../components/PillButton.jsx';
-
+import ActionButton  from '../../components/ActionButton';
 
 
 export default function PainLogbookEntry() {
 
     /* States and Constants */
-    const ruleEngine = new RuleEngine(rules);
-    const painLogbookManager = new PainLogbookManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
     const language  = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
+    const userID = parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr);
+    const token = FlowRouter.getParam('token');
+    const recommenderSystem = new PainRecommenderSystem(RECOMMENDATIONS);
+    const painLogbookManager = new PainLogbookManager(userID);
+    const progressManager    = new ProgressManager(userID);
     /* Recommendations */
     const [matchedRecommendations, updateMatchedRecommendations] = useState([]);
     const [currentRecommendation, updateCurrentRecommendation] = useState(0);
-    const [currentModule, updateCurrentModule] = useState({});
+    const [currentModules, updateCurrentModules] = useState([]);
     const [loadingModule, setLoadingModule] = useState(false);
     const [showModuleModal, setShowModuleModal] = useState(false);
     const [showExplanationModal, setShowExplanationModal] = useState(false);
     const [disabledAutoScroll, setDisabledAutoScroll] = useState(false);
     const [saved, setSaved] = useState(false);
+    const [showAllRecommendations, updateShowAllRecommendations] = useState(false);
     /* Message Queues */
     const [messageQueue, updateMessageQueue] = useState(["MESSAGE-INTRO"]);
     const [tempMessageQueue, updateTempMessageQueue] = useState([]);
     /* User input */
     const [userInput, updateUserInput] = useState([]);
+    const [userInputCodes, updateUserInputCodes] = useState([]);
+    const [userProgress, updateUserProgress] = useState([]);
+    const [userLogs, updateUserLogs] = useState([]);
 
-    function computeBars(inputs) {
-        let userCodes  = {};
-        /* Compute user frequencies */
-        inputs.forEach(input => {
-            if (input.level1 === "EMOTION" && Object.keys(codes).includes(input.level3)) {
-                userCodes[[input.level3]] = userCodes[[input.level3]] ? userCodes[[input.level3]]+2 : 2 ;
-            }
-            if (input.codes) input.codes.forEach(code => {
-                userCodes[[code]] = Object.keys(userCodes).includes(code) ? userCodes[[code]]+1 : 1 ;
-            });
-        });
-        /* Compute user relative frequencies */
-        const userTotal = inputs.reduce((total, input) => (input.level1) ? ((input.level1 === "EMOTION") ? total + 2 : total + 1) : total , 0);
-        let relUserCodes = {};
-        Object.keys(userCodes).forEach(code => {
-            relUserCodes[[code]] = userCodes[code] / userTotal;
-        });
-        /* Compute user total frequencies */
-        const codeFreqs = codeFrequencies();
-        let totUserCodes = {};
-        Object.keys(userCodes).forEach(code => {
-            totUserCodes[[code]] = userCodes[code] / codeFreqs[code];
-        });
-        /* Compute avg between both frequencies */
-        let userFrequencies = {};
-        Object.keys(userCodes).forEach(code => {
-            userFrequencies[code] = (totUserCodes[code] + relUserCodes[code]) / 2;
-        });
-        /* Sort and scale user inputs */
-        let codesArray = Object.keys(userFrequencies).map(key => [key, userFrequencies[key]] );
-        codesArray.sort((first, second) => second[1] - first[1]);
-        const max = codesArray[0][1];
-        for (let i = 0; i < codesArray.length; i++) {
-            codesArray[i][1] = codesArray[i][1] / max ; 
-        }
-        return codesArray;
-    }
+    const [saveAndForward, setSaveAndForward] = useState(undefined);
 
+    /* saveAndForward */
     useEffect(() => {
-        async function fetchSubmodule() {
+        if (saveAndForward && userLogs.length > 0 && userLogs[userLogs.length-1].split("-")[0] === "OPEN") {
+            saveLog();
+            if (saveAndForward.module && saveAndForward.submodule) FlowRouter.go(`/${language}/mycoach/${token}/module/${saveAndForward.module}/${saveAndForward.submodule}?goPainlogbookOnBack=true`);
+            else { history.back() }
+        }
+    }, [saveAndForward, userLogs]);
+
+    /* Fetch user progress */
+    useEffect(() => {
+        async function fetchUserProgress() {
+            const fetchedProgress = await progressManager.getUserProgress();
+            updateUserProgress(fetchedProgress);
+        }
+        fetchUserProgress();
+    }, []);
+
+    /* Fetch submodule metadata when recommendation changes, and log change */
+    useEffect(() => {
+        async function fetchSubmodules() {
             if (!matchedRecommendations || matchedRecommendations.length === 0) return;
             setLoadingModule(true);
-            let recModule = matchedRecommendations[currentRecommendation].module.toLowerCase(), recSubmodule = matchedRecommendations[currentRecommendation].submodule, module = recSubmodule.split("_")[0]; 
-            const submodule = await getSubmodule({module: recModule, submoduleID: recSubmodule});
-            updateCurrentModule(submodule);
+            const modules = [];
+            const recommendation = matchedRecommendations[currentRecommendation][0];
+            for (const module of RECOMMENDATIONS[recommendation].modules) {
+                const submodule = getSubmoduleMetadata({module: module.module, submoduleID: module.submodule});
+                if (submodule) {
+                    submodule.module = module.module;
+                    modules.push(submodule);
+                }
+            }
+            updateCurrentModules(modules);
             setLoadingModule(false);
         }
-        fetchSubmodule();
+        fetchSubmodules();
+        /* Log change */
+        if (matchedRecommendations?.length > 0 && matchedRecommendations[currentRecommendation][0]) {
+            const newUserLogs = [...userLogs, "SHOW-"+currentRecommendation+"-"+matchedRecommendations[currentRecommendation][0]];
+            updateUserLogs(newUserLogs);
+        }
     }, [currentRecommendation, matchedRecommendations]);
+
+    /* Switch recommendation index when user hides all recommendations */
+    useEffect(() => {
+        if (currentRecommendation > 2 && !showAllRecommendations) updateCurrentRecommendation(2);
+    }, [showAllRecommendations])
 
     /* Conversation Logic */
 
@@ -99,14 +107,16 @@ export default function PainLogbookEntry() {
                 history.back();
                 break;
             case "openRecommendation":
+                appendActionToLog({action:"OPENMODAL-"+currentRecommendation+"-"+matchedRecommendations[currentRecommendation][0]});
                 setShowModuleModal(true);
                 break;
             case "explainRecommendation":
+                appendActionToLog({action: "EXPLAIN-"+currentRecommendation+"-"+matchedRecommendations[currentRecommendation][0]})
                 setShowExplanationModal(true);
                 break;
             case "saveAndClose":
-                saveLog();
-                history.back();
+                appendActionToLog({action:"CLOSE-"+currentRecommendation+"-"+matchedRecommendations[currentRecommendation][0]});
+                setSaveAndForward({});
                 break;
             default:
                 console.log(`Action ${actionType} not implemented.`)
@@ -116,22 +126,31 @@ export default function PainLogbookEntry() {
     function saveLog() {
         if (saved) return;
         let userLog = {THOUGHT: [], REACTION: [], EMOTION: [], CONTEXT: undefined, INTENSITY: undefined, ACTIVITY: undefined}
-        userInput.forEach(input => {
-            if (input.level1) userLog[input.level1].push(input.level4);
-            else { userLog[input.category] = input.content }
+        userInputCodes.forEach(input => {
+            /* Activity, context, intensity */
+            if (input.includes("|")) {
+                const code = input.split("|")[0];
+                userLog[code] = code === "CONTEXT" ? (input.split("|")[1]).split(" (")[0] : input.split("|")[1];
+            }
+            /* Thoughts, emotions, reactions */
+            else {
+                const code = input.split("-")[0];
+                userLog[code] = userLog[code].length > 0 ? [...userLog[code], input] : [input];
+            }
         });
         Object.keys(userLog).forEach(key => {
             if (["THOUGHT", "REACTION", "EMOTION"].includes(key)) { userLog[key] = userLog[key].join("|") }
         })
-        painLogbookManager.addPainLog(userLog.CONTEXT, userLog.ACTIVITY, userLog.INTENSITY, userLog.THOUGHT, userLog.EMOTION, userLog.REACTION);
+        console.log(userLogs);
+        painLogbookManager.addPainLog(userLog.CONTEXT, userLog.ACTIVITY, userLog.INTENSITY, userLog.THOUGHT, userLog.EMOTION, userLog.REACTION, JSON.stringify(userLogs));
         setSaved(true);
     }
 
     function initializeMessages() {
-        updateMessageQueue([conversation["MESSAGE-INTRO"]]);
+        updateMessageQueue([CONVERSATION["MESSAGE-INTRO"]]);
         let temporaryMessageQueue = [];
-        conversation["MESSAGE-INTRO"].response.forEach(message => {
-            temporaryMessageQueue.push(conversation[message]);
+        CONVERSATION["MESSAGE-INTRO"].response.forEach(message => {
+            temporaryMessageQueue.push(CONVERSATION[message]);
         });
         updateTempMessageQueue(temporaryMessageQueue);
     }
@@ -139,13 +158,19 @@ export default function PainLogbookEntry() {
     function addResponseToMessageQueue(message) {
         let newQueue = [...messageQueue];
         newQueue.push(message);
-        if (message.id) {updateUserInput([...userInput, {category: message.category, content: message.id}])}
-        if (message.category === "ACTIVITY") {updateUserInput([...userInput, {category: message.category, content: message.content}])}
+        if (message.id) {
+            updateUserInput([...userInput, {category: message.category, content: message.id}])
+            updateUserInputCodes([...userInputCodes, message.category+"|"+message.content]);
+        }
+        if (message.category === "ACTIVITY") {
+            updateUserInput([...userInput, {category: message.category, content: message.content}])
+            updateUserInputCodes([...userInputCodes, "ACTIVITY|"+message.content]);
+        }
         let responseMessages = [];
         message.response.forEach(messageResponse => {
-            newQueue.push(conversation[messageResponse])
-            if (conversation[messageResponse].sentBy === "coach") {
-                conversation[messageResponse].response.forEach(option => responseMessages.push(conversation[option]));
+            newQueue.push(CONVERSATION[messageResponse])
+            if (CONVERSATION[messageResponse].sentBy === "coach") {
+                CONVERSATION[messageResponse].response.forEach(option => responseMessages.push(CONVERSATION[option]));
             }
         });
         updateMessageQueue(newQueue);
@@ -156,18 +181,21 @@ export default function PainLogbookEntry() {
         /* Add users responses + next coach message to message queue */
         let newQueue = [...messageQueue];
         let newUserInput = [...userInput];
+        let newUserInputCodes = [...userInputCodes];
         for (const [response, information] of Object.entries(responses)) {
+            newUserInputCodes.push(response)
             newUserInput.push(information);
             newQueue.push({content: information.translation ? information.translation[language] : response, sentBy: "user"});
         }
-        const nextCoachMessage = conversation[nextmessage.response[0]]
+        const nextCoachMessage = CONVERSATION[nextmessage.response[0]]
         newQueue.push(nextCoachMessage);
         /* Also add next responses to coach message to queue */
         let responseMessages = [];
         nextCoachMessage.response.forEach(response => {
-            responseMessages.push(conversation[response]);
+            responseMessages.push(CONVERSATION[response]);
         })
         /* Update queue states */
+        updateUserInputCodes(newUserInputCodes);
         updateUserInput(newUserInput);
         updateMessageQueue(newQueue);
         updateTempMessageQueue(responseMessages);
@@ -181,20 +209,24 @@ export default function PainLogbookEntry() {
             /* Recommendation message (requires more complex handling) */
             if (message.content === "recommendation") { 
                 /* Update state, but use local variable as state update happens asynchronously */
-                let recommendations = matchedRecommendations.length === 0 ? ruleEngine.matchRules(userInput) : matchedRecommendations ;
+                let recommendations = matchedRecommendations.length === 0 ? recommenderSystem.matchRules(userInput) : matchedRecommendations ;
                 if (matchedRecommendations.length === 0) updateMatchedRecommendations(recommendations);
-                messages.push(<ChatbubbleInputSummary key={"message-recommendation-inputs"} typeLength={recommendationIndex > 0 ? 0 : 2000} inputs={computeBars(userInput)} highlights={recommendations[recommendationIndex].codeMarkings}/>);
-                const recommendationText = " Wil je hiervoor wat tips bekijken in de module '" + moduleTranslation[recommendations[recommendationIndex].module]+ "'?";
+
+                messages.push(<ChatbubbleInputSummary key={"message-recommendation-inputs"} typeLength={recommendationIndex > 0 ? 0 : 2000} recommendations={matchedRecommendations} selectedRecommendation={currentRecommendation} logger={appendActionToLog} showAllRecommendations={showAllRecommendations} updateShowAllRecommendations={updateShowAllRecommendations}/>);
+
                 /*messages.push(<Chatbubble key={"message-recommendation-"+recommendationIndex+"-1"} typeLength={2000} own={false}>{recommendations[recommendationIndex].explanation}</Chatbubble>) */
-                /*
-                messages.push(<Chatbubble key={"message-recommendation-2"} delayedDisplay delayBy={recommendationIndex > 0 ? 0 : 2000} typeLength={recommendationIndex > 0 ? 0 : 2000} own={false}>{recommendations[recommendationIndex].recommendation + recommendationText}</Chatbubble>) */
+
+                /*messages.push(<Chatbubble key={"message-recommendation-2"} delayedDisplay delayBy={recommendationIndex > 0 ? 0 : 2000} typeLength={recommendationIndex > 0 ? 0 : 2000} own={false}>{recommendations[recommendationIndex].recommendation + recommendationText}</Chatbubble>) */
+
+                const currentRecommendationID = recommendations[recommendationIndex][0];
                 messages.push(<ChatbubbleRecommendation 
                     key={"message-recommendation-2"} 
                     recommendationIndex={recommendationIndex}
                     recommendationLength={recommendations.length-1}
+                    showAllRecommendations={showAllRecommendations}
                     nextRecommendation={() => updateCurrentRecommendation(currentRecommendation+1)}
                     prevRecommendation={() => updateCurrentRecommendation(currentRecommendation-1)}>
-                        {recommendations[recommendationIndex].recommendation + recommendationText}
+                        <div dangerouslySetInnerHTML={{ __html: RECOMMENDATIONS[currentRecommendationID].recommendation["nl-BE"] }} />
                     </ChatbubbleRecommendation>) ;
 
             }
@@ -217,7 +249,7 @@ export default function PainLogbookEntry() {
                     messages.push(<ChatbubbleEmotions
                         key={"chatbubble-emotions-" + index + "-" + message}
                         message={message}
-                        options={emotions}
+                        options={EMOTIONS}
                         language={language}
                         onSubmit={hangleTERinput}
                         />)
@@ -227,8 +259,8 @@ export default function PainLogbookEntry() {
                     messages.push(<ChatbubbleThoughtsReactions 
                         key={"chatbubble-" + message.content+ "-" + index + "-" + message}
                         message={message}
-                        options={message.content === "thoughts" ? thoughts : reactions} 
-                        fillerWords={fillerWords}
+                        options={message.content === "thoughts" ? THOUGHTS : REACTIONS} 
+                        fillerWords={FILLERWORDS}
                         language={language}
                         onSubmit={hangleTERinput}/>);
                     break;
@@ -265,43 +297,75 @@ export default function PainLogbookEntry() {
     }
 
     function renderExplanationModal() {
+        const currentRecommendationID = matchedRecommendations[currentRecommendation]?.[0];
+        const currentExplanation = RECOMMENDATIONS[currentRecommendationID].explanation;
+
         return (<AppModal
             notifyParent={() => {setShowExplanationModal(false)}}
             defaultOption="Begrepen" 
             defaultColor="blue"
             title="Waarom deze aanbeveling?"
             show={showExplanationModal}>
-                {matchedRecommendations[currentRecommendation].explanation}
+                {currentExplanation}
         </AppModal>)
     }
 
     function renderModuleModal() {
         if (loadingModule) return <React.Fragment/>
-        const submodule = currentModule;
-        return (<AppModal
+        /* Only one submodule present in recommendation */
+        if (currentModules.length === 1) return (<AppModal
             backOption="Sluit" 
             notifyBack={() => setShowModuleModal(false)} 
-            notifyParent={() => {saveLog(); FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/module/${recModule}/${recSubmodule}?goPainlogbookOnBack=true`)}}
+            notifyParent={() => {saveLog(); FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/module/${currentModules[0].module}/${currentModules[0].id}?goPainlogbookOnBack=true`)}}
             defaultOption="Open" 
             defaultColor="blue"
             noPadding
             show={showModuleModal}>
             <div className="modalpopup-top">
-                <Illustration image={submodule.image} width={submodule.imageWidth ? submodule.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
-                <div className={"module-card-number"}>Onderdeel {submodule.part}</div>
-                <div className={"modalpopup-card-title"}>{submodule.titleMarkup[0]}</div>
-                {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title"}>{submodule.titleMarkup[1]}</div>}
+                <Illustration image={currentModules[0].image} width={currentModules[0].imageWidth ? currentModules[0].imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
+                <div className={"module-card-number"}>Onderdeel {currentModules[0].part}</div>
+                <div className={"modalpopup-card-title"}>{currentModules[0].titleMarkup[0]}</div>
+                {currentModules[0].titleMarkup.length > 1 && <div className={"modalpopup-card-title"}>{currentModules[0].titleMarkup[1]}</div>}
             </div>
             <div className={"modalpopup-body"}>
                 <div style={{display:'flex', marginBottom:'5px'}}>
-                    <PillButton contentColor="white" fillColor={"blue"} icon="time">{submodule.duration}</PillButton>
-                    <PillButton contentColor="white" fillColor={"blue"} icon="information">{submodule.type}</PillButton>
+                    <PillButton contentColor="white" fillColor={"blue"} icon="time">{currentModules[0].duration}</PillButton>
+                    <PillButton contentColor="white" fillColor={"blue"} icon="information">{currentModules[0].type}</PillButton>
                 </div>
-                {submodule.description}
+                {currentModules[0].description}
                 <hr/>
                 Jouw pijnlog wordt opgeslagen en je wordt doorverwezen naar dit onderdeel.
             </div>
-        </AppModal>)
+        </AppModal>);
+        /* Multiple submodules present in recommendation */
+        return (<AppModal
+            backOption="Sluit" 
+            notifyBack={() => setShowModuleModal(false)} 
+            title="Aanbevolen onderdelen"
+            show={showModuleModal}>
+                Wij bevelen jou de volgende onderdelen aan. Kies er ééntje waar jij aan zou willen werken!
+                {currentModules.map(submodule => {
+                    const disabled = userProgress[submodule.module][submodule.id] === "NOT_STARTED";
+                    return (<React.Fragment>
+                    <hr/>
+                    {disabled && <b style={{color: 'var(--idewe-gray)', display: 'inline'}}>(Vergrendeld) </b>}
+                    <p style={{color: disabled ? 'var(--idewe-gray)' : 'var(--idewe-blue-dark)', display: 'inline'}}>{submodule.description}</p>
+                    <ActionButton 
+                        icon={submodule.icon} 
+                        color={disabled ? "gray": "blue"} 
+                        disabled={disabled} 
+                        subtitle={RECOMMENDATIONTITLES[submodule.module]}
+                        onClick={() => {
+                            appendActionToLog({action: "OPEN-"+currentRecommendation+"-"+matchedRecommendations[currentRecommendation][0]+"-"+submodule.id});
+                            setSaveAndForward({module: submodule.module, submodule: submodule.id});
+                        }}>{submodule.title}</ActionButton>
+                </React.Fragment>)})}
+        </AppModal>);
+    }
+
+    function appendActionToLog({action}) {
+        const newUserLogs = [...userLogs, action];
+        updateUserLogs(newUserLogs);
     }
     
     /* Initialize first message once */

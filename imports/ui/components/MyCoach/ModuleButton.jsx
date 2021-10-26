@@ -51,9 +51,9 @@ export default function ModuleButton(props) {
     }
 
     function generateTitle() {
-        if (props.code === "ACT") return <div style={{zIndex: "1"}}>{props.title.split(" ")[0]}<br/>{props.title.split(" ")[1] + " " + props.title.split(" ")[2]}</div>
-        if (props.code === "EM") return <div style={{zIndex: "1"}}>{props.title.split(" ")[0]}<br/>{props.title.split(" ")[1] + " " + props.title.split(" ")[2]}</div>
-        if (props.code === "SOC") return <div style={{zIndex: "1"}}>{props.title.split(" ")[0]}<br/>{props.title.split(" ")[1]}</div>
+        if (props.code === "ACT") return <div style={{zIndex: "3", fontSize:"15px"}}>Belasting &<br/>belastbaar-<br/>heid</div>
+        if (props.code === "EM") return <div style={{zIndex: "3"}}>{props.title.split(" ")[0]}<br/>{props.title.split(" ")[1] + " " + props.title.split(" ")[2]}</div>
+        if (props.code === "SOC") return <div style={{zIndex: "3"}}>{props.title.split(" ")[0]}<br/>{props.title.split(" ")[1]}</div>
         return <div style={{zIndex: "1"}}>{props.title}</div>
     }
 

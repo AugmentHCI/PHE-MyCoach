@@ -8,7 +8,7 @@ import 'moment/locale/nl';
 import 'moment/locale/fr';
 
 /* Internal API */
-import { emotions } from "./PainLogbookData.js";
+import { EMOTIONS } from "../../../api/data/PainLogbook"
 
 /* Managers */
 import PainLogbookManager from '../../../api/managers/PainLogbookManager';
@@ -78,7 +78,7 @@ export default function PainLogbook() {
             let emotionsHTML = painLog.emotions.split("|").length === 0 ? "Geen" : "";
             painLog.emotions.split("|").forEach(emotion => {
                 if (emotionsHTML.length > 0) emotionsHTML += ", ";
-                emotionsHTML += emotions[emotion].translation[language];
+                emotionsHTML += EMOTIONS[emotion]?.translation?.[language];
             });
             painLogsHTML.push(<div key={painLog._id} className="painlogbook-entry">
                 <div className="painlogbook-entry-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${FlowRouter.getParam('token')}/painlogbook/${painLog._id}`)}><Icon image="view" color="white"/></div>
