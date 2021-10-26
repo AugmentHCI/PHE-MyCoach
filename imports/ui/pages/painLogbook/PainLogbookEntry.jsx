@@ -53,7 +53,7 @@ export default function PainLogbookEntry() {
 
     /* saveAndForward */
     useEffect(() => {
-        if (saveAndForward && userLogs.length > 0 && userLogs[userLogs.length-1].split("-")[0] === "OPEN") {
+        if (saveAndForward && userLogs.length > 0 && (["OPEN", "CLOSE"].includes(userLogs[userLogs.length-1].split("-")[0]))) {
             saveLog();
             if (saveAndForward.module && saveAndForward.submodule) FlowRouter.go(`/${language}/mycoach/${token}/module/${saveAndForward.module}/${saveAndForward.submodule}?goPainlogbookOnBack=true`);
             else { history.back() }
@@ -345,8 +345,8 @@ export default function PainLogbookEntry() {
             show={showModuleModal}>
                 Wij bevelen jou de volgende onderdelen aan. Kies er ééntje waar jij aan zou willen werken!
                 {currentModules.map(submodule => {
-                    const disabled = userProgress[submodule.module][submodule.id] === "NOT_STARTED";
-                    return (<React.Fragment>
+                    const disabled = !userProgress?.[submodule.module]?.[submodule.id] || userProgress[submodule.module][submodule.id] === "NOT_STARTED";
+                    return (<React.Fragment key={submodule.id}>
                     <hr/>
                     {disabled && <b style={{color: 'var(--idewe-gray)', display: 'inline'}}>(Vergrendeld) </b>}
                     <p style={{color: disabled ? 'var(--idewe-gray)' : 'var(--idewe-blue-dark)', display: 'inline'}}>{submodule.description}</p>

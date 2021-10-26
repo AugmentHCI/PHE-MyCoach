@@ -175,7 +175,9 @@ export function ChatbubbleThoughtsReactions(props) {
                 <div style={{maxHeight:"110px", overflow:"scroll", overflowX:"hidden"}}>
                     { renderSelectedOptions() }
                 </div>
-                { Object.keys(selectedOptions).length > 0 && <Button color="blue" onClick={() => props.onSubmit(selectedOptions, props.message)}>Verstuur</Button>}
+                {Object.keys(selectedOptions).length > 0 && <div style={{display: 'flex', flex: 2, justifyContent: 'center'}}>
+                     <Button size="small" width="50%" center color="blue" onClick={() => props.onSubmit(selectedOptions, props.message)}>Verstuur</Button>
+                </div>}
             </div>}
             {!hidden && <div className={"chatbubble-ownchoice-textinput"}>
                 <Input type="text" value={searchTerm} placeholder={"Typ om te filteren"} width={"300px"} onChange={updateSearchterm} noOutline></Input>
@@ -280,10 +282,10 @@ export function ChatbubbleInputSummary({typeLength=undefined, recommendations, s
                 {index < recommendations.length-1 && <hr key={"bar-" + index} className="chatbubble-inputs-divider"/>}
             </React.Fragment>)
             if (index === 2 && !showAllRecommendations) inputsHTML.push(<div key={"button-show-more"} style={{display:"flex", justifyContent: "center"}}>
-                <Button size="small" onClick={() =>{ updateShowAllRecommendations(!showAllRecommendations); logger({action:"SHOWMORE"}) }}>Toon meer</Button>
+                <Button width="fit" size="small" onClick={() =>{ updateShowAllRecommendations(!showAllRecommendations); logger({action:"SHOWMORE"}) }}>Toon meer</Button>
             </div>)
             if (index === recommendations.length-1 && showAllRecommendations) inputsHTML.push(<div key={"button-show-less"} style={{display:"flex", justifyContent: "center"}}>
-                <Button size="small" onClick={() =>{ updateShowAllRecommendations(!showAllRecommendations); logger({action:"SHOWLESS"} )}}>Toon minder</Button>
+                <Button width="fit" size="small" onClick={() =>{ updateShowAllRecommendations(!showAllRecommendations); logger({action:"SHOWLESS"} )}}>Toon minder</Button>
             </div>)
         })
         return (<div className="chatbubble-inputs-container">

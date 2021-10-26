@@ -1048,7 +1048,7 @@ export const CONVERSATION = {
         response: ["MESSAGE-1-INPUT"]
     },
     "MESSAGE-1-INPUT": {
-        content: "Specifieer kort wat je aan het doen was.",
+        content: "Beschrijf kort wat je aan het doen was",
         sentBy: "coach", 
         response: ["MESSAGE-1-INPUT-RESPONSE"]
     },
@@ -1168,14 +1168,14 @@ export const CONVERSATION = {
     }, 
     "OPEN-RECOMMENDATION": {
         content: "recommendation-answer",
-        text: "Ja, open aanbeveling",
+        text: "Bekijk aanbevolen onderdelen",
         sentBy: "user",
         action: "openRecommendation",
         response: ["RECOMMENDATION"]
     },
     "EXPLAIN-RECOMMENDATION": {
         content: "recommendation-answer",
-        text: "Leg uit waarom ik aanbeveling krijg",
+        text: "Leg uit waarom ik deze aanbeveling krijg",
         sentBy: "user",
         action: "explainRecommendation",
         response: ["RECOMMENDATION"]
