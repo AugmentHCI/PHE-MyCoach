@@ -40,7 +40,7 @@ export default function createSwipeContent({module, questionID, items, questionM
     }
 
     useEffect(() => {
-        if (blockChange) setTimeout(() => setBlockChange(false), 200)
+        if (blockChange) setTimeout(() => setBlockChange(false), 200);
     }, [blockChange]);
 
     useEffect(() => {

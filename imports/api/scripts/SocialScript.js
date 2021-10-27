@@ -1104,7 +1104,7 @@ const SOCMOD6 = {
             ]
         },
           {
-            title: "De arbeidsgeneesheer van IDEWE",
+            title: "De arbeidsarts van IDEWE",
             cardContents: [
                 {
                     type: "Image",
@@ -1112,7 +1112,7 @@ const SOCMOD6 = {
                 },
                 {
                     type: "Text",
-                    content: "De arbeidsgeneesheer is een arts die gespecialiseerd is in de relatie tussen gezondheid en werk. In het kader van chronische pijn kan hij onder andere aanbevelingen doen om de werkpost aan te passen zodat rekening gehouden wordt met jouw gezondheidsbeperkingen als werknemer. Ook kan de arbeidsgeneesheer advies geven over progressieve werkhervatting. De arbeidsgeneesheer werkt nauw samen met de preventieadviseur ergonomie en de preventieadviseur psychosociale aspecten en kan jou, indien hij inschat dat dit aangewezen is, hiernaar doorverwijzen."
+                    content: "De arbeidsarts is een arts die gespecialiseerd is in de relatie tussen gezondheid en werk. In het kader van chronische pijn kan hij onder andere aanbevelingen doen om de werkpost aan te passen zodat rekening gehouden wordt met jouw gezondheidsbeperkingen als werknemer. Ook kan de arbeidsarts advies geven over progressieve werkhervatting. De arbeidsarts werkt nauw samen met de preventieadviseur ergonomie en de preventieadviseur psychosociale aspecten en kan jou, indien hij inschat dat dit aangewezen is, hiernaar doorverwijzen."
                 },
             ]
         },
