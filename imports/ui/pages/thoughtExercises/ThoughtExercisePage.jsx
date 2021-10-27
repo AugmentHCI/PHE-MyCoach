@@ -29,6 +29,7 @@ const Exercise = styled.div`
 `
 
 const ExerciseText = styled.div`
+    line-height: 1.2em;
     display: flex;
     height: 100%;
     align-items: center;

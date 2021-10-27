@@ -1,3 +1,131 @@
+const STRESS_SIGNALS = [
+    {
+        id: "STRESS-HEARTBEATING",
+        text: "Hartkloppingen",
+        subtitle: "(Lichamelijk)"
+    },
+    {
+        id: "STRESS-DIZZY",
+        text: "Duizelig",
+        subtitle: "(Lichamelijk)"
+    },
+    {
+        id: "STRESS-SWEATING",
+        text: "Zweten",
+        subtitle: "(Lichamelijk)"
+    },
+    {
+        id: "STRESS-SHORTBREATH",
+        text: "Kortademig",
+        subtitle: "(Lichamelijk)"
+    },
+    {
+        id: "STRESS-HEADACHE",
+        text: "Hoofdpijn",
+        subtitle: "(Lichamelijk)"
+    },
+    {
+        id: "STRESS-MUSCLEACHE",
+        text: "Spier/rugpijn",
+        subtitle: "(Lichamelijk)"
+    },
+    {
+        id: "STRESS-SHAKING",
+        text: "Beven",
+        subtitle: "(Lichamelijk)"
+    },
+    {
+        id: "STRESS-TICS",
+        text: "Tics",
+        subtitle: "(Lichamelijk)"
+    },
+    {
+        id: "STRESS-EXHAUSTION",
+        text: "Vermoeid",
+        subtitle: "(Lichamelijk)"
+    },
+    {
+        id: "STRESS-DISTRAUGHT",
+        text: "Verstrooid",
+        subtitle: "(Verstandelijk)"
+    },
+    {
+        id: "STRESS-FORGETFUL",
+        text: "Vergeetachtig",
+        subtitle: "(Verstandelijk)"
+    },
+    {
+        id: "STRESS-OVERTHINKING",
+        text: "Piekeren",
+        subtitle: "(Verstandelijk)"
+    },
+    {
+        id: "STRESS-NOINTEREST",
+        text: "Desinteresse",
+        subtitle: "(Verstandelijk)"
+    },
+    {
+        id: "STRESS-NOEFFORT",
+        text: "Onderpresteren",
+        subtitle: "(Gedrag)"
+    },
+    {
+        id: "STRESS-AGRESSION",
+        text: "Agressie",
+        subtitle: "(Gedrag)"
+    },
+    {
+        id: "STRESS-CRYING",
+        text: "Wenen",
+        subtitle: "(Gedrag)"
+    },
+    {
+        id: "STRESS-SUBSTANCEABUSE",
+        text: "Middelengebruik",
+        subtitle: "(Gedrag)"
+    },
+    {
+        id: "STRESS-SLOPPYNESS",
+        text: "Slordigheid",
+        subtitle: "(Gedrag)"
+    },
+    {
+        id: "STRESS-UNSAFEDRIVING",
+        text: "Gevaarlijk rijgedrag",
+        subtitle: "(Gedrag)"
+    },
+    {
+        id: "STRESS-DISSATISFACTION",
+        text: "Ontevreden",
+        subtitle: "(Emotioneel)"
+    },
+    {
+        id: "STRESS-ONEDGE",
+        text: "Prikkelbaar",
+        subtitle: "(Emotioneel)"
+    },
+    {
+        id: "STRESS-INSECURE",
+        text: "Onzeker",
+        subtitle: "(Emotioneel)"
+    },
+    {
+        id: "STRESS-SUSPICIOUS",
+        text: "Achterdochtig",
+        subtitle: "(Emotioneel)"
+    },
+    {
+        id: "STRESS-SLEEPLESS",
+        text: "Slapeloos",
+        subtitle: "(Emotioneel)"
+    },
+    {
+        id: "STRESS-ANGRY",
+        text: "Boos",
+        subtitle: "(Emotioneel)"
+    }
+]
+
 const STRMOD1 = {
     id: "STR_MOD_1",
     title: "Wat is stress?",
@@ -494,9 +622,28 @@ const STRMOD3 = {
                 content: "Hieronder enkele voorbeelden. Welke signalen herken jij bij jezelf wanneer je ongezonde stress ervaart?"
             },
             {
-                type: "Oefening"
-            }
+                id: "STR-MOD-3-SWIPE",
+                type: "Swipe",
+                agreeButtonText: "Herkenaar",
+                disagreeButtonText: "Niet herkenbaar",
+                items: STRESS_SIGNALS
+            },
         ]
+        },
+        {
+            showIfAnswered: ["STR-MOD-3-SWIPE"],
+            title: "Jouw signalen",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Hier zie je een overzicht van de stress-signalen die jij hebt aangeduid. Jezelf bewust zijn van deze signalen is de eerste stap om aan stressmanagement te doen."
+                },
+                {
+                    type: "Display-Values",
+                    values: STRESS_SIGNALS,
+                    useSelectionFrom: "STR-MOD-3-SWIPE",
+                },
+            ]
         },
         {
             title: "Rood",
@@ -523,7 +670,7 @@ const STRMOD3 = {
             },
             {
                 type: "Text",
-                content: "Weet dat je steeds een afspraak kan maken bij je huisarts, de arbeidsgeneesheer die verbonden is aan jouw organisatie of de preventieadviseur psychosociale aspecten. In de module over sociale omgeving vind je een overzicht van mogelijke aanspreekpunten."
+                content: "Weet dat je steeds een afspraak kan maken bij je huisarts, de arbeidsarts die verbonden is aan jouw organisatie of de preventieadviseur psychosociale aspecten. In de module over sociale omgeving vind je een overzicht van mogelijke aanspreekpunten."
             },
         ]
         },
@@ -845,7 +992,16 @@ const STRMOD6 = {
         {
             cardContents: [{
                 type: "Text",
-                content: "In een vorig hoofdstuk zag je welke signalen kunnen duiden op aanhoudende of chronische stress. Jezelf bewust zijn van deze signalen is de eerste stap om aan stressmanagement te doen."
+                content: "In een vorig hoofdstuk zag je welke signalen kunnen duiden op aanhoudende of chronische stress. Hier zie je nog een overzicht van signalen die jij hebt aangeduid."
+            },
+            {
+                type: "Display-Values",
+                values: STRESS_SIGNALS,
+                useSelectionFrom: "STR-MOD-3-SWIPE",
+            },
+            {
+                type: "Text",
+                content: "Jezelf bewust zijn van deze signalen is de eerste stap om aan stressmanagement te doen."
             },
             {
                 type: "Image",

@@ -89,8 +89,7 @@ function CardsParser(props) {
                     let swipeAnswers = userQuestions[rule.questionID];
                     if (!swipeAnswers) return false;
                     swipeAnswers = JSON.parse(swipeAnswers);
-                    let count = 0;
-                    Object.keys(swipeAnswers).forEach(answer => { if (swipeAnswers[answer]) count++; })
+                    let count = swipeAnswers?.agree?.length;
                     if (rule.atLeast && count < rule.atLeast) return false;
                     else if (rule.atMost && count > rule.atMost) return false;
                     else {console.log("SwipeAgreeCount - unhandled case"); break;}

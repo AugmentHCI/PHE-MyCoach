@@ -1281,8 +1281,9 @@ const ACTMOD5 = {
                 {
                     id: "ACT-MOD-5-SWIPE",
                     type: "Swipe",
-                    buttons: {disagree: "Nee", agree: "Ja"},
-                    options: [
+                    agreeButtonText: "Ja",
+                    disagreeButtonText: "Nee",
+                    items: [
                         {
                             id: "ACT_MOD_5_SWIPE_SLEEP",
                             text: "Ik heb een vast slaapritueel",

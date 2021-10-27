@@ -409,6 +409,8 @@
     background-color: var(--idewe-background-solid);
     border-radius: 10px;
     transition: 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
 
     &-selected {
         @extend .content-multiplechoice-option;
@@ -432,7 +434,7 @@
     }
 }
 
-/* Circle Ecercise */
+/* Circle Exercise */
 .content-circleexercise-edit {
     position: absolute;
     top: 10px;

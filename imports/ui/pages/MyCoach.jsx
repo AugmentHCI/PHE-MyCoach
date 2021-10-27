@@ -327,7 +327,7 @@ export default function MyCoach(props) {
                     trigger="click"
                     visible={!showTutorial3 && showTutorial4}>
                     <div className="mycoach-feedback-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/feedback`)}>
-                        <Icon color="white" image="add-text" width="26px"/>
+                        <Icon color="white" image="add-text" width="26px" style={{marginTop:"-4px"}}/>
                     </div>
                     </Popover>
                     <h1 style={{marginBottom:0}}>My Coach</h1>
@@ -349,7 +349,7 @@ const modulePriorities = {
 const moduleMapping = {
     "paineducation": "Pijneducatie",
     "thoughtsemotions": "Gedachten & Emoties",
-    "activitywork": "Activiteit & Werk",
+    "activitywork": "Belasting & Belastbaarheid",
     "stress": "Stress & Veerkracht",
     "social": "Sociale omgeving",
     "movement": "Bewegen"

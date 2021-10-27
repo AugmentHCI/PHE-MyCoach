@@ -6,10 +6,9 @@ import { Carousel } from 'react-responsive-carousel';
 
 /* Internal API */
 import createSortingContent from './ContentSorting';
-import createSwipeContent from './ContentSwiping';
 import LifeChartContent from './ContentLifechart';
+import createSwipeContent from './ContentSwipe';
 
-import contentStoryTest from './ContentStory';
 
 /* UI Components */
 import AppModal from '../../components/AppModal.jsx';
@@ -451,8 +450,6 @@ function ContentParser(props) {
                 return createMultiTextInputContent(props.data.text, props.data.placeholder);
             case 'DelayedDisplay':
                 return createDelayedDisplayContent(props.data);
-            case 'Swipe':
-                return createSwipeContent(props);
             case 'TextBubble':
                 return createTextBubbleContent(props.data);
             case 'Audiofile':
@@ -463,12 +460,14 @@ function ContentParser(props) {
                 return createShortcutContent(props);
             case 'LifedomainChart':
                 return <LifeChartContent questionManager={props.questionManager}/>;
+            case 'Swipe':
+                return createSwipeContent({module: props.module, questionID: props.data.id, items: props.data.items, callback: props.callback, questionManager: props.questionManager, agreeButtonText: props.data.agreeButtonText, disagreeButtonText: props.data.disagreeButtonText})
             case 'Story':
                 return createStoryContent({content: props.data.content, dynamicHeight: props.data.dynamicHeight});
-            case 'StoryTesting':
-                return contentStoryTest({db: props.data.data});
             case 'CircleExercise':
                 return createCircleExerciseContent({id: props.data.id, module: props.module, callback: props.callback, questionManager: props.questionManager});
+            case 'Display-Values':
+                return createDisplayValuesContent({values: props.data.values, selectionFrom: props.data.useSelectionFrom, questionManager: props.questionManager})
             case 'Break':
                 return <hr/>;
             default:
@@ -528,7 +527,9 @@ function createMultipleChoiceContent(props) {
                     let newChecked = {};
                     let newOptions = [];
                     answers = JSON.parse(answers);
-                    Object.keys(answers).forEach(key => {if (answers[key]) { newChecked[key] = false; newOptions.push({id: key, text: getTextFromOption(key)})}});
+                    console.log(answers);
+                    if (answers.agree) answers.agree.forEach(key => { newChecked[key] = false; newOptions.push({id: key, text: getTextFromOption(key)})});
+                    else { Object.keys(answers).forEach(key => {if (answers[key]) { newChecked[key] = false; newOptions.push({id: key, text: getTextFromOption(key)})}}) }
                     setOptions(newOptions);
                     updateChecked(newChecked);
                 }
@@ -545,7 +546,7 @@ function createMultipleChoiceContent(props) {
         { saved && options.map(option => {
             if (checked[option.id]) return <div key={option.id} className={"content-multiplechoice-option-presented"}>{option.text}</div>})
         }
-        { uncheckedOptions.length > 0 && uncheckedOptions.map(option => {
+        { uncheckedOptions.length > 0 && props.data.showUnchecked !== false && uncheckedOptions.map(option => {
             return <div key={option.id} className={"content-multiplechoice-option-unchecked"}>{option.text}</div>})
         }
         { !saved && <React.Fragment>
@@ -648,4 +649,26 @@ function createCircleExerciseContent({id, questionManager, module, callback}) {
             </div>}
         </React.Fragment>
     );
+}
+
+function createDisplayValuesContent({values, selectionFrom, questionManager}) {
+
+    const [answers, setAnswers] = useState(undefined);
+
+    useEffect(() => {
+        async function fetchAnswers() {
+            const fetchedAnswers = await questionManager.getLatestAnswerOnQuestion(selectionFrom);
+            if (fetchedAnswers) { setAnswers(JSON.parse(fetchedAnswers).agree) }
+            console.log(fetchedAnswers)
+        }
+        fetchAnswers();
+    }, []);
+
+    function getTextFromOption(answer) {
+        for (const value of values) {if (value.id === answer) {console.log(value.text); return value.text}}
+    }
+
+    return (<div>
+        { answers && answers.map(answer => { return <div key={answer} className={"content-multiplechoice-option-presented"}>{getTextFromOption(answer)}</div>}) }
+    </div>)
 }

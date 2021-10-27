@@ -1161,19 +1161,17 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: ["Je krijgt nu ongeveer 50 waarden te zien. Als je een waarde ziet die bij je past, tik je op ", {type: "bold", content:"'akkoord'"}, " of veeg je de kaart naar rechts. Indien de waarde niet bij je past, tik je op ", {type: "bold", content:"'niet akkoord'"}, " of je veegt naar links. Succes er mee!"]
+                    content: ["Je krijgt nu ongeveer 50 waarden te zien. Als je een waarde ziet die bij je past, tik je op ", {type: "bold", content:"'akkoord'"}, ", en indien de waarde niet bij je past, tik je op ", {type: "bold", content:"'niet akkoord'"}, ". Succes er mee!"]
                 },
                 {
                     id: "TE-MOD-5-SWIPE-50",
                     type: "Swipe",
-                    buttons: {disagree: "Niet akkoord", agree: "Akkoord"},
                     randomize: true,
-                    options: values,
-                    specialCaseTE: true
+                    items: values,
                 },
             ]
         },
-        /* Als ze uit de 50 kaarten, 10 hebben kunnen kiezen -> 10 kiezen dan 5 */
+        /* Als ze uit de 50 kaarten, meer 10 hebben kunnen kiezen -> 10 kiezen dan 5 */
         {
             id: "TE-MOD5-CARD4_MORETHAN10",
             title: "Jouw top 10",
@@ -1182,7 +1180,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: ["Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Als je hieruit je ",  {type:"bold", text: "top 10"}, " zou moeten kiezen, welke zijn dan de belangrijkste voor jou?"]
+                    content: ["Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Als je hieruit je ",  {type:"bold", content: "top 10"}, " zou moeten kiezen, welke zijn dan de belangrijkste voor jou?"]
                 },
                 {
                     id: "TE-MOD-5-SELECT-10",
@@ -1190,7 +1188,8 @@ const TEMOD5 = {
                     options: values,
                     useSelectionFrom: "TE-MOD-5-SWIPE-50",
                     needsSelectedAtLeast: 10,
-                    needsSelectedAtMost: 10
+                    needsSelectedAtMost: 10,
+                    showUnchecked: false
                 },
             ]
         },
@@ -1203,7 +1202,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: ["Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Je hebt er al minder dan 10 kunnen aanduiden, goed! Stel je voor dat je ze in een rugzak hebt en je bent met de boot op weg naar het bereiken van deze waarden. Maar, de boot lekt en begint te zinken. Je moet 5 waarden uit je rugzak halen om te redden, ",  {type:"bold", text: "welke 5 waarden blijven dan over"}, "?"]
+                    content: ["Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Je hebt er al minder dan 10 kunnen aanduiden, goed! Stel je voor dat je ze in een rugzak hebt en je bent met de boot op weg naar het bereiken van deze waarden. Maar, de boot lekt en begint te zinken. Je moet 5 waarden uit je rugzak halen om te redden, ", {type:"bold", content: "welke 5 waarden blijven dan over"}, "?"]
                 },
                 {
                     id: "TE-MOD-5-SELECT-5",
@@ -1211,7 +1210,8 @@ const TEMOD5 = {
                     options: values,
                     useSelectionFrom: "TE-MOD-5-SWIPE-50",
                     needsSelectedAtLeast: 5,
-                    needsSelectedAtMost: 5
+                    needsSelectedAtMost: 5,
+                    showUnchecked: false
                 },
             ]
         },
@@ -1227,12 +1227,9 @@ const TEMOD5 = {
                     content: "Volgende waarden heb je aangeduid als passend bij jou in de vorige oefening. Je hebt meteen al je top 5 kunnen kiezen uit de lijst van 50 waarden, wat geen makkelijke opgave is. Goed bezig!"
                 },
                 {
-                    id: "TE-MOD-5-SELECT-5",
-                    type: "Multiple-Choice",
-                    options: values,
+                    type: "Display-Values",
+                    values: values,
                     useSelectionFrom: "TE-MOD-5-SWIPE-50",
-                    needsSelectedAtLeast: 5,
-                    needsSelectedAtMost: 5
                 },
             ]
         },
@@ -1245,7 +1242,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: ["Je waarden zijn erg belangrijk en wegen erg zwaar. Stel je voor dat je ze in een rugzak hebt en je bent met de boot op weg naar het bereiken van deze waarden. Maar, de boot lekt en begint te zinken. Je moet 5 waarden uit je rugzak halen om te redden, ",  {type:"bold", text: "welke 5 waarden blijven dan over"}, "?"]
+                    content: ["Je waarden zijn erg belangrijk en wegen erg zwaar. Stel je voor dat je ze in een rugzak hebt en je bent met de boot op weg naar het bereiken van deze waarden. Maar, de boot lekt en begint te zinken. Je moet 5 waarden uit je rugzak halen om te redden, ",  {type:"bold", content: "welke 5 waarden blijven dan over"}, "?"]
                 },
                 {
                     id: "TE-MOD-5-SELECT-5",
@@ -1348,7 +1345,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Nu is het aan jou! We hebben de shortcut 'Waarden en Doelen' op het startscherm toegevoegd. Hier kan je zelf jouw persoonlijke doelen stellen. De tool helpt om jouw doelen concreet te maken en te realiseren. Neem dus zeker een kijkje, en succes!"
+                    content: "Nu is het aan jou! We hebben de shortcut 'Waarden en Doelen' op het startscherm toegevoegd. Hier kan je zelf jouw persoonlijke doelen stellen, en waarden bekijken. De tool helpt om jouw doelen concreet te maken en te realiseren. Neem dus zeker een kijkje, en succes!"
                 }
             ]
         },
