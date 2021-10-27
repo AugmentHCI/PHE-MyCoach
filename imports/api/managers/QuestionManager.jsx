@@ -18,6 +18,16 @@ export default class QuestionManager {
        await Meteor.callPromise('mycoachquestion.deleteUserQuestions', {userID: this.userID});
     }
 
+    async removeUserQuestion({questionID}) {
+        const result = await Meteor.callPromise('mycoachquestion.removeUserQuestion', {userID: this.userID, questionID: questionID});
+        return result;
+    }
+
+     async removeModuleQuestions({module}) {
+        const result = await Meteor.callPromise('mycoachquestion.removeModuleQuestions', {userID: this.userID, module: module});
+        return result;
+    }
+
     /* TODO: Fix */
     async getLatestAnswerOnQuestion(questionID) {
         let answers = await Meteor.callPromise('mycoachquestion.getQuestion', {userID: this.userID, questionID: questionID});

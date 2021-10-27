@@ -104,6 +104,30 @@ Meteor.methods({
             MyCoachQuestionCollection.remove(item._id);
         });
     },
+    'mycoachquestion.removeUserQuestion'({userID, questionID}) {
+        check(userID, Number);
+        const questions = MyCoachQuestionCollection.find({userID: userID, questionID: questionID});
+        if (questions.fetch().length === 0) return {status: 400, description: "No questions with given userID and questionID found."};
+        questions.map(function(item){
+            console.log("Removing: " + item._id);
+            MyCoachQuestionCollection.remove(item._id);
+        });
+        return {status: 200, description: "Succesfully removed all user questions for given questionID: " + questionID};
+    },
+    'mycoachquestion.removeModuleQuestions'({userID, module}) {
+        check(userID, Number);
+        let totalLength = 0;
+        /* Remove uppercase questions */
+        let questions = MyCoachQuestionCollection.find({userID: userID, module: module.toUpperCase()});
+        totalLength += questions.fetch().length === 0;
+        questions.map(function(item){ MyCoachQuestionCollection.remove(item._id); });
+        /* Remove uppercase questions */
+        questions = MyCoachQuestionCollection.find({userID: userID, module: module.toLowerCase()});
+        totalLength += questions.fetch().length === 0;
+        questions.map(function(item){ MyCoachQuestionCollection.remove(item._id); });
+        if (totalLength === 0) return {status: 400, description: "No questions deleted for given module."};
+        return {status: 200, description: "Succesfully removed all user questions for given module: " + module};
+    },
 });
 
 /* INTERACTIONS */

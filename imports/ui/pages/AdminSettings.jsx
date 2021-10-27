@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 /* External API */
 import jwt_decode from "jwt-decode";
@@ -13,11 +13,22 @@ import InteractionManager from '../../api/managers/InteractionManager';
 /* UI Components */
 import NavigationBar from "../components/NavigationBar";
 import Button from '../components/Button';
+import Input from '../components/Input';
+import Dropdown from '../components/Dropdown';
 
 /* Styles */
 import "./AdminSettings.scss";
 
-export default function AdminSettings(props) {
+const MODULES = [
+    {id: "STRESSRESILIENCE", value: "Stress"}, 
+    {id: "PAINEDUCATION", value: "Pijneducatie"},
+    {id: "THOUGHTSEMOTIONS", value: "Gedachten&Emoties"},
+    {id: "ACTIVITYWORK", value: "Activiteit&Werk"},
+    {id: "SOCIAL", value: "Sociale Omgeving"},
+    {id: "MOVEMENT", value: "Beweging"},
+]
+
+export default function AdminSettings() {
 
     const progressManager = new ProgressManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
     const questionManager = new QuestionManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
@@ -32,6 +43,28 @@ export default function AdminSettings(props) {
     const [copiedRRNR, setCopiedRRNR] = useState(false);
     const [copiedDeelnemerID, setCopiedDeelnemerID] = useState(false);
     const [copiedJWT, setCopiedJWT] = useState(false);
+
+    /* Individual Question */
+    const [questionID, updateQuestionID] = useState("");
+    const [questionStatus, updateQuestionStatus] = useState(undefined);
+
+    async function deleteQuestion() {
+        const result = await questionManager.removeUserQuestion({questionID: questionID});
+        updateQuestionStatus(result);
+        if (result.status === 200) updateQuestionID("");
+    }
+
+    /* Module questions */
+    const [modules, updateModules] = useState([]);
+
+    async function deleteModuleQuestions() {
+        for (let module of modules) { questionManager.removeModuleQuestions({module: module.id}) }
+        updateModules([]);
+    }
+
+    useEffect(() => {
+        if (questionStatus) setTimeout(() => updateQuestionStatus(undefined), 3000);
+    }, [questionStatus])
 
     const [unlockedShortcuts, setUnlockedShortcuts] = useState(false);
 
@@ -82,27 +115,41 @@ export default function AdminSettings(props) {
         <div className="settings-body">
             <div className="settings-explanation">Dit zijn admin-settings die gewone gebruikers niet te zien krijgen. Ga hier zorgvuldig mee om.</div>
             <h3>Help-acties</h3>
-            <Button color="blue" disabled={unlockedPainlogbook} onClick={() => unlockPainLogbook()}>{unlockedPainlogbook ? "Pijnlogboek ontgrendeld" : "Ontgrendel pijnlogboek"}</Button>
-            <Button color="blue" disabled={addedPainlogs} onClick={() => addExamplePainlogs()}>{addedPainlogs ? "Voorbeeldlogs toegevoegd" : "Voeg voorbeeld-pijnlogs toe"}</Button>
+            <Button width="100%" color="blue" disabled={unlockedPainlogbook} onClick={() => unlockPainLogbook()}>{unlockedPainlogbook ? "Pijnlogboek ontgrendeld" : "Ontgrendel pijnlogboek"}</Button>
+            <Button width="100%" color="blue" disabled={addedPainlogs} onClick={() => addExamplePainlogs()}>{addedPainlogs ? "Voorbeeldlogs toegevoegd" : "Voeg voorbeeld-pijnlogs toe"}</Button>
             <hr/>
-            <Button color="blue" disabled={copiedRRNR} 
+            <Button width="100%" color="blue" disabled={copiedRRNR} 
                 onClick={() => {navigator.clipboard.writeText(jwt_decode(FlowRouter.getParam('token')).rrnr); setCopiedRRNR(true); setCopiedDeelnemerID(false); setCopiedJWT(false);}}>
                     {copiedRRNR ? `RRNR-nummer gekopieerd: ${jwt_decode(FlowRouter.getParam('token')).rrnr}` : `Kopieer RRNR-nummer: ${jwt_decode(FlowRouter.getParam('token')).rrnr}`}
             </Button>
-            {jwt_decode(FlowRouter.getParam('token')).deelnemerId && <Button color="blue" disabled={copiedDeelnemerID} 
+            {jwt_decode(FlowRouter.getParam('token')).deelnemerId && <Button width="100%" color="blue" disabled={copiedDeelnemerID} 
                 onClick={() => {navigator.clipboard.writeText(jwt_decode(FlowRouter.getParam('token')).deelnemerId); setCopiedRRNR(false); setCopiedDeelnemerID(true); setCopiedJWT(false);}}>
                     {copiedDeelnemerID ? `Deelnemer ID gekopieerd: ${jwt_decode(FlowRouter.getParam('token')).deelnemerId}` : `Kopieer deelnemer ID: ${jwt_decode(FlowRouter.getParam('token')).deelnemerId}`}
             </Button>}
-            <Button color="blue" disabled={copiedJWT} 
+            <Button width="100%" color="blue" disabled={copiedJWT} 
                 onClick={() => {navigator.clipboard.writeText(FlowRouter.getParam('token')); setCopiedRRNR(false); setCopiedDeelnemerID(false); setCopiedJWT(true);}}>
                     {copiedJWT ? `JWT token gekopieerd` : `Kopieer JWT token`}
             </Button>
             <hr/>
             <h3>Reset-acties</h3>
-            <Button color="red" disabled={deletedProgress} onClick={() => deleteProgress()}>{deletedProgress ? "Progressie gewist" : "Wis mijn progressie"}</Button>
-            <Button color="red" disabled={deletedPainlogs} onClick={() => deletePainlogs()}>{deletedPainlogs ? "Pijnlogs gewist" : "Wis mijn pijnlogs"}</Button>
+            <Button width="100%" color="red" disabled={deletedProgress} onClick={() => deleteProgress()}>{deletedProgress ? "Progressie gewist" : "Wis mijn progressie"}</Button>
+            <Button width="100%" color="red" disabled={deletedPainlogs} onClick={() => deletePainlogs()}>{deletedPainlogs ? "Pijnlogs gewist" : "Wis mijn pijnlogs"}</Button>
+            <hr/>
+            <h3>Questions</h3>
+            <div style={{display: "flex", alignItems: "center"}}>
+                <Input style={{display:"flex", flex:2}} type="text" placeholder={"Vraag-ID"} value={questionID} onChange={updateQuestionID}/>
+                <Button width="fit" color="blue" onClick={() => { deleteQuestion() }}>Wis</Button>
+            </div>
+            { questionStatus?.status === 200 && <b style={{color:"var(--idewe-green)"}}>Succesvol verwijderd!</b>}
+            { questionStatus?.status === 400 && <b style={{color:"var(--idewe-red)"}}>Niets verwijderd</b>}
+            <hr/>
+            <div style={{display: "flex", alignItems: "center"}}>
+                <Dropdown items={MODULES} multiselect selectedItems={modules} onChange={updateModules} style={{marginRight: "10px", flex: 2}}/>
+                <Button width="fit" color="blue" onClick={() => { deleteModuleQuestions() }}>Wis</Button>
+            </div>
+            <hr/>
             <h3>Admin-Specifiek</h3>
-            <Button color="blue" onClick={() => unlockStijnShortcut()}>{unlockedShortcuts ? "Ontgrendeld" : "Ontgrendel Shortcuts"}</Button>
+            <Button width="100%" color="blue" onClick={() => unlockStijnShortcut()}>{unlockedShortcuts ? "Ontgrendeld" : "Ontgrendel Shortcuts"}</Button>
         </div>
     </div>)
 }

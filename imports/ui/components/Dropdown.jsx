@@ -6,13 +6,12 @@ import Icon from "./Illustrations/Icon.jsx";
 
 import "./Dropdown.scss";
 
-export default function Dropdown( { items, multiselect, style, defaultItems, onChange, defaultText, disabled, idKey="id", valueKey="value" }) {
+export default function Dropdown( { selectedItems=undefined, items, multiselect, style, defaultItems, onChange, defaultText, disabled, idKey="id", valueKey="value" }) {
     const [open, toggleOpen] = useState(false);
     const [selection, setSelection] = useState([]);
 
     function handleOnClick(item) {
         if (!selection.some(current => current[idKey] === item[idKey])) {
-            console.log("adding");
             if (!multiselect) {
                 setSelection([item]);
                 if (onChange) onChange([item]);
@@ -22,13 +21,11 @@ export default function Dropdown( { items, multiselect, style, defaultItems, onC
                 if (onChange) onChange([...selection, item]);
             }
         } else {
-            console.log("removing");
             let selectionAfterRemoval = [...selection];
             selectionAfterRemoval = selectionAfterRemoval.filter(current => current[idKey] !== item[idKey]);
             setSelection([...selectionAfterRemoval]);
             if (onChange) onChange([...selectionAfterRemoval]);
         }
-        console.log(selection)
     }
       
     function isItemInSelection(item) {
@@ -46,6 +43,10 @@ export default function Dropdown( { items, multiselect, style, defaultItems, onC
     useEffect(() => { 
         if (defaultItems) setSelection(defaultItems);
     }, []);
+
+    useEffect(() => { 
+        setSelection(selectedItems);
+    }, [selectedItems]);
 
     
     return (
