@@ -461,13 +461,15 @@ function ContentParser(props) {
             case 'LifedomainChart':
                 return <LifeChartContent questionManager={props.questionManager}/>;
             case 'Swipe':
-                return createSwipeContent({module: props.module, questionID: props.data.id, items: props.data.items, callback: props.callback, questionManager: props.questionManager, agreeButtonText: props.data.agreeButtonText, disagreeButtonText: props.data.disagreeButtonText})
+                return createSwipeContent({module: props.module, questionID: props.data.id, items: props.data.items, callback: props.callback, questionManager: props.questionManager, agreeButtonText: props.data.agreeButtonText, disagreeButtonText: props.data.disagreeButtonText, smallText: props.data.smallText})
             case 'Story':
                 return createStoryContent({content: props.data.content, dynamicHeight: props.data.dynamicHeight});
             case 'CircleExercise':
                 return createCircleExerciseContent({id: props.data.id, module: props.module, callback: props.callback, questionManager: props.questionManager});
             case 'Display-Values':
-                return createDisplayValuesContent({values: props.data.values, selectionFrom: props.data.useSelectionFrom, questionManager: props.questionManager})
+                return createDisplayValuesContent({values: props.data.values, selectionFrom: props.data.useSelectionFrom, questionManager: props.questionManager});
+            case 'Textarea':
+                return createTextAreaContent({id: props.data.id, questionManager: props.questionManager, placeholder: props.data.placeholder, module: props.module})
             case 'Break':
                 return <hr/>;
             default:
@@ -484,6 +486,42 @@ function ContentParser(props) {
 
 export default ContentParser;
 
+function createTextAreaContent({id, questionManager, placeholder, module}) {
+
+    const [value, updateValue] = useState("");
+    const [saved, updateSaved] = useState(false);
+
+
+    useEffect(() => {
+        async function fetchAnswer() {
+            const answer = await questionManager.getLatestAnswerOnQuestion(id);
+            if (answer) { updateValue(answer); updateSaved(true) }
+        }
+        fetchAnswer();
+    }, []);
+
+    useEffect(() => {
+        if (saved) updateSaved(false);
+    }, [value])
+
+    function save() {
+        questionManager.setModuleQuestion(module, id, value, false);
+        updateSaved(true);
+    }
+
+    console.log(saved)
+
+    return (<div>
+        <textarea 
+            className={"content-textarea" + (value ? "" : "-disabled")} 
+            placeholder={placeholder ? placeholder : "Typ hier"} 
+            value={value} 
+            onChange={(e) => updateValue(e.target.value)}/>
+        <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
+            <Button width="fit" center color="blue" disabled={ saved } onClick={() => save()}>Opslaan</Button>
+        </div>
+    </div>)
+}
 
 function createMultipleChoiceContent(props) {
 

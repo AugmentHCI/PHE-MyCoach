@@ -62,7 +62,7 @@ const SOCMOD1 = {
                     content: [
                         {image: "/images/social/cleaning.jpg", title: "Praktische steun", text: "Iets concreet doen om te helpen zoals bijvoorbeeld taken in het huishouden overnemen."},
                         {image: "/images/social/worried.jpg", title: "Emotionele steun", text: "Dit zijn bijvoorbeeld mensen waarbij je terecht kan om je verhaal te doen, die begrip tonen en die laten zien dat ze in je geloven."},
-                        {title: "Informatieve steun", text: "Dit omvat het geven van informatie, tips en adviezen om je vooruit te helpen."},
+                        {image: "/images/social/explaining.png", title: "Informatieve steun", text: "Dit omvat het geven van informatie, tips en adviezen om je vooruit te helpen."},
                     ]
                 }
             ]
@@ -71,7 +71,7 @@ const SOCMOD1 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "In deze module bekijken hoe je met je omgeving kan communiceren over jouw situatie, hoe je kan omgaan met bepaalde reacties van je omgeving, welke impact je eigen houding t.a.v. je omgeving heeft en waar je terecht kan voor hulp en ondersteuning."
+                    content: "In deze module bekijken we hoe je met je omgeving kan communiceren over jouw situatie, hoe je kan omgaan met bepaalde reacties van je omgeving, welke impact je eigen houding t.a.v. je omgeving heeft en waar je terecht kan voor hulp en ondersteuning."
                 },
             ]
         },
@@ -99,7 +99,7 @@ const SOCMOD2 = {
     title: "Sociale steun verhogen",
     titleMarkup: ["Sociale steun", "verhogen"],
     part: 2,
-    description: "Hoe kan sociale steun van je omgeving verhogen? Dit onderdeel staat boordevol tips & tricks.",
+    description: "Hoe kan je sociale steun van je omgeving verhogen? Dit onderdeel staat boordevol tips & tricks.",
     duration: "10 minuten",
     type: "Interactief",
     image: "soc-mod-support",
@@ -179,7 +179,7 @@ const SOCMOD2 = {
                         {image: "/images/social/facts.jpg", title: "Stap 1 - Waarneming", text: "Beperk je hier tot de objectieve feiten en verbind hier geen interpretaties of oordelen aan. Bijvoorbeeld zeg niet: Ik merk dat je je erg moeit met mijn situatie en vind dat onbeleefd! Maar zeg wel: Ik merk op dat je dagelijks vraagt of ik toch niet beter thuis zou blijven van het werk."},
                         {image: "/images/social/emojis.jpg", title: "Stap 2 - Gevoel", text: "Beschrijf hoe je je hierbij voelt. Bijvoorbeeld: Ik weet dat dit goed bedoeld is, maar ik voel me hier verdrietig bij."},
                         {image: "/images/social/sadhappy.jpg", title: "Stap 3 - Behoefte", text: "Geef aan wat jouw behoefte of waarde is, wat jij belangrijk vindt. Bijvoorbeeld: Omdat ik behoefte heb aan steun in mijn keuze om aan het werk te blijven."},
-                        {image: "/images/social/explaining.jpg", title: "Stap 4 - Verzoek", text: "Geef aan wat jouw behoefte of waarde is, wat jij belangrijk vindt. Bijvoorbeeld: Omdat ik behoefte heb aan steun in mijn keuze om aan het werk te blijven."},
+                        {image: "/images/social/explaining.jpg", title: "Stap 4 - Verzoek", text: "Zou je mij aub willen steunen en aanmoedigen in mijn keuze om aan het werk te zijn?"},
                     ]
                 }
             ]
@@ -295,12 +295,16 @@ const SOCMOD2 = {
                     content: "Hieronder heb je een voorbeeldje van een elevator pitch. Er is ook een invulveld waar jezelf jouw elevator pitch kan noteren indien je dit zou willen."
                 },
                 {
-                    type: "Voorbeeld",
-                    text: "Volgt nog (Comaco)"
+                    type: "Video",
+                    link: "https://player.vimeo.com/video/607350191"
                 },
                 {
-                    type: "Groot invulveld",
-                    text: "Nieuw tekst-inputveld maken dat meerdere regels kan tonen."
+                    type: "Break"
+                },
+                {
+                    id: "ELEVATOR-PITCH",
+                    type: "Textarea",
+                    placeholder: "Schrijf hier je elevatorpitch neer"
                 }
             ]
         },
@@ -402,9 +406,11 @@ const SOCMOD3 = {
                 {
                     id: "SOC-MOD-3-SWIPE-ACTION",
                     type: "Swipe",
-                    small: true,
-                    buttons: {disagree: "Niet doen", agree: "Doen"},
-                    options: [
+                    randomize: true,
+                    agreeButtonText: "Doen",
+                    disagreeButtonText: "Niet doen",
+                    smallText: true,
+                    items: [
                         {
                             id: "SOC-MOD-3-SWIPE-ACTION-1",
                             text: "In een hoekje kruipen en niet reageren",
@@ -429,7 +435,7 @@ const SOCMOD3 = {
                             id: "SOC-MOD-3-SWIPE-ACTION-6",
                             text: "Het gesprek afronden en het contact met deze persoon proberen te beperken.",
                         }
-                    ]
+                    ],
                 },
             ]
         },
@@ -505,9 +511,10 @@ const SOCMOD3 = {
                 {
                     id: "SOC-MOD-3-SWIPE2-ACTION",
                     type: "Swipe",
-                    small: true,
-                    buttons: {disagree: "Niet doen", agree: "Doen"},
-                    options: [
+                    agreeButtonText: "Doen",
+                    disagreeButtonText: "Niet doen",
+                    smallText: true,
+                    items: [
                         {
                             id: "SOC-MOD-3-SWIPE2-ACTION-1",
                             text: "Ingaan op de bezorgdheid en het advies volgen",
@@ -536,7 +543,7 @@ const SOCMOD3 = {
                             id: "SOC-MOD-3-SWIPE2-ACTION-7",
                             text: "De bouwstenen van de verbindende communicatie gebruiken om een reactie te formuleren",
                         }
-                    ]
+                    ],
                 },
             ]
         },
@@ -604,9 +611,10 @@ const SOCMOD3 = {
                 {
                     id: "SOC-MOD-3-SWIPE3-ACTION",
                     type: "Swipe",
-                    small: true,
-                    buttons: {disagree: "Niet doen", agree: "Doen"},
-                    options: [
+                    agreeButtonText: "Doen",
+                    disagreeButtonText: "Niet doen",
+                    smallText: true,
+                    items: [
                         {
                             id: "SOC-MOD-3-SWIPE3-ACTION-1",
                             text: "De adviezen ter harte nemen en je huidige behandelplan volledig omgooien",
@@ -631,7 +639,7 @@ const SOCMOD3 = {
                             id: "SOC-MOD-3-SWIPE3-ACTION-6",
                             text: "De bouwstenen van de verbindende communicatie gebruiken om een reactie te formuleren",
                         },
-                    ]
+                    ],
                 },
             ]
         },
@@ -681,7 +689,7 @@ const SOCMOD4 = {
     titleMarkup: ["Mijn houding t.a.v.", "de omgeving"],
     navBarTitle: "Mijn eigen houding",
     part: 4,
-    description: "In dit hoofdstuk leer je welke reacties van jouw omgeving mogelijks een negatief effect hebben op jouw situatie en hoe je hiermee kan omgaan.",
+    description: "In dit hoofdstuk leer je dat de manier waarop jij jouw klachten presenteert, een negatief effect kan hebben op jouw situatie en wat je dan beter wel kan doen.",
     duration: "10 minuten",
     type: "Informatief",
     image: "soc-mod-context",
@@ -891,7 +899,7 @@ const SOCMOD4 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Je klachten verbergen, klagen of veel activiteiten vermijden dan kan je situatie negatief beïnvloeden en mogelijks onprettige reacties van je omgeving uitlokken. Durf daarom -met mate- te communiceren over jouw klachten, communiceer je noden aan je omgeving, focus ook op wat wél goed gaat en blijf, rekening houdend met jouw grenzen, dingen ondernemen."
+                    content: "Je klachten verbergen, klagen of veel activiteiten vermijden kan je situatie negatief beïnvloeden en mogelijks onprettige reacties van je omgeving uitlokken. Durf daarom -met mate- te communiceren over jouw klachten, communiceer je noden aan je omgeving, focus ook op wat wél goed gaat en blijf, rekening houdend met jouw grenzen, dingen ondernemen."
                 },
             ]
         },
@@ -951,14 +959,14 @@ const SOCMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Sociale media maken ons leven makkelijker en bieden tal van voordelen. Hieronder volgt een overzicht."
+                    content: "Sociale media hebben jammer genoeg niet enkel voordelen. Ze bevatten ook veel valkuilen. Hieronder krijg je een overzicht."
                 },
                 {
                     type: "Story",
                     content: [
                         {image: "/images/social/addicted.jpg", title: "Sociale media zijn verslavend", text: "Voordat je het weet kan je jouw smartphone niet meer aan de kant leggen en blijf je maar scrollen door de nieuwsoverzichten. Vergeet ook niet om in de echte wereld te leven en regelmatig te de-connecteren."},
                         {image: "/images/social/losing-mind.jpg", title: "Niet alles is wat het lijkt", text: "Op sociale media lijkt iedereen altijd happy en nooit ergens last van te hebben. Dit kan heel demotiverend zijn wanneer jij wel een moeilijke periode hebt. Maar wees je ervan bewust dat veel dingen die op sociale media staan geen weerspiegeling zijn van de realiteit. Iedereen heeft wel eens mindere dagen."},
-                        {title: "Je bent meer waard dan enkel jouw likes", text: "Hoeveel likes krijg jij op jouw posts? Mensen maken er tegenwoordig een wedstrijd van. Ook dit is verslavend. En wanneer je dan eens minder likes krijgt, bestaat de kans dat je je slecht gaat voelen. Je bent meer waard dan enkel jouw likes en mensen die om je geven weten dat."},
+                        {image: "/images/social/like.jpeg", title: "Je bent meer waard dan enkel jouw likes", text: "Hoeveel likes krijg jij op jouw posts? Mensen maken er tegenwoordig een wedstrijd van. Ook dit is verslavend. En wanneer je dan eens minder likes krijgt, bestaat de kans dat je je slecht gaat voelen. Je bent meer waard dan enkel jouw likes en mensen die om je geven weten dat."},
                         {image: "/images/social/rocket.jpg", title: "Pas op met quick fixes", text: "Veel personen of online pagina’s beweren dat ze het wondermiddel hebben voor jouw klachten. Neem deze medicatie in, doe die oefening… Dit is zelden goed advies. Vaak helpen deze “oplossingen” niet, zijn het maar één van de zoveel mogelijke oplossingen of kunnen ze zelfs een negatief effect op je gezondheid hebben. Bespreek daarom goed jouw behandelplan met een gezondheidsexpert en ga op zoek naar kwaliteitsvolle pagina’s."},
                     ]
                 }
@@ -995,7 +1003,7 @@ const SOCMOD5 = {
                 },
                 {
                     type: "Text",
-                    content: "Niet alles wat op sociale media staat is waar. Dit kan gaan van complottheorieën tot opinies over politieke en sociale thema’s. Er wordt ook heel wat foutieve informatie verspreid over pijn en andere gezondheidsproblemen. Heb je een filmpje met opinie al bekeken dat zullen de algoritmes steeds vaker gelijkaardige filmpjes aanbevelen. Hierdoor wordt het heel makkelijk om onze manier van denken en ons gedrag te beïnvloeden. Wees daarom kritisch en probeer steeds de bron of beide kanten van het verhaal te achterhalen."
+                    content: "Niet alles wat op sociale media staat is waar. Dit kan gaan van complottheorieën tot opinies over politieke en sociale thema’s. Er wordt ook heel wat foutieve informatie verspreid over pijn en andere gezondheidsproblemen. Heb je een filmpje met een bepaalde opinie al bekeken, dan zullen de algoritmes steeds vaker gelijkaardige filmpjes aanbevelen. Hierdoor wordt het heel makkelijk om onze manier van denken en ons gedrag te beïnvloeden. Wees daarom kritisch en probeer steeds de bron of beide kanten van het verhaal te achterhalen."
                 },
                 {
                     type: "Image",
@@ -1099,7 +1107,7 @@ const SOCMOD6 = {
                 },
                 {
                     type: "Text",
-                    content: "Sommige organisaties hebben een interne vertrouwenspersoon aangesteld. Deze heeft een opleiding gevolgd om deze rol te mogen uitoefenen. Je kan bij de vertrouwenspersoon terecht voor een vertrouwelijk gesprek. Dit kan nuttig zijn wanneer psychosociale factoren, zoals bijvoorbeeld een hoge werkdruk, het ervaren van veel stress of het hebben van een conflict op het werk, het moeilijk maken om aan het werk te blijven of drempels zijn om het werk opnieuw te hervatten. Tijdens het gesprek kan je je verhaal doen en krijg je advies en tips. Indien dit aangewezen is, kan je de vertrouwenspersoon je doorverwijzen, bijvoorbeeld naar je huisarts, de preventieadviseur psychosociale aspecten of een psycholoog. Ook wordt er bekeken of je verdere ondersteuning wenst, zoals bijvoorbeeld een aantal individuele gesprekken, een contact met jouw leidinggevende of het organiseren van een bemiddelingsgesprek. De vertrouwenspersoon heeft beroepsgeheim en gaat enkel en alleen met jouw toestemming contact opnemen met het werk en bepaalde informatie doorgeven! Je kan de contactgegevens van de preventieadviseur psychosociale aspecten terugvinden in jouw arbeidsreglement."
+                    content: "Sommige organisaties hebben een interne vertrouwenspersoon aangesteld. Deze heeft een opleiding gevolgd om deze rol te mogen uitoefenen. Je kan bij de vertrouwenspersoon terecht voor een vertrouwelijk gesprek. Dit kan nuttig zijn wanneer psychosociale factoren, zoals bijvoorbeeld een hoge werkdruk, het ervaren van veel stress of het hebben van een conflict op het werk, het moeilijk maken om aan het werk te blijven of drempels zijn om het werk opnieuw te hervatten. Tijdens het gesprek kan je je verhaal doen en krijg je advies en tips. Indien dit aangewezen is, kan de vertrouwenspersoon je doorverwijzen, bijvoorbeeld naar je huisarts, de preventieadviseur psychosociale aspecten of een psycholoog. Ook wordt er bekeken of je verdere ondersteuning wenst, zoals bijvoorbeeld een aantal individuele gesprekken, een contact met jouw leidinggevende of het organiseren van een bemiddelingsgesprek. De vertrouwenspersoon heeft beroepsgeheim en gaat enkel en alleen met jouw toestemming contact opnemen met het werk en bepaalde informatie doorgeven! Je kan de contactgegevens van de preventieadviseur psychosociale aspecten terugvinden in jouw arbeidsreglement."
                 },
             ]
         },

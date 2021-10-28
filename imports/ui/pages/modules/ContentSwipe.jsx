@@ -9,7 +9,7 @@ import LoadingScreen from '../../components/LoadingScreen.jsx';
 /* Styles */
 import "./ContentSwipe.scss";
 
-export default function createSwipeContent({module, questionID, items, questionManager, callback, agreeButtonText=undefined, disagreeButtonText=undefined}) {
+export default function createSwipeContent({module, questionID, items, questionManager, callback, agreeButtonText=undefined, disagreeButtonText=undefined, smallText=false}) {
 
     const [loading, setLoading] = useState(true);
     const [blockChange, setBlockChange] = useState(false);
@@ -60,6 +60,8 @@ export default function createSwipeContent({module, questionID, items, questionM
         }
         if (index === items.length) { saveAnswers() }
       }, [index]);
+
+    const smallTextStyle = smallText ? {fontSize: "14px"} : {};
     
     if (loading) return (<LoadingScreen/>);
 
@@ -67,7 +69,7 @@ export default function createSwipeContent({module, questionID, items, questionM
         { (index < items.length && !hasSeen) && <div>
             <div className={"card-container" + (containsImages() ? "-image" : "")} style={{backgroundImage:`url(${items[index].image})`}}>
                 {items[index].subtitle && <div className={"card-subtitle"}>{items[index].subtitle}</div>}
-                {items[index].text && <div className={"card-text" + (items[index].image ? "-image" : "")}>{items[index].text}</div>}
+                {items[index].text && <div className={"card-text" + (items[index].image ? "-image" : "")} style={smallTextStyle}>{items[index].text}</div>}
             </div>
             <div style={{display:"flex", justifyContent: "center"}}>
                 <Button center color="red"   width="45%" onClick={() => disagree()} style={{marginRight:"5%"}}>{disagreeButtonText ? disagreeButtonText : "Niet akkoord"}</Button>
