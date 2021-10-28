@@ -60,7 +60,7 @@ export default function Slider(props) {
       </div>
       {props.showValue && !props.mapping && <div className={"slider-value" + (saved && props.oneTime ? "-saved" : "")}>{props.valueText ? props.valueText + ": " : ""}{value}</div>}
       {props.showValue && props.mapping && <div className={"slider-value" + (saved && props.oneTime ? "-saved" : "")}>{mappings[props.mapping][value]}</div>}
-      {oldValue && !props.oneTime && !saved && editing && <div className={"slider-value-old" + (saved && props.oneTime ? "-saved" : "")}>Vorige waarde: {mappings[props.mapping][oldValue]}</div>}
+      {oldValue && !props.oneTime && !saved && editing && <div className={"slider-value-old" + (saved && props.oneTime ? "-saved" : "")}>Vorige waarde: {props.mapping ? mappings[props.mapping][oldValue] : oldValue}</div>}
       {props.save && !saved &&
         <div className="selection-button-container">
           <Button width="fit" color="blue" onClick={() => save()} style={{}}>

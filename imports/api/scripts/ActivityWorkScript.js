@@ -19,7 +19,7 @@ const ACTMOD1 = {
                 },
                 {
                     type: "List",
-                    content: ["Wat doe jij van activiteiten in je vrije tijd en/of op het werk?", "Wat is dus jouw fysieke en mentale belasting? Is dit in evenwicht met jouw belastbaarheid, datgene wat je lichaam aan kan?"],
+                    content: ["Wat doe jij van activiteiten in je vrije tijd en/of op het werk?", "Wat is dus jouw fysieke en mentale belasting? Is dit in evenwicht met jouw belastbaarheid, datgene wat je lichaam aankan?"],
                 },
                 {
                     type: "Text",
@@ -27,7 +27,7 @@ const ACTMOD1 = {
                 },
                 {
                     type: "Text",
-                    content: "Maar wat betekent nu belasting en wat betekent belastbaarheid? Hier gaan we even verder op in.",
+                    content: "Maar wat betekent nu belasting en wat betekent belastbaarheid? Hier gaan we even dieper op in.",
                 },
             ]
         },
@@ -66,7 +66,7 @@ const ACTMOD1 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Belastbaarheid of draagkracht is datgene wat je fysiek en mentaal aan kan. Dat wordt bepaald door meerdere factoren waaronder: je algemene gezondheidstoestand, je lichamelijke conditie en spierkracht, je kennis en ervaring, je attitude (hoe je tegenover bepaalde zaken staat) en motivatie,  de manier waarop je met stress en druk omgaat, je familiale en sociale omstandigheden. Belastbaarheid is individueel verschillend."
+                    content: "Belastbaarheid of draagkracht is datgene wat je fysiek en mentaal aankan. Dat wordt bepaald door meerdere factoren waaronder: je algemene gezondheidstoestand, je lichamelijke conditie en spierkracht, je kennis en ervaring, je attitude (hoe je tegenover bepaalde zaken staat) en motivatie,  de manier waarop je met stress en druk omgaat, je familiale en sociale omstandigheden. Belastbaarheid is individueel verschillend."
                 },
                 {
                     type: "Image",
@@ -92,6 +92,7 @@ const ACTMOD1 = {
                 {
                     id: "ACT-MOD-1-BELASTING",
                     type: "Slider",
+                    oneTime: false,
                     text: "Hoe zit het met jouw belasting? Geef het een score op 100 (met 1 een lage belasting, en 100 een zeer hoge belasting)",
                     from: 1,
                     to: 100,
@@ -112,6 +113,7 @@ const ACTMOD1 = {
                 {
                     id: "ACT-MOD-1-BELASTBAARHEID",
                     type: "Slider",
+                    oneTime: false,
                     text: "Hoe zit het met jouw belastbaarheid? Geef het een score op 100 (met 1 een lage belastbaarheid, en 100 een zeer hoge belastbaarheid)",
                     from: 1,
                     to: 100,
@@ -154,7 +156,7 @@ const ACTMOD1 = {
                 },
                 {
                     type: "Text",
-                    content: "Bij chronische pijn is een gezond evenwicht tussen belasting en belastbaarheid extra belangrijk. In deze module krijg je tips en tricks aangereikt voor een gezonde balans. Zoals afwisseling tussen rust en activiteit, bewust kiezen tussen energiegevers en energievreters."
+                    content: "Bij chronische pijn is een gezond evenwicht tussen belasting en belastbaarheid extra belangrijk. In deze module krijg je tips en tricks aangereikt voor een gezonde balans, zoals afwisseling tussen rust en activiteit."
                 },
                 {
                     type: "Image",
@@ -187,7 +189,7 @@ const ACTMOD1 = {
                 {
                     type: "Text",
                     overview: true,
-                    content: "Welzijn, je lichamelijk en mentaal goed voelen, bereik je wanneer de belasting (draaglast) die je te verwerken krijgt op het werk en tijdens je vrije tijd (bv. strijken, stofzuigen, …) en je belastbaarheid (draagkracht), datgene wat je fysiek en mentaal aankan, in balans zijn. Zijn beide gedurende langere tijd uit balans, dan vermindert je welzijn en kunnen er gezondheidsklachten ontstaan."
+                    content: "Welzijn, je lichamelijk en mentaal goed voelen, bereik je wanneer de belasting (draaglast) die je te verwerken krijgt op het werk en tijdens je vrije tijd, en je belastbaarheid (draagkracht), datgene wat je fysiek en mentaal aankan, in balans zijn. Zijn beide gedurende langere tijd uit balans, dan vermindert je welzijn en kunnen er gezondheidsklachten ontstaan."
                 },
                 {
                     type: "Text",
@@ -309,11 +311,11 @@ const ACTMOD2WORK = {
             ]
         },
         {
-            title: "Doorwerkers vs. verzuimers",
+            title: "Doorwerkers vs. mensen die langdurig verzuimen",
             cardContents: [
                 {
                     type: "Text",
-                    content: "Doorwerkers rapporteren ongeveer evenveel pijn als verzuimers. Verzuimers zijn werknemers die niet gaan werken omwille van hun pijn. Bij doorwerkers heeft de pijn minder impact op hun dagelijks leven."
+                    content: "Doorwerkers rapporteren ongeveer evenveel pijn als mensen die langdurig verzuimen. Verzuimers zijn werknemers die niet gaan werken omwille van hun pijn. Bij doorwerkers heeft de pijn minder impact op hun dagelijks leven."
                 },
                 {
                     type: "Text",
@@ -325,7 +327,7 @@ const ACTMOD2WORK = {
                 },
                 {
                     type: "Text",
-                    content: ["ten opzichte van ", {type: "bold", content:"verzuimers"}, "?"]
+                    content: ["ten opzichte van ", {type: "bold", content:"mensen die langdurig verzuimen"}, "?"]
                 },
                 {
                     type: "Image",
@@ -372,11 +374,6 @@ const ACTMOD2WORK = {
                     overview: true,
                     content: "Rusten en activiteiten vermijden is niet aangewezen bij pijn. Beweging en zoveel mogelijk je normale activiteiten verderzetten zijn essentieel voor het herstelproces. Beweging verhoogt de doorbloeding naar je spieren en gewrichten, waardoor ze soepel blijven en sterker worden. Daarnaast zetten je hersenen ook pijndempende stoffen vrij tijdens het bewegen. Werk en activiteiten kunnen je afleiden van je pijn. Door te lang te rusten wordt je lichaam alleen maar zwakker waardoor het minder goed om kan met de belasting in je dagelijks leven."
                 },
-                {
-                    type: "List",
-                    overview: true,
-                    content: ["Geeft je energie", "Erkenning", "Zelfrespect", "Sociale steun", "Waardering", "Geeft je structuur", "Afleiding van pijn"]
-                },
             ]
         },
         {
@@ -419,6 +416,7 @@ const ACTMOD3ERGO = {
         },
         {
             title: "Doe de test",
+            wrapUp: true,
             cardContents: [
                 {
                     type: "Text",
@@ -676,20 +674,15 @@ const ACTMOD3ERGO = {
                },
                {
                    type: "Text",
-                   content: "Het is belangrijk om het zittend werken af te wisselen met .bv. staand werken of vergaderen. Waar kan je op letten wanneer je rechtstaat vergadert?"
+                   content: "Het is belangrijk om het zittend werken af te wisselen met bv. staand werken of vergaderen. Waar kan je op letten wanneer je rechtstaand vergadert?"
                },
                {
                    type: "List",
                    content: ["Zet je voeten op heupbreedte", "Neem af en toe een steunpunt. Leun bv. tegen de tafel", ["Varieer regelmatig van houding houding ", {type:"italic", content: "(bijvoorbeeld: beweeg je lichaamsgewicht van het ene been naar het andere)"}]]
-               }
-            ]
-        },
-        {
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            cardContents: [
-                {
-                    type: "Text",
-                    content: [{type:"bold", content:"Varieer - beweeg - doseer"}]
+               },
+               {
+                type: "Text",
+                content: [{type:"bold", content:"Varieer - beweeg - doseer"}]
                 },
                 {
                     type: "Text",
@@ -1022,7 +1015,7 @@ const ACTMOD4MGMT = {
                 },
                 {
                     type: "List",
-                    content: [[{type: "bold", content: "Laag activiteitenniveau"}, ": Deze personen voeren over het algemeen weinig activiteiten uit. Of, in geval van pijn, hebben de neiging om activiteiten te vermijden. Voldoende bewegen en het uitvoeren van waardevolle activiteiten is echter super belangrijk. Beweging verhoogt de doorbloeding naar je spieren en gewrichten, waardoor ze soepel blijven en sterker worden. Door een laag activiteitenniveau wordt je lichaam zwakker waardoor het de belasting in je dagelijks leven minder goed aan kan. Naast de lichamelijke voordelen dragen waardevolle activiteiten ook bij aan je mentale welzijn. Ook bij pijn zijn beweging en zoveel mogelijk je normale activiteiten verderzetten essentieel voor het herstelproces. Krijg je bijvoorbeeld veel last tijdens een specifieke activiteit, dan kan je nog altijd verder gaan met iets anders in plaats van lang te rusten of in de zetel te hangen."]]
+                    content: [[{type: "bold", content: "Laag activiteitenniveau"}, ": Deze personen voeren over het algemeen weinig activiteiten uit. Of, in geval van pijn, hebben de neiging om activiteiten te vermijden. Voldoende bewegen en het uitvoeren van waardevolle activiteiten is echter super belangrijk. Beweging verhoogt de doorbloeding naar je spieren en gewrichten, waardoor ze soepel blijven en sterker worden. Door een laag activiteitenniveau wordt je lichaam zwakker waardoor het de belasting in je dagelijks leven minder goed aankan. Naast de lichamelijke voordelen dragen waardevolle activiteiten ook bij aan je mentale welzijn. Ook bij pijn zijn beweging en zoveel mogelijk je normale activiteiten verderzetten essentieel voor het herstelproces. Krijg je bijvoorbeeld veel last tijdens een specifieke activiteit, dan kan je nog altijd verder gaan met iets anders in plaats van lang te rusten of in de zetel te hangen."]]
                 },
                 {
                     type: "Image",
@@ -1260,7 +1253,7 @@ const ACTMOD5 = {
     titleMarkup: ["Wat is belast-", "baarheid?"],
     shortTitle: "Belastbaarheid",
     part: 5,
-    description: "Belastbaarheid of draagkracht is datgene wat je fysiek en mentaal aan kan. Hoe is jouw belastbaarheid? In deze module krijg je handvaten om je belastbaarheid te verhogen.",
+    description: "Belastbaarheid of draagkracht is datgene wat je fysiek en mentaal aankan. Hoe is jouw belastbaarheid? In deze module krijg je handvaten om je belastbaarheid te verhogen.",
     duration: "10 minuten",
     type: "Informatief",
     image: "act-mod-intro",
@@ -1277,6 +1270,7 @@ const ACTMOD5 = {
         },
         {
             title: "Wat doe jij?",
+            wrapup: true,
             cardContents: [
                 {
                     id: "ACT-MOD-5-SWIPE",
@@ -1319,15 +1313,36 @@ const ACTMOD5 = {
             ]
         },
         {
-            title: "Basisprincipes om je omgeving aan te passen",
+            title: "Basisprincipes om je belastbaarheid te verhogen",
             cardContents: [
                 {
-                    type: "Text",
-                    content: ["We kunnen ons lichaam fit houden door in te zetten op gezonde beweging en gezonde voeding. Ook voldoende nachtrust draagt bij tot een fit lichaam en een fitte geest. Besteed bovendien aandacht aan je eigen veerkracht en zorg voor een ", {type: "italic", content: "gezonde geest in een gezond lichaam"}, ". Streef naar een evenwicht in je lichamelijke en mentale belastbaarheid. ", {type: "italic", content: "Roken en alcoholgebruik kunnen een negatieve invloed hebben"}, " op je gezondheid."]
+                    type: "Story",
+                    content: [
+                        {
+                            title: "Gezonde beweging en voeding",
+                            text: "We kunnen ons lichaam fit houden door in te zetten op gezonde beweging en gezonde voeding.",
+                            image: "/images/activitywork/food.jpg"
+                        },
+                        {
+                            title: "Nachtrust en veerkracht",
+                            text: "Ook voldoende nachtrust draagt bij tot een fit lichaam en een fitte geest. Besteed bovendien aandacht aan je eigen veerkracht en zorg voor een gezonde geest in een gezond lichaam",
+                            image: "/images/activitywork/slaapritueel.jpg"
+                        },
+                        {
+                            title: "Belastbaarheid",
+                            text: "Streef naar een evenwicht in je lichamelijke en mentale belastbaarheid.",
+                            image: "/images/activitywork/rustmomenten.jpg"
+                        },
+                        {
+                            title: "Roken en alcohol",
+                            text: "Roken en alcoholgebruik kunnen een negatieve invloed hebben op je gezondheid.",
+                            image: "/images/activitywork/smoking.jpg"
+                        },
+                    ]
                 },
                 {
                     type: "Text",
-                    content: "Op deze thema’s gaan we verder inzoomen."
+                    content: "Op deze thema’s gaan we verder inzoomen bij 'Belastbaarheid'."
                 },
             ]
         },
@@ -1337,9 +1352,18 @@ const ACTMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    overview: true,
-                    content: ["Welzijn, je lichamelijk en mentaal goed voelen bereik je wanneer de ", {type: "bold", content:"belasting"}, " (draaglast) die je te verwerken krijgt op het werk en tijdens je vrije tijd (bv. strijken, stofzuigen, …) en je ", {type: "bold", content:"belastbaarheid"}, " (draagkracht), datgene wat je fysiek en mentaal aankan, in balans zijn. Zijn beide gedurende langere tijd uit balans, dan vermindert je welzijn en kunnen er gezondheidsklachten ontstaan. Wat doe jij om je belastbaarheid zo hoog mogelijk te houden?"]
+                    content: "Jouw belastbaarheid bepaalt wat je fysiek en mentaal aankan. De belastbaarheid is dynamisch en wordt beïnvloed door:"
                 },
+                {
+                    type: "List",
+                    content: [
+                        "Gezonde beweeggewoontes te hanteren",
+                        "Te werken aan je veerkracht",
+                        "Aandacht te hebben voor je nachtrust",
+                        "Gezond te eten",
+                        "Roken en alcohol te vermijden"
+                    ]
+                }
             ]
         },
         {
@@ -1370,6 +1394,10 @@ const ACTMOD6MOV = {
                     type: "Text",
                     content: "Voldoende fysieke activiteit houd je fit en gezond. Het versterkt spieren en botten, houdt je gewrichten soepel, verbetert de werking van je hart, verhoogt de concentratie, geeft een aangenaam gevoel en werkt pijndempend."
                 },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/family.jpg"
+                }
             ]
         },
         {
@@ -1377,7 +1405,7 @@ const ACTMOD6MOV = {
             cardContents: [
                 {
                     type: "Text",
-                    content: ["Wil je meer weten over dit topic? Bekijk dan later de module ", {type: "bold", text: "beweging"}, "."]
+                    content: ["Wil je meer weten over dit topic? Bekijk dan de module ", {type: "bold", text: "beweging"}, "."]
                 },
                 {
                     type: "Shortcut",
@@ -1402,7 +1430,7 @@ const ACTMOD7FOOD = {
     titleMarkup: ["Belastbaarheid-", "Gezonde voeding"],
     shortTitle: "Gezonde voeding",
     part: 7,
-    description: "Eet jij al gezond, of kan je hier nog meer aandacht aan besteden? Ontdek het in je deze module.",
+    description: "Eet jij al gezond, of kan je hier nog meer aandacht aan besteden? Ontdek het in dit onderdeel.",
     duration: "10 minuten",
     type: "Informatief",
     image: "act-mod-food",
@@ -1419,21 +1447,64 @@ const ACTMOD7FOOD = {
             ]
         },
         {
-            title: "Eten en diëten tegen chronische pijn",
+            title: "Gezonde eetgewoontes",
             cardContents: [
                 {
                     type: "Text",
-                    content: "Gewichtstoename, onregelmatige eetpatronen, het samengaan van twee of meer ziektebeelden… Ook chronische pijn heeft meer te maken met voeding dan je misschien zou denken. Gepaste voedselopname kan de werking van het zenuw- en het immuunsysteem en van het hormoonstelsel verbeteren, wat een directe invloed heeft op de pijnervaring. Op gewicht blijven of, nog beter, kilo’s verliezen verlicht de druk op de gewrichten houdt sluimerende ontstekingen klein."
+                    content: "Gewichtstoename, onregelmatige eetpatronen, het samengaan van twee of meer ziektebeelden… Ook chronische pijn heeft meer te maken met voeding dan je misschien zou denken. Gepaste voedselopname kan de werking van het zenuw- en het immuunsysteem en van het hormoonstelsel verbeteren, wat een directe invloed heeft op de pijnervaring. Op gewicht blijven of kilo’s verliezen verlicht de druk op de gewrichten en houdt sluimerende ontstekingen klein."
                 },
                 {
                     id: "ACT-MOD-7-SLIDER-1",
                     type: "Slider",
                     text: "Ben je bewust van wat je eet?",
+                    oneTime: false,
                     from: 1,
                     to: 5,
                     mapping: "5-AGREE",
                     showValue: true,
                     save: true,
+                }
+            ]
+        },
+        {
+            title: "Alcohol",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: ["Alcohol werkt pijnstillend en kan effect hebben op je stemming. Met als gevolg dat je meer wordt afgeleid van je pijn. Op zich hoeft alcoholgebruik in die omstandigheden geen probleem te zijn, maar het kan wel " , {type: "bold", content: "problematisch worden wanneer je het systematisch gaat gebruiken"}, ". Veelvuldig drinken is immers geen ideaal middel tegen pijn, spanning of angst."]
+                },
+                {
+                    type: "Text",
+                    content: ["De opluchting en de ontspanning zijn het gevolg van de eerste glazen. Als je meer drinkt blijkt alcohol ", {type: "bold", content:"dikwijls negatieve gevoelens te versterken"}, ". Uit onderzoek weten we dat veel drinken de gevoelens van angst of somberheid doet toenemen. Hoe meer en hoe frequenter je drinkt, hoe meer de negatieve gevoelens zullen versterkt worden. De kans op algemene somberheid of depressie neemt toe. Bij veel drinken voel je je nadien miserabel omwille van de bekende 'kater'. ", {type: "bold", content: "Je wordt dan net gevoeliger voor pijn"}, ", terwijl je er tegelijkertijd minder 'weerbaar' tegenover wordt. Opnieuw drinken lijkt even een oplossing te bieden, maar je komt in een vicieuze cirkel terecht."]
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/alcohol.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "Als je daarnaast ook pijnstillers neemt, dan wordt het effect van beiden versterkt! Met als mogelijke gevolgen: versuffing, lusteloosheid, verwardheid,... Veel pijnstillers worden (gedeeltelijk) afgebroken door je lever. De afbraak van alcohol zal je lever nog meer belasten. Bij chronische pijn is het langdurig gebruik van aangepaste pijnstillers dikwijls noodzakelijk en wenselijk om de levenskwaliteit te verbeteren. Laat je goed begeleiden bij het gebruik van pijnmedicatie. Want medicatiegebruik kan ook nefast zijn voor je pijn."
+                }
+            ]
+        },
+        {
+            title: "Roken doet pijn",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Het verband tussen roken en pijn is complex en ze beïnvloeden elkaar in beide richtingen. Bij acute pijn kan een nicotineshot tijdelijk een klein pijnstillend effect hebben, maar bij chronische pijn is roken slecht."
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/smoking.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "Kwetsbaarheid, pijnklachten, vermoeidheid, slaaptekort, stemmingswisselingen, prikkelbaarheid, woedeaanvallen, depressie – rokers blijken er gevoelig voor te zijn dan niet-rokers. Patiënten met chronische pijn die roken, hebben meer pijn, zijn labieler, functioneren minder en slapen slechter. Roken heeft ook een negatieve invloed op mogelijk herstel en eventuele genezing."
+                },
+                {
+                    type: "Text",
+                    content: "Stoppen met roken hoef je niet alleen te doen. Vraag raad aan ex-rokers en zoek steun bij partner, familie en vrienden. Aarzel niet om professionele hulp in te roepen. (bv. rookstopbegeleiding IDEWE, De Tabak Stop lijn)."
                 }
             ]
         },
@@ -1511,12 +1582,18 @@ const ACTMOD7FOOD = {
                     content: "Vaak praten we onszelf enkele smoesjes in om ons te doen geloven dat gezond eten niet haalbaar is. Maar we gaan met enkele voorbeelden aantonen waarom deze smoesjes toch niet goed zijn..."
                 },
                 {
+                    type: "Break"
+                },
+                {
                     type: "TextBubble",
                     content: "“Ik ontbijt niet want ik wil vermageren”"
                 },
                 {
                     type: "List",
                     content: ["Je eet de calorieën er toch weer aan!", "Niet ontbijten doet je in de loop van de voormiddag grijpen naar suikers en vetrijke tussendoortjes"]
+                },
+                {
+                    type: "Break"
                 },
                 {
                     type: "TextBubble",
@@ -1526,6 +1603,9 @@ const ACTMOD7FOOD = {
                 {
                     type: "List",
                     content: ["Zet voor het eten alvast een schaaltje met kerstomaten, stukjes komkommer of wortelreepjes op tafel", "Of zet een schaaltje snoepgroenten op je bureau of in de keuken naast je werkblad.", "Leg groenten tussen je boterhammen", "Verwerk ook groenten in puree", "Maak een lekkere, verse soep", "Haal diepvriesgroenten in huis: ze zijn op drukke dagen een goed en snel alternatief"]
+                },
+                {
+                    type: "Break"
                 },
                 {
                     type: "TextBubble",
@@ -1548,6 +1628,7 @@ const ACTMOD7FOOD = {
                     id: "ACT-MOD-7-SLIDER-2",
                     type: "Slider",
                     text: "Ben je bewust van wanneer je eet?",
+                    oneTime: false,
                     from: 1,
                     to: 5,
                     mapping: "5-AGREE",
@@ -1585,6 +1666,7 @@ const ACTMOD7FOOD = {
                     id: "ACT-MOD-7-SLIDER-3",
                     type: "Slider",
                     text: "Eet je aandachtig?",
+                    oneTime: false,
                     from: 1,
                     to: 5,
                     mapping: "5-AGREE",
@@ -1612,66 +1694,16 @@ const ACTMOD7FOOD = {
             ]
         },
         {
-            title: "Alcohol",
-            cardContents: [
-                {
-                    type: "Text",
-                    content: ["Alcohol werkt pijnstillend en kan effect hebben op je stemming. Met als gevolg dat je meer wordt afgeleid van je pijn. Op zich hoeft alcoholgebruik in die omstandigheden geen probleem te zijn, maar het kan wel " , {type: "bold", content: "problematisch worden wanneer je het systematisch gaat gebruiken"}, ". Veelvuldig drinken is immers geen ideaal middel tegen pijn, spanning of angst."]
-                },
-                {
-                    type: "Text",
-                    content: ["De opluchting en de ontspanning zijn het gevolg van de eerste glazen. Als je meer drinkt blijkt alcohol ", {type: "bold", content:"dikwijls negatieve gevoelens te versterken"}, ". Uit onderzoek weten we dat veel drinken de gevoelens van angst of somberheid doet toenemen. Hoe meer en hoe frequenter je drinkt, hoe meer de negatieve gevoelens zullen versterkt worden. De kans op algemene somberheid of depressie neemt toe. Bij veel drinken voel je je nadien miserabel omwille van de bekende 'kater'. ", {type: "bold", content: "Je wordt dan net gevoeliger voor pijn"}, ", terwijl je er tegelijkertijd minder 'weerbaar' tegenover wordt. Opnieuw drinken lijkt even een oplossing te bieden, maar je komt in een vicieuze cirkel terecht."]
-                },
-                {
-                    type: "Image",
-                    link: "/images/activitywork/alcohol.jpg"
-                },
-                {
-                    type: "Text",
-                    content: "Als je daarnaast ook pijnstillers neemt, dan wordt het effect van beiden versterkt! Met als mogelijke gevolgen: versuffing, lusteloosheid, verwardheid,... Veel pijnstillers worden (gedeeltelijk) afgebroken door je lever. De afbraak van alcohol zal je lever nog meer belasten. Bij chronische pijn is het langdurig gebruik van aangepaste pijnstillers dikwijls noodzakelijk en wenselijk om de levenskwaliteit te verbeteren. Laat je goed begeleiden bij het gebruik van pijnmedicatie. Want medicatiegebruik kan ook nefast zijn voor je pijn."
-                }
-            ]
-        },
-        {
-            title: "Roken doet pijn",
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Het verband tussen roken en pijn is complex en ze beïnvloeden elkaar in beide richtingen. Bij acute pijn kan een nicotineshot tijdelijk een klein pijnstillend effect hebben, maar bij chronische pijn is roken slecht."
-                },
-                {
-                    type: "Image",
-                    link: "/images/activitywork/smoking.jpg"
-                },
-                {
-                    type: "Text",
-                    content: "Kwetsbaarheid, pijnklachten, vermoeidheid, slaaptekort, stemmingswisselingen, prikkelbaarheid, woedeaanvallen, depressie – rokers blijken er gevoelig voor te zijn dan niet-rokers. Patiënten met chronische pijn die roken, hebben meer pijn, zijn labieler, functioneren minder en slapen slechter. Roken heeft ook een negatieve invloed op mogelijk herstel en eventuele genezing."
-                },
-                {
-                    type: "Text",
-                    content: "Stoppen met roken hoef je niet alleen te doen. Vraag raad aan ex-rokers en zoek steun bij partner, familie en vrienden. Aarzel niet om professionele hulp in te roepen. (bv. rookstopbegeleiding IDEWE, De Tabak Stop lijn)."
-                }
-            ]
-        },
-        {
             title: "Overzicht",
             overview: true,
             cardContents: [
                 {
                     type: "Text",
-                    content: "Gewichtstoename, onregelmatige eetpatronen, het samengaan van twee of meer ziektebeelden… Ook chronische pijn heeft meer te maken met voeding dan je misschien zou denken. Gepaste voedselopname kan de werking van het zenuw- en het immuunsysteem en van het hormoonstelsel verbeteren, wat een directe invloed heeft op de pijnervaring. Op gewicht blijven of, nog beter, kilo’s verliezen verlicht de druk op de gewrichten houdt sluimerende ontstekingen klein."
-                },
-                {
-                    type: "Text",
-                    content: "Je bent wat je eet. Veel mensen willen graag gezond(er) eten, maar weten niet precies hoe ze hun voedingspatroon kunnen aanpassen. Gezond eten betekent vooral dat je slimme, gezonde keuzes maakt. De drie belangrijkste principes zijn:"
+                    content: "Voeding en eetgewoontes hebben meer te maken met pijn dan je misschien zou denken. Veel mensen willen graag gezond(er) eten, maar weten precies niet hoe ze hun voedingspatroon kunnen aanpassen. Gezond eten betekent vooral dat je slimme, gezonde keuzes maakt. De drie belangrijkste principes  zijn:"
                 },
                 {
                     type: "List",
                     content: ["Eet evenwichtig", "Eet met mate, niet te weinig maar ook niet te veel", "Eet gevarieerd, ga voor kleur op je bord"]
-                },
-                {
-                    type: "Text",
-                    content: "Ah ja en roken en regelmatige alcohol drinken doet weldegelijk pijn. Gezond keuzes maken, betekent naast gezond eten ook kiezen voor voldoende lichaamsbeweging."
                 },
             ]
         },
@@ -1690,7 +1722,7 @@ const ACTMOD8RES = {
     titleMarkup: ["Belastbaarheid -" , "Veerkracht"],
     shortTitle: "Veerkracht",
     part: 8,
-    description: "Veerkracht is het vermogen om je aan te passen aan stress en tegenslag en daar misschien zelfs sterker uit te komen. Hoe veer je terug na herval of na een acute pijn op stoot?",
+    description: "Veerkracht is het vermogen om je aan te passen aan stress en tegenslag en daar misschien zelfs sterker uit te komen. Hoe veer je terug na pijn of een herval/opstoot van je klachten?",
     duration: "10 minuten",
     type: "Informatief",
     image: "act-mod-res",
@@ -1702,7 +1734,7 @@ const ACTMOD8RES = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Veerkracht is het vermogen om je aan te passen aan stress en tegenslag en daar misschien zelfs sterker uit te komen. Het gaat niet alleen over ‘terugveren’ naar de oorspronkelijke positie, maar ook om doorgroeivermogen."
+                    content: "Veerkracht is het vermogen om je aan te passen aan stress en tegenslag en daar misschien zelfs sterker uit te komen. Het gaat niet alleen over ‘terugveren’ naar de oorspronkelijke positie, maar ook om doorgroeivermogen. Wil je meer weten? Bekijk dan de module over stress en veerkracht."
                 },
                 {
                     type: "Shortcut",
@@ -1740,7 +1772,7 @@ const ACTMOD9SLP = {
     titleMarkup: ["Belastbaarheid -", "Nachtrust"],
     shortTitle: "Nachtrust",
     part: 9,
-    description: "Slaap je goed? Ook slaap versterkt je basis. Lees hier de belangrijkste tips rond slaapkwaliteit.",
+    description: "Slaap je goed? Ook slaap verhoogt je belastbaarheid. Lees hier de belangrijkste tips rond slaapkwaliteit.",
     duration: "10 minuten",
     type: "Informatief",
     image: "te-mod-sleep",
@@ -1758,6 +1790,7 @@ const ACTMOD9SLP = {
                     id: "ACT-MOD-9-SLIDER-1",
                     type: "Slider",
                     text: "Slaap je goed?",
+                    oneTime: false,
                     from: 1,
                     to: 5,
                     valueText: "Jouw selectie",
