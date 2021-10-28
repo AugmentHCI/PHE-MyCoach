@@ -18,13 +18,14 @@ const MOVMOD1 = {
                 },
                 {
                     type: "Selection",
-                    id: "MOV-MOD-1-Q2",
+                    id: "MOV-MOD-1-Q1",
                     width: "fit",
                     question: "Welk gevoel illustreert het best hoe jij je bij fysieke activiteit voelt?",
                     options: [{id: "😄", text: "😄 blij"}, {id: "😟", text: "😟 bang"}, {id: "😡", text: "😡 boos"},{id: "😩", text: "😩 gestresst"}, {id: "😒", text: "😒 geërgerd"},{id: "😔", text: "😔 droevig"}, {id: "🥴", text: "🥴 misselijk"}, {id: "😰", text: "😰 hopeloos"}, {id: "😴", text: "😴 moe"}, {id: "😆", text: "😆 energiek"}]
                 }]
         },
         {
+            showIfAnswered: ["MOV-MOD-1-Q1"],
             title: "Voordelen van bewegen",
             cardContents: [
                 {
@@ -35,13 +36,6 @@ const MOVMOD1 = {
                     type: "Video",
                     link: "https://player.vimeo.com/video/556073021"
                 },
-                {
-                    type: "Text",
-                    content: "Of bekijk de infographic van het Vlaams instituut Gezond Leven:"
-                },
-                {
-                    type: "Infographic"
-                }
             ]
         },
         {
@@ -69,15 +63,15 @@ const MOVMOD1 = {
                     type: "Text",
                     content: "Pijn die je ervaart tijdens bewegen is een reactie van het zenuwstelsel en betekent niet noodzakelijk dat je meer schade oploopt. Naarmate het letsel herstelt neemt de overgevoeligheid van het zenuwstelsel af en zal je minder pijn ervaren."
                 },
+                {
+                    type: "Image",
+                    link: "/images/movement/broken.jpg"
+                },
             ]
         },
         {
             title: "Chronische pijn",
             cardContents: [
-                {
-                    type: "Image",
-                    link: "/images/movement/broken.jpg"
-                },
                 {
                     type: "Text",
                     content: "Bij chronische of langdurige pijn is de relatie met weefselschade veel kleiner. De schade is meestal hersteld, maar de overgevoeligheid van het zenuwstelsel is nog steeds aanwezig. Normale inspanningen kunnen dan pijnlijk blijven of soms kan er zelfs spontane pijn optreden. Het is in dit geval heel belangrijk om te beseffen dat pijn niet noodzakelijk wil zeggen dat je schade oploopt. Een initiële toename in pijnklachten is normaal wanneer je opnieuw meer gaat bewegen of activiteiten gaat opbouwen. Toch is het cruciaal dat je dit doet, en wel op een veilige en consequente manier! Na verloop van tijd zal de overgevoeligheid van het zenuwstelsel terug afnemen en zal je minder last ervaren."
@@ -140,7 +134,7 @@ const MOVMOD2 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Er bestaat niet één enkele aanbeveling voor beweging. Iedereen is anders en heeft andere klachten, noden én grenzen. En iedereen start op een ander niveau. Het is dus niet de bedoeling dat de aanbevolen beweging in een keer wordt nagestreefd. Verantwoord opbouwen en stap voor stap vooruitgaan is de boodschap: elke stap telt! Op jouw eigen ritme. Laat je leiden door de bewegingsdriehoek: je kompas voor een beweeglijker leven."
+                    content: "Er bestaat niet één enkele aanbeveling voor beweging. Iedereen is anders en heeft andere klachten, noden én grenzen. En iedereen start op een ander niveau. Het is dus niet de bedoeling dat de aanbevolen beweging in één keer wordt nagestreefd. Verantwoord opbouwen en stap voor stap vooruitgaan is de boodschap: elke stap telt! Op jouw eigen ritme. Laat je leiden door de bewegingsdriehoek: je kompas voor een beweeglijker leven."
                 },
                 {
                     type: "Text",
@@ -177,7 +171,7 @@ const MOVMOD2 = {
                 },
                 {
                     type: "Text",
-                    content: "Probeer actiever te zijn doorheen de dag. Neem de trap, wandel zoveel mogelijk rond, wissel zittend en staand werk af… Iedere stap telt! Dit zijn activiteiten aan een lage intensiteit, je hartslag blijft rustig dus dit is niet vermoeiend. De meeste taken binnen actieve jobs vallen onder deze categorie. Probeer rustig op te bouwen naar 10.000 stappen per dag."
+                    content: "Probeer actiever te zijn doorheen de dag. Neem de trap, wandel zoveel mogelijk rond, wissel zittend en staand werk af… Iedere stap telt! Dit zijn activiteiten aan een lage intensiteit, je hartslag blijft rustig dus dit is niet vermoeiend. De meeste taken binnen actieve jobs vallen onder deze categorie. Probeer bijvoorbeeld rustig op te bouwen naar 10.000 stappen per dag."
                 },
                 {
                     type: "Image",
@@ -190,7 +184,7 @@ const MOVMOD2 = {
                 },
                 {
                     type: "Text",
-                    content: "Beweeg iedere week 150 tot 300 minuten aan matige intensiteit óf 75 tot 150 minuten aan hoge intensiteit óf een combinatie van beiden. Dat kan door 5 dagen per week gedurende 30 minuten te bewegen aan matige intensiteit. Je kan dit ook opsplitsen in kleinere blokken van bijvoorbeeld 10 minuten. Tijdens inspanningen aan matige intensiteit gaat je hartslag omhoog, adem je sneller maar je raakt niet uitgeput (stevig doorstappen, rustig fietsen of zwaar werk in de tuin). Bij activiteiten aan een hoge intensiteit raak je wel uitgeput (hardlopen of andere sporten). Beweeg je nog meer? Dan geeft dit nog extra voordelen voor de gezondheid!"
+                    content: "Beweeg iedere week 150 tot 300 minuten aan matige intensiteit óf 75 tot 150 minuten aan hoge intensiteit óf een combinatie van beiden. Dat kan door 5 dagen per week gedurende 30 minuten te bewegen aan matige intensiteit. Je kan dit ook opsplitsen in kleinere blokken van bijvoorbeeld 10 minuten. Tijdens inspanningen aan matige intensiteit gaat je hartslag omhoog, adem je sneller maar je raakt niet uitgeput (stevig doorstappen, rustig fietsen of zwaar werk in de tuin). Bij activiteiten aan een hoge intensiteit raak je wel uitgeput (hardlopen of andere sporten). Beweeg je nog meer? Dan geeft dit nog extra voordelen voor de gezondheid! Ook bij deze intensievere activiteiten is het belangrijk dat je ze geleidelijk opbouwt."
                 },
                 {
                     type: "Image",
@@ -208,13 +202,6 @@ const MOVMOD2 = {
                 {
                     type: "Image",
                     link: "/images/movement/workout.png"
-                },
-                {
-                    type: "Text",
-                    content: "Je vindt al de informatie ook terug in de inforgraphic van het Vlaams instituut Gezond Leven:"
-                },
-                {
-                    type: "Infographic",
                 }]
         },
         {
@@ -223,6 +210,15 @@ const MOVMOD2 = {
                 {
                     type: "Text",
                     content: "Hier volgen de beweeggewoontes van een viertal personen doorheen hun dag. Denk jij dat deze personen een gezonde beweeggewoonte hebben of niet? Swipe door hun verhaal en antwoord dan op de vragen!"
+                },
+            ]
+        },
+        {   
+            title: "Alain",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "We beginnen met Alain, een 32-jarige receptionist."
                 },
                 {
                     type: "Story",
@@ -261,7 +257,7 @@ const MOVMOD2 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Hier een tweede voorbeeld."
+                    content: "Nu een tweede voorbeeld: Lydia, een 27-jarige poetshulp."
                 },
                 {
                     type: "Story",
@@ -299,7 +295,7 @@ const MOVMOD2 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Hier een derde voorbeeld van Guido."
+                    content: "Hier een derde voorbeeld van Guido, die al 15 jaar werkt op de marketingafdeling."
                 },
                 {
                     type: "Story",
@@ -336,6 +332,10 @@ const MOVMOD2 = {
             title: "Michel",
             cardContents: [
                 {
+                    type: "Text",
+                    content: "En ten slotte Michel, een 61-jarige leerkracht."
+                },
+                {
                     type: "Story",
                     content: [
                         {image: "/images/movement/michel/michel1.png"},
@@ -357,7 +357,7 @@ const MOVMOD2 = {
                 {
                     id: "MOV-MOD-2-Q4",
                     type: "Question",
-                    question: "En ten slotte, heeft Michel gezonde beweeggewoontes?",
+                    question: "Heeft Michel gezonde beweeggewoontes?",
                     options: ["Ja", "Nee"],
                     correct: "Ja",
                     explanation: "Michel wisselt voldoende af tussen staand en zittend werk. Ook buiten het werk beweegt hij voldoende. Door met de fiets te gaan werken haalt hij de normen voor bewegen aan matige of intensieve intensiteit.",
@@ -378,16 +378,9 @@ const MOVMOD2 = {
                 {
                     type: "List",
                     content: ["Probeer na 30 minuten stilzitten, 3 minuten te bewegen.",
-                        "Bouw beweging door de dag op naar 10000 stappen per dag.",
+                        "Bouw beweging door de dag op. Werk bijvoorbeeld naar 10000 stappen per dag.",
                         "Beweeg elke week 150 à 300 minuten aan matige intensiteit of 75-150 minuten aan hoge intensiteit of een combinatie van beide.",
                         "Train 2 keer per week de kracht en uithouding van de grote spiergroepen.",]
-                },
-                {
-                    type: "Text",
-                    content: "Al deze key take-aways zijn opgenomen in deze infographic:"
-                },
-                {
-                    type: "Infographic"
                 }
             ]
         },
@@ -414,7 +407,27 @@ const MOVMOD3 = {
     icon: "work",
     cards: [
         {
+            title: "Beweeg jij voldoende?",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "We beginnen dit onderdeel met de volgende vraag:"
+                },
+                {
+                    id: "MOV-MOD-3-INTRO",
+                    type: "Slider",
+                    text: "Slaag jij er op het werk al in om voldoende te bewegen of af te wisselen tussen verschillende houdingen?",
+                    from: 1,
+                    to: 5,
+                    showValue: true,
+                    save: true,
+                    mapping: "5-FREQUENCY"
+                }
+            ]
+        },
+        {
             title: "Tips op een rijtje",
+            showIfAnswered: ["MOV-MOD-3-INTRO"],
             cardContents: [
                 {
                     type: "Text",
@@ -431,7 +444,7 @@ const MOVMOD3 = {
                         {image: "/images/movement/desk.jpg", title: "Organiseer je omgeving", text: "Zorg ervoor dat je fysiek actief moet zijn. Zet je printer niet vlak aan je bureau, zet enkel een glaasje water op je bureau in plaats van een drinkbus. De vuilbak kan je ook op een afstand zetten."},
                         {image: "/images/movement/water.jpg", title: "Drink veel water", text: "Water is niet alleen gezond, het zorgt er ook voor dat je vaker moet plassen."},
                         {image: "/images/movement/sitting.jpg", title: "Wissel eens van stoel", text: "Een andere houding zorgt voor ander spierwerk. Wissel je bureaustoel eens af met een zitbal of balanskussen. Een dynamische bureaustoel helpt ook. Je kan natuurlijk ook voor een deskbike gaan. Probeer iedere 30 minuten af te wisselen, maar let op dat je dit rustig opbouwt."},
-                        {image: "/images/movement/brainstorm.jpg", title: "Actief vergaderen", text: "Je kan eens staand vergaderen of zelfs al wandelend. Je kan eer vergadering ook opbouwen zodat er moet bewogen worden, door bijvoorbeeld te werken met post-its. Dit is heel efficiënt en verhoogt de concentratie."},
+                        {image: "/images/movement/brainstorm.jpg", title: "Actief vergaderen", text: "Je kan eens staand vergaderen of zelfs al wandelend. Je kan een vergadering ook organiseren zodat er moet bewogen worden, door bijvoorbeeld te werken met post-its. Dit is heel efficiënt en verhoogt de concentratie."},
                         {image: "/images/movement/road.jpg", title: "Neem niet de kortste weg", text: "Zet je auto wat verder op de parking, ga naar het toilet op een ander verdiep of haal je koffie in een andere cafetaria."},
                         {image: "/images/movement/stretch.jpg", title: "Stretchen", text: "Neem eens een korte pauze om wat stretchoefeningen te doen. Dit kan vanop je stoel of al staand."},
                         {image: "/images/movement/team.jpg", title: "Motiveer elkaar", text: "Spreek samen af met collega’s om iets actief te doen. Of zet de koffietassen in de kast onderaan, zo moet iedereen bukken om er één te pakken."},
@@ -483,7 +496,7 @@ const MOVMOD3 = {
             ]
         },
         {
-            title: "Nek-oefeningen",
+            title: "Nek-schouder-bovenrug oefeningen",
             cardContents: [
                 {
                     type: "Text",
@@ -495,16 +508,7 @@ const MOVMOD3 = {
                         {image: "/images/movement/exercises/Picture 1.jpg", title: "Nek - Oefening 1", text: "Draai je hoofd naar links en naar rechts. Doe deze oefening 5 maal."},
                         {image: "/images/movement/exercises/Picture 2.jpg", title: "Nek - Oefening 2", text: "Kijk met je hoofd naar het plafond en dan naar de grond. Doe deze oefening 5 maal."},
                         {image: "/images/movement/exercises/Picture 3.jpg", title: "Nek - Oefening 3", text: "Breng je linkeroor naar je linkerschouder en omgekeerd. Doe deze oefening 5 maal."},
-                        {image: "/images/movement/exercises/Picture 4.jpg", title: "Nek - Oefening 4", text: "Breng je kin naar achteren, maak dus een dubbele kin, houdt deze positie 5 seconden aan en ontspan daarna je nek/hoofd. Doe deze oefening 5 maal."}
-                    ]
-                }]
-        },
-        {
-            title: "Schouder-oefeningen",
-            cardContents: [
-                {
-                    type: "Story",
-                    content: [
+                        {image: "/images/movement/exercises/Picture 4.jpg", title: "Nek - Oefening 4", text: "Breng je kin naar achteren, maak dus een dubbele kin, houdt deze positie 5 seconden aan en ontspan daarna je nek/hoofd. Doe deze oefening 5 maal."},
                         {image: "/images/movement/exercises/Picture 5.jpg", title: "Schouder - Oefening 1", text: "Haal je schouders op en duw daarna je schouders naar beneden. Doe deze oefening 5 maal."},
                         {image: "/images/movement/exercises/Picture 6.jpg", title: "Schouder - Oefening 2", text: "Maak een schouderrol naar achteren en daarna naar voor. Doe deze oefening 5 maal."},
                         {image: "/images/movement/exercises/Picture 7.jpg", title: "Schouder - Oefening 3", text: "Leg je handen gekruist op je schouders en draai met je romp naar links en naar rechts. Doe deze oefening 5 maal."},
@@ -532,12 +536,12 @@ const MOVMOD3 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Als je een weerstandband (elastiek) hebt liggen, kan je deze ook gebruiken om verschillende oefeningen thuis of op kantoor te doen."
+                    content: "Als je een weerstandband (elastiek) hebt liggen, kan je deze ook gebruiken om verschillende oefeningen thuis of op kantoor te doen. Deze oefeningen versterken de armen, rug en borst"
                 },
                 {
                     type: "Story",
                     content: [
-                        {image: "/images/movement/exercises/Picture 27.png", title: "Elastiek - Oefening 1", text: "Om de spieren in je bovenrug te versterken kan je gebruik maken van een weerstandsband (elastiek). Bevestig de elastiek bv. aan een de deurklink. Breng je armen (ellebogen 90°) naar achteren. Houdt deze positie 5 seconden aan en keer terug naar voren met de armen. Doe deze oefening 5 maal."},
+                        {image: "/images/movement/exercises/Picture 27.png", title: "Elastiek - Oefening 1", text: "Bevestig de elastiek bv. aan een de deurklink. Breng je armen (ellebogen 90°) naar achteren. Houdt deze positie 5 seconden aan en keer terug naar voren met de armen. Doe deze oefening 5 maal."},
                         {image: "/images/movement/exercises/Picture 28.png", title: "Elastiek - Oefening 2", text: "Bevestig de elastiek bv. aan een de deurklink. Breng je armen (ellebogen gestrekt) naar achteren. Houdt deze positie 5 seconden aan en keer terug naar voren met de armen. Doe deze oefening 5 maal."},
                         {image: "/images/movement/exercises/Picture 29.png", title: "Elastiek - Oefening 3", text: "Breng het elastiek achter je schouders- bovenrug. Strek je armen en beweeg nu met de armen naar voor. Doe deze oefening 5 maal."},
                         {image: "/images/movement/exercises/Picture 30.png", title: "Elastiek - Oefening 4", text: "Plaats beide voeten op het elastiek en houdt de elastiek vast met beide handen. Plooi en strek je ellebogen. Doe deze oefening 5 maal."}
@@ -567,18 +571,39 @@ const MOVMOD4 = {
     title: "Bewegen in je vrije tijd",
     titleMarkup: ["Bewegen in", "je vrije tijd"],
     part: 4,
-    description: "Ook als je thuis bent kan je aan je belastbaarheid en conditie werken in dit onderdeel kom je hier alles over te weten.",
+    description: "Ook als je thuis bent kan je aan je belastbaarheid en conditie werken. In dit onderdeel kom je hier alles over te weten.",
     duration: "10 minuten",
     type: "Interactief",
     image: "mov-mod-4",
     imageWidth: "180px",
     icon: "running",
-    cards: [{
-            title: "Tips op een rijtje",
+    cards: [
+        {
+            title: "Beweeg jij voldoende?",
             cardContents: [
                 {
                     type: "Text",
-                    content: "Hier vind je tal van tips om meer te bewegen in je vrije tijd. Swipe naar rechts om ze even te bekijken."
+                    content: "We beginnen dit onderdeel met de volgende vraag:"
+                },
+                {
+                    id: "MOV-MOD-4-INTRO",
+                    type: "Slider",
+                    text: "Slaag jij er in je vrije tijd al in om voldoende te bewegen of af te wisselen tussen verschillende houdingen?",
+                    from: 1,
+                    to: 5,
+                    showValue: true,
+                    save: true,
+                    mapping: "5-FREQUENCY"
+                }
+            ]
+        },
+        {
+            title: "Tips op een rijtje",
+            showIfAnswered: ["MOV-MOD-4-INTRO"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Hier vind je tal van tips om meer te bewegen in je vrije tijd. Veeg (swipe) naar links om ze even te bekijken."
                 },
                 {
                     type: "Story",
@@ -588,14 +613,14 @@ const MOVMOD4 = {
                         {image: "/images/movement/phone.jpg", title: "Leg de telefoon aan de kant", text: "Je kan natuurlijk al wandelend telefoneren. Maar het is nog leuker als je afspreekt om bij te praten tijdens een leuke activiteit. Ga bijvoorbeeld samen bowlen? Spreken jullie gewoon af bij het café om de hoek? Dan kan je nog altijd al staand bijpraten of neem de fiets tot daar."},
                         {image: "/images/movement/gardening.jpg", title: "Klusjes", text: "Klusjes in het huis of de tuin zijn goed om extra te bewegen. Je kan poetsen, koken, tuinieren…Sommigen doen dit graag en vinden dit zelfs ontspannend. Behoor jij niet tot deze categorie? Probeer het dan eens met je lievelingsmuziek."},
                         {image: "/images/movement/ideas.jpg", title: "Bereid je voor", text: "Een goed voorbereid persoon is er twee waard. Zo kan je beter anticiperen op onvoorziene situaties. Neem bijvoorbeeld sportkledij mee naar het werk, misschien kan je na het werk gaan sporten? Zorg ervoor dat je ook regenkledij voorziet en iets om zichtbaar te zijn in de donker."},
-                        {image: "/images/movement/dog-beach.jpg", title: "Vakantie", text: "Heerlijk, verlof! De ene persoon is van nature al zeer actief tijdens vrij dagen terwijl de ander misschien liever een goed boek leest. Toch is dit een ideaal moment om extra te bewegen: ontdek nieuwe plekjes of laat je verbijsteren door de schoonheid van de natuur tijdens een leuke wandeling."},
-                        {image: "/images/movement/weights.jpg", title: "Bouw op", text: "Het is niet makkelijk om actiever te worden, dit moet groeien. Bouw je te snel op of doe je te vee ineens, dan houd je het niet vol en loop je het risico op een blessure. Bouw je te traag op, dan maak je weinig progressie en blijven de voordelen voor je gezondheid beperkt."},
-                        {image: "/images/movement/planning.jpg", title: "Maak een planning", text: "Om echt meer te bewegen in het dagelijks leven moet het een gewoonte worden. Nieuwe gewoontes vragen tijd en een goed planning. Plan daarom extra beweegmomenten in je agenda. Om je aan je plan te helpen herinneren kan je een alarm instellen."},
+                        {image: "/images/movement/dog-beach.jpg", title: "Vakantie", text: "Heerlijk, verlof! De ene persoon is van nature al zeer actief tijdens vrije dagen terwijl de ander misschien liever een goed boek leest. Toch is dit een ideaal moment om extra te bewegen: ontdek nieuwe plekjes of laat je verbijsteren door de schoonheid van de natuur tijdens een leuke wandeling."},
+                        {image: "/images/movement/weights.jpg", title: "Bouw op", text: "Het is niet makkelijk om actiever te worden, dit moet groeien. Bouw je te snel op of doe je te veel ineens, dan houd je het niet vol en loop je het risico op een blessure. Bouw je te traag op, dan maak je weinig progressie en blijven de voordelen voor je gezondheid beperkt."},
+                        {image: "/images/movement/planning.jpg", title: "Maak een planning", text: "Om echt meer te bewegen in het dagelijks leven moet het een gewoonte worden. Nieuwe gewoontes vragen tijd en een goede planning. Plan daarom extra beweegmomenten in je agenda. Om je aan je plan te helpen herinneren kan je een alarm instellen."},
                         {image: "/images/movement/shoes.jpg", title: "Organiseer je omgeving", text: "Richt je omgeving zo in dat je herinnerd wordt om meer te bewegen. Zet je loopschoenen aan de voordeur, berg je gameconsole op in de kast, zet je fiets voor de auto..."},
                         {image: "/images/movement/engagement.jpg", title: "Gebruik je tijd nuttig", text: "Je hoeft niet lang te bewegen of sporten om al voordeel te halen voor je gezondheid. Maar zorg ervoor dat je de tijd die je vrijmaakt om te bewegen optimaal benut. Leg afleidingen zoals je GSM aan de kant, neem niet te veel pauzes, maak geen lange babbels met je buur... Focus! Muziek kan je hierbij helpen."},
                         {image: "/images/movement/yoga.jpg", title: "Beweeg bij de tv", text: "Ook tijdens het kijken naar je favoriete serie kan je meer bewegen. Je kan dit vanop de hometrainer doen of terwijl je yoga doet. Ook afwisselen tussen zitten en staan is al voldoende."},
                         {image: "/images/movement/wrench.jpg", title: "Pak activiteiten slim aan", text: "Je kan activiteiten zo aanpakken dat je meer afwisseling hebt in je houding en bewegingen. Strijk bijvoorbeeld een paar kledingstukken en leg deze dan weg. Dit is beter dan ineens een hele mand te strijken, je moet meer rondlopen waardoor je de spieren die je gebruikt tijdens het strijken even rust gunt."},
-                        {image: "/images/movement/start.jpg", title: "Gewoon starten", text: "Na een lange dag op het werk kan je absoluut geen zin hebben om nog iets van stort of beweging te doen. Probeer je er toch achter te zetten, al is het maar voor 10 minuten. Je gaat zien, je kan even stoom aflaten en op termijn voel je je energieker, je concentratie verbetert en je kan beter slapen."},
+                        {image: "/images/movement/start.jpg", title: "Gewoon starten", text: "Na een lange dag op het werk kan je absoluut geen zin hebben om nog iets van sport of beweging te doen. Probeer je er toch achter te zetten, al is het maar voor 10 minuten. Je gaat zien, je kan even stoom aflaten en op termijn voel je je energieker, je concentratie verbetert en je kan beter slapen."},
                         {image: "/images/movement/balance.jpg", title: "Evenwicht", text: "Evenwicht in je activiteiten is belangrijk. Zowel over- als onder belasting vormen een risico op lichamelijke klachten. Probeer daarom evenwicht in je planning te krijgen waarbij je afwisselt tussen zware- en lichte taken, rust en beweging, zaken die je graag en minder graag doet..."},
                         {image: "/images/movement/shot.jpg", title: "Stel een doel", text: "Doelen helpen om je motivatie te verhogen. Ga voor jezelf na waarom je meer wilt bewegen? Wat moet je precies kunnen om dit doel te bereiken? Zorg ervoor dat je een haalbaar doel kiest. Is je doel te hoog, dan loop je het risico dit niet te halen wat heel demotiverend kan zijn."},
                         {image: "/images/movement/gift.jpg", title: "Goed gedaan", text: "Een gezonde levensstijl hanteren is niet gemakkelijk. Zorg er daarom voor dat je jezelf beloont wanneer je gezonde doelen haalt of volhoudt. Denk bijvoorbeeld aan een leuk tripje, een gezellig etentje of een nieuw paar loopschoenen."},
@@ -715,13 +740,13 @@ const MOVMOD4 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "De doorsnee persoon beweegt veel te weinig, ook thuis. Nochtans is voor of na de werkuren het ideale moment om wat meer beweging in je dag te krijgen. Ook mensen met een actieve job kunnen hun gezondheid een extra boost geven door ook buiten het werk voldoende te bewegen. Probeer een aantal strategieën te bedenken om meer te bewegen die bij jouw passen. Met wat creativiteit en doorzettingsvermogen kom je er wel! Alle beetjes helpen!"
+                    content: "De doorsnee persoon beweegt veel te weinig, ook thuis. Nochtans is voor of na de werkuren het ideale moment om wat meer beweging in je dag te krijgen. Ook mensen met een actieve job kunnen hun gezondheid een extra boost geven door ook buiten het werk voldoende te bewegen. Probeer een aantal strategieën te bedenken om meer te bewegen die bij jou passen. Met wat creativiteit en doorzettingsvermogen kom je er wel! Alle beetjes helpen!"
                 }]
         },
         {
             generateFinishSubmoduleButton: true,
-            lastModule: true,
-            text: "Voltooi module Bewegen",
+            lastModule: false,
+            text: "Voltooi onderdeel",
             textOnCompleted: "Keer terug"
         }
     ]
@@ -747,11 +772,20 @@ const MOVMOD5 = {
                 }]
         },
         {
-            title: "Beweegscore",
+            title: "HOE ZIT HET MET JOUW HOEVEELHEID BEWEGING",
             cardContents: [
                 {
                     type: "Text",
-                    content: "Probeer even te antwoorden op de volgende vragen door een inschatting te maken van je hoeveelheid beweging."
+                    content: "Probeer even te antwoorden op de volgende vragen om een inschatting te maken van jouw beweeggedrag."
+                },
+            ]
+        },
+        {
+            title: "Fysieke activiteitsniveau",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Het fysieke activiteitsniveau wordt berekend op basis van hoeveel jij wandelt en het aantal minuten dat je activiteiten doet aan een hoge en middelmatige intensiteit. Een gemiddelde score (bijna iedere dag minstens 30 minuten bewegen aan middelmatige intensiteit)  is voldoende om voordelen te ondervinden voor je gezondheid. Hogere scores leveren extra voordelen op. Maar let op dat je ook voldoende rust inplant, anders loop je het risico op overbelasting. Scoor je eerder aan de lage kant? Dan kan je best proberen om meer te bewegen en ook iets intensiever te bewegen. Een veilige opbouw is wel cruciaal!"
                 },
                 {
                     id: "MOV-MOD-5-FYS",
@@ -766,17 +800,13 @@ const MOVMOD5 = {
             ]
         },
         {
+            title: "Aantal stappen per dag",
             showIfAnswered: ["MOV-MOD-5-FYS"],
             cardContents: [
                 {
                     type: "Text",
-                    content: "Het fysieke activiteit level wordt berekend op basis van hoeveel jij wandelt en het aantal minuten dat je activiteiten doet aan een hoge en middelmatige intensiteit. Een gemiddelde score is voldoende om voordelen te ondervinden voor je gezondheid. Hogere scores leveren extra voordelen op. Maar let op dat je ook voldoende rust inplant, anders loop je het risico op overbelasting. Scoor je eerder aan de lage kant? Dan kan je best proberen om meer te bewegen en ook iets intensiever te bewegen. Een veilige opbouw is wel cruciaal!"
-                }
-            ]
-        },
-        {
-            title: "Aantal stappen per dag",
-            cardContents: [
+                    content: "Naast regelmatig activiteiten aan een hoge en middelmatige intensiteit te doen, is het ook belangrijk dat je voldoende stappen zet op een dag. Opnieuw geldt dat gemiddelde scores reeds een positief effect hebben op je gezondheid. Maar een veilige opbouw en voldoende rust zijn ook hier heel belangrijk om het risico op overbelasting te beperken."
+                },
                 {
                     id: "MOV-MOD-5-STEPS",
                     type: "Slider",
@@ -790,20 +820,12 @@ const MOVMOD5 = {
             ]
         },
         {
+            title: "Inactieve uren",
             showIfAnswered: ["MOV-MOD-5-STEPS"],
             cardContents: [
                 {
                     type: "Text",
-                    content: "Naast regelmatig activiteiten aan een hoge en middelmatige intensiteit te doen, is het ook belangrijk dat je voldoende stappen zet op een dag. Opnieuw geldt dat gemiddelde scores reeds een positief effect hebben op je gezondheid. Maar een veilige opbouw en voldoende rust zijn ook hier super belangrijk om het risico op overbelasting te beperken."
-                }
-            ]
-        },
-        {
-            title: "Aantal stappen per dag",
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Inactieve uren zijn uren waarin je minder dan 250 stappen hebt gezet. Als je voldoende slaapt, zit je al aan 8 inactieve uren per dag. Daarom is het belangrijk om je inactieve uren doorheen de dag te beperken. Verhoogd risico heb je bij meer dan 8 inactieve uren per dag (een totaal van 16 uur dus)."
+                    content: "Inactieve uren zijn uren waarin je minder dan 250 stappen hebt gezet. Als je voldoende slaapt, zit je ongeveer al aan 8 inactieve uren per dag. Daarom is het belangrijk om je inactieve uren doorheen de dag te beperken. Verhoogd risico op gezondheidsproblemen heb je bij meer dan 8 inactieve uren per dag (een totaal van 16 uren dus)."
                 },
                 {
                     id: "MOV-MOD-5-INACTIVE",
@@ -818,16 +840,8 @@ const MOVMOD5 = {
             ]
         },
         {
-            showIfAnswered: ["MOV-MOD-5-INACTIVE"],
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Wanneer je minder dan 250 stappen op een uur hebt gezet, wordt dit gezien als een inactief uur. Hoe minder inactieve uren doorheen de dag hoe beter. Vanaf 8 inactieve uren op een dag (uren slaap niet meegerekend) heb je een verhoogd risico op gezondheidsproblemen."
-                }
-            ]
-        },
-        {
             titleCard: "true",
+            showIfAnswered: ["MOV-MOD-5-INACTIVE"],
             title: "Redenen om meer te bewegen"
         },
         {
@@ -903,6 +917,17 @@ const MOVMOD5 = {
                     type: "Image",
                     link: "/images/movement/family.jpg"
                 },
+            ]
+        },
+        {
+            title: "Jouw redenen",
+            cardContents: [
+                {
+                    type: "Multitext-Input",
+                    id: "MOV-MOD-5-REASONS",
+                    text: "Wat zijn voor jouw redenen om meer te bewegen?",
+                    placeholder: "Schrijf ze hier neer:"
+                }
             ]
         },
         {
@@ -994,7 +1019,7 @@ const MOVMOD5 = {
                 {
                     type: "Multitext-Input",
                     id: "MOV-MOD-5-LIMITS",
-                    text: "Wat zijn voor jouw drempels om meer te bewegen?",
+                    text: "Wat zijn voor jouw drempels die je belemmeren van meer te bewegen?",
                     placeholder: "Schrijf ze hier neer:"
                 }
             ]
@@ -1081,8 +1106,8 @@ const MOVMOD5 = {
                     type: "Story",
                     content: [
                         {image: "/images/movement/start.jpg", title: "Stap 1", text: "Om je activiteitenniveau langzaam op te bouwen moeten we eerst je basisniveau vaststellen. Je basisniveau bepaal je door de tijd te meten dat je met een activiteit bezig kunt zijn totdat je moe wordt of de pijn toeneemt. Je bepaalt je basisniveau liefst meerdere keren, zodat je een betrouwbaar gemiddelde krijgt. Je hebt namelijk goede en slechte dagen. Van deze basis haal je 20% af om je startniveau te bepalen."},
-                        {image: "/images/movement/stairs.jpg", title: "Stap 2", text: "Houd dit één tot twee weken vol, afhankelijk van je hersteltijd. Daarna breiden we uit met ± 10%. Wanneer je gaat opbouwen mag de hersteltijd niet toenemen. Het kan zijn dat pijn en vermoeidheid erger worden, maar dat is niet erg, zolang de hersteltijd maar niet langer wordt. Het is super belangrijk dat je je aan het schema houdt. Hoe verleidelijk misschien ook, maar het is niet goed dat je al je activiteiten tegelijk gaat opbouwen."},
-                        {image: "/images/movement/stairs.jpg", title: "Voorbeeld 1", text: "Na 10 minuten fietsen neemt jouw pijn toe. Dan is je startniveau 8 minuten. Na één tot twee weken verhoog je dit naar 9 minuten."},
+                        {image: "/images/movement/stairs.jpg", title: "Stap 2", text: "Houd dit één tot twee weken vol, afhankelijk van je hersteltijd. Daarna breiden we uit met ± 10%. Wanneer je gaat opbouwen mag de hersteltijd niet toenemen. Het kan zijn dat pijn en vermoeidheid erger worden, maar dat is niet erg, zolang de hersteltijd maar niet langer wordt. Het is zeer belangrijk dat je je aan het schema houdt. Hoe verleidelijk misschien ook, maar het is niet goed dat je al je activiteiten tegelijk gaat opbouwen."},
+                        {image: "/images/movement/bycicle.jpg", title: "Voorbeeld 1", text: "Na 10 minuten fietsen neemt jouw pijn toe. Dan is je startniveau 8 minuten. Na één tot twee weken verhoog je dit naar 9 minuten."},
                         {image: "/images/movement/walking.jpg", title: "Voorbeeld 2", text: "Na 500 meter stappen neemt jouw pijn toe. Dan is je startniveau 400 meter. Na één tot twee weken verhoog je dit naar 440 meter."},
                     ]
                 },
@@ -1103,18 +1128,9 @@ const MOVMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Bewegen is één van de beste dingen die je kan doen voor je gezondheid. Bewegen..."
-                },
-                {
-                    type: "List",
-                    content: ["Traint het hart en beperkt het risico op hart- en vaatzieken.",
-                    "Geeft je immuunsysteem een boost.",
-                    "Zet hormonen vrij die zorgen voor een goed gevoel en pijndemping.",
-                    "Traint de spieren, houdt de gewichten soepel en versterkt de botten.",
-                    "Houdt je gewicht onder controle en beperkt het risico op diabetes type 2.",
-                    "Zorgt voor een betere concentratie en een beter geheugen.",
-                    "Werkt ontspannend en leidt tot een betere slaap."]
-                }]
+                    content: "Voor iedereen is het belangrijk om voldoende te bewegen, maar niet bij iedereen lukt het even goed om dit te verwezenlijken. Zicht krijgen op wat jou motiveert en welke drempels jij ervaart is een eerste stap. Nadien kan jouw beweegplan vormgeven door doelen te stellen. Met een opbouwschema kan je dan deze doelen realiseren."
+                }
+            ]
         },
         {
             generateFinishSubmoduleButton: true,

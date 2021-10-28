@@ -72,11 +72,12 @@ export default function Slider(props) {
 }
 
 const mappings = {
-  "3-LEVELS": {1: "Laag", 2: "Gemiddeld", 3: "Hoog"},
-  "3-STEPS": {1: "Minder dan 5000 stappen", 2: "5000 tot 12500 stappen", 3: "12500 stappen of meer"},
+  "3-LEVELS": {1: "Laag (minder dan 30 min matige intensiteit per dag)", 2: "Gemiddeld (bijna dagelijks minstens 30 min matige intensiteit)", 3: "Hoog (bijna dagelijks minstens 90 min matige intensiteit)"},
+  "3-STEPS": {1: "Laag (minder dan 5000 stappen)", 2: "Gemiddeld (5000 tot 12500 stappen)", 3: "Hoog (12500 stappen of meer)"},
   "3-AMOUNT": {1: "Weinig", 2: "Gemiddeld", 3: "Veel"},
   "5-AGREE": {1: "Helemaal niet akkoord", 2: "Niet akkoord", 3: "Neutraal", 4: "Akkoord", 5: "Helemaal akkoord"},
   "5-AMOUNT": {1: "Helemaal niet", 2: "Niet veel", 3: "Een beetje", 4: "Vrij veel", 5: "Zeer veel"},
+  "5-FREQUENCY": {1: "Absoluut niet", 2: "Meestal niet", 3: "Soms", 4: "Meestal wel", 5: "Bijna altijd"},
   "5-IMPORTANCE": {1: "Helemaal niet belangrijk", 2: "Een beetje belangrijk", 3: "Redelijk belangrijk", 4: "Vrij belangrijk", 5: "Zeer belangrijk"},
   "6-WEEK": {2: "2 Weken", 3: "3 Weken", 4: "4 Weken", 5: "5 Weken", 6: "6 Weken"},
   "10-IMPACT": {1: "Heel negatieve impact", 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "Geen negatieve impact"},
