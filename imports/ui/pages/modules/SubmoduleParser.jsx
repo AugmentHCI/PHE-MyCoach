@@ -84,7 +84,7 @@ export default function SubmoduleParser(props) {
         if (!didSeeCompletionModal) interactionManager.setInteractionStatus("MODULE_COMPLETION_MODAL", "SHOW");
         const text = didSeeCompletionModal 
             ? "Goed zo, je hebt deze module voltooid. Doe zo verder!"
-            : "Super, je hebt net je allereerste onderdeel voltooid! Je kan nu verder met de volgende onderdelen. Als je een onderdeel wilt herbekijken, komt de overzichtskaart van boven te staan zodat je snel een overzicht hebt van de belangrijkste informatie. Doe zo verder!";
+            : "Super, je hebt net je allereerste onderdeel voltooid! Je kan nu verder met de volgende onderdelen. Als je een onderdeel wilt herbekijken, komt de overzichtskaart vanboven te staan zodat je snel een overzicht hebt van de belangrijkste informatie. Doe zo verder!";
         return (<AppModal show={true} title={"Klaar!"} defaultOption={"Sluit"} notifyParent={ notifyModal }>
             {text}
         </AppModal>);

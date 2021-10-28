@@ -108,7 +108,7 @@ const PEMOD2 = {
     title: "Rol van de hersenen",
     titleMarkup: ["Rol van de", "hersenen"],
     part: 2,
-    description: "In dit onderdeel bespreken we welke rol onze hersenen hebben in het verwerken van onze prikkels, en onze pijnervaring.",
+    description: "In dit onderdeel bespreken we welke rol onze hersenen hebben in het verwerken van onze prikkels en onze pijnervaring.",
     duration: "10 minuten",
     type: "Informatief",
     image: "new_ideas",
@@ -286,7 +286,7 @@ const PEMOD3 = {
         cardContents: [
             {
                 type: "Sort-Exercise",
-                content: "Geef voor elke contextuele factor aan in welke situatie deze het meest aanwezig zal zijn. Bij het rugbyspel, of bij de overval? Sleep ze naar de juiste situatie.",
+                content: "Geef voor elke omgevingsfactor aan in welke situatie deze het meest aanwezig zal zijn. Bij het rugbyspel, of bij de overval? Sleep ze naar de juiste situatie.",
                 columns: {
                     "default": {"name": "Beide", "items": [
                         {id: "1", content: "Vreugde"}, 
@@ -314,7 +314,7 @@ const PEMOD3 = {
         ]
     },
     {
-        title: "Factoren die bijdragen tot pijn",
+        title: "Het belang van de situatie",
         showIfAnswered: ["PE-MOD-3-Q1"],
         cardContents: [
             {
@@ -571,7 +571,7 @@ const PEMOD5 = {
         cardContents: [
             {
                 type: "Text",
-                content: "Binnen de Health Empower app hebben we een aantal modules ontwikkeld waar al deze factoren aan bod komen! Je vindt er tal van tips en oefeningen. Hieronder heb je alvast een overzicht van hoe we met elk van deze factoren aan de slag gaan."
+                content: "Hieronder volgt alvast een overzicht waar al deze factoren aan bod komen! Je vindt er tal van tips en oefeningen. Hieronder heb je alvast een overzicht van hoe we met elk van deze factoren aan de slag gaan."
             }]
     },
     {
@@ -584,6 +584,10 @@ const PEMOD5 = {
                 type: "Text",
                 overview: true,
                 content: "Jezelf vaak overbelasten leidt tot toegenomen spierspanning en een verminderde doorbloeding van je weefsels. Dit verhoogt het aantal pijn gerelateerde prikkels die naar de hersenen worden gestuurd, wat het zenuwstel overgevoelig kan maken. Overbelasten kan je beperken door je taken slim aan te pakken en ergonomisch te werken. Let op, ook onderbelasten kan leiden tot meer pijnklachten. Door onderbelasten wordt je lichaam minder fit waaroor je jezelf sneller kan overbelasten. Dit zien we vaak bij mensen met chronische pijn. Daarom is het belangrijk om je belastbaarheid geleidelijk te verhogen."
+            },
+            {
+                type: "Image",
+                link: "/images/paineducation/rock.jpg"
             }]
     },
     {
@@ -596,7 +600,11 @@ const PEMOD5 = {
                 type: "Text",
                 overview: true,
                 content: "In tegenstelling tot acute stress (wat zorgt voor pijndemping, verhoogde alertheid, ..) heeft langdurige stress een hoop negatieve gevolgen voor onze gezondheid. Naast het verhoogde risico op hart- en vaatziekten zorgt langdurige stress voor een toegenomen spierspanning en worden de pijnversterkende banen gestimuleerd. Probeer stress te beperken met een goede planning, door je grenzen af te bakenen en tijd vrij te maken voor zaken die je energie geven."
-            }]
+            },
+            {
+                type: "Image",
+                link: "/images/paineducation/pressure.jpg"
+            },]
     },
     {
         id: "PE-MOD-5-CARD-5",
@@ -608,7 +616,11 @@ const PEMOD5 = {
                 type: "Text",
                 overview: true,
                 content: "Evenwichtige voeding en voldoende slaap zijn belangrijk om je lichaam fit en gezond te houden. Slaap is het beste moment voor je lichaam om te herstellen. Een gezonde voeding zorgt ervoor dat je lichaam de nodige voedingsstoffen krijgt om te herstellen. Bovendien is er steeds meer bewijs voor een relatie tussen ongezonde voeding en lichamelijke pijn, mede door een toegenomen inflammatoire reactie van ons lichaam."
-            }]
+            },
+            {
+                type: "Image",
+                link: "/images/paineducation/choice.jpg"
+            },]
     },
     {
         id: "PE-MOD-5-CARD-6",
@@ -620,6 +632,10 @@ const PEMOD5 = {
                 type: "Text",
                 overview: true,
                 content: "Ons lichaam is gemaakt om te bewegen. Bewegen bevordert de doorbloeding en dit versterkt onze spieren en botten, houdt onze gewrichten soepel, verbetert de werking van het hart en verhoogt de concentratie. Hierdoor loop je minder risico op overbelasting."
+            },
+                        {
+                type: "Image",
+                link: "/images/paineducation/habits.jpg"
             },
             {
                 type: "Text",
@@ -637,7 +653,11 @@ const PEMOD5 = {
                 type: "Text",
                 overview: true,
                 content: "Negatieve gedachten en emoties beïnvloeden ons gedrag, zorgen voor stress en verhogen de kans op een overgevoelig zenuwstelsel. Door veel aandacht te schenken aan je pijn, gaan je hersenen meer op deze prikkels letten en ze uitvergroten. Als je ook nog eens veel activiteiten gaat vermijden uit angst voor pijn of schade, dan zal je lichaam na verloop van tijd minder sterk worden. Dit verhoogt dan weer het risico op overbelasting en dus meer pijn. Beperk daarom foutieve of niet helpende gedachten en focus op waardevolle activiteiten. Ben je iets aan het doen wat je heel leuk vindt of je concentreert je op je activiteit? Dan filteren je hersenen vanzelf al een deel van de pijn weg!"
-            }]
+            },
+            {
+                type: "Image",
+                link: "/images/paineducation/couch.jpg"
+            },]
     },
     {
         id: "PE-MOD-5-CARD-8",
@@ -649,7 +669,11 @@ const PEMOD5 = {
                 type: "Text",
                 overview: true,
                 content: "Onbegrip en bezorgdheid van de omgeving gaan gepaard met onaangename gevoelens, gedachten en stress. Dit kan een overgevoelig zenuwstelsel mee in de hand werken en leiden tot over- en onder belasting. Betrek je omgeving op een helpende manier door sociale steun te verhogen, je behoeften te formuleren en assertief te reageren."
-            }]
+            },
+            {
+                type: "Image",
+                link: "/images/paineducation/network.jpg"
+            },]
     },
     {
         id: "PE-MOD-5-CARD-9",
