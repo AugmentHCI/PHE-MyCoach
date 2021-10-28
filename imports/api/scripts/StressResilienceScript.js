@@ -173,7 +173,7 @@ const STRMOD1 = {
                     content: [
                         {
                             image: "/images/stress/lion.png", 
-                            text: "Stel dat er in de oertijd plots een leeuw voor je neus stond, zorgde stress ervoor dat je ging vechten voor je leven, zo snel mogelijk kon vluchten of bevroor en deed alsof je dood was, hetgeen je geen interessante prooi meer maakte voor de leeuw."
+                            text: "Stel dat er in de oertijd plots een leeuw voor je neus stond. Stress zorgde ervoor dat je ging vechten voor je leven, zo snel mogelijk kon vluchten of bevroor en deed alsof je dood was, hetgeen je geen interessante prooi meer maakte voor de leeuw."
                         },
                         {
                             image: "/images/stress/fire.png", 
@@ -316,7 +316,7 @@ const STRMOD1 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: ["Korte periodes van stress, gevolgd door een rustperiode zijn dus ok, maar als je lange tijd te weinig rust en recuperatie krijgt, gaat het mis. Je ", {type: "bold", content: "draaglast"}," (de stresserende elementen of gebeurtenissen waarmee we te maken krijgen) en je ", {type: "bold", content: "draagkracht"}," (de middelen waarover we beschikken om met stressvolle situaties om te gaan) raken dan uit evenwicht, met chronische stressklachten als resultaat."]
+                    content: ["Korte periodes van stress, gevolgd door een rustperiode zijn dus ok, maar als je lange tijd te weinig rust en recuperatie krijgt, gaat het mis. Je ", {type: "bold", content: "belasting"}," (de stresserende elementen of gebeurtenissen waarmee we te maken krijgen) en je ", {type: "bold", content: "belastbaarheid"}," (de middelen waarover we beschikken om met stressvolle situaties om te gaan) raken dan uit evenwicht, met chronische stressklachten als resultaat."]
                 },
                 {
                     type: "Image",
@@ -335,7 +335,7 @@ const STRMOD1 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Stress is zeker niet altijd iets slecht of negatief.  Integendeel: kortdurende stress is zelfs positief! Stress wordt negatief wanneer er een disbalans ontstaat tussen onze draaglast en onze draagkracht. Wanneer dit te lang duurt, kunnen er chronische stressklachten ontstaan."
+                    content: "Stress is zeker niet altijd iets slecht of negatief.  Integendeel: kortdurende stress is zelfs positief! Stress wordt negatief wanneer er een disbalans ontstaat tussen onze belasting en onze belastbaarheid. Wanneer dit te lang duurt, kunnen er chronische stressklachten ontstaan."
                 }]
         },
         {
@@ -565,7 +565,7 @@ const STRMOD3 = {
     title: "Hoe stress herkennen?",
     titleMarkup: ["Hoe stress", "herkennen?"],
     part: 3,
-    description: "In dit hoofdstuk kom je te aan welke signalen je chronische stress bij jezelf kan herkennen.",
+    description: "In dit hoofdstuk kom je te weten welke signalen kunnen wijzen op chronische stress.",
     duration: "10 minuten",
     type: "Interactief",
     image: "stress-mod-3",
@@ -590,7 +590,7 @@ const STRMOD3 = {
             {
                 type: "Image",
                 width: "50",
-                link: "/images/stress/lights.png"
+                link: "/images/stress/lights.jpg"
             }]
         },
         {
@@ -813,7 +813,7 @@ const STRMOD4 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Een disbalans is tussen jouw energievreters en energiegevers kan leiden tot chronische stress. Je kan de balans herstellen door:"
+                    content: "Een disbalans tussen jouw energievreters en energiegevers kan leiden tot chronische stress. Je kan de balans herstellen door:"
                 },
                 {
                     type: "List",
@@ -1017,7 +1017,7 @@ const STRMOD6 = {
             cardContents: [
                 {
                 type: "Text",
-                content: "In een vorig hoofdstuk leerde je dat een disbalans is tussen jouw energievreters en energiegevers kan leiden tot chronische stress. Je kan verschillende acties ondernemen om deze balans te herstellen:"
+                content: "In een vorig hoofdstuk leerde je dat een disbalans tussen jouw energievreters en energiegevers kan leiden tot chronische stress. Je kan verschillende acties ondernemen om deze balans te herstellen:"
                 },
                 {
                     type: "List",
@@ -1102,7 +1102,7 @@ const STRMOD6 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Eerder in dit onderdeel werd uitgelegd dat stress een reactie is op een psychologisch proces. Of je een bepaalde situatie al dan niet als bedreigend of uitdagend ervaart, is mede afhankelijk van jouw beleving."
+                    content: "Eerder in deze module werd uitgelegd dat stress een reactie is op een psychologisch proces. Of je een bepaalde situatie al dan niet als bedreigend of uitdagend ervaart, is mede afhankelijk van jouw beleving."
                 },
                 {
                     type: "Image",

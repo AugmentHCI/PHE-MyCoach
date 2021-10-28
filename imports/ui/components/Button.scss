@@ -23,6 +23,7 @@
         font-size: 16px;
         text-align: left;
         float: left;
+        text-align: center;
 
         &-small {
             @extend .button-text;
