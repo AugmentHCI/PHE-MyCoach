@@ -672,7 +672,7 @@ const PEMOD5 = {
             },
             {
                 type: "Image",
-                link: "/images/paineducation/network.jpg"
+                link: "/images/paineducation/pins.jpg"
             },]
     },
     {
