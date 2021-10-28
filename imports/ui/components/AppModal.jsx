@@ -7,6 +7,7 @@ import "../../../i18n/en.i18n.json";
 import Modal from 'react-bootstrap/Modal';
 import "./AppModal.scss";
 import Button from './Button.jsx';
+import Icon from "./Illustrations/Icon";
 
 const T = i18n.createComponent("Common");
 
@@ -34,7 +35,7 @@ export default function AppModal(props) {
         {!props.backOption && <Button color="blue" center onClick={handleDefault}>{defaultOption}</Button>}
         {props.backOption && <React.Fragment>
           <Button color="gray" width="45%" center onClick={handleBack} style={{marginRight:"10px"}}>{props.backOption}</Button>
-          {defaultOption && <Button color={props.defaultColor ? props.defaultColor : (props.disabledDefault ? "gray" : "blue")} width="45%" center onClick={handleDefault}>{defaultOption}</Button>}
+          {defaultOption && <Button color={props.defaultColor ? props.defaultColor : (props.disabledDefault ? "gray" : "blue")} width="45%" center onClick={handleDefault}>{props.addLockedIcon && <Icon width="14px" color="white" image="locked" style={{margin:"0 4px 4px 0"}}/>}{defaultOption}</Button>}
         </React.Fragment>}
       </Modal.Footer>
     </Modal>

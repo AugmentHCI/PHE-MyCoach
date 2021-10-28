@@ -36,6 +36,7 @@ import PillButton from "../components/PillButton.jsx";
 /* Styles */
 import 'antd/dist/antd.css';
 import "./MyCoach.scss";
+import CoachingModal from "../components/CoachingModal";
 
 /* Instance of React translate component, "Common" refers to the namespace of the i18n files */
 const T = i18n.createComponent("Common");
@@ -201,45 +202,9 @@ export default function MyCoach(props) {
                 Je hebt alle modules doorlopen, goed zo! Herbekijk gerust één van de modules die jij al eens doorlopen hebt. Denk af en toe ook aan jouw logboeken!
             </AppModal>)
         }
-        let submodule = [], module = "";
-        switch (userDailyCoaching.split("_")[0]) {
-            case "PE":
-                submodule = PainEducationScript.submodules.filter(submoduleData => submoduleData.id === userDailyCoaching)[0];
-                module = "paineducation";
-                break;
-            case "TE":
-                submodule = ThoughtsEmotionsScript.submodules.filter(submoduleData => submoduleData.id === userDailyCoaching)[0];
-                module = "thoughtsemotions";
-                break;
-            case "ACT":
-                submodule = ActivityWorkScript.submodules.filter(submoduleData => submoduleData.id === userDailyCoaching)[0];
-                module = "activitywork";
-                break;
-        }
-
-        return (<AppModal
-            backOption="Sluit" 
-            notifyBack={() => setShowCoachingModal(false)} 
-            notifyParent={() => {FlowRouter.go(`/${language}/mycoach/${userToken}/module/${module}/${userDailyCoaching}`)}}
-            defaultOption="Bekijk" 
-            defaultColor="blue"
-            noPadding
-            show={showCoachingModal}>
-            <div className="modalpopup-top">
-                <Illustration image={submodule.image} width={submodule.imageWidth ? submodule.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "20px", zIndex: "1"}}/>
-                <div className={"module-card-number"}>Onderdeel {submodule.part}</div>
-                <div className={"modalpopup-card-title"}>{submodule.titleMarkup[0]}</div>
-                {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title"}>{submodule.titleMarkup[1]}</div>}
-            </div>
-            <div className={"modalpopup-body"}>
-                <div style={{display:'flex', marginBottom:'5px'}}>
-                    <PillButton contentColor="white" fillColor={"blue"} icon="time">{submodule.duration}</PillButton>
-                    <PillButton contentColor="white" fillColor={"blue"} icon="information">{submodule.type}</PillButton>
-                </div>
-                <div className={"modalpopup-card-module"}>{moduleMapping[module]}</div>
-                {submodule.description}
-            </div>
-        </AppModal>)
+       
+        const module = userDailyCoaching.split("_")[0];
+        return (<CoachingModal module={module} submodule={userDailyCoaching} showModal={showCoachingModal} setShowModal={setShowCoachingModal} userToken={userToken} language={language} checkProgress/>)
     }
 
     function renderFinishPainEducationModal() {
@@ -344,13 +309,4 @@ export const coachRRNRs = [1111111, 4862876, 3381097, 4018425, 4799179, 3237616,
 /* The module priorities per profile */
 const modulePriorities = {
     1: []
-}
-
-const moduleMapping = {
-    "paineducation": "Pijneducatie",
-    "thoughtsemotions": "Gedachten & Emoties",
-    "activitywork": "Belasting & Belastbaarheid",
-    "stress": "Stress & Veerkracht",
-    "social": "Sociale omgeving",
-    "movement": "Bewegen"
 }
