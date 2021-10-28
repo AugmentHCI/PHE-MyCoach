@@ -18,7 +18,7 @@ export const values = [
     {id: "VALUE_INDEPENDENT",    text: "Zelfstandig"},
     {id: "VALUE_LOYAL",    text: "Trouw"},
     {id: "VALUE_SPONTANEOUS",    text: "Spontaan"},
-    {id: "VALUE_FLEXIBLE",    text: "Flexiebel"},
+    {id: "VALUE_FLEXIBLE",    text: "Flexibel"},
     {id: "VALUE_COOPERATING",    text: "Coöperatief"},
     {id: "VALUE_PLAYFUL",    text: "Speels"},
     {id: "VALUE_ENERGETIC",    text: "Energiek"},
@@ -56,6 +56,10 @@ const TEMOD1 = {
                     type: "Text",
                     content: "Moeilijke gedachten en gevoelens kunnen een grote impact hebben op ons welbevinden en op de manier waarop we ons gedragen. Dat is ook zo met lastige gedachten en gevoelens rond pijn. Zo kunnen ze er bijvoorbeeld voor zorgen dat we veel piekeren en bepaald gedrag niet (meer) gaan stellen. In deze module reiken we je een aantal handvaten aan die je kunnen helpen om minder te vechten tegen deze lastige gevoelens en gedachten. Hiernaast bekijken we met jou hoe je minder ‘in je hoofd’ kan zitten maar en meer in het hier en nu. Ook helpen we je onderzoeken hoe je, ondanks de pijn, het leven kan leiden dat je wil leiden.",
                     showIf: [{rule: "Profile", profiles: [2, 3, 4, 5, 6]}]
+                },
+                {
+                    type: "Image",
+                    link: "/images/thoughtsemotions/thinking.jpg"
                 },
                 {
                     type: "Text",
@@ -259,7 +263,7 @@ const TEMOD1 = {
         },
         {
             id: "TE-MOD1-CARD9",
-            title: "Afleiding van gedachten",
+            title: "Afleiding van gedachten en gevoelens",
             cardContents: [
                 {
                     type: "Text",
@@ -322,7 +326,7 @@ const TEMOD1 = {
             ]
         },
         {
-            title: "Leren omgaan met gedachten",
+            title: "Leren omgaan met gedachten en gevoelens",
             cardContents: [
                 {
                     type: "Text",
@@ -344,7 +348,7 @@ const TEMOD1 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Vaak hebben we de neiging om allerlei pogingen te ondernemen om van onze moeilijke gedachten en gevoelens af te raken. Deze hebben echter geen of slechts een tijdelijk effect. We kunnen onze gedachten en gevoelens niet zomaar aan- en uitzetten… Wél kunnen we leren om er op zo’n manier mee om te gaan dat we er minder last van ondervinden of zodat ze ons gedrag minder bepalen! Dit gaan we bekijken in het volgende onderdeel: 'Aan de slag met gedachten en emoties'"
+                    content: "Vaak hebben we de neiging om allerlei pogingen te ondernemen om van onze moeilijke gedachten en gevoelens af te raken. Deze hebben echter geen of slechts een tijdelijk effect. We kunnen onze gedachten en gevoelens niet zomaar aan- en uitzetten… Wél kunnen we leren om er op zo’n manier mee om te gaan dat we er minder last van ondervinden of zodat ze ons gedrag minder bepalen!"
                 }
             ]
         },
@@ -370,11 +374,11 @@ const TEMOD2 = {
     icon: "thought",
     cards: [{
         id: "TE-MOD2-CARD1",
-        title: "Gedachte-oefening",
+        title: "Terugkerende of pieker-gedachten",
         cardContents: [
             {
                 type: "Text",
-                content: "We moedigen je aan om de komende twee dagen eens bewust stil te staan bij jouw gedachten. Welke gedachten komen vaak terug en spelen je best wel parten?",
+                content: "We moedigen je aan om stil te staan bij jouw gedachten. Welke gedachten komen vaak terug en spelen je best wel parten?",
                 showIf: [{"rule": "Profile", "profiles": [1]}]
             },
             {
@@ -404,10 +408,6 @@ const TEMOD2 = {
         id: "TE-MOD2-CARD2",
         title: "Eens reflecteren",
         cardContents: [
-            {
-                type: "Text",
-                content: "Bekijk de wederkerende, lastige gedachten die je voor jezelf hebt genoteerd de afgelopen dag.",
-            },
             {
                 type: "Text",
                 content: "Vraag jezelf ook eens het volgende af: Zijn deze gedachten helpend?",
@@ -497,29 +497,9 @@ const TEMOD2 = {
         ]
     },
     {
-        id: "TE-MOD2-SLIDER",
-        cardContents: [
-            {
-                type: "Text",
-                content: "We halen deze schaalvraag er nog eens opnieuw bij."
-            },
-            {
-                id: "TE-MOD-2-SLIDER-FOLLOWUP",
-                type: "Slider",
-                text: "Hoe zou je, na het doorlopen van deze module, op een schaal van 1 tot 10 - waarbij 1 staat voor een heel sterke negatieve impact en 10 voor helemaal geen negatieve impact - de impact van moeilijke gedachten en gevoelens op jouw welbevinden scoren?",
-                from: 1,
-                to: 10,
-                showValue: true,
-                save: true,
-                mapping: "10-IMPACT"
-            }
-        ]
-    },
-    {
         id: "TE-MOD2-OVERVIEW",
         title: "Key take-away",
         overview: true,
-        showIfAnswered: ["TE-MOD-2-SLIDER-FOLLOWUP"],
         cardContents: [
             {
                 type: "Text",
@@ -574,12 +554,16 @@ const TEMOD3 = {
                 content: "Wetenschappelijk onderzoek toont aan dat mindfulness kan helpen om beter om te gaan met stress en minder te piekeren. Ook voor veel personen die te kampen hebben met (chronische) pijnklachten kan mindfulness helpend zijn als manier om hier beter mee te kunnen omgaan.",
             },
             {
+                type: "Image",
+                link: "/images/thoughtsemotions/relax-cleaning.jpg"
+            },
+            {
                 type: "Text",
                 content: "Mindfulness is iets dat je, net als fietsen, moet leren. Hoeveel te meer je ermee oefent, hoeveel te makkelijker het je zal afgaan. Laat dus ook toe dat het een proces zal zijn, met vallen en opstaan, net zoals je als kind leerde fietsen.",
             },
             {
                 type: "Text",
-                content: "Aan de slag!",
+                content: [{type: "bold", content: "Aan de slag!"}],
             }
         ]
     },
@@ -623,20 +607,20 @@ const TEMOD3 = {
     },
     {
         id: "TE-MOD3-CARD4",
-        title: "Uitbreidingsoefening",
+        title: "Mindful tandenpoetsen",
         cardContents: [
             {
                 type: "Text",
-                content: "We bekijken met jou graag nog een mindfulness oefening die je gemakkelijk kan integreren in je dagelijks leven, nl. tijdens het tandenpoetsen. Zet het volgende audiofragment aan de volgende keer dat je je tanden poetst of luister hier alvast naar en denk eraan terug wanneer je je tanden aan het poetsen bent."
+                content: "We bekijken met jou graag een mindfulness oefening die je gemakkelijk kan integreren in je dagelijks leven, nl. tijdens het tandenpoetsen. Zet het volgende audiofragment aan de volgende keer dat je je tanden poetst of luister hier alvast naar en denk eraan terug wanneer je je tanden aan het poetsen bent."
             },
             {
                 type: "Audiofile",
                 source: "/audio/mindfulBrushing.m4a"
             },
             {
-                type: "Text",
-                content: "Pak je tandenborstel en op het moment dat je deze in je hand hebt, ben je alleen nog maar bezig met tandenpoetsen. Je voelt bewust de borstel in je hand, het dopje van de tandpasta tube, je ruikt de geur, je ziet de stroperige structuur van de pasta. Blijf er met je aandacht bij. Komen er bijvoorbeeld gedachten naar boven over de lichamelijke pijn de je ervaart, ga dan weer met je aandacht terug naar het poetsen. Dan ga je poetsen: je proeft de smaak van de tandpasta, je voelt de structuur van de borstel en hoort de geluiden tijdens het poetsen. Je maakt alles intens mee en bent volledig met de aandacht bij alle sensaties van het poetsen. Iedere keer als je gedachten afdwalen, ga je met je aandacht terug naar het poetsen. Keer op keer. Dit hou je vol totdat je je tandenborstel weglegt. Merk vervolgens op hoe je je voelt."
-            }
+                type: "Image",
+                link: "/images/thoughtsemotions/brushing.jpg"
+            },
         ]
     },
     {
@@ -662,7 +646,7 @@ const TEMOD3 = {
             {
                 type: "Text",
                 overview: true,
-                content: "Met mindfulness leer je om aandacht te richten op het hier en nu. Het vergt wat oefening, maar is bewezen helpend te kunnen zijn in het omgaan met moeilijke, mogelijks pijngerelateerde gedachten en emoties.",
+                content: "Met mindfulness leer je om aandacht te richten op het hier en nu. Het vergt wat oefening, maar het is bewezen helpend te kunnen zijn in het omgaan met moeilijke, mogelijks pijngerelateerde gedachten en emoties.",
             },
             {
                 type: "Text",
@@ -712,7 +696,7 @@ const TEMOD4 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Zoals we al geleerd hebben, kunnen we gedachten niet uitzetten. Ons hoofd denkt ook vooral op korte termijn, en op korte termijn wil ons lichaam pijn vermijden. In het begin zal dit misschien ook een gunstig effect hebben, want door niet te stofzuigen ga je mogelijke pijn uit de weg.",
+                    content: "Zoals we al geleerd hebben, kunnen we gedachten niet uitzetten. Ons hoofd denkt ook vooral op korte termijn, en op korte termijn wil ons lichaam pijn vermijden. In het begin zal stofzuigen vermijden misschien een gunstig effect hebben, want door niet te stofzuigen ga je mogelijke pijn uit de weg.",
                 },
                 {
                     type: "Text",
@@ -815,7 +799,7 @@ const TEMOD4 = {
                 },
                 {
                     type: "Text",
-                    content: [{type: "bold", content: "3. Tenslotte, Herinner je ook dat je gedachten en emoties er altijd zullen zijn, maar dat je kan kiezen en oefenen om er minder aandacht aan te besteden en om, ondanks deze gedachten en emoties, toch te kiezen voor activiteiten die waardevol zijn voor jou."}]
+                    content: [{type: "bold", content: "3. Herinner je ook dat je gedachten en emoties er altijd zullen zijn, maar dat je kan kiezen en oefenen om er minder aandacht aan te besteden en om, ondanks deze gedachten en emoties, toch te kiezen voor activiteiten die waardevol zijn voor jou."}]
                 },
                 {
                     type: "List",
@@ -829,29 +813,13 @@ const TEMOD4 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Hopelijk is het tijdens deze module duidelijk geworden dat stilstaan bij hetgene dat je kan controleren en bewust zijn van je gedachten en emoties zinvol kan zijn. We hebben hiervoor verschillende oefeningen en tips doorlopen. Welke zijn het meest geschikt voor jou en ga je mee aan de slag? Je kan er meerdere aanduiden:"
+                    content: "Hopelijk is het tijdens deze module duidelijk geworden dat stilstaan bij hetgene dat je kan controleren en bewust zijn van je gedachten en emoties zinvol kan zijn. We hebben hiervoor verschillende oefeningen en tips doorlopen. Deze kan je terugvinden in de shortcut 'Oefeningen' op je startscherm en in deze module."
                 },
-                {
-                    type: "Multiple-Choice",
-                    id: "TE-MOD-4-EXERCISES",
-                    options: [
-                        {id: "THOUGHT-EXERCISE", text: "Oefening 'ik heb de gedachte dat ...'"}, 
-                        {id: "VIDEO-NEIGHBOUR", text: "Filmpje van de vervelende buurman"}, 
-                        {id: "VIDEO-CARS", text: "Filmpje van gedachten als auto’s op een drukke baan"}, 
-                        {id: "MINDFULNESS", text: "Mindfulness oefening zoals 5,4,3,2,1"}, 
-                        {id: "MINDFUL_BRUSHING", text: "Oefening mindful tandenpoetsen"}, 
-                        {id: "REFLECTION", text: "Gedachten en emoties van op een afstand bekijken"}, 
-                        {id: "ACTIVITY", text: "Activiteiten rustig opbouwen (zie modules ‘activiteiten en werk’ en ‘bewegen’)"}, 
-                        {id: "PAINLOGBOOK", text: "Analyse van mijn activiteiten door gebruik van het pijnlogboek"}],
-                    needsSelectedAtLeast: 1,
-                    needsSelectedAtMost: 8
-                }
             ]
         },
         {
             id: "TE-MOD4-OVERVIEW",
             title: "Key take-away",
-            showIfAnswered: ["TE-MOD-4-EXERCISES"],
             overview: true,
             cardContents: [
                 {
@@ -994,7 +962,7 @@ const TEMOD5 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Duid nu voor iedere domein aan hoeveel je in dat levensdomein investeert.",
+                    content: "Duid nu voor ieder domein aan hoeveel je in dat levensdomein investeert.",
                 },
                 {
                     id: "TE-MOD-5-INVEST-WORK",
@@ -1340,7 +1308,7 @@ const TEMOD5 = {
         },
         {
             id: "TE-MOD5-CARD8_NU",
-            title: "Enkele voorbeelden",
+            title: "Nu is het aan jou!",
             showIf: [{rule:"HasNotUnlockedShortcut", shortcut: "GOALSETTING"}],
             cardContents: [
                 {
@@ -1351,7 +1319,7 @@ const TEMOD5 = {
         },
         {
             id: "TE-MOD5-CARD8_U",
-            title: "Enkele voorbeelden",
+            title: "Nu is het aan jou!",
             showIf: [{rule:"HasUnlockedShortcut", shortcut: "GOALSETTING"}],
             cardContents: [
                 {

@@ -418,9 +418,11 @@ function ContentParser(props) {
     }
 
     function createAudioContent(data) {
-        return (<ReactAudioPlayer
-            src={data.source}
-            controls/>)
+        return (<div style={{width:"100%", display:"flex", justifyContent: "center", marginTop:"1em"}}>
+            <ReactAudioPlayer
+                src={data.source}
+                controls/>
+        </div>)
     }
 
     function generateContent() {
