@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 /* External API */
+import jwt_decode from "jwt-decode";
 import ReactAudioPlayer from 'react-audio-player';
 import { Carousel } from 'react-responsive-carousel';
 
@@ -11,9 +12,9 @@ import createSwipeContent from './ContentSwipe';
 
 
 /* UI Components */
-import AppModal from '../../components/AppModal.jsx';
+import CoachingModal from '../../components/CoachingModal.jsx';
 import Button from '../../components/Button.jsx';
-import PillButton from '../../components/PillButton.jsx';
+import ActionButton from '../../components/ActionButton.jsx';
 import Slider from '../../components/Slider.jsx';
 import Input from '../../components/Input.jsx';
 import Icon from '../../components/Illustrations/Icon.jsx';
@@ -21,6 +22,10 @@ import Icon from '../../components/Illustrations/Icon.jsx';
 /* Styles */
 import './ContentParser.scss';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Requires a loader
+import { RECOMMENDATIONTITLES } from '../../../api/data/PainLogbook';
+import ProgressManager from '../../../api/managers/ProgressManager';
+import { getSubmoduleMetadata } from '../../../api/scripts/ScriptDispatcher';
+
 
 
 function ContentParser(props) {
@@ -459,7 +464,7 @@ function ContentParser(props) {
             case 'Multiple-Choice':
                 return createMultipleChoiceContent(props);
             case 'Shortcut':
-                return createShortcutContent(props);
+                return createShortcutContent({module: props.data.module, submodule: props.data.submodule, userToken: props.userToken, language: "nl-BE"});
             case 'LifedomainChart':
                 return <LifeChartContent questionManager={props.questionManager}/>;
             case 'Swipe':
@@ -606,13 +611,44 @@ function createSubtitleContent({content, underline=undefined}) {
     return <h3 style={{fontWeight:600, marginTop: '1em', marginBottom: '.5em', fontSize: '16px', textDecoration: underline ? "underline" : ""}}>{content}</h3>
 }
 
-function createShortcutContent(props) {
+function createShortcutContent({module, submodule, userToken, language}) {
 
     const [showModal, setShowModal] = useState(false);
+    const [disabled, setDisabled] = useState(false);
+    const [submoduleTitle, setSubmoduleTitle] = useState("");
+    const [submoduleIcon, setSubmoduleIcon] = useState("");
+
+    useState(() => {
+        async function fetchData() {
+            const userID = parseInt(jwt_decode(FlowRouter.getParam('token'))?.rrnr);
+            const progressManager = new ProgressManager({userID: userID, userToken: userToken});
+            const progress = await progressManager.getUserProgress();
+            setDisabled(progress?.[module]?.[submodule] === "NOT_STARTED");
+            const submoduleMetadata = await getSubmoduleMetadata({module: module, submoduleID: submodule});
+            setSubmoduleTitle(submoduleMetadata?.title);
+            setSubmoduleIcon(submoduleMetadata?.icon);
+        }
+        fetchData();
+    }, [])
+
 
     return (<div style={{marginTop: "5px"}}>
-        {showModal && <AppModal title="Snelkoppeling" defaultOption={"Sluit"} notifyParent={() => setShowModal(false)} show={showModal}>{props.data.modalText}</AppModal>}
-        <PillButton contentColor={"white"} fillColor={"blue"} icon="information" onClick={() => setShowModal(true)}>{props.data.buttonText}</PillButton>
+        {showModal && <CoachingModal
+            module={module}
+            submodule={submodule}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            userToken={userToken}
+            language={language}
+            checkProgress={true} />}
+            {submoduleTitle &&  <ActionButton 
+                icon={submoduleIcon} 
+                color={disabled ? "gray": "blue"} 
+                disabled={disabled} 
+                subtitle={RECOMMENDATIONTITLES[module]}
+                onClick={() => { setShowModal(true) }}>
+                    {submoduleTitle}
+            </ActionButton>}
     </div>)
 }
 

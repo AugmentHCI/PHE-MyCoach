@@ -1,15 +1,33 @@
 import "../../db/MyCoachMethods.jsx";
 
+import ProfileManager from "./ProfileManager.jsx";
+import moment from "moment";
+import { dateComesAfter, minutesBetween } from "../Moment.jsx";
+
+
 export default class ProgressManager {
-    constructor(userID, profile=1) {
+    
+    constructor({userID, profile=1, userToken=undefined}) {
+        this.userToken = userToken;
         this.userID = userID;
-        this.profile = profile;
+        this.profile = profile ? profile : 1;
         this.hasToWait = [].includes(profile); /* TODO: navragen */
+
+        this.fetchData();
     }
 
     setProfile(profile) {
-        this.profile = profile;
+        this.profile = profile ? profile : 1;
     }
+
+    async fetchData() {
+        if (!this.userToken) return;
+        const profileManager = new ProfileManager(this.userID, this.userToken);
+        const latestUserData = await profileManager.getLatestQuestionnaire();
+        const profile = latestUserData?.data?.profile;
+        this.profile = profile ? profile : 1;
+    }
+
 
     /**
      * Gets the user coaching progress.
@@ -17,7 +35,6 @@ export default class ProgressManager {
      */
     async getUserProgress() {
         const moduleUserData = await Meteor.callPromise('mycoachprogress.getUserProgress', {userID: this.userID});
-        console.log(parseProgress(moduleUserData));
         return parseProgress(moduleUserData);
     }
 
@@ -28,9 +45,16 @@ export default class ProgressManager {
      */
     async getModuleProgress(module) {
         const moduleUserData = await Meteor.callPromise('mycoachprogress.getModuleProgress', {userID: this.userID, moduleID: module});
-        console.log(moduleUserData);
-        console.log(parseProgress(moduleUserData));
         return parseProgress(moduleUserData);
+    }
+
+    async getMinutesToNextCoaching() {
+        const moduleUserData = await Meteor.callPromise('mycoachprogress.getUserProgress', {userID: this.userID});
+        let earliestTime = moment("01-01-2000", "DD-MM-YYYY");
+        moduleUserData.forEach(submodule => {
+            if (dateComesAfter(submodule.timestamp, earliestTime)) earliestTime = moment(submodule.timestamp);
+        });
+        return 1200 - minutesBetween(earliestTime, moment(new Date()));
     }
 
     async getDailyCoaching() {
@@ -99,15 +123,30 @@ export default class ProgressManager {
             switch (this.profile) {
                 case 1:
                 case 4:
+                    if (getModuleStatus(progress["MOVEMENT"]) === "NOT_STARTED") this.unlockModules(["MOVEMENT"], progress);
+                    else if (getModuleStatus("MOVEMENT") === "COMPLETED") this.unlockModules(["THOUGHTSEMOTIONS", "ACTIVITYWORK", "STRESS", "SOCIAL"], progress);
+                    break;
+                case 2:
+                    if (getModuleStatus(progress["MOVEMENT"]) === "NOT_STARTED" || getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") this.unlockModules(["MOVEMENT", "THOUGHTSEMOTIONS"], progress);
+                    else if (getModuleStatus(progress["MOVEMENT"]) === "COMPLETED" && getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED") this.unlockModules(["ACTIVITYWORK", "STRESS", "SOCIAL"], progress);
+                    break; 
+                case 3:
+                    /* Paineducation -> ThoughtsEmotions */
+                    if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") 
+                        { this.unlockModules(["THOUGHTSEMOTIONS"], progress); }
+                    else if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED" && (getModuleStatus(progress["ACTIVITYWORK"]) === "NOT_STARTED" || getModuleStatus(progress["STRESS"]) === "NOT_STARTED" || getModuleStatus(progress["SOCIAL"]) === "NOT_STARTED")) 
+                        { this.unlockModules(["ACTIVITYWORK", "STRESS", "SOCIAL"], progress); }
+                    else if (getModuleStatus(progress["ACTIVITYWORK"]) === "COMPLETED" && getModuleStatus(progress["STRESS"]) === "COMPLETED" && getModuleStatus(progress["SOCIAL"]) === "COMPLETED") 
+                        { this.unlockModules(["MOVEMENT"], progress); }
+                    break; 
                 case 5:
                 case 6:
                     if (getModuleStatus(progress["ACTIVITYWORK"]) === "NOT_STARTED" || getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") 
-                        {this.unlockModules(["THOUGHTSEMOTIONS", "ACTIVITYWORK"], progress); }
-                    break;
-                case 2:
-                    case 3:
-                    if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") this.unlockModules(["THOUGHTSEMOTIONS"], progress);
-                    else if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED") this.unlockModules(["ACTIVITYWORK"], progress);
+                        { this.unlockModules(["ACTIVITYWORK", "THOUGHTSEMOTIONS"], progress); }
+                    else if (getModuleStatus(progress["ACTIVITYWORK"]) === "COMPLETED" && getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED" && (getModuleStatus(progress["STRESS"]) === "NOT_STARTED" || getModuleStatus(progress["SOCIAL"]) === "NOT_STARTED")) 
+                        { this.unlockModules(["STRESS", "SOCIAL"], progress); }
+                    else if (getModuleStatus(progress["STRESS"]) === "COMPLETED" && getModuleStatus(progress["SOCIAL"]) === "COMPLETED") 
+                        { this.unlockModules(["MOVEMENT"], progress); }
                     break;
                 default:
                     console.log("No profile provided for user.")
@@ -137,8 +176,8 @@ export default class ProgressManager {
                     case "MOVEMENT": 
                         await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "MOVEMENT", submoduleID: "MOV_MOD_1", status: "IN_PROGRESS"}); 
                         break;
-                    case "STRESSRESILIENCE": 
-                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "STRESSRESILIENCE", submoduleID: "STR_MOD_1", status: "IN_PROGRESS"}); 
+                    case "STRESS": 
+                        await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "STRESS", submoduleID: "STR_MOD_1", status: "IN_PROGRESS"}); 
                         break;
                     case "SOCIAL": 
                         await Meteor.callPromise('mycoachprogress.setProgress', {userID: this.userID, moduleID: "SOCIAL", submoduleID: "SOC_MOD_1", status: "IN_PROGRESS"}); 
@@ -188,12 +227,18 @@ function parseProgress(userData) {
 }
 
 const template = {
-        "PAINEDUCATION":    {"PE_MOD_1": "NOT_STARTED", "PE_MOD_2": "NOT_STARTED", "PE_MOD_3": "NOT_STARTED", "PE_MOD_4": "NOT_STARTED", "PE_MOD_5": "NOT_STARTED"},
-        "THOUGHTSEMOTIONS": {"TE_MOD_1": "NOT_STARTED", "TE_MOD_2": "NOT_STARTED", "TE_MOD_3": "NOT_STARTED", "TE_MOD_4": "NOT_STARTED", "TE_MOD_5": "NOT_STARTED", "TE_MOD_6": "NOT_STARTED"},
-        "ACTIVITYWORK":     {"ACT_MOD_1": "NOT_STARTED", "ACT_MOD_2": "NOT_STARTED", "ACT_MOD_3": "NOT_STARTED", "ACT_MOD_4": "NOT_STARTED", "ACT_MOD_5": "NOT_STARTED", "ACT_MOD_6": "NOT_STARTED", "ACT_MOD_7": "NOT_STARTED", "ACT_MOD_8": "NOT_STARTED", "ACT_MOD_9": "NOT_STARTED"},
-        "MOVEMENT": {},
-        "STRESSRESILIENCE": {},
-        "SOCIAL": {}
+        "PAINEDUCATION":    
+            {"PE_MOD_1": "NOT_STARTED", "PE_MOD_2": "NOT_STARTED", "PE_MOD_3": "NOT_STARTED", "PE_MOD_4": "NOT_STARTED", "PE_MOD_5": "NOT_STARTED"},
+        "THOUGHTSEMOTIONS": 
+            {"TE_MOD_1": "NOT_STARTED", "TE_MOD_2": "NOT_STARTED", "TE_MOD_3": "NOT_STARTED", "TE_MOD_4": "NOT_STARTED", "TE_MOD_5": "NOT_STARTED", "TE_MOD_6": "NOT_STARTED"},
+        "ACTIVITYWORK":
+            {"ACT_MOD_1": "NOT_STARTED", "ACT_MOD_2": "NOT_STARTED", "ACT_MOD_3": "NOT_STARTED", "ACT_MOD_4": "NOT_STARTED", "ACT_MOD_5": "NOT_STARTED", "ACT_MOD_6": "NOT_STARTED", "ACT_MOD_7": "NOT_STARTED", "ACT_MOD_8": "NOT_STARTED", "ACT_MOD_9": "NOT_STARTED"},
+        "MOVEMENT": 
+            {"MOV_MOD_1": "NOT_STARTED", "MOV_MOD_2": "NOT_STARTED", "MOV_MOD_3": "NOT_STARTED", "MOV_MOD_4": "NOT_STARTED", "MOV_MOD_5": "NOT_STARTED"},
+        "STRESS":
+            {"STR_MOD_1": "NOT_STARTED", "STR_MOD_2": "NOT_STARTED", "STR_MOD_3": "NOT_STARTED", "STR_MOD_4": "NOT_STARTED", "STR_MOD_5": "NOT_STARTED", "STR_MOD_6": "NOT_STARTED"},
+        "SOCIAL": 
+            {"SOC_MOD_1": "NOT_STARTED", "SOC_MOD_2": "NOT_STARTED", "SOC_MOD_3": "NOT_STARTED", "SOC_MOD_4": "NOT_STARTED", "SOC_MOD_5": "NOT_STARTED", "SOC_MOD_6": "NOT_STARTED"},
 }
 
 

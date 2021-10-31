@@ -16,18 +16,18 @@
     font-family: var(--main-font);
     font-weight: 600;
     
-    &-PE {
+    &-TOP {
         @extend .modulebutton;
     }
 
-    &-ACT {
+    &-TOPLEFT {
         @extend .modulebutton;   
         position: absolute;
         right: 0;
         top: -80px;
     }
 
-    &-EM {
+    &-TOPRIGHT {
         @extend .modulebutton;
         position: absolute;
         left: 0;
@@ -35,21 +35,21 @@
 
     }
 
-    &-MOV {
+    &-BOTTOMRIGHT {
         @extend .modulebutton;  
         position: absolute;
         right: 0;
         top: -60px;
     }
 
-    &-SOC {
+    &-BOTTOMLEFT {
         @extend .modulebutton;
         position: absolute;
         left: 0;
         top: -60px;
     }
 
-    &-STR {
+    &-BOTTOM {
         @extend .modulebutton;
         position: absolute;
         top: -85px;

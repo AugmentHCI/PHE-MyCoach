@@ -26,10 +26,10 @@ export default function PainLogbookEntry() {
     /* States and Constants */
     const language  = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
     const userID = parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr);
-    const token = FlowRouter.getParam('token');
+    const userToken = FlowRouter.getParam('token');
     const recommenderSystem = new PainRecommenderSystem(RECOMMENDATIONS);
     const painLogbookManager = new PainLogbookManager(userID);
-    const progressManager    = new ProgressManager(userID);
+    const progressManager    = new ProgressManager({userID: userID, userToken: userToken});
     /* Recommendations */
     const [matchedRecommendations, updateMatchedRecommendations] = useState([]);
     const [currentRecommendation, updateCurrentRecommendation] = useState(0);
@@ -55,7 +55,7 @@ export default function PainLogbookEntry() {
     useEffect(() => {
         if (saveAndForward && userLogs.length > 0 && (["OPEN", "CLOSE"].includes(userLogs[userLogs.length-1].split("-")[0]))) {
             saveLog();
-            if (saveAndForward.module && saveAndForward.submodule) FlowRouter.go(`/${language}/mycoach/${token}/module/${saveAndForward.module}/${saveAndForward.submodule}?goPainlogbookOnBack=true`);
+            if (saveAndForward.module && saveAndForward.submodule) FlowRouter.go(`/${language}/mycoach/${userToken}/module/${saveAndForward.module}/${saveAndForward.submodule}?goPainlogbookOnBack=true`);
             else { history.back() }
         }
     }, [saveAndForward, userLogs]);

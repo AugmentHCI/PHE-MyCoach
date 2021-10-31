@@ -33,7 +33,7 @@ export default function SubmoduleParser(props) {
     const userToken = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : "demo";
     const userID = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     
-    const progressManager = new ProgressManager(userID);
+    const progressManager = new ProgressManager({userID: userID, userToken: userToken});
     const interactionManager = new InteractionManager(userID);
     const profileManager = new ProfileManager(userID, userToken);
     const shortcutManager = new ShortcutManager(userID);
@@ -124,16 +124,11 @@ export default function SubmoduleParser(props) {
         }
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
-            /*
-            const latestUserProfile = (await profileManager.getLatestQuestionnaire())?.data;
-            const profile = latestUserProfile ? latestUserProfile.profile : 1;
-            */
-            const latestUserProfile = {profile: 1};
-            const profile = 1;
+            const profile = progressManager.profile;
             progressManager.setProfile(profile);
             const progress = await progressManager.getModuleProgress(module.toUpperCase());
             const modalStatus = await interactionManager.getInteractionStatuses("MODULE_COMPLETION_MODAL");
-            setUserProfile(latestUserProfile);
+            setUserProfile({profile: 1});
             setUserProgress(progress);
             setDidSeeCompletionModal(modalStatus.includes("CONFIRM"));
             setLoading(false);
@@ -167,7 +162,7 @@ export default function SubmoduleParser(props) {
                     </ModuleCard>
                     <hr className="module-hr-line"/>
                     {loading && <LoadingScreen/>}
-                    {!loading && <CardsParser cards={data.cards} module={module} submodule={data.id} moduleStatus={userProgress?.[module.toUpperCase()]?.[submodule]} userID={userID} userProfile={userProfile} finishCallback={finishSubmodule}/>}
+                    {!loading && <CardsParser cards={data.cards} module={module} submodule={data.id} moduleStatus={userProgress?.[module.toUpperCase()]?.[submodule]} userID={userID} userProfile={userProfile} userToken={userToken} finishCallback={finishSubmodule}/>}
                 </FadeIn>}
             </div>
         </React.Fragment>

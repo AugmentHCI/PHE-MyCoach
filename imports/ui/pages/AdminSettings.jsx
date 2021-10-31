@@ -20,7 +20,7 @@ import Dropdown from '../components/Dropdown';
 import "./AdminSettings.scss";
 
 const MODULES = [
-    {id: "STRESSRESILIENCE", value: "Stress"}, 
+    {id: "STRESS", value: "Stress"}, 
     {id: "PAINEDUCATION", value: "Pijneducatie"},
     {id: "THOUGHTSEMOTIONS", value: "Gedachten&Emoties"},
     {id: "ACTIVITYWORK", value: "Activiteit&Werk"},
@@ -30,7 +30,7 @@ const MODULES = [
 
 export default function AdminSettings() {
 
-    const progressManager = new ProgressManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
+    const progressManager = new ProgressManager({userID: parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr), userToken: FlowRouter.getParam('token')});
     const questionManager = new QuestionManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
     const shortcutManager = new ShortcutManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));
     const interactionManager = new InteractionManager(parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr));

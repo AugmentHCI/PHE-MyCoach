@@ -14,9 +14,7 @@ import "../../../i18n/en.i18n.json";
 import "../../db/MyCoachMethods.jsx"; // TODO
 import { UserData } from "../../api/questionnaireCodes/dummydata.jsx";
 import { SHORTCUTS } from "../../api/data/Shortcuts.js"
-import PainEducationScript from '../../api/scripts/PainEducationScript'
-import ThoughtsEmotionsScript from '../../api/scripts/ThoughtsEmotionsScript';
-import ActivityWorkScript from '../../api/scripts/ActivityWorkScript';
+import { DEV_RRNRS, MODULEORDER } from "../../api/data/Coaching";
 
 /* Managers */
 import ProgressManager from "../../api/managers/ProgressManager.jsx";
@@ -31,15 +29,16 @@ import ModuleButton from "../components/MyCoach/ModuleButton.jsx";
 import Button from "../components/Button.jsx";
 import Illustration from "../components/Illustrations/Illustration.jsx";
 import Icon from "../components/Illustrations/Icon.jsx";
-import PillButton from "../components/PillButton.jsx";
+import CoachingModal from "../components/CoachingModal";
 
 /* Styles */
 import 'antd/dist/antd.css';
 import "./MyCoach.scss";
-import CoachingModal from "../components/CoachingModal";
+
 
 /* Instance of React translate component, "Common" refers to the namespace of the i18n files */
 const T = i18n.createComponent("Common");
+
 
 export default function MyCoach(props) {
 
@@ -49,7 +48,7 @@ export default function MyCoach(props) {
 
     /* Instantiate managers for progress and interaction retrieval/handling */
     const interactionManager = new InteractionManager(userID);
-    const progressManager    = new ProgressManager(userID);
+    const progressManager    = new ProgressManager({userID: userID, userToken: userToken});
     const profileManager     = new ProfileManager(userID, userToken);
     const shortcutManager    = new ShortcutManager(userID, userToken);
 
@@ -57,16 +56,19 @@ export default function MyCoach(props) {
     const [userProgress, setUserProgress] = useState(undefined);
     const [userShortcuts, setUserShortcuts] = useState(undefined);
     const [userDailyCoaching, setUserDailyCoaching] = useState(undefined);
-    const [userData, setUserData] = useState(props.data ? (Object.entries(props.data).length === 0 ? UserData : props.data) : undefined);
+    const [userData, setUserData] = useState(props.data ? (Object.entries(props.data).length === 0 ? UserData : props.data) : {});
+    const [userProfile, setUserProfile] = useState(UserData?.profile ? UserData?.profile : 1);
+    const [minutesToNextCoaching, setMinutesToNextCoaching] = useState(0);
 
     const [showIntroductionModal, setShowIntroductionModal] = useState(false);
     const [showIntroductionVideo, setShowIntroductionVideo] = useState(false);
     const [showFinishPainEducationModal, setShowFinishPainEducationModal] = useState(false);
     const [showCoachingModal, setShowCoachingModal] = useState(false); 
-    const [showTutorial1, updateShowTutorial1] = useState(undefined);
-    const [showTutorial2, updateShowTutorial2] = useState(undefined);
-    const [showTutorial3, updateShowTutorial3] = useState(undefined);
-    const [showTutorial4, updateShowTutorial4] = useState(undefined);
+    const [showTutorial1, updateShowTutorial1] = useState(false);
+    const [showTutorial2, updateShowTutorial2] = useState(false);
+    const [showTutorial3, updateShowTutorial3] = useState(false);
+    const [showTutorial4, updateShowTutorial4] = useState(false);
+
 
     function handleIntroduction() {
         if (!userData) return;
@@ -86,7 +88,7 @@ export default function MyCoach(props) {
     }
 
     function handleIntroductionSeen() {
-        setShowIntroductionModal(false)
+        setShowIntroductionModal(false);
     }
 
     async function handleIntroductionVideoSeen() {
@@ -95,6 +97,10 @@ export default function MyCoach(props) {
         const newProgress = await progressManager.getUserProgress();
         setUserProgress(newProgress);
         setShowIntroductionVideo(false);
+        updateShowTutorial1(true);
+        updateShowTutorial2(true);
+        updateShowTutorial3(true);
+        updateShowTutorial4(true);
     }
 
     function calculateLineColor(module) {
@@ -118,15 +124,16 @@ export default function MyCoach(props) {
                 <h4>Je shortcuts</h4>
                 Hier zie jij je snelkoppelingen waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog snelkoppelingen toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
                 <div className="tutorial-button-row">
-                    <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> updateShowTutorial1(false)}>Volgende</Button>
+                <Button center color="gray-light" size="small" style={{flex: 1, marginRight: "10px"}} onClick={()=> updateShowTutorial1(true)}>Vorige</Button>
+                    <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> updateShowTutorial2(false)}>Volgende</Button>
                 </div>
             </div>}
             placement="bottom"
             trigger="click"
-            visible={showTutorial1 && !showIntroductionVideo && !showIntroductionModal && !showFinishPainEducationModal}>
+            visible={showTutorial2 && !showTutorial1}>
                 <ActionButton icon={SHORTCUTS["DAILY-COACHING"].icon} onClick={() => setShowCoachingModal(true)}>{SHORTCUTS["DAILY-COACHING"].translation[language]}</ActionButton>
                 {userShortcuts && userShortcuts.map(shortcut => {
-                    return <ActionButton icon={SHORTCUTS[shortcut.shortcut].icon} 
+                    return <ActionButton key={shortcut.shortcut} icon={SHORTCUTS[shortcut.shortcut].icon} 
                                             onClick={() => {
                                                 if (SHORTCUTS[shortcut.shortcut].link) { FlowRouter.go(`/${language}/mycoach/${userToken}/${SHORTCUTS[shortcut.shortcut].link}`) } 
                                                 else { setShowCoachingModal(true) } }}>
@@ -143,13 +150,12 @@ export default function MyCoach(props) {
                 <h4>Coaching</h4>
                 Hier zie jij je persoonlijk coachingtraject.<br/>Je kan elke dag je coaching bekijken.<br/>
                 <div className="tutorial-button-row">
-                    <Button center color="gray-light" size="small" style={{flex: 1, marginRight: "10px"}} onClick={()=> updateShowTutorial1(true)}>Vorige</Button>
-                    <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> updateShowTutorial2(false)}>Volgende</Button>
+                    <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> updateShowTutorial1(false)}>Volgende</Button>
                 </div>
             </div>}
             placement="topLeft"
             trigger="click"
-            visible={!showTutorial1 && showTutorial2}>
+            visible={showTutorial1 && !showIntroductionVideo}>
                 <h2 style={{marginTop: '20px'}}>MIJN TRAJECT</h2>
             </Popover>
             <div className="module-container">
@@ -167,26 +173,26 @@ export default function MyCoach(props) {
                     placement="top"
                     trigger="click"
                     visible={!showTutorial2 && showTutorial3}>
-                        <ModuleButton rrnr={userID} code={"PE"} title={"Pijneduatie"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/paineducation/`)} data={userProgress?.PAINEDUCATION}/>
+                        <ModuleButton position={"TOP"} token={userToken} language={language} module={MODULEORDER[userProfile][0]} data={userProgress?.[MODULEORDER[userProfile][0]]}/>
                     </Popover>
-                    <div className="line-paineducation" style={{borderLeft:calculateLineColor("PAINEDUCATION")}}/>
+                    <div className="line-paineducation" style={{borderLeft:calculateLineColor(MODULEORDER[userProfile][0])}}/>
                 </div>
                 <div className="module-middle-row">
-                    <ModuleButton rrnr={userID} code={"EM"} title={"Gedachten en emoties"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/thoughtsemotions/`)} data={userProgress?.THOUGHTSEMOTIONS}/>
+                    <ModuleButton position={"TOPRIGHT"} token={userToken} language={language} module={MODULEORDER[userProfile][1]} data={userProgress?.[MODULEORDER[userProfile][1]]}/>
                     <div className="coaching-circle">Mijn <br/>coaching</div>
-                    <ModuleButton rrnr={userID} code={"ACT"} title={"Belasting & belastbaarheid"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/activitywork/`)} data={userProgress?.ACTIVITYWORK}/>
+                    <ModuleButton position={"TOPLEFT"} token={userToken} language={language} module={MODULEORDER[userProfile][2]} data={userProgress?.[MODULEORDER[userProfile][2]]}/>
                 </div>     
                 <div className="module-middle-row">
-                    <ModuleButton rrnr={userID} code={"MOV"} title={"Bewegen"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/movement/`)} data={userProgress?.MOVEMENT}/>
-                    <ModuleButton rrnr={userID} code={"SOC"} title={"Sociale omgeving"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/social/`)} data={userProgress?.SOCIAL}/>
-                    <div className="line-emotions" style={{borderLeft:calculateLineColor("THOUGHTSEMOTIONS")}}/>
-                    <div className="line-activity" style={{borderLeft:calculateLineColor("ACTIVITYWORK")}}/>
-                    <div className="line-movement" style={{borderLeft:calculateLineColor("MOVEMENT")}}/>
-                    <div className="line-social" style={{borderLeft:calculateLineColor("SOCIAL")}}/>
+                    <ModuleButton position={"BOTTOMLEFT"} token={userToken} language={language} module={MODULEORDER[userProfile][3]} data={userProgress?.[MODULEORDER[userProfile][3]]}/>
+                    <ModuleButton position={"BOTTOMRIGHT"} token={userToken} language={language} module={MODULEORDER[userProfile][4]} data={userProgress?.[MODULEORDER[userProfile][4]]}/>
+                    <div className="line-emotions" style={{borderLeft:calculateLineColor(MODULEORDER[userProfile][1])}}/>
+                    <div className="line-activity" style={{borderLeft:calculateLineColor(MODULEORDER[userProfile][2])}}/>
+                    <div className="line-movement" style={{borderLeft:calculateLineColor(MODULEORDER[userProfile][3])}}/>
+                    <div className="line-social" style={{borderLeft:calculateLineColor(MODULEORDER[userProfile][4])}}/>
                 </div>
                 <div className="module-topandbottom-row">
-                    <ModuleButton rrnr={userID} code={"STR"} title={"Stress en veerkracht"} onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/module/stressresilience/`)} data={userProgress?.STRESSRESILIENCE}/>
-                    <div className="line-stress" style={{borderLeft:calculateLineColor("STRESSRESILIENCE")}}/>
+                    <ModuleButton position={"BOTTOM"} token={userToken} language={language} module={MODULEORDER[userProfile][5]} data={userProgress?.[MODULEORDER[userProfile][5]]}/>
+                    <div className="line-stress" style={{borderLeft:calculateLineColor(MODULEORDER[userProfile][5])}}/>
                 </div>    
             </div> 
         </React.Fragment>)
@@ -204,7 +210,7 @@ export default function MyCoach(props) {
         }
        
         const module = userDailyCoaching.split("_")[0];
-        return (<CoachingModal module={module} submodule={userDailyCoaching} showModal={showCoachingModal} setShowModal={setShowCoachingModal} userToken={userToken} language={language} checkProgress/>)
+        return (<CoachingModal module={module} submodule={userDailyCoaching} showModal={showCoachingModal} setShowModal={setShowCoachingModal} userToken={userToken} language={language} checkProgress minutesToUnlock={minutesToNextCoaching}/>)
     }
 
     function renderFinishPainEducationModal() {
@@ -245,10 +251,12 @@ export default function MyCoach(props) {
                 fetchedShortcuts.push({screen: "MAIN", shortcut: "THOUGHTEXERCISES"});
             }
             setUserShortcuts(fetchedShortcuts);
+            const minutes = await progressManager.getMinutesToNextCoaching();
+            setMinutesToNextCoaching(minutes);
         }
         async function fetchUserData() {
             const latestUserData = await profileManager.getLatestQuestionnaire();
-            latestUserData?.data ? setUserData(latestUserData.data) : setUserData({profile: 1});
+            latestUserData?.data ? setUserData(latestUserData.data) : setUserData({profile: 1, K: false});
             latestUserData?.data?.profile ? progressManager.setProfile(latestUserData.data.profile) : progressManager.setProfile(1);
         }
         async function fetchUserInteractionStatus() {
@@ -291,22 +299,20 @@ export default function MyCoach(props) {
                     placement="bottomRight"
                     trigger="click"
                     visible={!showTutorial3 && showTutorial4}>
-                    <div className="mycoach-feedback-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/feedback`)}>
-                        <Icon color="white" image="add-text" width="26px" style={{marginTop:"-4px"}}/>
+                    <div className="mycoach-feedback-button" 
+                         onClick={() => { DEV_RRNRS.includes(userID) ? 
+                                            FlowRouter.go(`/${language}/mycoach/${userToken}/adminsettings`) : 
+                                            FlowRouter.go(`/${language}/mycoach/${userToken}/feedback`) }}>
+                        { DEV_RRNRS.includes(userID) ? 
+                            <Icon color="white" image="settings" width="22px"/> :
+                            <Icon color="white" image="add-text" width="26px" style={{marginTop:"-4px"}}/> }
                     </div>
                     </Popover>
                     <h1 style={{marginBottom:0}}>My Coach</h1>
-                    {coachRRNRs.includes(userID) && <button className="settings-button" onClick={() => FlowRouter.go(`/${language}/mycoach/${userToken}/adminsettings`)}> <Icon width="24px" image={"settings"} color={"blue-dark"}/></button>}
                 </div>
                 { renderTodos() }
                 { renderModules() }
             </FadeIn>}</React.Fragment>}
         </div>
     )
-}
-
-export const coachRRNRs = [1111111, 4862876, 3381097, 4018425, 4799179, 3237616, 4013945, 3475505, 4557583, 2988321, 3604510, 3731886, 4173393, 2360438];
-/* The module priorities per profile */
-const modulePriorities = {
-    1: []
 }

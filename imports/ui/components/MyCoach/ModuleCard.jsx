@@ -9,6 +9,7 @@ import "./ModuleCard.scss";
 import Icon from '../Illustrations/Icon.jsx';
 import Illustration from '../Illustrations/Illustration.jsx';
 import PillButton from '../PillButton.jsx';
+import { minutesToString } from '../../../api/Moment';
 
 const T = i18n.createComponent("Common");
 
@@ -17,7 +18,8 @@ export default function ModuleCard(props) {
     const lockedSuffix = props.locked ? "-locked" : "";
     const iconColor = props.locked ? "gray-dark" : "blue";
     const iconImage = {"IN_PROGRESS": {image: "loading", color: "blue"}, "TO_START": {image: "time", color: "gray-light"}, "COMPLETED": {image: "check", color: "blue"}, "NOT_STARTED": {image: "locked", color: "gray-dark"}}
-    const status = props.status ? props.status : "NOT_STARTED";
+    const isLockedMins = props.status === "IN_PROGRESS" && props.minLeft ? true : false;
+    const status = isLockedMins ? "NOT_STARTED" : (props.status ? props.status : "NOT_STARTED");
 
     /* UI - Closed card */
     if (props.closed) return (<div className={"module-card-closed" + lockedSuffix} onClick={() => toggleClosed()}>
@@ -39,7 +41,8 @@ export default function ModuleCard(props) {
 
     const titleHTML = Array.isArray(props.title) ? createTitleHTML() : props.title;
 
-    const buttonText = status === "COMPLETED" ? "Herbekijk" : "Begin";
+    const timeLeftString = props.minLeft > 0 ? "Nog " + minutesToString(props.minLeft) : "Begin";
+    const buttonText = status === "COMPLETED" ? "Herbekijk" : timeLeftString;
 
     function createTitleHTML() {
         let prototypeTitleHTML = [];
@@ -79,7 +82,7 @@ export default function ModuleCard(props) {
                         <PillButton contentColor={props.locked ? "white" : "blue"} fillColor={props.locked ? "gray-light" : "white"} icon="information">{props.type}</PillButton>
                     </div>
                     {!props.hideButton && <div className="module-button-container">
-                        <button className={"module-button" + (props.locked ? "-disabled" : "")} onClick={()=> {if (props.onClick && !props.locked) props.onClick()}}>{buttonText}</button>
+                        <button className={"module-button" + (props.timeLocked ? "-disabledtime" : (props.locked ? "-disabled" : ""))} onClick={()=> {if (props.onClick && !props.locked) props.onClick()}}>{buttonText}</button>
                     </div>}
                 </div>
             </div>

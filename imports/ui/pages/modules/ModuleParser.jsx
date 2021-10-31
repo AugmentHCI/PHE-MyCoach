@@ -24,6 +24,7 @@ import ModuleCard from '../../components/MyCoach/ModuleCard.jsx';
 import ModuleTile from '../../components/MyCoach/ModuleTile.jsx';
 import AppModal from '../../components/AppModal';
 import LoadingScreen from '../../components/LoadingScreen.jsx';
+import CoachingModal from '../../components/CoachingModal';
 
 /* Styles */
 import './ModuleParser.scss';
@@ -43,6 +44,7 @@ export default function ModuleParser(props) {
     const [loadingShortcuts, setLoadingShortcuts] = useState(true);
     const [loadingUserData, setLoadingUserData] = useState(true);
     const [loadingModule, setLoadingModule] = useState(true);
+    const [minutesToNextCoaching, setMinutesToNextCoaching] = useState(0);
 
     /* Get states from URL parameters */
     const module = FlowRouter.getParam('module').toUpperCase();
@@ -50,7 +52,7 @@ export default function ModuleParser(props) {
     const userToken = FlowRouter.getParam('token');
     const userID = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
 
-    const progressManager = new ProgressManager(userID);
+    const progressManager = new ProgressManager({userID: userID, userToken: userToken});
     const shortcutManager = new ShortcutManager(userID);
 
     /**
@@ -62,7 +64,8 @@ export default function ModuleParser(props) {
         moduleData.submodules.forEach(submodule => {
             const status = userProgress?.[module]?.[submodule.id];
             const isClosed = status === "COMPLETED" || status === "NOT_STARTED" ? true : false;
-            const isLocked = status === "NOT_STARTED" || status === "TO_START" ? true : false;
+            const isTimeLocked = status === "IN_PROGRESS" && minutesToNextCoaching > 0 ? true : false;
+            const isLocked = status === "NOT_STARTED" || status === "TO_START" ? true : isTimeLocked;
             if (!isClosed && openSubmodule !== submodule.id && openSubmodule === "") { updateOpenSubmodule(submodule.id) }
             moduleCardsHTML.push(<ModuleCard 
                 key={submodule.id}
@@ -78,6 +81,8 @@ export default function ModuleParser(props) {
                 onToggleClosed={updateOpenSubmodule}
                 closed={openSubmodule !== submodule.id}
                 locked={isLocked}
+                timeLocked={isTimeLocked}
+                minLeft={minutesToNextCoaching}
                 status={status}>
             </ModuleCard>)
         });
@@ -165,35 +170,7 @@ export default function ModuleParser(props) {
                 Je hebt alle modules doorlopen, goed zo! Herbekijk gerust één van de modules die jij al eens doorlopen hebt.
             </AppModal>)}
 
-        const settings = {"TO_START": {text: "Vergrendeld", color: "gray-dark"}, 
-                          "NOT_STARTED": {text: "Vergrendeld", color: "gray-dark"}, 
-                          "IN_PROGRESS": {text: "Bekijk", color: "blue"}, 
-                          "COMPLETED": {text: "Herbekijk", color: "blue"}}
-        const submodule = moduleData.submodules.filter(submoduleData => submoduleData.id === selectedSubmodule)[0];
-        const locked = ["NOT_STARTED", "TO_START"].includes(userProgress[module][submodule.id]);
-
-        return (<AppModal 
-            backOption="Sluit" 
-            notifyBack={() => setShowModal(false)} 
-            notifyParent={() => {if (!locked) routeToSubmodule(selectedSubmodule)}}
-            defaultOption={settings[userProgress[module][submodule.id]].text} 
-            defaultColor={settings[userProgress[module][submodule.id]].color} 
-            noPadding
-            show={showModal}>
-            <div className="modalpopup-top">
-                <Illustration image={submodule.image + (locked ? "-locked" : "")} width={submodule.imageWidth ? submodule.imageWidth : "160px"} style={{position: "absolute", bottom: "0px", right: "10px", zIndex: "1"}}/>
-                <div className={"module-card-number" + (locked ? "-locked" : "")}>Onderdeel {submodule.part}</div>
-                <div className={"modalpopup-card-title" + (locked ? "-locked" : "")}>{submodule.titleMarkup[0]}</div>
-                {submodule.titleMarkup.length > 1 && <div className={"modalpopup-card-title" + (locked ? "-locked" : "")}>{submodule.titleMarkup[1]}</div>}
-            </div>
-            <div className={"modalpopup-body" + (locked ? "-locked" : "")}>
-                <div className="modalpopup-pillrow">
-                    <PillButton contentColor="white" fillColor={locked ? "gray-light" : "blue"} icon="time">{submodule.duration}</PillButton>
-                    <PillButton contentColor="white" fillColor={locked ? "gray-light" : "blue"} icon="information">{submodule.type}</PillButton>
-                </div>
-                {submodule.description}
-            </div>
-        </AppModal>)
+        return (<CoachingModal module={module} submodule={selectedSubmodule} showModal={showModal} setShowModal={setShowModal} userToken={userToken} language={language} checkProgress minutesToUnlock={minutesToNextCoaching}/>)
     }
 
     /* Fetch module data and user progress only once, avoids infinite re-rendering due to state-changes */
@@ -207,7 +184,9 @@ export default function ModuleParser(props) {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgress() {
             const progress = await progressManager.getModuleProgress(module);
+            const minutes = await progressManager.getMinutesToNextCoaching();
             updateUserProgress(progress);
+            setMinutesToNextCoaching(minutes);
             setLoadingUserData(false);
         }
         /* Wrap in async function, as getModuleProgress is async */

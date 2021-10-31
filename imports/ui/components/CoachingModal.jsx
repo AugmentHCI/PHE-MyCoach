@@ -7,13 +7,15 @@ import AppModal from "./AppModal";
 import PillButton from "./PillButton";
 import Illustration from "./Illustrations/Illustration";
 import ProgressManager from "../../api/managers/ProgressManager";
+import { minutesToString } from "../../api/Moment";
 
 
 
-export default function CoachingModal({module, submodule, showModal, setShowModal, userToken, language, checkProgress=false}) {
+export default function CoachingModal({module, submodule, showModal, setShowModal, userToken, language, checkProgress=false, minutesToUnlock=0}) {
 
     const [coachingData, setCoachingData] = useState(undefined);
     const [isLocked, setIsLocked] = useState(undefined);
+    const [minutesLeft, setMinutesLeft] = useState("");
 
     useEffect(() => {
         async function fetchData() {
@@ -21,10 +23,13 @@ export default function CoachingModal({module, submodule, showModal, setShowModa
             setCoachingData(fetchedCoachingData);
             if (checkProgress) {
                 const userID = parseInt(jwt_decode(userToken)?.rrnr);
-                const progressManager = new ProgressManager(userID);
+                const progressManager = new ProgressManager({userID: userID});
                 const progress = await progressManager.getUserProgress();
                 const moduleProgress = progress?.[fullMapping[module]]?.[submodule];
-                setIsLocked(moduleProgress === "LOCKED")
+                setIsLocked(moduleProgress === "LOCKED" || minutesToUnlock > 0);
+                if (minutesToUnlock > 0) {
+                    setMinutesLeft("Nog " + minutesToString(minutesToUnlock));
+                }
             }
         }
        fetchData();
@@ -34,7 +39,7 @@ export default function CoachingModal({module, submodule, showModal, setShowModa
         backOption="Sluit" 
         notifyBack={() => setShowModal(false)} 
         notifyParent={() => {FlowRouter.go(`/${language}/mycoach/${userToken}/module/${module}/${submodule}`)}}
-        defaultOption="Bekijk"
+        defaultOption={minutesLeft ? minutesLeft : "Bekijk"}
         addLockedIcon={ checkProgress && isLocked }
         defaultColor={ checkProgress && isLocked ? "gray" : "blue" }
         disabledDefault={checkProgress && isLocked}
@@ -72,6 +77,6 @@ const fullMapping = {
     "ACT": "ACTIVITYWORK",
     "TE": "THOUGHTSEMOTIONS",
     "MOV": "MOVEMENT",
-    "STR": "STRESSRESILIENCE",
+    "STR": "STRESS",
     "SOC": "SOCIAL"
 }

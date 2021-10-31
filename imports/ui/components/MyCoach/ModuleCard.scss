@@ -87,7 +87,6 @@
 }
 
 .module-card-pills {
-    display: flex;
     flex-wrap: wrap;
 }
 
@@ -115,6 +114,13 @@
 
     &-disabled {
         @extend .module-button;
+        background-color: var(--idewe-gray-light);
+        color: var(--idewe-white);
+    }
+
+    &-disabledtime {
+        @extend .module-button;
+        font-size: 14px;
         background-color: var(--idewe-gray-light);
         color: var(--idewe-white);
     }

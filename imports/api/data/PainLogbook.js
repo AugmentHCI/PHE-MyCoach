@@ -920,9 +920,9 @@ export const RECOMMENDATIONS = {
             {module: "ACTIVITYWORK", submodule: "ACT_MOD_4"}, 
             {module: "MOVEMENT", submodule: "MOV_MOD_3"}, 
             {module: "MOVEMENT", submodule: "MOV_MOD_4"}, 
-            {module: "STRESSRESILIENCE", submodule: "STR_MOD_4"}, 
-            {module: "STRESSRESILIENCE", submodule: "STR_MOD_5"}, 
-            {module: "STRESSRESILIENCE", submodule: "STR_MOD_6"}, 
+            {module: "STRESS", submodule: "STR_MOD_4"}, 
+            {module: "STRESS", submodule: "STR_MOD_5"}, 
+            {module: "STRESS", submodule: "STR_MOD_6"}, 
             {module: "THOUGHTSEMOTIONS", submodule: "TE_MOD_2"}, 
             {module: "THOUGHTSEMOTIONS", submodule: "TE_MOD_3"}, 
             {module: "THOUGHTSEMOTIONS", submodule: "TE_MOD_4"}, 
@@ -1192,7 +1192,7 @@ export const CONVERSATION = {
 export const RECOMMENDATIONTITLES = {
     "THOUGHTSEMOTIONS": "Gedachten & Emoties",
     "SOCIAL": "Sociale omgeving",
-    "STRESSRESILIENCE": "Stress & Veerkracht",
+    "STRESS": "Stress & Veerkracht",
     "MOVEMENT": "Bewegen",
     "ACTIVITYWORK": "Belasting & Belastbaarheid",
     "PAINEDUCATION": "Pijneducatie"

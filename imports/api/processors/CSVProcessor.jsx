@@ -1,4 +1,5 @@
 import moment from "moment";
+import { DEV_RRNRS } from "../data/Coaching";
 import * as Moment from "../Moment";
 
 
@@ -35,7 +36,7 @@ export class CSVProcessor {
     addUser = function(userIndex) {
         const userQuestionnaire = this.userQuestionnaires[userIndex];
         /* Do not add empty user or IDEWE employee */
-        if (isNaN(userQuestionnaire.info.period) || coachRRNRs.includes(userQuestionnaire.info.rrnr)) return this;
+        if (isNaN(userQuestionnaire.info.period) || DEV_RRNRS.includes(userQuestionnaire.info.rrnr)) return this;
         let days = userQuestionnaire.info.period, daysWithinPeriod = 0, date = userQuestionnaire.info.from;
         this.#appendUserQuestionnaire(userIndex, "info");
         this.#appendUserQuestionnaire(userIndex, "profiel", date);
@@ -117,7 +118,7 @@ export class CSVProcessor {
     #getLongestPeriod = function() {
         let maxPeriod = 0;
         this.userQuestionnaires.forEach(user => { 
-            if (user.info?.period > maxPeriod && !coachRRNRs.includes(user.info.rrnr)) maxPeriod = user.info.period
+            if (user.info?.period > maxPeriod && !DEV_RRNRS.includes(user.info.rrnr)) maxPeriod = user.info.period
         });
         return maxPeriod;
     }
@@ -197,5 +198,3 @@ const questionCount = function(type) {
 const incrementDateByDay = function(date) {
     return moment(date, "DD-MM-YYYY").add(1, "day").format("DD-MM-YYYY")
 }
-
-const coachRRNRs = [1111111, 4862876, 3381097, 4018425, 4799179, 3237616, 4013945, 3475505, 4557583, 2988321, 3604510, 3731886, 3430269, 85508, 91995, 92422];

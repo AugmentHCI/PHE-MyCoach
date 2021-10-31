@@ -2,8 +2,8 @@
 //data format zoals door API wordt gegenereerd (JSON)
 export const UserData = {
     "USERID": "dummy",
-    "PROFILE": 3,
-    "RECENT_PAIN": true,
+    profile: 3,
+    K: true,
     "interactions": {
         "INTRODUCTION_TEXT": true,
         "INTRODUCTION_VIDEO": true,

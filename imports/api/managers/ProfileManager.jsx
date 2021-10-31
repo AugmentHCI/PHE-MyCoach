@@ -154,6 +154,7 @@ export default class ProfileManager {
     }
     
     async getLatestQuestionnaire() {
+        return {data: {profile: 3, K: false}, status: "DUMMY"}
         try {
             let status = "NORMAL";
             /* Fetch user questionnaires from MongoDB */
@@ -240,7 +241,7 @@ export default class ProfileManager {
             if (AE > 12 && PW > 11) return 4;
             if ((AE > 9 && PW <= 7) || (AE > 12 && PW <= 11)) return 5;
             if (AE <= 12 && PW > 7) return 6;
-            return 0;
+            return 1;
         }
     }
 }

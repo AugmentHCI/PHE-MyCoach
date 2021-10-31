@@ -92,7 +92,7 @@ function CardsParser(props) {
                     let count = swipeAnswers?.agree?.length;
                     if (rule.atLeast && count < rule.atLeast) return false;
                     else if (rule.atMost && count > rule.atMost) return false;
-                    else {console.log("SwipeAgreeCount - unhandled case"); break;}
+                    else {console.log("SwipeAgreeCount - unhandled case"); return true;}
                 case "HasSelected": 
                     let swipeAnswersSelection = userQuestions[rule.questionID];
                     if (!swipeAnswersSelection || !JSON.parse(swipeAnswersSelection)[rule.answerID]) return false;
@@ -146,6 +146,7 @@ function CardsParser(props) {
                         data={content} 
                         module={props.module}
                         userProfile={userProfile}
+                        userToken={props.userToken}
                         questionManager={questionManager}
                         callback={updateQuestionsCallback}/>);
         });

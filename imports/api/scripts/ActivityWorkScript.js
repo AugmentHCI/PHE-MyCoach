@@ -1405,13 +1405,12 @@ const ACTMOD6MOV = {
             cardContents: [
                 {
                     type: "Text",
-                    content: ["Wil je meer weten over dit topic? Bekijk dan de module ", {type: "bold", text: "beweging"}, "."]
+                    content: ["Wil je meer weten over dit topic? Bekijk dan de module ", {type: "bold", content: "beweging"}, "."]
                 },
                 {
                     type: "Shortcut",
-                    module: "Beweging",
-                    buttonText: "Snelkoppeling - Module Beweging",
-                    modalText: "Dit is een snelkoppeling naar de module 'Beweging'. Maar, deze wordt pas deze zomer ontwikkeld, dus de inhoud van dit onderdeel is nog beperkt. Kom zeker terug wanneer de module 'Beweging' is toegevoegd!"
+                    module: "MOVEMENT",
+                    submodule: "MOV_MOD_2",
                 },
             ]
         },
@@ -1468,6 +1467,7 @@ const ACTMOD7FOOD = {
         },
         {
             title: "Alcohol",
+            showIfAnswered: ["ACT-MOD-7-SLIDER-1"],
             cardContents: [
                 {
                     type: "Text",
@@ -1510,7 +1510,6 @@ const ACTMOD7FOOD = {
         },
         {
             title: "Eten en diëten tegen chronische pijn",
-            showIfAnswered: ["ACT-MOD-7-SLIDER-1"],
             cardContents: [
                 {
                     type: "Text",
@@ -1738,9 +1737,8 @@ const ACTMOD8RES = {
                 },
                 {
                     type: "Shortcut",
-                    module: "Stress",
-                    buttonText: "Snelkoppeling - Module Stress",
-                    modalText: "Dit is een snelkoppeling naar de module 'Stress'. Maar, deze wordt pas deze zomer ontwikkeld, dus de inhoud van deze module 'Veerkracht' is nog beperkt. Kom zeker terug wanneer de module 'Stress' is toegevoegd!"
+                    module: "STRESS",
+                    submodule: "STR_MOD_6",
                 },
             ]
         },

@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import "./ModuleButton.scss";
 
-import Icon from "../Illustrations/Icon.jsx";
-import { coachRRNRs } from "../../pages/MyCoach";
+import { FlowRouter } from "meteor/kadira:flow-router";
 
-export default function ModuleButton(props) {
+import jwt_decode from "jwt-decode";
+
+import Icon from "../Illustrations/Icon.jsx";
+
+import { DEV_RRNRS, MODULETITLES } from "../../../api/data/Coaching";
+
+export default function ModuleButton({module, token, language, data, position}) {
+
+    const userID  = parseInt(jwt_decode(token)?.rrnr);
+    const title = MODULETITLES[module];
 
     const diameter = 120;
     const stroke = 14;
@@ -21,24 +29,24 @@ export default function ModuleButton(props) {
      */
     function handleOnClick() {
         press(false);
-        if (props.onClick && calculateProgress() !== 0) props.onClick();
-        else if (props.onClick && coachRRNRs.includes(props.rrnr)) props.onClick();
+        if (calculateProgress() !== 0) { FlowRouter.go(`/${language}/mycoach/${token}/module/${module.toLowerCase()}/`) }
+        else if (DEV_RRNRS.includes(userID)) { FlowRouter.go(`/${language}/mycoach/${token}/module/${module.toLowerCase()}/`) }
     }
 
     /**
      * Calculate the percentage of completed submodules
      */
     function calculateProgress() {
-        if (!props.data) return 0;
+        if (!data) return 0;
         let completed = 0;
-        if (Object.keys(props.data).length === 0) return 0;
-        for (const [, status] of Object.entries(props.data)) {
+        if (Object.keys(data).length === 0) return 0;
+        for (const [, status] of Object.entries(data)) {
             if (status == "COMPLETED") completed += 1;
             else if (status == "IN_PROGRESS") completed += 0.5;
             /* TODO: Check if still called TO_START */
             else if (status == "TO_START") completed += 0.2;
         }
-        return Math.round(completed/(Object.keys(props.data).length) * 100)
+        return Math.round(completed/(Object.keys(data).length) * 100)
     }
 
     /**
@@ -51,14 +59,14 @@ export default function ModuleButton(props) {
     }
 
     function generateTitle() {
-        if (props.code === "ACT") return <div style={{zIndex: "3", fontSize:"15px"}}>Belasting &<br/>belastbaar-<br/>heid</div>
-        if (props.code === "EM") return <div style={{zIndex: "3"}}>{props.title.split(" ")[0]}<br/>{props.title.split(" ")[1] + " " + props.title.split(" ")[2]}</div>
-        if (props.code === "SOC") return <div style={{zIndex: "3"}}>{props.title.split(" ")[0]}<br/>{props.title.split(" ")[1]}</div>
-        return <div style={{zIndex: "1"}}>{props.title}</div>
+        if (module === "ACTIVITYWORK") return <div style={{zIndex: "3", fontSize:"15px"}}>Belasting &<br/>belastbaar-<br/>heid</div>
+        if (module === "THOUGHTSEMOTIONS") return <div style={{zIndex: "3"}}>{title.split(" ")[0]}<br/>{title.split(" ")[1] + " " + title.split(" ")[2]}</div>
+        if (module === "SOCIAL") return <div style={{zIndex: "3"}}>{title.split(" ")[0]}<br/>{title.split(" ")[1]}</div>
+        return <div style={{zIndex: "1"}}>{title}</div>
     }
 
     return <div 
-        className={"modulebutton-" + props.code + progressSuffix} 
+        className={"modulebutton-" + position + progressSuffix} 
         onClick={() => handleOnClick()}
         onTouchStart={() => press(true)}
         onTouchEnd={() => press(false)}>

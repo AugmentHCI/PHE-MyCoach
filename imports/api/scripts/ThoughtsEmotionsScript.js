@@ -1224,12 +1224,12 @@ const TEMOD5 = {
         },
         {
             titleCard: true,
+            showIfAnswered: ["TE-MOD-5-SELECT-50"],
             title: "Doelen"
         },
         {
             id: "TE-MOD5-CARD6",
             title: "En nu je doelen",
-            showIfAnswered: ["TE-MOD-5-SELECT-5"],
             cardContents: [
                 {
                     type: "Text",

@@ -71,7 +71,7 @@ export default function ThoughtExercisePage() {
 
     useEffect(() => {
         async function getExercises() {
-            const progressManager = new ProgressManager(userID);
+            const progressManager = new ProgressManager({userID: userID, userToken: userToken});
             const progress = await progressManager.getUserProgress();
             const userExercises = parseAvailableExercises(progress);
             updateExercises(userExercises);
