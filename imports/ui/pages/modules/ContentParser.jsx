@@ -476,7 +476,9 @@ function ContentParser(props) {
             case 'Display-Values':
                 return createDisplayValuesContent({values: props.data.values, selectionFrom: props.data.useSelectionFrom, questionManager: props.questionManager});
             case 'Textarea':
-                return createTextAreaContent({id: props.data.id, questionManager: props.questionManager, placeholder: props.data.placeholder, module: props.module})
+                return createTextAreaContent({id: props.data.id, questionManager: props.questionManager, placeholder: props.data.placeholder, module: props.module});
+            case 'Link':
+                return createCopyLinkContent({link: props.data.link});
             case 'Break':
                 return <hr/>;
             default:
@@ -747,4 +749,21 @@ function createDisplayValuesContent({values, selectionFrom, questionManager}) {
     return (<div>
         { answers && answers.map(answer => { return <div key={answer} className={"content-multiplechoice-option-presented"}>{getTextFromOption(answer)}</div>}) }
     </div>)
+}
+
+function createCopyLinkContent({link}) {
+
+    const [copied, setCopied] = useState(false);
+
+    useEffect(() => {
+        if (copied) setTimeout(() => setCopied(false), 3000)
+    }, [copied])
+
+    return <ActionButton
+        onClick={() => {navigator.clipboard.writeText(link); setCopied(true)}} 
+        disabled={copied}
+        color={copied ? "gray" : "blue"}
+        icon="link">
+            {copied ? "Gekopieerd!" : "Kopieer link"}
+    </ActionButton>
 }

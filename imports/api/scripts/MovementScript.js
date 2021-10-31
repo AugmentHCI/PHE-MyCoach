@@ -137,11 +137,25 @@ const MOVMOD2 = {
                     content: "Er bestaat niet één enkele aanbeveling voor beweging. Iedereen is anders en heeft andere klachten, noden én grenzen. En iedereen start op een ander niveau. Het is dus niet de bedoeling dat de aanbevolen beweging in één keer wordt nagestreefd. Verantwoord opbouwen en stap voor stap vooruitgaan is de boodschap: elke stap telt! Op jouw eigen ritme. Laat je leiden door de bewegingsdriehoek: je kompas voor een beweeglijker leven."
                 },
                 {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/movement/bewegingsdriehoek.png"
+                },
+                {
+                    type: "Text",
+                    content: "Indien je de afbeelding groter wilt bekijken of meer informatie wilt, kan je de link kopiëren met de onderstaande knop om deze dan in je browser te plakken."
+                },
+                {
+                    type: "Link",
+                    link: "https://www.gezondleven.be/themas/beweging-sedentair-gedrag/bewegingsdriehoek"
+                },
+                {
                     type: "Text",
                     content: "Bekijk hier de uitleg van het Vlaams instituut Gezond Leven over de bewegingsdriehoek:"
                 },
                 {
-                    type: "Infographic",
+                    type: "Video",
+                    link: "https://www.youtube.com/embed/sYfkAqQRJUQ"
                 }]
         },
         {
@@ -632,11 +646,11 @@ const MOVMOD4 = {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Er zijn ontelbare actieve hobby’s, maar welke activiteiten iemand leuk vindt is heel individueel. Weet je niet goed wat bij jou past? Denk dan eens terug aan activiteiten die je vroeger hebt gedaan of graag deed. Of kijk eens wat mensen binnen je familie of vriendenkring doen, want samen actief bezig zijn is veel leuker. Heb je echt geen idee waar te beginnen? Via de website van Sport Vlaanderen krijg je een overzicht van al de clubs bij jou in de buurt:"
+                    content: "Er zijn ontelbare actieve hobby’s, maar welke activiteiten iemand leuk vindt is heel individueel. Weet je niet goed wat bij jou past? Denk dan eens terug aan activiteiten die je vroeger hebt gedaan of graag deed. Of kijk eens wat mensen binnen je familie of vriendenkring doen, want samen actief bezig zijn is veel leuker. Heb je echt geen idee waar te beginnen? Via de website van Sport Vlaanderen krijg je een overzicht van al de clubs bij jou in de buurt. Je kan de link kopiëren met de onderstaande knop, om deze dan in een browser te plakken."
                 },
                 {
                     type: "Link",
-                    content: "https://www.sport.vlaanderen/waar-sporten/vind-een-sportorganisatie/"
+                    link: "https://www.sport.vlaanderen/waar-sporten/vind-een-sportorganisatie/"
                 }
             ]
         },
