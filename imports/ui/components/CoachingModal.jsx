@@ -16,6 +16,7 @@ export default function CoachingModal({module, submodule, showModal, setShowModa
     const [coachingData, setCoachingData] = useState(undefined);
     const [isLocked, setIsLocked] = useState(undefined);
     const [minutesLeft, setMinutesLeft] = useState("");
+    const [progress, setProgress] = useState("")
 
     useEffect(() => {
         async function fetchData() {
@@ -25,9 +26,10 @@ export default function CoachingModal({module, submodule, showModal, setShowModa
                 const userID = parseInt(jwt_decode(userToken)?.rrnr);
                 const progressManager = new ProgressManager({userID: userID});
                 const progress = await progressManager.getUserProgress();
-                const moduleProgress = progress?.[fullMapping[module]]?.[submodule];
-                setIsLocked(moduleProgress === "LOCKED" || minutesToUnlock > 0);
-                if (minutesToUnlock > 0) {
+                const moduleProgress = progress?.[fullMapping[module]]?.[submodule] ? progress?.[fullMapping[module]]?.[submodule] : progress?.[module]?.[submodule];
+                setIsLocked(moduleProgress === "LOCKED" || (moduleProgress === "IN_PROGRESS" && minutesToUnlock > 0));
+                setProgress(moduleProgress);
+                if (minutesToUnlock > 0 && moduleProgress === "IN_PROGRESS" ) {
                     setMinutesLeft("Nog " + minutesToString(minutesToUnlock));
                 }
             }
@@ -39,7 +41,7 @@ export default function CoachingModal({module, submodule, showModal, setShowModa
         backOption="Sluit" 
         notifyBack={() => setShowModal(false)} 
         notifyParent={() => {FlowRouter.go(`/${language}/mycoach/${userToken}/module/${module}/${submodule}`)}}
-        defaultOption={minutesLeft ? minutesLeft : "Bekijk"}
+        defaultOption={minutesLeft ? minutesLeft : (progress === "COMPLETED" ? "Herbekijk" : "Bekijk")}
         addLockedIcon={ checkProgress && isLocked }
         defaultColor={ checkProgress && isLocked ? "gray" : "blue" }
         disabledDefault={checkProgress && isLocked}

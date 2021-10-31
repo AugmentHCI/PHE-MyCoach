@@ -1509,7 +1509,7 @@ const ACTMOD7FOOD = {
             ]
         },
         {
-            title: "Eten en diëten tegen chronische pijn",
+            title: "Energie",
             cardContents: [
                 {
                     type: "Text",
@@ -1518,6 +1518,47 @@ const ACTMOD7FOOD = {
                 {
                     type: "List",
                     content: ["Eet evenwichtig", "Eet met mate, niet te weinig maar ook niet te veel", "Eet gevarieerd, ga voor kleur op je bord"]
+                },
+            ]
+        },
+        {
+            title: "Energieverbruik",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Eet met mate, niet te weinig, maar ook niet te veel. Wat is te weinig of te veel eten? Dit hangt voor een groot deel af van hoe fysiek actief je bent en jouw biologische postuur. Eet je meer dan de energie die je verbruikt, dan kom je bij. Eet je minder, dan val je af."
+                },
+                {
+                    type: "Text",
+                    content: "De BMI geeft aan of je gewicht gezond is ten opzichte van je lengte en wordt als volgt berekend: Gewicht(kg) / Lengte(m)^2. Een gezond BMI heeft een score van 18.5-24.9"
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/bmi.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "En hoeveel energie of kcal mag je dan opeten? Een gemiddeld persoon (50-80 kg) die de bewegingsrichtlijnen (30-40 min sporten 3 keer per week) volgt verbruikt 1800–2400 kcal per dag of 25-35 kcal per kg lichaamsgewicht per dag."
+                },
+            ]
+        },
+        {
+            title: "Macronutriënten",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Er zijn 3 soorten macronutriënten, namelijk koolhydraten, proteïnen en vetten. Koolhydraten en vetten zijn de voornaamste bronnen van energie en proteïnen worden gebruikt voor het opbouwen van weefsels zoals spieren. Beperk vooral verzadigde vetzuren (kaas, boter…), snelle suikers (snoep, frisdrank…) en ultra bewerkt voedsel (fastfood, beleg…), want deze zorgen voor een verhoogd ontstekingsniveau in het lichaam en vormen een risico allerlei gezondheidsproblemen. Hieronder volgen de consumptierichtlijnen voor een gemiddeld persoon (50-80 kg) die de bewegingsrichtlijnen (30-40 min sporten 3 keer per week) volgt van ieder macronutriënt evenals de aanbevolen voedingsbronnen:"
+                },
+                {
+                    type: "List",
+                    content: [
+                        "Koolhydraten (aardappelen, rijst of volkoren deegwaren): 45-65% van de totale voedselinname of 3-5g per kg lichaamsgewicht per dag.", 
+                        "Vetten (plantaardige oorsprong of vette vis): 20-35% van de totale voedselinname.", 
+                        "Proteïnen (vlees, bij voorkeur gevogelte, vis of vervangproducten zoals tofoe, tempé, ...): 0.8-1.0g per kg lichaamsgewicht per dag."]
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/nutrients.jpg"
                 },
             ]
         },
