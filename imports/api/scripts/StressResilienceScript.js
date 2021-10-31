@@ -670,8 +670,13 @@ const STRMOD3 = {
             },
             {
                 type: "Text",
-                content: "Weet dat je steeds een afspraak kan maken bij je huisarts, de arbeidsarts die verbonden is aan jouw organisatie of de preventieadviseur psychosociale aspecten. In de module over sociale omgeving vind je een overzicht van mogelijke aanspreekpunten."
+                content: "Weet dat je steeds een afspraak kan maken bij je huisarts, de arbeidsarts die verbonden is aan jouw organisatie of de preventieadviseur psychosociale aspecten. In het onderdeel over sociale omgeving vind je een overzicht van mogelijke aanspreekpunten."
             },
+            {
+                type: "Shortcut",
+                module: "SOCIAL",
+                submodule: "SOC_MOD_6"
+            }
         ]
         },
         {
@@ -803,8 +808,31 @@ const STRMOD4 = {
                     content: "Breng zelf jouw energievreters en -gevers in kaart. Maak indien mogelijk een onderscheid tussen werk en privé. Ga nadien na welke energiegevers kan jij makkelijk aan je schema toevoegen en probeer oplossingen te bedenken om sommige energievreters te verminderen of schrappen? Voeg dit toe aan onderstaand schema."
                 },
                 {
-                    type: "Oefening"
-                }
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Jouw energiegevers"
+                },
+                {
+                    type: "Multitext-Input",
+                    id: "STR-MOD-4-ENERGYGIVERS",
+                    text: "Breng jouw energiegevers in kaart door ze hier neer te schrijven. Welke energiegevers zou jij eventueel nog kunnen toevoegen aan jouw dag?",
+                    placeholder: "Schrijf ze hier neer:"
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Subtitle",
+                    content: "Jouw energievreters"
+                },
+                {
+                    type: "Multitext-Input",
+                    id: "STR-MOD-4-ENERGYTAKERS",
+                    text: "Breng ook jouw energievreters in kaart. Zitten er enkele tussen die jij kan verminderen of schrappen?",
+                    placeholder: "Schrijf ze hier neer:"
+                },
             ]
         },
         {
@@ -1068,8 +1096,13 @@ const STRMOD6 = {
                 },
                 {
                     type: "Text",
-                    content: "Meer weten over de impact van sociale steun en jouw sociale omgeving? Neem een kijkje in de module sociale omgeving!"
+                    content: "Meer weten over de impact van sociale steun en jouw sociale omgeving? Neem een kijkje in de module sociale omgeving:"
                 },
+                {
+                    type: "Shortcut",
+                    module: "SOCIAL",
+                    submodule: "SOC_MOD_2"
+                }
             ]
         },
         {
@@ -1089,8 +1122,13 @@ const STRMOD6 = {
                 },
                 {
                     type: "Text",
-                    content: "Welke waarden krijgen volgens jou genoeg aandacht in je dagelijks leven? En welke onvoldoende? Kom er alles over te weten in de module rond gedachten en emoties"
+                    content: "Welke waarden krijgen volgens jou genoeg aandacht in je dagelijks leven? En welke onvoldoende? Kom er alles over te weten in de module rond gedachten en emoties:"
                 },
+                {
+                    type: "Shortcut",
+                    module: "THOUGHTSEMOTIONS",
+                    submodule: "TE_MOD_5"
+                }
             ]
         },
         {
@@ -1113,6 +1151,11 @@ const STRMOD6 = {
                     type: "Text",
                     content: "Het kan dus zeker helpend zijn om aan de slag te gaan met jouw gedachten en emoties! Neem hiervoor een kijkje in de volgende module."
                 },
+                {
+                    type: "Shortcut",
+                    module: "THOUGHTSEMOTIONS",
+                    submodule: "TE_MOD_4"
+                }
             ]
         },
         {
@@ -1163,6 +1206,15 @@ const STRMOD6 = {
                     content: "Je zult merken dat het nu vrijwel onmogelijk is om in een cirkeltje te blijven denken. Want heb je een gedachte op papier gezet? Dan heb je eerder de neiging om ze verder uit te werken dan om ze te herhalen. Je leert jezelf zo om op een productieve manier om te gaan met je gedachten."
                 },
                 {
+                    type: "Multitext-Input",
+                    id: "STR-MOD-6-OVERTHINK",
+                    text: "Je kan hier ook je piekergedachten neerschrijven.",
+                    placeholder: "Schrijf je piekergedachten neer"
+                },
+                {
+                    type: "Break"
+                },
+                {
                     type: "Text",
                     content: "Lig je soms in bed te woelen omdat je piekert? Leg dan een boekje op je nachtkastje om je gedachten in te noteren. Zo kun je ze loslaten en genieten van een goede nachtrust. De volgende dag kun je dan verder op die gedachte ingaan tijdens je piekermoment."
                 },
@@ -1196,11 +1248,22 @@ const STRMOD6 = {
                     content: "Zijn er zaken die noch belangrijk en noch dringend zijn? Dump ze dan! Bekijk eens of er ook to do’s zijn die je misschien kan delegeren. Zaken die belangrijk en dringend zijn moet je zo snel mogelijk doen en zaken die minder dringend zijn moet je inplannen."
                 },
                 {
-                    type: "Text",
-                    content: "Denk eraan dat je maar op 1 taak tegelijk kan focussen. Probeer daarom eerst een taak af te werken voordat je aan de volgende begint. Wil je meer weten over hoe je je activiteiten kan managen? Neem dan een kijkje in de module over activiteiten en werk"
+                    type: "Multitext-Input",
+                    id: "STR-MOD-6-TODO",
+                    text: "Welke to-do's staan er nog allemaal op jouw lijstje? Eens je ze hebt opgeschreven, kan je de minder dringende taken schrappen zodat je een overzicht bewaart van de belangrijke to-do's. Je kan deze lijst achteraf altijd nog bijwerken.",
+                    placeholder: "Schrijf je to-do's neer"
                 },
                 {
-                    type: "Schema"
+                    type: "Break"
+                },
+                {
+                    type: "Text",
+                    content: "Denk eraan dat je maar op 1 taak tegelijk kan focussen. Probeer daarom eerst een taak af te werken voordat je aan de volgende begint. Wil je meer weten over hoe je je activiteiten kan managen? Neem dan een kijkje in het onderdeel rond activiteitenmanagement."
+                },
+                {
+                    type: "Shortcut",
+                    module: "ACTIVITYWORK",
+                    submodule: "ACT_MOD_4"
                 }
             ]
         },
@@ -1241,6 +1304,15 @@ const STRMOD6 = {
                     content: "Aan het eind van de dag, vertel 3 zaken tegen jezelf waarvoor jij vandaag dankbaar bent, wat je goed gedaan hebt, wat de dag de moeite waard maakte. Voorbeelden hiervan kunnen zijn: een lekker ontbijt, een goed gesprek met een vriend, op tijd de deur uit geraakt zijn..."
                 },
                 {
+                    type: "Multitext-Input",
+                    id: "STR-MOD-6-THANKFUL",
+                    text: "Je kan de zaken waar jij dankbaar voor bent hier bijhouden.",
+                    placeholder: "Waar ben jij dankbaar voor?"
+                },
+                {
+                    type: "Break"
+                },
+                {
                     type: "Image",
                     link: "/images/stress/smiley.png"
                 },
@@ -1258,6 +1330,10 @@ const STRMOD6 = {
                     content: "Je ademhaling is een natuurlijk en simpel wapen tegen stress. Emoties verstoren de ademhaling. Je kan jezelf weer kalmeren door je ademhaling te beheersen."
                 },
                 {
+                    type: "Image",
+                    link: "/images/stress/yoga.png"
+                },
+                {
                     type: "Break"
                 },
                 {
@@ -1269,8 +1345,12 @@ const STRMOD6 = {
                     content: "Ga in een comfortabele houding zitten of liggen. Leg een hand op je buik. Adem vier tellen in. Voel hoe je buik opzwelt. Hou de adem even vast. Adem dan vier tellen uit. Laat je lichaam op zijn eigen tempo weer inademen. Doe deze oefening enkele keren per dag en ’s avonds voor het slapengaan."
                 },
                 {
-                    type: "Image",
-                    link: "/images/stress/yoga.png"
+                    type: "Text",
+                    content: "Heb je graag meer begeleiding tijdens je ademhalingsoefening? Dan kan je volgend filmpje van ademwinst.nl volgen als leidraad."
+                },
+                {
+                    type: "Video",
+                    link: "https://www.youtube.com/embed/deN4STBUOW0"
                 },
             ]
         },
@@ -1291,8 +1371,13 @@ const STRMOD6 = {
                 },
                 {
                     type: "Text",
-                    content: "Meer weten over het belang van goede slaap en tips voor een goede nachtrust? Neem zeker een kijkje in volgende module."
+                    content: "Meer weten over het belang van goede slaap en tips voor een goede nachtrust? Neem zeker een kijkje in volgende module:"
                 },
+                {
+                    type: "Shortcut",
+                    module: "ACTIVITYWORK",
+                    submodule: "ACT_MOD_9"
+                }
             ]
         },
         {
@@ -1312,8 +1397,13 @@ const STRMOD6 = {
                 },
                 {
                     type: "Text",
-                    content: "Meer weten over gezonde voeding? Neem zeker een kijkje in volgende module "
+                    content: "Meer weten over gezonde voeding? Neem zeker een kijkje in volgende module:"
                 },
+                {
+                    type: "Shortcut",
+                    module: "ACTIVITYWORK",
+                    submodule: "ACT_MOD_7"
+                }
             ]
         },
         {
@@ -1335,6 +1425,11 @@ const STRMOD6 = {
                     type: "Text",
                     content: "Meer weten over het belang van beweging? Neem zeker een kijkje in de volgende module:"
                 },
+                {
+                    type: "Shortcut",
+                    module: "MOVEMENT",
+                    submodule: "MOV_MOD_1"
+                }
             ]
         },
         {

@@ -270,7 +270,7 @@ function ContentParser(props) {
         const [currentValue, updateValue] = useState("");
         const [values, updateValues] = useState([]);
         const [saved, updateSave] = useState(false);
-        const buttonStyle = {height:"50px", marginTop:"10px", marginLeft:"0", paddingTop:"15px", paddingLeft:"10px"};
+        const buttonStyle = {height:"50px", marginTop:"10px", marginLeft:"0", paddingLeft:"10px"};
 
         function addItem() {
             updateValues([...values, currentValue]);
