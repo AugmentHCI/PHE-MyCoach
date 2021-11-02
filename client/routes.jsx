@@ -18,7 +18,7 @@ import ActivityLogbook   from '../imports/ui/pages/activityLogbook/ActivityLogbo
 import ValueLogbook      from '../imports/ui/pages/valueLogbook/ValueLogbook.jsx';
 import NewGoalScreen     from '../imports/ui/pages/valueLogbook/NewGoalScreen';
 import ViewGoalEntry     from '../imports/ui/pages/valueLogbook/ViewGoalEntry';
-import ThoughtExercisePage from '../imports/ui/pages/thoughtExercises/ThoughtExercisePage.jsx';
+import ExercisePage      from '../imports/ui/pages/exercises/ExercisePage.jsx';
 import ExerciseParser      from '../imports/ui/pages/modules/ExerciseParser';
 /* User study */
 import Introduction       from '../imports/ui/pages/userstudy/Introduction.jsx';
@@ -112,9 +112,9 @@ FlowRouter.route('/:language/mycoach/:token/feedback', {
   action(){ mount( App, { content: <FeedbackScreen /> })}
 });
 
-FlowRouter.route('/:language/mycoach/:token/thoughtexercises', {
-  name: 'ThoughtExercises',
-  action(){ mount( App, { content: <ThoughtExercisePage /> })}
+FlowRouter.route('/:language/mycoach/:token/exercises', {
+  name: 'Exercises',
+  action(){ mount( App, { content: <ExercisePage /> })}
 });
 
 FlowRouter.route('/:language/mycoach/:token/exercise/:module/:submodule/:cardID', {

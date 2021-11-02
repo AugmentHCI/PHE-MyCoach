@@ -133,7 +133,7 @@ export default function MyCoach(props) {
             visible={showTutorial2 && !showTutorial1}>
                 <ActionButton icon={SHORTCUTS["DAILY-COACHING"].icon} onClick={() => setShowCoachingModal(true)}>{SHORTCUTS["DAILY-COACHING"].translation[language]}</ActionButton>
                 {userShortcuts && userShortcuts.map(shortcut => {
-                    return <ActionButton key={shortcut.shortcut} icon={SHORTCUTS[shortcut.shortcut].icon} 
+                    if (shortcut.shortcut !== "THOUGHTEXERCISES") return <ActionButton key={shortcut.shortcut} icon={SHORTCUTS[shortcut.shortcut].icon} 
                                             onClick={() => {
                                                 if (SHORTCUTS[shortcut.shortcut].link) { FlowRouter.go(`/${language}/mycoach/${userToken}/${SHORTCUTS[shortcut.shortcut].link}`) } 
                                                 else { setShowCoachingModal(true) } }}>
@@ -245,10 +245,10 @@ export default function MyCoach(props) {
             setUserProgress(progress);
             setUserDailyCoaching(dailyCoaching);
             const fetchedShortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
-            if (progress?.THOUGHTSEMOTIONS && progress["THOUGHTSEMOTIONS"]["TE_MOD_2"] === "COMPLETED" && fetchedShortcuts.filter(shortcut => shortcut.shortcut === "THOUGHTEXERCISES").length === 0) {
-                shortcutManager.upsertShortcut("THOUGHTEXERCISES", "MAIN", "DEFAULT");
-                shortcutManager.upsertShortcut("THOUGHTEXERCISES", "THOUGHTSEMOTIONS", "DEFAULT");
-                fetchedShortcuts.push({screen: "MAIN", shortcut: "THOUGHTEXERCISES"});
+            if (progress?.THOUGHTSEMOTIONS && progress["THOUGHTSEMOTIONS"]["TE_MOD_2"] === "COMPLETED" && fetchedShortcuts.filter(shortcut => shortcut.shortcut === "EXERCISES").length === 0) {
+                shortcutManager.upsertShortcut("EXERCISES", "MAIN", "DEFAULT");
+                shortcutManager.upsertShortcut("EXERCISES", "THOUGHTSEMOTIONS", "DEFAULT");
+                fetchedShortcuts.push({screen: "MAIN", shortcut: "EXERCISES"});
             }
             setUserShortcuts(fetchedShortcuts);
             const minutes = await progressManager.getMinutesToNextCoaching();

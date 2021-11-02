@@ -38,6 +38,14 @@ const ExerciseText = styled.div`
     flex: 2;
 `
 
+const ExerciseTitle = styled.div`
+    font-family: var(--main-font);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--idewe-blue-dark);
+    margin-bottom: 10px;
+`
+
 const ExerciseIcon = styled.div`
     display: flex;
     flex: 1;
@@ -50,6 +58,18 @@ const ExerciseIcon = styled.div`
     align-items: center;
 `
 
+const ExerciseExplanation = styled.div`
+    background-color: var(--idewe-white);
+    color: var(--idewe-blue-dark);
+    font-family: var(--main-font);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 15px;
+    margin: 20px 0 10px;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+`
+
 
 const Exercises = {
     thoughts: {icon: "writing", text: "Stilstaan bij gedachten", link: "thoughtsemotions/TE_MOD_2/TE-MOD2-CARD1"},
@@ -60,26 +80,26 @@ const Exercises = {
     mindfulnessAudio: {icon: "sound", text: "Mindfulness Audio", link: "thoughtsemotions/TE_MOD_3/TE-MOD3-CARD4"},
 }
 
-export default function ThoughtExercisePage() {
+export default function ExercisePage() {
 
     const userID = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
     const language  = FlowRouter.getParam('language') ? FlowRouter.getParam('language') : "nl-BE";
     const userToken = FlowRouter.getParam('token') ? FlowRouter.getParam('token') : "demo";
 
-    const [exercises, updateExercises] = useState([]);
+    const [thoughtExercises, updateThoughtExercises] = useState([]);
 
 
     useEffect(() => {
         async function getExercises() {
             const progressManager = new ProgressManager({userID: userID, userToken: userToken});
             const progress = await progressManager.getUserProgress();
-            const userExercises = parseAvailableExercises(progress);
-            updateExercises(userExercises);
+            const userExercises = parseAvailableThoughtExercises(progress);
+            updateThoughtExercises(userExercises);
         }
         getExercises();
     }, [])
     
-    function parseAvailableExercises(progress) {
+    function parseAvailableThoughtExercises(progress) {
         let newExercises = [];
         progress?.THOUGHTSEMOTIONS?.["TE_MOD_2"] === "COMPLETED" && newExercises.push(Exercises.thoughts);
         progress?.THOUGHTSEMOTIONS?.["TE_MOD_2"] === "COMPLETED" && newExercises.push(Exercises.ihaveathought);
@@ -91,23 +111,26 @@ export default function ThoughtExercisePage() {
     }
 
     return (<React.Fragment>
-        <NavigationBar title="Gedachten-oefeningen"/>
+        <NavigationBar title="Oefeningen"/>
         <div className="container" style={{paddingTop: "85px"}}>
-            <h2>Jouw gedachten-oefeningen</h2>
             <FadeIn>
-            <ExerciseContainer>
-                { exercises.map(exercise => {return (<Exercise 
-                    key={exercise.text} 
-                    onClick={() => {FlowRouter.go(`/${language}/mycoach/${userToken}/exercise/${exercise.link}`)}}>
-                        <div style={{display:"flex", alignItems: "center", margin: ".5em .5em"}}>
-                            <ExerciseIcon>
-                                <Icon image={exercise.icon} color="blue" width="24px" style={{display:"inline"}}/>
-                            </ExerciseIcon>
-                        </div>
-                        <ExerciseText>{exercise.text}</ExerciseText>
-                        <Icon image="next" color="white" style={{display:"inline", margin:".5em .5em"}}/>
-                    </Exercise>)}) }
-            </ExerciseContainer>
+                <ExerciseExplanation>
+                    Hier krijg je een handig overzicht van oefeningen die jij hebt vrijgespeeld in de module 'Gedachten en Emoties'. Naarmate jij de coaching meer vrijspeelt, komen hier ook meer oefeningen te staan.
+                </ExerciseExplanation>
+                <ExerciseTitle>Jouw gedachten-oefeningen</ExerciseTitle>
+                <ExerciseContainer>
+                    { thoughtExercises.map(exercise => {return (<Exercise 
+                        key={exercise.text} 
+                        onClick={() => {FlowRouter.go(`/${language}/mycoach/${userToken}/exercise/${exercise.link}`)}}>
+                            <div style={{display:"flex", alignItems: "center", margin: ".5em .5em"}}>
+                                <ExerciseIcon>
+                                    <Icon image={exercise.icon} color="blue" width="24px" style={{display:"inline"}}/>
+                                </ExerciseIcon>
+                            </div>
+                            <ExerciseText>{exercise.text}</ExerciseText>
+                            <Icon image="next" color="white" style={{display:"inline", margin:".5em .5em"}}/>
+                        </Exercise>)}) }
+                </ExerciseContainer>
             </FadeIn>
         </div>
     </React.Fragment>)

@@ -55,18 +55,18 @@ export const SHORTCUTS = {
             "en-EN": "My values ​​and goals"
         }
     },
-    "THOUGHTEXERCISES": {
+    "EXERCISES": {
         icon: "idea",
-        link: "thoughtexercises",
+        link: "exercises",
         title: {
             "nl-BE": "Gedachten-oefeningen",
-            "nl-FR": "Thought exercises",
-            "en-EN": "Thought exercises"
+            "nl-FR": "Exercises",
+            "en-EN": "Exercises"
         },
         translation: {
-            "nl-BE": "Begin met gedachten-oefeningen",
-            "nl-FR": "Start some thought-exercises",
-            "en-EN": "Start some thought-exercises"
+            "nl-BE": "Begin met wat oefeningen",
+            "nl-FR": "Start some exercises",
+            "en-EN": "Start some exercises"
         }
     },
 }
