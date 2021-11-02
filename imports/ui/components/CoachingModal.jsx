@@ -8,6 +8,7 @@ import PillButton from "./PillButton";
 import Illustration from "./Illustrations/Illustration";
 import ProgressManager from "../../api/managers/ProgressManager";
 import { minutesToString } from "../../api/Moment";
+import { DEV_RRNRS } from "../../api/data/Coaching";
 
 
 
@@ -16,14 +17,15 @@ export default function CoachingModal({module, submodule, showModal, setShowModa
     const [coachingData, setCoachingData] = useState(undefined);
     const [isLocked, setIsLocked] = useState(undefined);
     const [minutesLeft, setMinutesLeft] = useState("");
-    const [progress, setProgress] = useState("")
+    const [progress, setProgress] = useState("");
+    const userID = parseInt(jwt_decode(userToken)?.rrnr);
+
 
     useEffect(() => {
         async function fetchData() {
             const fetchedCoachingData = getSubmoduleMetadata({module: module, submoduleID: submodule});
             setCoachingData(fetchedCoachingData);
             if (checkProgress) {
-                const userID = parseInt(jwt_decode(userToken)?.rrnr);
                 const progressManager = new ProgressManager({userID: userID});
                 const progress = await progressManager.getUserProgress();
                 const moduleProgress = progress?.[fullMapping[module]]?.[submodule] ? progress?.[fullMapping[module]]?.[submodule] : progress?.[module]?.[submodule];
@@ -44,7 +46,7 @@ export default function CoachingModal({module, submodule, showModal, setShowModa
         defaultOption={minutesLeft ? minutesLeft : (progress === "COMPLETED" ? "Herbekijk" : "Bekijk")}
         addLockedIcon={ checkProgress && isLocked }
         defaultColor={ checkProgress && isLocked ? "gray" : "blue" }
-        disabledDefault={checkProgress && isLocked}
+        disabledDefault={checkProgress && isLocked && !DEV_RRNRS.includes(userID)}
         noPadding
         show={showModal}>
         <div className="modalpopup-top">

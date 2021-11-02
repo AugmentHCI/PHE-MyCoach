@@ -77,7 +77,7 @@ export default function ModuleCard(props) {
                     </div>}
                 </div>
                 <div className="module-card-bottom-row">
-                    <div className="module-card-pills">
+                    <div className={"module-card-pills" + (props.noFlex ? "-noflex" : "")}>
                         <PillButton contentColor={props.locked ? "white" : "blue"} fillColor={props.locked ? "gray-light" : "white"} icon="time">{props.duration}</PillButton>
                         <PillButton contentColor={props.locked ? "white" : "blue"} fillColor={props.locked ? "gray-light" : "white"} icon="information">{props.type}</PillButton>
                     </div>

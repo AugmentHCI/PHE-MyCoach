@@ -89,6 +89,11 @@
 .module-card-pills {
     display: flex;
     flex-wrap: wrap;
+
+    &-noflex {
+        @extend .module-card-pills;
+        display: block;
+    }
 }
 
 .module-card-pills > .pill-button {
