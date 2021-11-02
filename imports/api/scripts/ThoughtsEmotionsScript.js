@@ -199,7 +199,7 @@ const TEMOD1 = {
                 },
                 {
                     type: "Text",
-                    content: "Verschillende van deze moeilijke gedachten kunnen ook pijn gerelateerd zijn, mogelijks schieten ze meerdere keren per dag door je hoofd. Enkele voorbeelden:"
+                    content: "Verschillende van deze moeilijke gedachten kunnen ook pijngerelateerd zijn, mogelijks schieten ze meerdere keren per dag door je hoofd. Enkele voorbeelden:"
                 },
                 {
                     type: "List",
