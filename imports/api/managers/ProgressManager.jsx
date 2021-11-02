@@ -54,6 +54,8 @@ export default class ProgressManager {
         moduleUserData.forEach(submodule => {
             if (dateComesAfter(submodule.timestamp, earliestTime)) earliestTime = moment(submodule.timestamp);
         });
+        const parsedModuleData = parseProgress(moduleUserData);
+        if (parsedModuleData?.PAINEDUCATION?.PE_MOD_1 === "IN_PROGRESS") return 0;
         return 1200 - minutesBetween(earliestTime, moment(new Date()));
     }
 
@@ -120,6 +122,9 @@ export default class ProgressManager {
         }
         else {
             /* Unlock next module(s), depending on status and profile */
+            if (getModuleStatus(progress["PAINEDUCATION"]) === "NOT_STARTED") this.unlockModules(["PAINEDUCATION"], progress);
+            else { this.unlockModules(["THOUGHTSEMOTIONS", "ACTIVITYWORK", "STRESS", "SOCIAL", "MOVEMENT"], progress); }
+            /*
             switch (this.profile) {
                 case 1:
                 case 4:
@@ -131,7 +136,6 @@ export default class ProgressManager {
                     else if (getModuleStatus(progress["MOVEMENT"]) === "COMPLETED" && getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED") this.unlockModules(["ACTIVITYWORK", "STRESS", "SOCIAL"], progress);
                     break; 
                 case 3:
-                    /* Paineducation -> ThoughtsEmotions */
                     if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "NOT_STARTED") 
                         { this.unlockModules(["THOUGHTSEMOTIONS"], progress); }
                     else if (getModuleStatus(progress["THOUGHTSEMOTIONS"]) === "COMPLETED" && (getModuleStatus(progress["ACTIVITYWORK"]) === "NOT_STARTED" || getModuleStatus(progress["STRESS"]) === "NOT_STARTED" || getModuleStatus(progress["SOCIAL"]) === "NOT_STARTED")) 
@@ -152,6 +156,7 @@ export default class ProgressManager {
                     console.log("No profile provided for user.")
                     break;
             }
+                */
         }
     }
 

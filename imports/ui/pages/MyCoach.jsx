@@ -222,7 +222,7 @@ export default function MyCoach(props) {
         defaultColor="blue"
         title="Proficiat!"
         show={userProgress?.["PAINEDUCATION"]?.["PE_MOD_5"] === "COMPLETED" && showFinishPainEducationModal}>
-            Je hebt de module pijneducatie doorlopen, super! Je kan nu de module rond gedachten en emoties bekijken, oftewel de module rond activiteit en werk. Wij hebben ook een snelkoppeling naar je pijnlogboek toegevoegd, neem daar zeker ook eens een kijkje!
+            Je hebt de module pijneducatie doorlopen, super! Je kan nu vrij de overige modules bekijken, of je dagelijkse coaching volgen via de snelkoppeling bovenaan. Wij hebben ook een snelkoppeling naar je pijnlogboek toegevoegd, neem daar zeker ook eens een kijkje!
     </AppModal>
     }
 
@@ -239,15 +239,29 @@ export default function MyCoach(props) {
         /* Wrap in async function, as getModuleProgress is async */
         async function fetchUserProgressAndShortcuts() {
             let progress = await progressManager.getUserProgress();
+            /* Unlock Paineducation if not unlocked yet */
             if (progress?.PAINEDUCATION && progress["PAINEDUCATION"]["PE_MOD_1"] === "NOT_STARTED") {
                 progress["PAINEDUCATION"]["PE_MOD_1"] = "IN_PROGRESS";
                 await progressManager.setSubmoduleStatus("PAINEDUCATION", "PE_MOD_1", "IN_PROGRESS");
             }
+            /* Unlock last 3 modules if applicable */
+            if (progress?.["ACTIVITYWORK"]?.["ACT_MOD_9"] === "COMPLETED" && progress?.["THOUGHTSEMOTIONS"]?.["TE_MOD_6"] === "COMPLETED") {
+                progress["STRESS"]["STR_MOD_1"] = "IN_PROGRESS";
+                progress["MOVEMENT"]["MOV_MOD_1"] = "IN_PROGRESS";
+                progress["SOCIAL"]["SOC_MOD_1"] = "IN_PROGRESS";
+                progressManager.setSubmoduleStatus("STRESS", "STR_MOD_1", "IN_PROGRESS");
+                progressManager.setSubmoduleStatus("MOVEMENT", "MOV_MOD_1", "IN_PROGRESS");
+                progressManager.setSubmoduleStatus("SOCIAL", "SOC_MOD_1", "IN_PROGRESS");
+                console.log("Unlocking");
+                //await progressManager.setSubmoduleStatus("PAINEDUCATION", "PE_MOD_1", "IN_PROGRESS");
+            }
             const dailyCoaching = await progressManager.getDailyCoaching();
             setUserProgress(progress);
             setUserDailyCoaching(dailyCoaching);
-            await shortcutManager.removeShortcut("THOUGHTEXERCISES");
+
+            await shortcutManager.removeShortcut("THOUGHTEXERCISES"); /* Remove old THOUGHTEXERCISES shortcut if present*/
             const fetchedShortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
+            /* Unlock EXERCISES shortcut if applicable */
             if (progress?.THOUGHTSEMOTIONS && progress["THOUGHTSEMOTIONS"]["TE_MOD_2"] === "COMPLETED" && fetchedShortcuts.filter(shortcut => shortcut.shortcut === "EXERCISES").length === 0) {
                 shortcutManager.upsertShortcut("EXERCISES", "MAIN", "DEFAULT");
                 shortcutManager.upsertShortcut("EXERCISES", "THOUGHTSEMOTIONS", "DEFAULT");
