@@ -338,7 +338,7 @@ const PEMOD3 = {
                 type: "List",
                 numbered: true,
                 overview: true,
-                content: ["Er is geen mooi verband tussen pijn en de hoeveelheid schade. Er kan pijn zijn zonder veel schade maar er kan ook veel schade zijn zonder pijn. De hersenen bepalen of we pijn ervaren.", "Negatieve emoties zoals angst of boosheid, frustratie omwille van de pijn en negatieve gedachten omtrent je pijn fungeren als een versterker waardoor je meer pijn zal ervaren. Ze onderdrukken ook de pijn dempende mechanismen en verhogen het risico op een overgevoelig zenuwstelsel.", "Na een acuut letsel wordt het zenuwstelsel gevoeliger waardoor meer prikkels naar de hersenen worden gestuurd. Prikkels die voordien niet pijnlijk waren, zoals lichte rek of druk, zullen nu wel pijnlijk zijn. Je hersenen willen dat je het aangedane lichaamsdeel ontziet zodat het kan herstellen.", "Fysieke inspanning zet pijn-dempende stoffen vrij. Deze stoffen zorgen ervoor dat er minder prikkels naar de hersenen worden gestuurd."]
+                content: ["Er is geen mooi verband tussen pijn en de hoeveelheid schade. Er kan pijn zijn zonder veel schade maar er kan ook veel schade zijn zonder pijn. De hersenen bepalen of we pijn ervaren.", "Negatieve emoties zoals angst of boosheid, frustratie omwille van de pijn en negatieve gedachten omtrent je pijn fungeren als een versterker waardoor je meer pijn zal ervaren. Ze onderdrukken ook de pijndempende mechanismen en verhogen het risico op een overgevoelig zenuwstelsel.", "Na een acuut letsel wordt het zenuwstelsel gevoeliger waardoor meer prikkels naar de hersenen worden gestuurd. Prikkels die voordien niet pijnlijk waren, zoals lichte rek of druk, zullen nu wel pijnlijk zijn. Je hersenen willen dat je het aangedane lichaamsdeel ontziet zodat het kan herstellen.", "Fysieke inspanning zet pijn-dempende stoffen vrij. Deze stoffen zorgen ervoor dat er minder prikkels naar de hersenen worden gestuurd."]
             }
         ]
     },
@@ -415,7 +415,7 @@ const PEMOD4 = {
                 number: 3,
                 options: ["Juist", "Fout"],
                 correct: "Fout",
-                explanation: "Pijn is een complex geheel dat beïnvloed wordt door verschillende factoren. Naast medicatie zijn er veel zaken die je zelf kan doen om pijn in de toekomst te vermijden, de overgevoeligheid van het zenuwstelsel te beperken en de pijn dempende mechanismen te activeren.",
+                explanation: "Pijn is een complex geheel dat beïnvloed wordt door verschillende factoren. Naast medicatie zijn er veel zaken die je zelf kan doen om pijn in de toekomst te vermijden, de overgevoeligheid van het zenuwstelsel te beperken en de pijndempende mechanismen te activeren.",
                 onCorrect: "Inderdaad, ook deze stelling is fout!",
                 onIncorrect: "Ook deze stelling is fout."
             },
@@ -439,7 +439,7 @@ const PEMOD4 = {
                 number: 5,
                 options: ["Juist", "Fout"],
                 correct: "Fout",
-                explanation: "Langdurig rusten zorgt ervoor dat je lichaam gaat verzwakken waardoor je het risico op overbelasting vergroot. Tijdens beweging treden ook de pijn dempende mechanismen in werking. Als je je focust op werk en andere betekenisvolle activiteiten gaan je hersenen minder aandacht besteden aan pijn gerelateerde prikkels en word je er vanzelf minder door gehinderd. Probeer daarom je normale activiteiten binnen de mate van het mogelijke verder te zetten en deze geleidelijk terug op te bouwen.",
+                explanation: "Langdurig rusten zorgt ervoor dat je lichaam gaat verzwakken waardoor je het risico op overbelasting vergroot. Tijdens beweging treden ook de pijndempende mechanismen in werking. Als je je focust op werk en andere betekenisvolle activiteiten gaan je hersenen minder aandacht besteden aan pijngerelateerde prikkels en word je er vanzelf minder door gehinderd. Probeer daarom je normale activiteiten binnen de mate van het mogelijke verder te zetten en deze geleidelijk terug op te bouwen.",
                 onCorrect: "Dit klopt inderdaad niet!",
                 onIncorrect: "Net niet!"
             },
@@ -451,7 +451,7 @@ const PEMOD4 = {
                 number: 6,
                 options: ["Juist", "Fout"],
                 correct: "Juist",
-                explanation: "Negatieve gedachten, emoties en langdurige stress kunnen leiden tot een overgevoelig zenuwstelsel. Pijnversterkende banen worden gestimuleerd, pijn gerelateerde prikkels worden makkelijker naar de hersenen gestuurd en de hersenen zullen meer aandacht besteden aan deze prikkels en ze uitvergroten.",
+                explanation: "Negatieve gedachten, emoties en langdurige stress kunnen leiden tot een overgevoelig zenuwstelsel. Pijnversterkende banen worden gestimuleerd, pijngerelateerde prikkels worden makkelijker naar de hersenen gestuurd en de hersenen zullen meer aandacht besteden aan deze prikkels en ze uitvergroten.",
                 onCorrect: "Correct!",
                 onIncorrect: "Dat is juist wel het geval."
             },
@@ -583,7 +583,7 @@ const PEMOD5 = {
             {
                 type: "Text",
                 overview: true,
-                content: "Jezelf vaak overbelasten leidt tot toegenomen spierspanning en een verminderde doorbloeding van je weefsels. Dit verhoogt het aantal pijn gerelateerde prikkels die naar de hersenen worden gestuurd, wat het zenuwstel overgevoelig kan maken. Overbelasten kan je beperken door je taken slim aan te pakken en ergonomisch te werken. Let op, ook onderbelasten kan leiden tot meer pijnklachten. Door onderbelasten wordt je lichaam minder fit waaroor je jezelf sneller kan overbelasten. Dit zien we vaak bij mensen met chronische pijn. Daarom is het belangrijk om je belastbaarheid geleidelijk te verhogen."
+                content: "Jezelf vaak overbelasten leidt tot toegenomen spierspanning en een verminderde doorbloeding van je weefsels. Dit verhoogt het aantal pijngerelateerde prikkels die naar de hersenen worden gestuurd, wat het zenuwstel overgevoelig kan maken. Overbelasten kan je beperken door je taken slim aan te pakken en ergonomisch te werken. Let op, ook onderbelasten kan leiden tot meer pijnklachten. Door onderbelasten wordt je lichaam minder fit waaroor je jezelf sneller kan overbelasten. Dit zien we vaak bij mensen met chronische pijn. Daarom is het belangrijk om je belastbaarheid geleidelijk te verhogen."
             },
             {
                 type: "Image",
@@ -640,7 +640,7 @@ const PEMOD5 = {
             {
                 type: "Text",
                 overview: true,
-                content: "Tijdens bewegen worden ook pijn dempende stoffen vrijgezet waardoor je minder kans hebt op een overgevoelig zenuwstelsel. Tot slot zet bewegen ook het gelukshormoon vrij wat een aangenaam gevoel geeft. Enkel maar voordelen dus! Bij mensen met chronische pijn werken de pijndempende mechanismen tijdens bewegen minder goed, wat zorgt voor meer pijn. Dit wilt niet zeggen dat zij hun lichaam schaden, ook voor hen is het belangrijk om voldoende te bewegen. Maar een goede opbouw is cruciaal."
+                content: "Tijdens bewegen worden ook pijndempende stoffen vrijgezet waardoor je minder kans hebt op een overgevoelig zenuwstelsel. Tot slot zet bewegen ook het gelukshormoon vrij wat een aangenaam gevoel geeft. Enkel maar voordelen dus! Bij mensen met chronische pijn werken de pijndempende mechanismen tijdens bewegen minder goed, wat zorgt voor meer pijn. Dit wilt niet zeggen dat zij hun lichaam schaden, ook voor hen is het belangrijk om voldoende te bewegen. Maar een goede opbouw is cruciaal."
             }]
     },
     {

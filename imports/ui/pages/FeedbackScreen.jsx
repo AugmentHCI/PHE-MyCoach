@@ -44,7 +44,7 @@ export default function FeedbackScreen(props) {
         <div className="settings-body">
             <FadeIn>
             {userID !== 4557583 && <React.Fragment>
-                <div className="painlogbook-explanation">Geef hier feedback over bijvoorbeeld een scherm dat fouten geeft, een module dat niet laadt, een oefening binnen een onderdeel dat fout werkt, enz. Wij zullen jou feedback dan gebruiken om eventuele fouten op te sporen en op te lossen!</div>
+                <div className="painlogbook-explanation">Geef hier feedback over bijvoorbeeld een scherm dat fouten geeft, een module dat niet laadt, een oefening binnen een onderdeel dat fout werkt, enz. Wij zullen jouw feedback dan gebruiken om eventuele fouten op te sporen en op te lossen!</div>
                 {!sent && <div><h3 style={{fontSize:"18px", marginTop:"15px"}}>Waar deed het probleem zich voor?</h3>
                 <Input 
                     type="text" value={valueScreen} onChange={updateValueScreen}
