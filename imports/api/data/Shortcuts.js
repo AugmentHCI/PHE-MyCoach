@@ -64,9 +64,9 @@ export const SHORTCUTS = {
             "en-EN": "Exercises"
         },
         translation: {
-            "nl-BE": "Begin met wat oefeningen",
-            "nl-FR": "Start some exercises",
-            "en-EN": "Start some exercises"
+            "nl-BE": "Begin met je oefeningen",
+            "nl-FR": "Start your exercises",
+            "en-EN": "Start your exercises"
         }
     },
 }

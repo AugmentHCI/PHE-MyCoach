@@ -229,6 +229,13 @@ Meteor.methods({
             }
         });
     },
+    'mycoachshortcut.removeShortcut'({userID, shortcut}) {
+        check(userID, Number);
+        check(shortcut, String);
+        MyCoachShortcutCollection.find({userID: userID, shortcut: shortcut}).map(function(item){
+            MyCoachShortcutCollection.remove(item._id);
+        });
+    },
     'mycoachshortcut.deleteUserShortcuts'({userID}) {
         check(userID, Number);
         MyCoachShortcutCollection.find({userID: userID}).map(function(item){

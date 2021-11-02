@@ -23,6 +23,14 @@ export default class ShortcutManager {
     }
 
     /**
+     * Removes all instances of a given shortcut.
+     */
+    async removeShortcut(shortcut) {
+        console.log("Disabling " + shortcut)
+        await Meteor.callPromise('mycoachshortcut.removeShortcut', {userID: this.userID, shortcut: shortcut});
+    }
+
+    /**
      * Resets (deletes) all shortcut settings of this user.
      */
     async resetUserShortcuts() {

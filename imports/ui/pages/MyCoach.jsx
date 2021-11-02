@@ -72,7 +72,9 @@ export default function MyCoach(props) {
 
     function handleIntroduction() {
         if (!userData) return;
-        const introText = userData?.K ? "Welkom bij de HealthEmpower coaching. Heb je momenteel pijn? Dan ben je niet alleen. Eén op vier werknemers ervaart dagelijks pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe  je op een goede manier kan omgaan met je pijn. Dit heeft een positieve impact op je functioneren. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Daarom is de app ook interessant voor mensen die nu geen pijn ervaren. Bekijk hier alvast het introductiefilmpje." : "Welkom bij de Health Empower coaching. Heb jij momenteel geen pijn? Gelukkig! 1 op de 4 werknemers ervaart pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe je het risico op pijn in de toekomst kan beperken. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Daarom is de app ook interessant voor mensen die nu geen pijn ervaren. Bekijk hier alvast het introductiefilmpje."
+        // const introText = userData?.K ? "Welkom bij de HealthEmpower coaching. Heb je momenteel pijn? Dan ben je niet alleen. Eén op vier werknemers ervaart pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe  je op een goede manier kan omgaan met je pijn. Dit heeft een positieve impact op je functioneren. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Daarom is de app ook interessant voor mensen die nu geen pijn ervaren. Bekijk hier alvast het introductiefilmpje." : "Welkom bij de Health Empower coaching. Heb jij momenteel geen pijn? Gelukkig! 1 op de 4 werknemers ervaart pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe je het risico op pijn in de toekomst kan beperken. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Daarom is de app ook interessant voor mensen die nu geen pijn ervaren. Bekijk hier alvast het introductiefilmpje."
+        const introText ="Welkom bij de HealthEmpower coaching. Heb je momenteel pijn? Dan ben je niet alleen. Eén op vier werknemers ervaart pijn. Meest voorkomend zijn nek- en rugklachten. Dat kan een grote impact hebben op je functioneren, thuis maar ook op het werk. Met deze coaching willen we je inzicht geven in hoe pijn werkt. Je leert hoe  je op een goede manier kan omgaan met je pijn. Dit heeft een positieve impact op je functioneren. Je krijgt ook een aantal handvaten aangereikt om actief aan je gezondheid te werken. Daarom is de app ook interessant voor mensen die nu geen pijn ervaren. Bekijk hier alvast het introductiefilmpje.";
+
         if (showIntroductionModal) {
             return (
                 <AppModal show={true} title={"Welkom!"} defaultOption={"Naar het filmpje"} notifyParent={handleIntroductionSeen}>
@@ -133,7 +135,7 @@ export default function MyCoach(props) {
             visible={showTutorial2 && !showTutorial1}>
                 <ActionButton icon={SHORTCUTS["DAILY-COACHING"].icon} onClick={() => setShowCoachingModal(true)}>{SHORTCUTS["DAILY-COACHING"].translation[language]}</ActionButton>
                 {userShortcuts && userShortcuts.map(shortcut => {
-                    if (shortcut.shortcut !== "THOUGHTEXERCISES") return <ActionButton key={shortcut.shortcut} icon={SHORTCUTS[shortcut.shortcut].icon} 
+                 return <ActionButton key={shortcut.shortcut} icon={SHORTCUTS[shortcut.shortcut].icon} 
                                             onClick={() => {
                                                 if (SHORTCUTS[shortcut.shortcut].link) { FlowRouter.go(`/${language}/mycoach/${userToken}/${SHORTCUTS[shortcut.shortcut].link}`) } 
                                                 else { setShowCoachingModal(true) } }}>
@@ -244,6 +246,7 @@ export default function MyCoach(props) {
             const dailyCoaching = await progressManager.getDailyCoaching();
             setUserProgress(progress);
             setUserDailyCoaching(dailyCoaching);
+            await shortcutManager.removeShortcut("THOUGHTEXERCISES");
             const fetchedShortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
             if (progress?.THOUGHTSEMOTIONS && progress["THOUGHTSEMOTIONS"]["TE_MOD_2"] === "COMPLETED" && fetchedShortcuts.filter(shortcut => shortcut.shortcut === "EXERCISES").length === 0) {
                 shortcutManager.upsertShortcut("EXERCISES", "MAIN", "DEFAULT");

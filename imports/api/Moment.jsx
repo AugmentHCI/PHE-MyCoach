@@ -54,6 +54,21 @@ export function daysBetween(date1, date2, absolute=true, format=undefined) {
     return minutesBetweenDates;
 }
 
+/**
+ * Returns the weeks between two days (as either an absolute or relative value).
+ * @param {String} date1     The first date
+ * @param {String} date2     The second date
+ * @param {Boolean} absolute Whether the weeks between needs to be absolute or relative (negative if date2 comes before date1).
+ * @param {String} format    Format of the date objects to be interpreted by moment.
+ * @returns 
+ */
+ export function weeksBetween(date1, date2, absolute=true, format=undefined) {
+    let difference = format ? moment(date1, format).diff(moment(date2, format)) : moment(date1).diff(moment(date2));
+    let weeksBetweenDates = Math.round(moment.duration(difference).asWeeks());
+    if (absolute) return Math.abs(weeksBetweenDates);
+    return weeksBetweenDates;
+}
+
 export function minutesToString(minutes) {
     if (Math.floor(minutes % 60) === 0)
         return(Math.floor(minutes / 60) + " uur")
