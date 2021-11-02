@@ -293,7 +293,6 @@ function ContentParser(props) {
                 const answer = await props.questionManager.getLatestAnswerOnQuestion(props.data.id);
                 if (answer) { updateValues(JSON.parse(answer)) }
             }
-            console.log(props.data.id);
             fetchStatus();
         }, []);
 
@@ -411,7 +410,6 @@ function ContentParser(props) {
                     answers = JSON.parse(answers);
                     let count = 0;
                     Object.keys(answers).forEach(id => { if (answers[id]) count++; });
-                    console.log(count);
                     if (!rule.count.includes(count)) return false;
                     break;
                 default:
@@ -518,8 +516,6 @@ function createTextAreaContent({id, questionManager, placeholder, module}) {
         updateSaved(true);
     }
 
-    console.log(saved)
-
     return (<div>
         <textarea 
             className={"content-textarea" + (value ? "" : "-disabled")} 
@@ -574,7 +570,6 @@ function createMultipleChoiceContent(props) {
                     let newChecked = {};
                     let newOptions = [];
                     answers = JSON.parse(answers);
-                    console.log(answers);
                     if (answers.agree) answers.agree.forEach(key => { newChecked[key] = false; newOptions.push({id: key, text: getTextFromOption(key)})});
                     else { Object.keys(answers).forEach(key => {if (answers[key]) { newChecked[key] = false; newOptions.push({id: key, text: getTextFromOption(key)})}}) }
                     setOptions(newOptions);
@@ -634,7 +629,7 @@ function createShortcutContent({module, submodule, userToken, language}) {
     }, [])
 
 
-    return (<div style={{marginTop: "5px"}}>
+    return (<div style={{marginTop: "10px"}}>
         {showModal && <CoachingModal
             module={module}
             submodule={submodule}
@@ -643,6 +638,7 @@ function createShortcutContent({module, submodule, userToken, language}) {
             userToken={userToken}
             language={language}
             checkProgress={true} />}
+            {disabled && <b style={{fontFamily:"var(--main-font)", color:"var(--idewe-gray)", marginLeft:"5px", fontWeight: 600}}>(Vergrendeld)</b>}
             {submoduleTitle &&  <ActionButton 
                 icon={submoduleIcon} 
                 color={disabled ? "gray": "blue"} 
@@ -679,7 +675,6 @@ function createCircleExerciseContent({id, questionManager, module, callback}) {
     useEffect(() => {
         async function fetchAnswer() {
             const fetchedAnswer = await questionManager.getLatestAnswerOnQuestion(id);
-            console.log(fetchedAnswer);
             if (fetchedAnswer) setData(JSON.parse(fetchedAnswer));
         }
         fetchAnswer();
@@ -737,13 +732,12 @@ function createDisplayValuesContent({values, selectionFrom, questionManager}) {
         async function fetchAnswers() {
             const fetchedAnswers = await questionManager.getLatestAnswerOnQuestion(selectionFrom);
             if (fetchedAnswers) { setAnswers(JSON.parse(fetchedAnswers).agree) }
-            console.log(fetchedAnswers)
         }
         fetchAnswers();
     }, []);
 
     function getTextFromOption(answer) {
-        for (const value of values) {if (value.id === answer) {console.log(value.text); return value.text}}
+        for (const value of values) {if (value.id === answer) return value.text }
     }
 
     return (<div>
