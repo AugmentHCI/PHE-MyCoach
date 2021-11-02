@@ -16,6 +16,7 @@ export default function Slider(props) {
 
   async function save() {
     if (!props.questionManager) return;
+    console.log(props.module);
     updateSaved(true);
     await props.questionManager.setModuleQuestion(props.module, props.id, value); 
     props.callback();

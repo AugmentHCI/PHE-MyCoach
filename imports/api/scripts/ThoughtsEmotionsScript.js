@@ -81,6 +81,7 @@ const TEMOD1 = {
                     from: 1,
                     to: 10,
                     mapping: "10-IMPACT",
+                    oneTime: false,
                     showValue: true,
                     save: true,
                 }
@@ -220,7 +221,7 @@ const TEMOD1 = {
                 },
                 {
                     type: "Image", 
-                    link: "/images/thoughtsemotions/cloud.png"
+                    link: "/images/thoughtsemotions/cloud.jpg"
                 },
                 {
                     type: "Text",
@@ -406,47 +407,25 @@ const TEMOD2 = {
     },
     {
         id: "TE-MOD2-CARD2",
-        title: "Eens reflecteren",
+        title: "Drukke baan",
         cardContents: [
             {
                 type: "Text",
-                content: "Vraag jezelf ook eens het volgende af: Zijn deze gedachten helpend?",
-            },
-            {
-                type: "Text",
-                content: "Meestal zijn de wederkerende gedachten die we hebben niet dadelijk helpend. Daarom gaan we in deze module verder in op hoe je anders met deze gedachten kunt leren omgaan zodat zij zo min mogelijk impact hebben op jouw leven.",
-                showIf: [{"rule": "Profile", "profiles": [1]}]
-            },
-            {
-                type: "Text",
-                content: "Meestal zijn de wederkerende gedachten die we hebben niet dadelijk helpend. Door bv. te denken aan je pijn of welke gevolgen dit zal hebben voel je je vaak niet beter of biedt dat niet meteen een oplossing. Daarom gaan we in deze module verder in op hoe je anders met deze gedachten kunt leren omgaan zodat zij zo min mogelijk impact hebben op jouw leven.",
-                showIf: [{"rule": "Profile", "profiles": [2, 3, 4, 5, 6]}]
-            },
-            {
-                type: "Text",
-                content: "In volgend filmpje zie je een eerste manier om anders naar jouw gedachten te leren kijken, namelijk zoals auto’s die voorbijrijden op een drukke baan:",
+                content: "Je kan je gedachten leren bekijken zoals auto's die voorbijrijden op een drukke baan. Je probeert de gedachten te laten komen en gaan zonder ze vast te houden, , achterna te hollen, of ze weg te duwen.  Uiteraard gaat dit niet elke keer en met iedere lastige gedachte lukken, maar het kan al zeker helpen om hier bewuster mee bezig te zijn. De enige manier om te leren om je gedachten te laten komen en gaan, zoals auto's op een drukke snelweg, of zoals wolken die voorbijglijden voor de zon, is oefenen, oefenen, oefenen!",
             },
             {
                 type: "Video",
                 link: "https://www.youtube.com/embed/iN6g2mr0p3Q"
             },
-            {
-                type: "Text",
-                content: "Je kan dus leren om gedachten te laten komen en gaan zonder ze vast te houden, achterna te hollen, of ze weg te duwen. Uiteraard gaat dit niet elke keer en met iedere lastige gedachte lukken, maar het kan al zeker helpen om je hier bewuster mee bezig te zijn."
-            },
-            {
-                type: "Text",
-                content: "De enige manier om te leren om je gedachten te laten komen en gaan, zoals auto’s op een drukke snelweg of zoals wolken die voorbijglijden voor de zon, is oefenen, oefenen, oefenen! Daarom vragen we je om hier de komende dag heel bewust mee te proberen bezig zijn. "
-            },
         ]
     },
     {
         id: "TE-MOD2-CARD3",
-        title: "Afstand nemen van gedachten",
+        title: "Ik heb de gedachte dat",
         cardContents: [
             {
                 type: "Text",
-                content: "Tijd om een volgende manier te bekijken om wat afstand te leren nemen van moeilijke gedachten die door je hoofd gaan. Ga even rustig zitten beluister volgend audiofragment.",
+                content: "Ga even rustig zitten en beluister volgend audiofragment.",
             },
             {
                 type: "Audiofile",
@@ -466,25 +445,17 @@ const TEMOD2 = {
             },
             {
                 type: "Text",
-                content: "Let op! Het doel van deze oefening is niet perse om jezelf beter te doen voelen, hoewel dit een aangename bijkomstigheid kan zijn. Wel is het de bedoeling om je los te kunnen maken van niet-helpende gedachten die veel tijd en energie van je vragen. Op die manier ontstaat er meer ruimte om je aandacht te kunnen richten op zaken die jij belangrijk vindt.",
+                content: "Let op! Het doel van deze oefening is niet perse om jezelf beter te doen voelen, hoewel dit een aangename bijkomstigheid kan zijn. Wel is het de bedoeling om je los te kunnen maken van niet-helpende gedachten die veel tijd en energie van je vragen. Op die manier ontstaat er meer ruimte om je aandacht te kunnen richten op zaken die jij belangrijk vindt. Het is vooral door te oefenen dat je deze techniek steeds beter onder de knie zal krijgen.",
             },
-            {
-                type: "Text",
-                content: "Probeer je hier extra bewust van te zijn de komende dagen. Het is vooral door te oefenen dat je je dit steeds beter onder de knie zal krijgen. Als je (wederkerende en lastige) gedachten opmerkt, plaats er dan ‘Ik heb de gedachte dat…’ voor of bekijk ze als auto’s op een drukke baan. Je kan altijd terugkomen en het audiofragment opnieuw beluisteren."
-            }
         ]
     },
     {
         id: "TE-MOD2-CARD4",
-        title: "Invloed beperken",
+        title: "De vervelende buurman",
         cardContents: [
             {
                 type: "Text",
-                content: "Tijd voor het verkennen van een volgende manier om om te gaan met moeilijke gedachten en gevoelens op zo’n manier dat ze je gedrag en je leven minder gaan bepalen.",
-            },
-            {
-                type: "Text",
-                content: "Zo kan je moeilijke gedachten en gevoelens namelijk ook proberen te bekijken als die vervelende buurman, die plots je feestje komt crashen:",
+                content: "Je kan moeilijke gedachten en gevoelens ook proberen te bekijken als een vervelende buurman die je plots je feestje komt crashen:",
             },
             {
                 type: "Video",
@@ -492,7 +463,7 @@ const TEMOD2 = {
             },
             {
                 type: "Text",
-                content: "Herinner je dat als je sterk focust op je pijngedachten dat er makkelijker prikkels doorkomen. Ook deze kan je vergelijken met deze vervelende buurman. Zijn er wederkerende gedachten die je doen denken aan deze vervelende buurman? Probeer de komende dag verder in te zetten op bewust worden van je gedachten."
+                content: "Herinner je dat als je sterk focust op pijn en gedachten gerelateerd aan pijn dat er makkelijker prikkels doorkomen? Ook dat kan je vergelijken met een vervelende buurman."
             }
         ]
     },
@@ -717,7 +688,7 @@ const TEMOD4 = {
         },
         {
             id: "TE-MOD4-CARD3",
-            title: "Eens denken",
+            title: "Controle of niet?",
             showIfAnswered: ["TE-MOD-4-NEGAVTIVE-CONSEQUENCES"],
             cardContents: [
                 {
@@ -742,6 +713,10 @@ const TEMOD4 = {
                 {
                     type: "List",
                     content: ["Wat er in de toekomst zal gebeuren", "Welke gedachten er in je opkomen", "Het feit dat je pijn voelt", "De angst die je zal voelen om een bepaalde beweging te doen"]
+                },
+                {
+                    type: "Image",
+                    link: "/images/thoughtsemotions/ideas.jpg"
                 },
                 {
                     type: "Text",
@@ -778,12 +753,22 @@ const TEMOD4 = {
                     content: "Tijd om aan de slag te gaan! Je kan niet controleren of je angstig zal zijn, of welke gedachten rond bewegen en pijn in je opkomen. Je kan wél kiezen om deze gedachten te herkennen, je activiteiten te analyseren en toch de keuze te maken die voor jou op lange termijn gunstig is. Hoe kan je dit doen?"
                 },
                 {
+                    type: "Break"
+                },
+                {
                     type: "Text",
                     content: [{type: "bold", content: "1. Probeer je activiteiten rustig op te bouwen."}]
                 },
                 {
                     type: "List",
                     content: ["Bv. als je stofzuigt en je voelt een pijnscheut. Wat is een alternatief dat werkt voor jou? Misschien kan je beginnen met het stofzuigen van één kamer in de plaats van dadelijk het hele huis onder handen te nemen, misschien kan je de borstel nemen omdat die lichter is, ...", "Dit noemen we graded activity of graded exposure – dit wordt verder uitgelegd in de modules ‘activiteiten en werk’ en ‘bewegen’."]
+                },
+                {
+                    type: "Image",
+                    link: "/images/thoughtsemotions/up.jpg"
+                },
+                {
+                    type: "Break"
                 },
                 {
                     type: "Text",
@@ -798,6 +783,13 @@ const TEMOD4 = {
                     content: ["Door dit telkens bij te houden in je ", {type: "italic", content: "pijnlogboek"}, ", zal je beter inzicht krijgen op wat voor jou goed werkt."]
                 },
                 {
+                    type: "Image",
+                    link: "/images/thoughtsemotions/puzzle.jpg"
+                },
+                {
+                    type: "Break"
+                },
+                {
                     type: "Text",
                     content: [{type: "bold", content: "3. Herinner je ook dat je gedachten en emoties er altijd zullen zijn, maar dat je kan kiezen en oefenen om er minder aandacht aan te besteden en om, ondanks deze gedachten en emoties, toch te kiezen voor activiteiten die waardevol zijn voor jou."}]
                 },
@@ -805,6 +797,22 @@ const TEMOD4 = {
                     type: "List",
                     content: ["Denk terug aan de mindfulness oefeningen zoals de 5, 4, 3, 2, 1 oefening als manier om je aandacht te focussen op waarmee je bezig bent en minder in je hoofd te zitten", "Probeer je gedachten en gevoelens vanop een afstand te bekijken door er het zinnetje ‘Ik heb de gedachte dat’ voor te zetten."]
                 },
+                {
+                    type: "Image",
+                    link: "/images/thoughtsemotions/signs.jpg"
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Text",
+                    content: "Je kan hiervoor altijd eens een kijkje nemen bij het onderdeel 'Activiteitenmanagement:"
+                },
+                {
+                    type: "Shortcut",
+                    module: "ACTIVITYWORK",
+                    submodule: "ACT_MOD_4"
+                }
             ]
         },
         {
@@ -1224,7 +1232,7 @@ const TEMOD5 = {
         },
         {
             titleCard: true,
-            showIfAnswered: ["TE-MOD-5-SELECT-50"],
+            showIfAnswered: ["TE-MOD-5-SWIPE-50"],
             title: "Doelen"
         },
         {
@@ -1383,6 +1391,10 @@ const TEMOD6 = {
                 {
                     type: "Text",
                     content: "In eerste instantie zal je misschien de neiging hebben om rechtsomkeer te maken, terug naar de veilige haven. Wanneer je angst hebt voor pijn bij het uitoefenen van bepaalde activiteiten, is dat misschien net zo. Ook hier is het zo dat het stoppen met de activiteit in kwestie of het vermijden ervan er op korte termijn misschien voor zal zorgen dat je je iets beter voelt omdat je moeilijke gevoelens en gedachten verminderen. Op lange termijn kan dit je echter verhinderen om die dingen te doen waar jij veel waarde aan hecht.",
+                },
+                {
+                    type: "Image",
+                    link: "/images/thoughtsemotions/storm.jpg"
                 },
                 {
                     type: "Text",

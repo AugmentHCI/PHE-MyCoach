@@ -46,8 +46,8 @@ function CardsParser(props) {
             if (showonly === "NONOVERVIEW" && (card.overview || card.wrapup)) continue;
             if (Object.keys(card).length === 0) continue; /* Empty card */
             if (card.showIfAnswered && !card.showIfAnswered.every(question => Object.keys(userQuestions).includes(question))) {
-                if (!card.showIf || (card.showIf && showCard(card.showIf))) {console.log("Case 1 - breaking rendering: " + card.id); break; }
-                else if (card.showIf && !showCard(card.showIf)) {console.log("Case 2 - continue rendering: " + card.id); continue; }
+                if (!card.showIf || (card.showIf && showCard(card.showIf))) { console.log("Case 1 - breaking rendering: " + card.id); break; }
+                else if (card.showIf && !showCard(card.showIf)) { console.log("Case 2 - continue rendering: " + card.id); continue; }
                 else {console.log("Case 3 - UNHANDLED! "); }
             }
             if (card.showIf && !showCard(card.showIf)) continue;
@@ -92,7 +92,7 @@ function CardsParser(props) {
                     let count = swipeAnswers?.agree?.length;
                     if (rule.atLeast && count < rule.atLeast) return false;
                     else if (rule.atMost && count > rule.atMost) return false;
-                    else {console.log("SwipeAgreeCount - unhandled case"); return true;}
+                    break;
                 case "HasSelected": 
                     let swipeAnswersSelection = userQuestions[rule.questionID];
                     if (!swipeAnswersSelection || !JSON.parse(swipeAnswersSelection)[rule.answerID]) return false;

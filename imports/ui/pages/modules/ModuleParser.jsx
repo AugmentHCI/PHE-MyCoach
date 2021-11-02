@@ -83,6 +83,7 @@ export default function ModuleParser(props) {
                 locked={isLocked}
                 timeLocked={isTimeLocked}
                 minLeft={minutesToNextCoaching}
+                noFlex
                 status={status}>
             </ModuleCard>)
         });
