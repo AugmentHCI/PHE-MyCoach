@@ -220,11 +220,11 @@ const ACTMOD2WORK = {
     icon: "work",
     imageWidth: "230px",
     cards: [{
-            title: "Reflectie met stelling (Activiteiten)",
+            title: "Enkele stellingen",
             cardContents: [
                 {
                     type: "Text",
-                    content: "Laten we beginnen met een stelling. Wat denk jij van het volgende:",
+                    content: "Laten we beginnen met twee stellingen. Wat denk jij van het volgende:",
                 },
                 {
                     id: "ACT-MOD-2-SLIDER-1",
@@ -235,24 +235,6 @@ const ACTMOD2WORK = {
                     mapping: "5-AGREE",
                     showValue: true,
                     save: true,
-                }
-            ]
-        },
-        {
-            title: "Reflectie",
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Rusten en activiteiten vermijden is niet aangewezen bij pijn. Beweging en zoveel mogelijk je normale activiteiten verderzetten zijn essentieel voor het herstelproces. Beweging verhoogt de doorbloeding naar je spieren en gewrichten, waardoor ze soepel blijven en sterker worden. Daarnaast zetten je hersenen ook pijndempende stoffen vrij tijdens het bewegen. Werk en activiteiten kunnen je afleiden van je pijn. Door lang te rusten wordt je lichaam alleen maar zwakker waardoor het minder goed om kan met de belasting in je dagelijks leven. Dit wilt niet zeggen dat je bij een acute blessure de belasting niet tijdelijk mag verlagen om het herstelproces te bevorderen."
-                },
-            ]
-        },
-        {
-            title: "Belasting",
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Wat denk jij van volgende stelling?"
                 },
                 {
                     id: "ACT-MOD-2-SLIDER-2",
@@ -267,8 +249,17 @@ const ACTMOD2WORK = {
             ]
         },
         {
+            title: "Reflectie",
+            showIfAnswered: ["ACT-MOD-2-SLIDER-1", "ACT-MOD-2-SLIDER-2"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Rusten en activiteiten vermijden is niet aangewezen bij pijn. Beweging en zoveel mogelijk je normale activiteiten verderzetten zijn essentieel voor het herstelproces. Beweging verhoogt de doorbloeding naar je spieren en gewrichten, waardoor ze soepel blijven en sterker worden. Daarnaast zetten je hersenen ook pijndempende stoffen vrij tijdens het bewegen. Werk en activiteiten kunnen je afleiden van je pijn. Door lang te rusten wordt je lichaam alleen maar zwakker waardoor het minder goed om kan met de belasting in je dagelijks leven. Dit wilt niet zeggen dat je bij een acute blessure de belasting niet tijdelijk mag verlagen om het herstelproces te bevorderen."
+                },
+            ]
+        },
+        {
             title: "Voordelen werk",
-            showIfAnswered: ["ACT-MOD-2-SLIDER-2"],
             cardContents: [
                 {
                     type: "Text",
