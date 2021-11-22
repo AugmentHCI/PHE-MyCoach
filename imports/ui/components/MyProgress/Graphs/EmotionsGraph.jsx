@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getActivityData } from '../../../../api/processors/MyProgressProcessor';
+
 import i18n from 'meteor/universe:i18n';
 import "../../../../../i18n/nl.i18n.json";
 import "../../../../../i18n/fr.i18n.json";
@@ -42,7 +42,7 @@ function Circle({tint, isEmpty}) {
     );
 }
 
-export default function ActivityGraph({data, locale}) {
+export default function EmotionsGraph({data, locale}) {
   
   useEffect(() => { 
     i18n.setLocale(locale);

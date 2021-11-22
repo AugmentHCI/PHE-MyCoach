@@ -4,7 +4,6 @@ import { mount } from 'react-mounter';
 
 import App              from '../imports/ui/App.jsx';
 import MyProgress       from '../imports/ui/pages/MyProgress.jsx';
-import MyProgressTemp   from '../imports/ui/pages/MyProgressTemp.jsx';
 import MyCoach          from '../imports/ui/pages/MyCoach.jsx';
 import ModuleParser     from '../imports/ui/pages/modules/ModuleParser.jsx';
 import SubmoduleParser  from '../imports/ui/pages/modules/SubmoduleParser.jsx';
@@ -181,17 +180,17 @@ FlowRouter.route('/:language/mycoach/:token/module/:module/:submodule', {
 // Route when token is passed
 FlowRouter.route('/:token', {
   name: 'MyProgress',
-  action(){ mount( App, { content: <MyProgressTemp /> })}
+  action(){ mount( App, { content: <MyProgress /> })}
 })
 
 // Route when language and token are passed: these are the parameters that should always be passed, previous two routings should be obsolete
 FlowRouter.route('/:language/:token', {
   name: 'MyProgress',
-  action(){ mount( App, { content: <MyProgressTemp /> })}
+  action(){ mount( App, { content: <MyProgress /> })}
 })
 
 // Route when language and token are passed: these are the parameters that should always be passed, previous two routings should be obsolete
 FlowRouter.route('/:language/myprogress/:token', {
   name: 'MyProgress',
-  action(){ mount( App, { content: <MyProgressTemp /> })}
+  action(){ mount( App, { content: <MyProgress /> })}
 })

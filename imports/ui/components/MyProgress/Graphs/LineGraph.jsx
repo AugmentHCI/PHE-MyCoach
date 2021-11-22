@@ -1,278 +1,100 @@
-import React, { Component } from 'react';
-import { ResponsiveLine } from '@nivo/line';
-import { getParameterData } from '../../../../api/processors/MyProgressProcessor';
+import React from 'react';
+import { DualAxes, Line } from '@ant-design/charts';
+import { getParameterData, parameters } from '../../../../api/processors/MyProgressProcessor';
 import { getFitBitDataWeekly } from '../../../../api/processors/MyProgressFitBitProcessor';
-import i18n from 'meteor/universe:i18n';
-import "../../../../../i18n/nl.i18n.json";
-import "../../../../../i18n/fr.i18n.json";
-import "../../../../../i18n/en.i18n.json";
 
-const T = i18n.createComponent("Common");
+import { UserQuestions } from "../../../../api/processors/QuestionnaireProcessor";
 
-//null = niet ingevuld die dag
-//const ordinalData = {"Niet vermoeid": 1, "Enigszins vermoeid": 2, "Tamelijk vermoeid": 3, "Erg vermoeid": 4}
-//const ordinalData = {"Niet": 1, "Enigszins": 2, "Tamelijk": 3, "Zeer": 4}
-const ordinalData = {"0": 1, "+": 2, "++": 3, "+++": 4}
-export default class LineGraph extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      parameter: this.props.parameter,
-      comparisonParameter: "",
-      data: this.getData(this.props.parameter),
-      comparisonData: [],
-    };
-  }
 
-  componentDidMount(){
-    this.updateData(this.props.parameter, false);
-    /* If this.props.comparison = true -> graph for the insights tab, this one contains two parameters to compare */
-    if(this.props.comparison !== ""){
-      this.updateData(this.state.comparisonParameter, true);
-    }
-    i18n.setLocale(this.props.locale);
-  }
+export default function LineGraph({parameter, data, compareParameter}) {
 
-  /* Check if data in MyProgress parent component has changed -> if so: update this component with new data */
-  componentDidUpdate(prevProps) {
-    if (prevProps.parameter != this.props.parameter) {
-      this.setState({data: this.getData(this.props.parameter)})
-    }
-    if (prevProps.comparison != this.props.comparison && this.props.comparison !== "") {
-      this.setState({comparisonData: this.getData(this.props.comparison)})
-    }
-    if (this.props.data !== prevProps.data) {
-      this.updateData(this.props.parameter, false);
-      if (this.props.comparison) {
-        this.updateData(this.props.comparison, true);
+  const userQuestions = new UserQuestions(data);
+  userQuestions.parseUserQuestions().groupUserQuestions();
+
+  const parsedData = userQuestions.getQuestionData("phe-dagelijks", questionMetadata[parameter], parameter, "22-11-2021", "29-11-2021").result;
+  const data2 = compareParameter ? userQuestions.getQuestionData("phe-dagelijks", questionMetadata[compareParameter], compareParameter, "22-11-2021", "29-11-2021").result : undefined;
+  if (data2) parsedData.forEach((entry, index) => {
+    if (data2) entry.value2 = data2[index]?.value ? data2[index]?.value : 0;
+  })
+
+  const param1metadata = parameters.filter(param => {return param.id === parameter})[0];
+  const color1 =  getComputedStyle(document.documentElement).getPropertyValue(param1metadata.color);
+  const param2metadata = compareParameter ? parameters.filter(param => {return param.id === compareParameter})[0] : undefined;
+  const color2 =  compareParameter ? getComputedStyle(document.documentElement).getPropertyValue(param2metadata.color) : undefined;
+
+
+  const dualAxesConfig = compareParameter ? {
+    data: [parsedData, parsedData],
+    xField: 'date',
+    yField: ['value', 'value2'],
+    smooth: true,
+    meta: {
+      value: { alias: param1metadata.measure },
+      value2: { alias: param2metadata.measure }
+    },
+    yAxis: {
+      value: { 
+        max: param1metadata.max,
+        title: {
+          text: param1metadata.measureFull ? param1metadata.measureFull : param1metadata.measure,
+          autoRotate: true,
+        }
+      },
+      value2: { 
+        max: param2metadata.max,
+        title: {
+          text: param2metadata.measureFull ? param2metadata.measureFull : param2metadata.measure,
+          autoRotate: true,
+        }
       }
-    }
-  } 
+    },
+    geometryOptions: [
+      {
+        geometry: 'line',
+        smooth: true,
+        color: color1,
+        lineStyle: {
+          lineWidth: 3,
+        },
+      },
+      {
+        geometry: 'line',
+        smooth: true,
+        color: color2,
+        lineStyle: {
+          lineWidth: 3,
+        },
+      },
+    ],
+  } : {};
 
-  getData = (parameter) => {
-    if (parameter === "distance" || parameter === "steps") return getFitBitDataWeekly(this.props.fitData, parameter);
-    return getParameterData(this.props.data, parameter, "week");
-  }
+  const lineConfig = {
+    data: parsedData,
+    xField: 'date',
+    yField: 'value',
+    smooth: true,
+    yAxis: {
+      max: param1metadata.max,
+    },
+  };
 
-  updateData = (parameter, comparison) => {
-    if (!comparison) {
-      this.setState({parameter: parameter, data: this.getData(parameter)});
-    } else {
-      this.setState({comparisonData: this.getData(parameter)});
-    }
-  }
+  console.log(dualAxesConfig)
 
-  //called when a different parameter is selected in dropdown
-  updateParameter = (newParameter, comparison) => {
-    if (!comparison) {
-      this.setState({parameter: newParameter})
-    } else {
-      this.setState({comparisonParameter: newParameter})
-    }
-    this.updateData(newParameter, comparison);
-  }
+  if (compareParameter) return (<div style={{height: "250px", padding: "0 10px"}}>
+    <DualAxes {...dualAxesConfig} />
+  </div>)
 
-  //values = [1,2,3,4] for physical and mental tiredness, values = [0, ..., 100] for satisfaction and pain intensity
-  getGridYValues = (data) => {
-    if (data.max===100) { return [0,10,20,30,40,50,60,70,80,90,100] } 
-    else if (data.max===4) { return [1,2,3,4] }
-    else { return [data.min, 2, data.max] }
-  }
+  return (<div style={{height: "250px", padding: "0 10px"}}>
+    <Line {...lineConfig} />
+  </div>)
+}
 
-  getLineData = () => {
-    if(!this.props.comparison){
-      return [this.state.data]
-    } else {
-      return [this.state.data, this.state.comparisonData]
-    }
-  }
-
-  //when two parameters are compared: color corresponding axes and titles in the color of the parameter
-  getColor = (data) => {
-    if(!this.props.comparison){
-      return "rgb(51,51,51)"
-    } else {
-      return getComputedStyle(document.documentElement).getPropertyValue(data.color)
-    }
-  }
-
-  getAxisTitleTranslation = () => {
-    return i18n.getTranslation('Common', 'myProgress.axes.day');
-  }
-
-  /**
-   * Turns the number of steps into a 'k' representation if larger than 1000.
-   * Example: transformStepsValue(12000) = 12k, transformStepsValue(850) = 850
-   * @param {Int} value Number of steps 
-   */
-  transformStepsValue(value) {
-    return Math.abs(value) > 999 ? Math.sign(value)*((Math.abs(value)/1000).toFixed(1)) + 'k' : Math.sign(value)*Math.abs(value);
-  }
-
-  render() {
-    return(
-      <div style={{height: "250px", width: "device-width"}}>
-        <div style={{position: "relative", height: "100%"}}>
-          <div style={{position: "absolute", zIndex: 0, top: 0, left: 0, right: 0, bottom: 0}}>
-            <ResponsiveLine
-              //bottom axis
-              data={[this.state.data]}
-              margin={{ top: 10, right: 70, bottom: 50, left: 70 }}
-              xScale={{ type: 'point' }}
-              yScale={{ type: 'linear', min: this.state.data.min, max: this.state.data.max, stacked: false, reverse: false }}
-              curve="monotoneX"
-              axisBottom={{
-                orient: 'bottom',
-                tickSize: 3,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: this.getAxisTitleTranslation(), 
-                legendOffset: 40,
-                legendPosition: 'middle'
-              }}
-              axisLeft={null}
-              enableGridX={false}
-              enableGridY={false}
-              theme={{
-                axis: {
-                  domain: {
-                    line: {
-                      stroke: "lightgrey"
-                    }
-                  },
-                }
-              }}
-            />
-          </div>
-
-          <div style={{position: "absolute", zIndex: 1, top: 0, left: 0, right: 0, bottom: 0}}>
-            <ResponsiveLine
-              //line graph parameter one
-              data={[this.state.data]}
-              margin={{ top: 10, right: 70, bottom: 50, left: 70 }}
-              xScale={{ type: 'point' }}
-              yScale={{ type: 'linear', min: this.state.data.min, max: this.state.data.max, stacked: false, reverse: false }}
-              curve="monotoneX"
-              axisBottom={null}
-              axisLeft={{
-                orient: 'left',
-                tickSize: 3,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: this.state.data.measure,
-                legendOffset: -40,
-                legendPosition: 'middle',
-                format: value => {
-                    if (this.state.data.max==100) { return value }
-                    else if (this.state.data.max==4) { return Object.keys(ordinalData).find(key => ordinalData[key] === value) }
-                    else if (this.state.data.id === "steps") { return this.transformStepsValue(value) }
-                    else { return value }
-                  },
-              }}
-              enableGridX={false}
-              enableGridY={false}
-              gridYValues={this.getGridYValues(this.state.data)}
-              colors={d => getComputedStyle(document.documentElement).getPropertyValue(d.color)}
-              isInteractive={false}
-              theme={{
-                grid: {
-                  line: {
-                    stroke: "lightgrey",
-                    strokeWidth: 1,
-                    strokeDasharray: "2 4"
-                  }
-                },
-                axis: {
-                  domain: {
-                    line: {
-                      stroke: "lightgrey"
-                    }
-                  },
-                  ticks: {
-                    line: {
-                      stroke: this.getColor(this.state.data)
-                    },
-                    text: {
-                      fill: this.getColor(this.state.data)
-                    }
-                  },
-                  legend: {
-                    text: {
-                      fill: this.getColor(this.state.data)
-                    }
-                  }
-                }
-              }}
-            />
-          </div>
-
-          <div style={{position: "absolute", zIndex: 2, top: 0, left: 0, right: 0, bottom: 0}}>
-            {this.props.comparison &&
-            <ResponsiveLine
-              //linegraph parameter two
-              data={[this.state.comparisonData]}
-              margin={{ top: 10, right: 70, bottom: 50, left: 70 }}
-              xScale={{ type: 'point' }}
-              yScale={{ type: 'linear', min: this.state.comparisonData.min, max: this.state.comparisonData.max, stacked: false, reverse: false }}
-              curve="monotoneX"
-              axisBottom={null}
-              axisLeft = {null}
-              axisRight={{
-                orient: 'right',
-                tickSize: 3,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: this.state.comparisonData.measure,
-                legendOffset: 40,
-                legendPosition: 'middle',
-                format: value => {
-                    if(this.state.comparisonData.max==100){
-                      return value;
-                    }else if (this.state.data.max==4){
-                      return Object.keys(ordinalData).find(key => ordinalData[key] === value);
-                    }
-                    else {return value;}
-                  },
-              }}
-              enableGridX={false}
-              enableGridY={false}
-              gridYValues={this.getGridYValues(this.state.comparisonData)}
-              colors={d => getComputedStyle(document.documentElement).getPropertyValue(d.color)}
-              isInteractive={false}
-              theme={{
-                grid: {
-                  line: {
-                    stroke: "lightgrey",
-                    strokeWidth: 1,
-                    strokeDasharray: "2 4"
-                  }
-                },
-                axis: {
-                  domain: {
-                    line: {
-                      stroke: "lightgrey"
-                    }
-                  },
-                  ticks: {
-                    line: {
-                      stroke: this.getColor(this.state.comparisonData)
-                    },
-                    text: {
-                      fill: this.getColor(this.state.comparisonData)
-                    }
-                  },
-                  legend: {
-                    text: {
-                      fill: this.getColor(this.state.comparisonData)
-                    }
-                  }
-                }
-              }}
-            />
-            } 
-          </div>
-        </div>
-      </div>
-    )
-  }
+const questionMetadata = {
+  "t": "t",
+  "stress": "stress",
+  "ipaqd1": "ipaqd",
+  "ipaqd2": "ipaqd",
+  "ipaqd3": "ipaqd",
+  "ipaqd4": "ipaqd",
+  "vas": "vas"
 }

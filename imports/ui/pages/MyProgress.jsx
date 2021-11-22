@@ -25,7 +25,7 @@ import WeekPicker from '../components/MyProgress/Input/WeekPicker';
 import MonthPicker from '../components/MyProgress/Input/MonthPicker';
 import ParameterPicker from '../components/MyProgress/Input/ParameterPicker.jsx';
 import LineGraph from '../components/MyProgress/Graphs/LineGraph.jsx';
-import ActivityGraph from '../components/MyProgress/Graphs/ActivityGraph.jsx';
+import EmotionsGraph from '../components/MyProgress/Graphs/EmotionsGraph.jsx';
 import MonthlyActivityGraph from '../components/MyProgress/Graphs/MonthlyActivityGraph.jsx';
 import CalendarGraph from '../components/MyProgress/Graphs/CalendarGraph.jsx';
 import { StepsGraph } from '../components/MyProgress/Graphs/StepsGraph.jsx';
@@ -39,7 +39,6 @@ import Illustration from '../components/Illustrations/Illustration.jsx';
 /* Styles */
 import './MyProgress.scss';
 import '../components/MyProgress/Input/Dropdown.css';
-import { UserDataProcessor } from '../../api/processors/UserDataProcessor';
 
 
 // Instance of React translate component, "Common" refers to the namespace of the i18n files
@@ -73,7 +72,7 @@ export default class MyProgress extends Component {
       callError: "",
       devEnvironment: false,
       tap_count: 0,
-      didSeeFitBitPopup: null
+      didSeeFitBitPopup: null,
     };
   }
 
@@ -400,13 +399,11 @@ export default class MyProgress extends Component {
             <LineGraph 
               parameter = {this.state.parameter}
               data = {this.state.data}
-              fitData = {this.state.fitData}
-              comparison = {this.state.compareParameter}
-              locale = {i18n.getLocale()}
+              compareParameter = {this.state.compareParameter}
             />
         </Card>
         <Card title="Mijn Emoties" underline>
-          <ActivityGraph 
+          <EmotionsGraph 
             data = {this.state.data}
             locale = {i18n.getLocale()}
           />

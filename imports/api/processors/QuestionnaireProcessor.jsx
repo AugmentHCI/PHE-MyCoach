@@ -1,11 +1,168 @@
 import moment from "moment";
 import { questionnaireCodes, fillerQuestionCodes } from "../questionnaireCodes/questionnaireCodes";
+import { dateComesAfter, dateComesBefore, daysBetween } from "../Moment";
 
 export class UserQuestions {
 
     constructor(questions) {
+        this.questions = questions;
+        this.parsedQuestions = undefined;
+        this.groupedQuestions = undefined;
+        /* Result contains the most recent operation */
         this.result = questions;
-        console.log(questions)
+    }
+    
+    parseUserQuestions() {
+        let parsedQuestions = [];
+        for (const question of this.questions) {
+            /* Set date and answer */
+            if (question.vraag.split("_").length === 0 || question.vraag.split("_")[1] !== "f") parsedQuestions.push({
+                questionnaire: question.vragenlijstNaam,
+                questioncode: question.vraag,
+                subquestionnaire: this.#getSubquestionnaire(question.vraag),
+                date: moment(question.datum).subtract(2, 'hours').format("DD-MM-YYYY"),
+                answer: this.#processAnswer(question.mogelijkAntwoord)
+            })
+        }
+        this.parsedQuestions = parsedQuestions;
+        this.result = parsedQuestions;
+        return this;
+    }
+
+    groupUserQuestions() {
+        /* Pre-requisite - Raw question data has to be parsed */
+        if (!this.parsedQuestions) this.parseUserQuestions();
+        /* Group user questions */
+        let questionnaires = { "profiel": {}, "baseline": {}, "followup": {}, "phe-dagelijks": {} }
+        this.parsedQuestions?.forEach(question => { this.#addQuestionToQuestionnaire(question, questionnaires[question.questionnaire]) });
+        questionnaires.followup = this.#groupFollowup(questionnaires.followup);
+        /* Save result */
+        this.groupedQuestions = questionnaires;
+        this.result = questionnaires;
+        return this;
+    }
+
+    getQuestionData(questionnaire, subquestionnaire, question, from, to) {
+        /* Pre-requisite - Raw question data has to be parsed and grouped */
+        if (!this.groupedQuestions) this.groupUserQuestions();
+        /* Get subquestionnaire */
+        const userQuestionnaire = this.groupedQuestions?.[questionnaire];
+        console.log(this.groupedQuestions)
+        if (!userQuestionnaire) { 
+            console.error(`QuestionnaireProcessor - getSubquestionnaireData: questionnaire ${questionnaire} is not valid.`); 
+            this.result = undefined;
+            return this;
+        }
+
+        let result = [];
+        let date = moment(from, "DD-MM-YYYY");
+        do {
+            const dateQuestionnaire = userQuestionnaire[date.format("DD-MM-YYYY")];
+            if (!dateQuestionnaire) result.push({date: date.format("ddd").replace(".", ""), value: 0});
+            else {
+                Object.entries(dateQuestionnaire).forEach(([subquestionnaire_q, questions]) => {
+                    if (subquestionnaire_q === subquestionnaire) {
+                        questions.forEach(question_q => { if (question_q.questioncode === question) result.push({date: date.format("ddd").replace(".", ""), value: question_q.answer})})
+                    }
+                })
+            }
+            date = date.add(1, "days");
+        }
+        while (!dateComesAfter(date.format("DD-MM-YYYY"), to, "DD-MM-YYYY"))
+        /* Save result */
+        this.result = result;
+        return this;
+    }
+
+    tagUserQuestions(userId, rrnr) {
+        let earliestDate = undefined;
+        let latestDate = undefined;
+        for (const questionnaireType of Object.keys(this.result)) {
+            for (const questionnaireDate of Object.keys(this.result[questionnaireType])) {
+                if (dateComesAfter(questionnaireDate, latestDate, "DD-MM-YYYY"))    latestDate   = questionnaireDate;
+                if (dateComesBefore(questionnaireDate, earliestDate, "DD-MM-YYYY")) earliestDate = questionnaireDate;
+            }
+        }
+        const period = daysBetween(earliestDate, latestDate, true, "DD-MM-YYYY");
+        const followupsPercent = Math.round(Object.keys(this.result.followup).length / Math.floor(period / 42) * 10000 ) / 100;
+        this.result["info"] = {
+            rrnr: rrnr, 
+            user: userId, 
+            from: earliestDate, 
+            to: latestDate, 
+            period: period, 
+            dailiesDone: Object.keys(this.result.daily).length,
+            dailiesPercent: Math.round(Object.keys(this.result.daily).length / period * 10000) / 100,
+            followupsReceived: Math.floor(period / 42),
+            followupsDone: Object.keys(this.result.followup).length,
+            followupsPercent: isNaN(followupsPercent) ? 0 : followupsPercent
+        }
+        return this;
+    }
+
+    #processAnswer = function(answer) {
+        if (!answer) return answer;
+        let processedAnswer = answer.replaceAll(" ", "");
+        /* Fix for vas including "suggesties." */
+        processedAnswer = answer.replaceAll("suggesties.", "");
+        /* Fix for VAS-slider values (map values to 0 or 100) */
+        if (["bb11_a", "bb21_a", "t1_a", "vas1_a"].includes(processedAnswer)) return 0;
+        if (["bb12_a", "bb22_a", "t2_a", "vas2_a"].includes(processedAnswer)) return 100;
+        return isNaN(processedAnswer) ? processedAnswer : parseInt(processedAnswer);
+    }
+
+    #getSubquestionnaire = function(questionCode) {
+        return questionCode.split(/(\d+)/)[0];
+    }
+
+    #groupFollowup = function(followup) {
+        let newFollowup = {};
+        let dates = Object.keys(followup);
+        while (dates.length > 0) {
+            console.log(`At start: ${JSON.stringify(dates)}`);
+            const date = dates.pop(); /* Date currently checking */
+            console.log(`Popped: ${date} Current: ${JSON.stringify(dates)}`);
+            let questionnaire = followup[date]; /* Corresponding questionnaire */
+            for (let i = 0; i < dates.length; i++) {
+                const otherDate = dates[i];
+                if (daysBetween(date, otherDate, true, "DD-MM-YYYY") < 10) {
+                    console.log(dates);
+                    console.log(`Removing ${otherDate}`)
+                    dates.splice(i, 1); /* Remove date */
+                    i--;
+                    console.log(dates);
+                    questionnaire = this.#mergeQuestionnaires(questionnaire, followup[otherDate]) /* Merge questionnaires */
+                }
+            }
+            console.log(`Adding date ${date}`)
+            newFollowup[date] = questionnaire; /* Add (merged) questionnaire to new dictionary */
+        }
+        return newFollowup;
+    }
+
+    #mergeQuestionnaires = function(q1, q2) {
+        const newQuestionnaire = {...q1};
+        Object.keys(q2).forEach(q => {
+            if (Object.keys(newQuestionnaire).includes(q)) newQuestionnaire[q] = newQuestionnaire[q].concat(q2[q]);
+            else { newQuestionnaire[q] = q2[q] }
+        })
+        return newQuestionnaire;
+    }
+
+    #addQuestionToQuestionnaire = function(question, questionnaire) {
+        if (questionnaire[question.date] && questionnaire[question.date][question.subquestionnaire]) 
+            questionnaire[question.date][question.subquestionnaire].push({questioncode: question.questioncode, answer: question.answer});
+        else if (questionnaire[question.date]) 
+            questionnaire[question.date][question.subquestionnaire] = [{questioncode: question.questioncode, answer: question.answer}];
+        else { questionnaire[question.date] = {[question.subquestionnaire]: [{questioncode: question.questioncode, answer: question.answer}]} }
+    }
+}
+
+
+export class UserQuestionsOld {
+
+    constructor(questions) {
+        this.result = questions;
     }
     
     parseUserQuestions() {
@@ -116,43 +273,4 @@ export class UserQuestions {
             questionnaire[question.date][question.subquestionnaire] = [{questioncode: question.questioncode, answer: question.answer}];
         else { questionnaire[question.date] = {[question.subquestionnaire]: [{questioncode: question.questioncode, answer: question.answer}]} }
     }
-}
-
-/**
- * Returns true if date1 comes strictly after date2, false otherwise.
- * @param {String} date1 The first date
- * @param {String} date2 The second date, or undefined
- * @returns 
- */
-function dateComesAfter(date1, date2, format=undefined) {
-    if (date2 === undefined || date2 === null) return true;
-    if (format) return moment(date1, format).diff(moment(date2, format)) > 0;
-    return moment(date1).diff(moment(date2)) > 0;
-}
-
-/**
- * Returns true if date1 comes strictly before date2, false otherwise.
- * @param {String} date1 The first date
- * @param {String} date2 The second date, or undefined
- * @returns 
- */
- function dateComesBefore(date1, date2, format=undefined) {
-    if (date2 === undefined || date2 === null) return true;
-    if (format) return moment(date1, format).diff(moment(date2, format)) < 0;
-    return moment(date1).diff(moment(date2)) < 0;
-}
-
-/**
- * Returns the days between two days (as either an absolute or relative value).
- * @param {String} date1     The first date
- * @param {String} date2     The second date
- * @param {Boolean} absolute Whether the days between needs to be absolute or relative (negative if date2 comes before date1).
- * @param {String} format    Format of the date objects to be interpreted by moment.
- * @returns 
- */
-function daysBetween(date1, date2, absolute=true, format=undefined) {
-    let difference = format ? moment(date1, format).diff(moment(date2, format)) : moment(date1).diff(moment(date2));
-    let daysBetweenDates = Math.round(moment.duration(difference).asDays());
-    if (absolute) return Math.abs(daysBetweenDates)+1;
-    return daysBetweenDates+1;
 }
