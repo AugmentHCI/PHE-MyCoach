@@ -33,9 +33,9 @@ export class UserQuestions {
         /* Pre-requisite - Raw question data has to be parsed */
         if (!this.parsedQuestions) this.parseUserQuestions();
         /* Group user questions */
-        let questionnaires = { "profiel": {}, "baseline": {}, "followup": {}, "phe-dagelijks": {} }
+        let questionnaires = { "phe-profiel": {}, "phe-voorgeschiedenis": {}, "phe-6-wekelijks": {}, "phe-dagelijks": {} }
         this.parsedQuestions?.forEach(question => { this.#addQuestionToQuestionnaire(question, questionnaires[question.questionnaire]) });
-        questionnaires.followup = this.#groupFollowup(questionnaires.followup);
+        questionnaires["phe-6-wekelijks"] = this.#groupFollowup(questionnaires["phe-6-wekelijks"]);
         /* Save result */
         this.groupedQuestions = questionnaires;
         this.result = questionnaires;

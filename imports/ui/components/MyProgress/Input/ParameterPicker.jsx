@@ -8,7 +8,7 @@ import "../../../../../i18n/en.i18n.json";
 
 const T = i18n.createComponent("Common");
 
-export default function ParameterPicker({onChange, dontDisplay, currentParameter}) {
+export default function ParameterPicker({onChange, dontDisplay, currentParameter, monthly=false}) {
 
     const title = currentParameter === "" ? "Geen" : parameters.filter((parameter) => parameter.id === currentParameter)[0].measure;
 
@@ -19,7 +19,7 @@ export default function ParameterPicker({onChange, dontDisplay, currentParameter
     return (
         <DropdownButton variant="dropdown" title={title}>
             {parameters.map(parameter => {
-                if (currentParameter !== parameter.id && dontDisplay !== parameter.id) 
+                if (currentParameter !== parameter.id && dontDisplay !== parameter.id && (!monthly || monthly && !parameter.id.includes("ipaqd")) ) 
                     return <Dropdown.Item key={parameter.id} onClick={() => handleChange(parameter.id)}>{parameter.measure}</Dropdown.Item>
             })}
         </DropdownButton>

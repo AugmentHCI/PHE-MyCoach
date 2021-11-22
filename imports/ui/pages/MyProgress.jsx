@@ -115,7 +115,8 @@ export default class MyProgress extends Component {
 
   /* Called when you switch between weekly and monthly -> update data */
   updateTimeFrame = (newTimeFrame) => {
-    this.setState({timeFrame: newTimeFrame})
+    this.setState({timeFrame: newTimeFrame});
+    if (newTimeFrame === 'monthly' && ["ipaqd1", "ipaqd2", "ipaqd3"].includes(this.state.compareParameter)) this.setState({compareParameter: ""});
     
     const newPeriod = this.getSelectedPeriod(this.state.selectedDate, newTimeFrame);
     this.setState({selectedPeriod: newPeriod});
@@ -375,6 +376,7 @@ export default class MyProgress extends Component {
                 currentParameter={this.state.compareParameter} 
                 dontDisplay={this.state.parameter} 
                 onChange={this.handleCompareParameterChange}
+                monthly={this.state.timeFrame === "monthly"}
                 style={{width: compareWidth}}>
               </ParameterPicker>
             </div>
@@ -400,6 +402,8 @@ export default class MyProgress extends Component {
               parameter = {this.state.parameter}
               data = {this.state.data}
               compareParameter = {this.state.compareParameter}
+              from={moment(this.state.selectedPeriod[0], "YYYY-MM-DD").format("DD-MM-YYYY")}
+              to={moment(this.state.selectedPeriod[1], "YYYY-MM-DD").format("DD-MM-YYYY")}
             />
         </Card>
         <Card title="Mijn Emoties" underline>

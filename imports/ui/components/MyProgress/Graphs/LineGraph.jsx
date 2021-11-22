@@ -6,13 +6,13 @@ import { getFitBitDataWeekly } from '../../../../api/processors/MyProgressFitBit
 import { UserQuestions } from "../../../../api/processors/QuestionnaireProcessor";
 
 
-export default function LineGraph({parameter, data, compareParameter}) {
+export default function LineGraph({parameter, data, compareParameter, from, to}) {
 
   const userQuestions = new UserQuestions(data);
   userQuestions.parseUserQuestions().groupUserQuestions();
 
-  const parsedData = userQuestions.getQuestionData("phe-dagelijks", questionMetadata[parameter], parameter, "22-11-2021", "29-11-2021").result;
-  const data2 = compareParameter ? userQuestions.getQuestionData("phe-dagelijks", questionMetadata[compareParameter], compareParameter, "22-11-2021", "29-11-2021").result : undefined;
+  const parsedData = userQuestions.getQuestionData("phe-dagelijks", questionMetadata[parameter], parameter, from, to).result;
+  const data2 = compareParameter ? userQuestions.getQuestionData("phe-dagelijks", questionMetadata[compareParameter], compareParameter, from, to).result : undefined;
   if (data2) parsedData.forEach((entry, index) => {
     if (data2) entry.value2 = data2[index]?.value ? data2[index]?.value : 0;
   })
@@ -73,6 +73,7 @@ export default function LineGraph({parameter, data, compareParameter}) {
     xField: 'date',
     yField: 'value',
     smooth: true,
+    color: color1,
     yAxis: {
       max: param1metadata.max,
     },
