@@ -98,7 +98,7 @@ function sendNotification({rrnrs, type}) {
 }
 
 async function sendUserNotifications() {
-  const currentTime = moment(new Date());
+  const currentTime = moment(new Date()).utcOffset('+0100');
   const remainder = 30 - (currentTime.minute() % 30);
   const roundedTime = remainder <= 15 ? 
     moment(currentTime).add(remainder, "minutes").format("HH:mm") : 
