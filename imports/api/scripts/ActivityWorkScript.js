@@ -400,6 +400,11 @@ const ACTMOD3ERGO = {
                     content: ["Een slappe of een te gespannen lichaamshouding", "Snelle of bruuske bewegingen", "Een zware last tillen vanuit een ongunstige houding","Langdurig in eenzelfde houding staan", "Repetitieve bewegingen"]
                 },
                 {
+                    type: "Image",
+                    width: "60",
+                    link: "/images/activitywork/warning.jpg"
+                },
+                {
                     type: "Text",
                     content: "Door aandacht te besteden aan je houding, je bewegingen en de uitvoering van je handelingen kun je de fysieke belasting verminderen.",
                 },
@@ -469,6 +474,15 @@ const ACTMOD3ERGO = {
             ]
         },
         {
+            title: "Basisprincipes van de ergonomie",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Om ergonomisch te werken moet je rekening houden met 2 zaken, namelijk de omgeving en je eigen handelen. Daarom leren we jou de ergonomische basisprincipes om je omgeving en je eigen handelen aan te passen."
+                },
+            ]
+        },
+        {
             title: "Basisprincipes om je omgeving aan te passen",
             cardContents: [
                 {
@@ -476,8 +490,18 @@ const ACTMOD3ERGO = {
                     content: "Wanneer je ergonomisch werkt, kan je er zelf voor zorgen dat de belasting minder zwaar doorweegt. Zorg er eerst voor dat de omstandigheden zo ergonomisch mogelijk zijn. Enkele tips:"
                 },
                 {
-                    type: "List",
-                    content: ["Voorzie de juiste hulpmiddelen en /of materiaal en gereedschap (bv. bij het dweilen een voldoende lange steel, liefst tot aan je neus)", "Schuif, duw, of trek een last", "Verwijder obstakels, hindernissen", "Werk op een goede hoogte", "Vraag hulp", "Creëer bewegingsruimte", "Richt de werkplek goed in", "Verklein de reikafstand", "Maak de last lichter", "Beperk de loopafstand met de last", "Wissel houdingen/activiteiten af en beweeg", "Draag aangepaste kledij en schoenen"]
+                    type: "Story",
+                    content: [
+                        {image: "/images/activitywork/wrench.jpg", title: "De juiste toolbox", text: "Voorzie de juiste hulpmiddelen, materialen en gereedschappen. Gebruik bij het dweilen bijvoorbeeld een voldoende lange steel (liefst tot aan je neus). Zorg ervoor dat je zelf ook aangepaste kledij en schoenen draagt."}, 
+                        {image: "/images/activitywork/carrying.jpg", title: "Waarom zware lasten dragen?", text: "Ga zuinig om met je energie. Probeer lasten daarom te schuiven, duwen of trekken in plaats van te dragen. Misschien zijn er wel hulpmiddelen die je kunnen helpen?"},
+                        {image: "/images/activitywork/boxesstocked.jpg", title: "Verken het parcours", text: "Voordat je een last verplaatst verken je best eerst het parcours. Probeer obstakels en hindernissen op voorhand te verwijderen. Denk bijvoorbeeld aan dozen of meubilair die een doorgang versperren."},
+                        {image: "/images/activitywork/updown.jpg", title: "Omhoog of omlaag?", text: "Werk op een goede hoogte zodat je niet te diep moet bukken of te hoog moet reiken. Je kan ofwel de hoogte van het werkblad of de last proberen aan te passen, ofwel je eigen hoogte door bijvoorbeeld op een trapje te staan."},
+                        {image: "/images/activitywork/together.jpg", title: "Samen sterk", text: "Bij sommige taken is het aangewezen om deze met meerdere personen uit te voeren. Aarzel dus niet om hulp te vragen."},
+                        {image: "/images/activitywork/boxes.jpg", title: "Creëer beweegruimte", text: "Voorkom dat je je in bochten en ongemakkelijke houdingen moet wringen. Zorg er dus eerst voor dat je voldoende ruimte creëert om de taak zo ergonomisch mogelijk uit te voeren."},
+                        {image: "/images/activitywork/workplace.jpg", title: "Richt de werkplek goed in", text: "Probeer je werkplek zo in te delen dat je het meest gebruikte gereedschap binnen handbereik ligt. Zo verklein je de reikafstand en de belasting. Ruim ook je werkplek regelmatig op zodat er niets in de weg kan liggen."},
+                        {image: "/images/activitywork/pulling.jpg", title: "Maak de last lichter", text: "Moet je een zware last tillen of verplaatsen? Bekijk dan eerst of je de last lichter kan maken? Kan je bijvoorbeeld de last opsplitsen in stukjes? Kan je hulp van iemand krijgen? Of zijn er hulpmiddelen ter beschikking?"},
+                        {image: "/images/activitywork/maze.jpg", title: "Ga voor de kortste en veiligste weg", text: "Beperk de loopafstand met een last door op voorhand de meest efficiënte route te bepalen. Let wel op dat de route ook veilig is en zo min mogelijk hindernissen bevat."},
+                    ]
                 },
             ]
         },
@@ -488,33 +512,18 @@ const ACTMOD3ERGO = {
                     type: "Text",
                     content: "Daarnaast is het belangrijk om je eigen handelingen te optimaliseren. Gebruik onderstaande zes basisprincipes om een goede houding aan te nemen."
                 },
-            ]
-        },
-        {
-            title: "Welke sector",
-            cardContents: [
                 {
-                    type: "Text",
-                    content: "Duid aan welk van de drie activiteiten het beste past bij jouw situatie (werk en vrije tijd). Je kan meerdere activiteiten aanduiden, indien er meerdere voor jou van toepassing zijn."
-                },
-                {
-                    id: "ACT-MOD-3-MULTISELECT",
-                    type: "Multiple-Choice",
-                    options: [{id: "FYS_WORK", text: "Fysiek werk"}, {id: "CARE_WORK", text: "Zorghandelingen"}, {id: "OFFICE_WORK", text: "Kantoor/Bureauwerk"}],
-                    needsSelectedAtLeast: 1,
-                    needsSelectedAtMost: 2,
-                },
+                    type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/fys_principes.png",
+                }
             ]
-        },
-        {
-            title: "Principes voor fysiek werk",
-            titleCard: true,
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
-            cardContents: []
         },
         {
             title: "Principe 1 - Sta in evenwicht",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            titleCard: true
+        },
+        {
             cardContents: [
                 {
                     type: "Image",
@@ -525,7 +534,7 @@ const ACTMOD3ERGO = {
                     link: "/images/activitywork/gehurkt.jpg"
                 },
                 {
-                    id: "ACT-MOD-3-FYS-Q1",
+                    id: "ACT-MOD-3-PRINCIPLE-1-Q1",
                     type: "Question",
                     question: "Staan deze personen in evenwicht?",
                     options: ["Ja", "Nee"],
@@ -537,8 +546,7 @@ const ACTMOD3ERGO = {
             ]
         },
         {
-            showIfAnswered: ["ACT-MOD-3-FYS-Q1"],
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            showIfAnswered: ["ACT-MOD-3-PRINCIPLE-1-Q1"],
             cardContents: [
                 {
                     type: "Image",
@@ -555,44 +563,281 @@ const ACTMOD3ERGO = {
             ]
         },
         {
-            title: "Principe 2 - Houd gewrichten in neutrale zone",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
             cardContents: [
                 {
                     type: "Text",
-                    content: "De neutrale zone is die zone waarin je gewrichten het minst belast worden en je spieren het efficiëntst kunnen werken. Hou alvast rekening met de volgende basisprincipes:"
+                    content: "Ook voor mensen die werken in de zorg is het hanteren van een brede steunbasis belangrijk. Stel, je begeleidt een zorgvrager bij het stappen en deze verliest het evenwicht."
+                },
+                {
+                    type: "Image",
+                    link: ["/images/activitywork/zorglinks.jpg", "/images/activitywork/zorgrechts.jpg"]
+                },
+                {
+                    id: "ACT-MOD-3-PRINCIPLE-1-Q2",
+                    type: "Question",
+                    question: "In welke houding ga je de zorgvrager het beste kunnen opvangen?",
+                    options: ["Links", "Rechts"],
+                    correct: "Links",
+                    explanation: "Door je voeten in een voor- of zijwaartse spreidstand te zetten, vergroot je je steunvlak. Door je knieën licht te buigen, sta je stabieler en kun je onverwachte bewegingen en het gewicht van de zorgvrager beter opvangen. Dat is minder belastend voor je lichaam.   ",
+                    onCorrect: "Interdaad, in de linker houding!",
+                    onIncorrect: "Nee, in de linker houding."
+                }
+            ]
+        },
+        {
+            showIfAnswered: ["ACT-MOD-3-PRINCIPLE-1-Q2"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Het eerste basisprincipe kan ook worden toegepast door mensen met een zittende job zoals beeldschermwerk. In zittende positie zit je best op een stabiele stoel met je voeten plat op de grond. Een brede steunbasis zorgt er eveneens voor dat je goed ondersteund wordt in je zittende werkhouding."
+                },
+                {
+                    type: "Text",
+                    content: "Het is belangrijk om het zittend werken af te wisselen met bijvoorbeeld staand werken of vergaderen. Zet dus in op het variëren van je houding en bewegingen. Hier zijn enkele tips voor als je afwisselt tussen zittend en rechtstaand werk:"
                 },
                 {
                     type: "List",
-                    content: [[{type: "bold", content: "Wervelkolom"}, ": behoud zo veel mogelijk de neutrale krommingen"], [{type: "bold", content: "Knieën "}, {type: "italic", content: "(tijdens het tillen)"}, ": buig niet dieper dan 90°"], [{type: "bold", content: "Knieën "}, {type: "italic", content: "(tijdens het stilstaan)"}, ": buig knieën lichtjes en overstrek ze niet"], [{type: "bold", content: "Schouders"}, ": houd bovenarmen zo dicht mogelijk bij je romp, je schouder ontspannen (niet optrekken en lichtjes naar achteren)"], [{type: "bold", content: "Pols"}, ": behoud zo veel mogelijk de verticale stand van de pols (zoals een hand geven)"]]
+                    content: [
+                        "Zet je voeten op heupbreedte. Zo verdeel je het gewicht over je beide benen en voeten.",
+                        "Zoek af en toe een extra steunpunt. Je kan bijvoorbeeld tegen een tafel leunen.",
+                        "Varieer regelmatig van houding. Verplaats bijvoorbeeld je lichaamsgewicht van de ene naar het andere been.",
+                        "Buig lichtjes door de knieën.",
+                        "Voorkom een doorgezakte houding.",
+                        "Plaats je schouders in een ontspannen positie (niet optrekken en lichtjes naar achteren kantelen).",
+                        "Houd je kin lichtjes ingetrokken en omhoog. Dit is een kleine moeite, maar van groot belang voor een goede lichaamshouding.",
+                        "Bouw het afwisselen tussen zittend en rechtstaand werk op. Sta niet meer dan 30 minuten aan één stuk recht.",
+
+                    ]
+                },
+                {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/standup.jpg",
+                },
+                {
+                    type: "Text",
+                    content: "Vind je het moeilijk om tijdens het werk voldoende te bewegen en af te wisselen tussen verschillende houdingen? In de module bewegen krijg je tal van tips!"
+                },
+                {
+                    type: "Shortcut",
+                    module: "MOVEMENT",
+                    submodule: "MOV_MOD_3"
+                }
+            ]
+        },
+        {
+            title: "Principe 2 - Houd gewrichten in neutrale zone",
+            titleCard: true,
+        },
+        {
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "De neutrale zone is die zone waarin je gewrichten het minst belast worden en je spieren het efficiëntst kunnen werken. Bij fysiek zware jobs en zorgberoepen kan je alvast rekening houden met de volgende richtlijnen:"
+                },
+                {
+                    type: "List",
+                    content: [
+                        [{type: "bold", content: "Wervelkolom"}, ": behoud zoveel mogelijk de normale krommingen (onderrug hol, bovenrug bol en nek hol)."], 
+                        [{type: "bold", content: "Knieën "}, ": buig tijdens het tillen de knieën niet dieper dan 90°. Zorg er tijdens het rechtstaan voor dat je de knieën niet overstrekt. Buig ze daarom lichtjes."], 
+                        [{type: "bold", content: "Schouders"}, ": houd de bovenarmen zo dicht mogelijk bij je romp en ontspan je schouders (niet optrekken en lichtjes naar achteren kantelen)."], 
+                        [{type: "bold", content: "Pols"}, ": behoud zoveel mogelijk de verticale stand van de polsen. Beeld je in dat je een hand geeft."]]
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/back-2.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "Onderstaande filmpjes geven een illustratie van hoe je dit kan toepassen:"
+                },
+                {
+                    type: "Video",
+                    link: "https://player.vimeo.com/video/511472364"
+                },
+                {
+                    type: "Video",
+                    link: " https://player.vimeo.com/video/511472311"
                 },
             ]
         },
         {
-            title: "Principe 3 - Werk met handen dicht bij romp",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            title: "In de zorg",
             cardContents: [
                 {
                     type: "Text",
-                    content: "In het derde basisprincipe proberen we zo dicht mogelijk met de handen bij de romp te werken;  Dit verkleint de hefboom; hoe kunnen we dit nu doen?"
+                    content: "Werk je in de zorg? Dan hebben we nog enkele tips om het bed van de zorgvrager af te stellen op de ideale hoogte:"
+                },
+                {
+                    type: "Text",
+                    content: [
+                        "De ellebooghoogte is het standaard referentiepunt.",
+                        "Zet het bed hoger bij precisietaken (bijvoorbeeld wondverzorging) of het uitoefenen van horizontale krachten (bijvoorbeeld zijwaarts verplaatsen).",
+                        "Zet het bed lager bij taken die meer verticale krachten vereisen zoals reanimatie.",
+                        "Bij een handeling met een kleine en grote zorgverlener, breng je het bed op hoogte van de kleinste zorgverlener. De grootste kan door de benen gaan om op een juiste hoogte te werken."
+                    ]
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/zorgbed.jpg"
+                },
+            ]
+        },
+        {
+            title: "Op kantoor",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Ook voor mensen met een zittend beroep en beeldschermwerk is het belangrijk om de gewrichten in de neutrale zones te houden."
+                },
+                {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/beeldschermwerk_typen.jpg"
+                },
+                {
+                    id: "ACT-MOD-3-PRINCIPLE-2-Q1",
+                    type: "Question",
+                    question: "Neemt deze persoon een goede houding aan?",
+                    options: ["Ja", "Nee"],
+                    correct: "Nee",
+                    explanation: "Dit is geen ideale houding. Wanneer je werkt aan een laptop, is je nek voorovergebogen.",
+                    onCorrect: "Correct.",
+                    onIncorrect: "Niet correct."
+                }
+            ]
+        },
+        {
+            showIfAnswered: ["ACT-MOD-3-PRINCIPLE-2-Q1"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Als je gedurende meer dan 30 min aan één stuk gebruik maakt van een laptop is het aangewezen om een laptophouder, dockingstation (op hoogte) of een extra scherm te gebruiken. Plaats de bovenkant van het scherm op ooghoogte. Dit doe je in combinatie met een extern toetsenbord en muis. "
+                },
+                {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/beeldschermwerk_correct.jpg"
+                },
+            ]
+        },
+        {
+            cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/activitywork/zitten_incorrect.png"
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/zitten_correct.png"
+                },
+                {
+                    id: "ACT-MOD-3-PRINCIPLE-2-Q2",
+                    type: "Question",
+                    question: "Op welke van de bovenstaande twee foto's heeft de persoon haar bureaustoel goed ingesteld?",
+                    options: ["Bovenste foto", "Onderste foto"],
+                    correct: "Onderste foto",
+                    explanation: "Op de bovenste foto staat de bureaustoel te laag waardoor de knieën zich boven de heupen bevinden. Hierdoor wordt de rug afgevlakt en ga je doorhangen in de onderrug.",
+                    onCorrect: "Correct.",
+                    onIncorrect: "Niet correct."
+                }
+            ]
+        },
+        {
+            title: "Principe 3 - Werk met handen dicht bij romp",
+            titleCard: true,
+            showIfAnswered: ["ACT-MOD-3-PRINCIPLE-2-Q2"]
+        },
+        {
+            cardContents: [
+                {
+                    type: "Image",
+                    link: "/images/activitywork/zorgboven.jpg"
+                },
+                {
+                    type: "Image",
+                    link: "/images/activitywork/zorgonder.jpg"
+                },
+                {
+                    id: "ACT-MOD-3-PRINCIPLE-3-Q1",
+                    type: "Question",
+                    question: "Op welke van de bovenstaande twee foto's heeft de zorgverlener de meest ideale houding?",
+                    options: ["Bovenste foto", "Onderste foto"],
+                    correct: "Onderste foto",
+                    explanation: "Op de bovenste foto staat de zorgverlener dichter bij de zorgvrager, waardoor er met de handen dicht bij de romp gewerkt kan worden. Dit verkleint de belasting voor je lichaam.",
+                    onCorrect: "Correct.",
+                    onIncorrect: "Niet correct."
+                },
+            ]
+        },
+        {
+            showIfAnswered: ["ACT-MOD-3-PRINCIPLE-3-Q1"],
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Probeer maar eens een volle fles water 30 seconden omhoog te houden met je armen gestrekt voor je lichaam. Door het hefboomeffect is dit meer belastend dan wanneer je de fles dicht bij jezelf houdt. Probeer dus te werken met de handen dicht bij de romp. Je kan dit doen door het werk of de last dichter naar jou te brengen of door zelf dichter bij het werk of de last te staan. "
+                },
+                {
+                    type: "Text",
+                    content: "Hier zijn ook nog 2 filmpjes ter illustratie:"
+                },
+                {
+                    type: "Video",
+                    link: "https://player.vimeo.com/video/511472440"
+                },
+                {
+                    type: "Video",
+                    link: "https://player.vimeo.com/video/511472523"
+                },
+                {
+                    type: "Break"
+                },
+                {
+                    type: "Text",
+                    content: "Vermijd ook tijdens beeldschermwerk om langdurig met de handen ver van de romp te werken. Anders kan je niet de neutrale zones van de gewrichten bewaren."
+                },
+                {
+                    type: "Text",
+                    content: "Hier zijn enkele tips die kunnen helpen:"
+                },
+                {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/beeldschermwerk_voorover.jpg"
                 },
                 {
                     type: "List",
-                    content: ["Breng het werk of de last dicht naar je toe", "Verplaats je dichter naar het werk of naar de last"]
+                    content: ["Plaats het klavier voldoende kort (5 tot 15 cm) tegen de rand van je bureau met de muis er vlak naast.",
+                        "Zet je bureau op dezelfde hoogte als je ellebogen wanneer je ellebogen zich in 90° bevinden en je schouders ontspannen zijn.",
+                        "Is je bureautafel te hoog? Verhoog dan je stoel en gebruik een voetensteun.",
+                        "Is je bureautafel te laag? Probeer dan de tafel te verhogen door bijvoorbeeld blokjes onder de tafel te plaatsen.",
+                        "Kies liefst voor een bureaustoel met armsteunen. Zijn die er niet? Schuif dan met je buik tot tegen de rand van je bureau."
+                    ]
+                },
+                {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/beeldschermwerk_elleboog.jpg"
                 },
             ]
         },
         {
             title: "Principe 4 - Gebruik je lichaamsgewicht en beenspieren",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            titleCard: true
+        },
+        {
             cardContents: [
                 {
                     type: "Text",
-                    content: "Je beenspieren zijn de sterkste spieren in je lichaam. Gebruik deze zoveel mogelijk. Wanneer je iets moet tillen van de grond, buig dan goed door je knieën (buig niet dieper dan een hoek van 90° in de knieën) en breng je rug niet te ver naar voren. Je lichaamsgewicht kun je effectief inzetten tijdens het trekken en duwen."
+                    content: "Je beenspieren zijn de sterkste spieren in je lichaam. Gebruik deze zoveel mogelijk. Wanneer je iets moet tillen van de grond, buig dan goed door je knieën (buig niet dieper dan een hoek van 90° in de knieën) en behoud de natuurlijke krommingen van je rug."
                 },
                 {
                     type: "Image",
                     link: "/images/activitywork/pushing.jpg"
+                },
+                {
+                    type: "Text",
+                    content: "Je lichaamsgewicht kan je ook effectief inzetten tijdens het trekken en duwen. Hetzelfde geldt voor het verplaatsen van zorgvragers."
                 },
                 {
                     type: "Text",
@@ -612,9 +857,15 @@ const ACTMOD3ERGO = {
         },
         {
             title: "Principe 5 - Zet de beweging rustig in",
+            titleCard: true,
+        },
+        {
             showIfAnswered: ["ACT-MOD-3-FYS-Q2"],
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
             cardContents: [
+                {
+                    type: "Text",
+                    content: "Langzaam opbouwen van de kracht is de boodschap! Er is een spectaculair verschil tussen een snelle en rustige start bij tillen en duw- en trekbewegingen. Als je snel en hevig te werk gaat, ontstaan er enorme piekkrachten in je lichaam. Door een beweging rustig in te zetten verlaag je deze piekbelasting. Hier zijn enkele tips om dit aan te pakken:"
+                },
                 {
                     type: "List",
                     content: ["Sta in evenwicht", "Gebruik steeds twee (gestrekte) armen zodat schouders en rug symmetrisch worden belast", "Zet de beweging rustig in. Gebruik de 3 seconden-regel: neem altijd drie tellen de tijd om een kar rustig in  beweging te krijgen"]
@@ -627,7 +878,9 @@ const ACTMOD3ERGO = {
         },
         {
             title: "Principe 6 - Beweeg handen en voeten in dezelfde richting",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "FYS_WORK"}],
+            titleCard: true
+        },
+        {
             cardContents: [
                 {
                     type: "Image",
@@ -646,314 +899,106 @@ const ACTMOD3ERGO = {
                     explanation: "Beide personen roteren hun rug tijdens het uitvoeren van hun taak. Je beweegt je handen en voeten best in dezelde richting. Door handen en voeten in dezelfde richting te bewegen, vermijd je rotaties ter hoogte van de rug. Hierdoor zorg je ervoor dat het lichaam zich altijd mee verplaatst op een rugvriendelijke manier.",
                     onCorrect: "Nee, inderdaad.",
                     onIncorrect: "Juist niet."
-                }
+                },
+                {
+                    type: "Image",
+                    link: ["/images/activitywork/rugarmen1.png", "/images/activitywork/rugarmen2.png"]
+                },
             ]
         },
         {
-            title: "Principes voor kantoorwerk",
+            title: "Extra - Principes voor kantoorwerk",
             titleCard: true,
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            cardContents: []
+            showIfAnswered: ["ACT-MOD-3-FYS-Q3"]
         },
         {
-            title: "Principe 1 - Sta in evenwicht",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
+            title: "Stap 1: De bureaustoel en tafel",
             cardContents: [
-               {
-                   type: "Text",
-                   content: "In zittende positie zit je best op een stabiele stoel met je voeten plat op de grond. Een brede steunbasis zorgt er eveneens voor dat je goed ondersteunt wordt in je zittende werkhouding."
-               },
-               {
-                   type: "Text",
-                   content: "Het is belangrijk om het zittend werken af te wisselen met bv. staand werken of vergaderen. Waar kan je op letten wanneer je rechtstaand vergadert?"
-               },
                {
                    type: "List",
-                   content: ["Zet je voeten op heupbreedte", "Neem af en toe een steunpunt. Leun bv. tegen de tafel", ["Varieer regelmatig van houding houding ", {type:"italic", content: "(bijvoorbeeld: beweeg je lichaamsgewicht van het ene been naar het andere)"}]]
+                   content: [
+                    "Ga diep in de stoel zitten.",
+                    "Kies voor een open hoek: bovenbenen licht afhellend.",
+                    "Voor de zitdiepte moeten er 4 vingers tussen zitting en knieholte zijn.",
+                    "Zorg voor een goede rugsteun. Deze heeft een bolling tegen de lage rug of lende.",
+                    "Zet je bureau op dezelfde hoogte als je ellebogen wanneer je ellebogen zich in 90° bevinden en je schouders ontspannen zijn.",
+                    "Is je bureautafel te hoog? Verhoog dan je stoel en gebruik een voetensteun.",
+                    "Is je bureautafel te laag? Probeer dan de tafel te verhogen door bijvoorbeeld blokjes onder de tafel te plaatsen.",
+                    "Kies liefst voor een bureaustoel met armsteunen en plaats ze op ellebooghoogte. Zijn die er niet? Schuif dan met je buik tot tegen de rand van je bureau.",
+                    "Zit dynamisch en stel de bureaustoel in op het lichaamsgewicht."
+                   ]
                },
                {
-                type: "Text",
-                content: [{type:"bold", content:"Varieer - beweeg - doseer"}]
-                },
-                {
-                    type: "Text",
-                    content: "Probeer zo veel mogelijk te variëren van houding, beweeg en sta. Sta niet meer dan 30 min aan één stuk."
-                },
-                {
-                    type: "List",
-                    content: ["Verdeel je gewicht over je beide benen en voeten.", "Plaats je voeten op gelijke lijn met je schouders.", "Buig lichtjes door de knieën.", "Voorkom een ‘doorgezakte’ houding.", "Trek je schouderbladen naar achteren en werk aan je schouders door ze te laten ‘rollen’. Hoe doe je dat? Beweeg je schouders van voren naar achteren, ontspan ze en laat ze dan weer op hun plaats ‘vallen’.", "Hou je kin lichtjes ingetrokken en omhoog: een kleine moeite, maar van groot belang voor een goede lichaamshouding."]
-                }
-            ]
-        },
-        {
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Een goed evenwicht zoeken tussen zitten en staand werken is een uitdaging. Hieronder geven we enkele tips mee:"
-                },
-                {
-                    type: "TextBubble",
-                    content: "Een korte vergadering? Vergader eens staand. Zo kom je sneller tot betere besluiten en duurt het overleg korter."
-                },
-                {
-                    type: "TextBubble",
-                    content: "Integreer werkvormen die af en toe rechtstaan vereisen.",
-                    float: "right"
-                },
-                {
-                    type: "List",
-                    content: ["Een brainstormsessie met post-its die je ergens op moet plakken.", "Een vragenronde waarbij iedereen die akkoord is met een stelling recht staat.", "Een overleg waarbij degene die aan het woord is, rechtstaat.", "Brainstorm in groepjes met rotatie."]
-                },
-                {
-                    type: "TextBubble",
-                    content: "Neem in een ruimte alle stoelen eens weg, zo ervaar je om rechtstaand te vergaderen.",
-                },
-                {
-                    type: "TextBubble",
-                    content: "Voorzie kleine beweegmomenten in je vergadering.",
-                    float: "right"
-                },
-                {
-                    type: "List",
-                    content: ["Vergader op een andere verdieping of in een ander gebouw. Zo beweeg je al voor je in de vergadering toekomt. Gebruik de trap in plaats van de lift.", "Spreek vooraf af met iemand om het sein te geven voor een korte beweegpauze."]
-                }
-            ]
-        },
-        {
-            title: "Principe 2 - Houd gewrichten in neutrale zone",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            cardContents: [
-                {
                     type: "Image",
-                    link: "/images/activitywork/beeldschermwerk_voorover.jpg"
-                },
-                {
-                    id: "ACT-MOD-3-OFFICE-Q1",
-                    type: "Question",
-                    question: "Neemt onderstaande persoon een goede houding aan?",
-                    options: ["Ja", "Nee"],
-                    correct: "Nee",
-                    explanation: "Dit is een foute houding. We gaan je nu uitleggen waarom.",
-                    onCorrect: "Correct.",
-                    onIncorrect: "Helaas."
-                }
-            ]
-        },
-        {
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            showIfAnswered: ["ACT-MOD-3-OFFICE-Q1"],
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Wanneer je werkt aan een laptop, is je nek voorovergebogen. Als je gedurende meer dan 30 min aan één stuk gebruik maakt van een laptop is het aangewezen om een laptophouder, dockingstation (op hoogte) of een extra scherm in combinatie met een extern toetsenbord en muis te voorzien. Plaats de bovenkant van het scherm op ooghoogte."
-                },
-                {
-                    type: "Image",
+                    width: "100",
                     link: "/images/activitywork/beeldschermwerk_zitten.jpg"
                 },
+            ]
+        },
+        {
+            title: "Stap 2: Beeldscherm",
+            cardContents: [
+                {
+                    type: "List",
+                    content: [
+                        "Plaats het externe beeldscherm of je laptop op armlengte afstand.",
+                        "Zorg ervoor dat de bovenrand van het externe beeldscherm of de laptop zich op ooghoogte bevindt.",
+                    ]
+                },
                 {
                     type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/beeldschermwerk_arm.jpg"
+                },
+            ]
+        },
+        {
+            title: "Stap 3: Toetsenbord en muis",
+            cardContents: [
+                {
+                    type: "List",
+                    content: [
+                        "Plaats het toetsenbord voldoende kort (5 tot 15 cm) tegen de rand van je bureau.",
+                        "Plaats de muis vlak naast je toetsenbord.",
+                    ]
+                },
+                {
+                    type: "Image",
+                    width: "100",
+                    link: "/images/activitywork/beeldschermwerk_correct.jpg"
+                },
+            ]
+        },
+        {
+            title: "Stap 4: Documenten",
+            cardContents: [
+                {
+                    type: "Text",
+                    content: "Werk je vaak met documenten? Gebruik dan een documentenhouder en plaats deze tussen het toetsenbord en het beeldscherm."
+                },
+                {
+                    type: "Image",
+                    width: "100",
                     link: "/images/activitywork/beeldschermwerk_scherm.jpg"
                 },
             ]
         },
         {
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            cardContents: [
-                {
-                    type: "Image",
-                    link: "/images/activitywork/zitten_incorrect.png"
-                },
-                {
-                    type: "Image",
-                    link: "/images/activitywork/zitten_correct.png"
-                },
-                {
-                    id: "ACT-MOD-3-OFFICE-Q2",
-                    type: "Question",
-                    question: "Op welke van de bovenstaande twee foto's heeft de persoon haar bureaustoel goed ingesteld?",
-                    options: ["Bovenste foto", "Onderste foto"],
-                    correct: "Onderste foto",
-                    explanation: "Op de bovenste foto staat de bureaustoel te laag waardoor de knieën zich boven de heupen bevinden. Hierdoor wordt de rug afgevlakt en ga je doorhangen in de onderrug.",
-                    onCorrect: "Correct.",
-                    onIncorrect: "Niet correct."
-                }
-            ]
-        },
-        {
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            showIfAnswered: ["ACT-MOD-3-OFFICE-Q2"],
+            title: "Stap 5: Beweeg en varieer",
             cardContents: [
                 {
                     type: "Text",
-                    content: "Stel daarom de hoogte van je bureaustoel zo in dat je bovenbenen lichtjes afhellen, zoals op de onderstaande foto:"
+                    content: "Doe aan actief zitten. Verander regelmatig van houding, werk eens rechtstaand, of ga even op een andere soort stoel zitten (bijvoorbeeld een zitbal). De beste houding is afwisseling!"
                 },
                 {
                     type: "Image",
-                    link: "/images/activitywork/beeldschermwerk_knie.jpg",
+                    width: "100",
+                    link: "/images/activitywork/kantoor.jpg"
                 },
-            ]
-        },
-        {
-            title: "Principe 3 - Handen dichtbij de romp",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            cardContents: [
-                {
-                    type: "Image",
-                    link: "/images/activitywork/beeldschermwerk_voorover.jpg"
-                },
-                {
-                    id: "ACT-MOD-3-OFFICE-Q3",
-                    type: "Question",
-                    question: "Op deze foto zie je dat de persoon een ‘doorgezakte’ houding heeft ter hoogte van de bovenrug. Hoe komt dit?",
-                    options: ["Toetsenbord te ver van tafelrand", "Tafel te hoog", "Tafel te laag"],
-                    correct: "Toetsenbord te ver van tafelrand",
-                    explanation: "Het toetsenbord ligt inderdaad te ver van de rand van de tafel, waardoor deze persoon zich voorover moet buigen om er aan te kunnen. De persoon heeft trouwens ook geen armsteunen, wat bijdraagt voor de slechte houding.",
-                    onCorrect: "Juist!",
-                    onIncorrect: "Dat is niet juist."
-                }
-            ]
-        },
-        {
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            showIfAnswered: ["ACT-MOD-3-OFFICE-Q3"],
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Hier enkele tips om je handen dichtbij je romp te houden:"
-                },
-                {
-                    type: "List",
-                    content: ["Plaats het klavier voldoende kort (5 tot 15 cm) tegen de rand van het bureau met de muis er vlak naast.", "Zet het bureau op dezelfde hoogte als de ellebogen: ellebogen 90° en schouders ontspannen.", "Is je bureautafel te hoog? Verhoog je stoel en gebruik een voetensteun.", "Is je bureautafel te laag? Probeer de tafel te verhogen door bijvoorbeeld blokjes onder de tafel te plaatsen.", "Kies liefst voor een bureaustoel met armsteunen. Zijn die er niet? Schuif dan met je buik tot tegen de bureautafel."]
-                },
-                {
-                    type: "Image",
-                    link: "/images/activitywork/beeldschermwerk_docuhouder.jpg"
-                },
-                {
-                    type: "Text",
-                    content: "Tip: Werk je vaak met documenten? Gebruik een documentenhouder en plaats deze tussen het toetsenbord en het scherm."
-                }
-            ]
-        },
-        {
-            title: "Principe 4 - Gebruik je lichaamsgewicht en beenspieren",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Til een papierendoos op. Wat ervaar je?"
-                },
-                {
-                    type: "Break"
-                },
-                {
-                    type: "Text",
-                    content: "Je beenspieren zijn de sterkste spieren in je lichaam. Gebruik deze zoveel mogelijk. Wanneer je iets moet tillen van de grond, buig dan goed door je knieën. Let op: buig niet dieper dan een hoek van 90° in de knieën en beweeg in de natuurlijke krommingen van je rug."
-                }
-            ]
-        },
-        {
-            title: "Principe 5 - Zet de beweging rustig in",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Langzaam opbouwen van de kracht is de boodschap! Er is een spectaculair verschil tussen een snelle en rustige start bij duw- en trekbewegingen. Je hebt minder kracht nodig en het is minder belastend indien je een kracht langzaam opbouwt in drie tellen. Als je snel en hevig te werk gaat, ontstaan er enorme piekkrachten in je lichaam."
-                },
-                {
-                    type: "Break"
-                },
-                {
-                    type: "Text",
-                    content: "Je beenspieren zijn de sterkste spieren in je lichaam. Gebruik deze zoveel mogelijk. Wanneer je iets moet tillen van de grond, buig dan goed door je knieën. Let op: buig niet dieper dan een hoek van 90° in de knieën en beweeg in de natuurlijke krommingen van je rug."
-                }
-            ]
-        },
-        {
-            title: "Principe 6 - Beweeg je handen en voeten in dezelfde richting",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            cardContents: [
-                {
-                    type: "Text",
-                    content: "Door handen en voeten in dezelfde richting te bewegen, vermijd je rotaties ter hoogte van de rug. Hierdoor zorg je ervoor dat het lichaam zich altijd mee verplaatst op een rugvriendelijke manier."
-                },
-            ]
-        },
-        {
-            title: "Stappenplan: stel je werkplek correct in",
-            showIf: [{rule: "HasSelected", questionID: "ACT-MOD-3-MULTISELECT", answerID: "OFFICE_WORK"}],
-            cardContents: [
-                {
-                    type: "Text",
-                    content: [{type:"bold", content:"Stap 1: De bureaustoel correct instellen"}]
-                },
-                {
-                    type: "Image",
-                    link: "/images/activitywork/beeldschermwerk_knie.jpg"
-                },
-                {
-                    type: "List",
-                    content: ["Ga diep in de stoel zitten.", "Kies voor een open hoek: bovenbeen licht afhellend.", "Voor de zitdiepte moeten er 4 vingers tussen zitting en knieholte zijn.", "Zorg voor een goede rugsteun door een bolling te maken tegen de lage rug of lende.", "Plaats de armsteunen (indien u hierover beschikt) op ellebooghoogte met ontspannen schouders.", "Zit dynamisch en stel de bureaustoel in op het lichaamsgewicht."]
-                },
-                {
-                    type: "Text",
-                    content: [{type:"bold", content:"Stap 2: Bureauhoogte"}]
-                },
-                {
-                    type: "Image",
-                    link: "/images/activitywork/beeldschermwerk_elleboog.jpg"
-                },
-                {
-                    type: "List",
-                    content: ["Zet het bureau op dezelfde hoogte als de ellebogen: ellebogen 90° en schouders ontspannen.", "Is je bureautafel te hoog? Verhoog je stoel en gebruik een voetensteun.", "Is je bureautafel te laag? Probeer de tafel te verhogen door bijvoorbeeld blokjes onder de tafel te plaatsen.", "Kies liefst voor een bureaustoel met armsteunen. Zijn die er niet? Schuif dan met je buik tot tegen de bureautafel."]
-                },
-                {
-                    type: "Text",
-                    content: [{type:"bold", content:"Stap 3: Scherm"}]
-                },
-                {
-                    type: "Text",
-                    content: "Plaats het externe scherm of de laptop op armlengte en de bovenrand van het scherm op ooghoogte."
-                },
-                {
-                    type: "Text",
-                    content: [{type:"bold", content:"Stap 4: Toetsenbord"}]
-                },
-                {
-                    type: "Text",
-                    content: "Plaats het klavier voldoende kort (5 tot 15 cm) tegen de rand van het bureau met de muis er vlak naast."
-                },
-                {
-                    type: "Text",
-                    content: [{type:"bold", content:"Stap 5: Documenten"}]
-                },
-                {
-                    type: "Image",
-                    link: "/images/activitywork/beeldschermwerk_docuhouder.jpg"
-                },
-                {
-                    type: "Text",
-                    content: "Werken je vaak met documenten? Gebruik een documentenhouder en plaats deze tussen het toetsenbord en het scherm. scherm, liefst lichtjes gekanteld naar hen toe."
-                },
-                {
-                    type: "Text",
-                    content: [{type:"bold", content:"Stap 6: Beweeg en varieer"}]
-                },
-                {
-                    type: "Image",
-                    link: "/images/activitywork/meeting.jpg"
-                },
-                {
-                    type: "Text",
-                    content: "Doe aan actief zitten. Verander regelmatig van houding, werk eens rechtstaand, of ga even op een andere soort stoel zitten (bijvoorbeeld een zitbal). De beste houding ... is de volgende!"
-                }
             ]
         },
         {
             title: "Overzicht",
-            showIfAnswered: ["ACT-MOD-3-MULTISELECT"],
             overview: true,
             cardContents: [
                 {

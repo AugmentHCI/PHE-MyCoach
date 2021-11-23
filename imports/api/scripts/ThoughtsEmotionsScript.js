@@ -365,6 +365,7 @@ const TEMOD1 = {
 const TEMOD2 = {
     id: "TE_MOD_2",
     title: "Mijn wederkerende gedachten",
+    navBarTitle: "Wederkerende gedachten",
     titleMarkup: ["Mijn wederkerende", "gedachten"],
     part: 2,
     description: "Nu is het tijd om enkele dagen stil te staan bij jouw gedachten.",
