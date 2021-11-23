@@ -858,9 +858,9 @@ const ACTMOD3ERGO = {
         {
             title: "Principe 5 - Zet de beweging rustig in",
             titleCard: true,
+            showIfAnswered: ["ACT-MOD-3-FYS-Q2"],
         },
         {
-            showIfAnswered: ["ACT-MOD-3-FYS-Q2"],
             cardContents: [
                 {
                     type: "Text",
@@ -891,14 +891,27 @@ const ACTMOD3ERGO = {
                     link: "/images/activitywork/lifting.jpg"
                 },
                 {
-                    id: "ACT-MOD-3-FYS-Q3",
+                    id: "ACT-MOD-3-PRINCIPLE-6-Q1",
                     type: "Question",
                     question: "Bewegen deze personen hun handen en voeten in dezelfde richting?",
                     options: ["Ja", "Nee"],
                     correct: "Nee",
-                    explanation: "Beide personen roteren hun rug tijdens het uitvoeren van hun taak. Je beweegt je handen en voeten best in dezelde richting. Door handen en voeten in dezelfde richting te bewegen, vermijd je rotaties ter hoogte van de rug. Hierdoor zorg je ervoor dat het lichaam zich altijd mee verplaatst op een rugvriendelijke manier.",
+                    explanation: "Beide personen roteren hun rug tijdens het uitvoeren van hun taak.",
                     onCorrect: "Nee, inderdaad.",
                     onIncorrect: "Juist niet."
+                },
+                {
+                    type: "Image",
+                    link: ["/images/activitywork/rugarmen1.png", "/images/activitywork/rugarmen2.png"]
+                },
+            ]
+        },
+        {
+            showIfAnswered: ["ACT-MOD-3-PRINCIPLE-6-Q1"],
+            cardContents: [
+                {
+                    type: "Text", 
+                    content: "Je beweegt je handen en voeten best in dezelde richting. Door handen en voeten in dezelfde richting te bewegen, vermijd je rotaties ter hoogte van de rug. Hierdoor zorg je ervoor dat het lichaam zich altijd mee verplaatst op een rugvriendelijke manier."
                 },
                 {
                     type: "Image",
