@@ -900,10 +900,6 @@ const ACTMOD3ERGO = {
                     onCorrect: "Nee, inderdaad.",
                     onIncorrect: "Juist niet."
                 },
-                {
-                    type: "Image",
-                    link: ["/images/activitywork/rugarmen1.png", "/images/activitywork/rugarmen2.png"]
-                },
             ]
         },
         {
