@@ -262,7 +262,13 @@ export default function MyCoach(props) {
             await shortcutManager.removeShortcut("THOUGHTEXERCISES"); /* Remove old THOUGHTEXERCISES shortcut if present*/
             const fetchedShortcuts = await shortcutManager.getShortcuts("MAIN", "ANY");
             /* Unlock EXERCISES shortcut if applicable */
-            if (progress?.THOUGHTSEMOTIONS && progress["THOUGHTSEMOTIONS"]["TE_MOD_2"] === "COMPLETED" && fetchedShortcuts.filter(shortcut => shortcut.shortcut === "EXERCISES").length === 0) {
+            const unlockedThoughtShortcut = progress?.THOUGHTSEMOTIONS && progress["THOUGHTSEMOTIONS"]["TE_MOD_2"] === "COMPLETED";
+            const unlockedStressShortcut = progress?.STRESS && progress["STRESS"]["STR_MOD_4"] === "COMPLETED";
+            const unlockedActivityShortcut = progress?.ACTIVITYWORK && progress["ACTIVITYWORK"]["ACT_MOD_4"] === "COMPLETED";
+            const unlockedMovementShortcut = progress?.MOVEMENT && progress["MOVEMENT"]["MOV_MOD_3"] === "COMPLETED";
+            const unlockedSocialShortcut = progress?.SOCIAL && progress["SOCIAL"]["SOC_MOD_2"] === "COMPLETED";
+
+            if ((unlockedThoughtShortcut ||  unlockedStressShortcut || unlockedActivityShortcut || unlockedMovementShortcut || unlockedSocialShortcut) && fetchedShortcuts.filter(shortcut => shortcut.shortcut === "EXERCISES").length === 0) {
                 shortcutManager.upsertShortcut("EXERCISES", "MAIN", "DEFAULT");
                 shortcutManager.upsertShortcut("EXERCISES", "THOUGHTSEMOTIONS", "DEFAULT");
                 fetchedShortcuts.push({screen: "MAIN", shortcut: "EXERCISES"});
