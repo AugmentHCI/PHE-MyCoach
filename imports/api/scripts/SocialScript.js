@@ -119,6 +119,7 @@ const SOCMOD2 = {
             titleCard: true
         },
         {
+            id: "VERBINDENDE_COMMUNICATIE",
             cardContents: [
                 {
                     type: "Text",
@@ -277,6 +278,7 @@ const SOCMOD2 = {
             titleCard: true
         },
         {
+            id: "ELEVATOR_PITCH",
             cardContents: [
                 {
                     type: "Text",

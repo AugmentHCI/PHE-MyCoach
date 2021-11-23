@@ -14,18 +14,20 @@ export default function ExerciseParser() {
     const submodule = FlowRouter.getParam('submodule');
     const exerciseID = FlowRouter.getParam('cardID');
 
-    function getCard() {
+    function getCards() {
         const submoduleData = getSubmodule({module: module, submoduleID: submodule});
+        let cards = [];
         for (const card of submoduleData.cards) {
-            if (card?.id === exerciseID) return card;
+            if (card?.id === exerciseID) cards.push(card);
         }
+        return cards;
     }
 
     return (<React.Fragment>
         <NavigationBar title="Gedachte-oefeningen"/>
         <div className="container" style={{paddingTop: "85px"}}>
-            <CardsParser cards={[getCard()]} module={module} submodule={submodule} moduleStatus={"COMPLETED"} userProfile={{profile:1}} noDivider userID={userID} finishCallback={() => {console.log("Go back")}}/>
-            <Button width="100%" center color="blue" style={{marginBottom:"30px"}} onClick={() => {history.back()}}>Voltooi</Button>
+            <CardsParser cards={getCards()} module={module} submodule={submodule} moduleStatus={"COMPLETED"} userProfile={{profile:1}} noDivider userID={userID} finishCallback={() => {console.log("Go back")}}/>
+            <Button width="100%" center color="blue" style={{marginBottom:"30px"}} onClick={() => {history.back()}}>Keer terug</Button>
         </div>
     </React.Fragment>)
 }

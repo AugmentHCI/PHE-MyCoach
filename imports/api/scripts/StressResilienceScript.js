@@ -801,6 +801,7 @@ const STRMOD4 = {
             ]
         },
         {
+            id: "ENERGY",
             title: "Oefening: aan de slag!",
             cardContents: [
                 {
@@ -934,7 +935,8 @@ const STRMOD5 = {
             ]
         },
         {
-            title: "Aan de slag!",
+            id: "CIRCLE",
+            title: "Jouw cirkel van betrokkenheid",
             cardContents: [
                 {
                     type: "Image",
@@ -1225,6 +1227,7 @@ const STRMOD6 = {
             ]
         },
         {
+            id: "TODO",
             title: "Tip 8: Maak een to do lijst",
             titleCard: true,
             cardContents: []
@@ -1290,6 +1293,7 @@ const STRMOD6 = {
             cardContents: []
         },
         {
+            id: "THANKFUL",
             cardContents: [
                 {
                     type: "Text",
@@ -1324,6 +1328,7 @@ const STRMOD6 = {
             cardContents: []
         },
         {
+            id: "BREATHING",
             cardContents: [
                 {
                     type: "Text",

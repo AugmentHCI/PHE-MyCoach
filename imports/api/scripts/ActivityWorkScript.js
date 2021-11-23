@@ -1043,6 +1043,7 @@ const ACTMOD4MGMT = {
             ]
         },
         {
+            id: "GOALSETTING",
             title: "Doelen en opbouwschema",
             cardContents: [
                 {
@@ -1069,6 +1070,7 @@ const ACTMOD4MGMT = {
             ]
         },
         {
+            id: "GOALSETTING",
             title: "Voorbeelden",
             showIf: [{rule:"HasNotUnlockedShortcut", shortcut: "GOALSETTING"}],
             cardContents: [
@@ -1107,6 +1109,7 @@ const ACTMOD4MGMT = {
             ]
         },
         {
+            id: "GOALSETTING",
             title: "Opbouwschema",
             cardContents: [
                 {
@@ -1129,6 +1132,7 @@ const ACTMOD4MGMT = {
             ]
         },
         {
+            id: "ACTIVITYMANAGEMENT",
             title: "Activiteitenmanagement",
             cardContents: [
                 {

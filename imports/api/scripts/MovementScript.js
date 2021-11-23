@@ -470,6 +470,7 @@ const MOVMOD3 = {
             ]
         },
         {
+            id: "WISSELWERKEN",
             title: "Wisselwerken",
             cardContents: [
                 {
@@ -495,7 +496,8 @@ const MOVMOD3 = {
                 {
                     type: "Audiofile",
                     source: "/audio/Podcast.mp3"
-                }            ]
+                }            
+            ]
         },
         {
             title: "Oefeningen voor op het werk",
@@ -510,6 +512,7 @@ const MOVMOD3 = {
             ]
         },
         {
+            id: "WERKOEFENINGEN",
             title: "Nek-schouder-bovenrug oefeningen",
             cardContents: [
                 {
@@ -531,6 +534,7 @@ const MOVMOD3 = {
                 }]
         },
         {
+            id: "WERKOEFENINGEN",
             title: "Been-oefeningen",
             cardContents: [
                 {
@@ -546,6 +550,7 @@ const MOVMOD3 = {
                 }]
         },
         {
+            id: "WERKOEFENINGEN",
             title: "Elastiek-oefeningen",
             cardContents: [
                 {
@@ -655,6 +660,7 @@ const MOVMOD4 = {
             ]
         },
         {
+            id: "WORKOUT",
             title: "Workout",
             cardContents: [
                 {
@@ -740,6 +746,7 @@ const MOVMOD4 = {
             ]
         },
         {
+            id: "WORKOUT",
             title: "Workout video",
             cardContents: [
                 {

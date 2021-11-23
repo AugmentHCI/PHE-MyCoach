@@ -24,14 +24,14 @@
         @extend .modulebutton;   
         position: absolute;
         right: 0;
-        top: -80px;
+        top: -85px;
     }
 
     &-TOPRIGHT {
         @extend .modulebutton;
         position: absolute;
         left: 0;
-        top: -80px;
+        top: -85px;
 
     }
 
@@ -39,14 +39,14 @@
         @extend .modulebutton;  
         position: absolute;
         right: 0;
-        top: -60px;
+        top: -55px;
     }
 
     &-BOTTOMLEFT {
         @extend .modulebutton;
         position: absolute;
         left: 0;
-        top: -60px;
+        top: -55px;
     }
 
     &-BOTTOM {
