@@ -29,7 +29,7 @@ export default function CoachingModal({module, submodule, showModal, setShowModa
                 const progressManager = new ProgressManager({userID: userID});
                 const progress = await progressManager.getUserProgress();
                 const moduleProgress = progress?.[fullMapping[module]]?.[submodule] ? progress?.[fullMapping[module]]?.[submodule] : progress?.[module]?.[submodule];
-                setIsLocked(moduleProgress === "LOCKED" || (moduleProgress === "IN_PROGRESS" && minutesToUnlock > 0));
+                setIsLocked(moduleProgress === "LOCKED" || moduleProgress === "NOT_STARTED" || (moduleProgress === "IN_PROGRESS" && minutesToUnlock > 0));
                 setProgress(moduleProgress);
                 if (minutesToUnlock > 0 && moduleProgress === "IN_PROGRESS" ) {
                     setMinutesLeft("Nog " + minutesToString(minutesToUnlock));

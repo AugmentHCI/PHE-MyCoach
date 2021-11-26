@@ -171,7 +171,15 @@ export default function ModuleParser(props) {
                 Je hebt alle modules doorlopen, goed zo! Herbekijk gerust één van de modules die jij al eens doorlopen hebt.
             </AppModal>)}
 
-        return (<CoachingModal module={module} submodule={selectedSubmodule} showModal={showModal} setShowModal={setShowModal} userToken={userToken} language={language} checkProgress minutesToUnlock={minutesToNextCoaching}/>)
+        return (<CoachingModal 
+            module={module} 
+            submodule={selectedSubmodule} 
+            showModal={showModal} 
+            setShowModal={setShowModal} 
+            userToken={userToken} 
+            language={language} 
+            checkProgress 
+            minutesToUnlock={minutesToNextCoaching}/>)
     }
 
     /* Fetch module data and user progress only once, avoids infinite re-rendering due to state-changes */
