@@ -1227,12 +1227,12 @@ const STRMOD6 = {
             ]
         },
         {
-            id: "TODO",
             title: "Tip 8: Maak een to do lijst",
             titleCard: true,
             cardContents: []
         },
         {
+            id: "TODO",
             cardContents: [
                 {
                     type: "Text",

@@ -6,6 +6,7 @@ import Icon from '../../components/Illustrations/Icon';
 import ProgressManager from '../../../api/managers/ProgressManager';
 import jwt_decode from "jwt-decode";
 import FadeIn from "react-fade-in";
+import { EXERCISES } from '../../../api/data/Exercises';
 
 const ExerciseContainer = styled.div`
     display: grid;
@@ -71,33 +72,6 @@ const ExerciseExplanation = styled.div`
     box-shadow: var(--card-shadow);
 `
 
-
-const Exercises = {
-    /* Thought-exercises */
-    thoughts: {icon: "writing", text: "Stilstaan bij gedachten", link: "thoughtsemotions/TE_MOD_2/TE-MOD2-CARD1"},
-    road: {icon: "video", text: "Drukke baan", link: "thoughtsemotions/TE_MOD_2/TE-MOD2-CARD2"},
-    ihaveathought: {icon: "sound", text: "Ik heb de gedachte dat...", link: "thoughtsemotions/TE_MOD_2/TE-MOD2-CARD3"},
-    neighbour: {icon: "video", text: "Buurman", link: "thoughtsemotions/TE_MOD_2/TE-MOD2-CARD4"},
-    mindfulness: {icon: "idea", text: "Mindfulness", link: "thoughtsemotions/TE_MOD_3/TE-MOD3-CARD3"},
-    mindfulnessAudio: {icon: "sound", text: "Mindfulness Audio", link: "thoughtsemotions/TE_MOD_3/TE-MOD3-CARD4"},
-    /* Social exercises */
-    connectingCommunication: {icon: "hug", text: "Verbindend communiceren", link: "social/SOC_MOD_2/VERBINDENDE_COMMUNICATIE"},
-    elevatorPitch: {icon: "chat-up", text: "Elevator pitch", link: "social/SOC_MOD_2/ELEVATOR_PITCH"},
-    /* Movement exercises */
-    wisselwerken: {icon: "circle", text: "Wisselwerken", link: "movement/MOV_MOD_3/WISSELWERKEN"},
-    werkoefeningen: {icon: "dumbbell", text: "Werk-oefeningen", link: "movement/MOV_MOD_3/WERKOEFENINGEN"},
-    workout: {icon: "video", text: "Workout", link: "movement/MOV_MOD_4/WORKOUT"},
-    /* Activity and Work */
-    activitymanagement: {icon: "calendar", text: "Activiteitenmanagement", link: "activitywork/ACT_MOD_4/ACTIVITYMANAGEMENT"},
-    goalsetting: {icon: "goal", text: "Doelen en opbouwschema", link: "activitywork/ACT_MOD_4/GOALSETTING"},
-    /* Stress-exercises */
-    energy: {icon: "writing", text: "Energiegevers en -vreters", link: "stress/STR_MOD_4/ENERGY"},
-    circle: {icon: "circle", text: "Cirkel van betrokkenheid", link: "stress/STR_MOD_5/CIRCLE"},
-    todo: {icon: "writing", text: "To-do lijst", link: "stress/STR_MOD_6/TODO"},
-    thankful: {icon: "mindfulness", text: "Dankbaarheid", link: "stress/STR_MOD_6/THANKFUL"},
-    breathing: {icon: "video", text: "Ademhalings-oefening", link: "stress/STR_MOD_6/BREATHING"},
-}
-
 export default function ExercisePage() {
 
     const userID = FlowRouter.getParam('token') ? parseInt(jwt_decode(FlowRouter.getParam('token')).rrnr) : 1111111;
@@ -131,43 +105,43 @@ export default function ExercisePage() {
     
     function parseAvailableThoughtExercises(progress) {
         let newExercises = [];
-        progress?.THOUGHTSEMOTIONS?.["TE_MOD_2"] === "COMPLETED" && newExercises.push(Exercises.thoughts);
-        progress?.THOUGHTSEMOTIONS?.["TE_MOD_2"] === "COMPLETED" && newExercises.push(Exercises.ihaveathought);
-        progress?.THOUGHTSEMOTIONS?.["TE_MOD_2"] === "COMPLETED" && newExercises.push(Exercises.road);
-        progress?.THOUGHTSEMOTIONS?.["TE_MOD_2"] === "COMPLETED" && newExercises.push(Exercises.neighbour);
-        progress?.THOUGHTSEMOTIONS?.["TE_MOD_3"] === "COMPLETED" && newExercises.push(Exercises.mindfulness);
+        progress?.THOUGHTSEMOTIONS?.["TE_MOD_2"] === "COMPLETED" && newExercises.push(EXERCISES.thoughts);
+        progress?.THOUGHTSEMOTIONS?.["TE_MOD_2"] === "COMPLETED" && newExercises.push(EXERCISES.ihaveathought);
+        progress?.THOUGHTSEMOTIONS?.["TE_MOD_2"] === "COMPLETED" && newExercises.push(EXERCISES.road);
+        progress?.THOUGHTSEMOTIONS?.["TE_MOD_2"] === "COMPLETED" && newExercises.push(EXERCISES.neighbour);
+        progress?.THOUGHTSEMOTIONS?.["TE_MOD_3"] === "COMPLETED" && newExercises.push(EXERCISES.mindfulness);
         return newExercises;
     }
 
     function parseAvailableSocialExercises(progress) {
         let newExercises = [];
-        progress?.SOCIAL?.["SOC_MOD_2"] === "COMPLETED" && newExercises.push(Exercises.connectingCommunication);
-        progress?.SOCIAL?.["SOC_MOD_2"] === "COMPLETED" && newExercises.push(Exercises.elevatorPitch);
+        progress?.SOCIAL?.["SOC_MOD_2"] === "COMPLETED" && newExercises.push(EXERCISES.connectingCommunication);
+        progress?.SOCIAL?.["SOC_MOD_2"] === "COMPLETED" && newExercises.push(EXERCISES.elevatorPitch);
         return newExercises;
     }
 
     function parseAvailableMovementExercises(progress) {
         let newExercises = [];
-        progress?.MOVEMENT?.["MOV_MOD_3"] === "COMPLETED" && newExercises.push(Exercises.wisselwerken);
-        progress?.MOVEMENT?.["MOV_MOD_3"] === "COMPLETED" && newExercises.push(Exercises.werkoefeningen);
-        progress?.MOVEMENT?.["MOV_MOD_4"] === "COMPLETED" && newExercises.push(Exercises.workout);
+        progress?.MOVEMENT?.["MOV_MOD_3"] === "COMPLETED" && newExercises.push(EXERCISES.wisselwerken);
+        progress?.MOVEMENT?.["MOV_MOD_3"] === "COMPLETED" && newExercises.push(EXERCISES.werkoefeningen);
+        progress?.MOVEMENT?.["MOV_MOD_4"] === "COMPLETED" && newExercises.push(EXERCISES.workout);
         return newExercises;
     }
 
     function parseAvailableActivityExercises(progress) {
         let newExercises = [];
-        progress?.ACTIVITYWORK?.["ACT_MOD_4"] === "COMPLETED" && newExercises.push(Exercises.activitymanagement);
-        progress?.ACTIVITYWORK?.["ACT_MOD_4"] === "COMPLETED" && newExercises.push(Exercises.goalsetting);
+        progress?.ACTIVITYWORK?.["ACT_MOD_4"] === "COMPLETED" && newExercises.push(EXERCISES.activitymanagement);
+        progress?.ACTIVITYWORK?.["ACT_MOD_4"] === "COMPLETED" && newExercises.push(EXERCISES.goalsetting);
         return newExercises;
     }
 
     function parseAvailableStressExercises(progress) {
         let newExercises = [];
-        progress?.STRESS?.["STR_MOD_4"] === "COMPLETED" && newExercises.push(Exercises.energy);
-        progress?.STRESS?.["STR_MOD_5"] === "COMPLETED" && newExercises.push(Exercises.circle);
-        progress?.STRESS?.["STR_MOD_6"] === "COMPLETED" && newExercises.push(Exercises.todo);
-        progress?.STRESS?.["STR_MOD_6"] === "COMPLETED" && newExercises.push(Exercises.thankful);
-        progress?.STRESS?.["STR_MOD_6"] === "COMPLETED" && newExercises.push(Exercises.breathing);
+        progress?.STRESS?.["STR_MOD_4"] === "COMPLETED" && newExercises.push(EXERCISES.energy);
+        progress?.STRESS?.["STR_MOD_5"] === "COMPLETED" && newExercises.push(EXERCISES.circle);
+        progress?.STRESS?.["STR_MOD_6"] === "COMPLETED" && newExercises.push(EXERCISES.todo);
+        progress?.STRESS?.["STR_MOD_6"] === "COMPLETED" && newExercises.push(EXERCISES.thankful);
+        progress?.STRESS?.["STR_MOD_6"] === "COMPLETED" && newExercises.push(EXERCISES.breathing);
         return newExercises;
     }
 

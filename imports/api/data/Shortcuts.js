@@ -59,7 +59,7 @@ export const SHORTCUTS = {
         icon: "idea",
         link: "exercises",
         title: {
-            "nl-BE": "Gedachten-oefeningen",
+            "nl-BE": "Oefeningen",
             "nl-FR": "Exercises",
             "en-EN": "Exercises"
         },
