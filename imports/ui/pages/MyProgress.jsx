@@ -406,7 +406,7 @@ export default class MyProgress extends Component {
               to={moment(this.state.selectedPeriod[1], "YYYY-MM-DD").format("DD-MM-YYYY")}
             />
         </Card>
-        <Card title="Mijn Emoties" underline>
+        <Card title="Mijn Gemoedstoestand" underline>
           <EmotionsGraph 
             data = {this.state.data}
             locale = {i18n.getLocale()}

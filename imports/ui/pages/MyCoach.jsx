@@ -124,7 +124,7 @@ export default function MyCoach(props) {
             <Popover
             content={<div className="tutorial-content">
                 <h4>Je shortcuts</h4>
-                Hier zie jij je snelkoppelingen waar je gemakkelijk<br/>toegang tot hebt. In de coaching modules<br/>kan je zelf nog snelkoppelingen toevoegen naar<br/>interessante oefeningen, informatie en filmpjes.<br/>
+                Hier zie jij je snelkoppelingen waar je gemakkelijk<br/>toegang tot hebt. Wanneer je meer onderdelen vrijspeelt, zal je een "Oefeningen"-snelkoppeling ontgrendelen waarin je makkelijk al de oefeningen in de app kan bekijken.
                 <div className="tutorial-button-row">
                 <Button center color="gray-light" size="small" style={{flex: 1, marginRight: "10px"}} onClick={()=> updateShowTutorial1(true)}>Vorige</Button>
                     <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> updateShowTutorial2(false)}>Volgende</Button>
@@ -150,7 +150,7 @@ export default function MyCoach(props) {
            <Popover
             content={<div className="tutorial-content">
                 <h4>Coaching</h4>
-                Hier zie jij je persoonlijk coachingtraject.<br/>Je kan elke dag je coaching bekijken.<br/>
+                Hier zie jij je persoonlijk coachingtraject.<br/>Je kan per dag één onderdeel van de modules bekijken. Dit is jouw "Dagelijkse Coaching".<br/>
                 <div className="tutorial-button-row">
                     <Button center color="blue" size="small" style={{flex: 1}} onClick={()=> updateShowTutorial1(false)}>Volgende</Button>
                 </div>
