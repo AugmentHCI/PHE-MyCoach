@@ -61,11 +61,12 @@ export default function AdminScreen(props) {
   /* USER DATA */ 
   async function fetchUserData(totalSize, steps) {
     let data = [];
-    for (let i = 0; i < totalSize; i += steps) {
+    for (let i = userIds.length - totalSize; i < userIds.length; i += steps) {
       const upperBound = i + steps > userIds.length ? userIds.length : i + steps;
       await fetchUserDataChunk(i, upperBound).then(( res ) => data = [...data, ...res.map(user => user.value)]);
     }
     setUserQuestionnaires(data);
+    console.log(data);
     return data;
   }
 
@@ -79,7 +80,7 @@ export default function AdminScreen(props) {
         .groupUserQuestions()
         .tagUserQuestions(2618594, 2618594)
         .result})
-    console.log(data)
+    console.log(data);
     setUserQuestionnaires([data]);
     return data;
   }
@@ -171,7 +172,7 @@ export default function AdminScreen(props) {
         <Button width="300px" color="blue" center onClick={() => getUserData() }>Haal gegevens op</Button>
         <Button width="300px" color="blue" center onClick={() => fetchFitBitData(userIds.length, 10) }>Haal fitbit op</Button>
         {userIdsMessage && <p className={userIdsMessage.status}>{userIdsMessage.message}</p>}
-        {userIds.length > 0 && <Button width="300px" color="blue" center onClick={() => fetchUserData(userIds.length, 13) }>Verwerk gebruikers</Button>}
+        {userIds.length > 0 && <Button width="300px" color="blue" center onClick={() => fetchUserData(userIds.length, 10) }>Verwerk gebruikers</Button>}
         {userIds.length > 0 && fetchCount < userIds.length && <p className="info">Data opgehaald van {fetchCount} van {userIds.length} gebruikers.</p>}
         {userIds.length > 0 && fetchCount < userIds.length && <p className="info">Momenteel aan het pollen: {activeCount}.</p>}
         {userIds.length > 0 && fetchCount === userIds.length && <p className="success">Data opgehaald van alle {userIds.length} gebruikers!</p>}

@@ -42,7 +42,7 @@ export default function CoachingModal({module, submodule, showModal, setShowModa
     if (coachingData) return(<AppModal
         backOption="Sluit" 
         notifyBack={() => setShowModal(false)} 
-        notifyParent={() => {FlowRouter.go(`/${language}/mycoach/${userToken}/module/${module}/${submodule}`)}}
+        notifyParent={() => {FlowRouter.go(`/${language}/mycoach/${userToken}/module/${fullMapping[module]}/${submodule}`)}}
         defaultOption={minutesLeft ? minutesLeft : (progress === "COMPLETED" ? "Herbekijk" : "Bekijk")}
         addLockedIcon={ checkProgress && isLocked }
         defaultColor={ checkProgress && isLocked ? "gray" : "blue" }
@@ -82,5 +82,12 @@ const fullMapping = {
     "TE": "THOUGHTSEMOTIONS",
     "MOV": "MOVEMENT",
     "STR": "STRESS",
-    "SOC": "SOCIAL"
+    "SOC": "SOCIAL",
+    /* Full ones */
+    "PAINEDUCATION": "PAINEDUCATION",
+    "ACTIVITYWORK": "ACTIVITYWORK",
+    "THOUGHTSEMOTIONS": "THOUGHTSEMOTIONS",
+    "MOVEMENT": "MOVEMENT",
+    "STRESS": "STRESS",
+    "SOCIAL": "SOCIAL"
 }

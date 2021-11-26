@@ -6,6 +6,7 @@ export class UserQuestions {
 
     constructor(questions) {
         this.questions = questions;
+        console.log(questions);
         this.parsedQuestions = undefined;
         this.groupedQuestions = undefined;
         /* Result contains the most recent operation */
@@ -84,18 +85,18 @@ export class UserQuestions {
             }
         }
         const period = daysBetween(earliestDate, latestDate, true, "DD-MM-YYYY");
-        const followupsPercent = Math.round(Object.keys(this.result.followup).length / Math.floor(period / 42) * 10000 ) / 100;
+        //const followupsPercent = Math.round(Object.keys(this.result.followup).length / Math.floor(period / 42) * 10000 ) / 100;
         this.result["info"] = {
             rrnr: rrnr, 
             user: userId, 
             from: earliestDate, 
             to: latestDate, 
             period: period, 
-            dailiesDone: Object.keys(this.result.daily).length,
-            dailiesPercent: Math.round(Object.keys(this.result.daily).length / period * 10000) / 100,
-            followupsReceived: Math.floor(period / 42),
-            followupsDone: Object.keys(this.result.followup).length,
-            followupsPercent: isNaN(followupsPercent) ? 0 : followupsPercent
+            //dailiesDone: Object.keys(this.result.daily).length,
+            //dailiesPercent: Math.round(Object.keys(this.result.daily).length / period * 10000) / 100,
+            //followupsReceived: Math.floor(period / 42),
+            //followupsDone: Object.keys(this.result.followup).length,
+            //followupsPercent: isNaN(followupsPercent) ? 0 : followupsPercent
         }
         return this;
     }
