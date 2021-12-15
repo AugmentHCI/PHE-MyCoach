@@ -57,6 +57,7 @@ export default function ValueLogbook() {
     
     function renderValues() {
         let valueHTML = [];
+        if (addingMode) return <React.Fragment/>;
         if ((!values || Object.keys(values).length === 0) && !addingMode) return <div style={{display:'flex', justifyContent: 'center', marginTop: '1em', marginBottom: '1em', color:'var(--idewe-blue)', fontWeight: 500, fontSize: '18px'}}>Nog geen waarden toegevoegd</div>
         Object.keys(values).forEach((value, index) => {
             if (values[value]) {

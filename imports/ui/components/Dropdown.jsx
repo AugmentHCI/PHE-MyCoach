@@ -6,7 +6,7 @@ import Icon from "./Illustrations/Icon.jsx";
 
 import "./Dropdown.scss";
 
-export default function Dropdown( { selectedItems=undefined, items, multiselect, style, defaultItems, onChange, defaultText, disabled, idKey="id", valueKey="value" }) {
+export default function Dropdown( { selectedItems=[], items, multiselect, style, defaultItems, onChange, defaultText, disabled, idKey="id", valueKey="value" }) {
     const [open, toggleOpen] = useState(false);
     const [selection, setSelection] = useState([]);
 
@@ -44,10 +44,11 @@ export default function Dropdown( { selectedItems=undefined, items, multiselect,
         if (defaultItems) setSelection(defaultItems);
     }, []);
 
+    /*
     useEffect(() => { 
         setSelection(selectedItems);
     }, [selectedItems]);
-
+    */
     
     return (
         <div className="dd-wrapper" style={style}>

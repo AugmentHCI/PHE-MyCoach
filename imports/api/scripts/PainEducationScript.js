@@ -19,7 +19,7 @@ const PEMOD1 = {
                 },
                 {
                     type: "Video",
-                    link: "https://player.vimeo.com/video/506997813"
+                    link: "https://www.youtube.com/embed/L7aOQobXPyU"
                 }]
         },
         {
@@ -132,7 +132,7 @@ const PEMOD2 = {
             },
             {
                 type: "Video",
-                link: "https://player.vimeo.com/video/506998666"
+                link: "https://www.youtube.com/embed/taOgb-Gg9G0"
             }
         ]
     },
@@ -249,7 +249,7 @@ const PEMOD3 = {
             },
             {
                 type: "Video",
-                link: "https://player.vimeo.com/video/507000187",
+                link: "https://www.youtube.com/embed/RNxuN9BPYeA",
             }
         ]
     },
@@ -371,7 +371,7 @@ const PEMOD4 = {
             },
             {
                 type: "Video",
-                link: "https://player.vimeo.com/video/507001144",
+                link: "https://www.youtube.com/embed/BIhDExhOpy8",
             }
         ]
     },
