@@ -918,7 +918,6 @@ const ACTMOD3ERGO = {
         {
             title: "Extra - Principes voor kantoorwerk",
             titleCard: true,
-            showIfAnswered: ["ACT-MOD-3-FYS-Q3"]
         },
         {
             title: "Stap 1: De bureaustoel en tafel",
