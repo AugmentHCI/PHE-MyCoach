@@ -122,7 +122,7 @@ const Day = styled.div`
       useEffect(() => { 
         async function fetchValues() {
             const fetchedValues = await questionManager.getLatestAnswerOnQuestion("TE-MOD-5-SELECT-5");
-            const parsedValues = JSON.parse(fetchedValues);
+            const parsedValues = fetchedValues ? JSON.parse(fetchedValues) : [];
             const valueList = [];
             Object.keys(parsedValues).forEach(value => {
                 if (parsedValues[value]) {
